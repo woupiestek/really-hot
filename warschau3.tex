@@ -1,0 +1,180 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand\headheight{14.5pt}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[all]{xy}
+\usepackage{cite}
+\usepackage{hyperref}
+
+\title{Realizability $\infty$-toposes}
+\author{W. P. Stekelenburg}
+\date{}
+
+\lhead{Realizability of homotopy type theory -- Stekelenburg}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{defin}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand\cat{\mathcal}
+\newcommand\Cat{\mathsf}
+\newcommand\id{\mathrm{id}}
+\newcommand\dom{\mathrm{dom}}
+\newcommand\cod{\mathrm{cod}}
+\newcommand\Set{\Cat{Set}}
+
+
+\newcommand\hide[1]{}
+
+\begin{document} %afdrukken en nakijken. Na verbeteringen rondsturen voor commentaar.
+\maketitle
+
+\hide{
+Waar zoek je naar?
+
+- karakterisatie?
+- tegenvoorbeelden?
+
+
+- realizeerbaarheid om een modelcategorie in een model voor homotopy type theory te veranderen:
+  van cofibrante PCA naar univalente fibratie.
+ 
+- Ja! door direct naar assemblies te gaan ontlopen we alle problemen. Nou ja, alleen als we met een topos beginnen natuurlijk. Ok.
+}
+
+
+\hide{
+1 Large general topic of wide interest
+  Iets met computability en logica. iets epistemologisch. misschien iets practisch en toepasbaars
+2 Literatures
+  Homotopy type theory
+  Realizability toposes
+3 Gap: realizability models for hott, realizability $\infty$ toposes. 
+  Waarom ben ik de aangewezen onderzoeker
+4 Researchvraag
+5 specifics
+  background, location, history, context, limitations???
+6 literature review
+7 methodology
+8 timeline
+9 budget
+10 conclusion
+}
+
+
+\hide{
+Drie dingen bij elkaar brengen: realizeerbaarheid, formele verificatie en homotopy type theory. Kan dat? Waarom moet ik onderzoek doen naar realizeerbaarheidsmodellen van hott?
+De vraag is dan: wat maakt hott zelf zo interessant? 
+
+The nature of mathematical truth -- logic and foundations. The nature of mathematical truth in hott
+
+Ik kan het niet. Ik snap niet hoe ik dit moet doen. Ik moet gewoon uitleggen waarom zoeken naar de 
+
+}
+
+The foundations of mathematics are not set in stone, but change with the tools of mathematical research. The past half century saw the emergence of computer aided proofs and the language of category theory for example. Recently, these tools have met in Voevodsky's univalent foundations program which founds mathematics on homotopy type theory. Earlier, the theory of realizability toposes explored alternative foundations of mathematics in which computability plays an central role. As yet, not much work has been published on realizability models of homotopy type theory even though realizability has always been a rich source of counter examples in logic. I am applying to %Your position/grant
+so I can develop such models.
+
+
+
+
+%hier
+
+
+\newcommand\N{\mathbb N}
+\newcommand\partar\rightharpoonup
+\newcommand\pers{\mathsf{PERs}}
+\newcommand\sep{\mathsf{Sep}}
+\newcommand\eff{\mathsf{Eff}}
+The category $\pers$ of \emph{PERs} is the category whose object are symmetric and transitive relations, i.e. \emph Partial \emph Equivalence \emph Relations, on the set $\N$ of natural numbers as objects; a morphism $R\to S$ is a function $f:\N/R \to \N/S$ of equivalence classes, for which a partial recursive function $\phi: \N\partar\N$ exists, such that if $n\in x \in \N/R$, then $\phi(n)$ is defined and $\phi(n)\in f(x)$.
+
+The category $\pers$ is a complete internal full subcategory of the category $\sep(\eff,\neg\neg)$ of \emph{$\neg\neg$-separated} objects in the \emph{effective topos}. Any internal subcategory has an externalization, which is a fibred category. For $\pers$ in $\sep(\eff,\neg\neg)$ this externalization is a complete fibred category. At the same time $\pers$ is \emph{the} subcategory of subquotients (quoteints of subobjects) of the natural number object of $\sep(\eff,\neg\neg)$. 
+Unfortunately, neither the full subcategory of subquotients nor the full subcategory of $\neg\neg$-separated subquotients of $\N$ in $\eff$ is a complete internal subcategory. The categories are only \emph{weakly complete}, which means that the stack completion of the externalization is complete. 
+
+The effective topos is the ex/reg completion -- N.B.: /reg, not /lex -- of $\sep(\eff,\neg\neg)$, and is therefore pseudoequivalent to a category of groupoids and pseudofunctors in $\sep(\eff,\neg\neg)$: the groupoids are equivalence relations, and the pseudofunctors are functional relations. Higher dimensional category theory may provide more suitable completions: Rosolini suggested looking at more general groupoids in $\sep(\eff,\neg\neg)$ in order to preserve the completeness of $\pers$; recent developments in homotopy type theory suggest by extension that $\omega$-groupoids in $\sep(\eff,\neg\neg)$ are a more suitable completion.
+
+%We believe that the faculty of mathematics, informatics and mechanics of the university of Warshaw has a lot of interest in research on the edge of higher dimensional category theory and theoretical computer science. Therefore we propose to research these two problems in collaboration with members of the mathematical logic and category theory group, and with Marek Zawadowski in particular.
+
+
+\hide{\section{internal ex/lex completions}
+\hide{dit probleem heb ik in mijn hoofd al helemaal opgelost}
+Suppose $\cat E$ is a category with enough projective objects. Even without the algebraic structure of Abelian categories, $\cat E$ provides projective resolutions in the form of \emph{trivial Kan complexes}, i.e. not only does every Horn have a filler, but any two fillers are homotopy equivalent. Each object $X$ is the colimit of a simplicial projective object $\{P_i |i\in\omega\}$, which comes from progresively covering the pull back $n$-cubes derived from a cover $P_0 \to X$.   
+\[\xymatrix{
+    & P_1\ar[r]\ar[dr] & P_0\ar[dr]\\
+P_2\ar[ur]\ar[r]\ar[dr] & P_1\ar[ur]\ar[dr] & P_0\ar[r] & X\\
+    & P_1\ar[r]\ar[ur] & P_0\ar[ur]\\
+}\]
+Due to projectivity, a morphism $X\to Y$ induces an equivalence class of Kan fibrations between these trivial Kan complexes.
+Hence the exact completion of a weakly left exact category is its category of trivial Kan complexes.
+
+Of course, because of triviality the higher objects in these simplicial projectives are unique up to equivalence, which means that the \emph{pseudoequivalence relation} $P_1\rightrightarrows P_0$ already contains all necessary information. It is presented in this form in \cite{MR1600009}
+
+An internally projective object satisfies the properties of a projective object in the internal language, which means that instead of a global section of regular epimorphisms, there are inhabited families of global sections:
+\[ \xymatrix{
+J\times P\ar@{.>}[d]_{-\times P}\ar@{.>}[r] & X\ar[d]^e\\
+I\times P\ar[r]_f & Y
+}\]
+This means that there are \emph{inhabited families} of Kan fibrations between the simplicial internally projective objects, which may not have any global elements. Hence we are looking for a variant of the ex/lex completion construction, that somehow replaces individual Kan fibrations by \emph{inhabited internal equivalence classes} of Kan fibrations. The greatest problem here is the property definition of `inhabited' in a category that may not be regular.
+
+The case we are interested in is the case of a realizability topos $\cat R$ constructed over another topos $\cat T$ than the topos of sets. The topos $\cat R$ is a locally small fibred topos over $\cat T$, and so is its subcategory of internally projective objects. A possibly suitable notion of inhabitation for enriched categories with a terminal object $1$ is the following: object $X$ of $\cat R$ is habited if $\cat R(Y,X)$ is, for all objects $Y$ of $\cat R$. 
+Other approaches look at Grothendieck topologies to provide a suitable notion of inhabitation, see \cite{ECnSS}.
+
+We want to figure out which approach is most suitable for representing exact categories as completions of their subcategories of internally projective objects in general.
+}
+
+\section{Modest sets}
+\newcommand\Asm{\mathsf{Asm}}%\newcommand\Set{\mathsf{Set}}
+\newcommand\inh{\mathbf I}%\newcommand\id{\mathrm id}
+\newcommand\set[1]{\left\{#1\right\}}
+The category $\sep(\eff,\neg\neg)$ of $\neg\neg$-separated objects in the effective topos $\eff$ is equivalent to the category of assemblies $\Asm$: 
+\begin{defin} Let $\inh \N$ be the set of inhabited subsets of $\N$. An \emph{assembly} is a set $X$ together with a function $f:X\to \inh \N$. If $(X,f)$ and $(Y,g)$ are assemblies, then $h:X\to Y$ is \emph{total} $(X,f)\to (Y,g)$, if there is a partial recursive $\phi:\N\partar\N$ such that for all $x\in X$ and $n\in f(x)$, $\phi(n)$ is defined and $\phi(n)\in g(h(x))$. The category $\Asm$ consist of assemblies and total morphisms.
+\end{defin}
+
+The forgetful functor $U:\Asm\to \Set$ is a fibration. The identity function $\id:\inh \N\to\inh \N$ determines a generic object $(\inh \N,\id)$ of $U$. Meanwhile, the singleton map $\set-:\N \to \inh \N$ determines a natural number object $(\N,\set-)$ of $\Asm$.
+
+The category $\pers$ is closely related to the following factorisation system on $\Asm$:
+
+\begin{defin} An arrow $m:X\to Y$ is \emph{modest}, if it is right orthogonal to all Cartesian regular epimorphisms of $\Asm$, i.e. given a regular epimorphism $e:X'\to Y'$ which is Cartesian relative to the forgetful functor $U$, and arbitrary morphisms $x:X'\to X$ and $y:Y'\to Y$, then there is a unique morphism $z: Y'\to X$ such that $m\circ z = x$ and $z\circ e = y$.
+\[ \xymatrix{
+X'\ar[d]_e\ar[r]^x & X\ar[d]^m \\
+Y'\ar[r]_y\ar@{.>}[ur]^z & Y
+}\]
+A \emph{modest set} is an assembly $M$ for which the unqiue map to the terminal object is modest.
+\end{defin}
+
+The relation to $\pers$ is precesily this:
+\begin{prop} Modest arrows $m:X\to Y$ are subquotients of $\N$ in the slice categories $\Asm/Y$. \end{prop}
+
+\begin{proof} See \cite{MR1023803}. \end{proof}
+
+On one hand, the full fibred subcategory of subquotients of $\N$ in $\Asm$ is complete, since it is a category of right orthogonal objects. The full subcategory of subquotients of $\N$ is a internal category of $\Asm$, however. This is rather interesting, as small complete categories are always posets, whereas the category of subquotients of $\N$ in $\Asm$ is not.
+
+
+\section{Problems and univalence}
+Modest morphisms and Cartesian epimorphism are a stable factorisation system in $\Asm$ and this is the reason for the nice properties of the category of subquotients of $\N$ there. This does not hold in $\eff$, because it implies that the subquotients of $\N$ from a topos, which quickly leads to contradictions with Cantors theorem.
+
+The exact status of the completeness is rather subtle:
+
+\begin{prop} The fibred categories of subquotients and $\neg\neg$-separated subquotients of $\N$ are only weakly complete, i.e. their stack completions are complete stacks. \end{prop}
+
+\begin{remark} This means that internal products exist, but do not always satisfy the Beck-Chevalley condition, i.e. they are unstable under reindexing. \end{remark}
+
+A localisation of the category of $\omega$-groupoids in $\Asm$ may be a better realizability topos than $\eff$. If not, it may still be a category where $\pers$ is a complete internal subcategory.
+
+The fact that $\eff$ is an ex/lex completion means that there are enough projectives (in $\Asm$ too).
+
+If we are right, then there is an interesting category of \emph{modest} $\omega$-groupoids which could be a PER model of homotopy type theory.
+
+\bibliography{realizability}{}
+\bibliographystyle{plain}
+\end{document}

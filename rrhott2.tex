@@ -1,0 +1,411 @@
+\documentclass{amsart}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[all]{xy}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{graphicx}
+
+\title{Univalence in the effective topos}
+\author[W. P. Stekelenburg]{Wouter Pieter Stekelenburg}
+\address{Faculty of Mathematics, Informatics and Mechanics\\
+University of Warsaw\\
+Banacha 2\\
+02-097 Warszawa\\
+Poland}
+\email{w.p.stekelenburg@gmail.com}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{corol}[theorem]{Corollary}
+
+
+\theoremstyle{definition}
+\newtheorem{defin}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{example}[theorem]{Example}
+
+
+\newcommand\hide[1]{}
+\newcommand\cat\mathcal
+\newcommand\set[1]{\left\{#1\right\}}
+
+\newcommand\id{\mathrm{id}}
+
+
+\begin{document}
+\maketitle
+
+Modest sets are a model of homotopy type theory. The internal groupoids in the effective topos have a model structure whose weak equivalences are internal equivalences of groupoids. Modest sets are a class of discrete internal groupoids, which are closed under internal limits. Arrow groupoids provide an interpretation of identity types, and there is a universe of modest sets which satisfies the univalence principle. This paper presents the resulting recursive realizability of homotopy type theory.
+
+\section{The effective topos}
+
+\subsection{discrete objects}
+This subsection sketches some of the notions that play a role in the background. The first is that of a discrete object.
+
+\begin{defin} An object $X$ of the effective topos is \emph{discrete} if the diagonal map $X\to X^{\nabla 2}$ is an isomorphism. \end{defin}
+
+These form a subcategory of the effective topos with a lot of structure.
+
+\begin{prop} Discrete objects are closed under finite limits, exponentials and coproducts. \end{prop}
+
+\begin{proof} By this definition $!:X\to 1$ has the right lifting property with respect to $!:\nabla 2 \to 1$ if $X$ is discrete. 
+Morphisms which have the right lifting property relative to $!:\nabla 2\to 1$ from a saturated class, which is why discrete objects have finite products and exponentials. Because $!:\nabla 2\to 1$ is an epimorphism, all monomorphism and hence all equalizers are discrete. Finally $\nabla 2$ is a connected object, which explains the sums. \end{proof}
+
+Surprisingly, this category is also essentially small in some sense.
+
+\begin{prop} Discrete objects are subquotients of the natural number object. \end{prop}
+
+\begin{proof} See %cite
+\end{proof}
+
+In order to turn discrete objects into a model of dependent type theory, we need a notion of familiy of discrete objects and considering the definition of discrete object, there is a obvious one.
+
+\begin{defin} A morphism $f:X\to Y$ is \emph{discrete} if it has the right lifitng property with respect to $!:\nabla 2\to 1$. \end{defin}
+
+There is an object of partial equivalence relations on the natural number object, together with a notion of a family of such things. It could have served as a universe of small types, if it wasn't for this.
+
+\begin{prop} Families of subquotients of $N$ are not closed under dependent products. \end{prop}
+
+\begin{proof} See %cite
+\end{proof}
+
+Note that discrete arrows are closed under dependent products, because they are a saturated class. Therefore, they do not coincide with families of subquotients of $N$ in all slices of the effective topos. There is a solution for this problem.
+
+\begin{prop} In the category of assemblies, families of subquotients of $N$ coincide with discrete arrows. \end{prop}
+
+\begin{proof} See %cite
+% of misschien moet ik dit zelf doen.
+\end{proof}
+
+The rest of this sections shows that modest sets are a model of homotopy type theory in the category of internal groupoids of the category of assemblies. We use internal groupoids to regain the exactness of the effective topos, which is lost in the transition to assemblies.
+
+
+
+\section{Projective model structure}
+This section presents two model structures on the internal groupoid of the effective topos, the \emph{canonical model structure} and the \emph{projective model structure}. In both of these model structures, weak equivalences are fully fiathful functors which are essentially surjective on objects. However, \emph{surjective} is interpreted in different ways. For the \emph{canonical model structure} a surjective morphisms is a split epimorphism. For the \emph{projecive model structure} any epimorphism is surjective.
+
+
+\hide{Hoe passen deze modelstructuren in deze paper?}
+
+
+The construction relies on the following properties of the effective topos and hence apply to internal groupoids of other categories with similar properties.
+
+\begin{lemma} The effective topos is regular and extensive and has enough projectives. \end{lemma}
+
+\newcommand\comma{\mathbin\downarrow}
+The contruction of the model structure proceeds in the following steps, which are explained in more detail in the subsection below.
+\begin{enumerate}
+\item There is an algebraic weak factorisation system on internal groupoids, which factors a functor $F:X\to Y$ in a \emph{deformation retract} $I(F):X\to Y\comma F$ and a \emph{cloven fibration} $\Pi_0(F):Y\comma F\to Y$. The deformation retracts are weak equivalences and the cloven fibrations are fibrations in both model structures.
+\item A morphism $f:X\to Y$ factors as a split epimorphism $(f,\id_Y):X+Y \to Y$ following a coproduct inclusion $\iota_0:X\to X+Y$. This weak factorisation system lifts to groupoids. The combination of these first two systems give the canonical model structure.
+\item A morphism $f:X\to Y$ factors as an epimorphism $(f,c):X+Y' \to Y$ following coproduct inclusion $\iota_0:X\to X+Y'$, where $c:Y'
+\to Y$ is an epimorphism and $Y'$ a projective object. The combination of this weak factorisation system with the first one gives the projective model structure.
+\end{enumerate}
+
+\subsection{Cloven fibrations and deformation retracts}
+The starting point for the factorisation in retracts and fibrations is the constuction of the `homotopy graph' of a functor between groupoids.
+
+\begin{defin}[Homotopy graph] For each functor $F:X\to Y$ let $Y\comma F$ be the groupoid whose object are morphism $f:x\to Fy$ and whose morphisms are commuting squares like below.
+\[ \xymatrix{
+x\ar[d]_f \ar[r]^g & x'\ar[d]^{f'}\\
+Fy \ar[r]_{Fh} & Fy'
+}\]
+So $(Y\comma F)_0$ is the pullback of $d_Y:Y_1 \to Y_0\times Y_0$ and $(\id_{Y_0},F_0): X_0 \to Y_0\times X_0$ and $(Y\comma F)_1$ has a more complicated definition along the same lines.
+
+Let $I(F):X \to Y\comma F$ be the functor that sends each object $x$ to $F\id_x:Fx\to Fx$. Let $\Pi(F):Y\comma F \to Y\times X$ be the functor that sends $f:y\to Fx$ to $(y,x)$ and let $\Pi_0(F):Y\comma F \to Y$ and $\Pi_1(F):Y\comma F \to X$ be its component functors.
+\end{defin} 
+
+There is a straighforward way to proceed from this structure to a weak factroisation system.
+
+\begin{defin} Let $F:X\to Y$ be any functor. A \emph{deformation} of $F$ is a functor $D:Y\to Y\comma F$ such that $\Pi_0(F)D = \id_Y$ and $DF = I(F)$. A \emph{deformation retract} is a functor which has a deformation. A \emph{cleavage} is a functor $C:Y\comma F \to X$ such that $CI(F) = \id_X$ and $FC = \Pi_0(F)$. A \emph{cloven fibration} is a functor which has a cleavage.
+\end{defin}
+
+\begin{lemma} Deformation retracts and cloven fibrations form a weak factorisation system. \end{lemma}
+
+\begin{proof} First of all, all morphism factor as a clovan fibrations following a deformation retract thank to the construction above.
+For each functor $F:X\to Y$, $I(F)$ is a deformation retract. The deformation is the functor $Y\comma F\to (Y\comma F)\comma I(F)$ which sends $f:y\to Fx$ to the following square.
+\[\xymatrix{
+y\ar[r]^f\ar[d]_f & Fx \ar[d]^{F\id_x}\\
+Fx \ar[r]_{F\id_x}& Fx
+}\]
+Also, $\Pi_0(F)$ is a cloven fibration. The cleavage is the functor $Y\downarrow \Pi_0(F) \to Y\downarrow F$ which sends $g:y\to \Pi_0(f)$ to $f\circ g$.
+
+Deformations and a cleavages give liftings directly.
+Let $F:W\to X$ have deformation $D:X\to X\comma F$, let $G:Y\to Z$ have cleavage $C:Z\comma G \to Y$ and let $A:W\to Y$ and $B:X\to Z$ be functors which satisfy $BF=GA$. These $A$ and $B$ induce a functor $B\comma A: X\comma F \to Z\comma G$, sending $f:x\to Fw$ to $Bf:Bx \to BFw=GAw$. The composition $C(B\comma A) D$ is a filler for the square formed by $A$, $B$, $F$ and $G$.
+\[\xymatrix{
+W\ar[rr]^A\ar[dd]_F \ar[dr]^{I(F)} && Y\ar[d]_{I(G)} \ar[r]^\id & Y \ar[dd]^G \\
+& X\comma F \ar[r]^{B\comma A}\ar[d]^{\Pi_0(F)} & Z\comma G \ar[ur]_{C}\ar[dr]_{\Pi_0(G)}\\
+X\ar[r]_{\id}\ar[ur]^D & X \ar[rr]_B && Z
+}\]
+\end{proof}
+
+The deformations retracts an the cloven fibrations are nearly the trivial cofibrations and the fibrations of the upcoming model structures, although both classes will be altered to fit better.
+
+\subsection{Induced weak factorisation systems}
+Any weak factorisation system $(L,R)$ on a topos $\cat E$ induces a weak factorisation system on the internal groupoids of $\cat E$.
+
+\begin{defin} And $L$-functor of internal groupoids is a functor $F:X\to Y$ whose object morphism $F_0:X_0\to Y_0$ is in $L$. An $R$-equivalence is a fully faithful functor $F:X\to Y$ such that $F_0\in R$. \end{defin}
+
+\begin{lemma} The classes of $L$-functors and $R$-equivalences form a weak factorisation system on internal groupoids. \end{lemma}
+
+\begin{proof} Functors factor as $R$-equivalences following $L$-functors in the following manner. Let $F:X\to Y$ be an arbitrary functor. The object map $F_0:X_0\to Y_0$ factors as an $R$-morphism $G_0:Z_0 \to Y_0$ following an $L$-morphism $H_0:X_0 \to Z_0$. Let $d_Z:Z_1 \to Z_0\times Z_0$ be the pullback of $d_Y:Y_1\to Y_0\times Y_0$ along $G_0\times G_0$. Now $Z$ is a groupoid, and the pullback square defines an $R$-equivalence $G:Z\to Y$. There is a unique $H_1:X_1 \to Z_1$ such that $G_1\circ H_1 = F_1$ and $H_0\times H_0\circ d_X = d_Z\circ H_1$, and this defines an $L$-functor $H:Y\to Z$.
+\[ \xymatrix{
+X_1\ar[d]_{d_X}\ar[r]_{H_1}\ar@/^/[rr]^{F_1} & Z_1 \ar[r]_{G_1} \ar[d]|{d_Z}\ar@{}[dr]|<\lrcorner & Y_1\ar[d]^{d_Y}\\
+X_0\times X_0 \ar[r]^{H_0\times H_0}\ar@/_/[rr]_{F_0\times F_0} & Z_0\times Z_0 \ar[r]^{G_0\times G_0} & Y_0\times Y_0 
+}\]
+
+The $L$-functors and $R$-equivalences inherit their lifting property form the classes $L$ and $R$. Let $F:W\to X$ be an $L$-functor let $G:Y\to Z$ be an $R$-functor and let $A:W\to Y$ and $B:X\to Z$ be functors that satsify $BF=GA$. There is a $C_0:X_0 \to Y_0$ such that $C_0\circ F_0 = A_0$ and $G_0\circ C_0 = B_0$. There is a unique factorisation of $B_1$ through $G_1$ which commutes with $C_0\times C_0$ because $G$ is fully faithful.
+\[ \xymatrix{
+X_1\ar[d]_{d_X}\ar[r]_{C_1}\ar@/^/[rr]^{B_1} & Y_1 \ar[r]_{G_1} \ar[d]|{d_Y}\ar@{}[dr]|<\lrcorner & Z_1\ar[d]^{d_Z}\\
+X_0\times X_0 \ar[r]^{C_0\times C_0}\ar@/_/[rr]_{B_0\times B_0} & Y_0\times Y_0 \ar[r]^{G_0\times G_0} & Z_0\times Z_0 
+}\]
+Faithfulness also forces that $C_1\circ F_1 = A_1$. Therefore $C:X\to Y$ satisfies $CF=A$ and $GF=B$.
+\end{proof}
+
+\subsection{Induced model structure}
+A weak equivalence of groupoids is essentially surjective on objects. In order to get a appropriate notion of surjection for internal groupoids of a topos, we use a weak factorisation system of the following kind.
+
+\begin{defin} A weak factorisation system $(L,R)$ on a topos $\cat E$ is \emph{surjective} if
+\begin{enumerate}
+\item every split epimorphism is in $R$;% ja moet
+\item every morphism in $R$ is an epimorphism; %: separabiliteit van de codomeinfibratie.
+\item If $f\circ g\in R$ then $f\in R$.
+\end{enumerate}\label{surjective}
+\end{defin}
+
+For the rest of this subsection, let $(L,R)$ be a surjective weak factorization system.
+
+\begin{defin} A functor $F:X\to Y$ is \emph{essentially surjective on objects} or \emph{eso} if $\Pi_0(F):Y\downarrow F\to Y$ is an $R$-equivalence. A functor $G:Y\to Z$ is \emph{fully faithful} if $\Pi_0(\id_Y)$ is a pullback of $\Pi_0(\id_Z)$ along $G$. A \emph{weak equivalence} is a fully faithful eso functor. \emph{Cofibrations} are $L$-functors. A functor is a \emph{fibration} if it has the lifting property with respect to all cofibrations which are also weak equivalences.\label{modstruc}
+\end{defin}
+
+\begin{remark} Fully faithful above is equivalent to the conventional definition. \end{remark}
+\hide{ Dit moeten we ergens uitwerken. }
+
+\hide{\begin{remark} A functor $F:X\to Y$ is fully faithful iff .
+\[\xymatrix{
+X\comma\id_X \ar[r]\ar[d]_{\Pi_0(\id_X)}\ar@{}[dr]|<\lrcorner & Y\comma\id_Y \ar[d]^{\Pi_0(\id_Y)} \\
+X \ar[r]_F & Y
+}\]\label{ff} \end{remark}}
+
+The rest of this subsection will show that these morphism satsify the axioms of model categories.
+
+\begin{lemma}[Retracts] Weak equivalences are closed under retracts. \label{retracts}\end{lemma}
+
+\begin{proof} If $F$ is a retract of $G$, then $\Pi_0(F)$ is a retract of $\Pi_0(G)$. But $R$-equivalences are closed under retracts as well, so if $G$ is eso, then so is $F$. Commutative squares which are retracts of pullbacks squares are themselves pullback squares, hence if $F$ is a retract of $G$ and $G$ is fully faithful, then so is $F$.\hide{Echt waar!?}
+\end{proof}
+
+\begin{lemma}[2 of 3] If two of $F:X\to Y$, $G:Y\to Z$ and $GF:X\to Z$ are weak equivalences, then all three are. \label{2of3}\end{lemma}
+
+\begin{proof} \emph{From $F$ and $G$ to $GF$:} the functor $\Pi_0(GF)$ is a retract of the pullback $H:W\to Z\comma G$ of $\Pi_0(F)$ along $\Pi_1(G)$, and $R$-equivalences are closed under pullbacks and retracts because they are the right class of a weak factorisation system. The object of $W$ are pairs $(g:z\to Gy,f:y\to Fx)$ and the morphisms consist of two commuting squares who have a side in common up to an application of $G$ as shown below.
+\[ \xymatrix{
+z\ar[d]_c\ar[r]^g & Gy\ar[d]^{Gb} & y\ar[d]_b\ar[r]^f & Fx\ar[d]^{Fa} \\
+z'\ar[r]_{g'} & Gy' & y'\ar[r]_{f'} & Fx'
+}\]
+
+There is a deformation retract $Z\comma GF \to W$, namely the functor $\id':Z\comma GF\to W$ which sends $h:z\to GFx$ to $(h, F\id)$. The deformation $D:W\to W\downarrow\id'$ sends $(g,f)$ to
+\[ \xymatrix{
+z\ar[d]_{\id_z}\ar[r]^g & Gy\ar[d]^{Gf} & y\ar[d]_f\ar[r]^f & Fx\ar[d]^{F\id_x} \\
+z\ar[r]_(.4){Gf\circ g} & GFx & Fx\ar[r]_{F\id_x} & Fx
+}\]
+The functor $\Pi_1(\id')D$ is a right inverse of $\id'$ and commutes with $\Pi_0(G)$, while $\id'$ commutes with $I(G)$.
+\[ \xymatrix{
+Z\comma GF \ar[r]^(.6){\id'}\ar[d]_{\Pi_0(GF)} & W \ar[r]^(.4){\Pi_1(\id')D}\ar[d]_H & Z\comma GF\ar[d]^{\Pi_0(GF)} \\
+Z \ar[r]_{I(G)} & Z\comma G \ar[r]_{\Pi_0(G)} & Z 
+}\]
+Therefore $\Pi_0(GF)$ is a retract of $H$ and hence itself an $R$-equivalence. Therefore $GF$ is eso.
+
+Because $F$ and $G$ are fully faithful, $\Pi_0(\id_X)$ is a pullback of $\Pi_0(\id_Y)$ along $F$ and $\Pi_0(\id_Y)$ is a pullback of $\Pi_0(\id_Z)$ along $G$. This means $\Pi_0(\id_X)$ is the pullback of $\Pi_0(\id_Z)$ along $GF$ and that $GF$ is fully faithful too. 
+\[ \xymatrix{
+X\comma\id_X\ar[d]_{\Pi_0(\id_X)}\ar[r]\ar@{}[dr]|<\lrcorner&Y\ar[r]\comma\id_Y\ar[d]_{\Pi_0(\id_Y)}\ar@{}[dr]|<\lrcorner&Z\comma\id_Z\ar[d]^{\Pi_0(\id_Z)}\\
+X\ar[r]_F & Y\ar[r]_G & Z
+}\]
+Hence $GF$ is fully faithful and eso and therefore a weak equivalence, if $F$ and $G$ are.
+
+\emph{From $FG$ and $G$ to $F$:} The functor $\Pi_0(G)$ is the pullback of $\Pi_0(GF)$ along $G:Y\to Z$, because $G$ is fully faithful.
+\[ \xymatrix{
+Y\comma G \ar[d]_{\Pi_0(G)} \ar[r]^{G\comma G} \ar@{}[dr]|<\lrcorner & Z\comma GF\ar[d]^{\Pi_0(GF)} \\
+Y \ar[r]_G & Z
+}\]
+Any morphism $h:Gy \to GFx$ equals $Gf$ for a unique $f:y\to Fx$. The $R$-equivalences are closed under pullback hence $GF$ is eso.
+
+Since $\Pi_0(\id_X)$ is a pullback of $\Pi_0(\id_Z)$ along $GF$ and $\Pi_0(\id_Y)$ is a pullback of $\Pi_0(\id_Z)$ along $G$, $\Pi_0(\id_X)$ is a pullback of $\Pi_0(\id_Y)$ along $F$.
+\[ \xymatrix{
+Z\comma GF \ar[r]^(.6){\id'}\ar[d]_{\Pi_0(GF)} & W \ar[r]^(.4){\Pi_1(\id')D}\ar[d]_H & Z\comma GF\ar[d]^{\Pi_0(GF)} \\
+Z \ar[r]_{I(G)} & Z\comma G \ar[r]_{\Pi_0(G)} & Z 
+}\]
+
+Therefore $F$ is a weak equivalence if $GF$ and $G$ are.
+
+\emph{From $FG$ and $F$ to $G$:} Let $F_*:Z\comma GF \to Z\comma G$ be the `forgetful functor' which send $h:z\to GFx$ to itself. Now $\Pi_0(G)F_* = \Pi_0(GF)$.
+\[ \xymatrix{
+Z\comma GF \ar[r]^{F_*} \ar[d]_{\Pi_0(GF)} & Z\comma G \ar[d]^{\Pi_0(G)}\\
+Z \ar[r]_{\id_Z} & Z
+}\]
+We assumed left factors of $R$-morphisms are $R$-morphisms so $\Pi_0(G)$ has an $R$-morphisms as underlying map. Hence $G$ is eso.
+
+The functor $G\comma G: Y\comma F \to Z\comma FG$ which sends $f:y\to Fx$ to $f:Gy \to GFx$ is fully faithful because $GF$ is and because $Y$ is a groupoid.
+This means that $\Pi_0(GF)(G\comma G) = G\Pi_0(F): Y\comma F\to Z$ is a fully faithful functor. Because $\Pi_0(F)$ has an epimorphism as underlying map, all $H:W\to Y$ such that $\Pi_0(\id_{Y\comma F})$ is a pullback of $H$, are isomorphic. For this reason $\Pi_0(Y)$ is the pullback of $\Pi_0(Z)$ along $G$.
+
+If $GF$ and $F$ are weak equivalences, then $G$ is too.
+\end{proof}
+
+
+\begin{lemma}[Lifting] Trivial fibrations are $R$-equivalences. \label{lift}\end{lemma}
+
+\begin{proof} Every trivial fibration $F:X\to Y$ factors as an $R$-equivalence $G:Z\to Y$ following a cofibration $H:X\to Z$ which is trivial cofibration because\dots %2 of 3
+The lifting property of fibrations implies that there is a functor $K:Z\to X$ such that $KH = \id_X$ and $FK=G$. Hence $F$ is a retract of $G$ and therefore an $R$-equivalence.
+\end{proof}
+
+
+\begin{lemma}[Factorisation] Every functor factors as a fibration following a trivial cofibration. \label{factor}\end{lemma}
+
+\begin{proof} Let $F:X\to Y$ be any functor. $I(F):X\to Y\comma F$ factors as an $R$-equivalence $G:Z\to Y\comma F$ following a cofibration $H:X\to Z$. Any trivial cofibration $K: V\to W$ is a deformation retract, because $K$ has the right lifting property relative to $\Pi_0(K): W\comma K \to W$. Therefore all $R$-equivalences, all cloven fibrations and compositions like $\Pi_0(F)G$ are fibrations.%beetje kort.
+
+The functor $I(F)$ is an equivalence because the underlying map of $\Pi_0(I(F))$ is a split epimorphisms. The functor $G:Z\to Y$ is a weak equivalence because $G$ factors though $\Pi_0(G)$, making $\Pi_0(G)$ an $R$-equivalence. Hence $H$ is a weak equivalencen and therefore a trivial cofibration.
+
+Therefore $F$ factors as the fibration $\Pi_0(F)G$ following a trivial cofibration $H$.
+\end{proof}
+
+\begin{prop} The weak equivalences, fibrations and cofibrations of definition \ref{modstruc} form a modelstructure on internal groupoids of any topos. \end{prop}
+
+\begin{proof} Lemmas \ref{retracts}, \ref{2of3}, \ref{lift} and \ref{factor} show that the functors in definition \ref{modstruc} satisfy all the axioms of model structures. 
+
+Fibrations and cofibrations are right and left classes in weak factorisation systems by the current definition, and hence closed under retracts. Lemma \ref{retracts} show that weak equivalences are also closed under retracts. Lemma \ref{2of3} shows that weak equivalence satisfy 2 of 3. Lemma \ref{lift} establishes that cofibrations have the left lifting property with respect to trivial fibrations, while fibrations have this lifting property relative to trivial cofobrations by definition. Lemma \ref{lift} also show that every functor factors as a trivial fibrations following a cofibration, while lemma \ref{factor} shows that every functor factors as a fibration following a trivial cofibration. \end{proof}
+
+\subsection{weak factorization systems on the effective topos}
+We apply the definitions above to two weak factorisation systems which are available in the effective topos. The first one the the factorisation system of split epimorphism and coproduct inclusion, which is fairly general.
+
+\begin{lemma} In every topos coproduct inclusions and split epimorphisms for a weak factorisation system. \end{lemma}
+
+\begin{proof} Every morphism $f:X\to Y$ factors as $(f,\id_Y):X+Y\to Y$ following $\iota_0:X\to X+Y$. Here, $(f,\id_Y)$ is a split epimorphism because $(f,\id_Y)\circ \iota_1 = f$ is. These classes of morphism have the lifitng property with respect to each other. Let $e:Y\to Z$ be a split epimorphism with section $s:Z\to Y$ and let $a:W\to Y$ and $b:W+X\to Z$ satisfy $b\circ \iota_0 = e\circ a$. The map $(a,s\circ b\circ \iota_1):W+X \to Y$ satisfies $(a,sb)\circ \iota_0 = a$, $e\circ (a,s\circ b\circ \iota_1)\circ \iota_1 = b\circ \iota_1$ and $e\circ (a,s\circ b\circ \iota_1)\circ \iota_0 = e\circ a = b\circ \iota_0$. It is therefore a diagonal filler.
+\[\xymatrix{
+& W\ar[d]_{\iota_0}\ar[r]^a & Y\ar[d]^e \\
+X\ar[r]_{\iota_1} & W+X \ar[r]_b\ar[ur]|{(a,s\circ b\circ \iota_1)} & Z & Z \ar[l]^{\id_Z} \ar[ul]_{s} 
+}\]
+
+If $e:Y\to Z$ has the right lifting property with respect to coproduct inclusions, then there must be an $f:Z+Y\to Y$ such that $f\circ \iota_0 = \id_Y$ and $e\circ f = (e,\id)$. Now $f\circ \iota_1$ is a section of $e$ and $e$ is a split epimorphism.
+
+\[\xymatrix{
+X\ar[r]^{\id_X}\ar[d]_{\iota_0} & X\ar[d]^e\\
+X+Y\ar[r]_{(e,\id)}\ar[ur]|f & Y
+}\]
+
+If $f:X\to Y$ has the left lifting property with respect to split epimorphisms then there must be a $g:Y\to X+Y$ such that $g\circ f = \iota_0$ and $(f,\id_Y)\circ g = \id_Y$. Let $h:W\to Y$ be the pullback of $\iota_1:Y\to X+Y$ along $g$. Then $(f,h):X+W \to Y$ is an isomorphism because coproducts are stable under pullback.
+\[\xymatrix{
+X\ar[r]^{\iota_0}\ar[d]_f & X+Y\ar[d]^{(f,\id_Y)}\\
+Y\ar[r]_{\id}\ar[ur]|g & Y
+}\quad\xymatrix{
+X+W\ar[d]_{(f,h)} \ar[r]\ar@{}[dr]|<\lrcorner & X+Y\ar[d]^{\id_{X+Y}}\\
+Y \ar[r]_{\iota_1} & X+Y
+}\]
+
+\end{proof}
+
+The second one depends on the following concepts.
+\begin{defin} A morphism $m:X\to Y$ is projective if it has the left lifting property with respect to all epimorphisms. In a catgroy with an initial object $0$ a \emph{projective object} is an object $X$ for which the unique map $0\to X$ is projective. A category \emph{has enough projectives} if for each object $X$ there is a projective object $X'$ together with an epimorphism $c_X:X'\to X$.
+\end{defin}
+
+\begin{lemma} In every topos with enough projectives, every morphism splits as an epimorphism following a projective morphisms. \end{lemma}
+
+\begin{proof} Let $f:X\to Y$ be any morphism let $Y'$ be projective and and let $c_Y:Y'\to Y$ be an epimorphism. The morphism $f$ now factors as $(f,c_Y):X+Y'\to Y$ following $\iota_0:X\to X+Y'$. Here, $(f,\id_Y)$ is a split epimorphism because $(f,\id_Y)\circ \iota_1 = f$ is, while $\iota_0:X\to X+Y'$ is projective because is the coproduct of the projective maps $\id_X$ and $0\to Y'$ and the class of projective morphisms is closed under coproducts.
+\end{proof}
+
+%In common: certain morphisms are $R$-equivalences... factorisation property.
+
+%twee modelstructure. sterke equivalencties and zwakke equivalenties\dots
+
+Both of these weak factorisation system are surjective in the sense of definition \ref{surjective}. They are the extreme cases with both the smallest and the greatest class of morphisms in any possible surjective factorisation system. They induce two model structures.
+
+\begin{defin} The \emph{canonical model structure} on internal groupoids is the model structure induced by the weak factorisation system of coproduct inclusions and split epimorphisms. The \emph{projective model structure} is the model structure induced by the weak factroisation system of projective morphisms and epimorphisms.
+\end{defin}
+
+\begin{remark} The fibrations of the canonical model structure --\emph{canonical fibrations}--are not necessarily cloven fibrations, because the $R$-equivalences are not necessarily cloven. %misschien is natuurlijkheid het probleem: de functoren zijn wel cloven, maar de cleavage is geen functor. Zou dat kunnen? Denk het niet.
+\end{remark}
+
+\section{Quillen model structure}
+The Quillen model structure is impredicative but constructive and non infinitary.  
+
+Let $\cat E$ be a topos with a natural number object $N$. There is internal category of initial segments of $N$, $\mathbf \Delta$ and hence a topos of sheaves over $\mathbf \Delta$: the internal simplicial sets. 
+\hide{In the effective topos, where the global sections functors preserves the natural number object, this is a subcatgeory of the topos of simplicial objects of the effective topos.}
+
+\hide{niet te algemeen maken}
+
+\section{modest sets}
+This section introduces the modest sets of the effective topos as a kind of discrete groupoid. These modest sets form a complete fibration with a generic object. Thanks to these, it is a model of homotopy type theory.
+
+
+
+\subsection{Connected and discrete functors}
+From now on, we work in the category $\cat G$ of internal groupoids of the category of assemblies. Since assemblies cover all objects of the effective topos, every internal groupoid of the effective topos is weakly equivalent to one here in the projective model structure, which is one of the reasons to prefer this strucre over others.
+
+The discrete functors are once again defined as having a right lifting property to some other functors.
+
+
+\begin{defin} A functor is \emph{discrete} if it has the right lifting property with respect to prone epimorphisms of groupoids. A functor is \emph{connected} if it has the left lifting property with respect to all discrete functors.
+\end{defin}%dit is teveel voor univalence.
+
+\hide{Rosolini's topos bestaat uit objecten die de liftingeigenschap hebben ten opzichte van kleine groepen. }
+
+\begin{lemma} Discrete functors form a complete fibred category. \end{lemma}
+
+\begin{proof} Class of morphism orthogonal to epimorphisms. \end{proof}
+
+\begin{lemma} There is a generic discrete arrow. \end{lemma}
+
+\begin{proof} The bundles of modest objects over partial equivalence relations on the natural number object. \end{proof}
+
+
+
+\subsection{identity types}
+Use the cloven path objects, which is stable under pullbacks.
+
+\hide{meest vervelende deel van het verhaal: de theorie van discrete objecten.}
+
+
+\end{document}
+
+
+
+\subsection{the model structures}
+
+
+
+To get a model structure on the internal groupoids of the effective topos I mimic the canonical model structure on small groupoids. This model structure has ordinary equivalences of categories as weak equivalences, fibred groupoids as fibrations and functors which are injective on objects as cofibrations. In particular trivial fibrations are fully faithful functors which are surjective on objects. The model structure relies on the weak factorisation system of injections and srujection that the axiom of choice induces on the topos of sets.
+
+
+
+The effective topos has enough projectives, and hence admits a model structure in which internal equivalences of categories are weak equivalences.
+
+For the rest of this section, let $\cat E$ be a topos and let $(L,R)$ be a weak factorization system on this topos.
+
+This weak factorisation system is going to be the cofibration-trivial fibration part of the model structure. I will construct the other half in two steps.
+
+\begin{defin} \emph{Cofibrations} are $L$-functors. A functor $F:X\to Y$ is a \emph{weak equivalence} if $F$ is fully faithful and if $\Pi_0:F\comma Y\to Y$ is an $R$-equivalence.  A \emph{trivial cofibration} is a cofibration which is also an equivalence. A functor $F:X\to Y$ is a \emph{fibration} if is has the right lifting property with respect to trivial cofibrations. \end{defin}
+
+\begin{lemma} Trivial cofibrations and fibrations form a weak factorisation system. \end{lemma}
+
+\begin{proof} Any functor $F$ already factors as a cloven fibration $P$ following a homotopy equivalence $I$. The homotopy equivalence $I$ factors as a trivial fibration $G$ following a cofibration $H$. If every cloven fibration is a fibration, and the cofibration factor of a homotopy equivalence is a weak equivalence, then $PG$ is a fibration and $H$ is a trivial cofibration, as required.
+
+I first show that cloven fibrations are fibrations. Let $F:W\to X$ be a trivial cofibration, and let $G:Y\to Z$, $A:W\to Y\comma G$ and $B:X\to Z$ satisfy $\Pi_0 A = BF$. There is a functor $H:X\to X\comma F$ such that $HF = I:W\to X\comma F$ and $\Pi_0H = F$ because $F$ is a cofibration and $\Pi_0:X\comma F \to X$ is a trivial fibration. Each $x\in X$ has $Hx:x\to F\Pi_1 H x$, and each $w\in W$ has $Aw:BFw \to G\Pi_1Aw$. So define
+$K$ using the pointwise composition $(A\Pi_1\circ B)H$. Then $\Pi_0 K = B$ and $KF = (A\Pi_1\circ B)I = A$,%HF=I!
+so cloven fibrations have the lifting property relative to trivial cofibrations adn are therefore fibrations.
+
+Next I show that cofibration factors of hpmotopy equivalences are weak equivalences. Let $F:X\to Y$, let $H:X\to Z$ be a cofibration and let $G:Z\to Y\comma F$ be a trivial fibration such that $GH=I:Y\to Y\comma F$. The projection $\Pi_0:(Y\comma F)\comma I \to (Y\comma F)$ is a split epimorphism and an $R$-equivalence because of that. The projection $\Pi_0: Z\comma H \to Z$ is the pullback of the former along $G$ and hence also an $R$-equivalence. Hence $H$ is a trivial cofibration. %controleren
+\end{proof}
+
+
+%2-uit-3 !?
+
+The effective topos has enough projectives. This means that regular epimorphisms are the $R$ class of a weak factorisation system on the effective topos. The resulting model structure 
+
+\section{modest groupoids}
+A modest groupoid is a separated groupoid which is injective with respect to full functors which are regularly epic on objects.
+
+
+
+
+
+

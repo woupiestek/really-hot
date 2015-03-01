@@ -1,0 +1,1448 @@
+\documentclass{amsart}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[all]{xy}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{graphicx}
+
+
+\title{Realizability of Univalence\\
+Modest Kan Complexes}
+\author[W. P. Stekelenburg]{Wouter Pieter Stekelenburg}
+\address{Faculty of Mathematics, Informatics and Mechanics\\
+University of Warsaw\\
+Banacha 2\\
+02-097 Warszawa\\
+Poland}
+\email{w.p.stekelenburg@gmail.com}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{corol}[theorem]{Corollary}
+
+
+\theoremstyle{definition}
+\newtheorem{defin}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{example}[theorem]{Example}
+
+
+\newcommand\hide[1]{}
+\newcommand\cat\mathcal
+\newcommand\set[1]{\left\{#1\right\}}
+
+\newcommand\id{\mathrm{id}}
+
+\begin{document}
+
+\maketitle
+
+The category of assemblies -- which is equivalent to the category of $\neg\neg$-separated objects in the effective topos -- has a lot of structure. It is a locally Cartesian closed regular and extensive category. This implies that the category of assemblies is a Heyting category. It has a generic monomorphism so the internal language is an intensional higher order intuitionistic logic. It has a very special natural number object, whose endomorphisms are precisely the total recrsuive functions. Moreover, quotients of subobjects of the natural number object form a complete internal category, namely the category of \emph{modest sets}. Thank to all of this structure, this category provides a model for polymorphic depedent type theories \hide{cite:Jacobs1999}. This paper extends this to \emph{homotopy type theory} using the modest Kan complexes as types.
+
+\newcommand\asm{\mathsf{Asm}}
+\newcommand\nno{\mathbf{N}}
+\newcommand\Simpcat{\vartriangle}
+\newcommand\simpcat{\blacktriangle}
+\newcommand\dual{^{op}}
+\newcommand\modset{\mathsf{Mod}}
+\section{Overview of the construction}
+The category of assemblies $\asm$ has a natural number object $\nno$. Therefore is has an \emph{internal category} of simplexes $\simpcat$. There is a category of presheaves $\asm^{\simpcat\dual}$ \hide{cite:M&M} which takes the place of the ordinary category of simplicial sets (which is contained in it). There are several ways to bring \emph{Kan fibrations} to $\asm^{\simpcat\dual}$. We ask for a strong version: the \emph{global Kan complexes}, which are equiped with a global lifting operator. The properly internal version is also interesting, as the \emph{effective topos} is equivalent to the category of 1-types for the 'local' Kan complexes -- those whose lifting merely exist.
+
+The category of assemblies unfortunately has few infinitary colimits if any \hide{cite:Jaap}. Therefore we will work with the subcategory of Kan complexes here, which happens to already have most of the structure we need. In fact, the only thing missing is a \emph{univalent Kan fibration} to serve as our universe.
+
+\hide{Nu kunnen we limieten en colimieten over het hele universum pakken om fibrant replacements te vinden. Deze categorie $\modset^{\simpcat\dual}$ is namelijk ook compleet.
+
+Om van $\cat M$ een simplical set te maken hebben we een soort inductieve colimiet nodig, maar is de category van modest sets bestaan die gewoon. We kijken naar eindige bomen van morfismes binnen de categorie $\modset^{\simpcat\dual}$. Dit kan heel goed zelf weer een soort modest Kan complex zijn.
+
+Hoe dan ook: we moeten werken met oneindige colimieten van modest sets, want daar buiten werkt vrijwel niets.
+}
+
+The subquotients of the natural number objects are easy to turn into a category $\modset$ of modest sets, and to modest simplicial sets $\modset^{\simpcat\dual}$ and modest Kan fibrations. The category $\modset^{\simpcat\dual}$ has the structure of a simplicial set, and the subcategory of Kan complexes en weak equivalences is even a Kan complex. This is the base of a univalent universe of modest Kan complexes, which serves as a model for modest sets.
+
+\section{Assemblies}
+This section contains definitions of the category of assemblies and its structure, like the limits, coproducts and exponentials and the natural number object. Each of these structures have a universal property, but this will not be demonstrated here. Instead we refer the reader to \hide{cite: Jaap, eigen artikelen}.
+
+The category of assemblies is constructed on top the the category of sets. It is based on Kleene's \emph{recursive realizability}. This is a model of Heyting arithmetic, in which an $\Pi^2_0$-statement $\forall x.\exists y.\phi(x,y)$ is valid if and only if there is a $\mu$-recursive function\hide{see wikipedia} $f$ such that $\forall x. \phi(x,f(x))$ is valid.
+
+\newcommand\N{\mathbb N}
+\newcommand\Set{\mathsf{Set}}
+\begin{defin} An \emph{assembly} is a pair $(X,e_X)$ where $X$ is a set and $e_X$ is a funxtion which assign a non empty set $e_X(x)\subseteq \N$ of natural numbers to each $x$ of $X$. A \emph{morphism} $(X,e_X)\to (Y,e_Y)$ is a function $f:X\to Y$ for which there is a partial recursive function $\phi$ such that for each $x\in X$ and $n\in e_X(x)$, $\phi(n)$ is defined and member of $e_Y(f(x))$. In this case $\phi$ \emph{tracks} $f$. Compositon and identities of morphisms are those of the underlying functions. Morphisms and assemblies together form the category $\asm$ of assemblies.
+\end{defin}
+
+There is an obvious functor $\Gamma:\asm\to\Set$ which satsifies $\Gamma(X,e_X)=X$ for each assembly $f$ and $\Gamma f = f$ for all morphisms. This functor is isomorphism to the global sections functor from which it gets its name. The functor $\Gamma$ has a right adjoint right inverse $\nabla:\Set\to\asm$ which satisfies $\nabla X = (X,x\mapsto\N)$ for each set $X$ and $\nabla (f:X\to Y) = f:\nabla X\to\nabla Y$. This works because the identity function tracks $f:\nabla X\to\nabla Y$. By defintion $\Gamma\nabla$ is the idenitity functor of $\Set$. Meanwhile, the identity function tracks $\id_X:(X,e_X) \to \nabla X$ which is the unit of the adjunction between $\nabla$ and $\Gamma$.
+
+\subsection{locally biCartesian closed and regular}
+\newcommand\pair[2]{\left\langle #1,#2\right\rangle}
+The structure of $\asm$ is closely connected to the rich structure the of partial recursive functions.
+They include bijections $\N\times \N\to \N$ like the following function.
+\[ \pair mn = \frac12(m+n)(m+n+1)+n\]
+There is also a binary function $(n,m)\mapsto n\cdot m$ such that for each unary partial recursive function $f$ there are numbers $i$ such that $f(x)$ is defined and equal to $y$ if and only if $i\cdot j$ is defined and equal to $y$. So the operator $\cdot$ is a \emph{universal partial recursive function}.
+
+Armed with these operators we can define limits, several colimits all and exponentials, even in slice categories of $\asm$. Finite products and coproducts, as well as exponentials look like this.
+\begin{align*}
+1 &= (1,x\mapsto \N)\\
+0 &= (\emptyset,!:\emptyset\to \N)\\
+(X,e_X)\times (Y,e_Y) &= (X\times Y, (x,y) \mapsto \set{\pair ij|i\in e_X(i)\land j\in e_Y(j)})\\
+(X,e_X)+(Y,e_Y) &= \left(X + Y, x \mapsto \set{\pair ij\middle|\begin{array}{c} i=0\land j\in e_X(j) \land x\in X \\ i=1\land j\in e_Y(j) \land x\in Y\end{array}}\right)\\
+(Y,e_Y)^{(X,e_X)} &= (Y^X , f\mapsto \set{i|\forall x\in X, j\in e_X(x).\exists k\in e_Y(f(x)). k=i\cdot j } )
+\end{align*}
+
+For each pair of morphisms $f,g:(X,e_X)\to(Y,e_Y)$ the equalizer in $\asm$ is $(\set{x\in X|f(x)=g(y)}, e_X)$, which $e_X$ restricted to the subset. The category of assemblies also has all coequalizers. Take the coequalizer $h:Y\to Z$ of $f$ and $g$ in the category of sets. Then let $e_Z(z) = \bigcup_{h(y)=z}e_Y(y)$. Now the identity morphism tracks $h:(Y,e_Y) \to (Z,e_Z)$ and if $k:(Y,e_Y)\to (W,e_W)$ satisfies $k\circ f = k\circ g$ then whatever partial recrsuive function tracks $k$ also tracks the factorisation of its underlying function though $h$.
+
+\hide{Bij $\nabla$ heel goed uitleggen wat het verschil is tussen regular en coequalizer behoudend.}
+
+For $f:(X,e_X) \to (Z,e_Z)$ and $g:(Y,e_Y) \to (Z,e_Z)$ there is a fibred exponential $(Y,e_Y)^{(X,e_X)}_{(Z,e_Z)}$. The underlying object is just the fibred exponenetial in the category of sets $Y^X_Z = \set{(z,f)|z\in Z, f:X_z\to Y_z }$. To make this an assembly $\pair ij\in e_{Y^X_Z}(z,f)$ if $i\in e_Z(z)$ and $j$ is the index of a partial recrsuive function that tracks $f:X_z\to Y_z$.
+
+The category of assemblies also has a natural number object.
+\[ \nno = (\N, n\mapsto \set n)  \]
+
+\hide{overzicht assemblies
+
+Wat moet hierin?
+
+-definitie van assemblies en morfismes.
+
+-misschien definities van producten, beelden, exponentials, coproducten etc.
+
+-natuurlijk getals object en misschien coinductive objecten.
+
+-generiek monomorfisme?
+}
+
+
+
+\section{Kan complexes}
+The types en contexts of the model of type theory presented here are an internalized version of Kan complexes which simplical sets with certain lifting properties. This section goes through internalizations of lifting properties, simplicial sets and finally Kan complexes in the category of assemblies. We start with a reminder of what Kan complexes are.
+
+
+\subsection{Background}
+Let $\Simpcat$ bet the category whose objects are non empty initial segments $[0,n]$ of the natural numbers $\N$ and whose morphisms are monotone function between these segments. A \emph{simplicial set} is a presheaf over $\Simpcat$ and a morphism between simplicial sets is a morphism of presheaves.
+
+Simplicial sets are a higher dimensional generalization of graphs, which can represent topological spaces up to homotopy. Important simplicial sets are the \emph{simplexes} $\Delta^n$, with are precisely the representable presheafs i.e. $\Delta^m([0,n]) = \Simpcat([0,m],[0,n])$. For $n>0$, the \emph{boundary} $\partial\Delta^n$ of $\Delta^n$ is the union of all embeddings $\Delta^{n-1}\to \Delta^n$. It comes with an inclusion $\partial\Delta^n \to \Delta^n$. For $k\leq n$ the \emph{horn} $\Lambda^n_k$ is the union of all embeddings $\Delta^{n-1}\to \Delta^n$ which contain the global setion $k:1 \to \Delta^n$. Horns come with an embedding $\Lambda^n_k \to \Delta^n$ too. Because $\Delta^0$ is the terminal presheaf $1$, its boundary $\partial\Delta^0$ is the presheaf $0$. The horn $\Lambda^0_0$ remains undefined.
+
+A \emph{Kan fibration} is a morphism $f:X\to Y$ of simplicial sets which has the \emph{right lifting property} with regard to horn inclusions $\Lambda^n_K\to\Delta^n$. For each $n>0$, $k\leq n$, $g:\Lambda^n_k\to X$ and $h:\Delta^n \to Y$ such that $f\circ g$ equals the restriction $h|\Lambda^n_k$ of $h$ to $\Lambda^n_k$, there are $k:\Delta^n\to X$ such that $k|\Lambda^n_k = g$ and $f\circ k = h$.
+\[ \xymatrix{
+\Lambda^n_k \ar[d] \ar[r]^g & X\ar[d]^f\\
+\Delta^n \ar[r]_h\ar@{.>}[ur]^k & Y
+}\]
+An \emph{acyclic Kan fibration} is a morphism $f:X\to Y$ of simplicial sets which has the right lifting property with regard to boundary inclusions $\partial \Delta^n\to\Delta^n$, this time for $n=0$ too. 
+
+A \emph{Kan complex} is a simplicial set $X$ for which the morphism $X\to 1$ is a Kan fibration. Kan complexes admit a homotopy theory, where $\Delta^1$ serves as a path object. A morphism $f:\Delta^1\times X\to Y$ is a homotopy between the morphisms $f(0,-)$ and $f(1,-)$. Thanks to the lifting properties, homotopical induce an equivalence relation on morphisms. A \emph{homotopy equivalence} of Kan complexes is a pair of morphisms $f:X\to Y$ and $g:Y\to X$ for which $f\circ g$ is homotopic to $\id_Y$ and $g\circ f$ to $\id_X$. 
+
+Acyclic Kan fibrations between Kan complexes are a special case of homotopy equivalences, and the \emph{acyclic Kan complexes} are Kan complexes which are homotopy equavalent to the terminal object $1$.%controleer
+
+Kan complexes are part of a model structure on the category of simplicial sets. This model category is Quillen equivalent to the category of topological spaces with the Quillen model structure. \hide{cite: Hovey, Goerss Jardine, etc.?}
+
+\subsection{Internal simplicial objects}
+The first step towards Kan complexes in $\asm$ is simplicial objects in $\asm$. The simple version is $\asm^{\Simpcat\dual}$, but we work with the internalized version $\asm^{\simpcat\dual}$ which has fewer objects. This subsection works out the definitions. \hide{alles beschreven in M\&M, citeren dus}
+
+\newcommand\intcat{\mathbf}
+\emph{Internal categories} exist in any category with pullbakcs. They are tuples $\intcat C=(C_0,C_1,d_0,d_1,r,t)$ where $C_i$ are objects, $d_i:C_1\to C_0$, $r:C_0\to C_1$ and $t:C_2\to C_1$ where $C_2$ is the pullback which can be defined as follows. %gebruik van interne taal gebruiken.
+\[ C_2 = \set{(f,g)\in C_1\times C_1| d_0(f)=d_1(g) } \]
+These morphisms satisfy the following equations.
+\begin{align*}
+d_0(r(x)) = d_1(r(x)) &= \id_{C_0}\\
+t(f, r(d_0(f))) = t(r(d_1(f)),f) &= f\\
+t(t(f,g),h) &= t(f,t(g,h))\\
+\end{align*}
+We use the internal language here. In a category of pullbacks, the internal language is just systems of equations and membership of subobjects, but that is all we need above. The map $r$ maps each object to its identity, and $t$ is the composition operator.
+
+The example we are interested in is $\simpcat$ in $\asm$, which has $C_0 = \nno$ and $C_1$ is the set of monotone functions between initial segments of $\nno$. 
+
+\hide{ waar gebruiken we deze? }
+%An \emph{internal functor} $F:\intcat C\to \intcat D$ is a pair of maps $F_0:C_0\to C_1$ and $F_1:C_0\to C_1$ which commute with $d_i$, $r$ and $t$. In the case of $t$ this means that the induce map $F_2:C_2\to D_2$ which satisfies $F_2(f,g) = (F_1(f),F_1(g))$ also satisfies $t(F_2(f,g)) = F_1(t(f,g))$.
+
+An \emph{internal presheaf} over $\cat C$ is a triple $(X,d,m)$ where $d$ is a map $X\to C_0$, and $m$ is a map $X\times_{C_0} C_1 \to X$; here:
+\[ X\times_{C_0} C_1 = \set{(y,f)\in X\times C_1| d(y) = d_1(f)} \]
+The maps satisfy the following equations:
+\begin{align*}
+d(m(x,f)) &= d_0(f) \\
+m(x,r(z)) &= x\\
+m(x,t(f,g)) &= m(m(x,f),g)
+\end{align*}
+The morphism $m$ is an action of the category $\intcat C$ on the family of sets $x:X\to C_0$.
+A morphism of internal presheaves $(X,d_X,m_X) \to (Y,d_Y,m_y)$ is a morphism $f:X\to Y$ such that $d_Y\circ f = d_X$ and $f(m(x,g))) = m(f(x),g)$.
+
+A \emph{internal simplicial object} in $\asm$ is an internal presheaf over the internal simplex category $\simpcat$. The category $\asm^{\simpcat\dual}$ is the category of internal simplical objects and morphisms of presheafs between them.
+
+%comparison. misschien als remark\dot
+The global sections functor $\Gamma:\asm\to\Set$ sends $\simpcat$ to $\Simpcat$. Thanks to this, there is a functor $\Gamma':\asm^{\simpcat\dual} \to \asm^{\Simpcat\dual}$. For each internal simplical object $(X,d,m)$, let $\Gamma'(X,d,m)([0,n])$ be the assembly $\set{x\in X|d(x)=n}$. For every monotone $f:[0,m]\to [0,n]$ there is a corresponding global section $f':1\to \simpcat_1$, so the map $m$ induces a morphism $\Gamma'(X,d,m)([0,n]) \to \Gamma'(X,d,m)([0,m])$.
+
+This reason that this functor $\Gamma'$ is not an equivalence of categories, is that the restriction map $m$ of an internal simplicial object depends recursively on the realizers of the monotone maps $f:[0,n]\to [0,m]$, while it doesn't have to for the `external' simplicial objects of $\asm$. \hide{tegenvoorbeeld?}
+
+\subsection{Internal lifting properties}
+We have a category $\cat S$ of simplicial sets and a family of morphisms $\Lambda^n_k\to\Delta^n$ and defined Kan complexes through the right lifting property. We want a stronger version of this, because the internal logic of the category of assemblies is constructive and we need stronger assumptions to reach similar conclusions.
+
+\newcommand\pb{\ar@{}[dr]|<\lrcorner}
+Let $\cat C$ be a Cartesian closed category with finite limits. A morphism $f:X\to Y$ of $\cat C$ has the \emph{stable right lifting property} with respect to a morphism $g:A\to B$ if $(f^B,X^g): X^B \to Y^B\times_{Y^A} X^A$ is a split epimorphism.
+\[\xymatrix{
+X^B\ar@/_3ex/[dr]_{f^B} \ar@/^3ex/[rr]^{X^g} \ar[r]_{(f^B,X^g)}
+&Y^B\times_{Y^A} X^A \ar[r]\ar[d]\pb & X^A \ar[d]^{f^A} \\
+&Y^B\ \ar[r]_{Y^g} & Y^A \\
+}\]
+Equivalently, this means that $f$ has the right lifting property with respect to all `multiples' $M\times g:M\times A\to M\times B$ of $g$. 
+
+Since our background category is a regular category, there is another varient of the lifting property worth mentioning here. A morphism $f:X\to Y$ has the \emph{local right lifting property} with respect to a morphism $g:A\to B$ if $(f^B,X^g): X^B \to Y^B\times_{Y^A} X^A$ is a regular epimorphism. In this case, rather than a single filler, the lifting property implies that there is an inhabited (i.e. globally supported) object of fillers, which may or may not have a global section. \hide{misschien uitlichten voor refereren later?}
+
+If $X$ has the stable lifting property with respect to $g:A\to B$, then for any object $Y$, $X^Y$ has too. This is a great advantage compared to the local lifting property. The local lifitng property is a better internalization, because it is true precisely when the statement 'there is a lifting' is valid in the internal language of $\cat C$.
+
+The Kan fibrations have the lifitng property with respect to a whol family of morphism. Suppose $\cat C$ is locally Cartesian closed. An \emph{internal family of morphisms} over on object $I$ is just a pair of morphism $g:A\to B$ and $h:B\to I$. A morphism $f:X\to Y$ has the stable right lifting property with respect to the family, if the constant family of morphism $I^* f:I^* X\to I^* Y$ has the stable right lifting property with respect to $g:f\circ g\to f$ in the slice $\cat C/I$. %onhandig bruik van $\Delta$ hier
+
+\subsection{Kan complexes}
+The \emph{stable Kan fibrations} of $\asm^{\simpcat\dual}$ have the stable lifting property with regard to the family of all horn inclusions.
+\[ \set{\Lambda^n_k \to \Delta^n|n,k\in \nno, k\leq n} \]
+In order to construct this family in $\asm$, where infinitrary colimits don't exists, we take advantage of the fact that $\simpcat$ is computably enumerable, in the sense that even in the constructive context of $\asm$, the objects of objects and morphisms of $\simpcat$ are in bijective correspondence with $\N$.
+\hide{gaan we dit nog uitwerken?}
+
+A \emph{stable Kan complex} is an internal simplical object $X$ for which the map $1:X\to 1$ is a stable Kan fibration. Such a simplicial object has a global horn filler operator.
+
+The stability immediately give us a crucial property.
+
+\begin{lemma}[Exponentials] Let $f:X\to Z$ be a stable Kan fibration and let $g:Y\to Z$ be an arbitary morphism. Then the fibred exponential $f^g_X:X^Y_Z\to Z$ is a stable Kan fibration too. \label{exp}\end{lemma}
+
+\begin{proof} In the case that $Z=1$ this is easy to see, and the rest parallel reasoning in slices of $\asm^{\simpcat\dual}$. That $X$ is a stable Kan complex means that the restriction maps $X^{\Delta^n} \to X^{\Delta^n_k}$ have a section for all $n\in \nno$ and $k\leq n$. The functor $W\mapsto W^Y$ preserves split epimorphisms, hence $(X^Y)^{\Delta^n} \to (X^Y)^{\Delta^n_k}$ is split, meaning that $X^Y$ is a stable Kan fibration too.
+\end{proof}
+
+\newcommand\kanfib{\mathsf{SKF}}
+For each Kan complex $K$ let $\kanfib(K)$ be the category whose objects are Kan fibrations with codomain $K$ and whose morphisms are commutative triangles in $\asm^{\simpcat\dual}$.
+
+\begin{theorem}[biCartesian closure] The category $\kanfib(K)$ is biCartesian closed.\label{bccc} \end{theorem}
+
+\begin{proof} Because the stable Kan fibrations are defined by a lifting property, they form a saturated class, which is stable under pullbacks, products and compositions. This explians hwy $\kanfib(K)$ has binary products. Lemma \ref{exp} explians the exponentials. 
+
+The category $\asm^{\simpcat\dual}$ inherits many of the nice properties of $\asm$. In particular it is an extensive category, which measn that it has coproduct which are stable under pullback (and disjoint). Every horn inclusion $\Lambda^n_k \to \Delta^n$ is \emph{connected}, which means that for each pair of morphism $f:A\to \Delta^n$ and $g:B\to \Delta^n$ if $\Lambda^n_k \to \Delta^n$ factors though $(f,g)$, then if factors through either $f$ or $g$. For this reason, if $f$ and $g$ are pullbacks of stable Kan fibrations $f':X\to K$ and $g':Y\to K$ along some morphism $\Delta^n\to K$ then $f'+_Z g':X+Y \to K$ is a Kan fibration too.
+
+\[\xymatrix{
+X \ar[dr] & Y \ar[d]\\ 
+\Lambda^n_k\ar[d] \ar[r]\ar@{.>}[u]\ar@{.>}[ur] &  X+Y \ar[d]^{(f',g')}\\
+\Delta^n \ar[r] & K
+}\]
+
+The initial morphism object $0\to K$ is a Kan fibration because there is no map $\Lambda^n_k \to 0$ for any $n\in \nno$ and $k\leq n$.
+\end{proof}
+
+\newcommand\ri{^*}
+Since stable Kan fibrations are stable under pullback, every morphism $f:X\to Y$ induces a functor $f\ri:\kanfib(Y) \to \kanfib(X)$.
+% stable kan verwarrend zijn. terug naar global?
+% missschien verzadiging ergens expliciet bewijzen.
+
+\begin{theorem}[Dependent products and coproducts] Let $f:K\to K'$ be a Kan fibration between Kan complexes. Then $f\ri:\kanfib(K') \to \kanfib(K)$ has both adjoints. \end{theorem}
+
+\begin{proof} Let $f:X\to K$ be a stable Kan fibration. Since stable Kan fibrations are stable under composition, the left adjoint $\coprod_f$ is the functor which satisfies $\coprod_f(g) = f\circ g$ on objects. The right adjoint $\prod_f$ is defined by the following pullback.
+\[\xymatrix{
+\prod_f(g)\ar[r]\ar[d]\pb & (f\circ g)^f \ar[d]^{g^f} \\
+1 \ar[r] & f^f
+}\]
+Over $K'$, $g$ is a morphism $f\circ g \to f$ and exponentiation gives the morphism $g^f: (f\circ g)^f \to f^f$. The exponenetial $f^f$ has a global section, namely the transpose of the identity $\id_f:f\to f$.
+
+To see that this defines a product, note that $\kanfib(K)$ and $\kanfib(K')/f$ are isomorphic categories. If $h:Y\to K'$ is another Kan fibration then any morphism $k:f\ri(h) \to g$ corresponds to a commutative square with a familiar transpose.
+\[ \xymatrix{
+f\times_{K'} h\ar[dr]_{f\ri(h)}\ar[r]^k & f\circ g \ar[d]^g & h \ar[r]^{k^t}\ar[dr]_h & \prod_f(g)\ar[r]\ar[d]\pb & (f\circ g)^f \ar[d]^{g^f} \\
+& f & & 1 \ar[r] & f^f
+}\]
+
+\end{proof}\hide{ Beck Chevalley is voor linksadjuncten triviaal, en dus ook geldig voor rechtadjuncten }
+
+We have a really simple interpretation of basic type constructions up to dependent products and coproducts. The interesting part, however, is in the identity types.
+
+\subsection{Homotopy in $\asm$}
+The category of simplicial sets has a standard model sturcture, and the category of topological sapces has the Quillen model structure, and these structures are equivalent, so question about the homotopy of topological spaces can be answered by looking at the corresponding simplicial sets.
+
+%lemma?
+The category is simplicial objects in $\asm$ extends the category of simplicals sets. Any simplicial set is in internal simplicial set in $\Set$. The reflective embedding $\nabla:\Set\to \asm$ induces a reflective embedding $\Set^{\Simpcat\dual} \to \asm^{\nabla\Simpcat\dual}$. Because the global sections functor $\Gamma$ preserves pullbacks and sends $\simpcat$ to $\Simpcat$, the unit of the adjunction $\Gamma\dashv \nabla$ is a functor $\eta_{\simpcat}:\simpcat \to \nabla \Simpcat$. The functor induces a functor $\asm^{\nabla\Simpcat\dual} \to \asm^{\simpcat\dual}$ which is fully faithful and has both adjoints. 
+
+This means that $\asm^{\simpcat\dual}$ provides an extended class of \emph{recursive homotopy types}, on top of the classical topological ones. Unfortunately, the category of assemblies has few infinitary colimits. This makes it hard, if not impossible, to find fibrant replacements for all simplicial objects. We will therefore focus on the stable Kan fibrations, and prove that they form a \emph{category of fibrant objects}.
+
+\begin{defin} A \emph{category of fibrant object} is a category $\cat C$ with finite limits with two classes of maps--the class $W$ of \emph{weak equivalences} and the class $F$ of \emph{fibrations}--which satisfy the following conditions.
+\begin{enumerate}
+\item if $f\circ g = h$ and any two morphisms out of $f,g,h$ are weak equivalences, then all of them are.
+\item all isomorphisms are in $W\cap F$ and $F$ is closed under composition.
+\item pullbacks of fibrations are fibrations, if the fibration is an equivalence, then its pullback is too.
+\item diagonal morphisms $\delta_X:X\to X\times X$ split as a fibration $X^I\to X\times X$ following a weak equivalence $X\to X^I$.
+\item the unique maps $1:X\to 1$ are fibrations.
+\end{enumerate}
+A morphism in $W\cap F$ is called a \emph{trivial fibration}.
+\label{catoffib}
+\end{defin}
+
+The proper notion of weak equivalence for the category of stable Kan complexes is the following.
+
+\newcommand\hto\Rightarrow
+\begin{defin} For each parallel pair of morphisms $f,g:X\to Y$ a \emph{homotopy} $h:f\hto g$ is a morphism $h:\Delta^1\times X\to Y$ such that $h(0,x) = f(x)$ and $h(1,x) = g(x)$ for all $x\in X$. Two morphisms $f,g:X\to Y$ are \emph{homotopic} is there is an $h:f\hto g$. For each $f:X\to Y$ a \emph{homotopy inverse} is a morphism $g:Y\to X$ such that $f\circ g$ is homotopic to $\id_Y$ and $g\circ f$ is homotopic to $\id_X$. A \emph{homotopy equivalence} is a morphism which has a homotopy inverse. \end{defin}
+
+\begin{lemma} The category of stable Kan complexes $\kanfib(1)$ together with homotopy equivalences and fibrations is a category of fibrant objects. \end{lemma}
+
+\begin{proof} Let's run through all the properties in definition \ref{catoffib}
+\begin{enumerate}
+\item That homotopy equivalences satisfy 2 out of 3 is trivial.
+\item All finite limits are available because by theorem \ref{bccc}.
+\item This is true because fibrations are a saturated class.
+\item An isomorphism if a homotopy equivalence because equal morphisms are homotopic, so inverses are homotopy inverses. For fibrations, both a consequence of being a saturated class.%misschein een lemma over toevoegen maken
+\item That fibrations are closed under pullback is known. We will get back to the trivial fibrations below.
+\item The diagonal $(\id_X,\id_X):X\to X\times X$ factors through $X^{\Delta^1}$. The combinatorial reasons that the map $X^!:X\to X^{\Delta^1}$ is a homotopy equivalence and that $(d_0,d_1):X^{\Delta^1} \to X\times X$ is a fibration will be treated below. %merk op dat het superscript in \Delta^1 een verwarrende alternatieve interpretatie heeft als exponential!
+\item The definition of $\kanfib(1)$ forces the maps $!:X\to 1$ to be fibrations.
+\end{enumerate}
+
+To show that the pullbacks of trivial fibrations are trivial, let $f:K\to L$ be any morphism, let $g:Y\to L$ be a stable Kan fibration and let $h:L\to Y$ be its homotopy inverse.
+There is a homotopy $a:g\circ h \hto \id_L$. We can \emph{whisker} it with $f$: $a*f = a\circ (\Delta^1\times f)$ to get a homotopy $g\circ h\circ f \hto f$. The lifitngproperty of $g$ implies that there is a morphism $b:\Delta^1 \times K \to X$ such that $b(0,x) = h(f(x))$ and $g(b(i,x)) = a(i,f(x))$. In particular $g(b(1,x)) = f(x)$ which means that there is a morphism $(b_1,f):K\to X\times_L K$ which is right inverse to $f\ri g: X\times_L K \to K$; here $b_1(x) = b(1,x)$.
+
+There is a homotopy $b: h\circ f = b_0\hto b_1$ and also a homotopy $c: h\circ g \hto \id_X$. If we whisker these with the projections of $X\times_L K$, we find homotopies $h\circ f\circ f\ri g\hto b_1\circ f\ri g$ and $h\circ g\circ \pi_0 \hto \pi_0$, where $h\circ f\circ f\ri = h\circ g\circ \pi_0$. We can compose these homotopies using the lifting of $\Lambda^2_0 \to \Delta^2$, to get a homotopy $d:b_1\circ f\ri g \hto \pi_0$. If we whisker $d$ with $g$ on the left--$g * d = g\circ d$--we get $g\circ b_1\circ f\ri g = f \circ f\ri g = g\circ \pi_0$. Therefore $d$ factors through the pullback, giving a homotopy $(b_1,f)\hto \id_{X\times_L K}$. This makes $(b_1,f)$ a homotopy inverse of $f\ri(g)$ and shows that trivial fibrations are stable under pullback.
+
+%over pad objecten.
+For the path spaces consider this. Both of the maps $d_0, d_1:X^{\Delta^1}$ are homotopy inverses of $X^!: X\to X^{\Delta^1}$. We have $d_i\circ X^! = \id_X$ which make them homotopic. There are maps $\min,\max:\Delta^1\times \Delta^1 \to \Delta^1$ which are homotopies of $\id_{\Delta^1}$ with its endpoints. Homotopies of $X^!\circ d_i$ with $\id_{X^{\Delta^1}}$ occur as transposes of the maps $(x,y,z) \mapsto z(\min(x,y))$ and $(x,y,z)\mapsto z(\max(x,y))$.
+
+The reason that $(d_0,d_1):X^! \to X\times X$ are a stable Kan fibration, and hence has the stable lifting property with repsect to each horn inclusion $\Lambda^n_k \to \Delta^n$ is because Kan complexes like $X$ have the stable lifting property with respect to the inclusion $f$ in the following pushout.
+\[\xymatrix{
+\Lambda^n_k+\Lambda^n_k \ar[rr]^{(\delta_0,\delta_1)\times \Lambda^n_k}\ar[d] && \Delta^1\times\Lambda^n_k\ar[d]\ar[r]^\id & \Delta^1\times\Lambda^n_k \ar[d]\\
+\Delta^n+\Delta^n \ar@/_3ex/[rrr]_{(\delta_0,\delta_1)\times \Delta^n} \ar[rr] && \bullet \ar@{.>}[r]^(.4){f}\ar@{}[ul]|<\ulcorner & \Delta^1\times \Delta^n
+}\]%\delta!?
+The object $\Delta_1\times \Delta_n$ is a prism, and the the object $\bullet$ consist of the sides of this prism except for one. Because $X$ fills all horns, it also fills up this prism in a couple of steps. The map $X^{\Delta^1\times \Delta^n}\to X^\bullet$ is therefore a split epimorphism, but this gives the stable lifting property for $(d_0,d_1)$ and $\Lambda^n_k \to\Delta^n$. %klopt dit parametrisch? is er een reden om te geloven dat het niet goed gaat omdat we meer stappen nog hebben in hogere dimensies?
+
+\hide{There is a technical problem here with finding a filler for all horn inclusions at once. But there is an algorithm, hence there should be a way to do it\dots
+
+Come to think of it: that might be the trick. Add explicit filler algorithms to anodyne extensions, which explain how to fill each part of them.
+
+Alternative: ask more duality.
+
+It might just be possible to do it with $\Delta^{2n+1}$ because it has enough points\dot. The hole het the wrong shape, but that is no big concern.
+}
+\end{proof}
+
+Standard theory now justifies using path spaces as interpretations of identity types. \hide{cite Brown73, Voevodsky using Kan complexes etc.}
+
+\section{Modest Kan complexes}
+In search of a univalent universe, we return to the category of assemblies $\asm$ to talk about the \emph{modest sets}. These already give an interesting interpretation of extensional type theory, because they form an internal category of $\asm$ which is complete in an suitably internal sence. 
+
+After introducion modest sets, we will use the fact that $\simpcat$ is enriched in modest sets to derive a universe of modest Kan complexes form the internal catgeory of modest sets.
+
+\subsection{Modest sets}
+\newcommand\bang{!}
+\newcommand\boldy{\nabla 2}
+\begin{defin} Let $\boldy = \nabla(1+1)$. A morphism is assemblies $f:(X,e_X)\to(Y,e_Y)$ is \emph{modest} is the following diagram is pull back.
+\[\xymatrix{
+(X,e_X) \ar[r]^{(X,e_X)^\bang} \ar[d]_{f} & (X,e_X)^{\boldy} \ar[d]^{f^{\boldy}}\\
+(Y,e_Y) \ar[r]_{(Y,e_Y)^\bang} & (Y,e_Y)^{\boldy}
+}\]
+An assembly $(X,E)$ is a \emph{modest set} if $!:(X,E)\to 1$ is modest.
+\end{defin}
+
+For each assembly $(X,e_X)$ let $\modset(X,e_X)$ be the category whose objects are modest arrows with codomain $(X,e_X)$ and whose morphisms are commutative triangles. Let $f:(X,e_X)\to(Y,e_Y)$ be a morphism of assemblies. Because modest arrows are stable under pullback, $f$ induces a functor $f\ri:\modset(Y,e_Y) \to \modset(X,e_X)$. Thank to the factroisatiom we have dependent coproducts of modest sets. These categories and functors have the following useful properties.\hide{cite Hyland et alt. Rosolini's modest sets maybe...}
+\begin{enumerate}
+\item The category $\modset(X,e_X)$ has all finite limits and colimits, and is closed under exponentials with arbitrary assemblies.
+\item The functor $f\ri$ hase both adjoints, and the adjoint satisfy the Beck Chevalley condition.
+\item Every object of $\modset(X,e_X)$ is isomorphism to a quotient of an subobject of the natural number object of $\asm/(X,e_X)$.
+\end{enumerate}
+
+\newcommand\pers{\cat P}
+The category of assemblies has enough structure to form an internal category $\pers$ whose objects are \emph{partial equivalence relations}--i.e. symmetric transitive but not necessarily reflexive binary relations--on the natural number object $\nno$, and whose morphisms $R\to S$ are morphisms between the subquotients $\nno/R$ and $\nno/S$. 
+
+Let $1/\pers$ be the internal category whose objects are morphisms with codomain $1$ and whose morphisms are commutative triangles in $\pers$. There is an obvious forgetful functor $1/\pers \to \pers$. Its object map $(1/\pers)_0 \to \pers_0$ is a generic modest morphism, because every modest morphism is a pullbakc of it. %cite!?
+
+\newcommand\modkanfib{\mathsf{MSKF}}
+\subsection{Modest fibrations}
+The category $\asm^{\simpcat\dual}$ has its own modest morphisms.
+
+\newcommand\modfib{\mathsf{Mod}}
+\begin{defin} The object $\boldy$ has a constant simplicial set which we will also denote by $\boldy$. A \emph{modest morphism} of simplical objects is a morphism $f:X\to Y$ for which the following diagram is a pullback.
+\[\xymatrix{
+X \ar[r]^{X^\bang} \ar[d]_{f} & X^{\boldy} \ar[d]^{f^{\boldy}}\\
+Y \ar[r]_{Y^\bang} & Y^{\boldy}
+}\]
+The category of modest morphisms and commutative triangles with codomain $X$ is $\modfib(X)$. A \emph{modest simplicial set} is a simplicial object $X$ for which the morphism $!:X\to 1$ is a modest morphism, hence a member of $\modfib = \modfib(1)$. A \emph{modest stable Kan fibration} is a stable Kan fibration which is also modest, and a \emph{modest stable Kan complex} is a simplicial object $X$ for which $!:X\to 1$ is a \emph{modest stable Kan complex}.
+\end{defin}%ik will van `stable' af\dots
+
+The modest simplicial sets are precisely the simplicial objects which are modest sets over every object of $\simpcat$ because $\asm^{\simpcat\dual}(\Delta_n\times \boldy, X)\simeq \asm(\boldy, X_n)$. In other words, for each presheaf $(X,d,m)$ over $\simpcat$ the morphism $d:X\to \nno$ is modest and therefore the pullback of the generic modest morphism along some morphism $\nno \to \pers_0$. Thanks to the action $m$ this morphism is an internal functor $\simpcat\dual\to\pers$. %internal functor!?
+
+This property has a generalization.
+
+\newcommand\elt{\int}
+\begin{lemma} For each simplicial assembly $(X,t,m)$ let $\elt (X,t,m)$ be the following internal category. The object of object $\elt(X,t,m)_0 = X$. For each pair of object $x,y$, $\elt X(x,y) = \set{ f\in \simpcat_1| f:t(x)\to t(y), m(y,f) = x}$. For each morphism $f:(X,t,m)\to(X',t',m')$ of simplicial assemblies, let $\elt f:\elt(X,t,m)\to \elt(X',t',m')$ be the faithful functor that has the underlying map $X\to X'$ of $f$ as object map and that sends a morphism $g:x\to y$ to $g:f(x)\to f(y)$. There is an equivalence between modest morphisms $(Y,t',m') \to (X,t,m)$ and functors $\elt(X,t,m)\dual \to \pers$. \end{lemma}
+
+\begin{proof} For each functor $\phi:\elt(X,t,m)\dual \to \cat P$ we get $(X_\phi,t_\phi,m_\phi)$ from pulling back the forgetful functor $1/\cat P \to \cat P$ along $\phi$. The underlying object of $\elt(X,t,m)\dual\times_{\cat P} 1/\cat P$ is $Y$, the projection $\elt(X,t,m)\dual\times_{\cat P} 1/\cat P \to \elt(X,t,m)\dual$ give the morphisms $f:Y\to X$ and $t':Y\to \simpcat_0$. Finally the action $m'$ of $\simpcat$ on $(Y,t')$ is defined as follows. For each $x\in X$ and each $g:1\to \phi(X)$ in $\cat P$,
+\[ m'( x g:1\to \phi(x) ,h) = (m(x,h),\phi(h)\circ g) \]
+This makes $f:Y\to X$ commute with the actions, as it should.
+
+A natural transformation $\eta:\phi \to \chi$ induces the morphism $(X_\phi,t_\phi,m_\phi) \to (X_\chi,t_\chi,m_\chi)$, which sends $(x,g)$ to $(x,\eta\circ g)$. This defines a functor form the category of functors $\elt(X,t,m)\dual\to\cat P$ to the category of modest morphisms $\modfib(X,t,m)$. This functor is essentially surjective, full and fiathful for the following reasons.
+
+Any modest morphism $f:(Y,t',m') \to (X,t,m)$ has a modest morphism $Y\to X$ as underlying morphism, and this morphism is a pullback of the generic modest morphism $(1/\pers)_0 \to \pers_0$ along some $\phi: X\to \cat P_0$. Suppose $a:i\to j$ is a morphism of $X$. For $x\in \phi(j)$ we have $f(m'(x,a)) = m(f(x),a) = i$, so $a$ induces a morphism $\phi(i)\to \phi(j)$. Since $m$ and $m'$ are actions, $\phi$ extends to a functor $\elt(X,t,m)\dual \to \cat P$. Since $(Y,t', m')$ is isomorphic to $(X_\phi,m_\phi,t_\phi)$ we now have essentially surjective. %gog o god
+
+A morphism $g:(X_\phi,t_\phi,m_\phi) \to (X_\chi,t_\chi,m_\chi)$ induces a natural transformation $\phi \to \chi$. The category of modest sets is a full subcategory of the category of assemblies and this means that the map between modest morphism $X_\phi \to X$ and $X_\psi\to X$ must correspond to some map $X\to\cat P_1$. This is a natural transformation because $g$ commutes with both $t$ and $m$ maps. The bijection between morphisms and natural transformations implies fullness and faithfulness.
+\end{proof}
+
+The category $\mod(X)$ is in some sense equivalent to the complete internal category $\cat P^{\elt X}$ and this has huge consequences for the modest morphisms, essecially considering the following.
+
+\begin{lemma} Both $\simpcat_0$ and $\simpcat_1$ are modest sets. \end{lemma}
+
+\begin{proof} The object of morphisms $\simpcat(m,n)$ is modest because it is isomorphic to the initial segment $[ 0 , \frac{(n+m+1)!}{(n+1)!m!}]\subseteq \nno$--note that this isomorphism is in $\asm$ and not necessarily monotone map in any sense. There are recursive isomorphisms $\nno \to \simpcat_0$ and $\nno\to \simpcat_1$ for these reasons. \end{proof}
+
+This fact has an incredible applications to the modest fibrations.
+
+\begin{defin} Let $I$ be the constant simplicial assembly which is objectwise equal to $\set{(n,k)\in \nno\times\nno| n>0, k\leq n}$. There are morphism $i:\Lambda \to \Delta$ and $j:\Delta \to I$ such that the fibre of $j\circ i$ over $(n,k)$ is $\Lambda^n_k$, the fibre of $j$ over $(n,k)$ is $\Delta^n$ and $i:\Lambda^n_k \to \Delta^n$ is the fibre of $i$ over $(n,k)$. We now have a simgel \emph{generic trivial cofibration} $i:\Lambda\to \Delta$ in $\asm^{\simpcat\dual}/I$.
+
+Let $I\ri:\asm^{\simpcat\dual} \to \asm^{\simpcat\dual}/I$ stand for the the pullback along $!:I\to 1$. For each morphism $f:X\to Y$, a \emph{filler operator} is a section of the morphism $(I\ri f^\Delta,I\ri X^i)$ in the following diagram.
+\[\xymatrix{ 
+I\ri(X)^\Delta \ar@/^3ex/[drr]^{I\ri(X)^i} \ar@/_3ex/[ddr]_{I\ri(f)^\Delta} \ar[dr]|(.7){(I\ri(f)^\Delta,I\ri(X)^i)} \\
+& \bullet \ar[d]\ar[r]\pb & I\ri(X)^\Lambda\ar[d]^{I\ri(f)^\Lambda}\\
+& I\ri(Y)^\Delta \ar[r]_{I\ri(Y)^i} & I\ri(Y)^\Delta
+}\]
+
+A \emph{filler algebra} over a simplical assemblie $X$ is a modest morphisms $Y\to X$ together with a filler operator. 
+\end{defin}
+
+%hier deze definitie moeten we veel en veel eerder geven.
+
+
+\begin{lemma} Modest morphisms have fibrant replacements. \end{lemma}
+
+\begin{proof} Let $f:X \to Z$ be a modest morphism. There is a complete internal category whose objects are tuples $(g,h,k)$ where $g$ represents a modest morphism $Y\to Z$, $h$ is a filler operator for $h$ and $k:X\to Y$ is a morphism such that $g\circ k = f$. The morphisms $(g,h,k) \to (g', h', k')$ are morphism $g\to g$ which commute with the filler operators and the factorisations of $f$. This category is complete and internal, and hence has an initial object $(g_0,h_0,k_0)$. The object $g_0$ is the free fibrant replacement of $f$.
+\end{proof}
+
+
+
+
+
+\subsection{The generic fibration}
+
+\newcommand\yod{\mathord{yod}}
+\begin{lemma} The category $\simpcat$ is enriched over $\cat P$. \end{lemma}
+
+\begin{proof} Since $\simpcat$ is a modest category, there is a Yoneda embedding $\yod:\simpcat \to \cat P^{\simpcat\dual}$. It also means that in a modest Kan fibration $f:X\to \Delta^n$, the object $X$ is a modest simplical set, and hence a member of $\cat P^{\simpcat\dual}$. 
+\end{proof}
+
+A \emph{generic modest Kan fibration} is a modest Kan fibration $\gamma:E\to P$ such that each modest Kan fibration $f:X\to Y$ is the pullback of $\gamma$ along some morphism $Y\to P$. Because $P([0,n])$ is in bijective correspondence with morphism $\Delta^n \to P$ by the Yoneda lemma, $P([0,n])$ is an object which contains all modest Kan fibrations $f:X\to \Delta^n$. For similar reasons $E([0,n])$ consist of pairs $f:X\to \Delta^n$ and $g:\Delta^n \to X$ such that $f$ is a modest Kan fibration and $f\circ g = \id_{\Delta_n}$. The morphism $\gamma$ simply forgets the section, so $\gamma(f,g) = f$. For each morphism $h:[0,m] \to [0,n]$ of $\simpcat$, $P(h):P([0,n])\to P([0,n])$ pulls fibrations back along $h$, and $E(h):E([0,n]) \to E([0,m])$ does the same, while also factorizing the composition of the sections with $h$ through the pullback of the fibrations.
+\[\xymatrix{
+X\times_{\Delta^n} \Delta^m \ar[r] \ar[d]^{P(h)(f)} \pb & X \ar[d]_f \\
+\Delta^m \ar[r]_h\ar@/^/[u]^{(g\circ h,\id)} & \Delta^n \ar@/_/[u]_g
+}\]
+
+\begin{theorem} There is a generic modest stable Kan fibration in $\asm^{\simpcat\dual}$. \end{theorem}
+
+\begin{proof} If $\gamma: E\to B$ is a generic modest stable Kan fibration, then $B_n$ corresponds to modest stable Kan fibrations with codomain $\Delta^n$. This is represented by a subcategory of the internal category $\cat P^{\elt(\Delta^n)\dual}$ where $\elt(\Delta^n) \simeq \simpcat/[0,n]$. We just set $B_n$ equivalent to this subcategory of $\cat P^{\simpcat/[0,n]\dual}$. By similar reasoning $E_n = 1/B_n$: elements of $B_n$ together with sections.
+%het beeld van de filteralgebras. weten wel zeker dat dit werkt?
+\end{proof}
+
+\subsection{Fibrancy}
+We need to show that $\gamma: E\to B$ is a Kan fibration, hence that is has a global filler operator. This means that we need a way to extend modest fibrations $f:X\to \Lambda^n_k$ along the horn inclusions $i^n_k:\Lambda^n_k \to \Delta^n$. \hide{We hebben al een filler op de rand\dots of niet? Niet helemaal, want $\Lambda^n_k$ is geen Kan complex. Maar $\Delta^{n-1}$ zijn dat wel. De truuk is dan dat de filler die we bekijken de bestaande fillers uitbreiden. Dan zijn we helemaal klaar, lijkt me. }
+We shall do this with the free fibrant replacements. We need to show that $f$ is the pullback of the replacement of $i\circ f$. When that is done, we apply this idea to the fibration $I\ri\gamma^\Lambda\times \Lambda$, to obtain the section that way.
+
+% dit is waanzin.
+
+
+
+
+\hide{Het idee met $\Lambda \to \Delta$ is nog steeds dat we voor elke simplex van codimensie 1 een retractie kunnen vinden en dat dat de limiet dwingt om gelijk te blijven. We zitten nu met een paar problemen.
+Probeer het dan zo: we nemen het zich net gedragen product/ coproduct van simplical sets, waarvan de pullback inderdaad gelijk is. Dan hoeven we alleen nog maar de beargumenteren dat de inclusie in de vrije Kanfibratie dat niet verpest.
+
+1: pak die grote fibratie.
+2: neemt het product van simplicial sets
+3: er is een categorie van filler algebras, waarbij de operators een uitbreiding zijn van bestaande fillers op de randen. [waar komen die vandaan?]
+
+We moeten twee dingen bewijzen. Dat $\gamma$ een fibratie is, maar ook dat $B$ het is! Dat laatste is het probleem.
+
+
+}
+
+
+
+\subsection{Univalence}
+The univalence principle says that equivalent objects are equal. Since we use homotopy to interpret equality, we can formulate the univalence principle as follows.
+
+\begin{defin} A fibration $f:X\to L$ is \emph{univalent} if for any pair of morphisms $g,h:K\to L$ such that $g\ri(f)$ and $h\ri(f)$ are equivalent, there is a homotopy $f\hto g$. \end{defin}
+
+The contrapositive of this property already holds for all Kan fibrations.
+
+\begin{lemma} For each pairs of morphism $g,h:K\to L$ and each fibration $f:X\to L$, a homotopy $k:g\hto k$ induces a weak equivalence $g\ri(f) \to h\ri(f)$. \end{lemma}%somethign with the triangles.
+
+\begin{proof} A homotopy $k:g\hto h$ is a map $\Delta^1\times K \to L$ which means that there is a fibration $k\ri(f):k\ri(X) \to \Delta^1\times K$, plus morphisms $a_0:g\ri(X) \to k\ri(X)$ and $a_1:h\ri(x) \to k\ri(x)$ which are pullback of the maps $K \to \Delta^1\times K$.
+\[\xymatrix{
+g\ri(X) \ar[r]^{a_0}\ar[d]_{g\ri(f)} \pb & k\ri(X) \ar[d]^{k\ri(f)} & h\ri(X) \ar[l]_{b_0} \ar[d]^{h\ri(f)} \ar@{}[dl]|<\llcorner \\
+K \ar[r]_(.4){\delta_0\times K} & \Delta^1\times K & K \ar[l]^(.4){\delta_1\times K}
+}\]
+
+There is a $b_0:\Delta^1\times g\ri(f) \to k\ri(f)$ such that $k\ri(f)(b_0(w,x)) = (w,g\ri(f))$ and $b_0(\delta_0,x) = a_0(x)$ because $k\ri$ is a fibration. There is a similar map $b_1:\Delta^1\times h\ri(f) \to k\ri(f)$ satisfying  $k\ri(f)(b_1(w,x)) = (w,h\ri(f))$ and $b_1(\delta_1,x) = a_1(x)$.
+\[\xymatrix{
+g\ri(X) \ar[d]_{\delta_0\times \id} \ar[r]^{a_0} & K\ri(X)\ar[d]^{k\ri(f)}\\
+\Delta^1\times g\ri(X) \ar[r]_{\id\times h\ri(f)} \ar[ur]^{b_0} & \Delta^1\times K
+}\]
+Since $k\ri(f)( b_0(\delta_1, x) ) = (\delta_1,g\ri(f))$ and since $a_1$ and $h\ri(f)$ are a pullback cone, there is a unique $c_0:g\ri(X)\to h\ri(X)$ such that $a_1(c_0(x)) = b_0(\delta_1, x)$ and $h\ri(f)\circ c_0 = g\ri(f)$. Once again there is a similar map $c_1:h\ri(X)\to g\ri(X)$ which $g\ri(f)\circ c_1 = h\ri(f)$ and $a_0(c_1(x)) = (\delta_0,x)$. All we need to show now, is that $c_i$ are homotopy inverses of each other.
+
+It is easy to see that $a_1(c_0(c_1(x))) = b_0(\delta_1,c_1(x))$ is homotopic to $b_0(\delta_0,c_1(x)) = a_0(c_1(x)) = b_1(\delta_0,x)$, which is homotopic to $b_1(\delta_1,x) = a_1(x)$. Hence there is a family of horns $h\ri(X) \to k\ri(X)^{\Lambda^2_0}$ to fill. The filler contains a homotopy $d_1:a_1(c_0(c_1(x))) \hto a_1(x)$, and because $h\ri(f)$ and $a_1$ are a pullback cone, there is a unique homotopy $e_1:c_0\circ c_1\hto \id_{h\ri(X)}$ such that $a_1*e_1 = d_1$. For symmetrical reasons there is a homotopy $e_0:c_1\circ c_0 \to \id_{g\ri(f)}$.
+\end{proof}
+
+All homotopy equivalences are of this form up to equivalence.
+
+\begin{lemma} If $f:X\to Y$ is a homotopy equivalence of Kan complexes, then there is a Kan fibration $Z\to\Delta_1$ such that $X$ is isomorphic to the fibre over $\delta_0$ and $Y$ is isomorphic to the fibre over $\delta_1$. If $X$ and $Y$ are modest, then so is $Z$. \label{hetoh} \end{lemma}
+
+\begin{proof}
+Let $Z_n$ consist of tuples $(i, x\in X_{i-1}, y\in Y_n)$ with $1\leq i\leq n+1$ and $f(x) = y\cdot \iota^n_i$ or tuples $(0,y\in Y_n)$. Here $\iota^n_i:[0,i] \to [0,n]$ is the inclusion of the initial segment. Pulling back along monotone maps sends initial segments to initial segement, and this is how $Z$ becomes a simplicial object. The morphism $g:Z \to \Delta_1$ sends $i$ to the `characteristic map' $\chi_i:[0,n]\to[0,1]$ where $\chi_i(x) = 0$ if $x<i$ and $\chi_i(x) = 1$ if $x\leq i$.
+
+By this description, the presheaf $Z$ is some pullback involving $X$ and $Y$, hence $Z$ is modest if $X$ and $Y$ are. Because $\delta_0: 1 \to \Delta^1$ points to $\chi_0$ in $\Delta^1([0,n])$, the fibre over $\delta_0$ is isomorphic to $Y$. Similarly, $\delta_1$ points to $\chi_{n+1}$, so the pullback over $\delta_1$ is isomorphic to $X$.
+
+All horn inclusions $\Lambda^n_k \to \Delta^n$ have a filler in $Y$. If we pull horn inclusions back along the maps $i^n_i:\Delta^{i-1} \to \Delta^n$ induced by the initial inclusions $\iota^n_i$ we nearly always get the identity $\Delta^{i-1}\to\Delta{i-1}$ which makes filling up superfluous. There is one exception: the pullback of $\Lambda^n_n \to\Delta^n$ along $i^n_{n-1}:\Delta^{n-1}\to\Delta^n$ is the boundary $\partial\Delta^{n-1}$. Here is where a homotopy inverse $f'$ of $f$ comes in.
+
+Let $a:\partial\Delta^{n-1} \to \Lambda_n^n$ be the inclusion of the boundary, and let $b:\partial\Delta^{n-1}\to X$ and $h:\Lambda^n_n \to Y$ satisfy $f\circ b = h\circ a$. We use the homotopy $g\circ f \hto \id$ to deform the horn $f'\circ h$ into a horn $h'$ with boundary $b$. We fill this horn in $X$, gaining a filler $k:\Delta^n \to X$. The following illustration show the homotopy along with we deform 3 dimensional horns.
+\[ \xymatrix{
+g(h(3)) \ar@{-}[r]\ar@{-}[dr]\ar@{-}[d] & g(f(b(2)) \ar@{-}[dr]\ar@{-}[d] \\
+g(f(b(1))\ar@{-}[dr]\ar@{.}[ur]\ar@{-}[r] & g(f(b(0))) \ar@{-}[dr] & b(2)\ar@{-}[d]\\
+& b(1) \ar@{-}[r]\ar@{.}[ur] & b(0)
+} \]
+
+The horns $f\circ h'$ and $h$ are homotopic, because $h'$ is homotopic to $f\circ h$ and $g\circ f \circ h$ is homotopic to $h$. There also share the boundary $f\circ b$. Therefore we can deform $f\circ k$ into a filler $k'$ of $h$, in such a way that the face of $k'$ that fills the boundary $f\circ b$ is the image of the fact of $k$ the fills the boundary $b$. The following illustation shows the homotopy along which we deform 2 dimensional fillers.
+\[ \xymatrix{
+f(h'(2)) \ar@{-}[r]\ar@{-}[dr]\ar@{-}[d] & h(2)\ar@{-}[d] \\
+f(b(0))\ar@{.}[ur] & f(b(1))
+}\]
+\end{proof}
+
+The construction above explains us the next big theorem of this paper.
+
+\begin{theorem} The generic modest Kan fibration $\gamma:E\to P$ is univalent. \end{theorem}
+
+\begin{proof} Since Kan complex are closed under arbitrary products, there is a Kan complex $HE(\gamma)$ of homotopy equivalences between fibres of $\gamma$. This means that there is a pair of Kan fibrations $d_0:D_0 \to HE(\gamma)$ and $d_1:D_1\to HE(\gamma)$ and a homotopy equivalence $h:D_0\to D_1$ such that $d_1\circ h = d_0$ and for each for every pair of morphisms $f,g:X\to P$ such that there is a homotopy equivalence $k:f^*(\gamma)\to g^*(\gamma)$, there is an $l:X\to HE(\gamma)$ such that $l\ri(d_0) = f$, $l\ri(d_1)=g$ and $l\ri(h) = k$. 
+
+The trivial homotopy equivalence $\id_P: P\to P$ induces a diagonal morphism $\delta:P\to HE(\gamma)$ and there are morphisms $\delta_i:HE(\gamma) \to P$ such that $\delta_i\ri(\gamma) = d_i$. These also satisfy $\delta_i\circ \delta = \id_P$. Also, the pair $(\delta_0,\delta_1):HE(\gamma) \to P\times P$ is a Kan fibration. For each pair of fibrations $f:F\to \Delta^n$ and $g:G\to \Delta^n$ a homotopy equivalence between the restrictions to $\Lambda^n_k$ extends to the whole of $\Delta^n$ in a constructive way.
+
+We will prove that $\delta\circ \delta_1$ is homotopic to $\id_{HE(\gamma)}$. The lifting properties then implies that there is a homotopy equivalence between $HE(\gamma)$ and $P^{\Delta^1}$.
+\[ \xymatrix{
+P \ar[r]^{P^!} \ar[d]_{\delta} & P^{\Delta^1} \ar[d]^{(d_0,d_1)} \\
+HE(\gamma) \ar[r]_{(\delta_0,\delta_1)} \ar@{<.>}[ur] & P\times P
+}\]
+
+Glueing the fibrations $d_0$ and $d_1$ can as in lemma \ref{hetoh} gives a fibration $d_0\otimes d_1: D_0\otimes D_1\to \Delta_1\times HE(\gamma)$. There is an equivalence $e:\Delta^1\times D_0 \to D_0\otimes D_1$ which commutes with $\Delta^1\times d_0$ and $d_0\otimes d_1$: it sends a tuple $(i,x,y)$ to $y$. There is a morphism $\chi: \Delta_1\times HE(\gamma) \to HE(\gamma)$ such that $e$ is the pullback of $h$ along $\chi$. The morphism $\chi$ is a homotopy $\delta\circ \delta_1\hto\id_{HE(\gamma)}$.
+\end{proof}
+
+
+
+
+
+\hide{ 
+Ik wil dat de inleiding alvast een goed overzicht geeft van wat we doen. 
+
+Op fibrante objecten hebben we een vrij volledige modelstructuur en we gebruiken de cograaf voor het bewijs dat het hele apparaat univalent is. 
+
+Voor fibrancy gebruik ik iets compleet anders, namelijk de mogelijkheid om de limiet te nemen van alle modest fibraties.
+
+}
+
+
+
+
+
+
+\hide{
+
+% ietswat uitleg over hoe dit een model is voor homotopy type theory
+
+% consequenties: Church thesis en Markov principle consistent. De kleine complete categorie ook. Interessant omdat de 1-typene een topos vormen. 
+
+
+}
+
+
+
+
+
+
+
+
+
+\hide{maar hoe bewijzen we dit nu weer!?}
+
+
+
+
+
+
+\hide{tegenhanger van $\N$; tegenhanger van $\pers$. Allemaal moeilijk te zeggen. hmm.
+}
+
+
+
+
+\hide{
+Wat hebben we eigenlijk nodig?
+
+Om een Kan complex te krijgen dienen de objecten Kan complexen te zijn. Maar een simplicial set van simplical modest sets is best te doen, en geeft veel extra structuur die we wel kunnen gebruiken. 
+
+Dus laten we eerst alleen kijken naar simplicial sets e.d. en ons later zorgen maken over de modest sets.
+
+}
+
+
+
+\end{document}
+
+
+
+
+
+
+\hide{
+The modest satisfies satisfy the stable right lifting property with respect to the morphism $!:\boldy \to 1$. As was the case with stable Kan complexes, this means that modest sets are closed under lots of constructions. 
+\begin{lemma}[biCartesian closure] The category $\modset(X,e_X)$ is closed under all finite limits and colimits, and exponentiation with arbitrary assemblies. \end{lemma}
+
+\begin{proof} The prove for the limits and exponentials are the same as with Kan fibrations (see lemma \ref{bccc}). The object $\boldy$ is connected, so the reason that $\modset(X,e_X)$ is closed under coproducts is also the same. Finally $\boldy$ is internally projective, which cause modest sets to be closed under quotients. Since $\asm$ has all colimits, $\modset(X,e_X)$ does too.\end{proof}
+
+Contrary to Kan fibrations, there are `modest replacements' for arbitrary objects and morphisms in $\asm$.
+
+\begin{defin}
+A morphism $f:W\to X$ is \emph{bold} if the following square is a pullback for each modest $g:Y\to Z$.
+\[\xymatrix{
+Y^X \ar[d]_{g^X} \ar[r]^{Y^f} \pb & Y^W \ar[d]^{g^W}\\
+Z^X \ar[r]^{Z^f} & Z^W
+}\]
+\end{defin}
+ 
+\begin{lemma} Every morphism $f:X\to Y$ in $\asm$ factors as a modest morphism following a bold one. \end{lemma}
+
+\begin{proof} The unit of $\Gamma\vdash\nabla$ gives $\boldy$ two global sections $\eta_0, \eta_1\to\boldy$. 
+Let $X^{\boldy}_Y$ be the object of pair $(y,p)$ where $y\in Y$ and where $p$ is a morphism $\boldy \to X$ such that $f(p(\eta_0))=f(p(\eta_1))=y$. There is an obvious projection $f^{\boldy}_Y:X^{\boldy}_Y \to Y$ and evaluation give a map $e:X^{\boldy}_Y\times \boldy \to X$ which commutes with $X^{\boldy}_Y\times !:$
+\[ \xymatrix{
+X^{\boldy}_Y\times \boldy \ar[r]^(.7)e \ar[d]_{X^{\boldy}_Y\times !} & X \ar[d]^f \\
+X^{\boldy}_Y \ar[r]_{f^{\boldy}_Y} & Y
+}\]
+Let $B(f):X\to Z$ is the pushout of $X^{\boldy}_Y\times !$ along $f^{\boldy}_Y$. There is a unique $M(f):Z\to Y$ such that $f = M(f)\circ B(f)$. The morphism $B(f)$ is bold because it is a pushout of $X^{\boldy}_Y\times !$, which is bold by definition. The reason that $M(f)$ is modest is more complicated. 
+
+As subobjects of $X^{\nabla 2}$, $X^{\nabla 2}_Y$ and $X^{\nabla 2}_Z\subseteq$ are equal. If $p:\nabla 2 \to X$ satisfies $B(f)(p(\eta_0)) = B(f)(p(\eta_1))$ then it satisfies $f(p(\eta_0)) = f(p(\eta_1))$ by composition with $M(f)$. If $p:\nabla 2 \to X$ satisfies $f(p(\eta_0)) = f(p(\eta_1))$ then $B(f)(p(\eta_0)) = B(f)(p(\eta_1))$ because of the way $B(f)$ is defined. This implies that in the following diagram the left square and the outer square are pullback.
+\[\xymatrix{
+X \ar[r]^{B(f)}\ar[d]^{X^\bang} & Z\ar[d]^{Z^\bang} \ar[r]^{M(f)} & Y\ar[d]^{Y^\bang}\\
+X^{\nabla 2}_Z \ar[r]_{B(f)^{\nabla 2}_Z} & Z^{\nabla 2} \ar[r]_{M(f)^{\nabla 2}} & Y^{\nabla 2}\\
+}\]
+The morphism $B(f)$ is a regular epimorphism and because $\nabla 2$ is internally projective, %why!?
+so is $B(f)^{\nabla 2}_Z$. Thanks to these regular epimorphisms, we can conclude that the right square is pullback too, and hence that $M(f)$ is modest.
+\end{proof}
+
+%doe eerst de factorisatie maar\dots of gebruik Hylandetc meer.
+
+
+}
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+\subsection{identity types}
+
+The \emph{identity type} of a Kan fibration $K$ is $K^{\Delta^1}$, where $\Delta^1$ is simply the representable presheaf belong to $[0,1]$, which has two global sections.
+
+\newcommand\Ho{\mathsf{Ho}}
+In order to investgate these type we introduce some homotopy theory to the category $\kanfib(1)$ of Kan complexes. A \emph{homotopy} between a pair of morphism $f,g:X\to Y$ is a morphism $h:\Delta^1\times X\to Y$ such that $h(0,x) = f(x)$ and $h(1,x) = g(x)$. If such a homotopy exists $f$ and $g$ are \emph{homotopic}. Being homotopic an equivalence relation thanks to the horn fillers, which is preserved by composition by arbitrary morphisms on either side. For each pair of Kan fibrations, the set $\pi(X,Y)$ is the quotient of $\kanfib(1)(X,Y)$ by homotopy, and this defines a quotient category $\Ho(\kanfib(1))$, where equivalent objects are equal. 
+
+Isomorphisms in $\Ho(\kanfib(1))$ correspond to the following class of morphism of fibrations. For each morphism $f:X\to Y$ a \emph{homotopy inverse} is a $g:Y\to X$ for which $f\circ g$ is homotopic to $\id_{Y}$ and $g\circ f$ is homotopic to $f\circ g$. If $f$ has a homotopy inverse $g$, then both $f$ and $g$ are homotopy equivalences.
+
+These notions work equally well with $\kanfib(K)$ for an arbitrary stable Kan complex $K$.
+
+We prove two important lemmas below.
+\begin{enumerate}
+\item Every morphism factors are a stable Kan fibrations following a homotopy equivalence.
+\item A homotopy equivalence $f:K\to L$ induces an equivalence of categories $\Ho(f\ri):\Ho(\kanfib(L)) \to \Ho(\kanfib(K))$.
+\end{enumerate}
+
+These properties imply that dependent products up to homotopy exist along all morphisms between Kan complexes and hence that the category of Kan complexes is a nice model of intentional dependent type theory.
+%Beck Chevalley... als het link werkt, dan werkt het rechts ook. Zeg het maar!
+
+\subsection{Homotopy inside $\asm$}
+Since 
+
+
+%ik denk 1 pullbacks lang fibraties in het algemeen. properness. etc.
+
+
+
+
+
+\hide{homotopy to equivalence.}
+
+\begin{lemma}[Homotopies induce homotopy equivalences] Let $f,g:K\to L$ be two morphisms. If $f$ and $g$ are homotopic, then there is an up to homotopy natural homotopy equivalence $f\ri \to g\ri$.\end{lemma}
+
+%de naturality squares mogen zwak commuteren!
+
+\begin{proof}\hide{dit is niets bijzonders.}
+
+ Let $h:\Delta^1 \times K \to L$ be a homotopy between $f$ and $g$ and let $k:X\to L$ be a stable Kan fibration. The basic idea is simple enough: the lifting allows us to transport elements of $X$ over the image of $f$ 
+
+
+
+There are useful maps $\max, \min:\Delta^1\times \Delta^1 \to \Delta^1$, which provide homotopies of the identity of $\Delta^1$ to both of its points.
+
+Let $k:X\to L$ be a Kan fibration and let $h: K \to L^{\Delta_0}$ be the (transpose of) an homotopy between $f$ and $g$. Both $k^{\Delta^1}$ and $h\ri(k^{\Delta^1})$ are Kan fibrations. 
+
+\hide{failing homotopy graph approach}
+The fibration $h\ri(k^{\Delta^1})$ consists of paths $p:x\to y$ in $X$ such that $k(p) = h(i)$ for some $i\in K$. The projections to the end points are epimorphisms $h\ri(k^{\Delta^1}) \to f\ri(k)$ and $g\ri(k)$. And they are split epimorphisms because we can transport $x$ and $y$ to each other's fibres along $h(i)$. They cannot be inverses, but that doesn't matter, because the result is a horn ($\Lambda^2_0$ or $\Lambda^2_2$) in $X$ which has a filler. Therefore the split epimorphisms are homotopy equivalences.
+
+\hide{lifting equivalences between 1 and $\Delta_1$}
+Alternative: Let $h:\Delta^1\times K \to L$ and pull $k$ back here. We easily get the projectives along degeneracy maps, and the inclusions of the separated pullbacks, but we need to transport those inclusions to each other's fibres.
+
+
+How to say this in catspeak?
+
+and there are split epimorphisms $h\ri(k^{\Delta^1})$ has two split epimorphisms 
+
+There are two maps $d_0, d_1:L^{\Delta^1} \to L$ and there are split epimorphisms $e_0:k^{\Delta^1} \to d_0\ri k$ and $e_1:k^{\Delta^1} \to d_1\ri k$ in $\kanfib(L^{\Delta^1})$ because $k$ is a stable Kan fibration. A homotopy between $f$ and $g$ induces a map $h:K\to L^{\Delta^1}$, and the pullbacks of $k$ along $f$ and $g$ are the pullback of $k$ along $d_0\circ h$ and $d_1\circ h$. So the result is that we get $f\ri(k)$, $g\ri(k)$ and $h\ri(k^{\Delta^1})$ with split epimorphisms $h\ri(k^{\Delta^1}) \to f\ri(k)$ and $g\ri(k)$.
+
+Now $h\ri(k^\to)$ consist of paths $p:p(0) \to p(1)$, and the epimorphisms simply project the paths to their end point. The sections induce new paths $p':p'(0) \to p(1)$. Now we use horn fillers to find the equivalence.
+
+% idee van: beide inverse zijn deformation retracts en die zijn stabiel onder pullback. Maar kan dat ook wat concreter?
+% dat defomration retracts stabiele zijn moet toch zeker weer afhangen van de natuurlijke transformaties????
+% als $h$ paden zijn, hoe maken we dat dan zichtbaarder? 
+
+
+ The map $h_*:X^{\Delta^1} \to L/h$ which simply composes a path with $h$ has an inverse $k:L/h \to X$ which is part of the global filler. 
+
+
+\end{proof}
+
+
+%   Let op! Nog niet af!
+\begin{lemma}[Factorisation] Every morphism $f:X\to Y$ between Kan complexes factors are as a Kan fibrations following a homotopy equivalence. \end{lemma}
+
+\begin{proof} Let $Y/f$ be the fibred product of $f$ and the morphism $d_1:Y^{\Delta^1} \to Y$ which is defined by $d_1(h) = h(1)$. There is a diagonal map $r:Y\to Y^{\Delta^1}$, which satisfies $d_1\circ r = \id_Y$, and hence we get a morphism $r(f): X\to Y/f$. 
+\[ \xymatrix{
+X \ar@/^3ex/[rr]^{r\circ f} \ar[r]_{r(f)} \ar[dr]_\id & Y/f \ar[r]\ar[d]^{d_1(f)}\ar@/^3ex/[rr]^{d_0(f)} \pb & Y^{\Delta^1} \ar[d]^{d_1}\ar[r]_{d_0} & Y \\
+& X \ar[r]_f & Y
+}\]
+Besides $d_1$ we also have a morphism $d_0:Y^{\Delta^1} \to Y$ which satisfies $d_0(h) = h(0)$. Its composition with the pullback of $f$ along $d_1$ is $d_0(f):Y/f \to Y$. Now $d_0\circ r = \id_Y$ too, hence $d_0(f)\circ r(f) = d_0\circ r \circ f = f$. 
+
+There is a combinatorial argument for why $d_i:Y^{\Delta^1}\to Y$ are Kan fibrations\hide{see hovey, g/j}. Therefore $d_0(f)$ is the composition of tow Kan fibrations. Because $d_1(f)\circ r(f) = \id_X$, $d_1(f)\circ r(f)$ is homotopic to $\id_X$. The homotopy from $r(f)\circ d_1(f)$ to $\id_Y$ comes from a map $\Delta^1\times \Delta^1 \to \Delta^1$ 
+
+\end{proof}
+
+
+
+\hide{ Wat het zijn
+- aflsutingseigenschappen
+- equivalenties
+- hints over de interpretatie van verschillende soorten typen.
+
+belangrijke definities/ lemmas:
+- wat een equivalentie is
+- cartesische geslotenheid van Kan fibraties over vaste basis
+- producten langs Kan fibraties en equivalenties langs equivalenties.
+}
+
+
+\hide{ definities.
+- reminder simplicial sets - x
+- lifting properties, - x
+- saturated klasses etc. - ?
+- interne categorie-en, functoren, natuurlijke transformaties -x
+- simplices, schoven -x
+- Kan fibraties
+}
+
+
+
+
+
+
+
+
+
+
+\end{document}
+\hide{
+\subsection{cofibrancy of simplicial assemblies}
+The generic cofibrations are multiples of boundary inclusions $\partial\Delta^n\times X \to \Delta^n \times X$. Among these are the maps $0\to X$ for each simplicial assembly $X$, hence alle simplicial assemblies are cofibrant. This suggest that the category of simplicial assemblies satisfies the following set of axioms.
+
+\begin{defin} A \emph{category of cofibrant object} is a category $\cat C$ with finite colimits with two classes of maps--the class $W$ of \emph{weak equivalences} and the class $C$ of \emph{cofibrations}--which satisfy the following conditions.
+\begin{enumerate}
+\item if $f\circ g = h$ and any two morphisms out of $f,g,h$ are weak equivalences, then all of them are.
+\item all isomorphisms are in $W\cap C$ and $C$ is closed under composition.
+\item pushouts of cofibrations are cofibrations and if the cofibration is an equivalence, then its pullback is too.
+\item codiagonal morphisms $X+X\to X$ split as a weak equivalence $I\times X\to X$ following a cofibration $X+X\to T\times X$.
+\item the unique maps $0\to X\to X$ are cofibrations.
+\end{enumerate}
+\label{catoffib}
+\end{defin}
+
+Weak equivalences of simplicial assemblies are defined as follows.
+
+\newcommand\hto\Rightarrow%{\stackrel{\rm h}\to}
+\begin{defin} The \emph{path objects} are a family of objects $P_i$ for $i\in \N$ each with a start point $p_0:1\to P_i$ and an endpoint $p_1: 1\to P_i$ which are defined as follows. The object $P_0$ is the terminal object $1$ and $p_0,p_1$ both are the identity morphism. The object $P_{2i+1}$ comes from pushing out $p_1:1\to P_1$ along $\delta_0:1\to \Delta^1$.
+\[ \xymatrix{
+1 \ar[dr]^{p_0} \ar@/_3ex/[ddrr]_{p_0} && 1 \ar[dl]_{p_1} \ar[dr]^{\delta_0} && 1\ar[dl]_{\delta_1} \ar@/^3ex/[ddll]^{p_1} \\
+& P_i \ar[dr] && \Delta^1 \ar[dl]\\
+&& P_{2i+1} 
+}\]
+The object $P_{2i+2}$ is defined similarly, except with $\delta_0$ and $\delta_1$ reversed. For any pair for arrows $f,g:X\to Y$ a \emph{path} $f\hto g$ is a morphism $h:P_n\times X\to Y$ such that $h(p_0,x) = f(x)$ and $h(p_1,x) = g(x)$. If there is a path $f\hto g$, then $f$ and $g$ are \emph{homotopic}. A morphism $f:X\to Y$ is a \emph{weak equivalence}, if there are trivial cofibrations $g:Y\to Z$ and $h:Y\to Z$ such that $g\circ f$ is homotopic to $h$. \end{defin}
+
+The elaborate definition of path objects makes homotopy an equivalence relation, with primitive recursive functions to invert or compose paths.
+
+\hide{
+%weak equivalences.
+Among simplicial assemblies, the $W$ is the least class of maps which is closed under compositions and retracts, which contains the trivial cofibrations generated from horn inclusions $\Lambda^n_k \to \Delta^n$ and the following \emph{homotopy equivalences}.
+% ik heb hier heel sterke twijfels aan. Pak liever de gewone triviale cofibraties erbij.
+
+\begin{defin} For each parallel pair of morphisms $f,g:X\to Y$ a \emph{homotopy} $h:f\hto g$ is a morphism $h:\Delta^1\times X\to Y$ such that $h(0,x) = f(x)$ and $h(1,x) = g(x)$ for all $x\in X$. Two morphisms $f,g:X\to Y$ are \emph{homotopic} is there is an $h:f\hto g$. For each $f:X\to Y$ a \emph{homotopy inverse} is a morphism $g:Y\to X$ such that $f\circ g$ is homotopic to $\id_Y$ and $g\circ f$ is homotopic to $\id_X$. A \emph{homotopy equivalence} is a morphism which has a homotopy inverse. \end{defin}
+}
+
+\begin{lemma} The category of simplicial assemblies $\asm^{\simpcat\dual}$ together with weak equivalences and cofibrations is a category of cofibrant objects. \end{lemma}
+
+\begin{proof} Cofibrations and trivial cofibrations are a \emph{saturated classes}, which means that there are closed under coproducts, compositions and pushouts.
+
+\hide{
+Every morphism $f:X\to Y$ factors as the inverse of a trivial cofibration following a cofibration. Define $Z$ by the following pushout:
+\[\xymatrix{
+X+X\ar[r]^{f+\id}\ar[d]_{(\delta_0,\delta_1)\times \id} & Y+X \ar[d]^{(p_0,p_1)} \\
+\Delta^1\times X \ar[r]_q & Z \ar@{}[ul]|<\ulcorner
+}\]
+The map $(p_0,p_1):Y+X\to Z$ is the factorisation of two maps $p_0:Y\to Z$ and $p_1:X\to Z$ though the coporduct $Y+X$; it is also the pushout of a generic cofibration and hence a cofibration. The morphism $p_0$ is a pushout of the generic trivial cofibration $Y \to \Delta^1\times Y$ and hence a trivial cofibration. Because $Y$ is cofibrant and cofibrations are closed under composition and coproducts, $p_1:X\to Z$ is a cofibration too. Meanwhile, there are maps $(\id,f):Y+X \to Y$ and $f\circ \pi_1:\Delta^1\times X \to Y$ which commute with $f+\id_X$ and $(\delta_0,\delta_1)\times \id_{\Delta^1}$. Because $Z$ is a pushout, there is a map $W(f):Z\to Y$ such that $W(f)\circ (p_0,p_1) = (\id,f)$ and $W(f)\circ q = f\circ \pi_1$. The morphism $W(f)$ therefore satisfies $W(f)\circ p_0 = \id_Y$ and $W(f)\circ p_1 = f$. \hide{Since equality is a trivial homotopy, $W(f)$ is a homotopy equivalence if $p_0\circ W(f)$ is homotopic to $\id_Z$.}
+}
+\hide{
+Pushouts are stable under multiplication, so we can construct a map $Z\times\Delta^1\to Z$ by finding suitable maps $\Delta^1\times(Y+X) \to Z$ and $\Delta^1\times \Delta^1\times X \to Z$. The map $q$ is a homotopy $p_0\circ f \hto p_1$, so $(\pi_1, q): \Delta^1\times Y + \Delta^1\times X \to Z$, where $\pi_1:\Delta^1\times X \to X$ is the projection, is a homotopy $(p_0,p_0\circ f)\hto (p_0, p_1)$. Furthermore, the morphism $(p_0\circ\pi_1, q)$ satisfies $(p_0\circ\pi_1, q)\circ (\id\times f +\id\times \id) = (p_0\circ f\circ \pi_1,q)$.
+
+There is a homotopy $\min:\delta_0\circ ! \hto \id_{\Delta^1}$ and therefore $q\circ(\min\times \id_X)$ is a homotopy $p_0\circ f\circ \pi_1 \hto q$. The morphism $q\circ(\min\times \id_X)$ satsifies $q\circ(\min\times \id_X)\circ (\delta_0,\delta_1)\times\id_X = (p_0\circ f\circ \pi_1,q)$. Hence there is a unique $h:\Delta^1\times Z \to Z$ which satisfies $h\circ(\id_{\Delta^1}\times (p_0,p_1)) = (p_0\circ\pi_1, q)$ and $h\circ (\id_{\Delta^1}\times q) = q\circ(\min\times \id_X)$. The morphism $h$ satisfies $h(\delta_0\times \id) = p_0\circ W(f)$ and $h(\delta_1\times \id) = \id_Z$. Therefore $p_0\circ W(f)$ is homotopic to $\id_Z$ and $W(f)$ is a homotopy equivalence.
+}
+
+\hide{We can now characterize weak equivalences as those morphisms $f:X\to Y$ which factor as homotopy equivalences following trivial cofibrations. Furthermore, the homotopy equivalences are \emph{homotopy retractions} because the homotopy inverse is an actual right inverse.}
+
+With this information, let's run though the list of the properties in definition \ref{catoffib}. %hier
+\begin{enumerate}
+\item It is easy to compose cospans of trivial cofibrations, since trivial cofibration are closed under pushouts and compositions. Path can be inverted and composed wherever necessary to build new paths. Hence if $g\circ f = h$ and any two of $f,g,h$ are weak equivalences, then all of them are.
+
+\item Isomorphisms and compositions of cofibrations are cofibration, because cofibrations are a saturated class.
+
+\hide{Let $f$ and $g$ satsify $f = W(f)\circ C(f)$ and $g = W(g)\circ C(g)$ where $W(f), W(g)$ are homotopy retractions and $C(f)$ and $C(g)$ trivial cofibrations, and let $h=g\circ f$ be defined. The pushout $a$ of $C(g)$ along the homotopy inverse $W(f)'$ of $W(f)$ is a trivial cofibration. We have $g\circ W(f)\circ W(f)'= g = W(g)\circ C(g)$ and hence there is a unique morphism $k$ such that $k\circ a = g\circ W(f)$ and $k\circ b = W(g)$ if $b$ is the pushout of $W(f)$ along $C(g)$. The composite $a\circ C(f)$ is a trivial cofibration and $b\circ W(g)'$ is both a homotopy inverse and a right inverse of $k$. Therefore $h = k\circ a\circ C(f)$ is a weak equivalence.
+\[ \xymatrix{
+\bullet \ar[rr]^(.7)f\ar[dr]_{C(f)}\ar@/^3ex/[rrrr]^h && \bullet \ar[rr]^(.3)g\ar[dr]|{C(g)} \ar@/_2ex/[dl] && \bullet \ar@/_2ex/[dl] \\
+& \bullet \ar[ur]|{W(f)}\ar[dr]_{a} && \bullet \ar[ur]|{W(g)} \ar@/_2ex/[dl]_{b} \\
+&& \bullet \ar@/_3ex/[uurr]_{k}
+}\]
+
+Let $h=g\circ f$, let $h = h_1\circ h_0$ and $f = f_1\circ f_0$, let $f_1$ and $h_1$ have right inverses $f_1'$ and $h_1'$ and let all of $f_0$, $f_1'$, $h_0$ and $h_1'$ be trivial cofibrations. Since $g \circ f_1 \circ f_0 = h_1\circ h_0$, there is a morphism from the pushout of $f_0$ and $h_0$ which is the inverse of the composed cofibrations.
+\[\xymatrix{
+\bullet\ar[dr]  \ar@/^3ex/[rrrr]^g && \ar[ll]_(.3)f \bullet \ar[rr]^(.3)h\ar[dr]_{h_0}\ar[dl]^{f_0}  && \bullet \ar[dl] \\
+& \bullet \ar@/^2ex/[ul]|{f_1}\ar[dr] && \bullet \ar@/^2ex/[ur]|{h_1} \ar[dl] \\
+&& \bullet \ar@/_3ex/[uurr]
+}\]}
+
+
+% omslachtig, en ik weet ook nog niet precies hoe dit moet. 
+
+\item \hide{cofibraties die weak equivalences zijn moeten triviale cofibraties zijn, maar hoe de fuck kunnen we dat inzien? 
+Hier hebben we de sterkere eigenschap nodig dat er ook een inverse is--precies het morfisme wat verhinderd dat we aantonen dat zwakke equivalenties voldoen aan 2 uit 3. }
+
+\item trivial.
+\end{enumerate}
+
+\subsection{Simplicial sets}
+\begin{lemma} The category $\sSet$ is a reflective subcategory of $\sAsm$. \end{lemma}
+
+\begin{proof} The category $\Set$ of sets is a reflective subcategory of $\Asm$. Explicitely, the inclusion $\nabla:\Set \to\Asm$ satisfies $\nabla(X) = (X,x\mapsto \N)$ for sets, and $\nabla$ is the identity on functions. The reflector $\Gamma$ satisfies $\Gamma(X,\phi) = X$ and is the identity on morphisms. Both functors are left exact, and hence preserve internal categories, functors and even discrete obfibrations. Moreover, $\Gamma\simcat = \Simcat$, the ordinary simplex category.
+
+The functor $\Gamma:\sAsm \to \sSet$ is now defined, but $\nabla$ sends $\sSet \to \Asm^{\nabla\Simcat\dual}$. On order to get back to $\sAsm$ we pull the obfibrations of $\Asm^{\nabla\Simcat\dual}$ back along $\eta_\simcat\ri:\simcat \to\nabla \Simcat$. This way we get a new adjoint pair of functors, the embedding $\eta_\simcat\ri\nabla:\sSet \to \sAsm$ and its reflector $\Gamma:\sAsm \to\sSet$.
+\end{proof}
+
+The category of simplicial assemblies has enough colimits to make the small object argument work. So as long as the objects $A_i$ from the family $(a,e)$ are small, we can generate a factorisation system in $\sSet$ from $\Gamma a$. The right adjoint $\eta_\simcat\ri\nabla$ automatically sends $(\Gamma a,\Gamma e)$-injectives to $(a,e)$-injectives. For each $f:X\to Y$ we get a factorisation $g:X\to Z$ and $h:Z\to Y$ where $h$ is an $(a,e)$-injective. The morphism $g$ may not have the left lifting property with respect to injectives which are not pullbacks of those in the image of $\eta_\simcat\ri\nabla$. 
+
+If $a$ is a monomorphism, then so are $\Gamma a$ and the factor $g:X\to Z$ of $f:X\to Y$. Monomorphisms are orthogonal to $\nabla 2$ and hence modest morphisms. This allows us to use the completeness of simplicial modest sets.
+
+\subsection{Modest morphisms}
+\begin{lemma} Every modest morphism $f:X\to Y$ factors as an $(a,e)$-injective following an $(a,e)$-anodyne morphism. \end{lemma}
+
+\newcommand\simpers{\mathbf{sip}}
+\begin{proof} The generic modest morphism $\rat U:\rat\pers_* \to \rat \pers$ also induces an internal category $\simpers$ of simplicial pers inside $\sAsm$, in the same way that the generic modest moprhism $\mu:E\to B$ in $\Asm$ did. So $\rat \pers$ is the underlying object of objects of $\simpers$, and $\simpers(i,j) = (\rat\pers_*)_j^{(\rat\pers_*)_i}$. There is also a opfibration $V:\simpers_* \to \simpers$, where $\simpers_*$ is constructed in the same way as $\pers_*$.
+
+The family of fibrations $(a:D\to E,e:E\to I)$ have a counterpart inside $\simpers$, since these are morphism between modest sets. So this means that we have an internal functor $\chi:[2] \to \simpers$, and the pullback of $(a,e)\ri V$ is $(a,e)$ as discrete opfibration over $[2]$. This allows us to turns the factorisation construction $S$ into an internal functor of $\simpers$, togetehr with a natural tranformation $\sigma:\id_{\simpers} \to S$.
+\[ \xymatrix{
+\coprod_{I}(X^D\times_I D) \ar[r]^(.7)\epsilon\ar[d]_{\coprod_{I}(X^D\times_I a) }\ar@{}[dr]|>\ulcorner & X\ar[d]^{\sigma(X)}\\
+\coprod_{I}(X^D\times_I E) \ar[r] & S(X)\\
+}\]
+Here $\epsilon$ is the application map which send $(f,x)$ to $f(x)$. Modest sets and pers are closed under aribitray colimits because $\nabla 2$ is an indecomposable injective, i.e. $X\mapsto X^{\nabla 2}$ preserves all colimits. Hence we know that $S(X)$ is a per, but also that pulling back along $V:\simpers_*\to\simpers$ preserves internal colimits in $\simpers$. 
+%fully faithful is niet genoeg: inclusie Asm->Eff behoudt niet alle pushouts.
+
+This is the core of the proof. There is an internal category $\simpers^S$ of $S$-algebras. An object of $\simpers^S$ is a pair $(P,p)$ where $P$ is an object of $\simpers$ and $p:SP\to P$ is a morphism which satisfies $p\circ \sigma_P = \id_P$. A morphism $(P,p)\to (Q,q)$ is a morphism $f:P\to Q$ which satisfies $q\circ S(f)=f\circ p$. There is a forgetful functor $G:\simpers^S\to\simpers$ which sends $(P,p)$ to $P$ and which is the identity on morphisms. For standard reasons, $G$ creates limits, which means that $\simpers^S$ is complete and $G$ preserves limits. Because both categories are internal, $G$ has a left adjoint $F:\simpers \to \simpers^G$: the free $S$-algebra functor.
+
+The morphism $\bang:GFP \to 1$ is $(a,e)$-injective because the algebra structure of $FP$ is an operator that provides lifts for the morphisms in the family $a$. The unit $\sigma^\infty_P:P\to GFP$ is anodyne, because injective morphisms are essentially families of $S$ algebras. %Let $f:X\to Y$ be a morphism in $\simpers$, let $h:S(f) \to X$ satisfy $f\circ h = \rho(f)$ and $h\circ \sigma(f) = \id_X$, and let $x:P \to X$ and $y:GFP \to Y$ be morphisms such that $f\circ x=y\circ \sigma^\infty$. $GF$
+
+\hide{
+To factorize modest morphisms we use the ge\-ne\-ric modest morphism $\rat U:\rat\pers_*\to\rat\pers$. It too has a one step factorization $\sigma(\rat U):\rat\pers_* \to S(\rat U)$ and $\tau(\rat U):S(\rat U) \to \rat\pers$. 
+
+Since $e$ and $I$ are modest, $\rho(\rat U)$ is modest. By definition $\phi:\coprod_I(I^*(f)^a\times_I E) \to Y$ covers $\rho(\rat U)$, and $\phi$ is modest thanks to $e$ and $I$. Modest morfismes are closed under quotients because $\nabla 2$ is (internally) projective. For this reason, there are morphisms $S:\rat\pers \to \rat\pers$ and $T:S(\rat U) \to \rat\pers_*$ such that $\rat U\circ T = S\circ \rho(\rat U)$ is a pullback.
+
+\[ \xymatrix{
+\rat \pers_* \ar[r]_{\sigma(\rat U)} \ar@/^2ex/[rr]^{\rat U} & S(\rat U) \ar[r]_{\rho(\rat U)}\ar[d]_{T}\pb & \rat \pers \ar[d]^S \\
+& \rat \pers_* \ar[r]_{\rat U} & \rat \pers
+}\]
+
+We build \emph{the category of $S$-algebras} $\rat\pers^S$. The objects are pers $P\in \rat\pers$ with morphisms $p:(\rat\pers_*)_{SP}\to (\rat\pers_*)_{P}$ such that $p\circ T\circ \sigma(\rat U) = \id_P$. %how the fuck is $S$ een functor?
+
+ A morphism $(P,p) \to (Q,q)$ is a morphism $(\rat\pers_*)_P \to (\rat\pers_*)_Q$.
+}
+
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\subsection{model structure}
+We now extend the standard model structure from simplicial sets to simplicial assemblies, using the global lifting property, but with internal families of generators.
+
+
+Let $b:\partial \Delta \to \Delta$ and $i:\Delta \to \nno$ be the family of cycle inclusion into simplices. So The fibre of $i$ over $n\in \nno$ is the simplex $\Delta[n]$, the fibre of $i\circ b$ over $n$ is the boundary $\partial\Delta[n]$ and the fibre of $b:i\circ b \to i$ is the inclusion $\partial \Delta[n] \to\Delta[n]$. In more detail, for all $p\in \nno$:
+\begin{align*}
+\Delta_p &= \coprod_{n\in\nno} \simcat([p],[n])\\
+\partial\Delta_p &= \set{ (n,f) \in \Delta_p | \exists q\leq n. \forall r\leq p. f(r)\neq q }\\
+b((n,f)) &= (n,f)\\
+i((n,f)) &= n
+\end{align*}
+
+\begin{defin} Let $\nno\ri:\sAsm \to \sAsm/\nno$ be the pulling back along $\bang:\nno\to 1$ functor. An \emph{acyclic fibration} is a morphism $f:X\to Y$ such that $\nno\ri f$ has the global right lifting property with respect to $b$. A \emph{cycle filler} for $f:X\to Y$ is a section of the morphism $(\nno\ri(f)^\Delta,\nno\ri(X)^b)$. A \emph{cofibration} is a morphism that has the global left lifitng property with respect to all acyclic fibrations. \end{defin}
+
+Let $J$ be the constant simplicial assembly which is objectwise equal to the following assembly:
+\[ \set{(n,k)\in \nno\times\nno| n\geq 1, k\leq n }\]
+Let $h:\Lambda \to \Delta'$, $j:\Delta'\to J$ be such that the fibre of $j$ over $(n,k)$ is the simplicial assembly $\Delta[n]$, the fibre of $j\circ h$ over $(n,k)$ is the horn $\Lambda_k[n]$ and the fibre of $h:j\circ h \to j$ is the horn inclusion $\Lambda_k[n] \to \Delta[n]$. In more detail, if $p\in \nno$ then:
+\begin{align*}
+\Delta'_p &= \coprod_{(n,k)\in J} \simcat([p],[n]) \\
+%\partial\Delta_p &= \set{ ((n,k),f)\in I\times \simcat_1 | f:[p]\to [n], \exists q\not\in f }\\
+\Lambda_p &= \set{ ((n,k),f)\in \Delta'_p \middle | \begin{array}{l} \exists q\leq p. f(q) = k,\\ \exists r\leq n.\forall q\leq p. f(r)\neq q \end{array}}\\
+h((n,k),f) &= ((n,k),f)\\
+j((n,k),f) &= (n,k)
+\end{align*}
+
+\begin{defin} Let $I\ri:\sAsm \to \sAsm/I$ be the pulling back along $I\to 1$. A \emph{fibration} is a morphism $f:X\to Y$ such that $I\ri f$ has the global section lifting property with respect to $i:\Lambda \to \Delta$. A \emph{horn filler} for $f:X\to Y$ is a section of the morphism $(I\ri(f)^\Delta,I\ri(X)^i)$. An \emph{acyclic cofibration} is a morphism which has the global left lifting property with respect to all fibrations. \end{defin}
+
+By using internal families, we ensure that the cycle and horn fillers depend recursively on the indices we assign to the cycles and the horns.
+
+
+\hide{
+We cannot alway construct infinitary colimits of assemblies, but we have another trick up our sleaves.
+
+The category of simplicial sets is a reflective subcatgeory of the category of assemblies. 
+}
+
+
+
+
+
+\subsection{Category of fibrant objects}
+Although the category of assemblies admits certain $W$-types, I don't know if this is enough to construct fibrant replacements for arbitrary objects, let along factorizations of aribitray morphisms. For this reason it is not even clear if there is a notion of weak equivalence which turns the category of assemblies into a model category. For this reason, we restrict our attention to the category of \emph{algebraic fibrations} %citeer Garner
+which are fibrant objects which a horn filler attached. This satisfies the axioms for a category of fibrant objects by standard arguments, if weak equivalences are the standard homotopy equivalences.
+
+\hide{Hoeven we hier verder niets meer te bewijzen?}
+
+
+
+
+
+
+
+\subsection{Modest fibrations}
+Thanks to the generic modest arrow, and the completeness of the modest simplicial sets, every modest arrow factors as a fibration following an acyclic cofibration, or an acyclic fibration following a cofibration. We follow Garner here, \hide{citeer Garner}
+but instead of small objects and fibred colimits to get an algebraic Kan fibration monad, we use the algebraic completeness of modest simplicial sets. \hide{Rosolini, expers, note on expers}
+This subsection explain the construction for fibrations and acylic cofibrations.
+
+The family of generic cofibrations $h:\Lambda \to\Delta'$ and $j:\Delta'\to J$ are modest morphisms between modest simplicial sets, and therefore correspond to objecten an morphisms of the category $\vec \pers$. This allow us to define the functor $S:\vec \pers \to\vec \pers$ and the natural transformation $\sigma\id $ which satisfies the following pushout.
+\[\xymatrix{
+\coprod_I(X^\Lambda\times \Lambda) \ar[d]_{\id\times h} \ar[r]^(.6){\epsilon}\ar@{}[dr]|>\ulcorner & X\ar[d]^{\sigma_X} \\
+\coprod_I(X^\Lambda\times \Delta) \ar[r] & SX
+}\]
+Here $\coprod_I$ is the left adjoint of $I\ri$ and $\epsilon$ is the application map which sends $(f,x)$ to $f(x)$.
+
+
+\begin{defin} A \emph{$\pers$-valued Kan complex} is an object $X$ of $\vec\pers$ together with a section of $\sigma_X:X\to SX$. Let $U$ be the object of modest Kan complexes in $\sAsm$. There is a morphism $f:U \to \vec M$ which forgets the horn fillers. The \emph{generic modest fibration} $\phi:\tilde U \to U$ is the pullback of $\mu$ along $f$.
+\end{defin} %niet best; is \phi wel een fibration??? Nou ja, dat ligt wel heel erg voor de hand. we krijgen paren van horns plus hornsfillers die we driect kunnen toepassen.
+
+%idee: object van mkcs, terugtrekken langs de vergeetafbeelding naar $\vec M$ geeft de generieke modest fibration.
+
+The functor $S$ freely adds fillers to horns. The category $\vec \pers^{\vec \pers}$ is a complete internal monoidal category, with a monoidal structure given by composition of functors. Being complete and internal implies that the category is algebraically complete. Among other things, it implies that there is a free monoid $S^*$ generated by $S$. This free monoid is a monad on $\pers$ and modest Kan complexes are algebras for this monoid. The unit of the monad is an acyclic cofibration, so $S^* X$ is always a fibrant replacement for $X$.
+
+%we lijken nu makelijk te kunnen doorschuiven naar de univalence en de fibrancy van deze objecten.
+
+
+
+\hide{
+Define the family of simplicial assemblies $A$ whose objects are morphisms from generic acyclic cofibrations to the generic modest morphism. This should be familiar.
+\[\xymatrix{
+A \ar[r]\ar[d]\pb & I\ri(\vec M')^\Lambda \ar[d]^{I\ri(\vec\mu)^\Lambda }\\
+I\ri(\vec M)^\Delta \ar[r]_{I\ri(\vec M)^h} & I\ri(\vec M)^\Lambda
+}\]
+
+By various adjunctions, the projections from $A$ are transposes of maps  $\epsilon:\coprod_I(A\times \Delta) \to \vec M$ and $\epsilon':\coprod_I(A\times \Lambda) \to \vec M'$, where $\coprod_I$ is the left adjoint of $I\ri$. These maps commute with $\vec\mu$ and $\coprod_I(\id_A\times h)$. Pushing out $\coprod_I(\id_A\times h)$ along $\epsilon'$ factors an acyclic cofibration away from $\vec\mu$.
+\[\xymatrix{
+\coprod_I(A\times \Lambda) \ar[r]^(.6){\epsilon'}\ar[d]_{\coprod_I(\id_A\times h)} & \vec M' \ar[d]^? \ar[r]^\id & \vec M' \ar[d]^{\vec\mu} \\
+\coprod_I(A\times \Delta) \ar@/_3ex/[rr]_{\epsilon}\ar[r] & \bullet \ar@{}[ul]|<\ulcorner \ar[r]  & \vec M
+}\]
+}
+% et nunc?
+% we streven naar een soort replacement afbeelding\dots
+% er moet een modest mofisme overblijven. Maar ja\dots
+
+\hide{
+Fibrant replacements hebben we alleen bij modest. vereist: definitie van modest, bewijs van kleinheid.
+
+Is dit de juiste volgorde?
+- eerst over modest simplicial sets en de generieke modest fibratie
+- dan over algebraic Kan fibrations, en de generieke fibratie die daarbij hoort.
+- ten slotte de zieke lemma'tjes over fibrancy en univalence van de generieke fibratie.
+
+}
+
+
+%is going into more detail necessary!?
+
+%zo komen we er niet. 
+
+%ik kan de sterke versie van de liftingeigenschappen er wel bij geven, maar dat is niet precies wat we hier gebruiken. Wat verandert deze rare familie verzie ervan? Logischerwijze zijn alle pullbacks van de familie nu toegestaan. 
+
+If $q\neq p$ then the face $\Sigma\cup \set q$ contains the point $p$ and hence is a subface of $E_{j-1}$. Because $\face(\Sigma)$ is strictly below $\face(\Xi_{K\xi(\la)})$, it is below 
+Clearly $\face(\Sigma\cup\set p) \subseteq \face(\Xi_{K\xi(\la)}\cup\set{p})$. %geen probleem als er een ander element in $l$ zit, maar ander wordt het lastig.
+
+\hide{divergence here}
+The object $\Xi_{K\xi(\la)}$ has a least element $q$, and $q\neq p$ because $K\xi(\la)\neq k$ by assumption.
+
+ Is $\Xi_{K\xi(\la)}\cup\set{p,q}$ part of the mix?
+
+
+
+
+
+
+\hide{
+Expressed as a union of faces, $D_m$ takes a number of forms depending on $K\xi(\la)$. If $\Xi_{\xi(l)}\neq\set l$, the we get:
+\[ D_m = \left(\bigcup_{i\not\in \set{k, K\xi(\la)}} \face(\Xi_i)\right) \cup \bigcup_{q\in \Xi_k} \face(\Xi_{\xi(l)}\cup\set{q}) \]
+In the special case were $K\xi(\la)=k$ already $D_m = H\ri\hat K_!(\Delta[m])$ and we are done. 
+
+If $\Xi_{\xi(l)}=\set l$, then:
+\[ D_m = \left(\bigcup_{i\not\in \set{k, K\xi(\la)}} \face(\Xi_i)\right) \cup \left(\bigcup_{q\in \Xi_k-\set p} \face\set{l,q}\right) \cup \left(\bigcup_{q\not\in \Xi_k\cup\set{l}} \face\set{l,p,q}\right) \]
+}
+
+
+
+
+
+
+
+
+The paths from $p$ to every other edge $q$ of $\face(\Xi_{K\xi(\la)})$ are already in $D_{m-n-1}$. Every $q\neq p$ is a member of $\Xi_i$ for at most one $i$. Since $h:\Lambda_k[n] \to \Delta[n]$ is a horn $n>0$, which means there is always a least $j$ such that $\face([m+1]-\set{p,q}) \subseteq \face(\Xi_j)$. If $j\neq k$, then this shows $\face([m+1]-\set{p,q})\subseteq D_m$. If $j=k$, then $\face([m+1]-\set{p,q})\subseteq \face(\Xi_{K\xi(\la)}\cup\set{r})$ for some $r\in \Xi_k-\set p$ and this also means $\face([m+1]-\set{p,q}) \subseteq D_m$, as claimed.
+
+We now use a similar construction as before. For $j>0$ let $E_j$ be the union of $D_m$ and all $j$-dimensional faces of $H\ri\hat K_!(\Lambda_l[m])$ which contain the point $p$. So $E_1 = D_m$. For $j>1$ let $T_j$ be the set of those $j$-dimensional faces which are in $E_j$ but not yet in $E_{j-1}$. For each face $\face(\Sigma)\in T_j$ there is a horn $\Lambda_{p(\Sigma)}[j]\to \Delta[n]$ and maps $s_\Sigma:\Lambda_{p_\Sigma}[j] \to E_{j-1}$ and $t_\Sigma:\Delta[j] \to E_{j}$ satisfying $t_\Sigma(p_\Sigma) = p$ which commute the the inclusion $E_{j-1}\subseteq E_j$. Hence the following diagram is a pushout, making $E_{j-1}\to E_j$ and acyclic cofibration.
+
+\[ \xymatrix{
+\coprod_{\face(\Sigma)\in T_j} \Lambda_{p_\Sigma}[j] \ar[r] \ar[d]_s \ar@{}[dr]|>\ulcorner & \coprod_{\face(\Sigma)\in T_j} \Delta[j]\ar[d]^t\\
+D_{j-1}\ar[r] & D_{j}
+}\]
+
+Now $E_{m-n+1}$ contains $\Xi_{K\xi(\la)}$ and hence equals $H\ri\hat K_!(\Lambda_l[m])$. This means that the inclusion $H\ri\hat K_!(\Lambda_l[m])\to H\ri\hat K_!(\Delta[m])$ is an acyclic cofibration.
+
+\hide{Ik ben bang dat het speciale geval problemen oplevert door de faces tegenover $l$ en $p$. Die moeten daar niet zijn, denk ik. }
+
+\end{proof}
+
+\hide{Hoe wordt dit een global filler operator?}
+
+
+
+%The exception is when $\Xi_{K\xi(\la)} = \set l$ i.e. when $\xi(l) = \xi(l')$ implies $l=l'$. In this case we get:
+%\bgein{equation} H\ri\hat K_!(\Lambda_l[m]) &= \bigcup_{i\neq k, q\in \Xi_k} \face(\Xi_i\cup\set q) \end{equation}
+
+
+
+
+
+
+
+
+%\end{document}
+
+
+
+
+I will switch to a more geometric style to explain why $H\ri(\hat K_!)$ preserves acyclic cofibration.
+Suppose we have a horn $\Lambda_l[m] \to \Delta[m]$ and a morphism $x:\Delta[m] \to \Delta[n]$. Because $\Delta$ is fully faithful $x= \Delta(\xi)$ for some $\xi:[m] \to [n]$. Similarly, suppose that $p:\Delta[i] \to \Lambda_l[m]$ is a monomorphism, there is a monomorphism $\pi:[i]\to [m+1]$ corresponding to $\pi$. The functor $\hat K_!$ sends $\Delta(\xi)$ to $\Delta(\hat K\xi)$ and $\Delta(\xi\circ \pi)$ to $\Delta(\hat K(\xi\circ \pi))$. So now we have a case distinction based on whether $\xi$ and $\xi\circ \pi$ are in $|\Lambda_k[n]|$.
+
+\begin{itemize}
+\item If $\xi\in |\Lambda_k[n]|$, then $\xi\circ \pi\in |\Lambda_k[n]|$. In this case $\hat K$ is the identity, but so is pulling back along $h:\Lambda_k[n] \to\Delta[n]$. In fact, $\Delta(\xi)$ factors though $\Lambda_k[n]$ in this case, and the horn $\Lambda_l[m] \to\Delta[m]$ is filled as follows.
+\[ \xymatrix{
+\Delta[m]_l \ar[d] \ar[r] & X \ar[d]^{f\ri(\vec\mu)}\ar[r]\pb & Y \ar[d]^{g\ri(\vec\mu)}\\
+\Delta[m] \ar[r]\ar@/_2ex/[rr]_{\Delta(\xi)}\ar@{.>}[ur] & \Lambda_k[n] \ar[r] & \Delta[n]
+}\]
+\item If $\xi\circ \pi\not\in |\Lambda_k[n]|$, then $\xi\not\in |\Lambda_k[n]|$. In this case, $\hat K$ is $K$ on both $\xi$ and $\xi\circ \pi$. So $\Delta(\pi):\Delta[m-1] \to \Delta[m]$ is sends to $\Delta(K\pi): \Delta[m] \to \Delta[m+1]$ in a way with commutes with $\Delta(K\xi):\Delta[m+1] \to\Delta[n]$: $K$ extends simplices with an edge over $k$. Pulling back along $h:\Lambda_k[n]$ now yields a morphism $h^*(\Delta(K\xi))$ which is am acyclic cofibration, thanks to this extra point.
+\[ \xymatrix{
+\Delta[i]\ar[d]_{\Delta(\pi)}\ar[r]^{\Delta(\eta_{\xi\circ\pi})} & \Delta[i+1] \ar[d]^{\Delta(K\pi)} & h^*(\Delta[i+1]) \ar[l]\ar[d]^{h^*(\Delta(K\pi))}\ar@{}[dl]|<\llcorner \\
+\Delta[m] \ar[r]^{\Delta(\eta_\xi)}\ar[dr]_{\Delta(\xi)} & \Delta[m+1]\ar[d]^{\Delta(K\xi)} & h^*(\Delta[m+1])\ar[l]\ar[d]\ar@{}[dl]|<\llcorner \\
+& \Delta[n] & \Lambda_k[n] \ar[l]^{h}
+}\]
+\item The last case is $\xi\not\in |\Lambda_k[n]|$ and $\xi\circ \pi \in |\Lambda_k[n]|$. The functor $\hat K_!$ gives the monomorphism $\Delta(\eta_\xi\circ \pi):\Delta[i] \to \Delta[m+1]$ and $\Delta(\xi)\circ \Delta(\eta_\xi\circ \pi)$ factors though $\Lambda_k[n]$.
+\[ \xymatrix{
+\Delta[i]\ar[d]_{\Delta(\pi)}\ar[r]^{\id} & \Delta[i] \ar[d]^{\Delta(\eta_\xi\circ \pi)} & \Delta[i] \ar[l]_\id\ar[d]^{\Delta(\eta_\xi\circ \pi)}\ar@{}[dl]|<\llcorner \\
+\Delta[m] \ar[r]^{\Delta(\eta_\xi)}\ar[dr]_{\Delta(\xi)} & \Delta[m+1]\ar[d]^{\Delta(K\xi)} & h^*(\Delta[m+1])\ar[l]\ar[d]\ar@{}[dl]|<\llcorner \\
+& \Delta[n] & \Lambda_k[n] \ar[l]^{h}
+}\]
+\end{itemize}
+In the cases where $\xi\not\in |\Lambda_k[n]|$, $h^*(\hat K_1(\Lambda_l[m]))$ is the union of the acyclic cofibrations $h^*(\Delta(K\pi)):h^*(\Delta[i+1]) \to h^*(\Delta[m+1])$ and  
+and $\Delta(\eta_\xi\circ \pi)$, and this is an acyclic cofibration.
+
+\hide{
+Overdek met alle horns.
+
+}
+
+
+
+
+
+\hide{$\Lambda_k[n] = \hat K_!(\partial \Delta[n-1])$}
+
+%\end{document}
+
+
+Let $U$ be the universe of modest complexes, and let $\cat U$ be the complete internal category of complexes and horn filler preserving morphisms. Let $f:\Lambda_k[n] \to U$ be any morphism. We need to fill the horn $h:\Lambda_k[n] \to \Delta[n]$ in a systematic way. In order to do this, consider that $|\Delta_n|$ is the object of morphisms $[i]\to [n]$, and that $|\Lambda_k[n]|$ is the subobject of those morphisms $\phi:[i]\to [n]$ whose image either omits least two elements of $[n]$, or omits one and contains $k$. The projections of these morphisms to their domains turns these collection into modest simplical sets. 
+
+Because $\Delta[n]$ is representable, any $g:\Delta[n] \to U$ corresponds to $U(n)$ which consists of functors $g':\simcat/[n]\to\pers$ with a filler operator attached. The morphism $f$ induces a functor $f':\cat L^n_k \to \pers$ satisfying $f'(\xi) =  f(\xi)(\id)$, where $\cat L^n_k$ the the full subcategory of $\Delta[n]$ whose objects correspond to the elements of $\Lambda_k[n]$. 
+
+%hoe meer we naar functoren vertalen hoe beter, lijkt me. Er zijn functoren op de functorscategoriene die een inversie dienen te hebben; het is allemaal parallel.
+
+To define $g$ we divide $\Delta[n]$ into three subcollection of morphisms: $A = |\Lambda_k[n]|$, $B$ is the collection of morphisms whose image is $[n]$ and $C$ is the collection of morphisms whose image is $[n]- \set{k}$. Necessarily $g'(\alpha) = f'(\alpha)$ if $\alpha\in A$. For each $\phi:[m] \to [n] \in B$ let $\cat L(\phi)$ be the category of morphisms $\psi:[l] \to [m]$ for which $\phi\circ \psi\in A$. The morphisms of $\cat L(\phi)$ are just the commutative triangles. Let
+\[ h_*(f')(\xi) = \lim_{\alpha\in \cat L(\xi)} f'(\alpha) \]
+For $\beta\in B$ we let $g'(\beta) =  f'(\beta)$.
+
+For the extension to $C$ we will use some special tools. We first define a monad on $\simcat/[n]$.
+For each $\xi$ we let $K\phi$ satisfy:
+\[ K\xi(i) = \left\{ \begin{array}{cl} 
+\xi(i) & \xi(i)<k\\
+k & \xi(i)\geq k, \xi(i-1)<k\\
+\xi(i-1) & \xi(i-1)\geq k
+\end{array}\right.\]
+If we think of $\phi$ is a finite nondecreasing sequence of numbers, then this is the unique way to insert an extra $k$ into that sequence.
+The definition for morphisms is similar. For $\phi:\xi \to \xi'$, let
+\[ K\phi(i) = \left\{ \begin{array}{cl} 
+\xi(i) & \xi(i)<k\\
+\min{p|\xi'(p) \leq k } & \xi(i)\geq k, \xi(i-1)<k\\
+\xi(i-1) & \xi(i-1)\geq k
+\end{array}\right.\]
+The unit $\eta_\xi: \xi \to K\xi$ is the face map which skips $\min\set{p|\xi(p)\leq k}$. The multiplication $\mu_\xi:KK\xi \to K\xi$ doubles that same unit.
+
+Let $\gamma\in C$. Note that $K\gamma$ and $KK\gamma$ are in $B$. The morphisms $K\eta_\gamma$ and $\eta_{K\gamma}:K\gamma \to KK\gamma$ induce functors $\cat L(K\gamma) \to \cat L(KK\gamma)$ and in turn morphisms $g'(K\eta_\gamma), g'(\eta_{K\gamma}):g'(KK\gamma) \to g'(K\gamma)$. Let $g'(\eta_\gamma): g'(K\gamma) \to g'(\gamma)$ be the coequalizer of those two morphisms. We need to turn $g'$ into a contravariant and we do this in a way which preserves the mapping of $\eta_\gamma, K\eta_\gamma, \eta_{K\gamma}$ given here. 
+
+Morphisms in $\Lambda_k[n]$ can be divided in nine subsets sets based on where the domains and codomains come from. 
+\begin{enumerate}
+\item For $\phi:\alpha \to \alpha'$ with $\alpha,\alpha'\in A$ we simply let $g'(\phi) = f'(\phi)$.
+\item For $\phi:\alpha \to \beta$ where $\alpha\in A$ and $\beta\in B$, note that $\alpha\in \Lambda(\beta)$, so we have a projection $g'(\beta) \to g'(\alpha)$ which will be $g'(\phi)$. 
+\item For $\phi:\alpha \to \gamma$ where $\alpha\in A$ and $\gamma\in C$, we already have $g'(\eta_\gamma\circ\alpha):g'(K\gamma) \to g'(\alpha)$, and $g'(\eta_\gamma\circ\alpha) \circ g'(K\eta_\gamma) = g'(\eta_\gamma\circ\alpha) \circ g'(\eta_{K\gamma})$, so there is a unique $u:g'(K\gamma) \to g'(\alpha)$ such that $g'(\alpha)\circ g'(\eta_\gamma) = g'(\eta_\gamma\circ\alpha)$. Let $g'(\phi) = u$.
+
+\item There are no $\phi:\beta \to \alpha$ if $\alpha\in A$ and $\beta\in B$, since $\beta$ is surjective and $\alpha$ is not. The functor $g'$ is trivially defined here.
+\item For $\phi:\beta \to \beta'$ where $\beta,\beta'\in B$, we have a cone $g'(\psi): g'(\beta') \to g'(\alpha)$ for $\psi\in A$, which induces a morphism $g'(\beta') \to g'(\beta)$ hich will be $g'(\phi)$.
+\item There are no $\phi:\beta \to \gamma$ if $\beta\in B$ and $\gamma\in C$, since $\beta$ is surjective and $\beta$ is not. The functor $g'$ is trivially defined here.
+\item There are no $\phi:\gamma \to \alpha$ if $\alpha\in A$ and $\gamma\in C$, since $\gamma$ reaches at least one point outside of $\alpha$'s range. The functor $g'$ is trivially defined here.
+\item Let $\beta\in B$ and $\gamma\in C$. For every morphism $\phi:\gamma \to \beta$, there is a least $\phi':K\gamma\to \beta$ such that $\phi'\circ \eta_\gamma = \phi$. Let $g'(\phi) = g'(\eta_\gamma)\circ g'(\phi')$.
+
+Note that the choice of $\phi'$ does not matter%why?
+
+\item For $\gamma$ and $\gamma'\in C$, every morphism $\phi:\gamma \to \gamma'$ induces a pair of morphism $K\phi, KK\phi$ which commute wth the parallel pairs $(K\eta_\gamma, \eta_{K\gamma})$ and $(K\eta_{\gamma'}, \eta_{K\gamma})$. There is a unique morphism $u:g'(\gamma')\to g'(\gamma)$ which commutes with both. Let $g'(\phi) = u$. %slechte beschrijving
+\[ \xymatrix{
+g'(KK\gamma') \ar[d]_{g'(KK\phi)} \ar@<1ex>[r]^{g'(K\eta_{\gamma'})} \ar@<-1ex>[r]_{g'(\eta_{K\gamma'})} & g'(K\gamma') \ar[d]^{g'(K\phi)} \ar[r]^{\eta_{\gamma'}} & g'(\gamma')\ar[d]^{g'(\phi)}\\
+g'(KK\gamma) \ar@<1ex>[r]^{g'(K\eta_{\gamma})} \ar@<-1ex>[r]_{g'(\eta_{K\gamma})} & g'(K\gamma) \ar[r]_{\eta_{\gamma}} & g'(\gamma)\\
+}\]
+\end{enumerate}
+
+This is a recursive definition, were $g'$ over $B$ depends on $A$ and $g'$ over $C$ depends on $B$. That $g'$ preserves compositions and identities is clear for morphisms between object in $A$. We treat the elements of $B$ as colimits of elements of $A$ and extended $g'$ accordingly, which means that the extension to $A\cup B$ is a defined functor. The elements of $C$ are equalizers of element of $B$ and $g'$ respects this too, which means that the extension to $\simcat/[n] = A\cup B\cup C$ is a functor.
+
+The resulting functor $g':(\simcat/[n])\dual\to \pers$ induces a morphism $g:\Delta[n]\to \vec M$, which in turn induces a modest morphism $g\ri(\vec\mu):Y\to \Delta[n]$. Not that by definition $g\circ h = f$, where $h:\Lambda_k[n] \to \Delta[n]$ is the horn we triad te fill. As a consequence $h\ri(g\ri(\vec\mu)) = f\ri(\vec\mu)$.
+
+We need to show that $g\ri(\vec\mu):Y\to \Delta[n]$ is a fibration, and hence that a filler operator exists. We already have a filler operator for $f^*(\vec\mu):X\to \Lambda_k[n]$. The definition of $g'$ provides extra fillers in the following way.
+
+\begin{lemma} For each $\xi:[m] \to [n]$, let $\Delta(\xi):\Delta[m]\to\Delta[n]$ be the yoneda embedding. Let $\xi\ri(h):\Lambda(\xi)\to \Delta[m]$ be the pullback of $h:\Lambda_k[n] \to \Delta[n]$ along $\Delta(\xi)$. If $\xi$ is surjective, then for each $x:\Lambda(\xi) \to Y$ such that $g\ri(\vec\mu)\circ x = \Delta(\xi) \circ \xi\ri(h)$, there is a \emph{unique} $y:\Delta[m] \to Y$ such that $g\ri(\vec\mu)\circ y = \Delta(\xi)$ and $y\circ \xi\ri(h) = x$.
+\[\xymatrix{
+\Lambda(\xi) \ar[d]_{\xi\ri(h)} \ar[r]^x & Y \ar[d]^{g\ri(\vec\mu)} \\
+\Delta[m] \ar[r]_{\Delta(\xi)}\ar@{.>}[ur]^y & \Delta[n]
+}\]
+\end{lemma}
+
+\begin{proof} Take a good look at the definition of $g'$. \end{proof}
+
+We can combine the two fillers operators into one.
+
+Suppose we have the following square, where $\Delta(\xi)$ is the Yoneda embedding of the morphism $\xi:[m] \to [n]$ in the simplex category.
+\[\xymatrix{
+\Lambda_l[m] \ar[r]\ar[d] & Y \ar[d]^{g\ri(\vec\mu)}\\
+\Delta[m] \ar[r]_{\Delta(\xi)} & \Delta[n]
+}\]
+
+We first make a case distinction based on $\xi$:
+\begin{itemize}
+\item If $K\xi:[m+1] \to [n]$ is not surjective, then $\xi\in A$. This means that $\Delta(\xi)$ factors through $\Lambda_k[n]$ and $x$ factors through $f\ri(\vec\mu):X\to \Lambda_k[n]$. We can apply the filler operator of $f$ directly.
+\[\xymatrix{
+\Lambda_l[m] \ar[d]\ar[r]\ar@/^2ex/[rr]^x & X \ar[r]\ar[d]^{f^*(\vec\mu)}\pb & Y\ar[d]^{g^*(\vec\mu)}\\
+\Delta[m] \ar[r] \ar@/_2ex/[rr]_{\Delta(\xi)} \ar@{.>}[ur] & \Lambda_k[n]\ar[r]^h & \Delta[n]
+}\]
+\item If $K\xi$ is surjective, but $\xi(l) = k$, then $x$ factors though $f\ri(\vec\mu)$. First fill $\Lambda_l[m] \to \Lambda(\xi)$ using the filler of $f$, and then fill $\Lambda(\xi)\to \Delta[m]$ using the lemma.
+\[\xymatrix{
+\Lambda_l[m] \ar[r]\ar[d]\ar[drr]_(.4)x & X \ar[dr]\ar[d] \\
+\Lambda(\xi) \ar[r]\ar[d]_{\xi\ri(h)}\ar@{.>}[ur] & \Lambda_k[n] \ar[dr]_h & Y\ar[d]\\
+\Delta[m] \ar[rr]_{\Delta(\xi)}\ar@{.>}[urr] && \Delta[n]
+}\]
+\item This leaves the horns $K\xi$ is surjective, but $\xi(l)\neq k$. These are the complicated cases we will treat in detail below.
+\end{itemize}
+
+The acyclic cofibration $\Lambda_l[m]$ is the union $m$ faces $\Delta(\delta^m_i):\Delta[m-1] \to \Delta[m]$, where $i\leq m$ and $i\neq l$. For each face, there are three options.
+\begin{itemize}
+\item Case $\xi_i = \xi\circ\delta^m_i\in A$. In this case, $x_i = x\circ \delta^m_i:\Delta[m-1] \to Y$ factors through $X$.
+\item Case $\xi_i\in B$. In this case, $x_i \circ \xi_i\ri(h):\Lambda(\xi_i)\to \Delta[m]$ factors through $X$.
+\item Case $\xi_i\in C$. In this case, there is a modest set $g'(K(\xi_i))$ morphisms $y_i:\Delta[m] \to Y$ such that 
+\[ x_i = y_i\circ \Delta(\eta_{\xi_i})\]
+Because $K(\xi_i)\in B$, $y_i\circ (K\xi)\ri(h)$ factors through $X$.
+\end{itemize}
+
+Let $D = \set{i\in \nno| i\leq m, i\neq k, \xi_i\in C}$, and let $\# D$ be its cardinality. There is a unique morphism $p:\xi \to K^{\#D} \xi$ -- the $\#D$-fold unit --, and there are $\# D$ morphisms $q_i: K\xi \to  K^{\#D} \xi$, namely all variaties of $\eta_{K^{i+1}\xi}^j\circ \eta_{\xi}^i$ where $i+j+1 = \#D$. Let $\nu:D\to [\#D-1]$ satisfy $\nu(i) = \#\set{j\in D|j<i}$. We get the following family of monomorphisms
+\[ v_i = \left\{\begin{array}{rll}
+\Delta(q_{\nu(i)}\circ K\delta^m_i)\circ K\xi_i\ri(h) &: \Lambda(K\xi_i) \to \Lambda(K^{\#D}\xi) & i\in D \\
+\Delta(p\circ \delta^m_i)\circ \xi_i\ri(h) &: \Lambda(\xi_i) \to \Lambda(K^{\#D}\xi) & i\not\in D
+\end{array}\right.
+\]
+For $i\not\in D$. The union of these is a huge acyclic cofibration which commutes with the other maps.
+\[ \xymatrix{
+\bigcup\Lambda(?) \ar[r]\ar[d]_v & X \ar[d]^{f\ri(\vec\mu)}\\
+\Lambda(K^{\#D}\xi) \ar[r]_{K^{\#D}\xi\ri(h)} & \Lambda_k[n]
+}\]
+
+
+\hide{hier beneden nog wat aanpassen}
+\hide{
+Modest Kan complexes will be a kind of simplicial object in the category of assemblies, with a subtle twist. Because $\Asm$ has a natural number object and is locally Cartesian closed, there is an internal version of the simplex category. This is the category $\Simcat$ whose objects are initial segments $[n]$ of $\nno$ and whose morphisms are monotone maps between these initial segment.
+
+
+\begin{defin} Let $\simcat$ be the internal version of the simplex category in $\Asm$. A \emph{simplicial assembly} is an internal presheaf over $\simcat$. The \emph{category of simplicial assemblies} is $\sAsm = \Asm^{ \simcat\dual }$ where morphisms are ordinary morphisms of presheaves.
+\end{defin}
+
+Let me spell out what this means. Every simplicial assembly $X$ has an underlying object $|X|$, a \emph{dimension} map $d_X:|X|\to\nno$ and an action of $\simcat\dual$. For each $x\in |X|$ with $d_X(x) = n$ and each $f:[m]\to[n]$, there is $x\cdot f\in |X|$, with $d_X(x\cdot f) = m$. This \emph{restrictor} $\cdot$ satsifies $x\cdot \id = x$ and $(x\cdot f)\cdot g = x\cdot(f\circ g)$ when defined. A morphism of simplical assemblies $f:X\to Y$ has an underlying map $|f|:|X|\to |Y|$ which preserves the dimension and commutes with the restriction operators.
+
+The category of $\sAsm$ is a strict subcategory of $\Asm^{\Simcat\dual}$. The object of morphism of $\simcat$ is isomorphic to $\nno$. If $i\mapsto f_i:[n] \to [m]$ represents this isomorphism, then the restriction map $\rho_f:X_m \to X_n$ depends recursively on $i$, if $X$ is in $\sAsm$. There is another realizability condition for morphism between simplicial assemblies. No such restriction exists on $\Asm^{\Simcat\dual}$ which therefore has more objects and morphisms.
+}
+
+\hide{\section{Modesty}
+This is the main section of this paper. Here we will show how to define modest morphisms among simplicial sets, and how they once again form a complete internal category. Because they form a complete internal category, we can construct fibrant replacements of simplicial sets by taking limits over all available modest morphisms. Ultimately, this is where the univalent fibration comes from.}
+
+\hide{
+\subsection{Indexed assemblies} 
+%weet ik dit wel zeker?
+
+\subsection{Free simplicial categories} There is a forgetful functor $\norm\cdot:\sAsm \to \Asm$ along which we want to lift the whole
+along which we will lift the while structure with the modest sets. For this we heavily rely on the fact that $\norm\cdot$ gains a right adjoint when we apply it to internal categories. This adjunctio is related to the Grothendieck construction.
+
+\newcommand\lan{\mathord{\int}}
+\begin{defin} Let $\cat C$ be an object of $\catsasm$. The interal category $\lan \cat C$ is the category whose object of objects is just $|\cat C_0|$, where $\cat C_0$ is the object of object of $\cat C$; the morphisms $x\to y$ are pairs $(\phi,f)$ where $\phi:[d(x)] \to [d(y)]$ and $f:x\cdot\phi \to y$. Let $F:\cat C\to\cat D$ be a functor in $\catasm$. On objects $\lan F$ satsfies $\lan F(x) = F(x)$. On morphisms $\lan F$ satisfies $\lan F(\phi, f) = (\phi,Ff)$.
+\end{defin} %Please zoek uit wat de juiste richting van de morfismes is. Het kan niet allebei zijn. 
+
+\begin{lemma} The functor $\int:\catsasm\to\catasm$ has a right adjoint $\ran$. \end{lemma}
+
+\begin{proof} Let $\cat C$ be an internal category of $\Asm$. The category $\ran(\cat C)$ is essentially $\coprod_{[n]\in \simcat} \cat C^{\simcat/[n]\dual}$. The object of objects of $\ran(\cat C)$ consist of functors $F:\simcat/[n]\dual \to \cat C$, where $n$ is the dimension of $F$. The action satisfies $F\cdot \phi = F\circ \phi_*$ for each $\phi:[m]\to [n]$. Here $\simcat/\phi:\simcat/[m]\dual\to \simcat/[n]\dual$ is the functor which sends $\xi$ to $\phi\circ \xi$. The object of morphisms of $\ran(\cat C)$ is fashioned out of natural transformations in a similar way.
+
+Let $F:\cat C\to\cat D$ be a functor. Dimension wise composition and whiskering define the functor $\ran(F):\ran(\cat C)\to\ran(\cat D)$. If $x$ is a functor or natural transformation in $\coprod_{[n]\in\simcat}\cat C^{\simcat/[n]}$, then $\ran(F)(x) = Fx$.
+
+To see that this is a right adjoint we define the transposition operators. Let $\cat C$ be a category in $\catsasm$, $\cat D$ in $\catasm$ and let $F:\lan\cat C \to \cat D$. The transpose $F^t$ satisfies $F^t(x)(\xi) = F(x\cdot\xi)$ for any object $x$ in $\cat C$ and any object $\xi$ of $\simcat/[d(x)]$. For a morphism $f:x\to y$ in $\cat C[n]$ together with a morphism $\phi:\xi\to\xi'$ in $\simcat/[n]$ let $F^t(f)(\phi) = F(\phi,f)$. For combinations of objects and morphisms we use this same map with the objects replaced by identity morphisms.
+
+For $G:\cat C \to \ran(\cat D)$ define $G^t:\lan\cat C \to \cat D$ by letting $G^t(x) = G(x)(\id_{d(x)})$ for objects, and $G^t(\phi,f) = G(f)(\phi)$ for morphisms.
+
+We check and see that:
+\begin{align*}
+& F^{tt}(x) = F^t(x)(\id_{d(x)}) = F(x\cdot \id_{d(x)}) = F(x)\\
+& F^{tt}(\phi,f) = F^t(f)(\phi) = F(\phi,f)\\
+& G^{tt}(x)(\xi) = G^t(x\cdot \xi) = G(x\cdot\xi)(\id_{d(x\cdot\xi)}) = G(x)\circ\xi_*(\id_{d(x\cdot\xi)}) = G(x)(\xi)\\
+& G^{tt}(f)(\phi) = G^t(\phi,f) = G(f)(\phi)
+\end{align*}
+
+Hence we get an adjunction $\lan\dashv\ran$.
+\end{proof}
+
+The construction is related to the Grothendieck construction. 
+}
+
+\hide{
+\begin{defin} Let $[2]_0$ be the subcategory of $[2]$ which misses the arrow $1\to 2$. An \emph{opfibred congruence} is a faithful functor $F:\cat C \to \cat D$ which has the strong lifting property with respect to the functors $\set 0 \to [1]$, $[2]_0 \to [2]$. \end{defin}
+
+Due to this, opfibred congruences are closed under pullbacks and exponentials.
+
+\begin{lemma} The functor $\lan$ is full and faithful on opfibred congruences. \end{lemma}
+
+\begin{proof} Let $F:\cat C\to\cat D$ be a functor in $\catsasm$. 
+
+\end{proof}
+}
+
+
+%ik heb die rottige adjunctie nodig. Godverdomme!
+\hide{
+There is a relation between this pullbakc and the Grothendieck construction. The main thing we get out of that is that transposition proeserves pullbacks.
+
+\begin{lemma} Let $F:\cat A\to \cat B$ in $\catsasm$ and $G:\cat C\to \cat D$ in $\catasm$. For every $H:\cat A\to \ran \cat C$ and $K:\cat B\to\ran\cat D$ such that $\ran G\circ H = K\circ F$, the commutative suqere is a pullback if the transpose $G \circ H^t = K^t\circ \lan F$ is too.
+\[\xymatrix{
+\cat A \ar[r]^H\ar[d]_F\pb & \ran\cat C\ar[d]^{\ran G} && \lan\cat A \ar[r]^{H^t}\ar[d]_{\lan F}\pb & \cat C\ar[d]^G\\
+\cat B \ar[r]_K & \ran\cat D && \lan\cat B \ar[r]_{K^t} & \cat D
+}\]
+\end{lemma}
+
+\begin{proof}
+\end{proof}
+
+\subsection{Algebraic realization}\hide{ Dit moet nog even beter geintegreert worden met de rest van het verhaal. }
+The subsection presents the \emph{algebraic realization} of simplicial assemblies, both as a stand in for the geometric realization, and as a way to turn the category of PERs $\pers$ into a simplicial set of simplicial PERs. The algebraic realization is an adjunction between $\sAsm$ and $\catasm$. It is based on the Grothendieck construction, which translates between indexed and fibred categories.
+
+Abstractly, the algebraic realization is the right Kan extension of the functor $\simcat \to \catasm$ which sends $[n]$ to $\simcat/[n]\dual$ along the Yoneda embedding $\simcat \to \sAsm$. Similarly, the lagebraic nerve is a left Kan extension of the Yoneda embedding along $[n]\mapsto \simcat/[n]\dual$. Rather then trying to make sense of these functors and their Kan extension, we just present the constructions that come out of them.
+
+\newcommand\alre[1]{\left|#1\right|_{\textrm{al}}}
+\newcommand\alner{\mathcal N_{\textrm{al}}}
+\begin{defin} For each simplicial assembly $X = (|X|,d_X,\cdot)$ its \emph{algebraic realization} $\alre X$ is an internal category whose object of objects is $X$. For each pair of elements $i,j\in X$, $\alre X(i,j) = \set{\phi:[d_X(j)] \to [d_X(i)]| i\cdot \phi = j }$. On morphisms $f:X\to Y$, $\alre f:\alre X \to \alre Y$ is the morphism $|f|:|X|\to|Y|$ for object, while it is the identity on morphisms. This works because $f(i\cdot \phi) = f(i)\cdot \phi$ when $f$ is a morphism of simplicial assemblies.
+
+For each $\cat C$ in $\catasm$ its algebraic nerve $\alner(\cat C)$ is a simplicial assembly whose object of objects is the assembly $\coprod_{n\in \nno}\cat C^{\simcat/[n]\dual}$, where the dimension $d_{\alner(\cat C)}(f) = n$ if $f\in \cat C^{\simcat/[n]\dual}$, and where for all $\phi:[m] \to [n]$, $f\cdot \phi$ is the composition of $f:\simcat/[n]\dual\to \cat C$ with the functor $\simcat/\phi:\simcat/[m]\dual \to \simcat/[n]\dual$ which sends $\xi$ to $\phi\circ \xi$.}\hide{
+
+The (external) functor $\alner$ sends and internal functor $f:\cat C\to\cat D$ to the morphism $\alner(\cat C) \to\alner(\cat D)$ which sends $g\in\cat C^{\simcat/[n]\dual}$ to $f\circ g\in\cat C^{\simcat/[n]\dual}$, hence commuting with dimension and the restrictors.
+\end{defin}
+
+\begin{lemma} The algebraic realization functor is left adjoint to the algebraic nerve functor. \end{lemma}
+\begin{proof} Let $f: \alre{(|X|,d_X,\cdot)} \to\cat C$. Its transpose $f^t: X\to \alner(\cat C)$ sends $x\in |X|$ to the functor $f^t(x):\simcat/[d_X(x)] \to \cat C$ which satisfies $f^t(x)(\xi) = f(x\cdot \xi)$. 
+
+Let $g:(|Y|,d_Y,\cdot)\to \alner(\cat C)$. Its transpose $g^t:\alre{(|Y|,d_Y,\cdot)} \to \cat C$ sends an object $y$ of $\alre{(|Y|,d_Y,\cdot)}$ to $g(y)(\id_{[d_Y(y)]})$, which is an object of $\cat C$. If $\phi$ is a morphism $y\to y'$, then $\phi$ is a morphism of $\simcat$ such that $y'= y\cdot \phi$, and $\phi:[\phi \to \id_{[d_Y(y)]}]$ in $\simcat/[d_Y(y)]$. Hence $g(y)(\phi): g(y)(\id_{[d_Y(y)]}) \to g(y)(\phi) = g(y')(\id_{[d_Y(y')]})$. Therefore $g^t(\phi) = g(\dom \phi)(\phi)$.
+
+The transposes are inverse natural transformations between homsets, and hence tell us that algebraic realization and algebraic nerve are an adjunction between $\catasm$ and $\sAsm$.
+\end{proof}
+
+Unlike the geometric realization, the algebraic realization does not preserve the terminal object. It sends $1$ to $\simcat\dual$ instead. Pullbacks are a different story.
+
+\begin{lemma} The algebraic realization functor preserves pullbacks. \end{lemma} %misschien overbodig
+
+\begin{proof} Let $f:X\to Z$ and $g:Y\to Z$ be morphisms is of assemblies. The functor $\sAsm \to\Asm$ which sends $X$ to $|X|$ preserves pullbacks, and for this reason the object of objects of the fibred product $\alre(X\times_Z Y)$ is $|X|\times_{|Z|}|Y|$. If $(x,y)\in X\times_Z Y$ then $d_X(x) = d_Y(y)$. The morphisms $(x,y) \to (x',y')$ in $\alre X\times_{\alre Z }\alre Y$ are the morphism $\phi:[d_X(x')] \to [d_X(x)]$ of $\simcat$ such that $x'= x\cdot \phi$ and $y'= y\cdot y'$, which are precisely the morphisms of $\alre(X\times_Z Y)$.
+\end{proof}
+
+\hide{Nog eens over nadenken. Dit ligt me niet lekker.}
+
+We can define fibrations in the catergory $\catasm$ as morphism which have the strong lifting property with respect to to images of horns under the algebraic realization functor, or equivalently as those functor whose nerves are fibrations. Whether this leads to a model structure, let alone an equivalent one, is an open question.
+}
+
+
+\hide{
+\subsection{Modest simplicial sets}
+We define the modest morphsism in $\sAsm$ in such a way that the are pointwise modest morphisms of assemblies.
+
+\newcommand\boldy{{\bar{2}}}
+\begin{defin}[modest simplicial sets] A morphism $f:X\to Y$ is \emph{modest} if its underlying morphism $|f|:|X|\to|Y|$ is. A simplicial assembly $X$ is a \emph{modest simplicial set} if $|X|$ is modest set. \end{defin}
+
+\begin{lemma} The modest morphisms form a complete fibred subcategory of $\cod:(\sAsm)^\to\to\sAsm$. \end{lemma}
+
+\hide{ hier is de adjunctie niet handig. }
+\begin{proof} Because $\nno$ is modest, all maps $\nabla 2\to\nno$ are modest. Therefore, if $X = (|X|,d_X,\cdot)$ is a simplicial assembly, morphisms $\nabla 2 \to |X|$ are necessarily confined to a single dimension. Let $\simcat\ri(\nabla 2)$ be the constant simplicial set whose value over each object is $\nabla 2$. We now see that $|X^{\simcat\ri(\nabla 2)}|\simeq |X|^{\nabla 2}$. Since $|\cdot|:\sAsm$ preserves pullbacks, we see that $f:X\to Y$ is a modest morphism of simplicial assemblies if the following square is a pullback.
+\[\xymatrix{
+X \ar[d]_{f}\ar[r]^{\id^\bang} & X^{\simcat\ri(\nabla 2)}\ar[d]^{f^{\simcat\ri(\nabla 2)}} \\
+Y \ar[r]_{\id^\bang} & Y^{\simcat\ri(\nabla 2)} \\
+}\]
+
+Conclusion: modest morphisms in $\sAsm$ form a complete fibred subcategory of the codomain fibration for the same reason that modest morphisms in $\Asm$ do.
+\end{proof}
+}
+
+\hide{
+\begin{theorem} There is a generic modest morphism in $\sAsm$. \end{theorem}
+
+\newcommand\func{\mathsf{func}}
+\begin{proof} There is a generic modest morphism in $\Asm$: $\mu:E\to B$. We constructed the category of partial equivalences realtions $\pers$ (over $\nno$) from this, letting morphisms $\pers(i,j)$ be the exponential $E_j^{E_i}$. %The elements of $E$ should be understood as pairs $(x,y)$ where $y$ is a modest set, and $x\in y$.
+We construct a category of pointed pers $\pers_*$ in a similar way: the object of objects is $E$ and $\pers_*(i,j) = \set{ f\in E_{\mu(i)}\to E_{\mu(j)} | f(i)=j }$. There is a forgetful functor $U:\pers_*\to\pers$ which forgets the point. This category has modest sets with points as its objects, and point preserving morphisms are morphisms.
+
+The morphism $\mu$ unduces a forgetful functor $U:\pers_*\to \pers$ which forgets the point. On objects, $U_0=\mu$. On morphisms $U$ is the identity, since a morphism $i\to j$ in $\pers_*$ is already morphism $\mu(i)\to \mu(j)$ be definition.
+
+We now use a construction that turns a category into a simplicial set like the nerve, but instead of the posets $[n]$ we use the duals of slice categories $\simcat/[n]\dual$.
+
+The simplicial set $\ran\pers$ is defined as follows. The underlying object $|\vec\pers|$ is the object $\coprod_{n\in\nno} \func(\simcat/[n]\dual,\pers)$ of functors $\simcat/[n]\dual \to \cat P$ for arbitrary $n\in \nno$. For each functor $F:\simcat/[n]\dual \to \cat P$ the dimension $d(F)$ is equal to $n$. If $\phi:[m] \to [n]$, then $F\cdot \phi:\simcat/[m]\dual \to \pers$ is the functor which satisfies $F\cdot \phi(\xi) = F(\phi\circ \xi)$ for each object and which is the identity on morphisms.
+
+The simplicial set $\ran\pers_*$ is defined similarly, with $|\ran \pers_*|$ equal to the coproduct $\coprod_{n\in\nno} \func(\simcat/[n]\dual,\pers_*)$ etc. The functor $U$ becomes a morphism of simplicial sets by functor composition: $\ran U(F) = UF$. We claim that $\ran U$ is the generic modest morphism.
+
+If $f:X\to Y$ is a modest morphism, we already have morphisms $g:|X|\to E$ and $h:|Y|\to B$ which form a pullback square together with the generic modest morphism $\mu:E\to B$ of $\Asm$. Let $X_y = \set{x\in X| f(x)=y}$. The fact that $f$ is a pullback of $\mu$ means that $g_y:X_y \to E_{h(y)}$ is a fibrewise isomorphism.
+
+We turn $h$ into a morphism $h^t:Y\to \vec\pers$. For the objects $\xi$ of $\simcat/[d(x)]\dual$ we let $h^t(x)(\xi:[m] \to [d(x)]) = h(x\cdot \xi)$. For each morphism $\phi:\xi\to \xi'$ we need $h^t(x)(\phi)$ to be a morphism $E_{h(x\cdot \xi')} \to E_{h(x\cdot \xi)}$. Here we use the fibrewise isomorphisms $g_{x\cdot \xi}$ and $g_{x\cdot \xi'}$. \[ h^t(x)(\phi)(y) = g(g^{-1}(y)\cdot \phi) \]
+
+We then turn $g$ into a morphism $g^t:X\to \vec\pers_*$ in a similar fashion. For the objects $\xi$ of $\simcat/[d(x)]\dual$ we let $g^t(x)(\xi:[m] \to [d(x)]) = g(x\cdot \xi)$. For a morphism $\phi:\xi\to \xi'$ we need $g^t(x)(\phi)$ to be a morphism $E_{\mu(g(x\cdot \xi'))} \to E_{\mu(g(x\cdot \xi))}$ which send $g(x\cdot \xi')$ to $g(x\cdot \xi)$. This is done by as follows.
+\[ g^t(x)(\phi)(y) = g(g^{-1}(y)\cdot \phi) \]
+
+Form thses definition is is easy to see that $U\circ g^t = h^t\circ f$. To demonstrate that $g^t$ is still a pullback of $h^t$, suppose that $y\in Y$ and $F:\simcat/[d(y)]\dual \to \pers$ satisfy $\mu_*(F) = h^t(y)$. For each object $\xi:[m] \to [d(y)]$ of $\simcat/[d(y)]\dual$ this implies that $h(y\cdot\xi) = \mu(F(\xi))$ and hence that there are unique $x(\xi)\in X$ such that $f(x(\xi)) = y\cdot \xi$ and $g^t(x(\xi)) = F(\xi)$. For $\phi:\xi \to \xi'$ we have $UF(\phi)(F\xi') = F\xi$ by definition of $U$. If $\phi = \xi:\xi\to\id_{[d(y)]}$ then $h^t(y) = \mu(F)$ implies:
+\[ g(x(\xi)) = F\xi = \mu(F(\xi))(F\id) = h^t(y)(\xi)(F\id) = g(g^{-1}(F\id)\cdot \phi) = g(x(\id)\cdot \phi) \]
+This forces $x(\id)\cdot \phi = x(\xi)$. Hence we see that there is a unique $x = x(\id)$ such that $g^t(x) = F$ and $f(x) = y$. Therefore $f$ is a pullback of $\ran U$.
+
+The morphism $\ran U:\ran\pers_*\to\ran\pers$ is modest, because for each functor $F:\simcat/[n]\dual\to\pers$, the fibre over $|\ran U|$ over $F$ is $E_{F(\id_{[n]})}$. Since every modest morphism of simplicial assemblies is a pullback of $\ran U$, $\ran U$ is the generic modest morphism.
+\end{proof}
+}
+\hide{ het overzetten van pullback vereist eigenlijk dat $\alre$ fully faithful is, maar dat is $\alre$ natuurlijk niet.
+
+Het is lastig. alre is fully faithful, als we rekening houden met $1$. 
+
+ }
+
+
+\hide{
+Let $M_n$ be the object of functors $(\simcat/[n])\dual \to \pers$--here $\simcat/[n]$ is the slice category. This is a simplicial assembly $\vec M$. A monotone map $f:[m] \to [n]$ induces a functor $\simcat/f:\simcat/[m] \to\simcat/[m]$ by composition, and precomposition with this functor gives the restriction map $B_f:B_n\to B_m$.
+
+We define $M'_n$ similarly, expect that we now look at functors $(\simcat/[n])\dual \to 1/\pers$. The category $1/\pers$ has the domain $M'$ of the generic assembly $\mu:M'\to M$ as object of objects. By pulling back $\mu$ along itself, we get a morphism $\mu':M''\to M'$ with a right inverse $\rho:M'\to M''$, is the generic modest retraction. The elements of $1/\pers(i,j)$ are morphisms $f:(\mu')^{-1}\set i \to (\mu')^{-1}\set j$ such that $f(\rho(i)) = \rho(j)$. There is a forgetful functor $1/\pers \to \pers$, which induces a morphism of simplicial sets $\vec \mu:\vec M'\to\vec M$ 
+
+Let $f:X\to Y$ be a modest morphisms of simplicial assemblies. Its underlying map $|f|:|X|\to |Y|$ is modest, because the functor $x\mapsto |x|:\sAsm \to\Asm$ preserves pullbacks and sends $x^\boldy$ to $|x|^{\nabla 2}$. Hence $|f|$ is a pullback of the generic mordest morphism $\mu$ along some map $\chi:Y\to M$. The combination of $\chi$ and the restrictor, is the desired family of functors.
+\[ (y,g)\mapsto \chi(y\cdot g): (\simcat/[n])\dual \to \pers \]
+This way we get a morphism of simplicial sets $\vec\chi:Y\to B$. 
+
+Everything is parallel with $X$, and the morphism $\psi:X\to M'$ which is the pullback of $\chi$ along $\mu$. So there is a map $\vec \psi:X\to E$ defined by $(x,g)\mapsto \psi(x\cdot g)$, which commutes with $f:X\to Y$, $\vec \chi:X\to B$ and $\vec \mu: \vec M'\to \cat M$. The commutative square is a pullback. Suppose we have $y\in Y_n$ and $z\in M'_n$ such that $\chi_n(y) = \mu_n(z)$. In that case we have:
+\[ \mu_n(z(\id_{[n]})) = \mu_n(z)( \id_{[n]} ) = \chi_n(y)(\id_{[n]}) = \chi(y\cdot \id_{[n]} ) \] %\mu_n???
+We know that there is an isomorphism between $|X|$ and the set of pairs $(z',y)\in M'\times |Y|$ such that $\mu(z') = \chi(y)$. This isomorphism respects dimension and restrictions, making it an isomorphism between $X$ and the fibred products of $\vec M'$ and $Y$.\end{proof}
+}
+
+\hide{
+\newcommand\simpers{\mathbf{SPER}}
+\begin{corol} There is a complete internal category $\simpers$ of simplicial PERs in $\sAsm$. \end{corol}
+
+\begin{proof} One way is to construct $\simpers$ from $\ran U$ like $\pers$ was constructed from $\mu$. Being a category of presheaf in $\Asm$, $\sAsm$ inherits local Cartesian closure as well as a lot of other nice structure. Equivalently, we can use the fact that with the arrow category $\pers^\to$, $\pers$ becomes an internal double category. Now apply the $\ran$ construction form the proof above to get an internal category in $\sAsm$. \end{proof}
+
+%hier
+%morgen het pijnlijke stuk.
+}
+
+
+\hide{The following properties have to hold.
+\begin{enumerate}
+\item Identity maps are fibrations and homotopy equivalences, and both classes are closed under composition.
+\item The category $\sAsm_f$ has finite limits.
+\item Fibrations are stable under pullback.
+\item Homotopy equivalences which are fibrations are stable under pullback.
+\item If $f\circ g=h$ and any two of $f,g,h$ them are homotopy equivalences, then all of them are. 
+\item For every object $X$ the diagonal $X\to X\times X$ factors as a fibrations following a homotopy equivalence.
+\item For each object $X$ the morphism $\bang:X\to 1$ is a fibration.
+\end{enumerate}
+
+Items 1,2,3 are trivial.
+
+Homotopy equivalences which are fibrations are acyclic fibration and vice versa, for the following reasons.  Now $4$ follows.
+
+For $5$ use the morphisms $X^\bang:X\to X^{\Delta[1]}$ and $X^{(\delta^1_0,\delta^1_1)}:X^{\Delta[1]}\to X\times X$.}
+
+
+\hide{het is misschien beter om botweg te zeggen: kijk maar in Goers Jardine/Hovey}
+
+%Kom op. Dit kan zeker weten wel. 
+
+
+
+
+
+
+
+
+
+%\end{document}
+
+
+\end{proof}

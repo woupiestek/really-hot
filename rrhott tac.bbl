@@ -1,0 +1,472 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.4 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{MR1099188}{incollection}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Abadi}{A.}%
+     {M.}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Plotkin}{P.}%
+     {G.~D.}{G.~D.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE Comput. Soc. Press}%
+  }
+  \strng{namehash}{AMPGD1}
+  \strng{fullhash}{AMPGD1}
+  \field{labelyear}{1990}
+  \field{sortinit}{A}
+  \field{booktitle}{Fifth {A}nnual {IEEE} {S}ymposium on {L}ogic in {C}omputer
+  {S}cience ({P}hiladelphia, {PA}, 1990)}
+  \verb{doi}
+  \verb 10.1109/LICS.1990.113761
+  \endverb
+  \field{pages}{355\bibrangedash 365}
+  \field{title}{A per model of polymorphism and recursive types}
+  \verb{url}
+  \verb http://dx.doi.org/10.1109/LICS.1990.113761
+  \endverb
+  \list{location}{1}{%
+    {Los Alamitos, CA}%
+  }
+  \field{year}{1990}
+\endentry
+
+\entry{MR1600009}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Carboni}{C.}%
+     {Aurelio}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Vitale}{V.}%
+     {E.~M.}{E.~M.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{CAVEM1}
+  \strng{fullhash}{CAVEM1}
+  \field{labelyear}{1998}
+  \field{sortinit}{C}
+  \verb{doi}
+  \verb 10.1016/S0022-4049(96)00115-6
+  \endverb
+  \field{issn}{0022-4049}
+  \field{number}{1-3}
+  \field{pages}{79\bibrangedash 116}
+  \field{title}{Regular and exact completions}
+  \verb{url}
+  \verb http://dx.doi.org/10.1016/S0022-4049(96)00115-6
+  \endverb
+  \field{volume}{125}
+  \field{journaltitle}{J. Pure Appl. Algebra}
+  \field{year}{1998}
+\endentry
+
+\entry{Freyd91}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Freyd}{F.}%
+     {Peter~J.}{P.~J.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{FPJ1}
+  \strng{fullhash}{FPJ1}
+  \field{labelyear}{1991}
+  \field{sortinit}{F}
+  \field{pages}{95\bibrangedash 104}
+  \field{title}{Algebraically complete categories}
+  \field{volume}{1488}
+  \field{journaltitle}{Lecture notes in mathematics}
+  \field{year}{1991}
+\endentry
+
+\entry{MR1003196}{incollection}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Freyd}{F.}%
+     {Peter~J.}{P.~J.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Amer. Math. Soc.}%
+  }
+  \strng{namehash}{FPJ1}
+  \strng{fullhash}{FPJ1}
+  \field{labelyear}{1989}
+  \field{sortinit}{F}
+  \field{booktitle}{Categories in computer science and logic ({B}oulder, {CO},
+  1987)}
+  \verb{doi}
+  \verb 10.1090/conm/092/1003196
+  \endverb
+  \field{pages}{67\bibrangedash 68}
+  \field{series}{Contemp. Math.}
+  \field{title}{P{OLYNAT} in {PER}}
+  \verb{url}
+  \verb http://dx.doi.org/10.1090/conm/092/1003196
+  \endverb
+  \field{volume}{92}
+  \list{location}{1}{%
+    {Providence, RI}%
+  }
+  \field{year}{1989}
+\endentry
+
+\entry{GJSHT}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Goerss}{G.}%
+     {Paul~G.}{P.~G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jardine}{J.}%
+     {John~F.}{J.~F.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Birkh\"auser}%
+  }
+  \strng{namehash}{GPGJJF1}
+  \strng{fullhash}{GPGJJF1}
+  \field{labelyear}{1999}
+  \field{sortinit}{G}
+  \field{isbn}{978-3-0348-8707-6}
+  \field{series}{Progress in Mathematics}
+  \field{title}{Simplicial Homotopy Theory}
+  \field{volume}{174}
+  \list{location}{1}{%
+    {Basel}%
+  }
+  \field{year}{1999}
+\endentry
+
+\entry{MR1981211}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Hofstra}{H.}%
+     {Pieter J.~W.}{P.~J.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Oosten}{O.}%
+     {Jaap}{J.}%
+     {van}{v.}%
+     {}{}}%
+  }
+  \strng{namehash}{HPJWOJv1}
+  \strng{fullhash}{HPJWOJv1}
+  \field{labelyear}{2003}
+  \field{sortinit}{H}
+  \verb{doi}
+  \verb 10.1017/S0305004102006424
+  \endverb
+  \field{issn}{0305-0041}
+  \field{number}{3}
+  \field{pages}{445\bibrangedash 463}
+  \field{title}{Ordered partial combinatory algebras}
+  \verb{url}
+  \verb http://dx.doi.org/10.1017/S0305004102006424
+  \endverb
+  \field{volume}{134}
+  \field{journaltitle}{Math. Proc. Cambridge Philos. Soc.}
+  \field{year}{2003}
+\endentry
+
+\entry{Hovey99}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Hovey}{H.}%
+     {Mark}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Mathematical Society}%
+  }
+  \strng{namehash}{HM1}
+  \strng{fullhash}{HM1}
+  \field{labelyear}{1999}
+  \field{sortinit}{H}
+  \field{isbn}{978-0-8218-4361-1}
+  \field{series}{Mathematical Surveys and Monographs}
+  \field{title}{Model Categories}
+  \field{volume}{63}
+  \list{location}{1}{%
+    {Providence}%
+  }
+  \field{year}{1999}
+\endentry
+
+\entry{MR1023803}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Hyland}{H.}%
+     {J.~M.~E.}{J.~M.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Robinson}{R.}%
+     {E.~P.}{E.~P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Rosolini}{R.}%
+     {Guiseppe}{G.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{HJMEREPRG1}
+  \strng{fullhash}{HJMEREPRG1}
+  \field{labelyear}{1990}
+  \field{sortinit}{H}
+  \verb{doi}
+  \verb 10.1112/plms/s3-60.1.1
+  \endverb
+  \field{issn}{0024-6115}
+  \field{number}{1}
+  \field{pages}{1\bibrangedash 36}
+  \field{title}{The discrete objects in the effective topos}
+  \verb{url}
+  \verb http://dx.doi.org/10.1112/plms/s3-60.1.1
+  \endverb
+  \field{volume}{60}
+  \field{journaltitle}{Proc. London Math. Soc. (3)}
+  \field{year}{1990}
+\endentry
+
+\entry{KLV12}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Kapulkin}{K.}%
+     {Chris}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lumsdaine}{L.}%
+     {Peter}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Voevodsky}{V.}%
+     {Vladimir}{V.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{KCLPVV1}
+  \strng{fullhash}{KCLPVV1}
+  \field{labelyear}{2012}
+  \field{sortinit}{K}
+  \verb{eprint}
+  \verb 1211.2851
+  \endverb
+  \field{title}{The Simplicial Model of Univalent Foundations}
+  \field{journaltitle}{preprint}
+  \field{eprinttype}{arXiv}
+  \field{eprintclass}{math.lo}
+  \field{year}{2012}
+\endentry
+
+\entry{MR0354798}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {MacLane}{M.}%
+     {Saunders}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer-Verlag}%
+  }
+  \strng{namehash}{MS1}
+  \strng{fullhash}{MS1}
+  \field{labelyear}{1971}
+  \field{sortinit}{M}
+  \field{note}{Graduate Texts in Mathematics, Vol. 5}
+  \field{pages}{ix+262}
+  \field{title}{Categories for the working mathematician}
+  \list{location}{1}{%
+    {New York}%
+  }
+  \field{year}{1971}
+\endentry
+
+\entry{MR2479466}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Oosten}{O.}%
+     {Jaap}{J.}%
+     {van}{v.}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Elsevier B. V., Amsterdam}%
+  }
+  \strng{namehash}{OJv1}
+  \strng{fullhash}{OJv1}
+  \field{labelyear}{2008}
+  \field{sortinit}{O}
+  \field{isbn}{978-0-444-51584-1}
+  \field{pages}{xvi+310}
+  \field{series}{Studies in Logic and the Foundations of Mathematics}
+  \field{title}{Realizability: an introduction to its categorical side}
+  \field{volume}{152}
+  \field{year}{2008}
+\endentry
+
+\entry{MR1097022}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Rosolini}{R.}%
+     {Giuseppe}{G.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{RG1}
+  \strng{fullhash}{RG1}
+  \field{labelyear}{1990}
+  \field{sortinit}{R}
+  \verb{doi}
+  \verb 10.1142/S0129054190000242
+  \endverb
+  \field{issn}{0129-0541}
+  \field{note}{Third Italian Conference on Theoretical Computer Science
+  (Mantova, 1990)}
+  \field{number}{3}
+  \field{pages}{341\bibrangedash 353}
+  \field{title}{About modest sets}
+  \verb{url}
+  \verb http://dx.doi.org/10.1142/S0129054190000242
+  \endverb
+  \field{volume}{1}
+  \field{journaltitle}{Internat. J. Found. Comput. Sci.}
+  \field{year}{1990}
+\endentry
+
+\entry{MR2074932}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Rummelhoff}{R.}%
+     {Ivar}{I.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{RI1}
+  \strng{fullhash}{RI1}
+  \field{labelyear}{2004}
+  \field{sortinit}{R}
+  \verb{doi}
+  \verb 10.1016/j.tcs.2004.01.031
+  \endverb
+  \field{issn}{0304-3975}
+  \field{number}{1-3}
+  \field{pages}{215\bibrangedash 224}
+  \field{title}{Polynat in {PER} models}
+  \verb{url}
+  \verb http://dx.doi.org/10.1016/j.tcs.2004.01.031
+  \endverb
+  \field{volume}{316}
+  \field{journaltitle}{Theoret. Comput. Sci.}
+  \field{year}{2004}
+\endentry
+
+\entry{RealCats}{thesis}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Stekelenburg}{S.}%
+     {Wouter~Pieter}{W.~P.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SWP1}
+  \strng{fullhash}{SWP1}
+  \field{labelyear}{2013}
+  \field{extrayear}{1}
+  \field{sortinit}{S}
+  \field{title}{Realizability Categories}
+  \list{institution}{1}{%
+    {Utrecht University}%
+  }
+  \field{type}{phdthesis}
+  \field{year}{2013}
+\endentry
+
+\entry{MSC:8896618}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Stekelenburg}{S.}%
+     {Wouter~Pieter}{W.~P.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SWP1}
+  \strng{fullhash}{SWP1}
+  \field{labelyear}{2013}
+  \field{extrayear}{2}
+  \field{sortinit}{S}
+  \verb{doi}
+  \verb 10.1017/S0960129512000990
+  \endverb
+  \field{issn}{1469-8072}
+  \field{pages}{1\bibrangedash 29}
+  \field{title}{Regular functors and relative realisability categories}
+  \verb{url}
+  \verb http://journals.cambridge.org/article_S0960129512000990
+  \endverb
+  \field{volume}{FirstView}
+  \field{journaltitle}{Mathematical Structures in Computer Science}
+  \field{month}{05}
+  \field{year}{2013}
+\endentry
+
+\entry{hottbook}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{Univalent Foundations Program}}{U.}%
+     {The}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {\url{http://homotopytypetheory.org/book}}%
+  }
+  \strng{namehash}{UT1}
+  \strng{fullhash}{UT1}
+  \field{labelyear}{2013}
+  \field{sortinit}{U}
+  \field{title}{Homotopy Type Theory: Univalent Foundations of Mathematics}
+  \list{location}{1}{%
+    {Institute for Advanced Study}%
+  }
+  \field{year}{2013}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

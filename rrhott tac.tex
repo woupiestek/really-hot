@@ -1,0 +1,1304 @@
+% LaTeX 2e document, TAC style, 36 pp, Xy-pic ver ?, MikTeX version ?
+
+\documentclass{tac}
+\usepackage{amssymb, amsmath}
+\usepackage[backend=bibtex,citestyle=authoryear-icomp]{biblatex}
+\usepackage[all]{xy}
+%\usepackage{cite}
+\usepackage{url}
+%\usepackage{graphicx}
+
+%\renewcommand*\ttdefault{pcr}
+
+\title{Realizability of Univalence\\Modest Kan complexes}
+\author{Wouter Pieter Stekelenburg}\copyrightyear{2015}
+\address{Faculty of Mathematics, Informatics and Mechanics\\
+University of Warsaw\\
+Banacha 2\\
+02-097 Warszawa\\
+Poland}
+\eaddress{w.p.stekelenburg@gmail.com}
+\keywords{realizability, univalence, simplicial homotopy, modest sets, Kan complexes}
+\amsclass{03D80, 18G30, 18G55}
+
+\newcommand\hide[1]{}
+\newcommand\cat\mathcal
+\newcommand\set[1]{\left\{#1\right\}}
+\mathrmdef{id}
+\mathrmdef{dom}
+\mathrmdef{cod}
+\newcommand\ri{^*}
+\newcommand\N{\mathbb N}
+\mathbfdef[nno]{N}
+\newcommand\dual{^{\mathrm{op}}}
+\newcommand\disc{_{\mathrm{disc}}}
+\mathbfdef[simCat]\Delta
+\newcommand\s{^{\simCat\dual}}
+\mathbfdef[pow]{P}
+\mathssbxdef{Asm}
+\newcommand\bang{!}
+\newcommand\of{:}
+%\renewcommand\to{\mathord\rightarrow}
+\newcommand\simplex\Delta
+\newcommand\cycle{\partial\Delta}
+\newcommand\horn\Lambda
+\newcommand\f{_f}
+\newcommand\db[1]{{[\![}#1{]\!]}}
+\newcommand\gen\gamma
+\newcommand\dsum{\Sigma_}
+\newcommand\dprod{\Pi_}
+\newcommand\tuple[1]{\left\langle #1 \right\rangle}
+\newcommand\true{\mathtt{true}}
+\newcommand\false{\mathtt{false}}
+\newcommand\bool{\mathtt{bool}}
+\newcommand\ttif{\mathtt{if}}
+\mathssbxdef{cof}
+\mathrmdef{nat}
+\mathssbxdef{Ar}
+\mathssbxdef{Ob}
+\mathssbxdef[LDMC]{II}
+\newcommand\pe[1]{^{\diamond #1}}
+\newcommand\pp{\mathbin\diamond}
+\newcommand\norm[1]{\Vert #1 \Vert}
+\newcommand\ka\kappa
+\newcommand\la\lambda
+\newcommand\depprod{\Pi_}
+\newcommand\depsum{\Sigma_}
+\newcommand\face\delta
+\mathrmdef{colim}
+\newcommand\U{U}
+\newcommand\A{M}
+\newcommand\W{W}
+\newcommand\di{_*}
+\mathrmdef{hcg}
+\newcommand\ex{_{\textrm{ex}}}
+\newcommand\citep[1]{[\cite{#1}]}
+
+\newcommand\code\mathtt
+
+\addbibresource{realizability}
+
+\begin{document}
+
+\begin{abstract}
+A \emph{modest Kan complex} is a \emph{modest simplicial set} which has a right lifting property with respect to horn inclusions $\horn_k[n] \to \simplex[n]$. This paper develops the categorical logic that shows that there is a univalent universe of modest Kan complexes among \emph{simplicial assemblies}.
+\end{abstract}
+
+\maketitle
+
+
+\section{Introduction}
+This paper is about simplicial homotopy inside the following category. A \emph{PER} is a symmetric and transitive binary relation of the natural numbers $\N$. PERs are equivalence relations on subsets of the natural numbers. A morphism of PERs $f\of R\to S$ is a function of equivalence classes of the PERs $R$ and $S$ that has a \emph{partial recursive function} $\phi$ such that for each equivalence class of $R$, $\phi(x)$ is defined and $\phi(x)\in f(X)$ if $x\in X$ . Together they form the \emph{category of PERs}. 
+
+The simplicial homotopy of this paper is about the \emph{realizable} simplicial objects and \emph{realizable} Kan complexes in the category of PERs. \emph{Realizable} means that partial recursive functions provide witnesses for all total binary relations in the definition of these structures, for example for the existence of fillers for horns. The category of realizable simplicial PERs is embedded in the category of realizable simplicial assemblies whose fibrant objects have a model structure (theorem \ref{model category}) and a univalent universe of fibrant simplicial PERs (theorem \ref{univalent universe}).
+
+This paper develops simplicial homotopy internally in a category with a limited amount of structure (definition \ref{Heyting bialgebra}), so the theorems apply to many different categories of simplicial objects. The last section show how simplicial PERs are a concrete example, which is interesting because the homotopy category is a complete category (proposition \ref{completeness}) and the 0-types are a complete internal category of a topos (proposition \ref{consistency}).
+
+\subsection{Related literature}
+The category of PERs is a model for the polymorphic $\lambda$-calculus \citep{MR1099188,MR2074932,MR1003196}. Lemma \ref{generic modest} explains it relation to the category of modest sets, which is a full internal subcategory of the effective topos \citep{MR1097022,MR1023803,MR2479466}.
+
+Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}.
+
+Univalence is a desirable property for the universe of modest sets, because it implies that this universe is a model for homotopy type theory \citep{hottbook,KLV12}.
+
+\section{Preliminaries}
+This section surveys the categorical logic required to understand the rest of this paper.
+
+\subsection{Heyting bialgebras}
+This paper deals with several categories which have a higher dimensional version of the structure of Heyting algebras. Although the term \emph{extensive locally Cartesian closed category} covers what they are, I prefer a shorter term that highlights this connection.
+
+\begin{definition} A category $\cat C$ is \emph{locally Cartesian closed} if for each object $X$ the slice $\cat C/X$ is Cartesian closed. A category is \emph{extensive} if is has finite coproducts and if $\cat C/(X+Y)$ is equivalent to $(\cat C/X)\times(\cat C/Y)$ for each pair of objects $X$ and $Y$. A \emph{Heyting bialgebra} is an extensive locally Cartesian closed category. \label{Heyting bialgebra}
+\end{definition}
+
+Heyting bialgebras which are posets are simply Heyting algebras. While Heyting algebras are models for constructive provability, the morphisms of the bialgebras directly model constructive proofs. As suggested by the Curry-Howard correspondence, the internal languages of these categories are a typed $\lambda$-calculus, know as \emph{extensional type theory}.
+
+Extensional type theory hides a part of the necessary diagram chasing in the proofs of this paper. The following subsections provides a quick introduction to the type theory and the conventions of this paper.
+
+\subsection{Dependent types}
+The atomic sentences of a type theory are type assignments $t\of T$ and equations $t=u$. Types are interpreted as objects of a category $\cat C$, while terms are interpreted as global sections. A proposition $t\of T$ is valid if the interpretation $\db t$ of $t$ is a global section of the interpretation $\db T$ of $T$ in $\cat C$. A proposition $t=u\of T$ is valid if $\db u=\db t$. 
+
+The rules explain the interpretation of closed types and terms. This interpretation extend to dependent types an terms--i.e.\ types and terms that contain free variables--in the following manner. For each type $T_0$ a type $T_1$ that depends on $T_0$ is interpreted as an object of $\cat C/\db{T_0}$. A term $t_1\of T_1$ that depends on $T_0$ is a section of $\db{T_1}$. A further type $T_2$ that depends on both $T_0$ and $T_1$ is interpreted as an object $\db{T_2}\of(\cat C/\db{T_0})/\db{T_1}$ and a term $t_2\of T_2$ as a global section.
+\hide{\[\xymatrix{
+& \bullet\ar[dl]^{\db{T_2}}\ar[d]\\ 
+\bullet\ar[r]_{\db{T_1}}\ar@/^/[ur]^{\db{t_2}} & \db{T_0}
+}\]}
+\[\xy
+(0,12)*+{\bullet} = "top left",(24,12)*+{\bullet} = "top right",(12,0)*+{\db{T_0}} = "bottom"
+\ar "top right";"bottom" \ar_{\db{T_1}} "top left";"bottom" 
+\ar@/^/@{->}^{\db{T_2}} "top right";"top left"
+\ar@/^/@{->}^{\db{t_2}} "top left";"top right"
+\endxy\]
+So types and terms dependent on $T_0$ and $T_1$ are interpreted as the objects and global sections of the double slice category $(\cat C/\db{T_0})/\db{T_1}$.
+
+We deal with higher numbers of free variables by repetition. A context $\Gamma$ is a list $x_0\of T_0,x_1\of T_1,x_2\of T_2,\dots$ of type assignment to variables in which each type depends on the ones before it. The types that depend on the context are objects of the repeated slice category $\cat C/\db{T_0}/\db{T_1}/\db{T_2}/\dotsm$ and the terms are interpreted as its objects. 
+
+The purpose of the variables is to clarify the dependencies. There are functors $\db T\ri\of\cat C\to \cat C/\db T$ which sends each object $X$ to the projection $\pi_0\of(\db T\times X)\to \db T$. By default the context dependent interpretation $\db{x\of T\vdash U}$ of a type $U$ equal $\db T\ri(\db U)$ (and assume that $\db U$ is an object of $\cat C$) unless $U$ explicitly depends on $T$. The same convention applies to terms.
+
+\subsection{Dependent sums and products}
+This subsection discusses two constructions of types that this paper uses regularly. The structure of Heyting bialgebras is such that every slice category is a Heyting bialgebra and that the functors $X\ri\of\cat C\to\cat C/X$ preserve all the structure.
+
+%dependent sums
+
+For each object $X$, $\dsum X\of\cat C/X\to \cat C$ is the functor that sends each morphism $f\of Y\to X$ to its domain $Y$.
+
+Dependent sum type look like $\Sigma x\of T.U$. The elements are pairs $\tuple{x,y}$ such that $x\of T$ and $y\of U$. For arbitrary terms $t\of(\Sigma x\of T)$, $\pi_0(t)$ and $\pi_1(t)$ represent two values in the tuple $t$. The context dependent interpretation satisfies:
+\[ \db{\Gamma\vdash\Sigma x\of T.U} = \dsum {\db T}(\db{\Gamma,x\of T\vdash U}) \]
+The unit and counit induces a families of morphisms between the following families of objects.
+\begin{align*}
+\db{\Gamma\vdash t\of T}\times\db{\Gamma\vdash u\of U[t/x]} &\to \db{\Gamma\vdash \tuple{t, u}\of(\Sigma x\of T.U)}\\
+\db{\Gamma\vdash t\of (\Sigma x\of T.V)}&\to \db{\Gamma\vdash \pi_1(t) \of V}
+\end{align*}
+Here $u[t/x]$ is the result of replacing every free occurrence of $x$ in $u$ with $t$; the type $V$ cannot contain $x$ as a free variable. Unit and co-units satisfy equations that ensure that $\pi_0\tuple{t,u}=t$ and $\pi_1\tuple{t,u}=u$ are valid for all terms $t$ and $u$.
+
+
+Let $\cat C$ be finitely complete and Cartesian closed. The functor $\dprod X\of\cat C/X\to \cat C$ sends each morphism $f\of Y\to X$ is the object $\set{g\of X\to Y| f\circ g = \id_X }$ of sections of $f$. It is the right adjoint of $X\ri$.
+
+Product types look like $\Pi x\of T.U$. The elements are $\lambda$-terms $\lambda x\of T.u$, such that $u[t/x]\of U[t/x]$ whenever $t\of T$. A $\lambda$-term $\lambda x\of T.u$ and a term $t\of T$ have an \emph{application} $(\lambda x\of T.u)(t)$. The context dependent interpretation satisfies:
+\[ \db{\Gamma\vdash\Pi x\of T.U} = \dprod {\db T}(\db{\Gamma,x\of T\vdash U}) \]
+The unit and the counit induce the following families of morphism:
+\begin{align*}
+\db{\Gamma\vdash t\of T}\times\db{\Gamma\vdash u\of(\Pi y\of T.U)}&\to\db{\Gamma\vdash u(t)\of U[u/y]}\\
+\db{\Gamma\vdash u\of V}&\to\db{\Gamma\vdash (\lambda x\of T.u)\of(\Pi x\of T.V)}
+\end{align*}
+Here $V$ cannot depend on $x$. Unit and co-units satisfy equations that ensure that $(\lambda x\of T.u)(t) = u[t/x]$ and $(\lambda x\of T.u(x))=u$.
+
+Extensiveness means that $\cat C$ has coproducts, that $\cat C/0$ is equivalent to the terminal category and that $\cat C/(X+Y)\cong (\cat C/X)\times(\cat C/Y)$. In order to add coproduct to the language, only need the type $\bool$ that stands for the object $1+1$ and a way to introduce types and terms dependent on $\bool$.
+\[ \db{\Gamma\vdash t\of T}\times\db{\Gamma\vdash u\of U}\to\db{\Gamma,b\of\bool\vdash \ttif(b,t,u)\of\ttif(b,T,U)} \]
+The constants $\true$ and $\false$ denote the two global section of $1+1$. The function $\ttif$ is interpreted to satisfy the following equations.
+\[ \ttif(\true,t,u)=t\qquad\ttif(\false,t,u) = u\]
+
+\subsection{Full internal subcategories}\label{full internal subcategory}
+Full internal subcategories tie several categorical notions together. 
+
+Let $S$ be a class of morphisms in a Heyting bialgebra $\cat A$ which is closed under pullbacks. A \emph{generic morphism} is a $\gen(S)\in S$ such that each $f\in S$ is a pullback of $\gen(S)$.
+
+
+For each $f\of X\to Y$ of $\cat A$, the \emph{internal category of fibres} $\cof(f)$ of $f$ is defined as follows. The codomain $Y$ is the object of objects $\cof(f)_0$. The dependent sum $\Sigma a\of Y.\Sigma b\of Y.\Pi c\of X(a).X(b)$ where $X(a)$ is the fibre of $f$ over $a$ is the object of morphisms $\cof(f)_1$. The structural maps are the following. If $x,y\of \cof(f)_0$ and $(x,y,m)$ and $(w,x,n)\of\cof(f)_1$ then,
+\begin{align*}
+\dom(x,y,m) &= x & 
+\id(x) &= (x,x,\id_{X(a)})\\
+\cod(x,y,m) &= y &
+(x,y,m)\circ (w,x,n) &= (w,y,m\circ n)
+\end{align*}\label{category of fibres}
+
+A \emph{full internal subcategory} is the category of fibres of a generic morphism. The class $S$ and the category $\cof(\gen(S))$ are connected in the following way. Let $S/X$ be the category whose objects are morphism of $S$ whose codomain is $X$ and whose morphisms are arbitrary commutative triangles. because $S$ is closed under pullbacks, each $f\of X\to Y$ induces a \emph{reindexing functor} $f\ri\of S/Y\to S/X$. Generally $\cof(\gen(S))$ has a property if and only if $S/X$ has and $f\ri$ preserves the same property of each object $X$ and each morphism $f$ of $\cat A$. For example, the category $\cof(\gen(S))$ has dependent sums and products if $f\ri$ have left and right adjoints that satisfy the Beck Chevalley condition for each morphism $f\in S$.
+
+\section{Internal simplicial homotopy}
+This section develops the homotopy theory of Kan complexes internally in Heyting bialgebras.
+
+The situation is as follows. The ambient category is a Heyting bialgebra $\cat A$ that has a natural number object $\nno$. The category $\cat A$ has a class $S$ of `small' maps which has a generic morphism $\gen(S)$. The internal category $\cat S = \cof(\gen(\cat S))$ of fibres of $\gen(S)$ is an internal Heyting bialgebra $\cat S$ and therefore has an interesting category of simplicial objects $\cat S\s$. Here the internal version $\simCat$ of the category of simplicial sets comes from $\nno$.
+
+\begin{proposition} Every Heyting bialgebra with natural number object has an internal category of simplices.\end{proposition}
+
+\begin{proof} A natural number object allows the definition of predicates by recursion, so the order relation of $\nno$ is a recursive function $\mathord\leq\of\nno\times \nno \to \bool$. This is all we need to define the internal category of simplices.
+\begin{align*}
+[n] &= \set{x\of\nno\middle| x\leq n}\\
+\simCat([m],[n]) &= \set{f\of[m]\to[n]\middle|\forall x,y\of [m].x\leq y\to f(x)\leq f(y)}
+\end{align*}
+Universal quantification over $[m]$ reduces to a finite conjunction because $[m]$ is a finite object, which is why it is allowed above. 
+\end{proof}
+
+\subsection{Filler operators}
+Kan fibrations are morphisms of simplicial sets that have the lifting property relative to the family of horn inclusions. This subsection focuses on the lifting properties. Extensional type theory offers no existential quantification to express the idea that `there is a lifting'. Instead extensional type theory requires a lifting operator that witnesses this fact.
+
+\begin{definition} Let $\nat\of(\cat S\s)\dual\times \cat S\s \to \cat S^{\nno\disc}$ be the functor which sends each pair of simplicial objects $X,Y$ to the object $\nat(X,Y)$ of morphisms between them. The category $\cat S^{\nno\disc}$ is a useful codomain because natural transformations are families of morphisms and $\cat S$ has exponentials.
+
+Morphism $f\of X\to Y$ of $\cat S\s$ has the \emph{global right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the global \emph{left} lifting property with respect to $f$--if the morphism $(f_!,g\ri) = (\nat(\id_J,f),\nat(g,\id_X))$ 
+which is the factorization of the cone $(\nat(\id_J,f),\nat(g,\id_X))$ through the pullback cone of $\nat(\id_I,f)$ and $\nat(g,\id_Y)$
+is a \emph{split} epimorphism.
+\hide{\[\xymatrix{ 
+\nat(J,X) \ar@/^2ex/[rrr]^{\nat(g,\id_X)} \ar[dr]_(.6){\nat(\id_J,f)} \ar[r]_{(f_!,g\ri)}
+& \bullet \ar[d]\ar[rr] && \nat(I,X) \ar[d]^{\nat(\id_I,f)}\\
+& \nat(J,Y) \ar[rr]_{\nat(g,\id_Y)} && \nat(I,Y)
+}\]}
+\[\xy
+(34,20)*+{\nat(I,X)}="top",(0,10)*+{\nat(J,X)}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\nat(I,Y)}="right",(34,0)*+{\nat(J,Y)}="bottom"
+\ar^{\nat(g,\id_X)} "left";"top" \ar@{.>}|(.6){(f_!,g\ri)} "left";"middle" \ar_{\nat(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
+\ar "middle";"top" \ar^(.6){\nat(\id_I,f)} "top";"right" \ar_(.6){\nat(g,\id_Y)} "bottom";"right"
+\endxy\]
+A section of $(f_\bang,g\ri)$ is a \emph{filler operator}.\label{lifting}
+\end{definition}
+
+The ordinary right lifting property only says that composition with $(f_!,g\ri)$ induces a surjective function on global sections, while the \emph{local} right lifting property only requires that $(f_!,g\ri)$ is a regular epimorphism. The global version formulated above is stronger than either of those in a constructive context.
+
+A morphism can have a lifting property relative to a family or class of morphisms.
+
+\begin{definition}[Injective] For each morphisms $f$ of $\cat S\s$ let $\code{sections}(f)$ be the object of sections of $f$. An $I$-indexed-family of morphisms in $\cat S\s$ a morphism $a\of D\to E$ in $(\cat S\s)^{I\disc}$. Let $I\ri\of\cat S\s\to (\cat S\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$.
+\[ a\code{-injective}(f)=\code{sections}(I\ri(f)_\bang,a\ri) \]
+\end{definition}
+
+\hide{Add?: These injectives satisfy the usual properties of closure under products, composition and pullback, thanks to specific constructions on filler operators.}
+
+Internal languages only quantify over objects and the object of $a$-injectives does not exists inside $\cat S$. The definition of $a$-anodynes requires the ambient category $\cat A$.
+
+\begin{definition}
+The morphism $f$ is \emph{$a$-anodyne} for an $I$-indexed family of morphisms $a$ if the following object has a global section.
+\[ a\code{-anodyne}(f) = \Pi g\of \Ar(\cat S\s).\Pi s\of \code{sections}(a_!,(I\ri g)\ri).\code{sections}(f_!,g\ri) \]
+Here $\Ar(\cat S\s)$ is the object of arrows of $\cat S\s$. The global section \emph{witnesses} that $f$ is \emph{anodyne}. 
+\end{definition}
+
+%here
+
+\subsection{Kan fibrations}
+The subsection completes the definition of Kan fibrations.
+
+Heyting bialgebras like $\cat S$ have all the finite objects: $0$, $1$, $1+1$, $1+1+1$, etc. Hence $\simCat$ is enriched over $\cat S$ and there exists a Yoneda embedding $\Delta\of \simCat \to \cat S^{\simCat \dual}$. 
+
+\begin{definition} For each $n\of \nno$ the \emph{cycle} $\cycle[n]$ is the sieve of non surjective functions of $\simplex[n]$. For each $n$ and $k\of\nno$ the \emph{horn} $\horn_k[n]$ is the sieve of the non decreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$. 
+\end{definition}
+
+Being surjective is a decidable property of morphisms $[m]\to[n]$ so these sieves are definable. 
+
+\begin{definition} Cycles and horns form families of morphisms indexed over $\nno$ and over $\set{(n,k)\in\nno\times\nno| k\leq n }$ respectively.
+\begin{align*} 
+\code{cycles}&\of\bullet\to \nno\\
+ \code{horns}&\of\bullet\to\set{(n,k)\in\nno\times\nno| k\leq n }
+\end{align*}
+\begin{itemize}
+\item A \emph{Kan fibration} is an injective morphism relative to the family of all horn inclusions.
+\[ \code{fibration}(f) = \code{horns-injective}(f) \]
+\item An \emph{acyclic Kan fibration} is an injective morphism relative to the family of cycle inclusions.
+\[ \code{acyclic-fibration}(f) = \code{cycles-injective}(f) \]
+\item A \emph{Kan complex} or \emph{Kan fibrant object} is a simplicial object $X$ for which the unique morphism $X\to 1$ is a fibration.
+\[ \code{fibrant}(X) = \code{horns-injective}(\bang_X) \]
+\item A \emph{cofibration} is an anodyne morphism relative to the family of cycle inclusions.
+\[ \code{cofibration}(f) = \code{cycles-anodyne}(f) \]
+\item A \emph{cofibrant object} is a simplicial object $X$ for which the unique morphism $0\to X$ is a cofibration.
+\[ \code{cofibrant}(X) = \code{cycles-anodyne}(\bang_X) \]
+\item An \emph{acyclic cofibration} is an anodyne morphism relative to the family of horn inclusions.
+\[ \code{acyclic-cofibration}(f) = \code{horns-anodyne}(f) \]
+\item A \emph{weak equivalence} is a morphism which factors as an acyclic fibration following an acyclic cofibration.
+\begin{align*} 
+&\code{weak-equivalence}(f) =\\
+&\set{(g,h)\in \Ar(\cat S\s)\times\Ar(\cat S\s) \middle| \begin{array}{c}
+(f=g\circ h)\times\\
+\code{acyclic-fibration}(h)\times\\
+\code{acyclic-cofibration}(g)
+\end{array}}
+\end{align*}
+\end{itemize}\label{Kan}
+
+
+The category of Kan complexes and morphisms of simplicial object is $\cat S\s\f$. Its objects are pairs $(X,\xi)$ where $X$ is an object of $\cat S$ and $\xi$ is a filler operator for $\bang_X\of X\to 1$. The filler operator merely serves as a witness of fibrancy and is \emph{not} preserves by morphisms $(X,\xi)\to(Y,\xi')$ which are arbitrary morphisms $X\to Y$.
+\end{definition}
+This paper usually leaves out `Kan' and simply talk about fibrations and complexes. 
+
+\begin{remark}[Saturation] Injectives are closed under various constructions, notably compositions, finitary products and pullbacks. Every isomorphism is injective. Moreover, the filler operators for the new injectives are often straightforward functions of the existing filler operators.
+\[
+\xy
+(0,12)*+{\bullet}="a",(12,12)*+{\bullet}="b",(24,12)*+{\bullet}="c",
+(0,0)*+{\bullet}="d",(12,0)*+{\bullet}="e",(24,0)*+{\bullet}="f",
+\ar "a";"b" \ar "b";"c" \ar "a";"d" \ar^(.6){g\ri(f)} "b";"e" \ar^f "c";"f" \ar "d";"e" \ar_g "e";"f"
+\ar@{.>} "d";"c" \ar@{.>} "d";"b"
+\endxy
+\xy
+(0,12)*+{\bullet}="a",(12,12)*+{\bullet}="b",(12,6)*+{\bullet}="c",(0,0)*+{\bullet}="d",(12,0)*+{\bullet}="e"
+\ar "a";"b" \ar "a";"d" \ar "b";"c" \ar "c";"e" \ar "d";"e" \ar@{.>} "d";"b" \ar@{.>} "d";"c"
+\endxy
+\]
+
+
+Anodynes have dual closure properties. They are closed under composition too, finitary coproducts and pushouts. Isomorphisms are anodynes and all morphisms that are both injective and anodyne are isomorphisms. Moreover, for each adjoint pair of functors $F\dashv G$ between two categories that have their own classes of anodynes and injectives, the left adjoint $F$ preserves anodynes if an only if the right adjoint $G$ preserves injectives.
+
+A consequence of these closure properties, is that horn inclusions are cofibrations, therefore that acyclic fibrations are fibrations and therefore all acyclic cofibrations are cofibrations.
+\end{remark}
+
+The next section demonstrates that the morphisms of definition \ref{Kan} form a model structure on $\cat S\s$ theorem \ref{model category}.
+
+\section{Model structure}
+Simplicial homotopy theory have been robbed of the comforts of classical foundations: the axiom of choice, the principle of the excluded middle, infinite limits and colimits etc. Yet the standard model structure of simplicial sets survives in the category of Kan complexes. This section runs through of the simplicial homotopy of Kan complexes \citep{Hovey99,GJSHT} in order to demonstrate that the familiar theory is constructive.
+
+\subsection{Cofibrations}
+This subsection characterizes the cofibrations of $\cat S\s$. It also proves that arbitrary morphisms factor as acyclic fibrations following cofibrations. The characteristic property is that a certain relation between the morphism and morphisms in the codomain is decidable.
+
+\begin{definition} A $y\of Y[n]$ is called an \emph{$n$-simplex} of $Y$. An $n$-simplex is \emph{degenerate} if there is an $s\of [n]\to [n]$ different from $\id_{[n]}$ such that $Y(s)(y)=y$. If there are no such $s$ and $x$, then $y$ is \emph{nondegenerate} and also called a \emph{face} of $Y$.\end{definition}
+
+While $\cat S$ may lack the structure required to soundly interpret existential quantification over arbitrary objects, this is not a problem with the set of morphisms $s\of [n]\to [n]$ different from $\id_{[n]}$ as it is finite.
+
+\begin{definition} A monomorphism is a \emph{free cofibration} if for each $i\in \nno$, there is an object $S_i$ of $i$-dimensional faces of $Y$ which are not on the image of $X$.
+\end{definition}
+
+\begin{lemma} Every free cofibration is a cofibration. \label{Reedy}
+\end{lemma}
+
+\begin{proof} Suppose $f\of X\to Y$ is a free cofibration and $i\of\nno\mapsto S_i$ is the family of nondegenerate monomorphisms outside the image of $f$. 
+For each $i\of\nno$ let $Y_i$ be the sieve of $Y$ which omits the simplices in $S_j$ for $j>i$.
+Let $\simCat\ri\of \cat S\to\cat S\s$ be the constant simplicial assembly functor. 
+Each $y\in S_i$ corresponds to a monomorphism $\simplex[i]\to Y$ which does not factor through $f$ by the Yoneda lemma.
+
+Cofibrations are closed under pushouts, finite and $\cat S$-indexed coproducts and transfinite compositions for all the usual reasons.
+The inclusion $X\to Y_0 = X+\simCat\ri(A_0)$ is a pushout of $A_0$ copies of the cofibration $0\to 1$ and hence a cofibration.
+For $i>0$, if $y\of S_i$ then $Y_i\cap y$ is the boundary of $y$, hence $Y_{i-1}\to Y_i$ is a pushout of $S_i$ copies of the cofibration $\cycle[j]\to\simplex[j]$ and hence a cofibration. Because $f\of X\to Y$ is the colimit of the inclusions $X\to Y_j$ and those inclusions are compositions of cofibrations, $f$ is a cofibration.
+\end{proof}
+
+The rest of this subsection shows the converse, i.e.\ every cofibration is free, by factoring every morphism as an acyclic fibration following a free cofibration. The factorization requires objects of cofibrations constructed from a classifier of locally decidable subobjects as described below.
+
+\begin{definition} A monomorphism $m\of X\to Y$ of $\cat S\s$ is \emph{locally decidable} if for each $i\of\nno$ monomorphism $m[i]\of X[i]\to Y[i]$ is \emph{decidable}, i.e.\ isomorphic to a coproduct inclusion, in $\cat S$. \end{definition}
+
+
+\begin{lemma} The category $\cat S\s$ has a locally decidable monomorphism $t\of 1\to \LDMC$ such that every morphism is a locally decidable monomorphism if and only if it is a pullback of $t$. \end{lemma}
+
+\begin{proof} For any object $X$ of $\cat S\s$ let a \emph{decidable sieve} be a $p\of(\Sigma i\of\nno.X[i])\to\bool$ such that $p(x)=\true$ implies $p(x\circ X(f))=\true$ for each morphism $f\of [m]\to [n]$ of $\simCat$ and $x\in X[n]$. For each $i\in\nno$, $\LDMC[i]$ is the object of \emph{decidable sieves} of $\simplex[i]$. The Yoneda lemma takes care of the rest. \end{proof}
+
+\begin{proposition} Every morphism $f\of X\to Y$ of $\cat S\s$ factors as an acyclic fibration following a cofibration. \label{factor1} \end{proposition}
+
+\begin{proof}
+Let $Z$ be the following object of $\cat S$. For $n\of\nno$ $Z[n]$ consist of quadruples $(a,b,c,d)$ where 
+ $a\of[n]\to [p]$ is an epimorphism of $\simCat$ (so $p\leq n$),
+ $b\of\LDMC[p]$ satisfies $b(\id_{[p]})=\true$ if an only if $a=\id_{[n]}$,
+ $c\of \set{b}\to X$, where $\set{b}$ is the pullback of $t\of 1\to\LDMC$ along $b$ and 
+ $d\of \simplex[p]\to Y$ satisfies $f\circ c = d\circ b\ri(t)$.
+
+\[\xymatrix{
+1\ar[d]_t & \set b\ar[l]\ar[d]_{b\ri(t)}\ar[r]^{c} & X\ar[d]^f \\
+\LDMC & \simplex[p]\ar[l]^b\ar[r]_d & Y
+}\]
+
+In $\simCat$ every morphism $\phi\of [m]\to[n]$ factors uniquely as a monomorphism $m(\phi)$ following an epimorphism $e(\phi)$. For every $\phi\of [m]\to [n]$ and $(a,b,c,d)\of Z[n]$ let
+\[ Z(\phi)(a,b,c,d) = \left\{\begin{array}{cc}
+(\id_{[n]},\top,a\circ\phi,Y(\phi)(d)) & b(\phi)=\true \\
+\left(\begin{array}{c} e(a\circ \phi)\\ b\circ \simplex(m(a\circ \phi))\\ c \circ t\ri(\simplex(m(a\circ \phi)))\\ d\circ\simplex(m(a\circ \phi))\end{array}\right) & b(\phi)=\false
+\end{array}\right.
+\]
+Here $\top\of \simplex[p]\to\LDMC$ is the characteristic morphism of $\id\of\simplex[p]\to\simplex[p]$.
+
+There is a morphism $g\of X\to Z$ which satisfies $g[n](x) = (\id_{[n]},\top,\xi,f[n](x))$ if $\xi\of\simplex[n] \to X$ is the morphism that satisfies $\xi(\id_{[n]})=x$. The morphism $g$ is a cofibration by lemma \ref{Reedy}.
+
+There is a morphism $h\of Z\to Y$ satisfying $h[n](a,b,c,d) = Y(a)(d)$ and this map is an acyclic fibration for the following reasons.
+Let $z\of\cycle[n]\to Z$, $y\of\simplex[n]\to Y$ and let $h\circ z = y\circ k_n$ where $k_n\of\cycle[n]\to \simplex[n]$ is the inclusion of the boundary.
+\[\xymatrix{
+\cycle[n]\ar[d]_{k_n}\ar[r]^z & Z\ar[d]^h\\
+\simplex[n]\ar[r]_{y} & Y
+}\]
+The morphism $z\of\cycle[n]\to Z$ assigns a simplex $z(\xi) = (a_\xi,b_\xi,c_\xi,d_\xi)$ to every non surjective morphism $\xi\of [m]\to[n]$.
+A filler corresponds to a simplex $w=(a,b,c,d)\of Z[n]$ for which $Y(a,d) = y(\id_{\simplex[n]})\of Y[n]$ and where $Z(\xi)(w)=z_\xi$ for all non surjective $\xi\of [m]\to[n]$.
+\begin{itemize}
+\item If $a_\xi=\id$ for all monomorphisms $\xi$, then $a=\id$. Let the morphism $b\of \simplex[n]\to \LDMC$ send all surjective $\xi\of[m]\to[n]$ to $\false$. For every other morphism $\phi\of [i]\to [j]$, let $b(\phi) = b_{m(\phi)}(e(\phi))$. If $b(\phi)=\true$, then $c(\phi) = c_{m(\phi)}(e(\phi))$. Finally $d$ is $y$ and $w=(a,b,c,d)$.
+\item If $a_\xi\neq \id$ for some monomorphisms $\xi$, then there is a greatest monomorphism $\mu\of [m]\to[n]$ such that $\mu\neq \id$ but $a_\mu=\id$. The reason is that there are finitely many monomorphisms to $[n]$ and the subcategory of those monomorphisms $\xi$ for which $a(\xi)=\id$ is closed under pushouts. In this case $a$ is the unique inverse of $\mu$ for which $e(a\circ \xi) = a_\xi$ for all monomorphisms. Let $w = Y(a)(z_\mu)$.
+\end{itemize}
+
+These two cases cover all possible commutative squares with the cycle inclusion $k_n$, because there are finitely many monomorphisms $\xi\of [m]\to [n]$ and $a_\xi = \id$ is a decidable property. For this reason, $h$ has the global right lifting property which respect to the family of all cycle inclusions. Therefore $h$ is an acyclic cofibration.
+\end{proof} %yeah!
+
+The factorization in the proof above turns the implication in lemma \ref{Reedy} into an equivalence.
+
+\begin{proposition} A morphism $f\of X\to Y$ is a cofibration if and only if it is a free cofibration. \label{cofibration characterization} \end{proposition}
+
+\begin{proof} Lemma \ref{Reedy} shows the `if' direction. For `only if' factor $f\of X\to Y$ as in the proof of lemma \ref{factor1} to get a free cofibration $g\of X\to Z$ and an acyclic fibration $h\of Z\to Y$. Because $\id_Y\circ f = h\circ g$ there is a $k\of Y\to Z$ such that $h\circ k = \id_Y$ and $k\circ f = g$ by the global lifting property. 
+\[
+\xymatrix{
+X\ar[d]_f \ar[r]^g & Z\ar[d]^h\\
+Y\ar[r]_\id \ar[ur]^k & Y
+}
+\]
+For each simplex $y$ of $Y$, $k(y)=(a,b,c,d)$. The simplex $y$ is in the image of $f$ if and only if $b=\top$ and this is decidable. A simplex $y$ for which $b\neq \top$ is nondegenerate if and only if $a=\id$ for the following reasons. The morphisms $k$ is a section of $h$ and hence a monomorphism. Monomorphisms preserve faces because faces are monomorphisms. The morphism $k$ commutes with the actions of morphisms in $\simCat$ and degenerates of $Z$ outside of the image of $g$ have $a\neq\id$.
+\end{proof}
+
+\subsection{Pullback exponentials}
+Kan complexes add additional structure that permits the factorization of morphisms of simplicial objects into Kan fibrations and acyclic cofibrations. Pullback exponentials and their duals, pushout products, are at the core of this argument.
+
+\begin{definition} For each pair of morphisms $f\of W\to X$ and $g\of Y\to Z$ the \emph{pullback exponential} $g\pe f$ is the unique factorization of the span of the span $(Y^f, g^X)$ though the pullback of $Z^f$ and $g^W$. 
+\hide{\[\xymatrix{
+Y^X \ar@/^2ex/[rr]^{Y^f} \ar[dr]_{g^X} \ar@{.>}[r]_(.6){g\pe f}
+& \bullet \ar[r]\ar[d] & Y^W \ar[d]^{g^W} \\
+& Z^X \ar[r]_{Z^f} & Z^W
+}\]}
+
+For each pair of morphisms $f\of W\to X$ and $g\of Y\to Z$ the \emph{pushout product} $f\pp g$ is the unique factorization of the cospan $(f\times \id_Z , \id_X\times g)$ though the pushout of $f\times \id_Y$ and $\id_W\times g$. 
+\hide{\[\xymatrix{
+W\times Y \ar[r]^{f\times \id} \ar[d]_{\id\times g} \po & X\times Y \ar[d] \ar[dr]^{\id\times g} \\
+W\times Z \ar[r] \ar@/_2ex/[rr]_{f\times\id} & \bullet \ar[r]^(.4){f\pp g} & X\times Z
+}\]}
+\[\xy
+(0,10)*+{Y^X}="left",(20,10)*+{\bullet}="middle",(30,20)*+{Y^W}="top",(30,0)*+{Z^X}="bottom",(40,10)*+{Z^W}="right"
+\ar^{Y^f} "left";"top" \ar_{g^X} "left";"bottom" \ar@{.>}|(.6){g\pe f} "left";"middle" 
+\ar "middle";"top" \ar "middle";"bottom" \ar^{g^W} "top";"right" \ar_{Z^f} "bottom";"right"
+\endxy\xy
+(0,10)*+{W\times Y}="left",(20,10)*+{\bullet}="middle",(10,20)*+{X\times Y}="top",(10,0)*+{W\times Z}="bottom",(40,10)*+{X\times Z}="right"
+\ar^(.4){f\times \id} "left";"top" \ar_{\id\times g} "left";"bottom" \ar "top";"middle" \ar "bottom";"middle"
+\ar@{.>}|(.3){g\pp f} "middle";"right" \ar^{\id\times g} "top";"right" \ar_{f\times\id} "bottom";"right"
+\endxy\]
+
+\end{definition}
+
+Allows $\cat S$ may omit some finite colimits, the following lemma show that pushout products of cofibrations always exist.
+
+\begin{lemma} Pushout products of pairs of locally decidable monomorphisms exists and is a locally decidable monomorphism. \end{lemma}
+
+\begin{proof} Let $f\of W\to X$ and $g\of Y\to Z$ be a pair of locally decidable monomorphisms. A pair $(x,y)\of X\times Z$ belong to the image of $f\pp g$ if either $x$ belong to the image of $f$ or $y$ belong to the image of $g$. This is a decidable property.
+\end{proof}
+
+The following fundamental lemma of simplicial homotopy has a constructive proof and therefore holds in $\cat S\s$.
+
+\begin{lemma}[Pushout product] If $f$ and $g$ are cofibrations, then so is $f\pp g$. Moreover, if either $f$ or $g$ is acyclic then so is $f\pp g$. \label{pushout product} \end{lemma}
+
+\begin{proof} Reasoning internally, a simplex $(x,z)$ of $X\times Z$ is outside of the image $f\pp g$ and nondegenerate if and only if both $x$ is outside of the image of $f$ and nondegenerate and $z$ is outside of the image of $g$ and nondegenerate. This is a decidable property of simplices of $X\times Z$ and hence $f\pp g$ is a cofibration by proposition \ref{cofibration characterization}. 
+
+Assume $f$ is an acyclic cofibration. Let $e$ be an arbitrary fibration. The problem of filling a commutative square with $f\pp g$ opposite to $e$ reduces to the problem of filling all commutative squares with the pushout product $h\pp k$ of a cycle inclusion $k\of \cycle[m]\to \simplex[m]$ and a horn inclusion $h\of \horn_k[n]\to\simplex[n]$ opposite to $e$. By standard simplicial homotopy, $h\pp k$ is an acyclic cofibration (see \cite{Hovey99} section 3.3, \cite{GJSHT} section I.5).
+
+For each horn inclusion $h\of \horn_k[n]\to \simplex[n]$ the pullback exponential $e\pe h$ is an acyclic fibration, because the problem of lifting a cycle inclusion $k\of \cycle[m]\to \simplex[m]$ reduces to the problem of lifting the acyclic cofibration $h\pp k$. Since $h\pp g$ has the global left lifting property with respect to all fibrations, it is an acyclic fibration. For the fibration $e$ this implies that $e\pe g$ is a fibration, because the problem of lifting a horn $h$ against $e\pe g$ reduces the the problem of lifting $g$ against the acyclic fibration $e\pe h$. This means that $f$ has the left lifting property with respect to $e\pe g$. By generalization $f\pp g$ has the left lifting property with respect to all fibrations, which means it is an acyclic cofibration.
+\end{proof}
+
+Lemma \ref{pushout product} has a counterpart for pullback exponentials.
+
+\begin{corollary} If $e\of U\to V$ is a fibration and $f\of W\to X$ is a cofibration, then $e\pe f$ is a fibration. Moreover, if either $f$ or $e$ are acyclic, then $e\pe f$ is acyclic. \label{pullback exponential}
+\end{corollary}
+
+The next corollary demonstrates the lifted morphism without constructing a pushout product or pullback exponential.
+
+\begin{corollary} Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
+\hide{\[\xymatrix{
+A\times C\ar[r]^{f\times \id}\ar[d]_{\id\times g} & B\times C\ar[r]^b\ar[d]_(.3){\id\times g} & X\ar[d]^h\\
+A\times D\ar[r]_{f\times \id} \ar[urr]^(.3){a} & B\times D \ar[r]_c \ar@{.>}[ur]_{d} & Y
+}\]}
+\[\xy
+(0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
+(0,0)*+{A\times D}="AD",(25,0)*+{B\times D}="BD",(40,0)*+{Y}="Y"
+\ar^{f\times\id} "AC";"BC"
+\ar_{\id\times g} "AC";"AD"
+\ar_{f\times\id} "AD";"BD"
+\ar^{a} "AD";"X"
+\ar|(.6){\id\times g} "BC";"BD"
+\ar^(.6){b} "BC";"X"
+\ar@{.>}_{d} "BD";"X"
+\ar_(.6){c} "BD";"Y"
+\ar^{h} "X";"Y"
+\endxy\]
+
+\hide{Transposed view:
+\[\xymatrix{
+A\ar[r]^{a^t}\ar[d]_f & X^D\ar[r]^{X^g}\ar[d]^(.7){h^D} & X^C\ar[d]^{h^C}\\
+B\ar[r]_{c^t} \ar[urr]_(.7){b^t} \ar@{.>}[ur]^{d^t} & Y^D \ar[r]_{Y^g} & Y^C
+}\]}\label{triple lift}
+\end{corollary}
+
+
+\subsection{Deformation retracts}
+In the classical situation, acyclic cofibrations between Kan complexes are deformation retracts. These still play an important role in the model structure on $\cat S\s\f$.
+
+\begin{definition} A \emph{deformation retract} is a morphism $f\of X\to Y$ with a left inverse $g\of Y\to X$ and a homotopy $h\of \simplex[1]\times Y\to Y$ between $\id_Y$ and $f\circ g$, i.e.\ $h\circ (\Delta(\delta^1_0)\times \id_Y) = \id_Y$ and $h\circ (\Delta(\delta^1_1)\times \id_Y) = f\circ g$, where $\Delta(\delta^1_i)\of 1\to \simplex[1]$ are the points of $\simplex[1]$.
+\end{definition}
+
+The following two lemmas explain how certain homotopies induce filler operators for fibrations and cofibrations. 
+
+\begin{lemma} Let $f\of X\to Y$ be a deformation retract with left inverse $g$ and homotopy $h$. If $f$ is a cofibration and $h\circ(\id_{\simplex[1]}\times f) = f\circ \pi_1$, then $f$ an acyclic cofibration.  \label{retract is acyclic}
+\[\xymatrix{
+\simplex[1]\times X \ar[r]^(.6){\pi_1}\ar[d]_{\id\times f} & X\ar[d]^f\\
+\simplex[1]\times Y \ar[r]_(.6)h & Y
+}\]
+\end{lemma}
+
+\begin{proof} 
+Let $k\of A\to B$ be a fibration and let $k\circ a = b\circ f$ for some $a\of X\to A$ and $b\of Y\to B$. 
+
+Corollary \ref{triple lift} helps out. The cofibrations are $f$ and $\simplex(\delta^1_1)$ and the latter of these is acyclic; the fibration is $k$; the the morphisms $a\circ g$, $a\circ \pi_1$ and $b\circ h$--where $\pi_1$ is the projection $\simplex[1]\times A\to A$--satisfy the following equations.
+\begin{align*} 
+	(a\circ \pi_1)\circ (\simplex(\delta^1_0)\times\id_X) &= a = (a\circ g)\circ f\\
+	(b\circ h)\circ (\simplex(\delta^1_0)\times\id_Y) &= b\circ f\circ g = k\circ (a\circ g)\\
+	(b\circ h)\circ (\id_{\simplex[1]}\times f) &= b\circ f\circ \pi_1 = k\circ (a\circ \pi_1)
+\end{align*}
+\hide{\[\xymatrix{
+X\ar[d]_f\ar@/^3ex/[rrr]^{\simplex(\delta^1_0)\times\id} &X\ar[d]_f \ar[rr]|(.4){\simplex(\delta^1_1)\times \id} && \simplex[1]\times X \ar[d]|(.6){\id\times f}\ar[r]|(.6){a\circ \pi_1} & A\ar[d]^k\\
+Y\ar@/_3ex/[rrr]_{\simplex(\delta^1_0)\times\id}&Y \ar[rr]|(.4){\simplex(\delta^1_1)\times \id}\ar[urrr]^(.3){a\circ g} && \simplex[1]\times Y\ar[r]|(.6){b\circ h}\ar@{.>}[ur]_d & B
+}\]}
+\[\xy
+(0,20)*+{X}="X1",(30,20)*+{\simplex[1]\times X}="X01",(50,20)*+{A}="A",(57,27)*+{X}="X0",
+(0,0)*+{Y}="Y1",(30,0)*+{\simplex[1]\times Y}="Y01",(50,0)*+{B}="B",(57,7)*+{Y}="Y0"
+\ar^f "X0";"Y0" \ar_(.4){\simplex(\delta^1_0)\times\id} "X0";"X01" \ar^a "X0";"A"
+\ar_f "X1";"Y1" \ar^(.4){\simplex(\delta^1_1)\times\id} "X1";"X01" 
+\ar_(.7){\id\times f} "X01";"Y01" \ar|(.6){a\circ\pi_0} "X01";"A"
+\ar_(.4)k "A";"B"
+\ar "Y0";"Y01" \ar^b "Y0";"B" \ar@{.>} "Y0";"A"
+\ar_(.4){\simplex(\delta^1_1)\times\id} "Y1";"Y01"
+\ar^(.3){a\circ g} "Y1";"A"
+\ar_(.6){b\circ h} "Y01";"B"
+\ar@{.>}|d "Y01";"A"
+\endxy\]
+
+The composition $A^{\simplex(\delta^1_0)}\circ d$ is filler for the square $k\circ a = b\circ f$. By abstraction there is a function that provides fillers for arbitrary commutative squares $f\to k$ where $k$ is a fibration. This proves $f$ is an acyclic cofibration.
+\end{proof}
+
+\begin{lemma} Let $\pi\of \simplex[1]\times Y\to Y$ be the projection and let $c\of 1+1\to\simplex[1]$ be the cycle inclusion. Let $g\of Y\to X$ be a fibration, let $f\of X\to Y$ be a right inverse and let $h\of \simplex[1]\times Y \to Y$ be a homotopy that satisfies $g\circ h = g\circ \pi_1$. Then $f$ is an acyclic fibration. \label{deformation is acyclic}
+\hide{\[\xymatrix{
+Y+Y\ar[rr]^{(\id,f\circ g)}\ar[d]_{c\times \id} && Y\ar[d]^g \\
+\simplex[1]\times Y \ar[rr]_{g\circ\pi}\ar[urr]^h && X
+}\]}
+\[\xy
+(0,14)*+{Y+Y}="up left",(21,14)*+{Y}="up right",
+(0,0)*+{\simplex[1]\times Y}="down left",(21,0)*+{X}="down right"
+\ar^(.6){(\id,f\circ g)} "up left";"up right" \ar_{c\times \id} "up left";"down left"
+\ar^g "up right";"down right"
+\ar_(.6){g\circ\pi_1} "down left";"down right" \ar^h "down left";"up right"
+\endxy\]
+\end{lemma}
+
+\begin{proof}
+Thanks to the transpose $h^t\of Y\to Y^{\simplex[1]}$ of $h$, $g$ is a retract of $g\pe{\simplex(\delta^1_1)}$.
+\hide{\[\xymatrix{
+Y\ar[d]_g \ar[r]^{h^t} & Y^{\simplex[1]} \ar[d]_{g\pe{\simplex(\delta^1_1)}} \ar[dr]^{Y^{\simplex(\delta^1_1)}} \ar[rr]^{Y^{\simplex(\delta^1_0)}}&& Y \ar[d]^g\\
+X \ar[r]^{(X^\bang,f)} \ar[dr]_{X^\bang} \ar@/_3ex/[rr]_(.6)f & \bullet\ar[r]\ar[d] & Y \ar[d]_(.4)g & X \\
+& X^{\simplex[1]} \ar[r]_{X^{\simplex(\delta_1^1)}} \ar@/_2ex/[urr]_(.7){X^{\simplex(\delta^1_0)}}& X
+}\]}
+\[\xy
+(0,21)*+{Y}="Y0",(14,28)*+{Y^{\simplex[1]}}="Y1",(35,21)*+{Y}="Y2",(42,28)*+{Y}="Y3",
+(21,14)*+{\bullet}="center",
+(7,7)*+{X}="X0",(28,0)*+{X^{\simplex[1]}}="X1",(42,7)*+{X}="X2",(56,0)*+{X}="X3"
+\ar_g "Y0";"X0" \ar^{h^t} "Y0";"Y1"
+\ar_{g\pe{\simplex(\delta^1_1)}} "Y1";"center" \ar|{Y^{\simplex(\delta^1_1)}} "Y1";"Y2" \ar^{Y^{\simplex(\delta^1_0)}} "Y1";"Y3"
+\ar^g "Y2";"X2"\ar^g "Y3";"X3"
+\ar "center";"X1" \ar "center";"Y2"
+\ar^{(X^\bang,f)} "X0";"center" \ar_{X^\bang} "X0";"X1" \ar@/_2ex/_(.6)f "X0";"Y2"
+\ar^(.6){X^{\simplex(\delta_1^1)}} "X1";"X2" \ar_{X^{\simplex(\delta_0^1)}} "X1";"X3"
+\endxy\]
+Because $\simplex(\delta^1_1)$ is an acyclic cofibration, $g\pe{\simplex(\delta^1_1)}$ is an acyclic fibration by corollary \ref{pullback exponential}. Hence $f$ is an acyclic fibration if it is a fibration.
+\end{proof}
+
+\subsection{Fibrant replacements}
+There is a conventional method for factoring morphisms between Kan complexes as fibrations following deformation retracts, which helps to prove the following proposition.
+
+\begin{proposition} Every morphism $f\of X\to Y$ between Kan complexes factors as a fibration following an acyclic cofibration. \label{factor2} \end{proposition}
+
+\begin{proof} Because $\bang_Y\of Y\to 1$ is a fibration, the morphism $(d_0,d_1)\of Y^{\simplex[1]} \to Y\times Y$ defined by composition with the cycle inclusion $1+1\to \simplex[1]$ is a fibration and the components $d_i\of Y^{\simplex[1]}\to Y$ are acyclic fibrations by corollary \ref{pullback exponential}. Pulling back $(d_0,d_1)$ along $f\times \id_Y$ produces the \emph{homotopy graph} $Y/f$ of $f$ together with projections $f_0\of Y/f\to X$ and $f_1\of Y/f\to Y$ where $f_0$ is an acyclic fibration because it is the pullback of $d_0$ and $f_1$ is a fibration because it is the composition of the fibrations $(f_0,f_1)$ and $\pi_1\of X\times Y\to Y$.
+\[\xymatrix{
+Y/f \ar[r]\ar[d]_{(f_0,f_1)} & Y^{\simplex[1]} \ar[d]^{(d_0,d_1)} \\
+X\times Y \ar[r]_{f\times\id} & Y\times Y
+}\]
+
+There is a deformation retract $r=(\id_X,Y^\bang\circ f)\of X\to Y/f$ with $f_1$ as left inverse. The retract factors as an acyclic fibration $g\of W\to Y/f$ following a cofibration $h\of X\to W$. This cofibration has a left inverse $h' = f_0\circ g$, which is an acyclic fibration. There is a homotopy $\phi$ between $\id_{W}$ and $h\circ h'$ by lemma \ref{triple lift} and the following equations.
+\begin{align*}
+(\id_W,h\circ h')\circ(h+h)&=(h,h)= (h\circ\pi_1)\circ (c\times \id_X)\\
+h'\circ h\circ \pi_1&=\pi_1=(h'\circ\pi_1)\circ(\id_{\simplex[1]}\times h)\\
+h'\circ(\id_W,h\circ h')&=(h',h')= (h'\circ\pi_1)\circ (c\times \id_W)
+\end{align*}
+\[\xymatrix{
+X+X\ar[d]_{c\times \id}\ar[r]^{h+h} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\id,h\circ h')} & W\ar[d]^{h'}\\
+\simplex[1]\times X\ar[r]_{\id\times h} \ar[urr]^(.3){h\circ\pi_1}  & \simplex[1]\times W\ar[r]_(.6){h'\circ\pi_1} \ar@{.>}[ur]_\phi & X
+}\]
+Because $\phi\circ(\id_{\simplex[1]\times h}) = h\circ \pi_1$, the cofibration $h$ is acyclic by lemma \ref{retract is acyclic}. 
+
+As promised the morphism $f$ factors as the fibration $f_1\circ g$ following the acyclic cofibration $h$.
+\end{proof}
+
+\subsection{Two-out-of-three}
+The category $\cat S\s$ has the two weak factorization systems that a model structure requires. This subsection demonstrates that the weak equivalences satisfy the 2-out-of-3 property and completes the proof that $\cat S\s\f$ is a model category.
+
+\begin{lemma}[2-out-of-3] Let $f\of X\to Y$ and $g\of Y\to Z$ be morphisms of $\cat S\s\f$. If any two of $f,g$ or $g\circ f$ are weak equivalences, then all three are. \label{toot}\end{lemma}
+
+\begin{proof}
+Compositions of acyclic fibrations are acyclic fibrations and the same holds for acyclic cofibrations. All compositions of weak equivalences are weak equivalences if $g\circ f$ factors as an acyclic fibration following an acyclic cofibration, whenever $g$ is an acyclic cofibration and $f$ is an acyclic fibration.
+
+By proposition \ref{factor1}, $g\circ f=h\circ k$ for some acyclic fibration $h\of W\to Z$ and a cofibration $k\of X\to W$. Since $Y$ is fibrant, $g$ has a left inverse $g'$ by the lifting property. Since $f \circ \id = g'\circ g\circ f= (g'\circ h)\circ k$ there is a morphism $k'$ such that $f\circ k' = g'\circ h$ and $k'\circ k = \id$, so $k$ has its own left inverse.
+\[\xymatrix{
+X\ar[d]_f \ar[r]_{k} \ar@/^2ex/[rr]^{\id} & W\ar[d]^h \ar[r]_{k'} & X\ar[d]^f\\
+Y \ar[r]^{g} \ar@/_2ex/[rr]_{\id} & Z \ar[r]^{g'} & Y
+}\]
+
+Let $c$ be the cycle $1+1\to\simplex[1]$. The fibrancy of $Z$ induces a homotopy between $\id_Z$ and $g\circ g'$, using lemma \ref{triple lift}.
+\[\xymatrix{
+Y+Y\ar[r]^{g+g}\ar[d]_{c\times\id} & Z+Z\ar[r]^(.6){(\id,g\circ g')}\ar[d]_(.3){c\times\id} & Z\\
+\simplex[1]\times Y\ar[r]_{\id\times g}\ar[urr]^(.3){g\circ\pi_1} & \simplex[1]\times Z\ar@{.>}[ur]_{\phi}
+}\]
+
+Let $c$ be the cycle $1+1\to\simplex[1]$. 
+\[\xymatrix{
+X+X\ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\id,k\circ k')} & W\ar[d]^h\\
+\simplex[1]\times X\ar[r]_{\id\times k} \ar[urr]^(.3){k\circ \pi_1}  & \simplex[1]\times W\ar[r]_(.6){\phi\circ (\id\times h)} \ar@{.>}[ur]_\chi & Z
+}\]
+There is a homotopy $\chi$ between $\id_W$ and $k\circ k'$ because of lemma \ref{triple lift}.
+\begin{align*}
+(\id, k\circ k')\circ (k+k) &= (k,k) = k\circ \pi_1\circ(c\times\id_X)\\
+h\circ (k \circ \pi_1) &= (\phi\circ (\id_W\times h))\circ (\id_{\simplex[1]} \times k)\\
+h\circ (\id, k\circ k') &= (\phi\circ (\id_W\times h))\circ (c\times \id_W)
+\end{align*}
+Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \pi_1$, lemma \ref{retract is acyclic} makes $k$ is an acyclic cofibration.
+
+Let $g$ and $g\circ f$ be weak equivalences now. 
+
+First assume that $g$ and $g\circ f$ are acyclic fibrations. By proposition \ref{factor1}, $f$ factors as an acyclic fibration $h\of W\to Y$ following a cofibration $k\of X\to W$. Because $(g\circ f)\circ \id = (g\circ h)\circ k$ and $g\circ f$ is an acyclic fibration, $k$ has a left inverse $k'\of X\to W$ which satisfies $g\circ f\circ k' = g\circ h$. 
+\[\xymatrix{
+X\ar[d]_k \ar[r]^\id & X\ar[d]^{g\circ f}\\
+W\ar[r]_{g\circ h} \ar@{.>}[ur]^{k'} & Z
+}\]
+
+Let $c\of 1+1\to\simplex[1]$ be the same cycle as above. There is homotopy $\phi$ between $\id_W$ and $k\circ k'$ because of lemma \ref{triple lift} and the following equations.
+\begin{align*}
+(\id,k\circ k')\circ(k+k) &= (k,k) = (k\circ\pi_1)\circ (c\times\id_X)\\
+(g\circ h)\circ (k\circ \pi_1) &= (g\circ h\circ \pi_1)\circ(\id\times k)\\
+(g\circ h)\circ (\id,k\circ k') &= (g\circ h\circ \pi_1)\circ(c\times\id_W)
+\end{align*}
+\[\xymatrix{
+X+X \ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times\id}\ar[r]^(.6){(\id,k\circ k')} & W\ar[d]^{g\circ h}\\
+\simplex[1]\times X \ar[r]_{\id\times k}\ar[urr]^(.3){k\circ\pi_1}& \simplex[1]\times W\ar[r]_{g\circ h\circ \pi_1}\ar@{.>}[ur]_\phi & Z
+}\]
+Because $\phi\circ (\id_{\simplex[1]}\times k)=k\circ \pi_1$, lemma \ref{retract is acyclic} says that $k$ is an acyclic cofibration.
+
+Next assume that $g$ and $g\circ f$ are acyclic cofibrations. Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. Because $B$ is fibrant, there is a $b'\of Z\to B$ such that $b'\circ g = b$. Lifting properties also imply that there is an $a'\of Z\to A$ such that $a'\circ g\circ f = a$ and $k\circ a'= b'$. So $b'\circ g$ is a filler for $k\circ a=b\circ f$. By abstraction, there is a filler operator that lifts $f$ against all fibrations.
+\[\xy
+(0,28)*+{X}="x",(14\halfrootthree,21)*+{A}="a",(0,14)*+{Y}="y",(14\halfrootthree,7)*+{B}="b",(0,0)*+{Z}="z"
+\ar^a "x";"a" \ar_f "x";"y" \ar^k "a";"b" \ar|(.33)b "y";"b" \ar_g "y";"z"
+\ar@{.>}_{b'} "z";"b" \ar@{.>}|(.67){a'} "z";"a"
+\endxy\]
+
+Let $g$ and $g\circ f$ be arbitrary weak equivalences. The morphism $f$ factors as an acyclic fibration $h\of W\to Y$ following a cofibration $k\of X\to W$. Because weak equivalences are closed under composition, $g\circ h$ is a weak equivalence. The morphism $k$ is acyclic for the following reasons. Factor both $g\circ f$ and $g\circ h$ as acyclic fibrations following acyclic cofibrations, so $g\circ f = a\circ b$ and $g\circ h = c\circ d$. The lifting properties induce a morphism $l$ such that $l\circ b = d\circ k$ and $c\circ l = a$. The morphism $l$ is a weak equivalence because $a$ and $c$ are acyclic fibrations. Because of closure under composition, the morphism $l\circ b = d\circ k$ is both a weak equivalence and a cofibration and hence an acyclic cofibration. Since $d$ is an acyclic cofibration, so is $k$.
+\[\xymatrix{
+X\ar[r]_k\ar@/^2ex/[rr]^f\ar[d]_b & W\ar[r]_h\ar[d]^d & Y\ar[d]^g \\
+\bullet\ar@/_2ex/[rr]_a\ar@{.>}[r]^l & \bullet\ar[r]^c & Z
+}\]
+Since $f = h\circ k$, $f$ is a weak equivalence.
+
+The remaining case is where $f$ and $g\circ f$ are weak equivalences.
+
+First assume that $f$ and $g\circ f$ are acyclic cofibrations. The morphism $g$ factors as a fibration $h\of W\to Z$ following an acyclic cofibration $k\of Y\to W$ by lemma \ref{factor2}. Lifting properties give $h$ a right inverse $h'$.
+\[\xymatrix{
+X\ar[r]^{k\circ f}\ar[d]_{g\circ f} & W\ar[d]^h\\
+Z\ar[r]_\id \ar[ur]^{h'} & Z
+}\]
+Lemma \ref{triple lift} provides a homotopy $\phi$ between $\id_W$ and $h'\circ h$, because the following equations hold.
+\begin{align*}
+(\id,h'\circ h)\circ(k\circ f+k\circ f)&= (k\circ f,k\circ f) = (k\circ f\circ \pi_1)\circ(c\times \id_Y)\\
+h\circ(k\circ f\circ\pi_1) &= g\circ f\circ\pi_1 = (h\circ\pi_1)\circ(\id_{\simplex[1]}\times (k\circ f))\\
+h\circ(\id_W,h'\circ h) &= (h,h) = (h\circ\pi_1)\circ(c\times\id_W)
+\end{align*}
+
+\[\xymatrix{
+X+X\ar[r]^{k\circ f+k\circ f}\ar[d]_{c\times \id} & W+W\ar[r]^(.6){(\id,h'\circ h)}\ar[d]_(.3){c\times\id} & W\ar[d]^h\\
+\simplex[1]\times X\ar[r]_{\id\times k\circ f}\ar[urr]^(.3){k\circ f\circ\pi_1} & \simplex[1]\times W\ar[r]_(.6){h\circ \pi_1}\ar@{.>}[ur]_{\phi} & Y
+}\]
+Because $h\circ \phi = h\circ \pi_1$, lemma \ref{deformation is acyclic} says that $h$ is an acyclic fibration.
+
+Next assume that $f$ and $g\circ f$ are acyclic fibrations. Let $k\of\cycle[n]\to\simplex[n]$ be the cycle inclusion. Let $a\of\cycle[n]\to Y$ and $b\of\simplex[n]\to Y$ satisfy $b\circ k = g \circ a$. Because $\cycle[n]$ is cofibrant, there is an $a'\of \cycle[n]\to X$ such that $f\circ a' = a$ and hence $(g\circ f)\circ a' = b\circ c$. There is a filler $b'\of\simplex[n]\to X$ for this commutative square. The morphism $f\circ b'$ is a filler for the square $b\circ k = g \circ a$. This proves $g$ is an acyclic fibration.
+
+\[\xy
+(14\halfrootthree,28)*+{X}="x", (0,21)*+{\cycle[n]}="v", (14\halfrootthree,14)*+{Y}="y", (0,7)*+{\simplex[n]}="w", (14\halfrootthree,0)*+{Z}="z"
+\ar@{.>}^{a'} "v";"x" \ar|(.67)a "v";"y" \ar_k "v";"w"
+\ar@{.>}|(.33){b'} "w";"x" \ar_b "w";"z"
+\ar "x";"y" \ar "y";"z"
+\endxy\]
+
+The general case where $f$ and $g\circ f$ are weak equivalences is now dual to the case where $g$ and $g\circ f$ are weak equivalences. By lemma \ref{factor1} $g=k\circ h$ with $k$ a fibration and $h$ an acyclic cofibration. Because weak equivalences compose, $h\circ f = a\circ b$ with $a$ and acyclic fibration and $b$ and acyclic cofibration. 
+Also $g\circ f = c\circ d$ with $c$ an acyclic fibration and $d$ and acyclic cofibration. 
+Lifting $b$ against $c$ gives a morphism $l$ that is a weak equivalence because $c\circ l = a$. That means that the cofibration $d\circ f = l\circ b$ is a weak equivalence and hence acyclic. Since $f$ is wedged between the acyclic cofibrations $d\circ f$ and $d$, it is a weak equivalence. 
+\[\xymatrix{
+X\ar[r]^f\ar[d]_b & Y\ar[r]^h\ar[d]^d\ar[dr]^g & \bullet\ar[d]^k\\
+\bullet\ar@/_2ex/[rr]_a\ar@{.>}[r]^l & \bullet\ar[r]^c & Z
+}\]%here
+
+This means that weak equivalences indeed satisfy 2-out-of-3.
+\end{proof}
+
+\subsection{Conclusion}
+
+\begin{theorem}[Model category]
+With fibrations, weak equivalences and cofibrations defined as above, the category $\cat S\s\f$ is a model category.
+\label{model category}
+\end{theorem}
+
+\begin{proof}
+Lemma \ref{factor1} shows that cofibrations and acyclic fibrations form a weak factorization system, considering that they satisfy a lifting property by definition \ref{Kan}. Lemma \ref{factor2} tells the same thing about fibrations and acyclic cofibrations. Lemma \ref{toot} demonstrates that if two of $f$, $g$ and $f\circ g$ are weak equivalences, then all three are. These three requirements define a model structure.
+\end{proof}
+
+\section{Descent}
+This sections shows how lifting properties \emph{descend} along the horn inclusions $H(n,k)\of \horn_k[n]\to\simplex[n]$. This means that each fibration $f\of X\to\horn_k[n]$ is the pullback of a fibration $g\of Y\to\simplex[n]$ along $H(n,k)$. This section proves this constructively.
+
+\subsection{Higher dimensional case}
+This subsection introduces a construction that works for dimensions $n>1$. For each fibration $f\of X\to \horn_k[n]$ each simplex in the descended fibration $Df\of DX\to \simplex[n]$ is the face of a filler for an acyclic cofibration which factors through $f$. This extends the range of the filler operator of a fibration while $f$ remains a pullback of $Df$ along $H(n,k)$. The following equivalence simplifies dealing with $\cat S\s/\simplex[n]$.
+
+\begin{lemma} The categories $\cat S\s/\simplex[n]$ and $\cat S^{(\simCat/[n])\dual}$ are equivalent. \label{slice equivalence} \end{lemma}
+
+\begin{proof} For $\xi\of[m]\to[n]$ in $\simCat$ let $[\xi]$ to denote the corresponding object of $\simCat/[n]$ and let $\simplex[\xi]$ be the representable functor generated by the Yoneda embedding. The equivalence links $\simplex[\xi]$ of $\cat S^{(\simCat/[n])\dual}$ to $\Delta\xi\of \simplex[m]\to \simplex[n]$ of $\cat S\s/\simplex[n]$.
+
+In the direction $\cat S\s/\simplex[n]\to \cat S^{(\simCat/[n])\dual}$ the equivalence sends a $f\of X\to \simplex[n]$ to the presheaf $g$ which for all $\xi$ of $\simCat/[n]$ satisfies:
+\[ g[\xi] = \set{ x\of X(\dom(\xi)) | f(\dom(\xi))(x)=\xi } \]
+Here $\dom(\xi)$ is the domain of $\xi$.
+In the direction $\cat S\s/\simplex[n]\to \cat S^{(\simCat/[n])\dual}$ the equivalence sends a presheaf $g$ to the morphism $f$ which for each $m\of\nno$ represent the family of objects:
+\[ \xi\of\simCat([m],[n])\mapsto g(\xi) \]
+\end{proof}
+
+%it is a functor $\cat S\s/\simplex[n]\to \cat S\s/\simplex[n]$ mind you!
+
+The dependent product along $H(n,k)\of \horn_k[n]\to\simplex[n]$ is the first half of the descent functor. It constructs fillers for a limited set of acyclic cofibrations. The following functor $K$ sends each $\simplex[n]$-indexed family of simplices to the family of simplices it will be a face of.
+
+\begin{definition}
+The functor $K\of\simCat/[n]\to\simCat/[n]$ is defined as follows. 
+\begin{enumerate}
+\item A function $\xi\of[m]\to[n]$ cuts $[m]$ into $n+1$ posets $\xi_j = \set{i\of[m]|\xi(i)=j}$. 
+\item Let $\norm \xi$ be the number of elements of the product: \[\Pi i\of ([n]-\set k).\set{p\of [m]|\xi(p)=i}\] 
+\item Define $K(\xi)\of [m+\norm\xi]\to [n]$ as follows.
+\[ 
+	K\xi(i) = \left\{
+		\begin{array}{cc}
+			\xi(i) & \xi(i)<k \\
+			k & \xi(i-\norm\xi)\leq k \leq \xi(i)\\
+			\xi(i-\norm\xi) & k<\xi(i-\norm\xi)
+		\end{array}
+	\right.
+\]
+\item Let $\ka(\xi)\of\Pi i\of([n]-\set k).\xi_i \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\Pi i\of([n]-\set k).\xi_i$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K\xi(i)=k$.
+\item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K(\xi)\circ\la(\xi) = \xi$.
+\item For each function $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
+\item Let $K(\phi)\of K(\xi)\to K(\xi')$ be the nondecreasing function which satisfies $K(\phi)\circ \ka(\xi) = \ka(\xi')\circ \Pi i\of([n]-\set k).\phi_i$ and $K(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
+\end{enumerate}
+\end{definition}
+
+The norm $\norm\xi$ equals the number of ways the injection $\delta^n_k\of[n-1]\to[n]$ factors through $\xi$. Here $\delta^n_k(i)=i$ if $i<k$ and $i+1$ if $i\geq k$. The functor $K$ gives each such factorization $\phi\of[n-1]\to [m]$ a unique anchor point in $K(\xi)_k$. Now $K(\phi)\of K(\delta^n_k)\to \xi$ is a full simplex. Pulling back along $H(n,k)$ preserves the homotopy type of $\Delta(K(\phi))$ and that is the point of the construction.
+
+The second half of the descent functor is the endofunctor of $\cat S\s/\simplex[n]$ that is equivalent to the endofunctor $K\ri$ of $\cat S^{\simCat/[n]\dual}$ that satisfies $K\ri X[\xi] = X[K\xi]$.
+
+\begin{lemma} Let $Df = K\ri\depprod{H[n,k]}f\of K\ri\depprod{H[n,k]}X\to\simplex[n]$. Each $f\of X\to\horn_k[n]$ is a pullback of $Df$ along $H(n,k)$. \end{lemma}
+
+\begin{proof} If $\xi\of [m]\to[n]$ is of $(\horn_k[n])[m]$, then $\norm\xi=0$ and $K\xi = \xi$. Lemma \ref{slice equivalence} and the Yoneda lemma imply that $f$ and the pullback of $K\ri\depprod{H[n,k]}f$ have isomorphic objects of simplices. \label{descent pullback}
+\end{proof}
+
+\subsection{Fibrancy}
+This subsection shows that $Df$ is a fibration by reducing the following lifting problems (for all $l\leq m\of\nno$) to one that involves $f$ directly.
+\begin{equation}
+	\xymatrix{
+		\horn_l[m]\ar[r]\ar[d]_{H(m,l)} & DX\ar[d]^{Df} \\
+		\simplex[m]\ar[r]_{\Delta\xi} \ar@{.>}[ur] & \simplex[n]
+	}
+	\label{descent lifting problem}
+\end{equation}
+
+The reduction is composed of two parts like the descent functor itself. The second part uses the adjunction between pulling back and dependent products. The first part fattens the horn up to help it survive the pullback. Some new notation helps to describe the constructions involved in the first part.
+
+
+\begin{definition} For each $\xi\of[m]\to[n]$ and $p\of[m]\to\bool$ let $\face^\xi(p)$ be the object of $\cat S^{\simCat/[n]\dual}$ which satisfies: 
+\[ \face^\xi(p)[\alpha] = \set{\psi\of [\alpha]\to[\xi] | (\forall i\of \dom\alpha)(p(\xi(i))=\true)} \]
+\end{definition}
+
+Although the \emph{face} $\face^\xi(p)$ is either the initial object or isomorphic to some $\simplex[\alpha]$, it comes with a canonical monomorphism into $\simplex[\xi]$ which allows us to treat it as a subobject and describe other subobjects of simplices as unions of faces. For example, the horn inclusion in (\ref{descent lifting problem}) \emph{is} $\bigcup_{i\of [m]-\set k} \face^\xi([m]-\set i)$ if we read $[m]-\set i$ as both a type and as a substitute for its characteristic map $[m]\to\bool$.
+
+
+\begin{proposition} Let
+\begin{align*}
+H(m,l)&=\bigcup_{i\of [m]-\set l} \face^\xi([m]-\set i)\\
+\depsum KH(m,l)&=\bigcup_{i\of [m]-\set l} \face^{K\xi}(\depsum K([m]-\set i))
+\end{align*}
+Let $\depsum K(p)\of [m+\norm\xi]\to \bool$ satisfy the following morphism--here $\mathord\land$ is the conjunction function of Booleans.
+\[ \depsum K(p)(\la(i))=p(i)\quad\depsum K(p)(\ka(\vec i)) = p(i_0)\land\dotsm\land p(i_n) \] 
+There is a natural isomorphism between
+\[ \cat S^{\simCat/[n]\dual}(H(m,l),K\ri -) \] and 
+\[ \cat S^{\simCat/[n]\dual}(\depsum KH(m,l),-) \] \label{K-universal}
+\end{proposition}
+
+
+\begin{proof} The union $H(m,l)$ is the finite colimit of all the $\face^\xi(p)$, where $p\of[m]\to\bool$ satisfies $p(i)=\false$ for some $i\in [m]$. The Yoneda lemma induces an equivalence $\cat S^{\simCat/[n]\dual}(\face^\xi(p),K\ri X)\simeq X[K\face^\xi(p)]\simeq \cat S^{\simCat/[n]\dual}(\face^{K\xi}(\depsum K p),X)$ which is natural in $X$ for all such $p$. The morphism $\depsum KH(m,l)$ is the colimit of those $\face^{K\xi}(\depsum K p)$ for the following reasons.
+
+The operator $\depsum K$ satisfies $\depsum K(p\land q)=\depsum K(p)\land \depsum K(q)$ and $\face^{K\xi}$ sends conjunctions to intersections. Hence:
+\[ \face^{K\xi}(\depsum K(p\land q)) = \face^{K\xi}(\depsum K(p)\land \depsum K(q)) = \face^{K\xi}(\depsum K(p))\cap \face^{K\xi}(\depsum K(q)) \]
+For each $r\of[m+\norm\xi]\to \bool$ such that $\face^{K\xi}(r)$ is a face of the union $\depsum KH(m,l)$ the intersection $r'$ of all $p\of[m]\to \bool$ such that $\face^\xi(r)\subseteq\face^\xi(\depsum K(p))$ therefore satisfies $\face^\xi(r)\subseteq \face^{K\xi}(\depsum K(r'))$. For this reason $\depsum KH(m,l)=\colim_{\face^\xi(p)\subseteq H(m,l)}\face^{K\xi}(\depsum K p)$. Facewise natural equivalences therefore join into a single natural equivalence:
+\[ \cat S^{\simCat/[n]\dual}(H(m,l),K\ri -)\simeq\cat S^{\simCat/[n]\dual}(\depsum K H(m,l), -) \]
+\end{proof}
+
+As noted in lemma \ref{slice equivalence} $\depsum K H(m,l)$ has a counterpart in $\cat S/\simplex[n]$ which has a pullback $H(n,k)\ri \depsum K H(m,l)$ in $\cat S/\horn_k[n]$. The following examples of acyclic cofibrations helps to prove that this is an acyclic cofibration.
+
+\begin{lemma}[Face completion] Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have an edge $e$ in common. The inclusion $\bigcup F\to \simplex[p]$ is an acyclic cofibration. \label{face completion} \end{lemma}
+
+\begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$ and therefore an acyclic cofibration. Because acyclic cofibrations are closed under composition, $\bigcup F = F_0\to F_p = \simplex[p]$ is an acyclic cofibration. 
+\end{proof}
+
+\begin{lemma} The object $H(n,k)\ri \depsum K H(m,l)$ is a subobject of $H(n,l)\ri\simplex[K\xi]$ in $\cat S/\horn_k[n]$. The inclusion of their domains in $\cat S$, $H(n,k)\ri \depsum K H(m,l)$ is an acyclic cofibration. \label{acyclic cofibrancy} 
+\[\xymatrix{
+\bullet \ar@{.>}[rr]^{H(n,k)\ri \depsum K H(m,l)} \ar[d] && \bullet\ar[rr]^{H(n,k)\ri\simplex(K\xi)}\ar[d] && \horn_k[n]\ar[d]^{H(n,k)}\\
+\bullet\ar[rr]_(.4){\depsum K H(m,l)} && \simplex[m+\norm\xi]\ar[rr]_(.6){\simplex(K\xi)} && \simplex[n]
+}\]
+\end{lemma}
+
+
+\begin{proof} 
+Both $H(n,l)\ri\simplex[K\xi]$ and $H(n,l)\ri \depsum K H(m,l)$ have descriptions in terms of unions of faces. For $i\in [n]-\set k$ let $\U(i) = [m+\norm\xi]-\set{\la(j)|\xi(j)=i}$ and for $j\in [m]-\set k$ let $\A(j) = \depsum K([m]-\set j)$.
+\begin{align*}
+H(n,l)\ri\simplex[K\xi] &= \bigcup_{i\of([n]-\set{k})} \face^{K\xi}(\U(i))\\
+H(n,l)\ri \depsum K H(m,l)&= \bigcup_{\substack{i\of([n]-\set{k})\\j\of([m]-\set l)}} \face^{K\xi}(\U(i)\cap \A(j))
+\end{align*}
+
+Let's get the simple cases out of the way first. If $\norm\xi = 0$, then the inclusion is $H(m,l)$ because $\depsum K$ and $H(n,k)\ri$ preserve it. Hence the inclusion is an acyclic cofibration. Assume $\norm\xi>0$ for the rest of this proof.
+
+The following paragraphs show that the following inclusions are acyclic cofibrations:
+\begin{equation} \bigcup_{p\in[m]-\set l} \face^{K\xi}(\A(p)\cap\U(i))\to \face^{K\xi}(\U(i)) \label{facewise} \end{equation}
+The case where $i=\xi(l)$ must be saved for last.
+
+Because $n>1$, there are always $i\of[n]$ such that $i\neq k$, $i\neq \xi(l)$. The set $F = \set{\face^{K\xi}(\A(p)\cap\U(i))}$ is inhabited and decidable. Each face in $F$ contains the edge $\la(l)$. By lemma \ref{face completion} the inclusion \ref{facewise} is an acyclic cofibration for all $i\in [n]-\set{k,\xi(l)}$.
+
+Now join the proven acyclic cofibration of \ref{facewise} together. Let
+\[ L=H(n,l)\ri \depsum K H(m,l)\cup\bigcup_{i\of([n]-\set{k,\xi(l)})}\face^{K\xi}(\U(i)) \]
+The map $H(n,l)\ri \depsum K H(m,l)\to L$ is an acyclic cofibration because it is a pushout of the coproduct of these simpler face inclusions. If $\xi(l)=k$, then $L=H(n,k)\ri \simplex[K\xi]$ and the proof is done. Otherwise the face $\face^{K\xi}(\U(\xi(l)))$ is left.
+
+
+For $\vec p \of\prod_{i\of([n]-\set k)}\xi_i$ let $\W(\vec p) = \U(\xi(l))-\set{ \la(q) | p_{\xi(q)} < q }$. For all $j\of\nno$ let $L_j = L\cup \bigcup_{ \ka(\vec p) < j } \face^{K\xi}(\W(\vec p))$. By this definition $L_0=L$ and $L_{m+\norm\xi+1} = H(n,k)\ri\simplex[K\xi]$ because if $p_i$ are the maximal elements of $\xi_i$ for each $i\of[n]-\set k$, then $\set{ \la(q) | p_{\xi(q)} < q }$ is empty and therefore $\W(\vec p) = \U(\xi(l))$.
+
+For every $j\of\nno$ the inclusion $L_j\to L_{j+1}$ is an acyclic cofibration for the following reasons.
+
+As long as $K\xi(j)<k$, $L_j = L$ because $j<\kappa(\vec p)$ for all $\vec p \of\prod_{i\of([n]-\set k)}\xi_i$. If $K\xi(j+1)<k$ too, then $L_j\to L_{j+1}$ is an acyclic cofibration because it is an identity. If $K\xi(j+1) = k$ then $j+1=\kappa(\vec p)$ or $j+1 = \la(p)$ for $p\of\xi_k$. First consider the case that $j+1=\ka(\vec p)$. 
+
+If $\vec p,\vec q\of\prod_{i\neq k} \xi_i$ and $p_i\leq q_i$ for all $i\of[n]-k$, then $\vec p \leq \vec q$ in the lexicographical order of the ordinal product and hence $\ka(\vec p)\leq \ka(\vec q)$. Therefore $\face^{K\xi}(\W(\vec p))\subseteq L_{\ka(\vec q)}$. For that reason, the intersection of $L_j$ and $\face^{K\xi}(\W(\vec p))$ is the union of the following families of faces.
+\begin{align*}
+\U(i)\cap \W(\vec p) &\textrm{ for $i\of[n]-\set{k,\xi(l)}$}\\
+\A(q)\cap\U(\xi(l))\cap \W(\vec p) &\textrm{ for $q\of[m]-\set l$}\\
+\W(\vec r)\cap \W(\vec p) &\textrm{ if $\kappa(\vec r)<\kappa(\vec p)$ }
+\end{align*}
+Define $\vec p[l]\of\prod_{i\neq k} \xi_i$ to satisfy $\vec p[l]_i = l$ if $i=\xi(l)$ and $\vec p[l]_i = p_i$ if $i\neq \xi(l)$. The intersection of $L_j$ and $\face^{K\xi}(\W(\vec p))$ is a union of faces which contain the supporting point $\kappa(\vec p[l])$ for the following reasons. 
+
+The supporting edge $\kappa(\vec p[l])\in\U(i)$ and $\W(\vec p)$ because those faces contain all edges in the image of $\ka$. The edge $\kappa(\vec p[l])$ is a member of $\A(q)$ when $\xi(q)=k$ or $\vec p[l]_{\xi(q)}=q$ by definition of $M(q)$. In other cases $\A(q)\cap\U(\xi(l))\cap \W(\vec p)$ is a subobject of one of the faces that do contain $\kappa(\vec p[l])$. If $q$ is the least element of $\xi_{\xi(q)}$, then $\A(q)\cap\W(\vec p)\subseteq \U(\xi(q))$. If $\xi(q-1)=\xi(q)$, then $\A(q)\cap \W(\vec p) \subseteq \W(\vec p[q-1])$ and $\kappa(\vec p[q-1])<\kappa(\vec p)$. Therefore $L_j\cap \face^{K\xi}(\W(\vec p))$ is a union of faces which contain the supporting edge $\ka(\vec p[l])$. By lemma \ref{face completion} $L_j\cap \face^{K\xi}(\W(\vec p))\to \face^{K\xi}(\W(\vec p))$ is an acyclic cofibration. Since it is a pushout of that map, $L_j\to L_{j+1} = L_j\cup \face^{K\xi}(\W(\vec p))$ too.
+
+By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = H(n,k)\ri \simplex[K\xi]$ and $L_j\to L_{j+1}$ is the identity. The same holds for all $L_j\to L_{j+1}$ where $K\xi(j+1)>k$ and where $j+1>m+\norm\xi$. Since acyclic cofibrations are closed under composition, both $L\to H(n,k)\ri \simplex[K\xi]$ and $H(n,k)\ri \depsum K H(m,l) \to H(n,k)\ri \simplex[K\xi]$ are acyclic cofibrations.
+\end{proof}
+
+\subsection{Conclusion}
+The only things separating this line and a proof of the descent theorem are the horns $H(n,k)$ where $n\leq 1$. There is no $H(n,k)$ for $n=0$. For $n=1$ there are two maps $H(1,i)\of 1\to \simplex[1]$ for which a simple construction exists.
+
+\begin{lemma} If $f\of X\to 1$ is a fibration--i.e.\ if $X$ is a complex--then $\id_{\simplex[1]}\times f\of\simplex[1]\times X\to \simplex[1]$ is a fibration. \end{lemma}
+
+\begin{proof} The morphism $\id\times f$ is a pullback of $f$ along $\bang\of X\to 1$ and fibrations are closed under pullbacks. \end{proof}
+
+\begin{theorem} For each fibration $f\of X\to\horn_k[n]$, $Df=K\ri\depprod{H(n,k)}f$ is a fibration. \label{descent} \end{theorem}
+
+
+\begin{proof} Let $\simplex\xi\of \simplex[m]\to\simplex[n]$ and $g\of \horn_l[m]\to DX$ such that $Df\circ g = \simplex\xi\circ H(m,l)$. 
+\[
+	\xymatrix{
+		\horn_l[m]\ar[r]^g\ar[d]_{H(m,l)} & DX\ar[d]^{Df} \\
+		\simplex[m]\ar[r]_{\simplex\xi} & \simplex[n]
+	}	
+\]
+Because $\depprod{H(n,k)}$ is right adjoint to $H(n,k)\ri$ and because of lemma \ref{K-universal}, $g$ has a transpose $g^t$ and $f\circ g^t = \simplex(K\xi)\circ (H(n,k)\ri \depsum{K} H(m,l))$.
+\[
+	\xymatrix{
+		\bullet\ar[r]^{g^t}\ar[d]_{H(n,k)\ri \depsum K H(m,l)} & X\ar[d]^{f} \\
+		\simplex[m+\norm\xi]\ar[r]_(.6){\simplex(K\xi)} & \simplex[n]
+	}	
+\]
+Lemma \ref{acyclic cofibrancy} means that there is a filler $h\of \simplex[m+\norm\xi]\to X$ for the second commutative square, whose transpose fills the first.
+By generalization there is a filler for each square with a horn inclusion $H(m,l)$ in it and by abstraction there is a filler operator that makes $Df$ a fibration in the sense of definition \ref{lifting}.
+\end{proof}
+
+\section{Fibrant Universe}
+This section adds a new class of \emph{modest morphisms} $M\subseteq S$ with its own generic morphism $\gen(M)$ and full internal subcategory $\cof(\gen(M))$. The class $M$ contains all regular monomorphisms and is closed under composition and pullback. 
+
+\subsection{Externalization}
+%begin clarification
+This time, $M$ is internal to $\cat S$ too. This that the morphism $\bang\of\cod(\gen(M))\to 1$ is a member of $S$, and therefore $\gen(M)$ corresponds to a global section of the object $\Ar(\cat S)$ of arrows of $\cat S$.
+
+\begin{lemma}
+A generic triangle $\gen(S)_2$ for a class of morphisms $S$ is a commutative triangle such that every commutative triangle in $S$ is a pullback of the generic one. If $S$ is closed under composition and pullback and has a generic morphism $\gen(S)$, then is has a generic triangle.
+\end{lemma}
+
+\begin{proof}
+The triangle consists of morphisms $f\of X\to Y$ and $g\of Y\to Z$ and their composition, which are defined as follows.
+\begin{align*}
+Z &= \Ar(\cof(\gen(S)))\\
+Y &= \Sigma a\of\Ar(\cof(\gen(S))).\cod(a)\\
+g(a,x) &= a\\
+X &= \Sigma a\of\Ar(\cof(\gen(S))).\dom(a)\\
+f(a,x) &= a(x)
+\end{align*}
+
+Any commutative triangle $f'\of X'\to Y'$ and $g'\of Y'\to Z'$ in $S$ induces a pair of characteristic morphisms $\chi(g')$ and $\chi(g'\circ f')\of Z'\to \cod(\gen(S))=\Ob(\cof(\gen(S)))$. Since $\Ar(\cof(\gen(S)))=\Pi i\of\cod(\gen(S))).\Pi j\of \cod(\gen(S))).\Pi k\of \gen(S)[i].\gen(S)[j]$ 
+\end{proof}
+
+
+
+\hide{%here
+We hebben het wel over een globale sectie van $\Ar(\cof(M)\s)$!
+
+Als $I\to\Ar(\cof(M)\s)$ een familie van fibraties is, dan is de relatie met die globale sectie toch niet zo eenvoudig.
+
+Die klasse $M\s$ is een deelobject van $\Ar(\cof(\gen(M))\s)$.
+
+Er moet een verband zijn: de globale sectie van $\Ar(\cat S)$, het object $M\subseteq \Ar(\cat S)$ en het morphisme $M\to M/M$. 
+
+Kunnen we iets met het object van karateristieken: $\cod\gen(M)^{\cod\gen(S)}$? Voordeel: de gewenste getuige is altijd daar. Nadeel: geen deelobject. Wanneer hebben we daar last van?
+
+Wat vervangt de inclusie?
+}
+%end clarification
+
+\subsection{Lifted generic}
+The first step is to lift the generic morphism of $M$ in $\cat S$ to a generic morphism of $M\s$ without considering fibrations. 
+
+The way to get there is a bit roundabout. If $\gen(M\s)$ were a the generic morphism, then there is an isomorphism between $V[n]$ and $\simplex[n]\to V$ by the Yoneda lemma and because $\gen(M\s)$ is generic also an isomorphism between $V[n]$ and the class of morphisms in $M\s$ whose codomain is $\simplex[n]$. By lemma \ref{slice equivalence} these correspond to functors $\simCat/[n]\dual\to\cat S$ whose values are fibres of the generic morphism $\gen(M)$ of $M$. 
+
+\begin{lemma}
+For each $n\of\nno$ let $\gen(M\s)[n]$ be the pullback of $\gen(M)$ along the map $F\mapsto F(\id_{[n]})\of\cof(\gen(M))^{\simCat/[n]\dual}\to \cod(\gen(M))$. The morphism $\gen(M\s)$ is a generic morphism of $M\s$.
+\end{lemma}
+
+
+\begin{proof} %the domain of $\gen(M\s)$ is a simplicial set...
+The domain of $\gen(M\s)$ is a simplicial object for the following reasons. The domain $\dom\gen(M\s)$ consists of pairs $(F,x)$ where $F(\id_{[n]}) = \gen(M)(x)$. The following action of $\simCat$ makes this a simplicial object. For all $h\of[m]\to[n]$ of $\simCat$ let:
+\[\dom\gen(M\s)(h)(F,x) = (F\circ h\di, Fh(x))\] Here $h\di\of\simCat/[m]\dual\to\simCat/[n]\dual$ is composing with $h$.
+
+%generic first
+Let $f\of X\to Y$ be a member of $M\s$. That means that for each $n\of\nno$ there is a morphism $\chi[n]\of Y[n] \to \cod(\gen(M))$ such that $f[n]$ is a pullback of $\gen(M)$. For each $g\of \simCat/[n]$ let $\chi'[n](y)(g) = \chi[\dom g](Y(g)(y))$. This defines a morphism $\chi'\of Y\to \dom (\gen(M\s))$ because the following square commutes for all $h\of [m]\to [n]$ in $\simCat$ as explained below.
+\[\xymatrix{
+Y[n]\ar[d]_{Y(h)} \ar[r]^(.3){\chi'[n]} & \cof(\gen(M))^{\simCat/[n]\dual} \ar[d]^{h\ri}\\
+Y[m] \ar[r]^(.3){\chi'[m]} & \cof(\gen(M))^{\simCat/[m]\dual}
+}\]
+The functor $h\ri$ sends each $F\of\simCat/[n]\dual\to \cof(\gen(M))$ to the functor $h\ri(F)$ that satisfies $h\ri(F)(g) = F(h\circ g)$. Therefore the equation expressed in the diagram holds:
+\begin{align*}
+h\ri(\chi'[n](y))(g) &= \chi'[n](y)(h\circ g) = \\
+\chi[\dom (h\circ g)](Y(h\circ g)(y))) &= \chi[\dom (g)](Y(g)(Y(h)(y))) =\\
+\chi'[m](Y(h)(y))(g)
+\end{align*}
+
+The morphism $f$ is the pullback of $\gen(M\s)$ because $\chi'[n](x)(\id) = \chi[n](x)$ and a basic fact about pullbacks.
+\[\xymatrix{
+X[n]\ar[d]_f\ar[r] & \dom\gen(M\s)[n] \ar[r]\ar[d]_{\gen(M\s)[n]} & \dom(\gen(M))\ar[d]^{\gen(M)} \\
+Y[n] \ar[r]^(.4){\chi'[n]} \ar@/_2ex/[rr]_{\chi[n]} & \cof(\gen(M))^{\simCat/[n]\dual} \ar[r]^(.6){F\mapsto F(\id)} & \cod(\gen(M))
+}\]
+The diagram hold for every $f$ and shows that $\gen(M\s)$ belongs to $M\s$ at the same time. Hence $\gen(M\s)$ is a generic morphism of $M\s$.
+\end{proof}\hide{ Even if we cannot build $\cof(\gen(M))\s$ in $\cat S$, that does mean the pullback is not a modest morphism. }
+
+\subsection{Generic fibration}
+
+This subsection shows that the class $M\s\f$ of fibrations in $M\s$ has its own generic morphism $\gen(M\s\f)$.
+
+\begin{definition}
+For each $n\of\nno$ the object $\cod(\gen(M\s\f))$ is an object of pairs $(x,y)$ where $x\of \cod(\gen(M\s\f))$ and $y$ is a lifting operator for the fibration $\bullet\to\simplex[n]$ that $x$ represents. There is a canonical way to pull back liftings and hence lifting operators.
+\[\xymatrix{
+A\ar[rr]^a\ar[d]_c && B \ar[rr]^b\ar[d]_(.4)d && C\ar[d]^e\\
+D\ar[rr]_f \ar@{.>}[urrrr]_(.7){l(b\circ a, g\circ f)}\ar@{.>}[urr]^{l(a, f)} && E \ar[rr]_g && F
+}\]
+For each $\phi\of \simCat([m],[n])$, $\cod(\gen(M\s\f))(\phi)(x,y) = (\cod(\gen(M\s))(\phi)(x),y')$, where $y'$ is $y$ transported along $\simplex(\phi)$.
+\end{definition}
+
+
+\begin{lemma} The morphism $\gen(M\s\f)$ is a fibration. \end{lemma}
+
+\begin{proof} For each horn inclusion $H(m,l)$ and each pair of morphisms $f$ and $g$ such that $\gen(M\s\f)\circ f=g\circ H(m,l)$, there is a lifting operator for the pullback of $\gen$ along $g$. The combination of all of these is a filler operator for all of $\gen(M\s\f)$.
+\end{proof}
+
+
+\begin{lemma} The object $\cod(\gen(M\s\f))$ is a Kan complex. \end{lemma}
+
+\begin{proof} For each $f\of\horn_k[n]\to \cod(\gen(M\s\f))$, the pullback of $\gen$ along $f$ descends along $H(n,k)$ by theorem \ref{descent}. The descended fibration has a characteristic function. This is the filler for the horn inclusion. %why?
+
+There is a little technical issue here. The constructions used in the proof of \ref{descent} are defined in terms of a dependent product (along $H(n,l)$) and hence only defined up to isomorphism. This is not a problem here because the product are finite and explicitly definable in terms of the functors $\cof(\gen(M))^\cat I \to \cof(\gen(M))$ that witness the existence of limits over finite index categories $\cat I$ in $\cof(\gen(M))$.
+
+This construction is the filler operator that proves that $\cod(\gen(M\s\f))$ is a complex.
+\end{proof}
+
+
+\subsection{Univalence}
+
+\begin{definition}[Univalence]. A fibration $f\of X\to Y$ is \emph{univalent} if weakly equivalent fibres are connected by a path. This means that if $g,h\of Z\to Y$ and if there is a weak equivalence $k\of g\ri(X)\to h\ri(X)$ such that $h\ri(f)\circ k = g\ri(f)$, then there is a homotopy $\kappa\of g\to h$.
+\end{definition}
+
+After showing that a path in the codomain of a fibration (a morphism $\simplex[1]\to\cod f$) induces a weak equivalence of the fibres this subsections shows that the converse holds for the generic fibration, i.e.\ that weakly equivalent pullbacks are connected by a path.
+
+\begin{lemma} Let $f\of X\to Y$ be a fibration of $\cat S\s$. For each $g\of \simplex[1]\times W\to Y$ the pullbacks of $f$ along $g_0=g\circ (\simplex(\delta^1_0),\id_W)$ and $g_1=g\circ(\simplex(\delta^1_1),\id_W)\of W\to Y$ are weakly equivalent. \end{lemma}
+
+The following diagram shows the context.
+\[\xymatrix{
+ g_i\ri(X) \ar[rr]^{f\ri(\simplex(\delta^1_i)\times \id_W)} \ar[d]_{g_i\ri(f)}  && g\ri(X) \ar[r]^{f\ri(g)} \ar[d]_{g\ri(f)}  & X\ar[d]^f\\
+ W \ar[rr]_{\simplex(\delta^1_i)\times \id_W} && \simplex[1]\times W \ar[r] & Y\\
+}\]
+The index $i$ equals $0$ or $1$. 
+
+\begin{proof} The morphisms $\delta^1_i\of 1\to \simplex[1]$ are deformation retracts, with $\id_{\simplex[1]}\of\simplex[1]\to\simplex[1]$ acting as homotopy between itself and $\delta^1_i\circ\bang_{\simplex[1]}$ in either case. The deformations help to show that $f\ri(\simplex(\delta^1_i)\times \id_W)$ are weak equivalences.
+
+Let $Y$ be a cofibrant replacement of $g\ri(X)$ and let $c\of Y\to g\ri(X)$ be an acyclic fibration. The composition $g\ri(f)\circ c$ is a fibration and so is $(g\ri(f)\circ c)^Y$ by corollary \ref{pullback exponential}. Define $h_i$ as the following filler.
+\[\xymatrix{
+1\ar[d]_{\simplex(\delta^1_i)} \ar[rrr]^(.4){*\mapsto \id_Y} &&& Y^Y \ar[d]^{(g\ri(f)\circ c)^Y}\\
+\simplex[1]\ar[rrr]_(.4){x\mapsto \lambda y.(x,g\ri(f)(c(y)))}\ar@{.>}[urrr]^(.4){h_i} &&& (\simplex[1]\times W)^Y
+}\]
+
+The transpose $h^t_i$ satisfies $g\ri(f)\circ c\circ h^t_i\circ(\simplex(\delta^1_{i})\times \id_Y) = (\simplex(\delta^1_{i})\times \id_W)\circ (\pi_1\circ g\ri(f))$.
+\[ \xymatrix{
+Y \ar[rr]^(.4){\simplex(\delta^1_{i})\times \id}\ar[d]_{\pi_1\circ g\ri(f)} && \simplex[1]\times Y \ar[r]^(.6){h^t_i}\ar[d]_{\id\times(\pi_1\circ g\ri(f)) } & Y\ar[dl]^{g\ri(f)\circ c} \\
+W \ar[rr]_(.4){\simplex(\delta^1_{i})\times \id} &&\simplex[1]\times W
+}\]
+
+Let $c_i\of Y_i\to g_i\ri(X)$ be the pullback of $c$ along $f\ri(\simplex(\delta^1_{i})\times \id_W)$. 
+There is a unique morphism $k_i\of  Y\to Y_i$ such that $g\ri(f)\circ c\circ f\ri(\simplex(\delta^1_{i})\times \id_W)\circ k_i = (\simplex(\delta^1_{i})\times \id_W)\circ g_i\ri(f) \circ c_i\circ k_i$.
+\[\xy
+(0,10)*+{Y}="left",(20,10)*+{Y_i}="center",(30,0)*+{W}="bottom",(30,20)*+{Y}="top",(40,10)*+{\simplex[1]\times W}="right"
+\ar^\id "left";"top" \ar@{.>}|{k_i} "left";"center" \ar_{\pi_1\circ g\ri(f)} "left";"bottom"
+\ar "center";"top" \ar|(.33){g_i\ri(f)\circ c_i} "center";"bottom"
+\ar^{g\ri(f)\circ c} "top";"right" \ar_{\simplex(\delta^1_{i})\times \id} "bottom";"right"
+\endxy\]
+The morphism $h_i$ is a homotopy between $\id$ and $f\ri(\simplex(\delta^1_{i})\times \id_W)\circ k_i$. In the other direction $k_i\circ f\ri(\simplex(\delta^1_{i}\times \id_W) = \id_{Y_i}$, because factorizations through pullback squares are unique.
+\[\xy
+(0,10)*+{Y_i}="left",(24,10)*+{Y_i}="center",(34,0)*+{W}="bottom",(34,20)*+{Y}="top",(44,10)*+{\simplex[1]\times W}="right"
+\ar^{f\ri(\dotsm)} "left";"top" \ar@{.>}|{k_i\circ f\ri(\dotsm)} "left";"center" \ar_{g_i\ri(f)} "left";"bottom"
+\ar "center";"top" \ar|(.4){g_i\ri(f)\circ c_i} "center";"bottom"
+\ar^{g\ri(f)\circ c} "top";"right" \ar_{\simplex(\delta^1_{i})\times \id} "bottom";"right"
+\endxy\]
+
+Both $Y_i$ are weakly equivalent to $Y$. Since $Y_i$ are weakly equivalent to $g_i\ri(X)$, they are weakly equivalent to each other. %note that it is a fibre wise equivalence!
+\end{proof}
+
+The equivalence between $\cat S\s/\simplex[1]$ and $\cat S^{\simCat/[1]\dual}$ helps to turn weak equivalences into correspondences and thus to show that weakly equivalent fibres are connected.
+
+
+\begin{definition} The nondecreasing morphisms $[n]\to[1]$ form a partial ordered set isomorphic to $[n+1]$. For all $i\of[n+1]$ and $j\of[n]$ let $\chi^n_i\of[n]\to[1]$ satisfy:
+\[ \chi^n_i(j) =\left\{
+	\begin{array}{cc}
+		0 & \textrm{if $i<j$}\\
+		1 & \textrm{if $i\geq j$}
+	\end{array}
+\right.\]
+
+Let $f\of X\to Y$ be a morphism in $\cat S\s$. Let $\hcg(f)$ be the following object of $\cat S^{\simCat/[1]\dual}$. 
+\[ \hcg(f)[\chi^n_i] =\left\{
+	\begin{array}{cc}
+		Y[n] & \textrm{if $i=0$}\\
+		\set{ (x,y)\of X[i]\times Y[n] | f[i](x) = y\cdot[i] } & \textrm{if $0<i\leq n$}\\
+		X[n] & \textrm{if $i=n+1$}
+	\end{array}
+\right.\]
+Here $y\cdot[i] = Y(\iota)(y)$ where $\iota\of[i]\to[n]$ is the inclusion of $[i]$ as initial segment of $[n]$.
+
+Let $\phi\of \chi^m_i\to\chi^n_j$. Note that if $j=0$ then $i=0$, if $j=n+1$ then $i=m+1$ because $\chi^n_j\circ \phi= \chi^m_i$. If $i>0$ let $\phi'\of [i-1]\to [j-1]$ be the restriction of $\phi$ to the initial segment $[i-1]$ of $[n]$.
+\[ \hcg(f)(\phi) =\left\{
+	\begin{array}{cc}
+		Y(\phi) & \textrm{if $j=0$}\\
+		Y(\phi)\circ \pi_1 & \textrm{if $0<j\leq n$ and $i=0$}\\
+		X(\phi')\times Y(\phi) & \textrm{if $0<j\leq n$ and $0<i\leq n$}\\
+		X(\phi')\circ \pi_0 & \textrm{if $0<j\leq n$ and $i=m+1$}\\
+		X(\phi') & \textrm{if $j=n+1$}
+	\end{array}
+\right.\]
+\end{definition}
+
+This construction helps because the pullbacks along $\simplex(\delta^1_i)$ are $X$ and $Y$, so $X$ and $Y$ are weakly equivalent if $\hcg(f)$ is a fibration.
+
+\begin{lemma} If $f$ is a weak equivalence of complexes, then $\hcg(f)$ is a fibration. \end{lemma}
+
+\begin{proof} Let $u\of U\to \simplex[n]$ be an arbitrary horn inclusion and let $a\of U\to \dom(\hcg(f))$ and $b\of \simplex[n]\to \simplex[1]$ satisfy $\hcg(f)\circ a=b\circ u$. Proving this lemma means filling this square with a morphism $d$.
+\[\xymatrix{ U\ar[r]^a\ar[d]_u & \bullet \ar[d]^{\hcg(f)} \\ \simplex[n] \ar[r]_b\ar@{.>}[ur]^{d} & 
+\simplex[1]}\]
+
+The proof stands on two legs. Firstly, the object $\hcg(f)$ is defined in such a way that a morphism $g\of z\to \hcg(f)$ where $z\of Z\to \simplex[1]$ corresponds to a commutative square $(g_0,g_1)\of z\ri(\simplex(\delta^1_1)) \to f$.
+\[\xy
+(0,13)*+{Z}="z", (7,1)*+{\simplex[n]}="sn", (14,13)*+{\bullet}="dhcg", (28,7)*{\iff},
+(42,14)*+{1}="a",(56,14)*+{\bullet}="b",(70,14)*+{X}="c",
+(42,0)*+{\simplex[1]}="d",(56,0)*+{Z}="e",(70,0)*+{Y}="f"
+\ar^g "z";"dhcg" \ar_z "z";"sn" \ar^{\hcg(f)} "dhcg";"sn"
+\ar|{\simplex(\delta_1^1)} "a";"d" \ar "b";"a"\ar|{z\ri(\simplex(\delta^1_1))} "b";"e"\ar^{g_0} "b";"c"
+\ar^f "c";"f" \ar^(.4)z "e";"d" \ar_(.4){g_1} "e";"f"
+\endxy\]
+
+Let $v=b\ri(\simplex(\delta^1_1))$ and $\tilde v=u\ri(v) = (b\circ u)\ri(\simplex(\delta^1_1))$. Both are cofibrations because they are decidable monomorphisms whose codomain is cofibrant.
+The morphism $a$ corresponds to a commutative square $\tilde v\to f$ and the filler $d$ corresponds to a commutative square $v \to f$
+\[\xy
+(0,14)*+{U\cap V}="uv", (28,14)*+{V}="v", (42,14)*+{1}="po",
+(14,11)*+{X}="x",(14,3)*+{Y}="y",
+(0,0)*+{U}="u", (28,0)*+{\simplex[n]}="sn", (42,0)*+{\simplex[1]}="pa"
+\ar_{\tilde v} "uv";"u" \ar^{\tilde u} "uv";"v" \ar_(.6){a_0} "uv";"x"
+\ar@{.>}^{d_0} "v";"x" \ar^v "v";"sn"\ar^\bang "v";"po"
+\ar^{\simplex[1]} "po";"pa" \ar^f "x";"y"
+\ar^(.6){a_1} "u";"y" \ar_u "u";"sn"
+\ar@{.>}_{d_1} "sn";"y" \ar_b "sn";"pa"
+\endxy\]
+
+Secondly, because $f$ is a weak equivalence, it factors as an acyclic fibration $f_1\of W\to Y$ following an acyclic cofibration $f_0\of X\to W$. Like all acyclic cofibrations with fibrant domains, $f_0$ has a left inverse $f_0^{-1}$.
+\[\xymatrix{
+X\ar[d]_{f_0}\ar[r]^\id & X\ar[d]^\bang\\
+W\ar[r]_\bang \ar@{.>}[ur]|{f_0^{-1}} & 1
+}\]
+
+Because $f_1$ is an acyclic fibration, there is a filler $c_0\of U\to W$ for the square $f_1\circ(f_0\circ a_0) = a_1\circ \tilde v$.
+\[\xymatrix{
+U\cap V\ar[d]_{\tilde v}\ar[r]^(.6){f_0\circ a_0} & W\ar[d]^{f_1}\\
+U\ar[r]_{a_1}\ar@{.>}[ur]^{c_0} & Y
+}\]
+
+
+Because $X$ is fibrant, there is a filler $c_1$ for $\bang_{\simplex[n]}\circ u = \bang_X\circ f_0^{-1}\circ c_0$.
+\[\xymatrix{
+U\ar[r]^{f_0^{-1}\circ c_0}\ar[d]_u & X\ar[d]^\bang\\
+\simplex[n]\ar[r]_\bang\ar@{.>}[ur]^{c_1} & 1
+}\]
+
+The morphism $c_1$ satisfies $c_1\circ v\circ \tilde u = c_1\circ u\circ\tilde v = f_0^{-1}\circ c_0\circ \tilde v = a_0$, which makes $c_1\circ v$ a candidate for $d_0$. Unfortunately $f\circ c_1\circ u = f\circ f_0^{-1}\circ c_0$ is not necessarily equal to $a_1$, so $f\circ c_1$ is not a suitable candidate for $d_1$.
+
+The object $W$ is fibrant because $f_1$ is a fibration. Lemma \ref{triple lift} provides a homotopy $\phi\of\id\to f_0\circ f_0^{-1}$ which makes $f_0$ a deformation retract.
+\[\xy
+(0,12)*+{X+X}="2x", (12,24)*+{\simplex[1]\times X}="px", (12,0)*+{W+W}="2w", (24,12)*+{\simplex[1]\times W}="pw", (48,12)*+{W}="w"
+\ar_{f_0+f_0} "2x";"2w" \ar^{\simplex(\delta_1^1)\times\id} "2x";"px"
+\ar|{\id\times f_0} "px";"pw" \ar^{f_0\circ\pi_0} "px";"w"
+\ar|{\simplex(\delta_1^1)\times\id} "2w";"pw" \ar_{(\id_W,f_0\circ f_0^{-1})} "2w";"w"
+\ar@{.>}|(.6)\phi "pw";"w"
+\endxy\]
+Here $k=(\simplex(\delta_0^1),\simplex(\delta^1_1))\of 1+1\to \simplex[1]$ is the cycle inclusion.
+
+Since $c_0\circ \tilde v = f_0\circ c_1\circ v\circ \tilde u$ the morphisms $c_0$ and $f_0\circ c_1\circ v$ have a unique factorization $c_2$ through the union $U\cup V$.
+\[\xy
+(0,10)*+{U\cap V}="uv", (10,20)*+{U}="u", (10,0)*+{V}="v", (20,10)*+{U\cup V}="u_v", (40,10)*+{W}="w"
+\ar^{\tilde v} "uv";"u" \ar_{\tilde u} "uv";"v"
+\ar "u";"u_v" \ar^{f_0\circ c_1\circ v} "u";"w"
+\ar "v";"u_v" \ar_{c_0} "v";"w"
+\ar@{.>}|{c_2} "u_v";"w"
+\endxy\]
+
+The inclusion $U\cup V\to \simplex[n]$ is a cofibration and by lemma \ref{triple lift} there is a filler for it and $\simplex(\delta^1_1)$ in $W$ because $W$ is a fibrant object.
+\[\xy
+(0,12)*+{U\cup V}="uv", (12,24)*+{\simplex[1]\times (U\cup V)}="puv", (12,0)*+{\simplex[n]}="sn", (24,12)*+{\simplex[1]\times \simplex[n]}="psn", (48,12)*+{W}="w"
+\ar "uv";"sn" \ar^(.3){\simplex(\delta_1^1)\times\id} "uv";"puv"
+\ar "puv";"psn" \ar^{f_0\circ\phi\circ c_2} "puv";"w"
+\ar|{\simplex(\delta_1^1)\times\id} "sn";"psn" \ar_{c_1} "sn";"w"
+\ar@{.>}|(.6){c_3} "psn";"w"
+\endxy\]
+
+
+
+Let $d_1=f_1\circ c_3\circ(\simplex(\delta^1_0)\times \id)\of\simplex[n]\to Y$. This way $d_1\circ v=f_1\circ f_0\circ c_1\circ v = f\circ d_0$ and $d_1\circ u = f_1\circ c_0 = a_1$ as required.
+
+By generalization there are fillers for all generic horn inclusions. Therefore $\hcg(f)$ is a fibration.
+\end{proof}
+
+
+\begin{proposition} The generic modest fibration $\gen(M\s\f)$ is univalent. \label{univalence} \end{proposition}
+
+%hoe zit het met het parametrische?
+\begin{proof} Because of the closure properties of $M$, $\hcg(f)\of M\s$ if $f\of M\s$. If $f$ is a weak equivalence of modest complexes, then $\hcg(f)$ is the pullback of $\gen(M\s\f)$ along some morphism $\phi\of\simplex[1]\to\cod(\gen(M\s\f))$. This $\phi$ is the path that connects a pair of weakly equivalent fibred of $\gen(M\s\f)$ and which makes the fibration univalent. This also works parametrically.
+
+Let $D\of \cat S\s\to \cat S^{\simCat/[1]\dual}$ be the functor that satisfies $DW[\chi^n_i]=W[n]$. This functor corresponds to $\simplex[1]\ri\of \cat S\s\to \cat S\s/\simplex[1]$. Let $g\of X\to W$ and $h\of Y\to W$ satisfy $h\circ f=g$. Define $k\of\hcg(f) \to DW$ by
+\begin{align*}
+k[\chi^n_0](y) &= h[n](y)\\
+k[\chi^n_i](x,y) &= h[n](y) \textrm{ if $0<i\leq n$}\\
+k[\chi^n_{n+1}](x,y) &= g[n](x)
+\end{align*}
+
+This morphism $k$ corresponds to a modest fibration $k'\of\bullet\to \simplex[1]\times W$ which is a pullback of $\gen(M\s\f)$.
+\end{proof}
+
+\subsection{Conclusion}
+
+\begin{theorem} The class $M\s\f$ of fibrations that are locally in $M$ has a generic morphism which is univalent. \label{univalent universe}\end{theorem} 
+
+\begin{proof} Proposition \ref{univalence} shows that a generic morphism is necessarily univalent. The generic morphism exists because fibration descent along horn inclusions (theorem \ref{descent}). \end{proof}
+
+\section{Realizability categories}
+%hoe ver gaan?
+This section gives examples of Heyting bialgebras and generic morphisms and to show the connection with the category of PERs from the introduction.
+
+
+\subsection{Assemblies}
+The following \emph{category of assemblies} is the intended ambient category $\cat A$.
+
+\begin{definition} An \emph{assembly} is a pair $(X,\alpha)$ where $X$ is a set and $\alpha$ is a function from $X$ to the set $\pow^*\N$ of inhabited subsets of $\N$. A morphism of assemblies $(X,\alpha)\to(Y,\beta)$ is a function $f\of X\to Y$ that has a partial recursive function $\phi$ such that for all $x\in X$ and $y\in \alpha(x)$, $y\in\dom\phi$ and $\phi(y)\in \beta(f(x))$.
+\end{definition}
+
+
+\begin{lemma} The category of assemblies has all finite limits and colimits, is locally Cartesian closed, regular and has a natural number object. It is a Heyting category that also possesses a generic monomorphism.
+\end{lemma}
+
+\begin{proof} See \cite{MR2479466,MSC:8896618,RealCats}. \end{proof}
+
+\begin{remark} The category of assemblies is not \emph{exact}. Not every equivalence relation is the kernel pair of a coequalizer. The generic monomorphism $\gen\of X\to Y$ provides an example. Let $E$ be the equivalence relation on $Y$ defined as follows.
+\[ E(y,y') \iff (\exists x\of X)(\gen(x)=y)\leftrightarrow (\exists x'\of X)(\gen(x')=y') \]
+A quotient object for this would yield a subobject classifier and make $\Asm$ a topos, but it doesn't exist. The coequalizer $Y/E$ yields a classifier for $\neg\neg$-closed subsets instead.
+\[\xymatrix{
+X\ar[r]^\gen\ar[d] & Y\ar[d] \\
+1\ar[r]_{\gen(\neg\neg)} & Y/E
+}\]
+\end{remark}
+
+\emph{Realizable functors}, \emph{realizable presheaves} and in particular \emph{realizable simplicial assemblies} are internal functors of $\Asm$. An internal category $\cat S$ of small assemblies makes everything realizable by default.
+
+\begin{definition} Let $U$ be a universe as in \citep{MR0354798}. Let $U'$ be the element relation, i.e.
+\[ U'=\set{(x,y)\in U\times U\middle| x\in y}\]
+A $U$-small function $f\of X\to Y$ is any function that is a pullback of the projection $(x,y)\mapsto y\of U'\to U$. This projection is therefore the generic $U$-small function $\gen(U)$.
+A $U$-small morphism of assemblies is a morphism of assemblies $f\of(X,\alpha)\to(Y,\beta)$ such that $f$ is $U$-small.
+\end{definition}
+
+The $U$-small morphisms for an arbitrary universe $U$ serve as the class of functions $S$.
+
+\begin{lemma} The class of $U$-small morphisms $S$ in $\Asm$ has a generic morphism. \end{lemma}
+
+\begin{proof}
+Simply let $V$ be the set of assemblies whose underlying sets are members of $U$.
+Let 
+\[ V'=\set{(x,(X,\alpha)) \in U\times V| x\in X} \]
+There is a morphism. 
+\[\pi_1\of(V',(x,(X,\alpha))\mapsto \alpha(x))\to(V,v\mapsto\N) \]
+It is $U$-small because its underlying function is a pullback of $\gen(U)$. 
+
+Let $f\of (X,\alpha)\to (Y,\beta)$ be a $U$-small morphism. There are morphisms $g\of X\to U'$ and $h\of Y\to U$ such that $\gen(U)\circ g = h\circ \pi_1$ is a pullback square. There is a function $\phi\of U'\to\pow\N$ such that $\phi(f(x))=\alpha(x)$ for all $x\of X$. Let $h'(y) = (f(y),\lambda x\of f(y).\phi(x,y))$. The function $h'$ is a morphism of assemblies $(Y,\beta)\to (V,v\mapsto\N)$ and $f$ is a pullback of $\pi_1$ along $h'$.
+\end{proof}
+
+The class $M$ consists of families of \emph{modest sets}. The best way to define these is a lifting property.
+
+\begin{definition} Let $I$ be the assembly $(\set{0,1},i\mapsto\N)$. A \emph{modest morphism} is a morphism $f\of(X,\alpha)\to(Y,\beta)$ that has the right lifting property with respect to $\bang_I\of I\to 1$.
+\[\xy
+(0,10)*+{(X,\alpha)}="left", (10,27)*+{\bullet}="extra",(20,10)*+{\bullet}="middle", (30,20)*+{(Y,\beta)}="top", (30,0)*+{(X,\alpha)^I}="bottom", (40,10)*+{(Y,\beta)^I}="right"
+\ar^(.4)f "left";"top" \ar|(.6){f\pe\bang} "left";"middle" \ar_{\id^\bang} "left";"bottom"
+\ar "middle";"top" \ar"middle";"bottom"
+\ar^{\id^\bang} "top";"right" \ar "bottom";"right"
+\ar^(.4){\id} "extra";"middle"  \ar@{.>} "extra";"left"
+\endxy\]
+\end{definition}
+
+The morphism $f\pe{\bang_I}$ is a monomorphism, so it only has an inverse if it is an isomorphism and $f$ is a pullback of $f^I$.
+
+\begin{lemma} There is a generic modest morphism. \end{lemma}
+
+\begin{proof} Let $P$ bet the set of all partial equivalence relations on the natural numbers. Let
+\[Q=\set{(x,R)\in\pow\N\times P| \exists n\in \N. x = \set{ m\in \N | (m,n)\in R}}\]
+Let $\pi_1\of Q\to P$ be the projection $(x,R) \mapsto R$. This is a morphism of assemblies $(Q,(x,R)\mapsto x) \to \nabla P=(P, x\mapsto \N)$.
+
+A morphism $I\to(Q,\pi_0)$ corresponds to a pair $(x,R),(y,S)\in Q$ such that $x$ intersects $y$. If $R=S$ then $n\in x\cap y$ implies $x=y$ because they are both the equivalence class $n$ for the same partial equivalence relation. For this reason $\pi_1\of (Q,\pi_0)\to\nabla P$ is modest.
+
+Let $f\of(X,\alpha)\to(Y,\beta)$ is a modest morphism. The lifting property implies that if $x$ and $x'$ are member of the same fibre $f[y]$ of $f$ and if $\alpha(x)$ intersects $\alpha(x')$ then $x=x'$. That means that for each $y\in Y$ the following symmetric binary relation is a PER. \[r(y) = \set{(i,j)\in \N\times\N| \exists x\in X. \set{i,j}\subseteq \in \alpha(x)}\] Therefore $r\of(Y,\beta)\to \nabla P$ and $x\mapsto (\alpha(x),r(f(x)))$ is a morphism $(X,\alpha)\mapsto(Q,\pi_0)$. The commutative square $\pi_1\circ (\alpha,r\circ f) = r\circ f$ is a pullback.
+\[\xymatrix{
+(X,\alpha)\ar[d]_f\ar[r]^{(\alpha,r\circ f)} & (Q,\pi_0)\ar[d]^{\pi_1}\\
+(Y,\beta) \ar[r]_{r} & \nabla P
+}\]
+By generalization, $\pi_1\of (Q,\pi_0)\to\nabla P$ is the generic modest morphism. \label{generic modest}
+\end{proof}
+
+\subsection{Limits}
+Complete small categories are necessarily posets by a lemma of Freyd. Internal categories of $\Asm$ don't suffer from this restriction. This subsection shows that derived categories preserve completeness. Let $\Asm(U)$ be the category of small assemblies for a universe $U$.
+
+\begin{proposition} Let $M$ be the class of modest morphisms in $\Asm(U)$. The full internal subcategory $\cof(\gen(M))$ of \emph{modest sets} is complete. \end{proposition}
+
+\begin{proof} Modest morphisms are closed under pullback because fillers factors through pullback squares.
+The underlying set $\set{0,1}$ of $I$ is inhabited and this has two important consequences. The first is that a filler is necessarily unique. Therefore modest morphisms have the lifting property with respect to all multiples $\pi_0\of X\times I\to X$ of $\bang\of I\to 1$. By adjunction all powers of modest morphisms are modest. 
+\[\xymatrix{
+X\times I\ar[d]_{\pi_0}\ar[r] & Y\ar[d]^f & I\ar[r]\ar[d] & Y^X\ar[d]^{f^X} \\
+X\ar[r]\ar[ur] & Z\ar@{}[ur]|\iff & 1\ar[r]\ar[ur] & Z^X
+}\]
+The second consequence is that all monomorphisms--including the regular ones--are modest.
+
+These constructions generate all internal limits of $\cof(\gen(M))$.
+\end{proof}
+
+Standard simplicial homotopy throws this in our laps.
+
+\begin{proposition} The category $\cof(\gen(M\s\f))$ has all internal limits up to weak equivalence.\label{completeness} \end{proposition}
+
+\begin{proof} The category of fibrant objects of $\cat S\s\f$ is \emph{right proper}, which means that weak equivalences are stable under pullback. On the other hand, cofibration in the category of cofibrant objects coincide with locally decidable morphisms, which are stable under pullback too. So in the subcategory of fibrant cofibrant objects, acyclic cofibration are stable under pullback. By adjunction fibration are closed under dependent products. Every object in $\cat S\s$ has a cofibrant replacement, which is also fibrant. Hence every internal limit exists up to weak equivalence.
+
+That internal limits in $\cof(\gen(M\s\f))$ yield objects of $\cof(\gen(M\s\f))$ follows from the completeness of the category of modest sets.
+\end{proof}
+
+The category of 0-dimensional types of $\Asm\s$ coincides with the \emph{exact completion} \citep{MR1600009}. This leads to the following proposition.
+
+\begin{proposition} Higher order intuitionist logic cannot prove that complete categories are posets.\label{consistency} \end{proposition}
+
+
+\begin{proof} The exact completion $\Asm\ex$ of $\Asm$ is a topos (see \cite{MR1981211}). Its internal logic is a higher order intuitionistic one. 
+
+Let $\simCat_0$ be the full subcategory of $\simCat$ on the objects $[0]$ and $[1]$. The category $\Asm^{\simCat_0\dual}$ is the category of $0$-truncated $n$-simplices. The inclusion functor $Z\of \simCat_0\to\simCat$ induces a functor $Z\ri\of \Asm\s \to \Asm^{\simCat_0\dual}$. The functor $Z\ri$ turns the higher dimensional cycle and horn inclusions into isomorphisms. The only cycle inclusions are which don't turn into isomorphisms are $0\to 1$ and $1+1 \to \Delta[1]$. The horn inclusions which don't turn into isomorphisms are $\Delta(\delta^1_i)\of 1\to \Delta[1]$ and $\Lambda_i[2] \to \Delta[2]$.
+
+The injective objects, i.e.\ the complexes, for these 5 horn inclusions are precisely the \emph{pseudoequivalence relations} of \citep{MR1600009}. The category $\Asm\ex$ therefore has the same objects as the full subcategory of complexes $\Asm^{\simCat_0\dual}\f\subseteq \Asm^{\simCat_0\dual}$. Morphisms of $\Asm\ex$ are equivalence classes of morphisms in $\Asm^{\simCat_0\dual}\f$ for the relation of being homotopic. 
+
+There is a generic modest fibration in $\Asm^{\simCat_0\dual}\f$ for the same reason that there is a generic modest fibration in $\Asm\s\f$ (theorem \ref{univalent universe}). Pullbacks of fibrations are preserved by the quotient functor $Q\of \Asm^{\simCat_0\dual}\f \to\Asm\ex$ because they are examples of homotopy pullbacks \citep{GJSHT}. Therefore $\gen(M\s\f)$ is a generic family of modest sets in $\Asm\ex$.
+\end{proof}
+
+\begin{remark} The effective topos is the exact completion of the category of partitioned assemblies, which are the projective object of the category of assemblies. The category of partitioned assemblies is not Cartesian closed and for that reason partitioned modest sets are not a complete internal category of the effective topos. The effective topos has no generic modest morphism \citep{MR1023803}.
+\end{remark}
+
+\begin{remark}[Colimits] Modest sets are closed under colimits, because a morphism $I\to X+Y$ always factors through either $X$ or $Y$. Many other colimits can be defined as limits over larger diagrams. In particular the limit of a category of \emph{Lambek algebras} of an endofunctor $F$ is an initial Lambek algebra, which is how modest sets interpret $W$-types \citep{Freyd91}.
+\end{remark}
+
+\subsection*{Acknowledgments} 
+I am grateful to the Warsaw Center of Mathematics and Computer Science for the opportunity to write this paper. I am also grateful for discussions with Marek Zawadowski and the seminars on simplicial homotopy theory he organized during my stay at Warsaw University. Richard Garner, Peter LeFanu Lumsdaine and Thomas Streicher made invaluable comments on early drafts of this paper.
+
+
+
+\printbibliography
+
+\end{document}
+

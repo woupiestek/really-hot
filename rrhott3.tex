@@ -1,0 +1,530 @@
+\documentclass{amsart}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[all]{xy}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{graphicx}
+
+\title{Univalence in the effective topos}
+\author[W. P. Stekelenburg]{Wouter Pieter Stekelenburg}
+\address{Faculty of Mathematics, Informatics and Mechanics\\
+University of Warsaw\\
+Banacha 2\\
+02-097 Warszawa\\
+Poland}
+\email{w.p.stekelenburg@gmail.com}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{corol}[theorem]{Corollary}
+
+
+\theoremstyle{definition}
+\newtheorem{defin}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{example}[theorem]{Example}
+
+
+\newcommand\hide[1]{}
+\newcommand\cat\mathcal
+\newcommand\set[1]{\left\{#1\right\}}
+
+\newcommand\id{\mathrm{id}}
+\newcommand\XN{\mathbb N}
+\newcommand\N{\mathbf N}
+\newcommand\partar\rightharpoonup
+
+\begin{document}
+\maketitle
+
+\hide{In plaats van de effectieve topos zo algemeen te ontwikkelen zouden we misschien beter kunnen kijken naar interne simplicial objecten van de gewone effective topos. De theorie van interne sheaves staat gelukkig in 'Sheaves...'
+
+% vdBerg Moerdijk heeft ook iets over realizeerbaarheid
+}
+
+Because the effective topos has complete internal categories, the category of internal groupoids in the effective topos has a model of homotopy type theory or at least of its 1-truncated part. Neither the construction of the effective topos nor the construction of the groupoid model depend on special properties of the topos of sets, we can performs them over the topos of simplical sets instead. Effective simplicial groupoids are a candidate for an effective $\infty$-topos although the right model structure remains a mystery.
+
+\section{Effective Toposes}
+This section is about the effective topos over simplicial sets and over other similar toposes. To be precise, our base topos $\cat S$ has the following properties beyond being an elementary topos:
+\begin{itemize}
+\item $\cat S$ has a natural number object $\N$;
+\item $\cat S$ has enough projectives.
+%\item the terminal object $1$ is projective. %waarvoor wil ik dit ook alweer gebruiken?
+\end{itemize}
+
+\newcommand\Eff{\mathsf{Eff}}
+The natural number object induces an internal recursion theory, which defines what \emph{effective} means for the effective topos $\Eff(\cat S)$ over $\cat S$. %which I work out in
+
+That $\cat S$ has enough projectives means that $\cat S$ is the exact completion of its full subcategory of projectives. This allows us to construct the $\Eff(\cat S)$ as the exact completion of the category of \emph{partitioned assemblies}. %verwijs naar de aankomende definitie
+
+\subsection{General recursive functions}
+This section supplies the effectively computable morphisms required for building the effective topos $\Eff(\cat S)$. Hence we are looking for the internal counterparts of the \emph{general recursive functions}. These exist because recursion is essentially the universal property of natural number objects.
+
+\begin{defin} A natural number object is the combination of an object $\N$ with morphisms $z:1\to \N$ and $s:\N \to \N$ such that for each object $X$ and each pair of morphisms $x:1\to X$ and $f:X\to X$ there is a unique morphism $g: \N\to X$ such that $g\circ z = x$ and $g\circ s = f\circ \rho(f,x)$.
+\[\xymatrix{
+1\ar[r]^z\ar[d]_\id & \N \ar@{.>}[d]_g & \N\ar[l]_s \ar@{.>}[d]^g\\
+1\ar[r]_x & X & X \ar[l]^f
+}\]
+\end{defin}
+
+\begin{remark} I will let $\XN$ stand for the \emph{set} of natural numbers which is external to $\cat S$. \end{remark}
+
+Primitive recursion is basically a parametric version of this, which is available because $\cat S$ is Cartesian closed.
+
+\begin{lemma}[Primitive recursion] For each $f:X\to X$ there is a unique $\rho f:\N\times X\to X$ such that $\rho f\circ(z,\id_X) = \id_X$ and $\rho f\circ(s,\id_X) = f\circ \rho f$.
+\[\xymatrix{
+X\ar[r]^{(z,\id)}\ar[d]_\id & \N\times X \ar[d]_{\rho f} & \N\times X\ar[l]_{(s,\id)} \ar[d]^{\rho f}\\
+X\ar[r]_{\id} & X & X \ar[l]^f
+}\]
+\end{lemma}
+
+\begin{proof} There is a map $x:1\to X^X$ which points at $\id_X$, and a map $f^X:X^X \to X^X$ defined by composition. Because $\N$ is a natural number object, there is a unique $g:\N \to X^X$ such that $g\circ z = x$ and $g\circ s = f^X\circ g$. The wanted morphism $\rho f$ is the transpose of $g$ under the adjunction $-\times X \dashv -^X$.
+\end{proof}
+
+The natural numbers object is the initial algebra of the functor $X\mapsto 1+X$. Because $\cat S$ is a topos, this functor also has a terminal coalgebra, which coincides with the partial map classifier of $\N$.
+
+\begin{defin} The \emph{extended natural number object} $\N_\bot$ is the object 
+\[ \N_\bot = \set{\xi\in \Omega^\N| \xi(x)\land\xi(y) \to x=y } \]
+\end{defin}
+
+The extended natural numbers have a dual recursion property.
+
+\begin{lemma}[Corecursion] For each morphism $f:X\to 1+X$ there is a least $g:X\to \N_\bot$ such that $g(x)=0$ if $f(x)\in 1$ and $g(x) = s(g(f(x)))$ if $f(x)\in X$. 
+\[ \xymatrix{
+X \ar[r]^f\ar[d]_g & X+1 \ar[d]^{g+\id_1}\\
+\N_\bot \ar[r]_{s^{-1}} & \N_\bot+1 
+}\]
+\end{lemma}
+
+Here, least means least domain.
+
+\begin{proof} By recursion there is a function $g^t:\N \to \Omega^X$ such that
+\begin{align*} 
+g^t(0) &= \set{x\in X|f(x)\in 1} \\
+g^t(s(n)) &= f^{-1}(g^t(n))\\
+\end{align*}
+Its transpose $g:X\to \Omega^X$ is singleton valued because $g^t(m)$ and $g^t(n)$ only intersect when $m=n$ for the following reasons. The morphism $f$ splits $X$ into two complementary parts, $g^t(0)$ and $\neg g^t(0)$. For $n>0$, $g^t(n)\subseteq \neg g^t(0)$ and hence $g^t(n)\cap g^t(0) = \bot$. Therefore 
+\[ g^t(n+m)\cap \neg g^t(m) = f^{-m}(g^t(n)\cap g^t(0)) = \bot \]
+\end{proof}
+
+\begin{defin}[Minimization] The minimization operator $\mu$ is the least function $\N_\bot^\N \to \N_\bot$ such that $\mu(f) = 0$ if $f(0) = 0$ and $\mu(f) = s(\mu(f\circ s))$ if defined. 
+The minimization operator $\mu$ comes from corecursion with the morphism $g:\N_\bot^\N \to 1+\N_\bot^\N$ where $g(f):1$ if $f(0)=0$ and $g(f) = f\circ s$ if $f(0)\neq 0$.
+\end{defin}
+
+The effective topos gets its name from functions $\N\to\N_\bot$ which are \emph{effectively computable} because their definition requires only recursion and corecursion and simpler operators.
+
+\begin{defin} The class of partial recursive functions is the least class $\cat P$ of functions $\N^k \to \N_\bot$ which satisfies the following conditions.
+\begin{enumerate}
+\item The canonical embedding $\set\cdot:\N\to\N_\bot$ is in $\cat P$ as are $\set z:1\to\N_\bot$, $\set s:\N \to \N_\bot$ and the projections $\vec x \mapsto \set{x_i}:\N
+^k \to \N_\bot$ for each $k\in \XN$ and $i<k$.
+\item For each $f:\N^k\to \N_\bot$ let $f^\bot:(\N_\bot)^k\to \N_\bot$ satisfy 
+\[ f^\bot(\vec \xi) = \set{f(\vec x)\in \N \middle| \vec x \in \prod_{i<k}\xi_i} \]
+If $f:\N^k\to \N_\bot$ and $g_i:\N^l\to\N_\bot$ for $i<k$ are in $\cat P$, then so is $f^\bot\circ(g_0,\dotsc,g_{k-1}):\N^l\to\N_\bot$.
+\hide{\item For each $f:\N^k \to \N_\bot$ and each $g:\N^{k+2} \times \N_\bot$ in $\cat P$ the following morphism $h:\N^{k+1} \to\N_\bot$ is in $\cat P$:
+\[ \xymatrix{
+\N^{k+1} \ar@{.>}[d]_h \ar[r]^(.4){(\id,f,z)} & (\N_\bot)^{k+2}\times \N\ar[r]^{\id\times s} \ar[d]|{\rho((\pi_{0\dotsm(k-2)}, g)_\bot)}& (\N_\bot)^{k+2}\times \N \ar[d]^{\rho((\pi_{0\dotsm(k-2)},g)_\bot)}\\
+\N_\bot & (\N_\bot)^{k+1} \ar[l]^{(\pi_{k-1})_\bot} \ar[r]_{(\pi_{0\dotsm(k-2)}, g)_\bot} & (\N_\bot)^{k+1}
+}\]
+Here $\pi_{0\dotsm(k-2)}$ is the projection to the first $k-1$ coordinates and $\pi_{k-1}$ is the projection to the last coordinate.
+%h = \rho (\pi_{0\dotsm(k-2)}, g)_\bot \circ (\id,f):\N^{k+1}
+}
+\item If $f_i:\N^k \to \N_\bot$ are in $\cat P$ for all $i<k$, then so are $\pi_i^\bot\circ \rho(f_0^\bot,\dotsc,f_{k-1}^\bot):\N^k\times\N \to \N_\bot$. Here $\pi_i$ is the projection $\vec x\mapsto \set{x_i}:\N^k \to \N_\bot$.
+\item If $f:\N^k\times \N \to \N_\bot$ is in $\cat P$, then so is function $\mu \circ f^t: \N^k \to \N_\bot$, where $f^t:\N^k \to \N_\bot^\N$ is the transpose of $f$.
+\end{enumerate}
+\end{defin}
+
+\begin{example} According to the Church-Turing hypothesis, any effective algorithm that operators on natural numbers defines a partial recursive function. For those who still need conficing, I will give a few examples here.
+\begin{itemize}
+\item Applying primitive recursion to $s:\N\to\N$ gives addition: $\rho s(m,n) = m+n$
+% later verder over denken.
+\end{itemize}
+\end{example}
+
+
+\hide{Het volgende probleem: een functie is volgens de interne taal berekenbaar, maar valt niet in de genoemde klasse van recursive functies. Kan dat niet voorkomen?
+Het probleem is dan dat bewoonde deelverzamelingen van $\N$ niet altijd een globale snede hebben, wat meteen de reden is dat ik een projective terminaal wilde hebben.
+
+
+Ik zie niet minder dan drie mogelijkheden:
+1 alle bewoonde deelverzamelingen
+2 alle deelverzamelingen met globale snede
+3 alle deelverzamelingen die een numeral bevatten, i.e. waar één van de punten $s^n(0):1\to N$ doorheen gaat.
+
+Ik vermoed dat ze allemaal verschillend kunnen zijn\dots
+
+Geeft ook licht verschillende constructies van gepartitoneerde assemblies. Maar is er \'e\'en die we moeten ontwijken?
+}
+
+\subsection{Exact completions}
+Both $\cat S$ and $\Eff(\cat S)$ are exact completions. Carboni and Vitali 1995%cite 
+explains what this means. The following definition covers the most relevant notions.
+
+\newcommand\reg{_{\textrm{reg}}}
+\newcommand\ex{_{\textrm{ex}}}
+\newcommand\wlim{\mathrm{wlim}}
+\begin{defin} Let $\cat C$ be a category with weak finite limits and let $\cat D$ be a regular category. For each $F:\cat C\to \cat D$ and each diagram $D$ in $\cat C$ there is a canonical map $F(\wlim D) \to \lim FD$: the factorisation of the image of the weak limit cone over $D$ in $\cat C$ through the limit cone over $FD$ in $\cat D$. The functor $F:\cat C \to \cat D$ is left covering or \emph{flat} if this canonical morphism is a regular epimorphism for each finite diagram $D$. 
+
+The \emph{regular completion} of $\cat C$ is a universal flat functor $I:\cat C\to \cat C\reg$. This means that for each regular $\cat D$ and each flat functor $F:\cat C\to \cat D$ there is an up to isomorphism unique regular functor $F':\cat C\ex \to\cat D$ such that $F'I \simeq F$.
+
+The \emph{exact completion} of $\cat C$ is a universal flat functor $I:\cat C\to \cat C\ex$ to an \emph{exact} $\cat C\ex$. This means that for each exact $\cat E$ and each flat functor $F:\cat C\to \cat E$ there is an up to isomorphism unique regular functor $F':\cat C\ex \to\cat E$ such that $F'I \simeq F$.
+\end{defin}
+
+\newcommand\pro{\mathsf{Pro}}
+The reason that $\cat S$ is an exact completion, is that is has enough projectives. This means that projective object cover all objects of the category. The full subcategory $\pro(\cat S)$ of projective objects has weak limits, and the inclusion $\pro(\cat S) \to \cat S$ is an exact completion.
+
+The effective topos $\Eff(\cat S)$ over $\cat S$ is an exact completion too. The reason are outlined in my thesis. I will take advantage of this fact to present the effective topos as the exact completion of another category in this paper.
+
+\newcommand\pasm{\mathsf{Pasm}}
+\begin{defin} A \emph{partitioned assembly} is a pair $(X,f)$ where $X$ is a projective object of $\cat S$, $f:X\to \N$ is an arbitrary morphism. A morphism $(X,f) \to (Y,g)$ is a morphism $h:X\to Y$ for which there exists a partial recursive $k:\to \N_\bot$ such that $g(h(x))\in k(f(x))$ for all $x\in X$. \label{pas}
+\end{defin}%gehannes met deze definities.
+
+\hide{De epimorfismes veroorzaken verwarring. Hoe het codomein is ingebed in de natuurlijke getallen bepaalt mede of een functie getracked word. Daar gaan mijn mooie plannen.}
+
+\begin{lemma} The category $\pasm(\cat S)$ has weak finite limits. \end{lemma}
+
+\newcommand\pair[2]{\langle #1,#2\rangle}
+\begin{proof} This relies heavily on the fact that $\pro(\cat S)$ has weak finite limits.
+
+The partitioned assembly $(1,z)$ is terminal.
+
+Let $(X,f)$ and $(X,g)$ be two partitoned assemblies with the same underlying object $X$. They combine into the assembly $(X,\pair fg)$, where $\pair fg$ is the composition of $(f,g):X\to \N\times \N$ with a recursive paring function $\N\times \N \to \N$. The new assembly $(X,\pair fg)$ is the intersection of $(X,f)$ and $(X,g)$ in the sense that if $(X,h)$ is a third assembly with the same underlying object, and $\id:(X,h) \to (X,f)$ and $\id:(X,h) \to (X,g)$ are morphisms of partitioned assemblies, then so is $\id:(X,h) \to (X,\pair fg)$.
+
+Let $k:(X,f) \to (Z,h)$ and $l:(Y,f) \to (Z,h)$ be an arbitrary pair of morphisms with the same codomain. There is a weak pullback $l':W\to X$ and $k':W\to Y$ of $k$ and $l$ in $\pro(\cat S)$. Now $l':(W,\pair{f\circ l',g\circ k'}) \to (X,f)$ and $k':(W,\pair{f\circ l',g\circ k'}) \to (Y,g)$ are morphism of assemblies, and together they form a weak pullback of $k$ and $l$ in $\pasm(\cat S)$.
+
+Since $\pasm(\cat S)$ has a terminal object and weak pullbacks and hence all weak finite limits.
+\end{proof}
+
+\begin{defin} The effective topos over $\cat S$ is $\Eff(\cat S) = \pasm(\cat S)/\ex$. \end{defin}
+
+The following remarks clarify in what sense $\Eff(\cat S)$ is similar to the effective topos $\Eff$ of Martin Hyland.
+
+For realizability purposes, two subobjects $U$ and $V$ of $\N$ in $\cat S$ are \emph{equivalent}, if there are partial recursive functions between $U$ and $V$ in both directions. The topos $\Eff(\cat S)$ assigns an equivalence class of subobjects of $\N$ to each proposition of its internal language. Each subterminal object $\sigma\subseteq 1$ has a covering partitioned assembly $(S,f)$ and the image $\exists_f(S)\subseteq \N$ is one of the objects of \emph{realizers} of $\sigma$. Let numerals be global sections of $\N$ which have the following form for some $n\in \XN$. 
+\[ \underline n = \underbrace{s(\dotsm(s}_{n\textrm{ times}}(0)):1\to \N \]
+With the class of morphisms selected in definition \ref{pas}, $\sigma \simeq 1$ if and only if a numeral factors through $\exists_f(S)$.
+
+For each of the following conditions on subobjects of $\N$ there is a topos in which more subobjects satisfy the condition than that satisfy the previous one.
+\begin{enumerate}
+\item the existence of a numeral $\underline n:1\to U$,  
+\item the existence of an arbitrary global section $x:1\to U$,
+\item mere inhabitation of $\exists_f(S)$ in $\cat S$, i.e. $!:U\to 1$ is epi.
+\end{enumerate}
+
+Effective toposes that make propositions valid if their sets of realizers satisfy these weaker conditions are \emph{filter quotients} of $\Eff(\cat S)$. %cite MacLane-Moerdijk, Johnstone 2times
+Take the class of subobjects $U\subseteq \N$ that satisfy the desired condition. For each monic $m:U'\to \N$ which represents $U$, the supports of $(U',m)$ in $\Eff(\cat S)$ form the filter which induces the desired effective topos. %cite thesis
+\hide{global section behoudt niet altijd pca's, of wel? Wel als het globale pca's zijn, en dat durf ik wel te wedden.}
+
+\hide{
+Is het erg? Het heeft wel iets spannends.
+Weet je wat, ik denk dat het prima zonder gaat.
+}
+
+\subsection{Generic proofs}
+This sections answers the question why $\Eff(\cat S)$ is a topos. Here we rely on the work of Mat\'ias Menni, who proved that $\cat C\ex$ is a topos, if and only if the underlying category has a generic proof. There is a delicate connection with Kleene's recursion theorem.
+
+\hide{Minder belangrijk?}
+
+\hide{modest sets, hiervoor of hierna?}
+\section{The internal groupoid interpretation of type theory}
+In this section we bring Hofmann and Streicher's groupoid interpretation of type theory to $\Eff(\cat S)$. %cite Hofmann Streicher.
+The major difficulty is in making everything work with the constructive internal logic of $\Eff(\cat S)$. To achieve that, we replace families of groipoids by cloven fibrations.
+
+The model which is worked out in the rest of this section looks roughly as follows. Cloven fibrations are a special type of functor between groupoids, which form a weak factorization system together with deformation retracts. All of this structure exists internally in $\Eff(\cat S)$. The result is a category $\cat G$ of internal groupoids, together with a weak factorisation system.
+
+For each internal groupoid $I$ the category $\cat F(I)$ of cloven fibrations $F:E\to G$ is a reflective subcategory of $\cat G/I$ and therefore complete. Every fibration comes with an internal groupoid structure. Internal functors $G:I\to J$ induce change of base functors $\cat F(J) \to \cat F(I)$ which preserve these structures and this way $\cat F(-)$ becomes a model of type theory, including depedent products and identity types.
+
+\subsection{Internal groupoids}
+Groupoids are categories all of whose morphisms are isomorphisms. Internalization requires nothing beyond finite limits.
+
+Let $\cat C$ be any category with finite limits. An \emph{internal groupoid} in $\cat C$ is a tuple $(G_0,G_1,d_0,d_1,r_G,t_G)$ where $G_0$ and $G_1$ are arbitrary objects, 
+$d_0,d_1:G_0\to G_1$ arbirary morphisms and $r_G:G_0 \to G_1$ is a morphism which satisfies $d_0\circ r = d_1\circ r = \id_{G_0}$; let $d'_i:G_2\to G_1$ be the pullbacks of $d_i$ along $d_{1-i}$. The morphism $t_G:G_1\times_{G_0}G_1 \to G_1$ makes the squares $d_i \circ t = d_i\circ d'_i$ commute and are pullbacks.
+
+\[ \xymatrix{
+G_0 \ar[r]^{r_G}\ar[d]_{r_G}\ar[dr]^\id & G_1\ar[d]^{d_0}\\
+G_1 \ar[r]_{d_1} & G_0
+}
+\xymatrix{
+G_1 \ar[d]_{d_0} & G_2 \ar[d]_{t_G}\ar[l]_{d'_0} \ar[r]^{d'_1} \ar@{}[dl]|<\llcorner\ar@{}[dr]|<\lrcorner & G_1 \ar[d]^{d_1} \\
+G_0 & G_1 \ar[l]^{d_0} \ar[r]_{d_1} & G_0
+}\]
+
+
+Functors internalize in the same manner.
+
+Let $G=(G_0,G_1,d_0,d_1,r_G,t_G)$ and $H=(H_0,H_1,d_0,d_1,r_H,t_H)$ be two internal groupoids. A functor $F:G\to H$ is a pair of morphisms $f_0:G_0 \to H_0$ and $f_1:G_1 \to H_1$ which together with the morphisms $f_2:G_1 \to H_2$ they induce commute with $d_i$, $r$ and $t$. 
+\[ \xymatrix{
+G_2 \ar[rr]^{d'_0}\ar[dd]_{d'_1} \ar[dr]^{f_2} && G_1 \ar[dr]^{f_1}\ar[dd]^(.7){d_1} \\
+& H_2 \ar[rr]^(.3){d'_0}\ar[dd]_(.3){d'_1} \ar@{}[dr]|<\lrcorner && H_1\ar[dd]^{d_1}\\
+G_1 \ar[rr]^(.7){d_0} \ar[dr]_{f_1} && G_0 \ar[dr]^{f_0} \\
+&H_1 \ar[rr]_{d_0} && H_0
+} \xymatrix{
+G_0 \ar[r]^{f_0}\ar[d]_{r_G} & H_0 \ar[d]^{r_H}\\
+%G_1 \ar[r]_{f_1} & G_1\\
+G_1 \ar[r]^{f_1}\ar[d]_{t_G} & H_1 \ar[d]^{t_H}\\
+G_2 \ar[r]_{f_2} & G_2}\]
+
+Composition of an pair of functors $f=(f_0,f_1):G\to H$ and $g = (g_0,g_1):K\to G$ is defined as follows.
+\[f\circ g = (f_0\circ g_0,f_1\circ g_1)\]
+Hence $\id_G = (\id_{G_0}, \id_{G_1})$ for each groupoid $G$.
+
+\newcommand\grpd{\mathsf{Grpd}}
+Together these form the category $\grpd(\cat C)$ of internal groupoids in $\cat C$.
+
+\hide{potential advantages of set builder}
+
+\hide{Some properties, like closure under limits and colimits?
+Refer to what sources for this?
+}
+
+\subsection{Cloven fibrations}
+There is an algebraic weak factorisation system on this category of internal groupoids as defined in Garner%cite
+This subsection shows how the factorisation is formally defined, uses the factorisation in the definition of classes of morphisms and then shows that this indeed gives a factorisation system.
+
+For each functor $F:H\to G$, $H/F$ is the groupoid which consists of morphisms $m:x\to f_0 y$ in $H_1$ and commutative squares. Just like groupoids, it has a formal definition which uses only pullbacks and commutative diagrams. The version here uses the more convenient set builder notation, which works in any topos.
+The objects of $H/F$ are defined as follows.
+\begin{align*}
+(H/F)_0 &= \set{(x,y)\in H_1\times G_0| d_1(x) = f_0(y) }\\
+(H/F)_1 &= \set{(w,x,y,z)\in H_1^3\times G_1 \middle| \begin{array}{c} d_0(w) = d_0(w),\\ d_1(w)=d_0(f_1(z)),\\ d_1(x)=d_0(y),\\ d_1(y)=d_1(f_1(z)),\\ t_H(f_1(z),w) = t_H(y,x) \end{array}}\\
+\end{align*}
+The morphisms of $H/F$ are defined as follows.
+\begin{align*}
+d_0(w,x,y,z) &= (w,d_0(z))\\
+d_1(w,x,y,z) &= (y,d_1(z))\\
+r_{H/F}(x,y) &= (x,r_H(d_0(x)),x,r_G(y))\\
+t_{H/F}((w,x,y,z),(y,x',y',z')) &= (w,t_H(x',x),y',t_G(y',y))\\
+\end{align*}
+
+There are two obvious projection functors $D_0(F): H/F \to H$ and $D_1(G):H/F\to G$, and identity arrows in the groupoids provide a third functor $R(F):G\to H/F$ that sends objects to identities. Formally:
+\begin{align*}
+(D_0(F))_0(x,y) &= d_0(x) \\
+(D_0(F))_1(w,x,y,z) &= x \\
+(D_1(F))_0(x,y) &= y \\
+(D_1(F))_1(w,x,y,z) &= y \\
+R(F)_0(x) &= (r_H(f_0(x)),x) \\
+R(F)_1(x) &= (r_H(f_0(d_0(x))),f_1(x),r_H(f_0(d_1(x))), x)
+\end{align*}
+
+Now $D_0(F)R(F) = F$ and $D_1(F)R(F) = \id_{G}$.
+
+\begin{defin} Let $F:G\to H$ be a functor of groupoids. A \emph{cleavage} of $F$ is a functor $C:H/F \to G$ such that $CR(F)=\id_G$ and $FC = D_0(F)$. If $F$ has a cleavage, then $F$ is a \emph{cloven fibration}. A \emph{deformation} of $F$ is a functor $D:H\to H/F$ %D?
+such that $DF = R(F)$ and $D_0(F)D = \id_H$. I $F$ has a deformation, then $F$ is a \emph{deformation retract}.
+\end{defin}
+
+\begin{lemma} Let $F:G\to H$ have a deformation $D:H\to H/F$, let $F':G'\to H'$ have cleavage $C:H'/F'\to G'$, let $A:G\to G'$ and $B:H\to H'$ satisfy $BF = F'A$. There is a unique functor $E:H\to G'$ such that $EF = A$ and $F'E = B$.
+\[\xymatrix{
+G \ar[d]_F \ar[r]^A & G'\ar[d]^{G'} \\
+H\ar[r]_B \ar[ur]^E & H'
+}\]
+\end{lemma}
+
+\begin{proof} There is a functor $B/A:H/F \to H'/F'$ defined by the following equations:
+\begin{align*}
+(B/A)_0(x,y) &= (b_1(x), a_0(y))\\
+(B/A)_1(w,x,y,z) &= (b_1(w),b_1(x),a_1(y),b_1(z))
+\end{align*}
+This functor satisfies $B/A \circ R(F) = R(F')\circ A$ and $D_0(F')\circ B/A = B\circ D_0(F)$. Let $E = C\circ B/A \circ D$. Now $EF =  A$ and $F'E = B$ as the following diagram shows.
+\[\xymatrix{
+G \ar[rr]^A \ar[dd]_F \ar[dr]^{R(F)} && G'\ar[d]_{R(F')} \ar[r]^{\id_{G'}} & G' \ar[dd]^{F'}\\
+& H/F \ar[r]^{B/A}\ar[d]^{D_0(F)} & H'/F' \ar[ur]_C \ar[dr]_{D_0(F')} \\
+H \ar[r]_{\id_H} \ar[ur]^D & H \ar[rr]_B && H'
+}\]
+\end{proof}
+
+\begin{lemma} For each functor $F:G\to H$, $R(F)$ is a deformation retract and $D_0(F)$ is a cloven fibration. \end{lemma}
+
+\begin{proof} The deformation $D:H/F \to (H/F)/R(F)$ is defined as follows.
+\begin{align*}
+D_0(x,y) &= (x,x,r_G(y),r_H(f_0(y))) \\
+D_1(w,x,y,z) &= (x,f_0(y),f_0(y),f_0(y))\\
+\end{align*}\hide{Dit is bijna niet te doen: zestien elementen zijn ook met een hoop overlap te veel}
+
+The cleavage $C: H/D_0(F) \to H/F$ is defined as follows.
+\begin{align*} 
+C_0(x,(y,z)) &= (y\circ x, z) \\
+C_1(w,x,(w',x',y',z'),z) &= (w'\circ w, x, y',z'\circ z)
+\end{align*}
+\end{proof}
+
+These lemmas justify the following conclusion.
+
+\begin{theorem} Deformation retracts and cloven fibrations form a weak factroisation system on the category of groupoids. \end{theorem}
+
+
+
+
+
+
+
+
+\newcommand\fib{\mathsf{Fib}}
+\newcommand\pb{^*}
+\subsection{Modeling type theory}
+This section shows how groupoids form a model of type theory.
+
+For each groupoid $I$ there is a category of fibrations $\fib(I)$. If $\Phi:X\to I$ and $\Psi:Y\to I$ are cloven fibrations, then $\fib(I)(\Phi,\Psi)$ contains all functors $H:X\to Y$ which satisfy $\Psi H=\Phi$. In the case of Grothendieck fibrations, there is an extra requirement that the functors preserve \emph{Cartesian} or \emph{prone} morphisms, but this is automatic with groupoids.
+
+Because fibrations are stable under pullback because they are the right class of a factroisation system. This way a functor $F:I\to J$ induces a 2-functor $F^*:\fib(J) \to \fib (I)$.
+
+An important property of $\fib$ is that it is invariant under deformation retracts.
+
+
+
+
+\subsection{dependent products of fibrations}
+While Hofmann and Streicher's paper describes a lot of structure form type theory, dependent products are left out. Therefore, this subsection will provide a description of depedent products of cloven fibrations.
+
+The construction of depedent produucts depedents on exponentials from the base catgeory $\cat C$ and the following lemma.
+
+\begin{lemma} If $\cat C$ is Cartesian closed, then so is $\grpd(\cat C)$. \end{lemma}
+
+\begin{proof} If $G$ and $H$ are groupoids, then the exponential groupoid $H^G$ consists of functors and natural transformations. These are collections of morphisms in $\cat C$ whcih satisfy certain equations, so the construction of $H^G$ requires only exponentials in $\cat C$ and finite limits, but both are given. \end{proof}
+
+The category $\cat C$ induces dependent products of fibrations along functors, if every slice of $\cat C$ is Cartesian closed, i.e. if $\cat C$ is \emph{locally Cartesian closed}. This is a property that any topos satisfies. We will assume that $\cat C$ for the rest of this section.
+
+The following insight makes the construction of dependent products easier to understand.
+
+\newcommand\disc{_\textrm{disc}}
+\begin{defin} For each $I$ of $\cat C$, $I\disc$ is the discrete groupoid based on $I$. For each morphism $f:I\to J$, $f\disc:I\disc \to J\disc$ is the induced functor. For each groupoid $G$, \end{defin} %discrete groupoid///faithful groupoid
+
+\begin{lemma} The categories $\grpd(\cat C)/I\disc$ and $\grpd(\cat C/I)$ are isomorphic. \end{lemma}
+
+\begin{proof} The forgetful functor $D_0:\cat C/I \to \cat C$ preserves pullbacks. This is enough to preserve groupoids. For each groupoid $G$ in $\grpd(\cat C/I)$ the functor $!:G\to 1$ is mapped to a functor $D_0G \to D_01 = D_0 G \to I\disc$. Thus we get from $\grpd(\cat C/I)$ to $\grpd(\cat C)/I\disc$
+
+Because $(I\disc)_0 = (I\disc)_1 = I$, a functor $F:G\to I\disc$ consists of an object of object $F_0:G_0 \to I$ and an object of morphisms $F_1:G_1 \to I$ and the groupoid structure of $G$ is fibered over $I$ because the functor preserves compisition and identities. This show that the forgetful functor is an isomorphism of categories.
+\end{proof}
+
+\appendix
+\section{Dependent products of fibrations}
+The category of groupoids is Cartesian closed, but not locally Cartesian closed. The fact that fibrations admit an interpretation of depedent products is therefore not trivial. This section explains how they are constructed.
+
+The category $\cat E$ whose internal groupoids are the subject of the section has to be locally Cartesian closed itself to make everything work. But this is property every topos has.
+
+\subsection{Sketch} Since every functor factors as a cloven fibration following a deformation retract, the construction of depedent product can be split in two constructions, one for either type of functors. This simplifies the description of depedent products considerably.
+
+The category of fibrations over a fixed groupoid has exponentials. If $F:I\to J$ is a fibration, fibrewise exponential provide a right adjoint of $F^*:\fib(J)\to\fib(I)$ using fibrewise exponentials.
+
+If $F:I\to J$ is a deformation retract, then the deformation $D:J\to J/F$ provides a functor $G = D_1(F)\circ D:J\to I$ such that $GF = \id_I$, and a natural isomorphism $D:\id_J \to FG$. The functor $G$ is both left and right adjoint to $F$ and therefore $G\pb$ is both a left and a right adjoint to $F\pb:\fib(J) \to \fib(I)$. %mijn god ik hoop dat dit werkt.
+
+\subsection{Along fibrations}
+The category of groupoids has exponential objects and this property extends to $\fib(I)$ for a fixed groupoid $I$. The following is a fibrewise definition of the exponential objects.
+
+
+\begin{defin} Let $\Phi:X\to I$ and $\Psi: Y\to I$ be functors with cleavages $K_\Phi:I/\Phi \to I$ and $K_\Psi:I/\Psi \to I$. Note that for each $m:i\to i'$, the cleavages define functors $\kappa_\Phi(m):X_{i'} \to X_i$ and $\kappa_\Psi(m):Y_{i'}\to Y_i$.
+\[ \kappa_\Phi(m)(x) = K_\Phi(m,x)\quad \kappa_\Psi(m)(x) = K_\Phi(m,x) \]
+The objects of $Y^X_I$ are pairs $(i,\xi)$ where $i\in I$ and $\xi:X_i \to Y_i$ is a functor. A morphism $(i,\xi) \to (i',\xi')$ is a pair $(m,\mu)$ where $m$ is a morphism $i\to i'$ in $I$ and where $\mu$ is a natural transformation between the functors $\xi\circ \kappa_\Phi(m) \to \kappa_\Psi(m)\circ\xi'$.
+\[\xymatrix{
+X_{i'}\ar[d]_{\kappa_\Phi(m)}\ar[r]^{\xi'} & Y_{i'}\ar[d]^{\kappa_\Psi(m)} \\
+X_i \ar[r]_{\xi} \ar@{=>}[ur]^\mu & Y_i
+}\]
+The functor $\Psi^\Phi:Y^X_I \to I$ is the projection to the first variable. Its cleavage $K_{\Psi^\Phi}$ sends $(m: i\to i', (i', \xi'))$ to $(i, \kappa_\Psi(m)\circ \xi'\circ \kappa_\Psi(m)^{-1})$.
+\end{defin}\hide{Heb ik hier de juiste volgorde te pakken?}
+
+The fibrewise definition makes it easy to see that there is an adjunction between exponentials and fibrewise products.
+
+If $F:I\to J$ and $\Phi:X\to I$ are fibrations, then $\Phi$ is also a morphism $\Phi: F\circ \Phi  \to F$ in $\fib(J)$. It induces a morphism $\Phi^F: (F\circ \Phi)^F  \to F^F$. The dependent product $\prod_{F}(\Phi)$ is the pullback of $\id_F^t:\id_J\to F^F$ along $\Phi^F$.\hide{verder uitwerken?}
+
+\[ \xymatrix{
+\prod_F(\Phi)\ar[r] \ar[d]\ar@{}[dr]|<\lrcorner & (F\circ \Phi)^F\ar[d]^{\Phi^F} \\
+\id_J \ar[r]_{\id_F^t} & F^F
+}\]
+
+A fibre of $\prod_F(X)_j$ is the set of functors $\xi:I_j \to X$ for which $\Phi_j\circ \xi = \id_{I_j}$.
+
+\subsection{Along retracts}
+The construction along retracts relies on the deformation, form which the adjoint functors are derived.
+
+\begin{lemma} Let $F:I\to J$ be a functor and let $D:J \to J/F$ be a deformation. Then $F^*:\fib(J) \to \fib(I)$ has both adjoints. \end{lemma}
+
+\begin{proof} The functor $G = D_1(F)\circ D$ satisfies $G\circ F = D_1(F)\circ D\circ F = D_1(F)\circ K = \id_I$ and therefore $F^*\circ G^* = \id_{\fib(I)}$.
+
+%The other direction work roughly as follows: $F:I \to J$ is a cross section of all isomorphism classes of $J$ and $D:J\to J/F$ induces a natural isomorphism between $\id_J$ and $FG$. This natural isomorphism lift to an isomorphism $G^* F^* \Phi \to  \Phi$ for each fibration $\Phi$.
+
+For the other composition $G^* F^*$ we need to be more explicit. Let $(FG)^* \Phi: (FG)^*X\to J$ be the pullback of $\Phi$ along $J$. This means:
+\begin{align*} 
+(FG)^*X_0 &= \set{ (j,x)\in J_0\times X_0 | FG(j)=\Phi(x) }\\
+(FG)^*X_1 &= \set{ (f,g)\in J_1\times C_1 | FG(f) = \Phi(g) }\\
+\end{align*}
+The functor $(FG)^*\Phi:(FG)^*(X)\to J$ is the projection to the first coordinate.
+
+Let $K:J/\Phi \to X$ be a cleavage of $\Phi$. We use this to define two functors:
+\begin{align*}
+A &:(FG)^*(X)\to X & A(j,x) &= K(D(j),x)\\
+B &:X\to (FG)^*(X) & B(x) &= (\Phi(x),K(D(\Phi(x))^{-1},x))\\
+\end{align*}
+
+The functor $A$ is well defined, because if $(j,x)\in (FG)^*X_0$ then $D(j)$ is a morphism $j\to FG(j) = \Phi(x)$ and hence $(D(j),x)\in J/\Phi$; it commutes with $\Phi$ and $(FG)^*(\Phi)$ because $\Phi(A(j,x)) = \Phi(K(D(j),x)) = j = (FG)^*(\Phi)(j,x)$. The pullback of $A:\Phi \to (FG)^*(\Phi)$ along $F$ is the identity on $F^*\Phi$ as the following computations shows.
+\[ F^*A(i,x) = (i,A(Fi,x)) = (i,K(D(F(i)), x)) = (i,K(\id_{\Phi(x)}, x)) = (i,x) \]
+For this reason, $A$ is the counit for the adjunction $G^* \dashv F^*$.
+
+The functor $B$ is well defined because if $x\in X$ then $D(\Phi(x))^{-1}: FG\Phi(x) \to \Phi(x)$ and hence $(D(\Phi(x))^{-1},x)\in J/\Phi$; it commutes with $\Phi$ and $(FG)^*(\Phi)$ because $(FG)^*(\Phi)(B(x)) = \Phi(x)$ be definition. The pullback of $B:(FG)^*(\Phi) \to \Phi$ along $F$ as the following computations shows.
+\[ F\pb B(i,x) = (i,K(D(Fi)^{-1},x)) = (i, K(\id_{\Phi(x)},x) = (i,x) \]
+For this reason, $B$ is the unit for the adjunction $F^*\dashv G^*$.
+\end{proof}
+
+The unit and counit are homotopy inverses of each other, so $F^*$ and $G^*$ are adjoint equivalences. As left adjoint it provides coproducts along retracts and as right adjoint products.
+
+\hide{
+The following also hold:
+\begin{align*}
+A(B(x)) &= A(\Phi(x),K(D(\Phi(x))^{-1},x)) = K(D(\Phi(x)),K(D(\Phi(x))^{-1},x))\\
+&= K(\id,x) = x \\
+B(A(j,x)) &= B(K(D(j),x))\\
+&= (\Phi(K(D(j),x)),K(D(\Phi(K(D(j),x)))^{-1},K(D(j),x)))\\
+&= (j,K(D(j)^{-1},K(D(j),x)) = (j,x)
+\end{align*}
+}
+
+
+
+\end{document}
+
+
+
+
+
+
+\hide{Let $\Phi: X\to I$ be a cloven fibration and let $F:I\to J$ be a functor of groupoids. 
+
+There is family of groupoids $Y:F/J_0 \to J_0$. Its objects are pairs $(x\in I_0,y:F_0(i) \to j)$ and a morphism $(x,y) \to (x',y')$ is a morphism $f:x\to x'$ such that $y = y'\circ F_0(f)$. 
+
+Let $\Delta_{J_0}: \cat C \to \cat C/J_0$ be the constant family functor. It induces a functor $\grpd(\cat C) \to \grpd(\cat C/J_0)$ which we will also call $\Delta_{J_0}$. The family of groupoids $Y:F/J_0 \to J_0$ comes with a familiy of functors $P:Y \to \Delta_{J_0}(I)$, which can be described by the projection $(x,y)\mapsto x$. %??
+
+Pointwise exponentiation gives a functor $\Delta_{J_0}(\Phi)^Y:\Delta_{J_0}(X)^Y\to\Delta_{J_0}(I)^Y$. The pullback of $P^t:1\to \Delta_{J_0}(I)^Y$ along $\Delta_{J_0}(\Phi)^Y$ is the object of objects of $\prod_F(\Phi)$. Informally it is a set of pairs $\set{(j,\xi:F/j \to X)\in J_0\times \Delta_{J_0}X^{F/j} | \Phi\circ \xi = P_j }$ together with its projection to $J_0$.
+
+Informally a morphism $(j,\xi) \to (j', \xi')$ is a pair $(\phi,\psi)$ where $\phi:j\to j'$ is a morphism of $J$ and $\psi$ is a natural transformation $\xi\to \xi\circ F/\phi$; here $F/\phi$ is the functor $F/j \to F/j'$ which $\phi$ induces by composition. There is a construction for this in $\cat C/J_1$, since it only involves exponentials and equations.
+}
+
+
+%\[ \set{(j,\xi,\xi',\eta)\in J_1\times \prod_F(\Phi)_{0,d_0j}\times \prod_F(\Phi)_{0,d_1j}\times\Delta_{J_1}(X/X)^{F/d_0j} \middle| \eta: \xi \to \xi'\circ F/j, \xi}\]
+%hier
+
+
+
+
+
+
+
+
+
+
+\hide{Voor elke groupoide de category van fibraties erheen. Locale Cartesische geslotenheid wordt dan belangrijk. }
+
+%grootste probleem nu: product types.
+
+
+
+
+
+\hide{
+concretely, what are we looking for, and what do we have to prove? What is the goal of this section?
+
+How are groupoids a model of type theory?
+In particular, do identity types do what they are supposed to do?
+}
+
+
+
+\end{document}

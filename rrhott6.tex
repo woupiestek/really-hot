@@ -1,0 +1,961 @@
+\documentclass{amsart}
+\usepackage{a4}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[all]{xy}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{graphicx}
+
+
+\title{Realizability of Univalence\\
+Modest Kan complexes}
+\author[W. P. Stekelenburg]{Wouter Pieter Stekelenburg}
+\address{Faculty of Mathematics, Informatics and Mechanics\\
+University of Warsaw\\
+Banacha 2\\
+02-097 Warszawa\\
+Poland}
+\email{w.p.stekelenburg@gmail.com}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{corol}[theorem]{Corollary}
+
+
+\theoremstyle{definition}
+\newtheorem{defin}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{example}[theorem]{Example}
+
+
+\newcommand\hide[1]{}
+\newcommand\cat\mathcal
+\newcommand\set[1]{\left\{#1\right\}}
+
+\newcommand\id{\mathrm{id}}
+\newcommand\ri{^*}
+
+\newcommand\Set{\mathsf{Set}}
+%\newcommand\sSet{\mathsf{sSet}}
+\newcommand\N{\mathbb N}
+\newcommand\pow{\mathbf P}
+\newcommand\Asm{\mathsf{Asm}}
+
+\newcommand\sier{{[1]}}
+
+\begin{document}
+
+
+
+\begin{abstract}
+A \emph{modest Kan complex} is a \emph{modest simplicial set} which has a right lifting property with respect to horn inclusions $\Lambda_k[n] \to \Delta[n]$. This paper shows that there is a univalent universe of modest Kan complexes among \emph{simplicial assemblies}.
+\end{abstract}
+
+\maketitle
+
+\newcommand\pers{\mathbf{PER}}
+\section{Introduction}
+A PER (Partial Equivalence Relation) is a symmetric transitive relation of the natural numbers. A morphism of PERs $R\to S$ is a function $f$ of the equivalence classes, for which there is a partial recursive function $\phi$ such that $\phi(x)\in f(y)$ for all $x\in y$. Together they form a category $\pers$ which has a lot of interesting properties. PERs provide a semantics for the polymorphic $\lambda$-calculus. \cite{MR1099188,MR2074932,MR1003196}%\cite{MR1265066,MR1099188,MR1167031,MR2729220,MR2074932,MR1076404,MR1003196,MR1239602}
+
+The category $\pers$ is closely related to the category of modest sets, which is a subcategory of the effective topos. \cite{MR1097022,MR1023803,MR2479466}
+
+This paper is essentially about \emph{simplicial PERs}, i.e. the simplicial objects of $\pers$ and their potential use as a model of \emph{homotopy type theory}. We study these through the related category of \emph{simplicial modest sets}. 
+
+Concretely, we show that inside the category of assemblies the \emph{category of discrete opfibrations} over a fixed base category all have their own versions of modest sets and all have a generic modest morphism (theorem \ref{genmod}). We define injective morphisms for arbitrary families of morphisms and show that they too have a generic modest morphism (theorem \ref{geninjmod}). Finally we introduce the \emph{simplicial assemblies}. \hide{and show that the Kan complexes form a \emph{category of fibrant objects} (theorem \ref{Hmtp}).} The generic modest Kan fibration lives in the category of Kan complexes because its codomain is a complex (theorem \ref{complex}). Ultimately we show that the generic modest fibration is \emph{univalent} (theorem \ref{univalence}).
+
+\section{Assemblies}
+This section provides some background on the category of assemblies and the category of modest sets. For general information about the effective topos see \cite{MR2479466}.
+
+\begin{defin}[Assemblies] Let $\N$ be the set of natural numbers and let $\pow\N$ be its powerset.
+An \emph{assembly} is a pair $(X,\phi)$ where $X$ is a set and $\phi:X\to \pow \N$ is a function which assigns a non empty set of numbers $\phi(x)$ to each element of $X$.
+
+Let $(X,\phi)$ and $(Y,\chi)$ be assemblies. A partial recursive function $f$ \emph{tracks} $g:X\to Y$ if $f: \phi(x) \to \chi(g(x))$. A morphism $(X,\phi)\to (Y,\chi)$ is a function $g:X\to Y$ which is tracked. With composition and identities defined as in the category of sets, $\Asm$ is the category of assemblies and morphisms of assemblies.
+\end{defin}
+
+The category of assemblies has a number of useful properties which we will mention without proving them here.
+
+\newcommand\nno{\mathbf N}
+\begin{lemma} The category of assemblies\dots
+\begin{itemize}
+\item is finitely complete and cocomplete;
+\item is locally Cartesian closed, regular and extensive;
+\item has a natural number object $\nno$.
+\end{itemize}
+
+\label{biCartesian closed + nno}
+\end{lemma}
+
+\begin{proof} See \cite{MR2479466,MSC:8896618,RealCats}. \end{proof}
+
+Modest sets are a subcategory of the category of assemblies which is complete in a suitable internalized sense and equivalent to an internal category of the category of assemblies.
+
+\newcommand\bang{!}
+\begin{defin}[Modesty]
+Let $\nabla 2$ be the assembly $(\set{0,1}, i \mapsto \N)$. A morphism $f:X\to Y$ of assemblies is modest of the following diagram is a pullback:
+\[\xymatrix{
+X \ar[r]^{\id^\bang} \ar[d]_{f} & X^{\nabla 2} \ar[d]^{f^{\nabla 2}}\\
+Y \ar[r]_{\id^\bang} & Y^{\nabla 2}
+}\]
+Here $\id^\bang$ stands for composition with the unique maps $\bang_X:X\to 1$ and $\bang_Y: Y\to 1$ to the terminal object. This is another way of saying that $f$ is \emph{right orthogonal} to $\bang:\nabla 2\to 1$ and to the multiple $W\times \bang$ for every assembly $W$. A \emph{modest set} is an assembly $X$ for which $\bang:X\to 1$ is modest (this implies $\id^\bang$ is an isomorphism).
+\end{defin}
+
+\begin{lemma} Modest morphisms\dots
+\begin{itemize}
+\item are closed under composition, pullbacks and products, including dependent products; 
+\item include all monomorphisms and the unique map $\bang_\nno:\nno \to 1$;%all gedefinieerd?
+%\item are also closed under all colimits; kom hier aan het einde op terug
+\item are pullbacks of a single \emph{generic modest morphism} $\mu$.
+\end{itemize}\end{lemma}
+
+\begin{proof} See \cite{MR1023803,MR2479466,MR1097022}.\hide{see Hyland, mainly} \end{proof}
+
+
+The \emph{generic modest morphism} $\mu:E\to B$ induces an internal category $\pers$. The object of objects of $\pers$ is $B$. The object of morphisms is $\coprod_{(i,j)\in B\times B} E_j^{E_i}$. Since it corresponds to modest sets, it is a complete internal category. Contrary to complete internal categories of $\Set$, which are posets by the theorem of Freyd, $\pers$ is not a poset. \hide{cite Freyd!?}
+
+The global sections functor $\Gamma:\Asm \to\Set$ turns $\pers$ into the category which we described in the introduction with subquotients of $\N$ as objects and tracked functions as morphisms.
+
+
+%ik kan de consequencties voor compleetheid nog niet onder woorden brengen.
+
+\newcommand\simcat{{\mathord{\triangle}}}%{\mathsf{fo}}
+%\newcommand\Simcat{{\mathord{\vartriangle}}}%{\mathsf{FO}}
+\newcommand\dual{^{op}}
+\section{Modest opfibrations}
+This section introduces discrete opfibrations, which act like functors from internal categories to $\Asm$. We construct a generic modest morphism for in the category of opfibrations for each internal category.
+
+\subsection{Discrete opfibrations}
+In order to mimic assembly-valued functors $\cat B \to \Asm$ we use a kind of functor $\cat E\to \cat B$ with the property that the fibres are discrete categories and that a morphism $f:i\to j$ in $\cat B$ induces a functor $f':\cat E_i\to\cat E_j$ between the fibres. Both of these properties come from the following.
+
+\newcommand\cod{\mathrm{cod}}
+\newcommand\dom{\mathrm{dom}}
+\newcommand\catasm{\mathsf{cat(Asm)}}
+\newcommand\tot{\mathord{\int}}
+\newcommand\rat{\mathbf{s}}
+A functor $F:\cat E\to\cat B$ is a \emph{discrete opfibration} if the following square is pullback.
+\[\xymatrix{
+\cat E^\sier \ar[r]^\dom \ar[d]_{F^\sier} & \cat E\ar[d]^F\\
+\cat B^\sier \ar[r]_\dom & \cat E
+}\]
+Here $\sier$ is the category with two objects $0,1$ and one non identity arrow $0\to 1$, so $\cat B^\sier$ and $\cat B^\sier$ are the arrow categories. In both cases $\dom$ is the projection of the arrows to their domains. In other words, discrete opfibration are right orthogonal to the functors $c\mapsto(c,0):\cat C\to \cat C\times\sier$.
+
+The category $\cat B$ acts on $\cat E$ in the following way. For each object $e$ of $\cat E$ and each morphism $\phi:F(e)\to b$ in $\cat B$ there is a unique morphism $\phi_e:e\to \phi\cdot e$ such that $F(\phi_e) = \phi$. 
+
+\begin{lemma} If $G:\cat B\to \cat C$ is a discrete opfibration, then $F:\cat A\to \cat B$ is the discrete opfibration if and only of $GF$ is. Moreover, discrete opfibrations are stable under pullback. \label{disc1} \end{lemma}
+
+\begin{proof} This holds for any class of right orthogonal morphisms, for straightforward reasons. \end{proof}
+
+For each internal category $\cat B$ of $\Asm$, $\Asm^{\cat B}$ is the category whose objects are discrete opfibrations with codomain $\cat C$ and whose morphisms are commutative triangles. The following lemmas serve to demonstrate that this category indeed functions as a category of presheaves.
+
+\begin{lemma}[Yoneda] Let $F/\cat D$ be the category that has morphisms $f:Fc\to d$ as objects and where a morphism $f\to f'$ is a pair $(g,g')$ where $g$ is a morphism of $\cat C$, $g'$ of $\cat D$ and $Fg'\circ f=f'\circ Fg$. For each functor $F:\cat C\to \cat D$ opfibrations are orthogonal to the functor $I(F):\cat C \to F/\cat D$ which sends $c$ to $F\id_c$. \label{Yoneda} \end{lemma}
+
+%dit lijkt me verkeerd om.
+\begin{proof} Let $G:\cat D\to\cat E$ be an opfibration and let $D:\cat C\to \cat \cat D$ and $E:F/\cat D \to \cat E$ satisfy $GD=EI$. Define $H:F/\cat D\to \cat C$ by $H(f:Fc\to d) = E(f,\id_{d})\cdot D(c)$ for objects of $\cat B^\sier$. For $(g,g'):(f:Fc\to d) \to (f':Fc'\to d')$ let $H(g,g') = E(g,g')_{H(f)}$. The functor $H$ satisfies $HI(b) = G(b)$ and $GH(f) = G(E(f,\id_{Fc})\cdot D(c))$.
+\end{proof}
+
+Another way in which that $\Asm^{\cat B}$ is like a presheaf category, is that in inherits a lot of the structure of $\Asm$.
+
+\begin{lemma} The category $\Asm^{\cat B}$ has all finite limits and colimits and is locally Cartesian closed and regular. \end{lemma}
+
+\begin{proof} Finite limits is trivial with lemma \ref{disc1}. The functor $\cat C \mapsto \cat C^\sier$ preserves all coproducts because the category $\set\to$ is connected. If a discrete opfibration $F:\cat C\to\cat D$ is a regular epimorphism of objects, then so is $F^\sier$, which explains coequalizers and regularity. Since every slice category of $\Asm^{\cat B}$ is another category of the form $\Asm^{\cat C}$ it suffices to show Cartesian closure. 
+
+Let $F:\cat C\to\cat B$ and $G:\cat D\to\cat B$ be opfibrations. The opfibration $G^F:\cat D^{\cat C}_{\cat B}$ is defined as follows. The objects of $\cat D^{\cat C}_{\cat B}$ are pairs $(b,H)$ where $b$ is an object of $\cat B$ and $H:b/\cat B \times_{\cat B} \cat C\to \cat D$ is a functor that commutes with $\cod\times F:b/\cat B \times_{\cat B} \cat C \to \cat B$ and $G:\cat D \to \cat B$. A morphism $(b,H) \to (b', H')$ is a morphism $f:b\to b'$ such that $H(x\circ f,Y) = H'(x,Y)$. This is an opfibration because for each object $(b,H)$ and each $f:b\to b'$, $(b,H\circ f\ri)$, where $f\ri$ is composition with $f$ to the right, is the unique lifting.
+
+Let $E:\cat E\to\cat B$ be another fibration. The opfibration $G:\cat D\to\cat B$ is orthogonal to $\cat E\times_{\cat B}\cat C \to E/\cat B\times_{\cat B} \cat C$ by lemma \ref{Yoneda} and there is a bijection between functors $E/\cat B\times_{\cat B} \cat C \to\cat D$ which commute with $\cod\times F$ and $G$ and functors $\cat E \to \cat D^{\cat C}_{\cat B}$ which commute with $E$ and $G^F$ by the definition given above. Note that this also works when $F$ is not an opfibration.
+\end{proof}
+
+\subsection{Total category}
+Let $\catasm$ be the category of internal categories and functors in $\Asm$. There is an obvious functor $\tot:\Asm^{\cat B} \to \catasm$ that sends a discrete opfibration $F:\cat E\to\cat B$ to its domain: the \emph{category of elements} of the discrete opfibration.
+
+\begin{lemma} The total category functor $\tot$ has a right adjoint. \end{lemma}
+
+\begin{proof}  %For each object $i$ of $\cat B$ let $i/\cat B$ be the coslice. For each morphism $\phi:i\to j$ let $\phi^*:j/\cat B\to i/\cat B$ be the functor that sends $\xi:j\to k$ to $\xi\circ \phi:i\to k$ for each object $\xi:j\to k$ in $j/\cat B$.
+
+For an arbitrary internal category $\cat C$ let $|\rat\cat C|$ be the following category. The objects are pairs $(i,F)$ where $i$ is an object of $\cat B$ and $F$ is a functor $i/\cat B \to \cat C$. A morphism $(i,F) \to (j,G)$ is a morphism $\phi:i\to j$ such that $F\circ \phi\ri = G$. Here $\phi\ri$ means composition with $\phi$ on the right. The opfibration $\rat\cat C:|\rat\cat C|\to\cat B$ is the projection to the first variable. %zo moet het toch wel?
+
+For an arbitrary functor $H:\cat C \to \cat D$, let $\rat H$ be the functor that satisfies $\rat H(i,F) = (i,HF)$ on objects and $\rat H(\phi,f)=(\phi,Hf)$ on morphisms.
+
+Let $D(\cat C):\rat\cat C \to\cat B$ be the functor which sends $(i,F)$ to $i$ and which is the identity on morphisms. This is a discrete opfibration because for each object $(i,F)$ of $\rat\cat C$ and each morphism $\phi:P(i,F) \to j$ there is a unique morphism $\phi:(i,F) \to (j,F\circ \phi\ri)$ over $\phi$.
+
+This functor $\rat$ has the property that there is a bijection between functors $\cat C\to|\rat\cat D|$ which commute with $F:\cat C\to\cat B$ and $\rat \cat D$ and functors $F/\cat B\to \cat D$, because of the definition of $\rat$. We can compose $G:\cat C\to\cat D$ with $\dom:F/\cat C \to \cat C$ to get the commutative triangle $F\to \rat \cat D$. For $H:f\to\rat \cat D$ we compose the corresponding $H':F/\cat B \to \cat D$ with the functor $I:\cat C\to \cat F/\cat B$ of lemma \ref{Yoneda}.
+
+\hide{
+To see that this functor is adjoint, we define the transposes. 
+Let $F:\cat C \to \cat B$ be a discrete opfibration, let $\cat D$ be an arbitrary internal category and let $G:\cat C\to \cat D$ be an arbitrary functor. 
+For each object $x$ of $\cat C$ let $G^t(x)$ satisfy $G^t(x) = (F(x),\xi\mapsto G(\xi\cdot x))$; for morphisms $G^t(x)(\phi) = G(\phi_x)$. For a morphism $f:x\to x'$ let $G^t(f) = Ff$. %dit maar proberen
+
+Let $H:\cat C\to \rat\cat D$ be a functor which satisfies $D(\cat D) H = F$ in other words $H = (F,K)$ for some complicated map $K$. Define $H^t$ by letting $H^t(x) = K(\id_k)$ if $H(x) = (k,K)$ for objects and $H^t(f) = H(\dom f)(F(f))$.
+
+We check and see that:
+\begin{align*}
+& G^{tt}(x) = G(\id_{F(x)}\cdot x) = G(x)\\ %okay
+& G^{tt}(f) = G^t(\dom f)(Ff) = G(Ff_{\dom f}) = G(f) \\ %jeej!
+& H^{tt}(x) = (F(x), \xi\mapsto H^t(\xi\cdot x)) = (F(x), \xi\mapsto K(\xi\cdot x)(\id)) =\\
+&\quad (F(x), \xi \mapsto K(x)(\xi\ri(\id))) = (F(x), K(x)) = H(x)\\ %vooruit
+& H^{tt}(f) = Ff = DHf = Hf\\%het werkt hier.
+\end{align*}}
+
+Hence we get an adjunction $\tot\dashv\rat$.
+\end{proof}
+
+\hide{zo komen we er moet een hoop gepuzzel toch. Godverdomme wat een gedoe zeg!}
+\subsection{Modest opfibrations}
+We bring modest morphisms to $\Asm^{\cat B}$ by considering morphisms of discrete opfibrations whose underlying functors are modest.
+
+\begin{defin} A discrete opfibration $F:X\to Y$ is \emph{modest} if its object map $F_0:X_0\to Y_0$ is a modest morphism. \end{defin}
+
+\begin{lemma} There is a generic modest opfibration. \end{lemma}
+
+\begin{proof} Let $\mu:E\to B$ be the generic modest morphism of $\Asm$. The category of $\pers$ was defined with $B$ as object of objects and with $\pers(i,j) = E_j^{E_i}$ as homsets. We define the internal category of pointed PERs $\pers_*$ in a similar way. Its object of objects is $E$ and $\pers_*(i,j) = \set{f\in E_{\mu(j)}^{E_\mu(i)}| f(i)=j}$; the idea is that $E$ is a set of PERs $E_i$ paired with a chosen point $1\to E_i$ and that morphisms are point preserving.
+
+There is a forgetful functor $U:\pers_* \to \pers$; for objects $U(i) = \mu(i)$ and for morphism $U$ is the identity. This is a discrete opfibration because for each morphism $f:E_i \to E_j$ and each point $p:1\to E_i$, $f(p):1\to E_j$ is he unique point that turns $f$ into a morphism of pointed PERs. We claim that this is the generic modest opfibration.
+
+Let $F:\cat C\to \cat D$ be a modest opfibration. There are morphisms $e:\cat C_0\to E$ and $b:\cat D_0\to B$ such that $b\circ g = \mu\circ e$ is a pullback square. We turn these into functors in the following way. In $\catasm/\cat D$  the action $x\mapsto f\cdot x$ for $f\in \cat D_1$ induces a morphism $\dom(\cat D) \to F^F$ where $\dom(\cat D):\cat D^{\to}\to\cat D$ is the domain functor and $F^F$ is the exponential as fibration. Because $F^F \simeq b\ri(U^U)$ we get an object map which turns $b:\cat D_0\to B$ into a functor $\cat D\to\pers$.
+
+In $\catasm/\cat C$ for the action $x\mapsto f\cdot x$ for $f\in \cat C_1$ induces a morphism $F\dom(\cat C) \to F^F$. This time we rely on $F\ri(F^F) \simeq (b\circ F)\ri(U^U) = (\mu\circ e)\ri(U^U)$ to turn the morphism $e:\cat C_0\to E$ into a functor $e:\cat C\to \pers_*$.
+
+\hide{
+Similarly, for $g\in \cat C_1$, $(g,x)\mapsto Fg\cdot x$ induces a morphism $\cat C_1 \to $
+a morphism $g:k\to l$ in $\cat C$ induces a morphism $Fg\cdot:\cat C_{F(k)} \to \cat C_{F(l)}$ such that $Fg\cdot k=l$. Note that for each object $i$ of $\cat D$, $e_i:X_i \to E_{b(i)}$ is a fibred isomorphism because the square is a pullback. We define functors $b:\cat D \to \pers_*$ and $e:\cat C \to \pers_*$ by sending each morphisms to the unique morphism that commute with the $e_i$.
+\[\xymatrix{
+\cat C_i \ar[d]_{f\cdot} \ar[r]^{e_i} & E_{b(i)} \ar@{.>}[d]^{b(f)} && \cat C_{F(k)} \ar[d]_{g\cdot} \ar[r]^{e_{F(k)}} & E_{\mu(e(k))} \ar@{.>}[d]^{e(g)} \\
+\cat C_j \ar[r]_{e_j} & E_{b(j)} && \cat C_{F(l)} \ar[r]_{e_{F(l)}} & E_{\mu(e(l))}
+}\]
+}
+
+The new functors satisfy $U\circ e = b\circ F$ and even form a pullback square. For each $f:i\to j$ in $\cat B$ and each $g:E_{\mu(k)} \to E_{\mu(l)}$ in $\pers_*$ such that $b(f) = U(g)$, there is an object $k'$ of $Y_i$ such that $F(k') = i$ and $e(k') = k$ because the object maps for a pullback square. Hence there is a unique $g':k'\to l'$ in $\cat B$ such that $Fg' = f$. Because $U(e(g')) = b(f)$, $e(g')$ is the unique morphism $g:k\to l$ for which $U(g)=b(f)$. Hence the square $U\circ e = b\circ F$ is a pullback.
+
+The discrete opfibration $U:\pers_*\to\pers$ is clearly modest itself and hence a generic modest morphism.
+\end{proof}
+
+A morphism $F:\cat C \to\cat B$ in $\Asm^\cat B$ is modest precisely when $\tot(F)$ is modest. This has the following consequence.
+
+\begin{theorem} The category $\Asm^\cat B$ has a generic modest morphism. \label{genmod} \end{theorem}
+
+\begin{proof} The morphism $\rat U:\rat\pers_* \to\rat\pers$ is the generic modest morphism of $\Asm^{\cat B}$. If $\tot(F):\tot(\cat E) \to \tot(\cat B)$ is a pullback of $U:\pers_*\to\pers$ along some $X:\tot(\cat B) \to \cat \pers$, then $F$ is the pullback of $\rat U$ along the transpose $X^t$ of $X$ for the following reasons.
+there is
+Discrete opfibrations are orthogonal to coslice categories. This means that for every point $p\in \pers_*$ and every functor $F:i/\cat B\to\pers$ such that $U(p) = F(\id_i)$, there is a unique functor $F_*:i/\cat B\to\pers_*$ such that $UF_* = F$ and $F_*(\id_i) = p$.
+
+The co-unit $\epsilon_{\pers}: \rat \pers \to \pers$ is the functor that sends $(i,F)$ in $\rat \pers$ to $F(\id_i)$ and a morphism $f:(i,F) \to (j,G)$ to $Ff:F(\id_i) \to F(f)=G(\id_j)$. The description for $\epsilon_{\pers_*}$ is the same. If $(i,F)$ is an object of $\rat \pers$ and $j$ an object of $\pers_*$ such that $Uj = \epsilon(i,F) = F(\id_i)$, we get a unique functor $F_*$ such that $\epsilon(i,F_*) = j$ and $UF_* = F$ as explained above. Hence the naturalness square of the co-unit is a pullback. This implies that $\rat U$ is modest and that if $\tot(F)$ is a pullback of $U$, then $F$ is a pullback of $\rat U$.
+\end{proof}
+
+\subsection{Orthogonality and completeness}
+Just like in $\Asm$, orthogonality characterizes the modest morphisms of $\Asm^{\cat B}$. %met een verwijzing?
+
+\newcommand\disc{_{\rm disc}}
+\begin{lemma} Let $\nabla 2\disc$ be the discrete category whose object of objects is $\nabla 2$. In $\catasm$ the modest morphisms are precisely those that are right orthogonal to the constant discrete opfibrations $\nabla 2\disc \times\cat \cat B \to\cat B$. \end{lemma}
+
+\hide{\tot preserves discrete opfibrations. Kunnen we dat niet beter gebruiken?}
+\begin{proof} A discrete opfibration $F:\cat C\to\cat D$ is modest if the underlying object map $F_0:\cat C_0 \to \cat D_0$ is modest. Due to the adjunction between $X\mapsto X\disc$ and $Y\mapsto Y_0$, $\tot F_0$ is right orthogonal to $\nabla 2$ when $\tot F$ is orthogonal to $\nabla 2\disc$. The constant discrete opfibration is just a multiple and therefore right orthogonality is preserved.
+\end{proof}
+
+
+\begin{prop} For each internal category $\cat B$ of $\Asm$, $\Asm^{\cat B}$ has small complete internal categories.\end{prop}
+
+\begin{proof} The class of discrete opfibrations which are right orthogonal to $\nabla 2\disc$ are closed under all existing limits and the fibration is essentially small thanks to the generic modest morphism. \end{proof}
+
+\newcommand\sAsm{\mathsf{sAsm}}
+
+\section{Injectives}
+The categories $\Asm^{\cat B}$ are canonically enriched over $\Asm$. Enrichment modifies the lifting properties which ordinarily define Kan fibrations in simplicial sets. This section shows that for any internal family of morphisms in $\Asm^{\cat B}$, there is a generic modest injective morphism. %plaats verwijzing?
+
+\subsection{Enriched injectives}
+
+\newcommand\pb{\ar@{}[dr]|<\lrcorner}
+\newcommand\po{\ar@{}[dr]|>\ulcorner}
+\newcommand\nat{\mathrm{nat}}
+\begin{defin} Let $\nat:(\Asm^{\cat P})\dual\times \Asm^{\cat P} \to \Asm$ be the functor which sends each pair of opfibration $X,Y$ over $\cat P$ to the assembly $\nat(X,Y)$ of morphisms between them. %opfibraties wel corrct gedefinieerd!?
+
+A morphism $f:X\to Y$ has the \emph{global right lifting property} with respect to a a morphism $g:I\to J$--and $g$ has the global \emph{left} lifting property with respect to $f$--if the morphism $(f_!,g\ri) = (\nat(\id_J,f),\nat(g,\id_X))$%:\nat(J,X) \to \nat(J,Y)\times_{\nat(J,X)} \nat(I,X)$ 
+in the diagram below is a \emph{split} epimorphism.
+\[\xymatrix{ 
+\nat(J,X) \ar[drr]^{\nat(g,\id_X)} \ar[ddr]_{\nat(\id_J,f)} \ar[dr]|(.6){(f_!,g\ri)}\\%{(\nat(\id_J,f),\nat(g,\id_X))} \\
+& \bullet \ar[d]\ar[r]\pb & \nat(I,X) \ar[d]^{\nat(\id_I,f)}\\
+& \nat(J,Y) \ar[r]_{\nat(g,\id_Y)} & \nat(I,Y)
+}\]
+\end{defin} 
+
+\begin{remark}[Lifting power] The ordinary right lifting property only says that composition with $(f_!,g\ri)$ induces a surjective function on global sections, while the \emph{local} right lifting property only requires that $(f_!,g\ri)$ is a regular epimorphism. The global version is stronger than either of those. \label{liftingpower} \end{remark}
+
+\begin{example} Modest sets have the global right lifting property with respect to $\bang:\nabla 2\to 1$. \end{example}
+
+\begin{example} Discrete opfibrations have the global right lifting property with respect to $0:1\to \set\to$, though they are not the only functors that have it. \end{example}
+
+\begin{defin}[Injective and anodyne] %Let $\cat B\ri:\Asm\to \Asm^{\cat B}$ be the \emph{constant obfibration functor} which sends an assembly $I$ to the opfibration $I\disc\times \cat B\to \cat B$. 
+An $I$-indexed-family of morphisms in $\Asm^{\cat B}$ a morphism $a:D\to E$ in $\Asm^{I\disc\times\cat B}$. Let $I\ri:\Asm^{\cat B}\times \Asm^{I\disc\times \cat B}$ be the functor which sends each opfibration $F:\cat E\to \cat B$ to the opfibration $I\disc\times F:I\disc\times\cat E\to I\disc\times\cat B$. A morphism $f:X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$. A morphism is \emph{$a$-anodyne} if it has the global left lifting property with respect to all $a$-injectives. \end{defin}
+
+\hide{Hier zat vroeger een lemma over de eigenschappen van injectives. Hebben we dat hier nodig? }
+
+\hide{\section{Injectives}
+This section introduces a version of injectivity with respect to a family of morphisms and constructs generic modest injectives.
+
+\subsection{Lifting properties}
+This subsection captures the notion of having the right lifting property with respect to a family of morphism at once. We introduce a strong version of this notion in order to make it work in the category of assemblies and to ensure that ultimately our fibrations are closed under indexed products.
+
+\begin{defin}
+A morphism $f:X\to Y$ has the \emph{global right lifting property} with respect to a morphism $g:I\to J$ and $g:I\to J$ has the global left lifting property with respect to $f$, if the morphism $(f^J,X^g):X^J \to Y^J\times_{Y^I}X^I$ in the diagram below is a split epimorphism.
+\[\xymatrix{ 
+X^J \ar@/^3ex/[drr]^{X^g} \ar@/_3ex/[ddr]_{f^J} \ar[dr]|{(f^J,X^g)} \\
+& \bullet \ar[d]\ar[r]\pb & X^I \ar[d]^{f^I}\\
+& Y^J \ar[r]_{Y^g} & Y^I
+}\]
+\end{defin}
+
+The ordinary right lifting property only says that composition with $(f^J,X^g)$ induces a surjective function on global sections, while the \emph{local} right lifting property only requires that the morphism $(f^J,X^g)$ is a regular epimorphism. The global version is stronger than either of those.
+
+\begin{example} Modest sets have the global right lifting property with respect to $\bang:\nabla 2\to 1$. \end{example}
+
+\begin{example} Discrete opfibrations have the global right lifting property with respect to $0:1\to \set\to$, though they are not the only functors that have it. \end{example}
+
+\begin{defin}[Injective and anodyne] Let $\cat S$ be a locally Cartesian closed category. A tuple $(a,e)$ where $a:D\to E$ and $e:E\to I$ are two morphisms represents a family of morphisms $\set{a_i:D_i\to E_i|i\in I}$ of $\cat S$. Let $I\ri:\cat S \to\cat S/I$ be the constant family functor. A morphism $f:X\to Y$ is \emph{$(a,e)$-injective} if $I\ri(f)$ has the global right lifting property relative to $a$. A family of morphisms $(b:D'\to E',e:E'\to J)$ is \emph{anodyne} if $b$ has the global left lifting with respect to $J\ri f$ for each $(a,e)$-injective morphism $f$. An \emph{anodyne morphism} is a anodyne family with one element. \end{defin}
+}
+
+\hide{
+\begin{lemma} For each family of morphism $(a,e)$ in each locally Cartesian closed category $\cat S$ the class of $(a,e)$-injectives\dots
+\begin{enumerate}
+\item includes all isomorphisms;
+\item is closed under composition and pullbacks;
+\item is closed under all available products;
+\item is closed under local exponentiation with arbitrary exponentials;
+\item is closed under dependent products along its own members.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} 1., 2. and 3. are trivial.
+
+For 4. Let $f:X\to Y$ be a $(a,e)$-injective and let $g:W\to Y$ be any other morphism. Because $\cat S$ is locally Cartesian closed, so the exponential $f^g$ exists. The fibred exponential functor $x\mapsto x^g$ preserves split monomorphisms because every functor does. It is right adjoint to the fibred product functor $x\mapsto g\times x$ and therefore preserves pullbacks. We have $I\ri(f^g) \simeq I\ri f^{I\ri g}$ and $I\ri Y^{I\ri g} \simeq I\ri Y$ and $x\mapsto x^{I\ri g}$ commutes with other exponentials. For all of these reasons $f^g:X^W_Y \to Y$ is $(a,e)$-injective.
+%Frobenius is een beetje twijfelachtig of niet? Nee, met schoven gaat dat altijd goed.
+
+Dependent products are pullbacks of fibred exponentials. Suppose $f:X\to Y$ and $g:W\to X$ are $(a,e)$-injective. In the slice over $Y$ we have:
+\[\xymatrix{
+\prod_f(g) \ar[r]\ar[d]\pb & (\coprod_f(g))^f \ar[d]^{g^f}\\
+1\ar[r]_{*\mapsto \id} & f^f
+}\]
+The object $\coprod_f(g) = f\circ g$ is a fibration when both $f$ and $g$ are, an the same goes for the fibred exponential $g^f$. Since injectives are stable under pullback, $\prod_f(g)$ is injective.
+\end{proof}
+}
+
+\subsection{Injectives as algebras}\label{IAA}
+Injectives are a kind of Lambek algebra for a functor $S:\Asm^{\cat B}\to \Asm^{\cat B}$. This allows us to construct a generic modest injective in $\Asm^{\cat B}$. %The following borrows heavily from \cite{MR2899720}.
+
+\begin{defin}[Algebras] A \emph{pointed endofunctor} is a pair $(F,\phi)$ where $F$ is an endofunctor of a category $\cat C$ and $\phi:\id_{\cat C}\to F$ is a natural transformation. An \emph{algebra} for $(F,\phi)$ is a pair $(X,f:FX\to X)$ where $f\circ \phi_X = \id_X$. \end{defin}
+
+\begin{lemma} There is a pointed endofunctor $(S:\Asm^{\cat B\times \to}\to\Asm^{\cat B\times \to}, \sigma)$ such that $f:X\to Y$ is $a$-injective if it has an algebra structure. \end{lemma}%verdient verwijzing naar Garner
+%\to voor de aanduiding van een categorie is toch niet echt handig\dots
+
+\begin{proof}
+For each morphism $f:X\to Y$ in $\Asm^{\cat B}$ let $\nat(a,I\ri (f))$ be the following object of $\Asm^{I\disc\times \cat B}$.
+\[ \set{(x,y)\in \nat(D,I\ri(X))\times \nat(E,I\ri(Y))| f\circ x = y\circ h } \]
+Alternatively, the following pullback square defines it. 
+\[\xymatrix{
+\nat(a,I\ri(f)) \ar[r]\ar[d]\pb & \nat(D,I\ri(X)) \ar[d]^{\nat(D,I\ri(f))}\\
+\nat(E,I\ri(Y)) \ar[r]_{\nat(a,I\ri(Y))} & \nat(D,I\ri(Y))
+}\]
+
+The functor $\nat(E,I^*(-))$ is a composition of three functors which have a left adjoint. The first one $I^*$ has $I_!:\Asm^{I\disc\times \cat B}\to \Asm^{\cat B}$ which is composition with the opfibration $I\disc\times \cat B\to \cat B$. The functor $\nat(E,-)$ is the composition of the exponential $-^E$ and the functor $\cat B_*:\Asm^{I\disc}\to\Asm^{I\disc\times \cat B}$ which is right adjoint to the functor $\cat B\ri:\Asm^{I\disc}\to\Asm^{I\disc\times \cat B}$ which sends each opfibration $F:\cat E\to I\disc$ to $F\times\cat B:\cat E\times\cat B\to I\disc\times\cat B$. Hence $I_!(\cat B^*(-)\times E)$ is left adjoint to $\nat(E,I^*(-))$.
+
+The transposes of the projections $\pi_0: \nat(a,I\ri (f))\to \nat(D,I\ri(X))$ and $\pi_1:\nat(a,I\ri (f))\to \nat(E,I\ri(Y))$ satisfy $f\circ \pi_0^t = \pi_1^t\circ I_!(\cat B^*(\nat(a,I\ri (f)))\times f)$. The pointed endofunctor comes from the pushout of $I_!(\cat B^*(\nat(a,I\ri (f)))\times f)$ along $\pi_0^t$, as defined below.
+\[ \xymatrix{
+I_!(\cat B^*(\nat(a,I\ri (f)))\times D) \ar[r]^(.7){\pi_0^t} \ar[d]_{I_!(\cat B^*(\nat(a,I\ri (f)))\times f)}\po &
+X \ar[r]^{\id_X}\ar[d]_{\sigma(f)} & X \ar[d]^f \\
+I_!(\cat B^*(\nat(a,I\ri (f)))\times E) \ar[r] \ar@/_2ex/[rr]_{\pi_1^t} & S(X) \ar[r]^{S(f)} &  Y 
+}\]
+
+By definition, $f$ is $a$-injective if the canonical morphism $(a^*,f_!):\nat(E,I\ri(X))\to \nat(a,I\ri(f))$ has a section $g$. The transpose $g^t$ satisfies $f\circ g^t = \pi_1^t$ and $g^t\circ I_!(\cat B^*(\nat(a,I\ri (f)))\times f) = \pi_0^t$ and hence factors though $S(X)$ giving an algebra structure to $f$. On the other hand each algebra structure on $f$ induces an inverse of $(a^*,f_!)$ 
+\end{proof}
+
+\begin{remark} Nothing forces $S(f)$ to be injective, so the construction above does not necessarily induce a factorization system into anodyne and injective morphisms. Small object arguments don't help because $\Asm^{\cat B}$ is not cocomplete. The internal category $\rat\pers$ is \emph{algebraically complete}\cite{Freyd91}. Therefore $(S,\sigma)$ generated a free monoid in the monoidal category $\rat\pers^{\rat\pers}$, which is a monad on $\rat\pers$ whose algebras are $(S,\sigma)$-algebras. This means that modest morphisms factorize into modest injective and morphisms which have the global left lifting property with respect to modest injectives. This is not exactly the same thing as anodyne, unfortunately. \label{modfac}
+\end{remark}
+
+
+\hide{\subsection{Injectives as algebras}
+For each morphism $f:X\to Y$ let $I\ri(f)^a$ in $\cat S/I$ be the following object.
+\[ \set{(x,y)\in I\ri(X)^D\times I\ri(Y)^E| f\circ x = y\circ h } \]
+Alternatively, we can use the following pullback square to define it. 
+\[\xymatrix{
+I\ri(f)^a \ar[r]\ar[d]\pb & I\ri(X)^D \ar[d]^{I\ri(f)^D}\\
+I\ri(Y)^E \ar[r]_{I\ri(Y)^a} & I\ri(Y)^D
+}\]
+By a couple of adjunctions we get two morphisms $\epsilon:\coprod_I(I\ri(f)\times D) \to X$ and $\phi:\coprod_I(I\ri(f)\times D) \to X$ such that $\phi\circ \coprod_I(I\ri(f)\times a) = f\circ \epsilon$. By definition $f$ is $(a,e)$-injective if the canonical morphism $I\ri(X)^E \to I\ri(f)^a$ has a section $g$. This is equivalent to the existence of a morphism $g^t: \coprod_I(I\ri(f)^a\times_I E) \to X$, which is a filler for the commutative square $\phi\circ \coprod_I(I\ri(f)\times a) = f\circ \epsilon$.
+\[\xymatrix{
+\coprod_I(I\ri(f)\times_I D) \ar[d]_{\coprod_I(I\ri(f)\times a)} \ar[r]^(.7)\epsilon & X\ar[d]^f \\
+\coprod_I(I\ri(f)\times_I E) \ar[r]_(.7)\phi \ar@{.>}[ur]^{g^t} & Y 
+}\]
+
+We push out $\coprod_I(I\ri(f)\times a)$ along $\epsilon$ to get the morphism $\sigma(f):X\to S(f)$.
+\[\xymatrix{
+\coprod_I(I\ri(f)\times_I D) \ar[d]_{\coprod_I(I\ri(f)\times a)} \ar[r]^(.7)\epsilon\po & X\ar[d]^{\sigma(f)} \ar[r]^\id & X\ar[d]^f \\
+\coprod_I(I\ri(f)\times_I E) \ar@/_2ex/[rr]_\phi \ar[r] & S(f) \ar[r]^{\rho(f)} & Y 
+}\]
+
+The morphism $g^t$ exists exactly when there is a morphism $h:S(f)\to X$ such that $f\circ h = \rho(f)$ and $h\circ\sigma(f) = \id_X$, which is an alternative way to define injectives.
+The morphism $\sigma(f):X\to S(f)$ is anodyne, as it is a pushout of an (indexed) coproduct of anodyne morphisms. %proved enough?
+
+%The morphism $\rho(f)$ is not necessarily injective however. The small object arguments show that we can factorize $f$ by repeating the factorization above infiniteely and taking colimits. This is not possible is $S=\Asm^{\cat B}$ since it lacks many infinitee colimits.
+}
+
+
+
+\subsection{Generic modest injectives} We delve deeper into the modest injectives.
+%Before we delve into the problem of factorizing, we will first prove the most important theorem of this paper.
+
+\begin{theorem} Suppose $\cat S =\Asm^{\cat B}$. Every family of anodyne morphisms has a generic modest $a$-injective. \label{geninjmod} \end{theorem}
+
+\begin{proof} The factorization with $S$ above is stable under pullback. I.e. if $f: A\to B$ is the pullback of $g:C\to D$ along some $h:B\to D$, then $S(f):S(A)\to B$ is the pullback of $S(g):S(C) \to D$.
+\[\xymatrix{
+A\ar[r]_{\sigma(f)} \ar@/^2ex/[rr]^{f}\ar[d]\pb & S(A) \ar[r]_{S(f)}\ar[d]\pb & B\ar[d]^h\\
+C\ar[r]^{\sigma(g)} \ar@/_2ex/[rr]_{g} & S(C) \ar[r]^{S(g)} & D
+}\]
+The functor $S$ is defined by a combination of limits and colimits and pullbacks preserve all of them because they have both adjoints.
+
+Let $\rat\pers^S$ be the following object of fibrewise left inverses of $\sigma(\rat U):\rat\pers_* \to S(\rat\pers_*)$ over $\rat\pers$:
+\[ \rat\pers^S_i = \set{ f:S(\rat\pers_*)_i\to (\rat\pers_*)_i| f\circ\sigma(\rat U)_i = \id_{(\rat\pers_*)_i}} \] 
+There is a morphism $\rat U^{S(\rat\pers_*)}:\rat\pers^S\to \rat\pers$ which simply sends each left inverse to its index.
+When we pull back $\rat U$ along $\rat U^{S(\rat U)}$ we obtain a modest morphism $\rat U^S:\rat\pers_*^S \to \rat\pers^S$.
+
+The object $S(\rat\pers_*^S)$ is the fibred product $\rat\pers^S\times_{\rat\pers}S(\rat\pers_*)$ and by definition of $\rat\pers^S$ there is an application morphism $\epsilon:S(\rat\pers_*^S)\to \rat\pers_*$ which makes $\epsilon\circ \sigma(\rat U^S)$ equal to the projection $\pi:\rat\pers_*^S\to\rat\pers_*$.
+\[\xymatrix{
+\rat\pers_*^S\ar[r]_{\sigma(\rat U^S)} \ar@/^2ex/[rr]^{\rat U^S}\ar[d]_\pi\pb & S(\rat\pers_*^S) \ar[r]_{S(\rat U^S)}\hide{\ar[d]^{)}_{(}\pb}\ar[dl]_\epsilon & \rat\pers^S\ar[d]^{\rat U^{S(\rat U)}}\\
+\rat\pers_*\ar[r]^{\sigma(\rat U)} \ar@/_2ex/[rr]_{\rat U} & S(\rat\pers_*) \ar[r]^{S(\rat U)} & \rat\pers
+}\]
+\hide{Warning: in this diagram $\sigma(\rat U)\circ\epsilon$ is not equal to the projection $S(\rat\pers_*^S) \to S(\rat\pers_*)$, hence the parentheses in the diagram above. }Because $\rat U\circ \epsilon = \rat U^{S(\rat U)}\circ S(\rat U^S)$, $\epsilon$ factors through $\rat\pers^S$ in a unique $\epsilon':S(\rat\pers_*^S)\to\rat\pers_*^S$ which satisfies $\rat U^S\circ\epsilon' = S(\rat U^S)$ and $\pi\circ \epsilon'= \epsilon$. Because $\rat U^S\circ\epsilon'\circ \sigma(\rat U^S) = \rat U^S$ and $\pi\circ \epsilon'\circ \sigma(\rat U^S) = \pi$, $\epsilon'\circ \sigma(\rat U^S)$ is the unique factorization of $(\rat U^S,\pi)$ through itself, i.e. $\id_{\rat\pers_*^S}$. Hence $\rat U^S$ is a modest $a$-injective.
+
+Let $f:X\to Y$ be the pullback of $\rat U$ along $\chi:Y\to \rat \pers$. Let $g:S(X) \to X$ satisfy $f\circ g = S(f)$ and $g\circ \sigma(f) = \id_X$. The morphism $S(f):S(X)\to Y$ is the pullback of $S(\rat U):S(\rat\pers_*) \to \rat\pers$. We take advantage of fibrewise isomorphisms $\alpha_y:X_y \to (\rat\pers_*)_{\chi(y)}$ and $\beta_y:S(X)_y\to S(\rat\pers_*)_{\chi(y)}$ set up by these pullbacks. The morphism $\chi$ factors through $\rat\pers^S$ thanks to the following mapping: 
+\[ y\in Y \quad \mapsto \quad \alpha_y\circ g_y\circ \beta_y^{-1}:S(\rat\pers_*)_{\chi(y)}\to (\rat\pers_*)_{\chi(y)} \]
+
+\hide{generalized elements}
+The following is a diagram chasing way to find that morphism.
+Work inside $\Asm^{\cat B}/Y$, where we have actual isomorphisms $\alpha':f\to \chi\ri(\rat U)$ and $\beta':S(f)\to\chi\ri(S(\rat U))$. 
+The morphism $\alpha'\circ g\circ (\beta')^{-1}:\chi\ri(S(\rat U)) \to \chi\ri(\rat U)$ has a transpose $\gamma:1\to \chi\ri(\rat U)^{\chi\ri(S(\rat U))}$. 
+Local Cartesian closure implies that the canonical morphism $\kappa:\chi\ri(\rat U^{S(\rat U)})\to \chi\ri(\rat U)^{\chi\ri(S(\rat U))}$ is an isomorphism.
+The transpose $(\kappa^{-1}\circ\gamma)^t:\chi\to \rat U^{S(\rat U)}$ in $\Asm^{\cat B}/\rat\pers$ is what we are looking for.
+
+Note that $h\circ \sigma(f) = \id_X$. For this reason $(\kappa^{-1}\circ\gamma)^t$ actually goes to $\rat\pers^S$, which only contains the right inverses of sections of $\sigma(\rat U)$.
+\hide{Kunnen we vast aantonen met de juiste pullbacks, maar misschien gaat dat te ver.}
+
+Because $\rat U^{S(\rat U)}\circ (\kappa^{-1}\circ\gamma)^t = \chi$ and $f\simeq \chi\ri(\rat U)$, $f\simeq [(\kappa^{-1}\circ\gamma)^t]\ri(\rat U^S)$. 
+
+Since every modest $a$-injective is a pullback of $\rat U^S$, $\rat U^S$ is a generic modest $a$-injective. %fuck yeah!
+\end{proof}
+
+%The next section of this paper is devoted to proving that $\rat\pers^S$ is injective for the family of horn inclusions $\set{\Lambda_k[n]\to\Delta[n]|n>0,k\leq n}$ and that $\rat U^S$ is univalent. 
+
+
+\hide{
+\subsection{Modest factorizations}
+While it is not possible to factorize general morphisms in $\Asm^{\cat B}$, it is possible to factorize modest ones.
+
+\begin{lemma}[Modest factorization] The forgetful functor $F:\rat\pers^S\to \rat\pers$ has a left adjoint. \end{lemma}
+
+Here $\rat\pers$ and $\rat\pers^S$ stand for the internal category of simplicial PERs and the internal category of $S$-algebras.
+
+\begin{proof} The forgetful functor $F$ creates limits and $G(X) = \lim_{X\to F(Y)} Y$. \end{proof}
+
+\begin{remark} The factorization does not necessarily yield an $a$-anodyne morphism though it yields a morphism which has the global left lifting property with respect to all modest fibrations. 
+\end{remark}%dat het niet per se anodyne morfismes zijn.
+}
+
+\section{Homotopy}
+This section turns to the to the \emph{simplicial assemblies} and their homotopy. The simplex category exists as internal category $\simcat$ of $\Asm$. The \emph{category of simplicial assemblies} $\sAsm$ is the category of opfibrations $\Asm^{\simcat\dual}$ over the dual $\simcat\dual$ of $\simcat$. %This category is not cocomplete and does not satisfy the axioms of choice in its internal logic. For these reasons, it is not clear under what conditions a family of morphism generates an anodyne-injective factorization system. We stick with the subcategory of Kan complexes instead, which satisfies the axioms of a \emph{category of fibrant objects}. By the way, for more information on simplicial homotopy see \cite{GJSHT}.
+
+\subsection{Simplicial assemblies}
+The category of assemblies has a natural number object $\nno$. The simplex category $\simcat$ has $\nno$ as object of objects, but we refer to its objects, we surround numbers by square brackets: $[n]$. The homset $\simcat([m],[n])$ is the object of non decreasing morphisms $\set{i|i\leq m}\to\set{j\leq m}$. Among the morphisms the \emph{face maps} are used below. The morphism $\delta^n_i:[n-1]\to [n]$ is the unique injective non decreasing morphism which skips $i$: it represents the face \emph{opposite to} $i$.
+
+%A \emph{simplicial assembly} is an opfibration $F:\cat C\to\simcat\dual$. The \emph{category of simplicial assemblies} $\sAsm$ is $\Asm^{\simcat\dual}$.
+
+Of course, there is another kind of simplicial assembly--a presheaf on the external simplex category. Those are more general, because in $\sAsm$ there must be a recursive function tracking the maps $(f,x)\mapsto f\cdot x$, while for the presheaves we only need recursive functions tracking $x\mapsto f\cdot x$ for each $f$ separately.
+
+The simplex $\Delta[n]$ is the opfibration $\simcat/[n]\dual\to\simcat\dual$. For each morphism $\phi:[m]\to[n]$ we let $\Delta(\phi):\Delta[m] \to \Delta[n]$ be the morphism that sends $\xi:[i]\to [m]$ to $\phi\circ \xi:[i]\to [n]$. The cycle $\partial\Delta[n]$ is the subopfibration $C[n]\subseteq \simcat/[n]\dual$ whose objects are the non decreasing maps $[m]\to[n]$ that are not surjective. For $n>0$, the horn $\Lambda_k[n]$ is the subopfibration $H_k[n]\subseteq\simcat/[n]\dual$ whose objects are the non decreasing maps $[m]\to[n]$ that are not surjective on the complement of $\set k\subseteq[n]$. These seemingly classical definitions work because equality of numbers is recursively decidable.
+
+These simplicial assemblies form a family $\set{\Lambda_k[n]\to\Delta[n]|n>0,k\leq n}$ of \emph{horn inclusions} and $\set{\partial\Delta[n]\to\Delta[n]|n\in \nno}$ of \emph{cycle inclusions}. We introduce the following terms based on these families.
+\begin{itemize}
+\item A \emph{Kan fibration} is a injective morphism relative to the family of horn inclusions.
+\item An \emph{acyclic Kan fibration} is a injective morphism relative to the family of cycle inclusions.
+\item A \emph{Kan complex} is a simplicial assembly $X$ for which $!:X\to 1$ is a fibration.
+\item A \emph{cofibration} is an anodyne morphism relative to the family of cycle inclusions.
+\item An \emph{acyclic cofibration} is a injective morphism relative to the family of horn inclusions. 
+\end{itemize}
+We often leave out `Kan' and simply talk about fibrations and complexes in the rest of this paper. %Note that because $0\to 1$ is a cycle, $0\to X$ is a cofibration for every simplicial assembly.
+
+For every pair of morphisms $f,g:X\to Y$ a \emph{homotopy} between them is a map $h:\Delta[1]\times X\to Y$ such that $h(0,x)=f(x)$ and $h(1,x)$. Here $0,1$ refers to the two global sections of $\Delta[1]$. The morphisms $f$ and $g$ are \emph{homotopic} if there is a homotopy between them. A morphism $f:X\to Y$ is a homotopy inverse of $g:Y\to X$ if $f\circ g$ is homotopic to $\id_Y$ and $g\circ f$ is homotopic to $\id_X$. If $f$ has a homotopy inverse, then $f$ is a homotopy equivalence.
+
+
+% pushout products werk gewoon. gevolg: cofibrant objects zijn cofibrant. 
+
+%hier!?
+
+
+\hide{
+\subsection{Reedy cofibrancy}
+A \emph{cofibrant object} is an object for which the inclusion of the terminal object is cofibrant. This subsection introduces a family of simplicial assemblies for which we can prove cofibrancy.
+
+\newcommand\dgn{\mathrm{dgn}}
+\begin{defin}[Reedy cofibrant] A monomorphism in $\Asm$ is \emph{decidable} if is has a complement $Y-X$, i.e. if it is isomorphic to a coproduct inclusion. For each simplicial assembly $X$, a \emph{degenerate simplex} is an object of $\tot X$ of the form $\xi\cdot x$ where $\xi$ is a strict surjection of $\simcat$. Let $\dgn(X)$ be the assembly of degenerate simplices of $X$. For a \emph{Reedy-cofibrant} simplicial assembly the inclusion $\dgn(X)\to X$ is decidable.\end{defin}
+
+\begin{example} The simplices $\Delta[n]$ are Reedy cofibrant. \end{example}
+
+
+\begin{remark} Ordinarily Reedy cofibrant objects occur in the Reedy model structure on $\cat C^{\simcat\dual}$ where $\cat C$ already has a model structure. Here we substitute decidable morphisms in $\Asm$ for cofibrations in $\cat C$. Decidable morphisms and split epimorphisms for a weak factorization system on $\Asm$. If the Reedy construction lifts this factorization system to $\sAsm$, then we can factor arbitrary morphism as acyclic fibrations following cofibrations. This is an open problem, however.
+\end{remark}
+
+\begin{prop} Every Reedy cofibrant simplicial assembly is cofibrant. \end{prop}
+
+\begin{proof} First note that cofibration are closed under pushouts, assembly indexed coproducts and transfinite composition because the global left lifting property with respect to acyclic fibrations defines them. The proof is the standard proof that simplicial sets are cofibrant as can be found in \cite{Hovey99} for example. For an arbitrary Reedy cofibrant object $Y$ let $Y_j$ be the union of less-than-$j$-dimensional simplices in $Y$. For each $j$ the map $Y_j\to Y_{j+1}$ is a pushout of $\simcat\ri(N)\times i:\simcat\ri(N)\times\partial\Delta[j+1]\to \simcat\ri(N)\times\Delta[j]$ where $i:\partial\Delta[j+1]\to \Delta[j+1]$ is the cycle inclusion, $\simcat\ri(N_{j+1})$ is the constant simplicial assembly $(N_{j+1})\disc\times \simcat\dual\to\simcat\dual$ and $N_{j+1}$ is the assembly of non degenerate $j+1$-dimensional simplices, which exists because both the $j+1$-dimensionality and degeneracy are decidable properties of simplices in Reedy cofibrant simplicial assemblies. We have proved that $Y_j\to Y_j+1$ are cofibrations. Because $Y_0 = 0$ and $\mathrm{colim}_{j\to\infty} Y_j=Y$, $0\to Y$ is a cofibration.
+\end{proof}
+
+\begin{corol} For each fibration $f:X\to Y$ and each Reedy cofibrant $A$, the morphism $f^A: X^A\to Y^A$ is a fibration. \end{corol}
+
+\begin{proof} 
+
+\end{proof}
+}
+
+\hide{
+\subsection{Fibrant-cofibrant objects}
+%kun je dit niet ergens vinden?
+\begin{lemma} A morphisms $f:X\to Y$ is an acyclic fibration if and only if it is both a homotopy equivalence and a fibration. \label{acycfib} \end{lemma}
+
+\begin{proof} Firstly let $f$ be an acyclic fibration. Since $0\to 1$ is a cycle, $f$ has an left inverse $g:Y\to X$ and since $f\circ g=\id_Y$, $f\circ g$ is homotopic to $\id_Y$. The cycle $1+1\to \Delta[1]$ makes $g\circ f$ homotopic to $\id_X$.
+\[\xymatrix{
+0\ar[d]\ar[r] & X^Y\ar[d]^{f^Y} && 1+1 \ar[d] \ar[r]^{i\mapsto (\id,g\circ f)} & X^X \ar[d]^{f^X}\\
+1\ar[r]_{*\mapsto \id}\ar@{.>}[ur]^g & Y^Y && \Delta[1] \ar[r]_{i\mapsto g}\ar@{.>}[ur] & Y^X
+}\]
+So $f$ is a homotopy equivalence. Horn inclusions are cofibrations because cofibrations are closed under pushout an composition and because of the following.
+\[\xymatrix{
+\partial\Delta[n-1]\ar[d]_{\delta^n_k}\ar[r]\po & \Delta[n-1]\ar[d] \\
+\Lambda_k[n] \ar[r] & \partial\Delta[n] \ar[r] & \Delta[n]
+}\]
+Here $\delta^n_k$ is the inclusion into the face opposite to the point $k$. This means $f$ is a fibration.
+
+Secondly, let $f:X\to Y$ be a fibration which has a homotopy inverse $g:Y\to X$. There is a homotopy $h:\Delta[1]\times Y\to Y$ such that $h(0,x) = f\circ g(x)$ and $h(1,x) = x$. By lifting it, we obtain a new homotopy inverse $g'$ of $g$ which satisfies $f\circ g'= \id_Y$.
+\[ \xymatrix{
+1\ar[r]\ar[d] & X^Y \ar[d]^{f^Y}\\
+\Delta[1]\ar[r]_{i\mapsto h(i,\cdot)}\ar@{.>}[ur] & Y^Y
+}\]
+
+Let $c:\partial\Delta[n]\to \Delta[n]$ be a cycle inclusion and let $x:\partial\Delta[n]\to X$ and $y:\Delta[n]\to Y$ satisfy $y\circ c=f\circ x$. There are homotopies $k:\Delta[1]\times X\to X$ with $k(0,x) = g'\circ f(x)$ and $h(1,x)=x$. We use this to reduce this lifting problem to the following.
+\[ \xymatrix{
+\partial\Delta[n] \ar[r]^c\ar[d]_{(0,\id)}\po & \Delta[n] \ar[d]\ar[dr]^{g'\circ y} \\
+\Delta[1]\times\partial\Delta[n]\ar[dr]\ar[r] & Z \ar[d]^{(c,0\times \id)}\ar[r]_{(h\circ x,g'\circ y)} & X \ar[d]^f \\
+& \Delta[1]\times \Delta[n] \ar[r]_(.6){ y\circ \pi_0 } & Y
+}\]
+The pushout $Z$ is the boundary of $\Delta[1]\times \Delta[n]$ minus one face and $(c,0\times \id)$ is its inclusion. It can be filled with $n$ simplices, each of which moves one edge of $g'\circ y$ to $x$ along the homotopy $k$. The last simplex gives a filler for the original square. 
+
+This proves that $f$ is an acyclic cofibration.
+\end{proof}
+}
+
+\hide{
+Though we can't show that $\sAsm$ is a model category with these collections of maps, we can say something about the structure of the category of complexes.
+
+\begin{defin}[Category of fibrant objects] A \emph{category of fibrant objects} is a category $\cat C$ together with two classes of morphisms: the class $F$ of fibrations and the class $W$ of \emph{weak equivalences}. These have the following properties.
+\begin{enumerate}
+\item If $f\circ g= h$ and two out of $f$, $g$ and $h$ are weak equivalences, then so is the third.
+\item Isomorphisms are fibrations and fibrations are closed under composition.
+\item Pullback of fibrations exists and are fibrations. Pullbacks of fibrations which are equivalences, are also equivalences.
+\item The diagonal $X\to X\times X$ or each object $X$ factors as a fibration $X' \to X\times X$ following a weak equivalence $X\to X'$.
+\item The map $\bang_X:X\to 1$ is a fibration for each object $X$.
+\end{enumerate}
+\end{defin}
+
+
+\begin{theorem} The full subcategory $\sAsm_f$ of Kan complexes in $\sAsm$, together with homotopy equivalences and fibrations is a category of fibrant objects. \label{Hmtp} \end{theorem}
+
+\begin{proof} The pushout product lemma applies to horn and cycle inclusions \cite{Hovey99}. This means that $X^{\Delta[1]}$ is a complex of $X$ is one and this defines the factorization of the diagonal. The rest is straightforward. \end{proof}
+}
+
+The next few subsections show that $\rat\pers^S$ is a complex and that $\rat U^S$ is univalent in $\sAsm$.
+
+\subsection{Fibrancy}
+Morphisms $\Delta[n] \to \rat\pers$ are transposes of functors $\simcat/[n]\dual \to \pers$. Similarly, for each horn $\Lambda_k[n]$ morphisms $\Lambda_k[n] \to \rat\pers$ are transposes of functors $H_k[n]\dual \to \pers$. 
+The problem is to show that any $f:H_k[n]\dual \to \pers$ has an extension $g$ to $\simcat/[n]\dual$, such that the transpose of $g$ should factor through $\rat\pers^S$, the category of algebras.
+
+The lowest dimensional case, where $n=1$, is special. The horns $\Delta(\delta^1_0),\Delta(\delta^1_1):!\to \Delta[1]$ are split monomorphisms, because they are sections of the map $!:\Delta[1]\to 1$. The map $!$ corresponds to the forgetful functor $\dom:\simcat/[1]\to\simcat$. We let $\dom^*(f)$ be the extension of each functor $f:\simcat\dual \to \pers$ along either $\delta^1_i$. This construction corresponds to sending a modest complex $X$ to the projection $\Delta[1]\times X \to \Delta[1]$. This map is trivially a fibration.
+
+\subsection{More dimensional}%Over!
+We present a construction which works for all $n>1$. Note that this construction does not always produce fibrations for $n=1$, so we have to rely on the alternative construction above.
+
+Let $n>1$. Let $H:H_k[n] \to \simcat/[n]$ be the inclusion. Composition determines a functor $H\ri:\pers^{\simcat/[n]\dual} \to \pers^{(H_k[n])\dual}$ and because $\pers$ is complete and $H\ri$ preserves all limits, this functor has a right adjoint $H_*:\pers^{(H_k[n])\dual}\to\pers^{\simcat/[n]\dual}$. More importantly, $H_*$ can be defined in such a way that it is a strict inverse of $H\ri$:
+\[ H_*(f)(\phi) = \left\{\begin{array}{cc} 
+f(\phi) & \phi\in (H_k[n])_0\\
+\lim\limits_{\alpha\to \phi, \alpha\in (H_k[n])_0} f(\alpha) & \phi\not\in (H_k[n])_0
+\end{array}\right.\]
+This is useful, because we are looking for an extension $g$ of $f$ such that $H\ri(g) = f$. Sadly, $H_*$ corresponds to the dependent product along $h:\Lambda_k[n] \to \Delta[n]$, which does not preserve fibrations.
+
+\newcommand\norm[1]{\left\Vert#1\right\Vert}
+The solution is that $g(\delta^n_{k})$, where $\delta^n_k$ is the face opposite to the point $k$, equals $H_*f(\id)$ i.e. the problematic simplices get a supporting edge over $k$. We extend $g$ to other objects $\xi:[m]\to[n]$ by adding more of these supporting edges.
+
+Define the \emph{distance} of $\xi$ to $H_k[n]$ as follows.
+\[ \norm\xi = \#\left( \prod_{\substack{i\in [n]}{i\neq k}}\set{p\in [m]|\xi(p)=i}\right)\]
+Here, $\#$ stands for the number of elements in this finite set. The distance $\norm\xi$ is the number of ways $\delta^n_k$ factors through $
+\xi$.
+
+Next we define a functor $K:\simcat/[n]\to\simcat/[n]$. For each object $\xi:[m]\to[n]$ we let $K\xi:[m+\norm\xi]\to[n]$ satisfy:
+\[ K\xi(i) = \left\{ \begin{array}{cl} 
+\xi(i) & \xi(i)<k\\
+k & \xi(i)\geq k, \xi(i-\norm\xi)<k\\
+\xi(i-\norm\xi) & \xi(i-\norm\xi)\geq k
+\end{array}\right.\]
+If we view $\xi$ as a finite non decreasing sequence then this functor simply adds $\norm\xi$ $k$'s to the sequence in such a way that the new sequence is still non decreasing.
+
+\hide{Symmetrie in de definitie is wel leuk, maar splitsen maakt het product te klein.}
+In order to define $K$ for morphisms, we introduce some extra notation. For $\xi:[m]\to[n]$ and $i\in[n]$, let $\xi_i$ be the partial ordered set $\set{p\in[m]|\xi(p)=i}$. Using ordinal arithmetic, we get the following equivalence:
+\[ [m+\norm\xi] = \sum_{i<k} \xi_i+\prod_{i\neq k}\xi_i+\sum_{i\geq k} \xi_i\]
+Of course, $i\in[n]$. A morphism $\phi:\xi\to\xi'$ of $\simcat/[n]$ is a sequence of $n+1$ non decreasing maps $\phi_i:\xi_i\to\xi'_i$ to which we apply the same construction:
+\[ K\phi = \sum_{i<k} \phi_i+\prod_{i\neq k}\phi_i+
+\sum_{i\geq k} \phi_i \]
+
+
+\hide{ The solution is based on the idea that $g$ should be like $H_*(f)$ plus a homotopy between each simplex outside of $\Lambda_k[n]$ to a point above $k$.
+
+We first define a monad on $\simcat/[n]$.
+For each $\xi$ we let $K\phi$ satisfy:
+\[ K\xi(i) = \left\{ \begin{array}{cl} 
+\xi(i) & \xi(i)<k\\
+k & \xi(i)\geq k, \xi(i-1)<k\\
+\xi(i-1) & \xi(i-1)\geq k
+\end{array}\right.\]
+If we think of $\phi$ is a finite non decreasing sequence of numbers, then this is the unique way to insert an extra $k$ into that sequence.
+The definition for morphisms is similar. For $\phi:\xi \to \xi'$, let
+\[ K\phi(i) = \left\{ \begin{array}{cl} 
+\xi(i) & \xi(i)<k\\
+\min\set{p|\xi'(p) \leq k } & \xi(i)\geq k, \xi(i-1)<k\\
+\xi(i-1) & \xi(i-1)\geq k
+\end{array}\right.\]
+The unit $\eta_\xi: \xi \to K\xi$ is the face map that skips $\min\set{p|\xi(p)\leq k}$. The multiplication $\mu_\xi:KK\xi \to K\xi$ doubles that point.
+}\hide{
+This functor replaces all simplices with simplices that touch the edge $k$ of $\Delta[n]$. We want to restrict this to simplices outside of $H_k[n]$ and it turns out that we can.
+
+Let $\hat K:\simcat/[n]\to\simcat/[n]$ be the following functor. On objects it satisfies:
+\[ \hat K(\xi) =\left\{ \begin{array}{cc} 
+\xi & \xi \in (H_k[n])_0\\
+K\xi & \xi \not\in (H_k[n])_0
+\end{array}\right.\]
+For morphisms $\phi:\alpha \to \beta$ there are just three options, because $H_k[n]$ is a sieve of $\simcat/[n]$, so $\alpha$ is an object of $H_k[n]$ when $\beta$ is.
+\[ \hat K(\phi)=\left\{ \begin{array}{cc} 
+\phi & \alpha,\beta\in (H_k[n])_0 \\
+\eta_\beta\circ \phi & \alpha\in (H_k[n])_0, \beta\not\in (H_k[n])_0 \\
+K\phi & \alpha,\beta\not\in (H_k[n])_0 \\
+\end{array}\right.\] %argument voor de beslisbaarheid van horns?
+
+Now $\hat KH = H$ and therefore $H\ri(\hat K\ri H_*(f)) = f$. So let $g = \hat K\ri H_*(f)$. We demonstrate that the anchoring point allows us to lift horns in $g$.
+}
+
+Composition to the right defines a functor $K^*:\pers^{\simcat/[n]}\to\pers^{\simcat/[n]}$, which has a left adjoint $K_!$ because $\pers$ has all finite colimits. %is dat duidelijk?
+To show that $K^*H_*$ preserves fibrations, we show that $K_!H^*$ preserves fibrations.
+
+\hide{
+Because $\pers^{\simcat/[n]\dual}$ is complete and internal, it is also cocomplete: the colimiting cocone is a limit of all cocones and this limit actually exists. Hence $\hat K\ri$ has a left adjoint $\hat K_!$ and $H\ri(\hat K_!)$ is left adjoint to $\hat K\ri H_*$. All we need to show, is that $H\ri(\hat K_!)$ sends (the counterparts of) horn inclusions $\Lambda_l[m] \to\Delta[m]$ to acyclic cofibrations. Its right adjoint then preserves fibrations.}
+
+\subsection{Preservation of acyclic cofibrations}
+Suppose we have a horn $j:\Lambda_l[m] \to \Delta[m]$ and a morphism $\Delta(\xi):\Delta[m] \to\Delta[n]$. We will first show that $K_!$ sends this horn to a monomorphism.
+
+\hide{wat is wat!?}
+\begin{lemma} Let $\delta^m_{pq}:[m-2]\to[m]$ for $p,q\in[m]$, $p<q$, be the unique non decreasing map that only skips $p$ and $q$. Seen as subobject of $K(\xi)$, $K(\xi\circ\delta^m_{pq})$ is the intersection of $K(\xi\circ\delta^m_{p})$ and $K(\xi\circ\delta^m_{q})$. \label{intersection}\end{lemma}%n>1!
+
+\begin{proof} Ordinal sums and products preserve pullbacks and therefore so does $K$. We start with the pullback square $\delta^m_q\circ \delta^{m-1}_p = \delta^m_p\circ \delta^m_{q-1}$ where both sides compose to $\delta^m_{pq}$. \end{proof}
+
+The morphism $\Delta(\xi):\Delta[m] \to \Delta[n]$ and $\Delta(\xi)\circ j:\Lambda_k[n]\to \Delta[n]$ are modest, which allows us to apply $K_!$ to them.
+
+\begin{corol} The domain $K_!(\Lambda_k[n])$ of $K_!(\Delta(\xi)\circ j)$ is a subobject of $\Delta[m+\norm\xi]$, which is the domain of $K_!(\xi)$. \end{corol}
+
+\begin{proof} The effect of $K_!$ on any map $\Delta(\chi):\Delta[m]\to\Delta[n]$ is straightforward: $K_!\Delta(\chi)=\Delta(K\chi)$. Because $K_!$ is a left adjoint, it preserves colimits. The morphism $\Delta(\xi)\circ j:\Lambda_k[n]\to\Delta[n]$ is a colimit of the diagram which consists of the objects $\Delta(\xi\circ\delta^m_{p})$ for $p\neq l$ and their intersections $\Delta(\xi\circ\delta^m_{pq})$. Since $K_!$ preserves these intersections by lemma \ref{intersection}, $K_!(\Delta(\xi)\circ j)$ is the union of $K_!(\Delta(\xi\circ\delta^m_p)$ for $p\neq l$. \end{proof}
+
+\hide{What $\hat K_!$ does to this horn, depends of whether $\Delta(\xi)$ factors though $h:\Lambda_k[n] \to \Delta[n]$. If $\xi\in (H_k[n])_0$, $\hat K_!$ has no effect. The pullback of $\Lambda_l[m] \to \Delta[m]$ along $h$ is however just $\Delta[m]_l \to \Delta[m]$.
+\[\xymatrix{
+\Lambda_l[m] \ar[r]\ar[d]\pb & \Delta[m] \ar[r]\ar[d]\pb & \Lambda_k[n] \ar[d]^h\\
+\Lambda_l[m] \ar[r] & \Delta[m] \ar[r]_{\Delta(\xi)}\ar[ur] & \Delta[n]
+}\]
+If only this were so easy for all the horns.
+
+If $\xi \not\in (H_k[n])_0$, then the effect of $\hat K_!$ is not trivial. The codomain of the horn becomes:
+\[  \hat K_!(\Delta(\xi)) = \Delta(K\xi): \Delta[m+1] \to \Delta[n] \]
+The functor $\hat K_!$ treats each of the faces $\delta^m_i:\Delta[m-1]\to \Lambda_l[m]$ differently based on whether $\xi\circ \delta^m_i\in (H_k[n])_0$ or not. In order to describe the result we introduce the following notation.
+}
+
+We introduce some notation in order to describe the effect of $H^*K_!$.
+
+\newcommand\face\delta %geen dimensie-indicatie meer?
+\newcommand\ka\kappa
+\newcommand\la\lambda
+\newcommand\im{\exists_}
+\begin{enumerate}
+\item We want to keep track of the elements which $K$ adds to the domain of $\xi:[m]\to[n]$. For this we use a \emph{non decreasing} injection $\ka$ which sends the product $\prod_{i\neq k}\xi_i$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K\xi(i)=k$.
+
+%The lexicographic ordering of $\prod_{i\neq k}\xi_i$ extends the product ordering and a natural choice for $\ka$ is the non decreasing injection which preserves the lexicographical ordering. 
+
+\item There is another injection $\la:[m]\to[m+\norm\xi]$ which skips the image of $\ka$: $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$.
+\item We extend the face notation. For each $U\subseteq [m+\norm\xi]$ let $\face(U)$ be the face of $\Delta[m+\norm\xi]$ which is opposite to all points in $U$.
+\item To apply $\ka$ and $\la$ to all elements of a subset of their domains we use $\im \ka$ and $\im\la$.
+\end{enumerate}
+
+\hide{
+\begin{enumerate} %symbolen voor $p$ en $l$? $\top$ ipv $l$, $\bot$ ipv $p$? $\alpha$ en $\omega$? $\kappa$ en $\lambda$!
+\item We want to keep track of the point which $\hat K$ added to $\Delta[m]$:
+\[ \ka = \min\set{i\in[m+1]|K\xi(i) = k} \]
+\item The top $l$ of the horn $\Lambda_l[m]$, shifts to $l+1$ if $l\geq p$. We use $\la$ to refer to whatever the position of the top becomes in $\Delta[m+1]$. Note that $\la\neq \ka$.
+\item The morphism $K\xi$ partitions $[m+1]$ into intervals, which we want to keep track of. Let $\Xi_j = \set{i\in [m+1]|K\xi(i) = j}$.
+\end{enumerate}}
+
+We can describe the action of $K_!$ using unions of face. Let $A = \im\ka(\prod_{i\neq k}\xi_i)$ and for each $q\in[m]$ let:
+\[ A_q = \set{\kappa(\vec p)\in A\middle|\hide{\vec p\in\prod_{i\neq k}\xi_i,} \xi(q) \neq k, p_{\xi(q)}=q } \]
+The set $A_q$ contains the supporting edges of $\xi$ which are not supporting edges for $\xi\circ\delta^m_q$. Therefore, the functor $K$ sends the face $\delta^m_p:\xi\circ\delta^m_p \to \xi$ to $\face(A_p\cup\set{\lambda(p)})$. Preserved unions imply
+\[ K_!(\Lambda_k[m]) = \bigcup_{p\neq l} \face(A_p\cup\set{\lambda(p)})\]
+
+The effect of $H\ri$ is also easy to describe in terms of unions of faces.
+\begin{align*}
+H\ri K_!(\Delta[m]) &= \bigcup_{i\neq k} \face(\im\la(\xi_i)) \\
+H\ri K_!(\Lambda_l[m]) &= \bigcup_{\substack{i\neq k\\p\neq l}} \face(\im\la(\xi_i)\cup A_p\cup\set{\lambda(p)}) %\\
+%&= \bigcup_{\substack{i\neq k\\p\in \xi_i-\set l}} \face(\im\la(\xi_i)\cup A_p) \label{simp}
+\end{align*}
+%Where \ref{simp} is justified by the fact that $\lambda(p)\in \im\la(\xi_{\xi(p)})$ and
+ 
+
+
+\hide{
+Note that these are recursively decidable subsets. They therefore have complements, even if we are working internally in the category of assemblies.
+
+We can describe the action of $\hat K_!$ using unions of faces. Let 
+\begin{equation} A = \set{i\in [m+1]| i\neq\ka, \Xi_{K\xi(i)}=\set i} \end{equation}
+This set $A$ contain the indices of faces of $\Delta[m]$ which are in $|\Lambda^n_k|$, adjusted for the insertion for $p$ by $K$. The functor $\hat K$ preserves these faces, while extending others with an extra point. For $\Lambda_l[m]$ this results in the following union of faces.
+\begin{equation} \hat K_!(\Lambda_l[m]) = \left(\bigcup_{q\in A-\set \la}\face\set{\ka,q}\right) \cup \left(\bigcup_{q\not\in A\cup\set{\ka,\la}}\face\set{q}\right) \end{equation}
+
+Unions of faces are a nice way to describe the effect of $H\ri$ as well.
+\begin{equation} H\ri\hat K_!(\Delta[m]) = \bigcup_{i\neq k} \face(\Xi_i) \end{equation}
+
+To find $H\ri\hat K_!(\Lambda_l[m])$, we intersect these faces with the ones in $\hat K_!(\Lambda_l[m])$.
+\begin{equation}
+H\ri\hat K_!(\Lambda_l[m]) = \left(\bigcup_{\substack{i\neq k\\q\in A-\set \la}}\face(\Xi_i\cup\set{\ka,q})\right)\cup \left(\bigcup_{\substack{i\neq k\\q\not\in A\cup\set{\la,\ka}}} \face(\Xi_i\cup\set{q})\right)
+\end{equation}
+
+By the way, unless $\la\in A$, this is equivalent to:
+\begin{equation} H\ri\hat K_!(\Lambda_l[m]) = \bigcup_{\substack{i\neq k\\q\not\in A}} \face(\Xi_i\cup\set q) \end{equation}
+}
+
+
+We first proof a technical lemma about acyclic cofibrations.
+
+\begin{lemma}[Face completion] Let $F$ be an inhabited decidable set of faces of $\Delta[p]$ which all have an edge $e$ in common. The inclusion $\bigcup F\to \Delta[p]$ is an acyclic cofibration. \label{facecom} \end{lemma}
+
+\begin{proof} For all $j\in [p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\Delta[p]$ which contain the edge $e$. Because $F$ is inhabited, $e\in \bigcup F$ and hence $F_0=F$. Because $\Delta[p]$ is a $p$-dimensional face of $\Delta[p]$ which contains $e$, $\bigcup F_p = \Delta[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it must be part of a higher dimensional face which must be a member of $F$. Therefore each face $\face(\Sigma)\in S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$ and therefore an acyclic cofibration. Because acyclic cofibrations are closed under composition, $\bigcup F = F_0\to F_p = \Delta[p]$ is an acyclic cofibration. 
+\end{proof}
+
+
+\begin{lemma} The inclusion $H\ri K_!(\Lambda_l[m]) \to H\ri K_!(\Delta[m])$ is an acyclic cofibration. \end{lemma}
+
+
+\begin{proof} If $\norm\xi=0$ and hence $\prod_{i\neq k}\xi_i=\emptyset$, then neither $K_!$ nor $H^*$ change anything about the horn $\Lambda_l[m]\to\Delta[m]$, so we only need to worry about the cases where $\norm\xi>0$.
+
+We will add the faces $U_i = \face(\im\la(\xi_i))$ of $H\ri K_!(\Delta[m]) = \bigcup_{i\neq k} \face(\im\la(\xi_i))$, saving the most case $i=\xi(l)$ for last.
+
+Note that because $n>1$, there are always $i\in [n]$ such that $i\neq k$, $i\neq \xi(l)$. The intersection of $H\ri K_!(\Lambda_l[m])$ with $\face(\im\la(\xi_i))$ is:
+\[ H\ri K_!(\Lambda_l[m])\cap U_i = \bigcup_{p\neq l} \face(\im\la(\xi_i)\cup A_p\cup\set{\la(p)})\]
+The set $F = \set{\face(\im\la(\xi_i)\cup A_p\cup\set{\la(p)})|p\neq l}$ is inhabited and decidable. Each face in $F$ contains the edge $\la(l)$. Hence the inclusion $H\ri K_!(\Lambda_l[m])\cap U_i\to U_i$ is an acyclic cofibration by lemma \ref{facecom}.
+
+Let $L$ be the union of $H\ri K_!(\Lambda_l[m])$ with $U_i$ for all $i\in [n] -\set{k, \xi(l)}$. The inclusion $H\ri K_!(\Lambda_l[m])\to L$ is a pushout of a coproduct of acyclic cofibrations indexed over $[n]-\set{k,\xi(l)}$ and hence is an acyclic cofibration. If $\xi(l)=k$, then $L=H\ri K_!(\Lambda_l[m])$ and we are done. Otherwise we still have to deal with the face $\face(\im\la(\xi_{\xi(l)}))$.
+
+Let $V_p =\face(\im\la(\xi_{\xi(l)}\cup\set p)\cup A_p)$. If $p\neq l$ these are faces of $U_{\xi(l)}$ which are part of $L$. Hence $L$ is the following union of faces.
+\[ L = \left(\bigcup_{i\in[n]-\set{k,\xi(l)}} U_i\right)\cup\left(\bigcup_{p\in [m]-\set l} V_{\set p}\right) \] 
+
+For each $\vec p\in \prod_{i\in [n]-{k}} \xi_i$ let $B_{\vec p} = \set{q\in [m]\middle | \xi(q)\in [n]-{k,\xi(l)} , q>p_{\xi(q)} }$ and let $W_{\vec p} = \face(\im\la(\xi_{\xi(l)}\cup B_{\vec p}))$. For all $j\in\nno$, let $L_{j} = L\cup \bigcup_{ \ka(\vec p) < j } W_{\vec p}$. By this definition $L_0=L$ and $L_{m+\norm\xi+1} = H^*K_!\Delta[m]$ because $B_{\vec p}=\emptyset$ and therefore $W_{\vec p} = U_{\xi(l)}$ if $p_i$ are the maximal elements of $\xi_i$ for each $i\in [n]-\set k$. 
+
+For every $j\in \nno$ the inclusion $L_j\to L_{j+1}$ is an acyclic cofibration for the following reasons.
+
+As long as $K\xi(j)<k$, $L_j = L$ because $\bigcup_{ \ka(\vec p) < j } W_{\vec p}$ is empty. If $K\xi(j+1)<k$ too, then $L_j\to L_{j+1}$ is an acyclic cofibration because it is an identity.
+
+If $K\xi(j+1) = k$ then $j+1=\kappa(\vec p)$ or $j+1 = \la(p)$ for $p\in \xi_k$. We first consider the case that $j+1=\ka(\vec p)$. If $\vec p,\vec q\in \prod_{i\neq k} \xi_i$ and $p_i\leq q_i$ for all $i\in [n]-k$, then $\vec p \leq \vec q$ in the lexicographical order of the ordinal product and hence $\ka(\vec p)\leq \ka(\vec q)$. Therefore $W_{\vec p}\subseteq L_{\ka(\vec q)}$. For that reason, the intersection $L_j\cap W_{\vec p}$ is the union of the following families of faces.
+\begin{align*}
+U_i\cap W_{\vec p} &= \face(\im\la(\xi_i\cup\xi_{\xi(l)}\cup B_{\vec p})) &&\textrm{ for $i\in [n]-\set{k,\xi(l)}$}\\
+V_q\cap W_{\vec p} &= \face(\im\la(\xi_{\xi(l)}\cup\set p\cup B_{\vec p})) &&\textrm{ for $q\in [m]-\set l$}\\
+W_{\vec r}\cap W_{\vec p} &= \face(\im\la(\xi_{\xi(l)}\cup B_{\vec r}\cup B_{\vec p}))&&\textrm{ if $\kappa(\vec q)<\kappa(\vec p)$ }
+\end{align*}
+Let $\vec p[l]\in \prod_{i\neq k} \xi_i$ satisfy $\vec p[l]_i = l$ if $i=\xi(l)$ and $\vec p[l]_i = p_i$ if $i\neq \xi(l)$. The intersection $L_j\cap W_{\vec p}$ is a union of faces which contain the supporting point $\kappa(\vec p[l])$ for the following reasons. The supporting edge $\kappa(\vec p[l])$ is a member of $U_i$ and $W_{\vec r}$ because those faces are only opposed to edges in the images of $\la$. The faces $V_q$ contains $\kappa(\vec p[l])$ if $\kappa(\vec p)\not\in A_q$. If $\xi(q) = k$, then $A_q=\empty$ and if $\xi(q) = \xi(l)$, then $\ka(\vec p[l])\not\in A_q$ because $\ka(\vec p[l])\in A_l$ and $A_l$ and $A_q$ are disjoint because $q\neq l$. Otherwise, $q = p_{\xi(q)}$ by definition of $A_q$. 
+
+Either $\xi(q-1) = \xi(q)$ or $q$ is the least member of $\xi_{\xi(q)}$. If $\xi(q-1)=\xi(q)$ let $\vec p[q-1] \in \prod_{i\neq k} \xi_i$ satisfy $\vec p[q]_\xi(q) = $ if $i=\xi(l)$ and $\vec p[\xi(q)]_i = p_i$ if $i\neq \xi(q)$. By definition, $B_{\vec p[q-1]} = B_{\vec p} \cup \set q$ and therefore $V_q\cap W_{\vec p}\subseteq W_{\vec p[q-1]}$. As noted before $\ka(\vec p[q-1])<\ka(\vec p)$, so $W_{\vec p[\vec p]}\subseteq L_{j}$. If $q$ is the least member of $\xi_{\xi(q)}$ then $\xi_{\xi(q)}\subseteq B_{\vec p} \cup \set q$ and therefore $V_q\cap W_{\vec p}\subseteq U_{\xi(q)}$. 
+
+In all cases where $V_q$ opposes $\ka(\vec p[l])$, some other face of $L_j\cap W_{\vec p}$ contains both $V_q$ and $\vec p[l]$. Therefore $L_j\cap W_{\vec p}$ is a union of faces which contain the supporting edge $\ka(\vec p[l])$. By lemma \ref{facecom} $L_j\cap W_{\vec p}\to W_{\vec p}$ is an acyclic cofibration and so is $L_j\to L_{j+1}$.
+
+As $\kappa(\vec p)$ grows, $B_{\vec p}$ shrinks to an empty set. By the time $j+1 = \la(p)$ for some $p\in \xi_k$, $L_j = H^*K_!\Delta[m]$ and $L_j\to L_{j+1}$ is the identity. The same holds for all $L_j\to L_{j+1}$ where $K\xi(j+1)>k$ and where $j+1>m+\norm\xi$.
+
+Since acyclic cofibrations are closed under composition, $L\to H^*K_!\Delta[m]$ and $H^*K_!\Lambda_l[m] \to H^*K_!\Delta[m]$ are acyclic cofibrations.
+\end{proof}
+
+
+\hide{
+\begin{lemma} The inclusion $H\ri\hat K_!(\Lambda_l[m]) \to H\ri\hat K_!(\Delta[m])$ is an acyclic cofibration. \end{lemma}
+
+\begin{proof} For all $j\geq 0$ let $D_j$ be the union of $H\ri\hat K_!(\Delta[m])$ with all $j$-dimensional faces of $H\ri\hat K_!(\Lambda_l[m])$ which contain the edges $\ka$ and $\la$. Note that since $\ka\neq\la$, this means that $D_0 = H\ri\hat K_!(\Lambda_l[m])$. For $j>1$, let $S_j$ be the set of those $j$-dimensional faces of $D_j$ which are not faces of $D_{j-1}$.
+
+For each $\face(\Sigma)\in S_j$ the faces $\face(\Sigma\cup\set q)$ for $q\not\in\Sigma\cup\set\la$ are already faces of $D_{j-1}$ for the following reasons. If $q\neq \ka$ then the $j-1$-dimensional face $\face(\Sigma\cup\set q)$ contains the points $\ka$ and $\la$ and hence is a face of $D_{j-1}$. The case $q=\ka$ is more difficult. We prove it by induction. 
+
+Since $\face(\Sigma) \subseteq H\ri\hat K_!(\Delta[m])$ and contains $\la$, $\face(\Sigma)\subseteq \face(\Xi_i)$ for some $i\not\in \set{k,K\xi(\la)}$ (thanks to $n>1$). %is dit genoeg?
+Therefore $\face(\Sigma\cup\set\ka) \subseteq \face(\Xi_i\cup\set\ka)$. The object $\Xi_i$ has a least element $q$ and $q\neq \la$ because $i\neq K\xi(\la)$. Therefore $\face(\Xi_i\cup\set{\ka}) = \face(\Xi_i\cup\set{\ka,q}) \subseteq H\ri\hat K_!(\Lambda_l[m])$. This shows that $\face(\Sigma\cup\set\ka) \subseteq H\ri\hat K_!(\Lambda_l[m])$ and therefore is a member of $S_{j-1}$.
+
+Thanks to all those faces, there is a unique horn $\Lambda_{l_\Sigma}[j] \to \Delta[j]$ and maps $s_\Sigma:\Lambda_{l_\Sigma}[j]\to D_{j-1}$ and $t_\Sigma:\Delta[j] \to D_{j-1}$ which commute with the inclusion $D_{j-1} \to D_j$, such that $d_\Sigma(l_\Sigma) = \la$ and $\face(\Sigma)$ is the image of $d_\Sigma$. Therefore the following diagram is a pushout, making the inclusion $D_{j-1} \to D_j$ an acyclic cofibration.
+\[ \xymatrix{
+\coprod_{\face(\Sigma)\in S_j} \Lambda_{l_\Sigma}[j] \ar[r] \ar[d]_s \po & \coprod_{\face(\Sigma)\in S_j} \Delta[j]\ar[d]^t\\
+D_{j-1}\ar[r] & D_{j}
+}\]
+This sequence becomes constant after a finite number of steps. Since $\xi\not\in (H_k[n])_0$, $K\xi:[m+1]\to [n]$ is surjective. Therefore $\face(\Xi_i)$ are at most $m$-dimensional and $D_m$ contains all faces of $H\ri\hat K_!(\Delta[m])$ which contain the points $\ka$ and $\la$. The inclusion $D_0 \to D_m$ is an acyclic cofibration. %let op: de faces zijn complementair. het gaat de dus om hoe klein een zijde kan zijn, niet hoe groot.
+
+We know that $D_m$ contains all faces that contain the point $\ka$ and $\la$. When $K\xi(\la) = k$ this is all faces. Otherwise, we still have to deal with $\face(\Xi_{K\xi(\la)})$.
+
+Assume $K\xi(\la)\neq k$. Let $E_j$ be the union of $D_m$ with all the $j$-dimensional faces of $\face(\Xi_{K\xi(\la)})$ which contain the edge $\ka$. This means in particular that $E_0 = D_m$. For $j>0$, let $T_j$ be the set of those $j$-dimensional faces of $E_j$ which are not faces of $E_{j-1}$.
+
+For each $\face(\Sigma)\in T_j$ \emph{strictly} below $\face(\Xi_{K\xi(\la)})$ the faces $\face(\Sigma\cup \set q)$ for $q\not\in \Sigma\cup p$ are already in $E_{j-1}$ for the following reasons. Strictly below means that $\face(\Sigma)\subseteq \face(\Xi_{K\xi(\la)}\cup\set{ q } )$ for some $q\not\in \Xi_{K\xi(\la)}$. The number $q$ cannot be in $\Xi_k$ because $\face(\Sigma)$ contains $\ka$ and for $q\in \Xi_k-\set \ka$, $\face(\Xi_{K\xi(\la)}\cup\set{ q } )\subseteq H\ri\hat K_!(\Lambda_k[n])\subseteq E_{j-1}$, so $\face(\Sigma)\in T_j$ will not be below those. Hence $\face(\Sigma\cup\set \ka)\subseteq \face(\Xi_{K\xi(\la)}\cup\set{ \ka,q })$ for some $q\not\in\Xi_k$ which means that $\face(\Sigma\cup\set \ka)\subseteq E_{j-1}$.
+
+If $d\leq m$ is the dimension of $\face(\Xi_{K\xi(\la)})$, then $E_{d-1}$ contains all $\face(\Xi_{K\xi(\la)}\cup \set{\ka})$ for all $q\neq \ka$. We can repeat the coproduct pushout construction above to show that for each $j\leq d$, the inclusion $E_{j-1} \to E_j$ is an acyclic cofibration. Therefore the inclusions $E_0 \to E_d$ and $H\ri\hat K_!(\Lambda_k[n])=D_1 \to E_d = H\ri\hat K_!(\Delta[n])$ are acyclic cofibrations. \end{proof}
+}
+
+%gelukt. heel goed controleren!
+
+\begin{remark} The seemingly classical reasoning above is actually constructive because we are working with finite and decidable sets of number--or equivalently with functions $\nno \to \set{0,1}$--in every case. This makes it work in $\sAsm$.
+%We cannot show that all monomorphisms $X\to Y$ are cofibrations, because we cannot always decide which non degenerate simplices in $Y$ come from $X$.
+%Hovey's proof \hide{citeer} that monomorphisms are cofibrations relies on the decidability of some sets, which are not decidable among simplicial assemblies. Hence cofibrations form a subclass of monomorphisms $X\to Y$ for which it is decidable which non degenerate simplices of $Y$ come from $X$.
+\end{remark}
+
+
+\begin{theorem} The simplicial assembly $\rat\pers^S$ is a complex. \label{complex} \end{theorem}
+
+\begin{proof} The two lemmas above show that each map $f:\Lambda_k[n] \to \rat\pers^S$ has an an extension $K^*H_!f:\Delta[n] \to \rat\pers^S$. The construction is sufficiently constructive to turn into an algebra structure $S(\rat\pers_*^S) \to \rat\pers^S$. \end{proof}
+
+
+\subsection{Univalence}
+A fibration $f:X\to Y$ is univalent if weakly equivalent pullbacks of $f$ are homotopic. For the generic modest fibration $\sigma:\tilde U \to U$ this means we can turn a weak equivalence of modest complexes $w:X\to Y$ into a modest fibration $W\to \Delta[1]$ such that the pullbacks $\Delta(\delta^1_0)\ri(W) = Y$ and $\Delta(\delta^1_1)\ri(W) = X$--such a fibration is a \emph{correspondence} between $X$ and $Y$. More precisely, for each pair of functors $f,g:\simcat\dual\to\pers$ which correspond to modest complexes and each natural transformation $w:f\to g$ which corresponds to a weak equivalence there should be a functor $h:\simcat/[1]\dual \to \pers$ such that the composition with the constant inclusions $(\delta^1_i)_!\simcat\dual\to \simcat/[1]\dual$ are equal to $f$ and $g$. 
+
+Because the factroization system are limited to modest simplicial sets, we can only show that the generic modest morphism satisfy this property for pullbacks along morphisms $f:X\to \rat\pers^S$ whose domains are modest. We call this property \emph{modest univalence}.
+
+The objects of $\simcat/[1]$ are morphisms $\chi:[n]\to [1]$. We can think of these morphisms as pairs $([n],[i])$ for $i\geq -1$, $i\leq n$, where $[i]\subseteq [n]$ is an initial segment and $[-1]$ stands for the empty initial segment. A morphism $\phi:\chi\to\chi'$ corresponds to a pair of morphism $(\phi:[n]\to[n'],\psi:[i]\to [i'])$ where $\psi$ is a restriction of $\phi$. 
+
+\newcommand\hcg{\mathsf{hcg}}
+For each pair $f,g:\simcat\dual\to\pers$ and each natural transformation $\iota:f\to g$, we define the \emph{homotopy cograph} $\hcg(\iota):\simcat/[1]\dual \to \pers$ as follows. On objects:
+\[ \hcg(\iota)([n],[i]) = \left\{\begin{array}{cc}
+f([n]) & i=n \\
+\set{(x,y)\in g(n)\times f(i)| x\cdot [i] = \iota(y)} & -1< i < n \\
+g([n]) & i=-1
+\end{array}\right.\]
+Here $x\cdot [i]$ is the restriction of $x$ along the inclusion $[i]\to [n]$ of $[i]$ as an initial segment of $[n]$.
+
+Let $(\phi,\psi):([m],[i]) \to ([n],[j])$ be any morphism. Note that the following restrictions apply: if $j=-1$, then $i=-1$; if $j=n$, then $i=n$. The reason is that $(\delta^1_0,\delta^1_1):1+1\to \Delta[1]$ induces a sieve on $\simcat/[1]$. With those in mind, let:
+\[ \hcg(\iota)(\phi,\psi) = \left\{\begin{array}{cc}
+f(\psi) & j=n\\
+f(\psi)\circ \pi_1 & -1 < j < n, i=m\\
+g(\phi) \times f(\psi) & -1<i<m\\
+g(\phi)\circ\pi_0 & -1< j < n, i=0\\
+g(\phi) & j=0
+\end{array}\right.\]
+
+The graph has $f$ gradually fading out as $i$ counts down to $0$. The functor $\hcg(\iota):\simcat/[1]\dual\to\pers$ satisfies $\hcg(\iota)\circ(\delta^1_1)_! = f$ and $\chi(\iota)\circ(\delta^1_0)_! = g$. Therefore it induces a modest fibration $\hcg(\iota)\ri(\vec \mu): Z\to \Delta[1]$ such that $f\ri(\vec \mu)$ and $g\ri(\vec \mu)$ are pullbacks along $\Delta(\delta_i^1)$.
+
+\begin{lemma} If $\dom f=\dom g$ is a modest complex and if $\iota:f\to g$ corresponds a weak equivalence of modest complexes, then $\hcg(\iota)$ is a modest fibration. \end{lemma}
+
+\begin{proof} We start with an analysis of what happens to horns in this construction.
+Let $n>0$ and $i,k\leq n$. These are the indices for the horn $\Lambda_k[n] \to \Delta[n]$ together with a morphism $\Delta([n],[i]):\Delta[n]\to\Delta[1]$. 
+
+If we pullback the horn along $\Delta(\delta^1_1):1\to \Delta[1]$, then we get a monomorphism which we express as an inclusion unions of faces of $\Delta([n])$ to get the following formula:
+\begin{equation}
+\bigcup_{\substack{q\leq n\\q\neq k}} \face(\set{p\in [n] | i < p}\cup\set{q}) \to \face\set{p\in [n] | i < p}
+\end{equation}
+\begin{itemize}
+\item For $i<n-1$, both sides are the face $\face\set{p\in [n] | i < p}$, because both $\set{p\in [n] | i < p}\cup\set{n}$ and $\set{p\in [n] | i < p}\cup\set{n-1}$ equal $\set{p\in [n] | i < p}$ and $k$ is unequal to either $n-1$ or $n$. Hence the pullback of the horn is the acyclic cofibration $\id_{\Delta[i]}: \Delta[i]\to\Delta[i]$, or, if $i=-1$ the acyclic cofibration $\id_0:0\to 0$.
+\item For $i=n-1$ and $k<n$, both sides are the face $\face\set{n}$ and the pullback of the horn is the acyclic cofibration $\id_{\Delta[n-1]}: \Delta[n-1]\to\Delta[n-1]$. For $k=n$ however, we find that the pullback is the cycle $\partial \Delta[n-1] \to \Delta[n-1]$.
+\item For $i=n$ the pullback is all of $\Lambda_k[n] \to \Delta[n]$.
+\end{itemize}
+
+With this analysis we can tackle the problem of lifting horns along $\hcg(\iota)\ri(\vec\mu):Z\to \Delta[1]$ and this hinges on the morphism $([n],[i]):\Delta[n] \to \Delta[i]$ just like the definition of $\hcg(\iota)$ does.
+
+\begin{enumerate}
+\item if $i=-1$, then filling $\Lambda_k[n] \to \Delta[n]$ in $\hcg(\iota)\ri(\vec\mu)$ reduces to filling it in $g\ri(\vec\mu)$.
+\item if $i=n$, then filling $\Lambda_k[n] \to \Delta[n]$ in $\hcg(\iota)\ri(\vec\mu)$ reduces to filling it in $f\ri(\vec\mu)$.
+\item if $-1<i<n$, then filling $\Lambda_k[n] \to \Delta[n]$ in $\hcg(\iota)\ri(\vec\mu)$ reduces to filling it in $g\ri(\vec\mu)$ and filling its pullback along $\Delta([n],[i])$ in $f\ri(\vec\mu)$ in a commutative way.
+\end{enumerate}
+
+We can do $1$ and $2$ because $f,g$ are complexes. The third $3$ is mostly not a problem, because the pullbacks are identities. There is just one exception: $k=n$ and $\Delta([n],[n-1])$. 
+To fill this cycle in $f$, in a way that is consistent with the filler of the horn in $g$, we use the fact that $\iota$ factors an acyclic fibration following a morphism which has the left lifting property with respect to modest fibrations (see remark \ref{modfac}). For these two types of maps, we have an elegant solution.
+
+Firstly assume that $\iota$ is an acyclic fibration. When we fill $\Lambda^n_n$ in $g\ri(\vec\mu)$, we get an $n-1$ simplex opposite to the edge $n$. The cycle $\partial\Delta[n-1] \to \Delta[n-1]$ commutes with the acyclic fibration $\iota\ri(\vec\mu)$, which means there is a filler for is. That way we fill $\partial\Delta[n-1]$ in $f\ri(\vec\mu)$ in a way that commutes with the filler of $\Lambda^n_n$ in $Y$.
+\[\xymatrix{
+\partial\Delta[n-1] \ar[d]\ar[dr]\ar[rr] &  & f\ri(\vec\mu)\ar[d]^{\iota\ri(\vec\mu) }\\
+\Delta[n-1] \ar@{.>}[urr]\ar[dr]_{\Delta(\delta^n_n)} & \Lambda_n[n] \ar[d]\ar[r] & g\ri(\vec\mu) \ar[d]^\bang \\
+& \Delta[n] \ar@{.>}[ur]\ar[r] & 1
+}\]
+
+Secondly assume that $\iota$ is . Because $f\ri(\vec\mu)$ is a modest complex, $\iota$ has a right inverse $\iota'$. After filling the horn $\Lambda_n[n]$ in $Y$ we use this right inverse to find a suitable filler in $X$.
+\[\xymatrix{
+f\ri(\vec\mu)\ar[d]_{\iota\ri(\vec\mu)} \ar[r]^\id & X \ar[d] \\
+g\ri(\vec\mu) \ar[r] \ar@{.>}[ur]^{\iota'} & 1 
+}\]
+
+Since $\iota$ is a weak equivalence between modest simplicial sets, it factors as an acyclic fibration following an morphism which has the right lifting property with respect to 
+
+
+\hide{If $\iota:X\to Y$ let $Y/\iota$ be the pullback of $Y^{\Delta(\delta^1_1)}:Y^{\Delta[1]} \to Y$ along $\iota$. The map $X\to Y/\iota$ which sends $x$ to the constant homotopy $\iota(x)$ is an acyclic cofibration, because it is a retract of the pushout of $Y/\iota \times \Delta(\delta^1_1):Y/\iota\to Y/\iota\times \Delta[1]$ along the projection $Y/\iota \to X$. Meanwhile $Y/\iota\to Y$ is a fibration because $Y^{\Delta[1]}\to Y\times Y$ and the projection $\pi_1:Y\times Y\to Y$ are fibrations. It is a homotopy equivalence because $\iota$ and $X\to Y/\iota$ are. Hence it is an acyclic fibration by lemma \ref{acycfib}. So we can fill the cycle $\partial\Delta$ by combining the constructions above.}%hier is uitleg nodig
+\end{proof}
+
+\hide{
+Is de cograaf niet een manier om een factorisatie te geven in fibraties en cofibraties? Acyclische fibraties dan? Kunnen we dat niet toepassen om een categorie van cofibrante objecten te krijgen?
+
+Het gaat om het morfisme $Z\to Y$. We zien dat het vuller van horns in $Z$ meestal wordt geredceert tot hetzelfde probleem in $Y$, maar nu eisen we dat de horn in $Y$ er al is\dots
+Het uiterste geval met $X$ is dan nog wel een probleem
+}
+
+\begin{theorem} The generic modest fibration $U^S$ is modestly univalent. \label{univalence}\end{theorem}
+
+\begin{proof} For every pair $f,g:X\to \rat\pers^S$ and each homotopy equivalence $h:f\ri(U^S) \to g\ri(U^S)$ we get a homotopy $k:\simcat/[1]\times X \to \rat \pers^S$ between $f$ and $g$ by applying the $\hcg$ construction pointwise for the various points of $X$. 
+
+
+\end{proof}
+
+\section{Conclusion}
+We have established that there is a modestly univalent generic modest Kan fibration in the category of Kan complexes $\sAsm_f$. We expect that the full subcategory of cofibrant objects is a model of homotopy type theory.
+
+Before ending this paper, want want to add a few interesting observations.
+
+\newcommand\ex{_{\rm ex}}
+\subsection{Exact completions}
+In the effective topos, modest morphisms are still closed under dependent products, but the generic modest morphism is no longer generic and dependent products fail to satisfy the Beck-Chevalley condition over some pullback squares \cite{MR1023803}. So $\pers$ is only complete in a weakened sense. The constructions in this paper allow us to show that toposes can have complete internal categories in a strong sense.
+
+\begin{prop} The exact completion $\Asm\ex$ of $\Asm$ \dots
+\begin{enumerate}
+\item It is a topos. 
+\item It has a generic modest morphism.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+For 1. see \cite{MR1981211}. In order to show 2., we a category of truncated simplicial assemblies.
+
+Let $\simcat_0$ be the full subcategory of $\simcat$ on the objects $[0]$ and $[1]$. The category $\Asm^{\simcat_0\dual}$ is the category of $0$-truncated $n$-simplices.
+
+Let $Z:\simcat_0\to\simcat$ be the inclusion functor. It induces a functor $Z\ri:\sAsm \to \Asm^{\simcat_0\dual}$. If we apply $Z\ri$ to cycle and horn inclusions we find that the higher dimensional ones become isomorphisms. The only cycle inclusions are which don't turn into isomorphisms are $0\to 1$, $1+1 \to \Delta[1]$. For horn inclusions we are left with $\Delta(\delta^1_i):1\to \Delta[1]$ and $\Lambda_i[2] \to \Delta[2]$.
+
+The injective objects, i.e. the complexes, for these 5 horn inclusions are precisely the \emph{pseudoequivalence relations} of \cite{MR1600009}. The category $\Asm\ex$ therefore has the same objects as the full subcategory of complexes $\Asm^{\simcat_0}_f\subseteq \Asm^{\simcat_0}$. Morphisms of $\Asm\ex$ are equivalence classes of morphisms in $\Asm^{\simcat_0}_f$ for the relation of being homotopic. 
+
+We have a generic modest injective in $\Asm^{\simcat_0}_f$ by theorem \ref{geninjmod}. Pullbacks of fibrations are preserved by the quotient functor $Q:\Asm^{\simcat_0}_f \to\Asm\ex$ because they are examples of homotopy pullbacks \cite{GJSHT}. Therefore $Q(\rat U^S)$ is a generic family of modest sets in $\Asm\ex$.
+\end{proof}
+
+\begin{remark}[Lifting power revisited] If we use the local rather than the global lifting property (see remark \ref{liftingpower}) in the definition of fibrations in $\Asm^{\simcat_0\dual}$, then the homotopy category is equivalent to the effective topos. The effective topos has no generic modest morphism \cite{MR1023803}. %wrong Awodey
+\end{remark}
+
+\subsection{Conjectures of independence}
+None of the proofs crucially rely on recursive realizability. For every non trivial \emph{partial combinatory algebra} $A$ the realizability topos $\mathsf{RT}(A)$ has a nice subcategory of assemblies $\Asm(A)$ \cite{MR2479466}. The category of modest sets can be defined in exactly the same way and includes the natural number object which $\mathsf{RT}(A)$ always has. Further generalization to relative realizability seem unproblematic and I am not sure if \emph{order partial combinatory algebras} cause any trouble.
+
+I see no reason why the category of assemblies has to be constructed over the topos of sets. The base category should be locally Cartesian closed and regular, but other properties may be superfluous.
+
+\subsection{Building factorization systems}
+A nice way to get an anodyne-injective factorization system is to generate a free monoid from the functor $S$ in subsection \ref{IAA} in the monoidal category of functors $\sAsm \to\sAsm$.  Garner shows that this is possible in the category of simplicial sets in \cite{MR2899720}, which is a reflective subcategory of $\sAsm$. The algebraic completeness of $\rat \pers$ makes it easy to find the free monoid of $S$ there, in fact the lemma before \ref{modfac} shows how to do it. I could not figure out how to combine these two constructions into one.
+
+\subsection*{Acknowledgments} 
+I am grateful to the Warsaw Center of Mathematics and Computer Science for the opportunity to write this paper and I am grateful for discussions with Marek Zawadowski. Richard Garner, Peter LeFanu Lumsdaine and Thomas Streicher were very helpful by pointing out mistakes in a draft of this paper.
+
+\bibliographystyle{alpha}
+
+\bibliography{realizability}{}
+
+
+\end{document}
+
+
