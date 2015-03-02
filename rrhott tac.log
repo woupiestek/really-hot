@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  28 FEB 2015 21:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  1 MAR 2015 11:46
 entering extended mode
 **rrhott*tac.tex
-("C:\Users\Wouter\Documents\Papers\rrhott tac.tex"
+("C:\Users\Wouter\Documents\GitHub\realy-hot\rrhott tac.tex"
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, arabic, armenian, assamese, basque, bengali
 , bokmal, bulgarian, catalan, coptic, croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, galic
@@ -10,7 +10,7 @@ ian, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, icelandic, 
 -x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, romanian, russian, sanskrit, serbian, slovak, sloven
 ian, spanish, swedish, swissgerman, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usenglishmax, w
 elsh, loaded.
-(C:\Users\Wouter\Documents\Papers\tac.cls
+(C:\Users\Wouter\Documents\GitHub\realy-hot\tac.cls
  Document Class `tac' <2012-09-22>, for use by TAC authors
 ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\xspace.sty"
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
@@ -402,7 +402,8 @@ File: english.lbx 2014/06/25 v2.9a biblatex localization (PK/JW/AB)
 )
 \@quotelevel=\count226
 \@quotereset=\count227
- ("C:\Users\Wouter\Documents\Papers\rrhott tac.aux")
+
+("C:\Users\Wouter\Documents\GitHub\realy-hot\rrhott tac.aux")
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
 LaTeX Font Info:    ... okay on input line 81.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
@@ -421,8 +422,7 @@ Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'ascii'.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'rrhott*tac.bbl' found.
-
-("C:\Users\Wouter\Documents\Papers\rrhott tac.bbl")
+ ("C:\Users\Wouter\Documents\GitHub\realy-hot\rrhott tac.bbl")
 Package biblatex Info: Reference section=0 on input line 81.
 Package biblatex Info: Reference segment=0 on input line 81.
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
@@ -436,8 +436,7 @@ LaTeX Font Info:    Try loading font information for U+msa on input line 84.
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 84.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 87.
@@ -452,28 +451,28 @@ LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
 (Font)              scaled to size 9.19995pt on input line 91.
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
 (Font)              scaled to size 6.89996pt on input line 91.
-
-[2] [3] [4] [5] [6] [7] [8] [9] <xymatrix 3x2 306> <xymatrix 2x2 182> [10] <xymatrix 2x2 223> [11] [12] <xymatrix 2x2
-184> [13] <xymatrix 2x2 175> [14] <xymatrix 3x2 399> <xymatrix 3x2 409> [15] <xymatrix 3x2 312> <xymatrix 3x2 399>
-<xymatrix 2x2 223> [16] <xymatrix 3x2 398> <xymatrix 3x2 409> [17] <xymatrix 2x2 223> <xymatrix 3x2 399> <xymatrix 3x2
-402> [18] [19] <xymatrix 2x2 209> [20] [21] <xymatrix 5x2 317> [22] [23] <xymatrix 2x2 182> <xymatrix 2x2 183> [24]
-[25] <xymatrix 2x2 184> <xymatrix 3x2 349> <xymatrix 5x2 413> [26] <xymatrix 4x2 314> [27] <xymatrix 4x2 242> <xymatrix
-4x2 279> [28] <xymatrix 2x2 223> [29] <xymatrix 2x2 223> <xymatrix 2x2 224> <xymatrix 2x2 223> [30] [31] <xymatrix 2x2
-168> [32] [33] <xymatrix 2x2 182> <xymatrix 4x2 436> [34] [35] [36]
+ [2] [3] [4] [5] [6] [7] [8] [9] <xymatrix 3x2 306>
+<xymatrix 2x2 182> [10] <xymatrix 2x2 223> [11] [12] <xymatrix 2x2 184> [13] <xymatrix 2x2 175> [14] <xymatrix 3x2 399>
+<xymatrix 3x2 409> [15] <xymatrix 3x2 312> <xymatrix 3x2 399> <xymatrix 2x2 223> [16] <xymatrix 3x2 398> <xymatrix 3x2
+409> [17] <xymatrix 2x2 223> <xymatrix 3x2 399> <xymatrix 3x2 402> [18] [19] <xymatrix 2x2 209> [20] [21] <xymatrix 5x2
+317> [22] [23] <xymatrix 2x2 182> <xymatrix 2x2 183> [24] [25] <xymatrix 2x2 184> <xymatrix 3x2 349> <xymatrix 5x2 413>
+[26] <xymatrix 4x2 314> [27] <xymatrix 4x2 242> <xymatrix 4x2 279> [28] <xymatrix 2x2 223> [29] <xymatrix 2x2 223>
+<xymatrix 2x2 224> <xymatrix 2x2 223> [30] [31] <xymatrix 2x2 168> [32] [33] <xymatrix 2x2 182> <xymatrix 4x2 436>
+[34] [35] [36]
 Underfull \hbox (badness 10000) in paragraph at lines 1303--1303
 
  []
 
-[37] ("C:\Users\Wouter\Documents\Papers\rrhott tac.aux")
+[37] ("C:\Users\Wouter\Documents\GitHub\realy-hot\rrhott tac.aux")
 Package logreq Info: Writing requests to 'rrhott*tac.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  8784 strings out of 493922
- 129011 string characters out of 3147303
+ 129121 string characters out of 3147303
  370620 words of memory out of 3000000
  11982 multiletter control sequences out of 15000+200000
  19909 words of font info for 74 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  37i,15n,52p,1073b,937s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on "rrhott tac.dvi" (37 pages, 266552 bytes).
+Output written on "rrhott tac.dvi" (37 pages, 269660 bytes).
