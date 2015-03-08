@@ -873,11 +873,21 @@ By generalization there is a filler for each square with a horn inclusion $H(m,l
 \end{proof}
 
 \section{Fibrant Universe}
-This section adds a new class of \emph{modest morphisms} $M\subseteq S$ with its own generic morphism $\gen(M)$ and full internal subcategory $\cof(\gen(M))$. The class $M$ contains all regular monomorphisms and is closed under composition and pullback. 
+This section adds a new class of \emph{modest morphisms} $M\subseteq S$ with its own generic morphism $\gen(M)$ and full internal subcategory $\cof(\gen(M))$. The class $M$ contains all regular monomorphisms and is closed under composition and pullback.
 
-\subsection{Externalization}
+\subsection{Discrete isofibrations}
 %begin clarification
-This time, $M$ is internal to $\cat S$ too. This that the morphism $\bang\of\cod(\gen(M))\to 1$ is a member of $S$, and therefore $\gen(M)$ corresponds to a global section of the object $\Ar(\cat S)$ of arrows of $\cat S$.
+This time, $M$ is internal to $\cat S$ too. Since internal categories like $\cat S$ have no set of morphisms of which $M$ can be a subset, $M$ takes a different form.
+
+\mathssbxdef{Iso}
+
+\begin{definition}
+A discrete isofibration is a functor $F\of\cat A\to \cat B$ which is fully faithful and which has a lifting property for isomorphisms. If $A$ is an object of $\cat A$ and if $f\of B\to FA$ is an isomorphism of $\cat B$ then there is an isomorphism $f'\of B'\to A$ such that $Ff'=f$. The internal version for locally Cartesian closed categories has a lifting operator, so $f'=l(X,f)$ for some element $l$ of.
+\[ \Pi X\of \Ob(\cat A).\Pi f\of \Iso(\cat B)/FX. \Iso(\cat A)/X \]
+Here $\Iso(\cat X)/Y$ is the object of isomorphisms of $\cat X$ whose codomains are $Y$.
+\end{definition}
+
+We can connect families of morphisms in the internal category $\cat S=\cof(\gen(S))$ to families of morphisms in the ambient category $\cat A$ by the following construction.
 
 \begin{lemma}
 A generic triangle $\gen(S)_2$ for a class of morphisms $S$ is a commutative triangle such that every commutative triangle in $S$ is a pullback of the generic one. If $S$ is closed under composition and pullback and has a generic morphism $\gen(S)$, then is has a generic triangle.
@@ -896,67 +906,58 @@ f(a,x) &= a(x)
 Any commutative triangle $f'\of X'\to Y'$ and $g'\of Y'\to Z'$ in $S$ induces a pair of characteristic morphisms $\chi(g')$ and $\chi(g'\circ f')\of Z'\to \cod(\gen(S))=\Ob(\cof(\gen(S)))$. Since $\Ar(\cof(\gen(S)))=\Pi i\of\cod(\gen(S))).\Pi j\of \cod(\gen(S))).\Pi k\of \gen(S)[i].\gen(S)[j]$ 
 \end{proof}
 
+\mathssbxdef{Func}
+\mathssbxdef[igen]{gen}
+\newcommand\pair[2]{\langle #1,#2\rangle}
+We assume that the morphism $\bang\of\cod\gen(M)\to 1$ is a member of $S$. Therefore $\gen(M)$ and $\bang$ form a triangle in $S$, which is the pullback of the generic triangle $\gen(S)_2$ along some global section $\igen(M)\of 1\to \Ar(\cat S)$.
 
+The discrete isofibration that assumes the role of the class of morphisms $M$ is a functor $\cat M\to \Func([1],\cat S)$ where the internal category $\cat M$ is constructed as follows. The objects are pairs $\pair fs$ where $f$ is a morphism of $\cat S$ and $y$ is a pullback square in $\cat S$ that witness that $f$ is a pullback of $\igen(M)$ and therefore an $M$-morphism.
+\[\xymatrix{
+\bullet\ar[d]_f\ar[r] & \bullet\ar[d]^{\igen(M)}\\
+\bullet\ar[r] & \bullet
+}\]
+A morphism $\pair fs\to \pair gt$ is a commutative square $f\to g$. The pullback squares are ignored, so the projection $\pi_0$ becomes a fully faithful functor $M\of\cat M\to \Func([1],\cat S)$. Because isomorphisms of morphisms are pullbacks squares, the lifting operator that witnesses that $M$ is a discrete isofibration simply composes the isomorphisms and the pullback squares: $(\pair fs,g)\mapsto \pair {\dom g}{s\circ g}$.
 
-\hide{%here
-We hebben het wel over een globale sectie van $\Ar(\cof(M)\s)$!
+There is a related discrete isofibration $M\s\of \cat M\s\to \Func([1],\cat S\s)$ which represent the class of morphisms $f\of X\to Y$ such that $f[i]$ are members of $M$ for all $i\of \nno$. The category $\cat M\s$ is simply the category of functors $\Func(\simCat\dual,\cat M)$ and $M\s$ acts by composition with $M$.
 
-Als $I\to\Ar(\cof(M)\s)$ een familie van fibraties is, dan is de relatie met die globale sectie toch niet zo eenvoudig.
+\hide{ Is dit genoeg? }
 
-Die klasse $M\s$ is een deelobject van $\Ar(\cof(\gen(M))\s)$.
-
-Er moet een verband zijn: de globale sectie van $\Ar(\cat S)$, het object $M\subseteq \Ar(\cat S)$ en het morphisme $M\to M/M$. 
-
-Kunnen we iets met het object van karateristieken: $\cod\gen(M)^{\cod\gen(S)}$? Voordeel: de gewenste getuige is altijd daar. Nadeel: geen deelobject. Wanneer hebben we daar last van?
-
-Wat vervangt de inclusie?
-
-
-Omdat $\gen(M)$ een element van $\gen(S)$ in, bestaat er een pullback $\gen(M)\to\gen(S)$. Nu is het niet duidelijk dat daar monomorfismes bij zitten.
-
-
-Er is steeds een verband tussen $\cat S^{I\disc}$ en $\cat S/I$. 
-
-Ik kom even niet verder dan: een morfisme in $M\s$ is de combinatie van een morfisme in $S\s$ met een getuige van modesty.
-
-
-}
 %end clarification
 
 \subsection{Lifted generic}
-The first step is to lift the generic morphism of $M$ in $\cat S$ to a generic morphism of $M\s$ without considering fibrations. 
+The first step is to lift the generic morphism $\igen(M)$ of $M$ in $\cat S$ to a generic morphism $\igen(M\s)$ of $M\s$.
 
-The way to get there is a bit roundabout. If $\gen(M\s)$ were a the generic morphism, then there is an isomorphism between $V[n]$ and $\simplex[n]\to V$ by the Yoneda lemma and because $\gen(M\s)$ is generic also an isomorphism between $V[n]$ and the class of morphisms in $M\s$ whose codomain is $\simplex[n]$. By lemma \ref{slice equivalence} these correspond to functors $\simCat/[n]\dual\to\cat S$ whose values are fibres of the generic morphism $\gen(M)$ of $M$. 
+The way to get there is a bit roundabout. If $\igen(M\s)$ were a the generic morphism, then there is an isomorphism between $V[n]$ and $\simplex[n]\to V$ by the Yoneda lemma and because $\igen(M\s)$ is generic also an isomorphism between $V[n]$ and the class of morphisms in $M\s$ whose codomain is $\simplex[n]$. By lemma \ref{slice equivalence} these correspond to functors $\simCat/[n]\dual\to\cat S$ whose values are fibres of the generic morphism $\igen(M)$ of $M$. 
 
 \begin{lemma}
-For each $n\of\nno$ let $\gen(M\s)[n]$ be the pullback of $\gen(M)$ along the map $F\mapsto F(\id_{[n]})\of\cof(\gen(M))^{\simCat/[n]\dual}\to \cod(\gen(M))$. The morphism $\gen(M\s)$ is a generic morphism of $M\s$.
+For each $n\of\nno$ let $\igen(M\s)[n]$ be the pullback of $\igen(M)$ along the map $F\mapsto F(\id_{[n]})\of\cof(\igen(M))^{\simCat/[n]\dual}\to \cod(\igen(M))$. The morphism $\igen(M\s)$ is a generic morphism of $M\s$.
 \end{lemma}
 
 
-\begin{proof} %the domain of $\gen(M\s)$ is a simplicial set...
-The domain of $\gen(M\s)$ is a simplicial object for the following reasons. The domain $\dom\gen(M\s)$ consists of pairs $(F,x)$ where $F(\id_{[n]}) = \gen(M)(x)$. The following action of $\simCat$ makes this a simplicial object. For all $h\of[m]\to[n]$ of $\simCat$ let:
-\[\dom\gen(M\s)(h)(F,x) = (F\circ h\di, Fh(x))\] Here $h\di\of\simCat/[m]\dual\to\simCat/[n]\dual$ is composing with $h$.
+\begin{proof} %the domain of $\igen(M\s)$ is a simplicial set...
+The domain of $\igen(M\s)$ is a simplicial object for the following reasons. The domain $\dom(\igen(M\s))$ consists of pairs $(F,x)$ where $F(\id_{[n]}) = \igen(M)(x)$. The following action of $\simCat$ makes this a simplicial object. For all $h\of[m]\to[n]$ of $\simCat$ let:
+\[\dom(\igen(M\s))(h)(F,x) = (F\circ h\di, Fh(x))\] Here $h\di\of\simCat/[m]\dual\to\simCat/[n]\dual$ is composing with $h$.
 
 %generic first
-Let $f\of X\to Y$ be a member of $M\s$. That means that for each $n\of\nno$ there is a morphism $\chi[n]\of Y[n] \to \cod(\gen(M))$ such that $f[n]$ is a pullback of $\gen(M)$. For each $g\of \simCat/[n]$ let $\chi'[n](y)(g) = \chi[\dom g](Y(g)(y))$. This defines a morphism $\chi'\of Y\to \dom (\gen(M\s))$ because the following square commutes for all $h\of [m]\to [n]$ in $\simCat$ as explained below.
+Let $f\of X\to Y$ be a member of $M\s$. That means that for each $n\of\nno$ there is a morphism $\chi[n]\of Y[n] \to \cod(\igen(M))$ such that $f[n]$ is a pullback of $\igen(M)$. For each $g\of \simCat/[n]$ let $\chi'[n](y)(g) = \chi[\dom g](Y(g)(y))$. This defines a morphism $\chi'\of Y\to \dom (\igen(M\s))$ because the following square commutes for all $h\of [m]\to [n]$ in $\simCat$ as explained below.
 \[\xymatrix{
-Y[n]\ar[d]_{Y(h)} \ar[r]^(.3){\chi'[n]} & \cof(\gen(M))^{\simCat/[n]\dual} \ar[d]^{h\ri}\\
-Y[m] \ar[r]^(.3){\chi'[m]} & \cof(\gen(M))^{\simCat/[m]\dual}
+Y[n]\ar[d]_{Y(h)} \ar[r]^(.3){\chi'[n]} & \cof(\igen(M))^{\simCat/[n]\dual} \ar[d]^{h\ri}\\
+Y[m] \ar[r]^(.3){\chi'[m]} & \cof(\igen(M))^{\simCat/[m]\dual}
 }\]
-The functor $h\ri$ sends each $F\of\simCat/[n]\dual\to \cof(\gen(M))$ to the functor $h\ri(F)$ that satisfies $h\ri(F)(g) = F(h\circ g)$. Therefore the equation expressed in the diagram holds:
+The functor $h\ri$ sends each $F\of\simCat/[n]\dual\to \cof(\igen(M))$ to the functor $h\ri(F)$ that satisfies $h\ri(F)(g) = F(h\circ g)$. Therefore the equation expressed in the diagram holds:
 \begin{align*}
 h\ri(\chi'[n](y))(g) &= \chi'[n](y)(h\circ g) = \\
 \chi[\dom (h\circ g)](Y(h\circ g)(y))) &= \chi[\dom (g)](Y(g)(Y(h)(y))) =\\
 \chi'[m](Y(h)(y))(g)
 \end{align*}
 
-The morphism $f$ is the pullback of $\gen(M\s)$ because $\chi'[n](x)(\id) = \chi[n](x)$ and a basic fact about pullbacks.
+The morphism $f$ is the pullback of $\igen(M\s)$ because $\chi'[n](x)(\id) = \chi[n](x)$ and a basic fact about pullbacks.
 \[\xymatrix{
-X[n]\ar[d]_f\ar[r] & \dom\gen(M\s)[n] \ar[r]\ar[d]_{\gen(M\s)[n]} & \dom(\gen(M))\ar[d]^{\gen(M)} \\
-Y[n] \ar[r]^(.4){\chi'[n]} \ar@/_2ex/[rr]_{\chi[n]} & \cof(\gen(M))^{\simCat/[n]\dual} \ar[r]^(.6){F\mapsto F(\id)} & \cod(\gen(M))
+X[n]\ar[d]_f\ar[r] & \dom(\igen(M\s))[n] \ar[r]\ar[d]_{\igen(M\s)[n]} & \dom(\igen(M))\ar[d]^{\igen(M)} \\
+Y[n] \ar[r]^(.4){\chi'[n]} \ar@/_2ex/[rr]_{\chi[n]} & \cof(\igen(M))^{\simCat/[n]\dual} \ar[r]^(.6){F\mapsto F(\id)} & \cod(\igen(M))
 }\]
-The diagram hold for every $f$ and shows that $\gen(M\s)$ belongs to $M\s$ at the same time. Hence $\gen(M\s)$ is a generic morphism of $M\s$.
-\end{proof}\hide{ Even if we cannot build $\cof(\gen(M))\s$ in $\cat S$, that does mean the pullback is not a modest morphism. }
+The diagram hold for every $f$ and shows that $\igen(M\s)$ belongs to $M\s$ at the same time. Hence $\igen(M\s)$ is a generic morphism of $M\s$.
+\end{proof}\hide{ Even if we cannot build $\cof(\igen(M))\s$ in $\cat S$, that does mean the pullback is not a modest morphism. }
 
 \subsection{Generic fibration}
 
@@ -968,7 +969,7 @@ For each $n\of\nno$ the object $\cod(\gen(M\s\f))$ is an object of pairs $(x,y)$
 A\ar[rr]^a\ar[d]_c && B \ar[rr]^b\ar[d]_(.4)d && C\ar[d]^e\\
 D\ar[rr]_f \ar@{.>}[urrrr]_(.7){l(b\circ a, g\circ f)}\ar@{.>}[urr]^{l(a, f)} && E \ar[rr]_g && F
 }\]
-For each $\phi\of \simCat([m],[n])$, $\cod(\gen(M\s\f))(\phi)(x,y) = (\cod(\gen(M\s))(\phi)(x),y')$, where $y'$ is $y$ transported along $\simplex(\phi)$.
+For each $\phi\of \simCat([m],[n])$, $\cod(\gen(M\s\f))(\phi)(x,y) = (\cod(\igen(M\s))(\phi)(x),y')$, where $y'$ is $y$ transported along $\simplex(\phi)$.
 \end{definition}
 
 
@@ -982,7 +983,7 @@ For each $\phi\of \simCat([m],[n])$, $\cod(\gen(M\s\f))(\phi)(x,y) = (\cod(\gen(
 
 \begin{proof} For each $f\of\horn_k[n]\to \cod(\gen(M\s\f))$, the pullback of $\gen$ along $f$ descends along $H(n,k)$ by theorem \ref{descent}. The descended fibration has a characteristic function. This is the filler for the horn inclusion. %why?
 
-There is a little technical issue here. The constructions used in the proof of \ref{descent} are defined in terms of a dependent product (along $H(n,l)$) and hence only defined up to isomorphism. This is not a problem here because the product are finite and explicitly definable in terms of the functors $\cof(\gen(M))^\cat I \to \cof(\gen(M))$ that witness the existence of limits over finite index categories $\cat I$ in $\cof(\gen(M))$.
+There is a little technical issue here. The constructions used in the proof of \ref{descent} are defined in terms of a dependent product (along $H(n,l)$) and hence only defined up to isomorphism. This is not a problem here because the product are finite and explicitly definable in terms of the functors $\cof(\igen(M))^\cat I \to \cof(\igen(M))$ that witness the existence of limits over finite index categories $\cat I$ in $\cof(\igen(M))$.
 
 This construction is the filler operator that proves that $\cod(\gen(M\s\f))$ is a complex.
 \end{proof}

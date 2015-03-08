@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  1 MAR 2015 11:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  8 MAR 2015 15:14
 entering extended mode
 **rrhott*tac.tex
 ("C:\Users\Wouter\Documents\GitHub\realy-hot\rrhott tac.tex"
@@ -455,24 +455,24 @@ LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
 <xymatrix 2x2 182> [10] <xymatrix 2x2 223> [11] [12] <xymatrix 2x2 184> [13] <xymatrix 2x2 175> [14] <xymatrix 3x2 399>
 <xymatrix 3x2 409> [15] <xymatrix 3x2 312> <xymatrix 3x2 399> <xymatrix 2x2 223> [16] <xymatrix 3x2 398> <xymatrix 3x2
 409> [17] <xymatrix 2x2 223> <xymatrix 3x2 399> <xymatrix 3x2 402> [18] [19] <xymatrix 2x2 209> [20] [21] <xymatrix 5x2
-317> [22] [23] <xymatrix 2x2 182> <xymatrix 2x2 183> [24] [25] <xymatrix 2x2 184> <xymatrix 3x2 349> <xymatrix 5x2 413>
-[26] <xymatrix 4x2 314> [27] <xymatrix 4x2 242> <xymatrix 4x2 279> [28] <xymatrix 2x2 223> [29] <xymatrix 2x2 223>
-<xymatrix 2x2 224> <xymatrix 2x2 223> [30] [31] <xymatrix 2x2 168> [32] [33] <xymatrix 2x2 182> <xymatrix 4x2 436>
-[34] [35] [36]
-Underfull \hbox (badness 10000) in paragraph at lines 1303--1303
+317> [22] [23] <xymatrix 2x2 182> <xymatrix 2x2 183> [24] [25] <xymatrix 2x2 168> <xymatrix 2x2 184> [26] <xymatrix 3x2
+349> <xymatrix 5x2 413> [27] <xymatrix 4x2 314> <xymatrix 4x2 242> <xymatrix 4x2 279> [28] [29] <xymatrix 2x2 223>
+<xymatrix 2x2 223> [30] <xymatrix 2x2 224> <xymatrix 2x2 223> [31] [32] <xymatrix 2x2 168> [33] <xymatrix 2x2 182>
+[34] <xymatrix 4x2 436> [35] [36] [37]
+Underfull \hbox (badness 10000) in paragraph at lines 1314--1314
 
  []
 
-[37] ("C:\Users\Wouter\Documents\GitHub\realy-hot\rrhott tac.aux")
+[38] ("C:\Users\Wouter\Documents\GitHub\realy-hot\rrhott tac.aux")
 Package logreq Info: Writing requests to 'rrhott*tac.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 8784 strings out of 493922
- 129121 string characters out of 3147303
- 370620 words of memory out of 3000000
- 11982 multiletter control sequences out of 15000+200000
+ 8788 strings out of 493922
+ 129136 string characters out of 3147303
+ 387620 words of memory out of 3000000
+ 11986 multiletter control sequences out of 15000+200000
  19909 words of font info for 74 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  37i,15n,52p,1073b,937s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on "rrhott tac.dvi" (37 pages, 269660 bytes).
+Output written on "rrhott tac.dvi" (38 pages, 282240 bytes).
