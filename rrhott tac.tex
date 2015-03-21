@@ -47,7 +47,7 @@ Poland}
 \newcommand\gen\gamma
 \newcommand\dsum{\Sigma_}
 \newcommand\dprod{\Pi_}
-\newcommand\tuple[1]{\left\langle #1 \right\rangle}
+\newcommand\tuplet[1]{\left\langle #1 \right\rangle}
 \newcommand\true{\mathtt{true}}
 \newcommand\false{\mathtt{false}}
 \newcommand\bool{\mathtt{bool}}
@@ -77,7 +77,6 @@ Poland}
 \newcommand\code\mathtt
 \mathssbxdef{Func}
 \mathssbxdef[igen]{gen}
-\newcommand\pair[2]{\langle #1,#2\rangle}
 
 \addbibresource{realizability}
 
@@ -144,14 +143,14 @@ This subsection discusses two constructions of types that this paper uses regula
 
 For each object $X$, $\dsum X\of\cat C/X\to \cat C$ is the functor that sends each morphism $f\of Y\to X$ to its domain $Y$.
 
-Dependent sum type look like $\Sigma x\of T.U$. The elements are pairs $\tuple{x,y}$ such that $x\of T$ and $y\of U$. For arbitrary terms $t\of(\Sigma x\of T)$, $\pi_0(t)$ and $\pi_1(t)$ represent two values in the tuple $t$. The context dependent interpretation satisfies:
+Dependent sum type look like $\Sigma x\of T.U$. The elements are pairs $\tuplet{x,y}$ such that $x\of T$ and $y\of U$. For arbitrary terms $t\of(\Sigma x\of T)$, $\pi_0(t)$ and $\pi_1(t)$ represent two values in the tuple $t$. The context dependent interpretation satisfies:
 \[ \db{\Gamma\vdash\Sigma x\of T.U} = \dsum {\db T}(\db{\Gamma,x\of T\vdash U}) \]
 The unit and counit induces a families of morphisms between the following families of objects.
 \begin{align*}
-\db{\Gamma\vdash t\of T}\times\db{\Gamma\vdash u\of U[t/x]} &\to \db{\Gamma\vdash \tuple{t, u}\of(\Sigma x\of T.U)}\\
+\db{\Gamma\vdash t\of T}\times\db{\Gamma\vdash u\of U[t/x]} &\to \db{\Gamma\vdash \tuplet{t, u}\of(\Sigma x\of T.U)}\\
 \db{\Gamma\vdash t\of (\Sigma x\of T.V)}&\to \db{\Gamma\vdash \pi_1(t) \of V}
 \end{align*}
-Here $u[t/x]$ is the result of replacing every free occurrence of $x$ in $u$ with $t$; the type $V$ cannot contain $x$ as a free variable. Unit and co-units satisfy equations that ensure that $\pi_0\tuple{t,u}=t$ and $\pi_1\tuple{t,u}=u$ are valid for all terms $t$ and $u$.
+Here $u[t/x]$ is the result of replacing every free occurrence of $x$ in $u$ with $t$; the type $V$ cannot contain $x$ as a free variable. Unit and co-units satisfy equations that ensure that $\pi_0\tuplet{t,u}=t$ and $\pi_1\tuplet{t,u}=u$ are valid for all terms $t$ and $u$.
 
 
 Let $\cat C$ be finitely complete and Cartesian closed. The functor $\dprod X\of\cat C/X\to \cat C$ sends each morphism $f\of Y\to X$ is the object $\set{g\of X\to Y| f\circ g = \id_X }$ of sections of $f$. It is the right adjoint of $X\ri$.
@@ -186,7 +185,12 @@ For each $f\of X\to Y$ of $\cat A$, the \emph{internal category of fibres} $\cof
 
 A \emph{full internal subcategory} is the category of fibres of a generic morphism. The class $S$ and the category $\cof(\gen(S))$ are connected in the following way. Let $S/X$ be the category whose objects are morphism of $S$ whose codomain is $X$ and whose morphisms are arbitrary commutative triangles. because $S$ is closed under pullbacks, each $f\of X\to Y$ induces a \emph{reindexing functor} $f\ri\of S/Y\to S/X$. Generally $\cof(\gen(S))$ has a property if and only if $S/X$ has and $f\ri$ preserves the same property of each object $X$ and each morphism $f$ of $\cat A$. For example, the category $\cof(\gen(S))$ has dependent sums and products if $f\ri$ have left and right adjoints that satisfy the Beck Chevalley condition for each morphism $f\in S$.
 
-\hide{Move stuff on discrete isofibrations here?}
+\hide{
+Move stuff on discrete isofibrations here?
+
+It is better to replace discrete isofibrations with $\cat S$-valued predicates or similar. We should use those throughout.
+
+}
 
 \section{Internal simplicial homotopy}
 This section develops the homotopy theory of Kan complexes internally in Heyting bialgebras. 
@@ -208,18 +212,18 @@ Kan fibrations are morphisms of simplicial sets that have the lifting property r
 
 \begin{definition} Let $\nat\of(\cat S\s)\dual\times \cat S\s \to \cat S^{\nno\disc}$ be the functor which sends each pair of simplicial objects $X,Y$ to the object $\nat(X,Y)$ of morphisms between them--the object $\nat(X,Y)$ lives in $\cat S^{\nno\disc}$ because natural transformations are families of morphisms and $\cat S$ has exponentials.
 
-A morphism $f\of X\to Y$ of $\cat S\s$ has the \emph{global right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the global \emph{left} lifting property with respect to $f$--if the morphism $\pair{f_!}{g\ri} = \pair{\nat(\id_J,f)}{\nat(g,\id_X))}$ 
+A morphism $f\of X\to Y$ of $\cat S\s$ has the \emph{global right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the global \emph{left} lifting property with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\nat(\id_J,f),\nat(g,\id_X))}$ 
 which is the factorization of the cone $\nat(\id_J,f)$, $\nat(g,\id_X))$ through the pullback cone of $\nat(\id_I,f)$ and $\nat(g,\id_Y)$
 is a \emph{split} epimorphism.
 \[\xy
 (34,20)*+{\nat(I,X)}="top",(0,10)*+{\nat(J,X)}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\nat(I,Y)}="right",(34,0)*+{\nat(J,Y)}="bottom"
-\ar^{\nat(g,\id_X)} "left";"top" \ar@{.>}|(.6){\pair{f_!}{g\ri}} "left";"middle" \ar_{\nat(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
+\ar^{\nat(g,\id_X)} "left";"top" \ar@{.>}|(.6){\tuplet{f_!,g\ri}} "left";"middle" \ar_{\nat(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
 \ar "middle";"top" \ar^(.6){\nat(\id_I,f)} "top";"right" \ar_(.6){\nat(g,\id_Y)} "bottom";"right"
 \endxy\]
-A section of $\pair{f_\bang}{g\ri}$ is a \emph{filler operator}.\label{lifting}
+A section of $\tuplet{f_\bang,g\ri}$ is a \emph{filler operator}.\label{lifting}
 \end{definition}
 
-The ordinary right lifting property only says that composition with $\pair{f_\bang}{g\ri}$ induces a surjective function on global sections, while the \emph{local} right lifting property only requires that $\pair{f_\bang}{g\ri}$ is a regular epimorphism. The global version formulated above is stronger than either of those in a constructive context.
+The ordinary right lifting property only says that composition with $\tuplet{f_\bang,g\ri}$ induces a surjective function on global sections, while the \emph{local} right lifting property only requires that $\tuplet{f_\bang,g\ri}$ is a regular epimorphism. The global version formulated above is stronger than either of those in a constructive context.
 
 A morphism can have a lifting property relative to a family or class of morphisms.
 
@@ -325,7 +329,7 @@ While $\cat S$ may lack the structure required to soundly interpret existential 
 \begin{lemma} Every free cofibration is a cofibration. \label{Reedy}
 \end{lemma}
 
-\begin{proof} Suppose $f\of X\to Y$ is a free cofibration and $i\of\nno\mapsto S_i$ is the family of nondegenerate monomorphisms outside the image of $f$. 
+\begin{proof} Suppose $f\of X\to Y$ is a free cofibration and $i\of\nno\mapsto S_i$ is the family of faces outside the image of $f$. 
 For each $i\of\nno$ let $Y_i$ be the sieve of $Y$ which omits the simplices in $S_j$ for $j>i$.
 Let $\simCat\ri\of \cat S\to\cat S\s$ be the constant simplicial assembly functor. 
 Each $y\in S_i$ corresponds to a monomorphism $\simplex[i]\to Y$ which does not factor through $f$ by the Yoneda lemma.
@@ -347,7 +351,7 @@ The rest of this subsection shows the converse, i.e.\ every cofibration is free,
 \begin{proposition} Every morphism $f\of X\to Y$ of $\cat S\s$ factors as an acyclic fibration following a cofibration. \label{factor1} \end{proposition}
 
 \begin{proof}
-Let $Z$ be the following object of $\cat S$. For $n\of\nno$ $Z[n]$ consist of quadruples $(a,b,c,d)$ where 
+Let $Z$ be the following object of $\cat S$. For $n\of\nno$ $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
  $a\of[n]\to [p]$ is an epimorphism of $\simCat$ (so $p\leq n$),
  $b\of\LDMC[p]$ satisfies $b(\id_{[p]})=\true$ if an only if $a=\id_{[n]}$,
  $c\of \set{b}\to X$, where $\set{b}$ is the pullback of $t\of 1\to\LDMC$ along $b$ and 
@@ -358,26 +362,26 @@ Let $Z$ be the following object of $\cat S$. For $n\of\nno$ $Z[n]$ consist of qu
 \LDMC & \simplex[p]\ar[l]^b\ar[r]_d & Y
 }\]
 
-In $\simCat$ every morphism $\phi\of [m]\to[n]$ factors uniquely as a monomorphism $m(\phi)$ following an epimorphism $e(\phi)$. For every $\phi\of [m]\to [n]$ and $(a,b,c,d)\of Z[n]$ let
-\[ Z(\phi)(a,b,c,d) = \left\{\begin{array}{cc}
-(\id_{[n]},\top,a\circ\phi,Y(\phi)(d)) & b(\phi)=\true \\
-\left(\begin{array}{c} e(a\circ \phi)\\ b\circ \simplex(m(a\circ \phi))\\ c \circ t\ri(\simplex(m(a\circ \phi)))\\ d\circ\simplex(m(a\circ \phi))\end{array}\right) & b(\phi)=\false
+In $\simCat$ every morphism $\phi\of [m]\to[n]$ factors uniquely as a monomorphism $m(\phi)$ following an epimorphism $e(\phi)$. For every $\phi\of [m]\to [n]$ and $\tuplet{a,b,c,d}\of Z[n]$ let
+\[ Z(\phi)\tuplet{a,b,c,d} = \left\{\begin{array}{cc}
+\tuplet{\id_{[n]},\top,a\circ\phi,Y(\phi)(d)} & b(\phi)=\true \\
+\tuplet{\begin{array}{c} e(a\circ \phi)\\ b\circ \simplex(m(a\circ \phi))\\ c \circ t\ri(\simplex(m(a\circ \phi)))\\ d\circ\simplex(m(a\circ \phi))\end{array}} & b(\phi)=\false
 \end{array}\right.
 \]
 Here $\top\of \simplex[p]\to\LDMC$ is the characteristic morphism of $\id\of\simplex[p]\to\simplex[p]$.
 
-There is a morphism $g\of X\to Z$ which satisfies $g[n](x) = (\id_{[n]},\top,\xi,f[n](x))$ if $\xi\of\simplex[n] \to X$ is the morphism that satisfies $\xi(\id_{[n]})=x$. The morphism $g$ is a cofibration by lemma \ref{Reedy}.
+There is a morphism $g\of X\to Z$ which satisfies $g[n](x) = \tuplet{\id_{[n]},\top,\xi,f[n](x)}$ if $\xi\of\simplex[n] \to X$ is the morphism that satisfies $\xi(\id_{[n]})=x$. The morphism $g$ is a cofibration by lemma \ref{Reedy}.
 
-There is a morphism $h\of Z\to Y$ satisfying $h[n](a,b,c,d) = Y(a)(d)$ and this map is an acyclic fibration for the following reasons.
+There is a morphism $h\of Z\to Y$ satisfying $h[n]\tuplet{a,b,c,d} = Y(a)(d)$ and this map is an acyclic fibration for the following reasons.
 Let $z\of\cycle[n]\to Z$, $y\of\simplex[n]\to Y$ and let $h\circ z = y\circ k_n$ where $k_n\of\cycle[n]\to \simplex[n]$ is the inclusion of the boundary.
 \[\xymatrix{
 \cycle[n]\ar[d]_{k_n}\ar[r]^z & Z\ar[d]^h\\
 \simplex[n]\ar[r]_{y} & Y
 }\]
-The morphism $z\of\cycle[n]\to Z$ assigns a simplex $z(\xi) = (a_\xi,b_\xi,c_\xi,d_\xi)$ to every non surjective morphism $\xi\of [m]\to[n]$.
-A filler corresponds to a simplex $w=(a,b,c,d)\of Z[n]$ for which $Y(a,d) = y(\id_{\simplex[n]})\of Y[n]$ and where $Z(\xi)(w)=z_\xi$ for all non surjective $\xi\of [m]\to[n]$.
+The morphism $z\of\cycle[n]\to Z$ assigns a simplex $z(\xi) = \tuplet{a_\xi,b_\xi,c_\xi,d_\xi}$ to every non surjective morphism $\xi\of [m]\to[n]$.
+A filler corresponds to a simplex $w=\tuplet{a,b,c,d}\of Z[n]$ for which $Y(a,d) = y(\id_{\simplex[n]})\of Y[n]$ and where $Z(\xi)(w)=z_\xi$ for all non surjective $\xi\of [m]\to[n]$.
 \begin{itemize}
-\item If $a_\xi=\id$ for all monomorphisms $\xi$, then $a=\id$. Let the morphism $b\of \simplex[n]\to \LDMC$ send all surjective $\xi\of[m]\to[n]$ to $\false$. For every other morphism $\phi\of [i]\to [j]$, let $b(\phi) = b_{m(\phi)}(e(\phi))$. If $b(\phi)=\true$, then $c(\phi) = c_{m(\phi)}(e(\phi))$. Finally $d$ is $y$ and $w=(a,b,c,d)$.
+\item If $a_\xi=\id$ for all monomorphisms $\xi$, then $a=\id$. Let the morphism $b\of \simplex[n]\to \LDMC$ send all surjective $\xi\of[m]\to[n]$ to $\false$. For every other morphism $\phi\of [i]\to [j]$, let $b(\phi) = b_{m(\phi)}(e(\phi))$. If $b(\phi)=\true$, then $c(\phi) = c_{m(\phi)}(e(\phi))$. Finally $d$ is $y$ and $w=\tuplet{a,b,c,d}$.
 \item If $a_\xi\neq \id$ for some monomorphisms $\xi$, then there is a greatest monomorphism $\mu\of [m]\to[n]$ such that $\mu\neq \id$ but $a_\mu=\id$. The reason is that there are finitely many monomorphisms to $[n]$ and the subcategory of those monomorphisms $\xi$ for which $a(\xi)=\id$ is closed under pushouts. In this case $a$ is the unique inverse of $\mu$ for which $e(a\circ \xi) = a_\xi$ for all monomorphisms. Let $w = Y(a)(z_\mu)$.
 \end{itemize}
 
@@ -395,7 +399,7 @@ X\ar[d]_f \ar[r]^g & Z\ar[d]^h\\
 Y\ar[r]_\id \ar[ur]^k & Y
 }
 \]
-For each simplex $y$ of $Y$, $k(y)=(a,b,c,d)$. The simplex $y$ is in the image of $f$ if and only if $b=\top$ and this is decidable. A simplex $y$ for which $b\neq \top$ is nondegenerate if and only if $a=\id$ for the following reasons. The morphisms $k$ is a section of $h$ and hence a monomorphism. Monomorphisms preserve faces because faces are monomorphisms. The morphism $k$ commutes with the actions of morphisms in $\simCat$ and degenerates of $Z$ outside of the image of $g$ have $a\neq\id$.
+For each simplex $y$ of $Y$, $k(y)=\tuplet{a,b,c,d}$. The simplex $y$ is in the image of $f$ if and only if $b=\top$ and this is decidable. A simplex $y$ for which $b\neq \top$ is nondegenerate if and only if $a=\id$ for the following reasons. The morphisms $k$ is a section of $h$ and hence a monomorphism. Monomorphisms preserve faces because faces are monomorphisms. The morphism $k$ commutes with the actions of morphisms in $\simCat$ and degenerates of $Z$ outside of the image of $g$ have $a\neq\id$.
 \end{proof}
 
 \subsection{Pullback exponentials}
@@ -429,14 +433,14 @@ Allows $\cat S$ may omit some finite colimits, the following lemma show that pus
 
 \begin{lemma} Pushout products of pairs of locally decidable monomorphisms exist and are locally decidable monomorphism. \end{lemma}
 
-\begin{proof} Let $f\of W\to X$ and $g\of Y\to Z$ be a pair of locally decidable monomorphisms. A pair $\pair xy\of X\times Z$ belongs to the image of $f\pp g$ if either $x$ belong to the image of $f$ or $y$ belong to the image of $g$. This is a decidable property.
+\begin{proof} Let $f\of W\to X$ and $g\of Y\to Z$ be a pair of locally decidable monomorphisms. A pair $\tuplet{x,y}\of X\times Z$ belongs to the image of $f\pp g$ if either $x$ belong to the image of $f$ or $y$ belong to the image of $g$. This is a decidable property.
 \end{proof}
 
 The following fundamental lemma of simplicial homotopy has a constructive proof and therefore holds in $\cat S\s$.
 
 \begin{lemma}[Pushout product] If $f$ and $g$ are cofibrations, then so is $f\pp g$. Moreover, if either $f$ or $g$ is acyclic then so is $f\pp g$. \label{pushout product} \end{lemma}
 
-\begin{proof} Reasoning internally, a simplex $(x,z)$ of $X\times Z$ is outside of the image $f\pp g$ and nondegenerate if and only if both $x$ is outside of the image of $f$ and nondegenerate and $z$ is outside of the image of $g$ and nondegenerate. This is a decidable property of simplices of $X\times Z$ and hence $f\pp g$ is a cofibration by proposition \ref{cofibration characterization}. 
+\begin{proof} Reasoning internally, a simplex $\tuplet{x,z}$ of $X\times Z$ is outside of the image $f\pp g$ and nondegenerate if and only if both $x$ is outside of the image of $f$ and nondegenerate and $z$ is outside of the image of $g$ and nondegenerate. This is a decidable property of simplices of $X\times Z$ and hence $f\pp g$ is a cofibration by proposition \ref{cofibration characterization}. 
 
 Assume $f$ is an acyclic cofibration. Let $e$ be an arbitrary fibration. The problem of filling a commutative square with $f\pp g$ opposite to $e$ reduces to the problem of filling all commutative squares with the pushout product $h\pp k$ of a cycle inclusion $k\of \cycle[m]\to \simplex[m]$ and a horn inclusion $h\of \horn_k[n]\to\simplex[n]$ opposite to $e$. By standard simplicial homotopy, $h\pp k$ is an acyclic cofibration (see \cite{Hovey99} section 3.3, \cite{GJSHT} section I.5).
 
@@ -919,12 +923,12 @@ f(a,x) &= a(x)
 
 We assume that the morphism $\bang\of\cod\gen(M)\to 1$ is a member of $S$. Therefore $\gen(M)$ and $\bang$ form a triangle in $S$, which is the pullback of the generic triangle $\gen(S)_2$ along some global section $\igen(M)\of 1\to \Ar(\cat S)$.
 
-The discrete isofibration that assumes the role of the class of morphisms $M$ is a functor $\cat M\to \Func([1],\cat S)$ where the internal category $\cat M$ is constructed as follows. The objects are pairs $\pair fs$ where $f$ is a morphism of $\cat S$ and $y$ is a pullback square in $\cat S$ that witness that $f$ is a pullback of $\igen(M)$ and therefore an $M$-morphism.
+The discrete isofibration that assumes the role of the class of morphisms $M$ is a functor $\cat M\to \Func([1],\cat S)$ where the internal category $\cat M$ is constructed as follows. The objects are pairs $\tuplet{f,s}$ where $f$ is a morphism of $\cat S$ and $y$ is a pullback square in $\cat S$ that witness that $f$ is a pullback of $\igen(M)$ and therefore an $M$-morphism.
 \[\xymatrix{
 \bullet\ar[d]_f\ar[r] & \bullet\ar[d]^{\igen(M)}\\
 \bullet\ar[r] & \bullet
 }\]
-A morphism $\pair fs\to \pair gt$ is a commutative square $f\to g$. The pullback squares are ignored, so the projection $\pi_0$ becomes a fully faithful functor $M\of\cat M\to \Func([1],\cat S)$. Because isomorphisms of morphisms are pullback squares, the lifting operator that witnesses that $M$ is a discrete isofibration simply composes the isomorphisms and the pullback squares: $(\pair fs,g)\mapsto \pair {\dom g}{s\circ g}$.
+A morphism $\tuplet{f,s}\to \tuplet{g,t}$ is a commutative square $f\to g$. The pullback squares are ignored, so the projection $\pi_0$ becomes a fully faithful functor $M\of\cat M\to \Func([1],\cat S)$. Because isomorphisms of morphisms are pullback squares, the lifting operator that witnesses that $M$ is a discrete isofibration simply composes the isomorphisms and the pullback squares: $(\tuplet{f,s},g)\mapsto \tuplet {\dom g,s\circ g}$.
 
 There is a related discrete isofibration $M\s\of \cat M\s\to \Func([1],\cat S\s)$ which represents the class of morphisms $f\of X\to Y$ such that $f[i]$ are members of $M$ for all $i\of \nno$. The category $\cat M\s$ is simply the category of functors $\Func(\simCat\dual,\cat M)$ and $M\s$ acts by composition with $M$.
 
