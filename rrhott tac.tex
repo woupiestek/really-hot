@@ -75,6 +75,9 @@ Poland}
 \newcommand\citep[1]{[\cite{#1}]}
 
 \newcommand\code\mathtt
+\mathssbxdef{Func}
+\mathssbxdef[igen]{gen}
+\newcommand\pair[2]{\langle #1,#2\rangle}
 
 \addbibresource{realizability}
 
@@ -88,7 +91,7 @@ A \emph{modest Kan complex} is a \emph{modest simplicial set} which has a right 
 
 
 \section{Introduction}
-This paper is about simplicial homotopy inside the following category. A \emph{PER} is a symmetric and transitive binary relation of the natural numbers $\N$. PERs are equivalence relations on subsets of the natural numbers. A morphism of PERs $f\of R\to S$ is a function of equivalence classes of the PERs $R$ and $S$ that has a \emph{partial recursive function} $\phi$ such that for each equivalence class of $R$, $\phi(x)$ is defined and $\phi(x)\in f(X)$ if $x\in X$ . Together they form the \emph{category of PERs}. 
+This paper is about simplicial homotopy inside the following category. A \emph{PER} is a symmetric and transitive binary relation of the natural numbers $\N$. PERs are equivalence relations on subsets of the natural numbers. A morphism of PERs $f\of R\to S$ is a function of equivalence classes of the PERs $R$ and $S$ that has a \emph{partial recursive function} $\phi$ such that for each equivalence class $X$ of $R$, $\phi(x)$ is defined and $\phi(x)\in f(X)$ for all $x\in X$. Together they form the \emph{category of PERs}. 
 
 The simplicial homotopy of this paper is about the \emph{realizable} simplicial objects and \emph{realizable} Kan complexes in the category of PERs. \emph{Realizable} means that partial recursive functions provide witnesses for all total binary relations in the definition of these structures, for example for the existence of fillers for horns. The category of realizable simplicial PERs is embedded in the category of realizable simplicial assemblies whose fibrant objects have a model structure (theorem \ref{model category}) and a univalent universe of fibrant simplicial PERs (theorem \ref{univalent universe}).
 
@@ -162,7 +165,7 @@ The unit and the counit induce the following families of morphism:
 \end{align*}
 Here $V$ cannot depend on $x$. Unit and co-units satisfy equations that ensure that $(\lambda x\of T.u)(t) = u[t/x]$ and $(\lambda x\of T.u(x))=u$.
 
-Extensiveness means that $\cat C$ has coproducts, that $\cat C/0$ is equivalent to the terminal category and that $\cat C/(X+Y)\cong (\cat C/X)\times(\cat C/Y)$. In order to add coproduct to the language, only need the type $\bool$ that stands for the object $1+1$ and a way to introduce types and terms dependent on $\bool$.
+Extensiveness means that $\cat C$ has coproducts, that $\cat C/0$ is equivalent to the terminal category and that $\cat C/(X+Y)\cong (\cat C/X)\times(\cat C/Y)$. In the presence of dependent coproducts, a type $\bool$ that stands for the object $1+1$ and a way to introduce types and terms that dependent on $\bool$ suffice to add all binary coproducts.
 \[ \db{\Gamma\vdash t\of T}\times\db{\Gamma\vdash u\of U}\to\db{\Gamma,b\of\bool\vdash \ttif(b,t,u)\of\ttif(b,T,U)} \]
 The constants $\true$ and $\false$ denote the two global section of $1+1$. The function $\ttif$ is interpreted to satisfy the following equations.
 \[ \ttif(\true,t,u)=t\qquad\ttif(\false,t,u) = u\]
@@ -183,10 +186,12 @@ For each $f\of X\to Y$ of $\cat A$, the \emph{internal category of fibres} $\cof
 
 A \emph{full internal subcategory} is the category of fibres of a generic morphism. The class $S$ and the category $\cof(\gen(S))$ are connected in the following way. Let $S/X$ be the category whose objects are morphism of $S$ whose codomain is $X$ and whose morphisms are arbitrary commutative triangles. because $S$ is closed under pullbacks, each $f\of X\to Y$ induces a \emph{reindexing functor} $f\ri\of S/Y\to S/X$. Generally $\cof(\gen(S))$ has a property if and only if $S/X$ has and $f\ri$ preserves the same property of each object $X$ and each morphism $f$ of $\cat A$. For example, the category $\cof(\gen(S))$ has dependent sums and products if $f\ri$ have left and right adjoints that satisfy the Beck Chevalley condition for each morphism $f\in S$.
 
-\section{Internal simplicial homotopy}
-This section develops the homotopy theory of Kan complexes internally in Heyting bialgebras.
+\hide{Move stuff on discrete isofibrations here?}
 
-The situation is as follows. The ambient category is a Heyting bialgebra $\cat A$ that has a natural number object $\nno$. The category $\cat A$ has a class $S$ of `small' maps which has a generic morphism $\gen(S)$. The internal category $\cat S = \cof(\gen(\cat S))$ of fibres of $\gen(S)$ is an internal Heyting bialgebra $\cat S$ and therefore has an interesting category of simplicial objects $\cat S\s$. Here the internal version $\simCat$ of the category of simplicial sets comes from $\nno$.
+\section{Internal simplicial homotopy}
+This section develops the homotopy theory of Kan complexes internally in Heyting bialgebras. 
+
+The situation is as follows. The ambient category is a Heyting bialgebra $\cat A$ that has a natural number object $\nno$. The category $\cat A$ has a class $S$ of `small' maps which has a generic morphism $\gen(S)$. The internal category $\cat S = \cof(\gen(\cat S))$ of fibres of $\gen(S)$ is an internal Heyting bialgebra $\cat S$ and therefore has a category of simplicial objects $\cat S\s$. Here the internal version $\simCat$ of the category of simplicial sets comes from $\nno$.
 
 \begin{proposition} Every Heyting bialgebra with natural number object has an internal category of simplices.\end{proposition}
 
@@ -201,25 +206,20 @@ Universal quantification over $[m]$ reduces to a finite conjunction because $[m]
 \subsection{Filler operators}
 Kan fibrations are morphisms of simplicial sets that have the lifting property relative to the family of horn inclusions. This subsection focuses on the lifting properties. Extensional type theory offers no existential quantification to express the idea that `there is a lifting'. Instead extensional type theory requires a lifting operator that witnesses this fact.
 
-\begin{definition} Let $\nat\of(\cat S\s)\dual\times \cat S\s \to \cat S^{\nno\disc}$ be the functor which sends each pair of simplicial objects $X,Y$ to the object $\nat(X,Y)$ of morphisms between them. The category $\cat S^{\nno\disc}$ is a useful codomain because natural transformations are families of morphisms and $\cat S$ has exponentials.
+\begin{definition} Let $\nat\of(\cat S\s)\dual\times \cat S\s \to \cat S^{\nno\disc}$ be the functor which sends each pair of simplicial objects $X,Y$ to the object $\nat(X,Y)$ of morphisms between them--the object $\nat(X,Y)$ lives in $\cat S^{\nno\disc}$ because natural transformations are families of morphisms and $\cat S$ has exponentials.
 
-Morphism $f\of X\to Y$ of $\cat S\s$ has the \emph{global right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the global \emph{left} lifting property with respect to $f$--if the morphism $(f_!,g\ri) = (\nat(\id_J,f),\nat(g,\id_X))$ 
-which is the factorization of the cone $(\nat(\id_J,f),\nat(g,\id_X))$ through the pullback cone of $\nat(\id_I,f)$ and $\nat(g,\id_Y)$
+A morphism $f\of X\to Y$ of $\cat S\s$ has the \emph{global right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the global \emph{left} lifting property with respect to $f$--if the morphism $\pair{f_!}{g\ri} = \pair{\nat(\id_J,f)}{\nat(g,\id_X))}$ 
+which is the factorization of the cone $\nat(\id_J,f)$, $\nat(g,\id_X))$ through the pullback cone of $\nat(\id_I,f)$ and $\nat(g,\id_Y)$
 is a \emph{split} epimorphism.
-\hide{\[\xymatrix{ 
-\nat(J,X) \ar@/^2ex/[rrr]^{\nat(g,\id_X)} \ar[dr]_(.6){\nat(\id_J,f)} \ar[r]_{(f_!,g\ri)}
-& \bullet \ar[d]\ar[rr] && \nat(I,X) \ar[d]^{\nat(\id_I,f)}\\
-& \nat(J,Y) \ar[rr]_{\nat(g,\id_Y)} && \nat(I,Y)
-}\]}
 \[\xy
 (34,20)*+{\nat(I,X)}="top",(0,10)*+{\nat(J,X)}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\nat(I,Y)}="right",(34,0)*+{\nat(J,Y)}="bottom"
-\ar^{\nat(g,\id_X)} "left";"top" \ar@{.>}|(.6){(f_!,g\ri)} "left";"middle" \ar_{\nat(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
+\ar^{\nat(g,\id_X)} "left";"top" \ar@{.>}|(.6){\pair{f_!}{g\ri}} "left";"middle" \ar_{\nat(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
 \ar "middle";"top" \ar^(.6){\nat(\id_I,f)} "top";"right" \ar_(.6){\nat(g,\id_Y)} "bottom";"right"
 \endxy\]
-A section of $(f_\bang,g\ri)$ is a \emph{filler operator}.\label{lifting}
+A section of $\pair{f_\bang}{g\ri}$ is a \emph{filler operator}.\label{lifting}
 \end{definition}
 
-The ordinary right lifting property only says that composition with $(f_!,g\ri)$ induces a surjective function on global sections, while the \emph{local} right lifting property only requires that $(f_!,g\ri)$ is a regular epimorphism. The global version formulated above is stronger than either of those in a constructive context.
+The ordinary right lifting property only says that composition with $\pair{f_\bang}{g\ri}$ induces a surjective function on global sections, while the \emph{local} right lifting property only requires that $\pair{f_\bang}{g\ri}$ is a regular epimorphism. The global version formulated above is stronger than either of those in a constructive context.
 
 A morphism can have a lifting property relative to a family or class of morphisms.
 
@@ -227,17 +227,21 @@ A morphism can have a lifting property relative to a family or class of morphism
 \[ a\code{-injective}(f)=\code{sections}(I\ri(f)_\bang,a\ri) \]
 \end{definition}
 
+\begin{remark}
+Since $\cat S$ is not necessarily a regular category, subclasses of objects that have a certain property are habitually replaced by \emph{discrete isofibrations} (see definition \ref{discrete isofibrations} below). These generalized classes give each object an object of realizers for their presence in the class. The object $a\code{-injective}(f)$ is the object of realizers of the statement that $f$ is an $a$-injective.
+\end{remark}
+
 \hide{Add?: These injectives satisfy the usual properties of closure under products, composition and pullback, thanks to specific constructions on filler operators.}
 
-Internal languages only quantify over objects and the object of $a$-injectives does not exists inside $\cat S$. The definition of $a$-anodynes requires the ambient category $\cat A$.
+Internal languages only quantify over objects and $\cat S$ does not have an object of $a$-injectives does not exist inside $\cat S$. The definition of $a$-anodynes therefore requires the ambient category $\cat A$.
 
 \begin{definition}
 The morphism $f$ is \emph{$a$-anodyne} for an $I$-indexed family of morphisms $a$ if the following object has a global section.
 \[ a\code{-anodyne}(f) = \Pi g\of \Ar(\cat S\s).\Pi s\of \code{sections}(a_!,(I\ri g)\ri).\code{sections}(f_!,g\ri) \]
-Here $\Ar(\cat S\s)$ is the object of arrows of $\cat S\s$. The global section \emph{witnesses} that $f$ is \emph{anodyne}. 
+Here $\Ar(\cat S\s)$ is the object of arrows of $\cat S\s$.
 \end{definition}
 
-%here
+A realizer for an $a$-anodyne $f$, i.e. an element of $a\code{-anodyne}(f)$, is a function that show how to apply a filler operator for the family $a$ to $f$.
 
 \subsection{Kan fibrations}
 The subsection completes the definition of Kan fibrations.
@@ -246,6 +250,8 @@ Heyting bialgebras like $\cat S$ have all the finite objects: $0$, $1$, $1+1$, $
 
 \begin{definition} For each $n\of \nno$ the \emph{cycle} $\cycle[n]$ is the sieve of non surjective functions of $\simplex[n]$. For each $n$ and $k\of\nno$ the \emph{horn} $\horn_k[n]$ is the sieve of the non decreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$. 
 \end{definition}
+
+\hide{formulas for precision?}
 
 Being surjective is a decidable property of morphisms $[m]\to[n]$ so these sieves are definable. 
 
@@ -278,12 +284,11 @@ Being surjective is a decidable property of morphisms $[m]\to[n]$ so these sieve
 \end{align*}
 \end{itemize}\label{Kan}
 
-
 The category of Kan complexes and morphisms of simplicial object is $\cat S\s\f$. Its objects are pairs $(X,\xi)$ where $X$ is an object of $\cat S$ and $\xi$ is a filler operator for $\bang_X\of X\to 1$. The filler operator merely serves as a witness of fibrancy and is \emph{not} preserves by morphisms $(X,\xi)\to(Y,\xi')$ which are arbitrary morphisms $X\to Y$.
 \end{definition}
 This paper usually leaves out `Kan' and simply talk about fibrations and complexes. 
 
-\begin{remark}[Saturation] Injectives are closed under various constructions, notably compositions, finitary products and pullbacks. Every isomorphism is injective. Moreover, the filler operators for the new injectives are often straightforward functions of the existing filler operators.
+\begin{remark}[Saturation] Injectives are closed under various constructions, notably compositions, finitary products and pullbacks. Every isomorphism is injective. Moreover, the filler operators for the new injectives are functions of the existing filler operators.
 \[
 \xy
 (0,12)*+{\bullet}="a",(12,12)*+{\bullet}="b",(24,12)*+{\bullet}="c",
@@ -297,8 +302,7 @@ This paper usually leaves out `Kan' and simply talk about fibrations and complex
 \endxy
 \]
 
-
-Anodynes have dual closure properties. They are closed under composition too, finitary coproducts and pushouts. Isomorphisms are anodynes and all morphisms that are both injective and anodyne are isomorphisms. Moreover, for each adjoint pair of functors $F\dashv G$ between two categories that have their own classes of anodynes and injectives, the left adjoint $F$ preserves anodynes if an only if the right adjoint $G$ preserves injectives.
+Anodynes have dual closure properties. Besides composition, they are closed under finitary coproducts and pushouts. Isomorphisms are anodynes and all morphisms that are both injective and anodyne are isomorphisms. Moreover, for each adjoint pair of functors $F\dashv G$ between two categories that have their own classes of anodynes and injectives, the left adjoint $F$ preserves anodynes if an only if the right adjoint $G$ preserves injectives.
 
 A consequence of these closure properties, is that horn inclusions are cofibrations, therefore that acyclic fibrations are fibrations and therefore all acyclic cofibrations are cofibrations.
 \end{remark}
@@ -315,7 +319,7 @@ This subsection characterizes the cofibrations of $\cat S\s$. It also proves tha
 
 While $\cat S$ may lack the structure required to soundly interpret existential quantification over arbitrary objects, this is not a problem with the set of morphisms $s\of [n]\to [n]$ different from $\id_{[n]}$ as it is finite.
 
-\begin{definition} A monomorphism is a \emph{free cofibration} if for each $i\in \nno$, there is an object $S_i$ of $i$-dimensional faces of $Y$ which are not on the image of $X$.
+\begin{definition} A monomorphism is a \emph{free cofibration} if for each $i\in \nno$, there is an object $S_i$ of $i$-dimensional faces of $Y$ which are not in the image of $X$. This means that there are $s_i:Y[i]\to\bool$ such that all $S_i$ are pullbacks of $\true:1\to\bool$.
 \end{definition}
 
 \begin{lemma} Every free cofibration is a cofibration. \label{Reedy}
@@ -423,9 +427,9 @@ W\times Z \ar[r] \ar@/_2ex/[rr]_{f\times\id} & \bullet \ar[r]^(.4){f\pp g} & X\t
 
 Allows $\cat S$ may omit some finite colimits, the following lemma show that pushout products of cofibrations always exist.
 
-\begin{lemma} Pushout products of pairs of locally decidable monomorphisms exists and is a locally decidable monomorphism. \end{lemma}
+\begin{lemma} Pushout products of pairs of locally decidable monomorphisms exist and are locally decidable monomorphism. \end{lemma}
 
-\begin{proof} Let $f\of W\to X$ and $g\of Y\to Z$ be a pair of locally decidable monomorphisms. A pair $(x,y)\of X\times Z$ belong to the image of $f\pp g$ if either $x$ belong to the image of $f$ or $y$ belong to the image of $g$. This is a decidable property.
+\begin{proof} Let $f\of W\to X$ and $g\of Y\to Z$ be a pair of locally decidable monomorphisms. A pair $\pair xy\of X\times Z$ belongs to the image of $f\pp g$ if either $x$ belong to the image of $f$ or $y$ belong to the image of $g$. This is a decidable property.
 \end{proof}
 
 The following fundamental lemma of simplicial homotopy has a constructive proof and therefore holds in $\cat S\s$.
@@ -444,7 +448,7 @@ Lemma \ref{pushout product} has a counterpart for pullback exponentials.
 \begin{corollary} If $e\of U\to V$ is a fibration and $f\of W\to X$ is a cofibration, then $e\pe f$ is a fibration. Moreover, if either $f$ or $e$ are acyclic, then $e\pe f$ is acyclic. \label{pullback exponential}
 \end{corollary}
 
-The next corollary demonstrates the lifted morphism without constructing a pushout product or pullback exponential.
+The following corollary gives a lifted morphism without constructing a pushout product or pullback exponential.
 
 \begin{corollary} Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
 \hide{\[\xymatrix{
@@ -587,7 +591,7 @@ The category $\cat S\s$ has the two weak factorization systems that a model stru
 \begin{proof}
 Compositions of acyclic fibrations are acyclic fibrations and the same holds for acyclic cofibrations. All compositions of weak equivalences are weak equivalences if $g\circ f$ factors as an acyclic fibration following an acyclic cofibration, whenever $g$ is an acyclic cofibration and $f$ is an acyclic fibration.
 
-By proposition \ref{factor1}, $g\circ f=h\circ k$ for some acyclic fibration $h\of W\to Z$ and a cofibration $k\of X\to W$. Since $Y$ is fibrant, $g$ has a left inverse $g'$ by the lifting property. Since $f \circ \id = g'\circ g\circ f= (g'\circ h)\circ k$ there is a morphism $k'$ such that $f\circ k' = g'\circ h$ and $k'\circ k = \id$, so $k$ has its own left inverse.
+By proposition \ref{factor1} $g\circ f=h\circ k$ for some acyclic fibration $h\of W\to Z$ and a cofibration $k\of X\to W$. Since $Y$ is fibrant, $g$ has a left inverse $g'$ by the lifting property. Since $f \circ \id = g'\circ g\circ f= (g'\circ h)\circ k$ there is a morphism $k'$ such that $f\circ k' = g'\circ h$ and $k'\circ k = \id$, so $k$ has its own left inverse.
 \[\xymatrix{
 X\ar[d]_f \ar[r]_{k} \ar@/^2ex/[rr]^{\id} & W\ar[d]^h \ar[r]_{k'} & X\ar[d]^f\\
 Y \ar[r]^{g} \ar@/_2ex/[rr]_{\id} & Z \ar[r]^{g'} & Y
@@ -599,20 +603,19 @@ Y+Y\ar[r]^{g+g}\ar[d]_{c\times\id} & Z+Z\ar[r]^(.6){(\id,g\circ g')}\ar[d]_(.3){
 \simplex[1]\times Y\ar[r]_{\id\times g}\ar[urr]^(.3){g\circ\pi_1} & \simplex[1]\times Z\ar@{.>}[ur]_{\phi}
 }\]
 
-Let $c$ be the cycle $1+1\to\simplex[1]$. 
-\[\xymatrix{
-X+X\ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\id,k\circ k')} & W\ar[d]^h\\
-\simplex[1]\times X\ar[r]_{\id\times k} \ar[urr]^(.3){k\circ \pi_1}  & \simplex[1]\times W\ar[r]_(.6){\phi\circ (\id\times h)} \ar@{.>}[ur]_\chi & Z
-}\]
 There is a homotopy $\chi$ between $\id_W$ and $k\circ k'$ because of lemma \ref{triple lift}.
 \begin{align*}
 (\id, k\circ k')\circ (k+k) &= (k,k) = k\circ \pi_1\circ(c\times\id_X)\\
 h\circ (k \circ \pi_1) &= (\phi\circ (\id_W\times h))\circ (\id_{\simplex[1]} \times k)\\
 h\circ (\id, k\circ k') &= (\phi\circ (\id_W\times h))\circ (c\times \id_W)
 \end{align*}
-Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \pi_1$, lemma \ref{retract is acyclic} makes $k$ is an acyclic cofibration.
+\[\xymatrix{
+X+X\ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\id,k\circ k')} & W\ar[d]^h\\
+\simplex[1]\times X\ar[r]_{\id\times k} \ar[urr]^(.3){k\circ \pi_1}  & \simplex[1]\times W\ar[r]_(.6){\phi\circ (\id\times h)} \ar@{.>}[ur]_\chi & Z
+}\]
+Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \pi_1$, lemma \ref{retract is acyclic} makes $k$ an acyclic cofibration.
 
-Let $g$ and $g\circ f$ be weak equivalences now. 
+Let $g$ and $g\circ f$ be weak equivalences now.
 
 First assume that $g$ and $g\circ f$ are acyclic fibrations. By proposition \ref{factor1}, $f$ factors as an acyclic fibration $h\of W\to Y$ following a cofibration $k\of X\to W$. Because $(g\circ f)\circ \id = (g\circ h)\circ k$ and $g\circ f$ is an acyclic fibration, $k$ has a left inverse $k'\of X\to W$ which satisfies $g\circ f\circ k' = g\circ h$. 
 \[\xymatrix{
@@ -686,10 +689,12 @@ X\ar[r]^f\ar[d]_b & Y\ar[r]^h\ar[d]^d\ar[dr]^g & \bullet\ar[d]^k\\
 This means that weak equivalences indeed satisfy 2-out-of-3.
 \end{proof}
 
+\hide{Use the structure of discrete isofibration etc. to make this more convincing?}
+
 \subsection{Conclusion}
 
 \begin{theorem}[Model category]
-With fibrations, weak equivalences and cofibrations defined as above, the category $\cat S\s\f$ is a model category.
+With fibrations, weak equivalences and cofibrations defined as above $\cat S\s\f$ is a model category.
 \label{model category}
 \end{theorem}
 
@@ -698,10 +703,10 @@ Lemma \ref{factor1} shows that cofibrations and acyclic fibrations form a weak f
 \end{proof}
 
 \section{Descent}
-This sections shows how lifting properties \emph{descend} along the horn inclusions $H(n,k)\of \horn_k[n]\to\simplex[n]$. This means that each fibration $f\of X\to\horn_k[n]$ is the pullback of a fibration $g\of Y\to\simplex[n]$ along $H(n,k)$. This section proves this constructively.
+This section shows constructively how lifting properties \emph{descend} along the horn inclusions $H(n,k)\of \horn_k[n]\to\simplex[n]$. This means that each fibration $f\of X\to\horn_k[n]$ is the pullback of a fibration $g\of Y\to\simplex[n]$ along $H(n,k)$. %is there a word to replace constructive here?
 
 \subsection{Higher dimensional case}
-This subsection introduces a construction that works for dimensions $n>1$. For each fibration $f\of X\to \horn_k[n]$ each simplex in the descended fibration $Df\of DX\to \simplex[n]$ is the face of a filler for an acyclic cofibration which factors through $f$. This extends the range of the filler operator of a fibration while $f$ remains a pullback of $Df$ along $H(n,k)$. The following equivalence simplifies dealing with $\cat S\s/\simplex[n]$.
+This subsection introduces a construction that works for dimensions $n>1$. For each fibration $f\of X\to \horn_k[n]$ each simplex in the descended fibration $Df\of DX\to \simplex[n]$ is the face of a filler for an acyclic cofibration which factors through $f$. This extends the range of the filler operator of $f$ while keeping it a pullback of $Df$ along $H(n,k)$. The following equivalence simplifies dealing with $\cat S\s/\simplex[n]$.
 
 \begin{lemma} The categories $\cat S\s/\simplex[n]$ and $\cat S^{(\simCat/[n])\dual}$ are equivalent. \label{slice equivalence} \end{lemma}
 
@@ -719,10 +724,10 @@ In the direction $\cat S\s/\simplex[n]\to \cat S^{(\simCat/[n])\dual}$ the equiv
 The dependent product along $H(n,k)\of \horn_k[n]\to\simplex[n]$ is the first half of the descent functor. It constructs fillers for a limited set of acyclic cofibrations. The following functor $K$ sends each $\simplex[n]$-indexed family of simplices to the family of simplices it will be a face of.
 
 \begin{definition}
-The functor $K\of\simCat/[n]\to\simCat/[n]$ is defined as follows. 
+The following defines the functor $K\of\simCat/[n]\to\simCat/[n]$.
 \begin{enumerate}
 \item A function $\xi\of[m]\to[n]$ cuts $[m]$ into $n+1$ posets $\xi_j = \set{i\of[m]|\xi(i)=j}$. 
-\item Let $\norm \xi$ be the number of elements of the product: \[\Pi i\of ([n]-\set k).\set{p\of [m]|\xi(p)=i}\] 
+\item Let $\norm \xi$ be the number of elements of the product: \[\Pi i\of ([n]-\set k).\xi_i\] 
 \item Define $K(\xi)\of [m+\norm\xi]\to [n]$ as follows.
 \[ 
 	K\xi(i) = \left\{
@@ -734,6 +739,9 @@ The functor $K\of\simCat/[n]\to\simCat/[n]$ is defined as follows.
 	\right.
 \]
 \item Let $\ka(\xi)\of\Pi i\of([n]-\set k).\xi_i \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\Pi i\of([n]-\set k).\xi_i$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K\xi(i)=k$.
+
+The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical ordering. %more?
+
 \item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K(\xi)\circ\la(\xi) = \xi$.
 \item For each function $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
 \item Let $K(\phi)\of K(\xi)\to K(\xi')$ be the nondecreasing function which satisfies $K(\phi)\circ \ka(\xi) = \ka(\xi')\circ \Pi i\of([n]-\set k).\phi_i$ and $K(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
@@ -750,7 +758,7 @@ The second half of the descent functor is the endofunctor of $\cat S\s/\simplex[
 \end{proof}
 
 \subsection{Fibrancy}
-This subsection shows that $Df$ is a fibration by reducing the following lifting problems (for all $l\leq m\of\nno$) to one that involves $f$ directly.
+This subsection shows that $Df$ is a fibration by reducing the following lifting problems (for all $l\leq m\of\nno$) to ones that involves $f$ directly.
 \begin{equation}
 	\xymatrix{
 		\horn_l[m]\ar[r]\ar[d]_{H(m,l)} & DX\ar[d]^{Df} \\
@@ -877,14 +885,17 @@ This section adds a new class of \emph{modest morphisms} $M\subseteq S$ with its
 
 \subsection{Discrete isofibrations}
 %begin clarification
-This time, $M$ is internal to $\cat S$ too. Since internal categories like $\cat S$ have no set of morphisms of which $M$ can be a subset, $M$ takes a different form.
+This time, $M$ is internal to $\cat S$ too. This means that we require something like a class of morphisms of $\cat S$ that belong to $M$. Concretely it is a discrete isofibration to $\Func([1],\cat S)$ that gives every arrow an object of realizers of modesty.
+
+\hide{replace discrete isofibrations with presheaves of the core or something like that. Couldn't we?}
+
 
 \mathssbxdef{Iso}
 
 \begin{definition}
-A discrete isofibration is a functor $F\of\cat A\to \cat B$ which is fully faithful and which has a lifting property for isomorphisms. If $A$ is an object of $\cat A$ and if $f\of B\to FA$ is an isomorphism of $\cat B$ then there is an isomorphism $f'\of B'\to A$ such that $Ff'=f$. The internal version for locally Cartesian closed categories has a lifting operator, so $f'=l(X,f)$ for some element $l$ of.
+A \emph{discrete isofibration} is a functor $F\of\cat A\to \cat B$ which is fully faithful and which has a lifting property for isomorphisms. If $A$ is an object of $\cat A$ and if $f\of B\to FA$ is an isomorphism of $\cat B$ then there is an isomorphism $f'\of B'\to A$ such that $Ff'=f$. The internal version for locally Cartesian closed categories has a lifting operator, so $f'=l(X,f)$ for some element $l$ of.
 \[ \Pi X\of \Ob(\cat A).\Pi f\of \Iso(\cat B)/FX. \Iso(\cat A)/X \]
-Here $\Iso(\cat X)/Y$ is the object of isomorphisms of $\cat X$ whose codomains are $Y$.
+Here $\Iso(\cat X)/Y$ is the object of isomorphisms of $\cat X$ whose codomains are $Y$.\label{discrete isofibrations}
 \end{definition}
 
 We can connect families of morphisms in the internal category $\cat S=\cof(\gen(S))$ to families of morphisms in the ambient category $\cat A$ by the following construction.
@@ -903,12 +914,9 @@ X &= \Sigma a\of\Ar(\cof(\gen(S))).\dom(a)\\
 f(a,x) &= a(x)
 \end{align*}
 
-Any commutative triangle $f'\of X'\to Y'$ and $g'\of Y'\to Z'$ in $S$ induces a pair of characteristic morphisms $\chi(g')$ and $\chi(g'\circ f')\of Z'\to \cod(\gen(S))=\Ob(\cof(\gen(S)))$. Since $\Ar(\cof(\gen(S)))=\Pi i\of\cod(\gen(S))).\Pi j\of \cod(\gen(S))).\Pi k\of \gen(S)[i].\gen(S)[j]$ 
+\hide{actually construct the characteristic morphisms}
 \end{proof}
 
-\mathssbxdef{Func}
-\mathssbxdef[igen]{gen}
-\newcommand\pair[2]{\langle #1,#2\rangle}
 We assume that the morphism $\bang\of\cod\gen(M)\to 1$ is a member of $S$. Therefore $\gen(M)$ and $\bang$ form a triangle in $S$, which is the pullback of the generic triangle $\gen(S)_2$ along some global section $\igen(M)\of 1\to \Ar(\cat S)$.
 
 The discrete isofibration that assumes the role of the class of morphisms $M$ is a functor $\cat M\to \Func([1],\cat S)$ where the internal category $\cat M$ is constructed as follows. The objects are pairs $\pair fs$ where $f$ is a morphism of $\cat S$ and $y$ is a pullback square in $\cat S$ that witness that $f$ is a pullback of $\igen(M)$ and therefore an $M$-morphism.
@@ -916,9 +924,9 @@ The discrete isofibration that assumes the role of the class of morphisms $M$ is
 \bullet\ar[d]_f\ar[r] & \bullet\ar[d]^{\igen(M)}\\
 \bullet\ar[r] & \bullet
 }\]
-A morphism $\pair fs\to \pair gt$ is a commutative square $f\to g$. The pullback squares are ignored, so the projection $\pi_0$ becomes a fully faithful functor $M\of\cat M\to \Func([1],\cat S)$. Because isomorphisms of morphisms are pullbacks squares, the lifting operator that witnesses that $M$ is a discrete isofibration simply composes the isomorphisms and the pullback squares: $(\pair fs,g)\mapsto \pair {\dom g}{s\circ g}$.
+A morphism $\pair fs\to \pair gt$ is a commutative square $f\to g$. The pullback squares are ignored, so the projection $\pi_0$ becomes a fully faithful functor $M\of\cat M\to \Func([1],\cat S)$. Because isomorphisms of morphisms are pullback squares, the lifting operator that witnesses that $M$ is a discrete isofibration simply composes the isomorphisms and the pullback squares: $(\pair fs,g)\mapsto \pair {\dom g}{s\circ g}$.
 
-There is a related discrete isofibration $M\s\of \cat M\s\to \Func([1],\cat S\s)$ which represent the class of morphisms $f\of X\to Y$ such that $f[i]$ are members of $M$ for all $i\of \nno$. The category $\cat M\s$ is simply the category of functors $\Func(\simCat\dual,\cat M)$ and $M\s$ acts by composition with $M$.
+There is a related discrete isofibration $M\s\of \cat M\s\to \Func([1],\cat S\s)$ which represents the class of morphisms $f\of X\to Y$ such that $f[i]$ are members of $M$ for all $i\of \nno$. The category $\cat M\s$ is simply the category of functors $\Func(\simCat\dual,\cat M)$ and $M\s$ acts by composition with $M$.
 
 \hide{ Is dit genoeg? }
 
@@ -929,6 +937,8 @@ The first step is to lift the generic morphism $\igen(M)$ of $M$ in $\cat S$ to 
 
 The way to get there is a bit roundabout. If $\igen(M\s)$ were a the generic morphism, then there is an isomorphism between $V[n]$ and $\simplex[n]\to V$ by the Yoneda lemma and because $\igen(M\s)$ is generic also an isomorphism between $V[n]$ and the class of morphisms in $M\s$ whose codomain is $\simplex[n]$. By lemma \ref{slice equivalence} these correspond to functors $\simCat/[n]\dual\to\cat S$ whose values are fibres of the generic morphism $\igen(M)$ of $M$. 
 
+
+\hide{ does this still make sense? }
 \begin{lemma}
 For each $n\of\nno$ let $\igen(M\s)[n]$ be the pullback of $\igen(M)$ along the map $F\mapsto F(\id_{[n]})\of\cof(\igen(M))^{\simCat/[n]\dual}\to \cod(\igen(M))$. The morphism $\igen(M\s)$ is a generic morphism of $M\s$.
 \end{lemma}
@@ -961,35 +971,36 @@ The diagram hold for every $f$ and shows that $\igen(M\s)$ belongs to $M\s$ at t
 
 \subsection{Generic fibration}
 
-This subsection shows that the class $M\s\f$ of fibrations in $M\s$ has its own generic morphism $\gen(M\s\f)$.
+This subsection shows that the class $M\s\f$ of fibrations in $M\s$ has its own generic morphism $\igen(M\s\f)$.
 
 \begin{definition}
-For each $n\of\nno$ the object $\cod(\gen(M\s\f))$ is an object of pairs $(x,y)$ where $x\of \cod(\gen(M\s\f))$ and $y$ is a lifting operator for the fibration $\bullet\to\simplex[n]$ that $x$ represents. There is a canonical way to pull back liftings and hence lifting operators.
+For each $n\of\nno$ the object $\cod(\igen(M\s\f))$ is an object of pairs $(x,y)$ where $x\of \cod(\igen(M\s\f))$ and $y$ is a lifting operator for the fibration $\bullet\to\simplex[n]$ that $x$ represents. There is a canonical way to pull back liftings and hence lifting operators.
 \[\xymatrix{
 A\ar[rr]^a\ar[d]_c && B \ar[rr]^b\ar[d]_(.4)d && C\ar[d]^e\\
 D\ar[rr]_f \ar@{.>}[urrrr]_(.7){l(b\circ a, g\circ f)}\ar@{.>}[urr]^{l(a, f)} && E \ar[rr]_g && F
 }\]
-For each $\phi\of \simCat([m],[n])$, $\cod(\gen(M\s\f))(\phi)(x,y) = (\cod(\igen(M\s))(\phi)(x),y')$, where $y'$ is $y$ transported along $\simplex(\phi)$.
+For each $\phi\of \simCat([m],[n])$, $\cod(\igen(M\s\f))(\phi)(x,y) = (\cod(\igen(M\s))(\phi)(x),y')$, where $y'$ is $y$ transported along $\simplex(\phi)$.
 \end{definition}
 
 
-\begin{lemma} The morphism $\gen(M\s\f)$ is a fibration. \end{lemma}
+\begin{lemma} The morphism $\igen(M\s\f)$ is a fibration. \end{lemma}
 
-\begin{proof} For each horn inclusion $H(m,l)$ and each pair of morphisms $f$ and $g$ such that $\gen(M\s\f)\circ f=g\circ H(m,l)$, there is a lifting operator for the pullback of $\gen$ along $g$. The combination of all of these is a filler operator for all of $\gen(M\s\f)$.
+\begin{proof} For each horn inclusion $H(m,l)$ and each pair of morphisms $f$ and $g$ such that $\igen(M\s\f)\circ f=g\circ H(m,l)$, there is a lifting operator for the pullback of $\gen$ along $g$. The combination of all of these is a filler operator for all of $\igen(M\s\f)$.
 \end{proof}
 
 
-\begin{lemma} The object $\cod(\gen(M\s\f))$ is a Kan complex. \end{lemma}
+\begin{lemma} The object $\cod(\igen(M\s\f))$ is a Kan complex. \end{lemma}
 
-\begin{proof} For each $f\of\horn_k[n]\to \cod(\gen(M\s\f))$, the pullback of $\gen$ along $f$ descends along $H(n,k)$ by theorem \ref{descent}. The descended fibration has a characteristic function. This is the filler for the horn inclusion. %why?
+\begin{proof} For each $f\of\horn_k[n]\to \cod(\igen(M\s\f))$, the pullback of $\gen$ along $f$ descends along $H(n,k)$ by theorem \ref{descent}. The descended fibration has a characteristic function. This is the filler for the horn inclusion. %why?
 
-There is a little technical issue here. The constructions used in the proof of \ref{descent} are defined in terms of a dependent product (along $H(n,l)$) and hence only defined up to isomorphism. This is not a problem here because the product are finite and explicitly definable in terms of the functors $\cof(\igen(M))^\cat I \to \cof(\igen(M))$ that witness the existence of limits over finite index categories $\cat I$ in $\cof(\igen(M))$.
+There is a small technical issue here. The constructions used in the proof of \ref{descent} are defined in terms of a dependent product (along $H(n,l)$) and hence only defined up to isomorphism. This is not a problem here because the products are finite and explicitly definable in terms of the functors $\cof(\igen(M))^\cat I \to \cof(\igen(M))$ that witness the existence of limits over finite index categories $\cat I$ in $\cof(\igen(M))$.
 
-This construction is the filler operator that proves that $\cod(\gen(M\s\f))$ is a complex.
+This construction is the filler operator that proves that $\cod(\igen(M\s\f))$ is a complex.
 \end{proof}
 
 
 \subsection{Univalence}
+\hide{some text?}
 
 \begin{definition}[Univalence]. A fibration $f\of X\to Y$ is \emph{univalent} if weakly equivalent fibres are connected by a path. This means that if $g,h\of Z\to Y$ and if there is a weak equivalence $k\of g\ri(X)\to h\ri(X)$ such that $h\ri(f)\circ k = g\ri(f)$, then there is a homotopy $\kappa\of g\to h$.
 \end{definition}
@@ -1159,10 +1170,10 @@ By generalization there are fillers for all generic horn inclusions. Therefore $
 \end{proof}
 
 
-\begin{proposition} The generic modest fibration $\gen(M\s\f)$ is univalent. \label{univalence} \end{proposition}
+\begin{proposition} The generic modest fibration $\igen(M\s\f)$ is univalent. \label{univalence} \end{proposition}
 
 %hoe zit het met het parametrische?
-\begin{proof} Because of the closure properties of $M$, $\hcg(f)\of M\s$ if $f\of M\s$. If $f$ is a weak equivalence of modest complexes, then $\hcg(f)$ is the pullback of $\gen(M\s\f)$ along some morphism $\phi\of\simplex[1]\to\cod(\gen(M\s\f))$. This $\phi$ is the path that connects a pair of weakly equivalent fibred of $\gen(M\s\f)$ and which makes the fibration univalent. This also works parametrically.
+\begin{proof} Because of the closure properties of $M$, $\hcg(f)\of M\s$ if $f\of M\s$. If $f$ is a weak equivalence of modest complexes, then $\hcg(f)$ is the pullback of $\igen(M\s\f)$ along some morphism $\phi\of\simplex[1]\to\cod(\igen(M\s\f))$. This $\phi$ is the path that connects a pair of weakly equivalent fibred of $\igen(M\s\f)$ and which makes the fibration univalent. This also works parametrically.
 
 Let $D\of \cat S\s\to \cat S^{\simCat/[1]\dual}$ be the functor that satisfies $DW[\chi^n_i]=W[n]$. This functor corresponds to $\simplex[1]\ri\of \cat S\s\to \cat S\s/\simplex[1]$. Let $g\of X\to W$ and $h\of Y\to W$ satisfy $h\circ f=g$. Define $k\of\hcg(f) \to DW$ by
 \begin{align*}
@@ -1171,19 +1182,18 @@ k[\chi^n_i](x,y) &= h[n](y) \textrm{ if $0<i\leq n$}\\
 k[\chi^n_{n+1}](x,y) &= g[n](x)
 \end{align*}
 
-This morphism $k$ corresponds to a modest fibration $k'\of\bullet\to \simplex[1]\times W$ which is a pullback of $\gen(M\s\f)$.
+This morphism $k$ corresponds to a modest fibration $k'\of\bullet\to \simplex[1]\times W$ which is a pullback of $\igen(M\s\f)$.
 \end{proof}
 
-\subsection{Conclusion}
+\subsection{Conclusion}\hide{some text?}
 
 \begin{theorem} The class $M\s\f$ of fibrations that are locally in $M$ has a generic morphism which is univalent. \label{univalent universe}\end{theorem} 
 
-\begin{proof} Proposition \ref{univalence} shows that a generic morphism is necessarily univalent. The generic morphism exists because fibration descent along horn inclusions (theorem \ref{descent}). \end{proof}
+\begin{proof} Proposition \ref{univalence} shows that a generic fibration is necessarily univalent. The generic morphism exists because fibrations descent along horn inclusions (theorem \ref{descent}). \end{proof}
 
 \section{Realizability categories}
 %hoe ver gaan?
-This section gives examples of Heyting bialgebras and generic morphisms and to show the connection with the category of PERs from the introduction.
-
+This section gives examples of Heyting bialgebras and generic morphisms and shows where the category of PERs from the introduction comes in.
 
 \subsection{Assemblies}
 The following \emph{category of assemblies} is the intended ambient category $\cat A$.
@@ -1210,7 +1220,7 @@ X\ar[r]^\gen\ar[d] & Y\ar[d] \\
 
 \begin{definition} Let $U$ be a universe as in \citep{MR0354798}. Let $U'$ be the element relation, i.e.
 \[ U'=\set{(x,y)\in U\times U\middle| x\in y}\]
-A $U$-small function $f\of X\to Y$ is any function that is a pullback of the projection $(x,y)\mapsto y\of U'\to U$. This projection is therefore the generic $U$-small function $\gen(U)$.
+A $U$-small function $f\of X\to Y$ is any function that is a pullback of the projection $(x,y)\mapsto y\of U'\to U$. This projection is therefore the \emph{generic $U$-small function} $\gen(U)$.
 A $U$-small morphism of assemblies is a morphism of assemblies $f\of(X,\alpha)\to(Y,\beta)$ such that $f$ is $U$-small.
 \end{definition}
 
@@ -1222,7 +1232,7 @@ The $U$-small morphisms for an arbitrary universe $U$ serve as the class of func
 Simply let $V$ be the set of assemblies whose underlying sets are members of $U$.
 Let 
 \[ V'=\set{(x,(X,\alpha)) \in U\times V| x\in X} \]
-There is a morphism. 
+The projection $\pi_1$ is a morphism. 
 \[\pi_1\of(V',(x,(X,\alpha))\mapsto \alpha(x))\to(V,v\mapsto\N) \]
 It is $U$-small because its underlying function is a pullback of $\gen(U)$. 
 
@@ -1260,7 +1270,7 @@ By generalization, $\pi_1\of (Q,\pi_0)\to\nabla P$ is the generic modest morphis
 \end{proof}
 
 \subsection{Limits}
-Complete small categories are necessarily posets by a lemma of Freyd. Internal categories of $\Asm$ don't suffer from this restriction. This subsection shows that derived categories preserve completeness. Let $\Asm(U)$ be the category of small assemblies for a universe $U$.
+Complete small categories are necessarily posets by a lemma of Freyd. Internal categories of $\Asm$ don't suffer from this restriction. This subsection shows that derived categories preserve completeness. Let $\Asm(U)$ be the category of $U$-small assemblies for a universe $U$.
 
 \begin{proposition} Let $M$ be the class of modest morphisms in $\Asm(U)$. The full internal subcategory $\cof(\gen(M))$ of \emph{modest sets} is complete. \end{proposition}
 
@@ -1277,11 +1287,11 @@ These constructions generate all internal limits of $\cof(\gen(M))$.
 
 Standard simplicial homotopy throws this in our laps.
 
-\begin{proposition} The category $\cof(\gen(M\s\f))$ has all internal limits up to weak equivalence.\label{completeness} \end{proposition}
+\begin{proposition} The category $\cof(\igen(M\s\f))$ has all internal limits up to weak equivalence.\label{completeness} \end{proposition}
 
 \begin{proof} The category of fibrant objects of $\cat S\s\f$ is \emph{right proper}, which means that weak equivalences are stable under pullback. On the other hand, cofibration in the category of cofibrant objects coincide with locally decidable morphisms, which are stable under pullback too. So in the subcategory of fibrant cofibrant objects, acyclic cofibration are stable under pullback. By adjunction fibration are closed under dependent products. Every object in $\cat S\s$ has a cofibrant replacement, which is also fibrant. Hence every internal limit exists up to weak equivalence.
 
-That internal limits in $\cof(\gen(M\s\f))$ yield objects of $\cof(\gen(M\s\f))$ follows from the completeness of the category of modest sets.
+That internal limits in $\cof(\igen(M\s\f))$ yield objects of $\cof(\igen(M\s\f))$ follows from the completeness of the category of modest sets.
 \end{proof}
 
 The category of 0-dimensional types of $\Asm\s$ coincides with the \emph{exact completion} \citep{MR1600009}. This leads to the following proposition.
@@ -1295,7 +1305,7 @@ Let $\simCat_0$ be the full subcategory of $\simCat$ on the objects $[0]$ and $[
 
 The injective objects, i.e.\ the complexes, for these 5 horn inclusions are precisely the \emph{pseudoequivalence relations} of \citep{MR1600009}. The category $\Asm\ex$ therefore has the same objects as the full subcategory of complexes $\Asm^{\simCat_0\dual}\f\subseteq \Asm^{\simCat_0\dual}$. Morphisms of $\Asm\ex$ are equivalence classes of morphisms in $\Asm^{\simCat_0\dual}\f$ for the relation of being homotopic. 
 
-There is a generic modest fibration in $\Asm^{\simCat_0\dual}\f$ for the same reason that there is a generic modest fibration in $\Asm\s\f$ (theorem \ref{univalent universe}). Pullbacks of fibrations are preserved by the quotient functor $Q\of \Asm^{\simCat_0\dual}\f \to\Asm\ex$ because they are examples of homotopy pullbacks \citep{GJSHT}. Therefore $\gen(M\s\f)$ is a generic family of modest sets in $\Asm\ex$.
+There is a generic modest fibration in $\Asm^{\simCat_0\dual}\f$ for the same reason that there is a generic modest fibration in $\Asm\s\f$ (theorem \ref{univalent universe}). Pullbacks of fibrations are preserved by the quotient functor $Q\of \Asm^{\simCat_0\dual}\f \to\Asm\ex$ because they are examples of homotopy pullbacks \citep{GJSHT}. Therefore $\igen(M\s\f)$ is a generic family of modest sets in $\Asm\ex$.
 \end{proof}
 
 \begin{remark} The effective topos is the exact completion of the category of partitioned assemblies, which are the projective object of the category of assemblies. The category of partitioned assemblies is not Cartesian closed and for that reason partitioned modest sets are not a complete internal category of the effective topos. The effective topos has no generic modest morphism \citep{MR1023803}.
