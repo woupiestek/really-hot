@@ -189,8 +189,22 @@ A \emph{full internal subcategory} is the category of fibres of a generic morphi
 Move stuff on discrete isofibrations here?
 
 It is better to replace discrete isofibrations with $\cat S$-valued predicates or similar. We should use those throughout.
+}
+
+\subsection{Predicates} Traditional simplicial homotopy work with \emph{classes} of fibrations, cofibrations and weak equivalences. In order to make the theory constructive, we need constructions that \emph{witness} membership of those classes. Therefore, functors into a \emph{full internal Heyting bialgebra} replace classes in this paper. 
+
+If $\cat C$ is an internal groupoid and $\cat H$ is an internal Heyting bialgebra an internal functor $F\of\cat C\to\cat H$ represents the class of objects $\set F\subseteq \Ob(\cat C)$ where $X\of U$ if there is a morphism $1\to\Ar(\cat H)$ in the ambient category which maps to a global section $1\to FX$ inside $\cat H$. However, besides this class of global elements, $F$ has classes of local elements for each object $I$ of the ambient category and each functor $G\of I\disc \to \cat H$--where $I\disc$ is the discrete groupoid based on $I$--determined by morphisms $1\to\Ar(\Func(I\disc,\cat C))$ in the ambient category.
+
+
+
+
+\hide{
+Need to say more?
 
 }
+
+
+\hide{Adjust to the new classes below}
 
 \section{Internal simplicial homotopy}
 This section develops the homotopy theory of Kan complexes internally in Heyting bialgebras. 
