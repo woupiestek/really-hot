@@ -56,6 +56,7 @@ Poland}
 \mathrmdef{nat}
 \mathssbxdef{Ar}
 \mathssbxdef{Ob}
+\mathssbxdef{Core}
 \mathssbxdef[LDMC]{II}
 \newcommand\pe[1]{^{\diamond #1}}
 \newcommand\pp{\mathbin\diamond}
@@ -106,6 +107,16 @@ Univalence is a desirable property for the universe of modest sets, because it i
 \section{Preliminaries}
 This section surveys the categorical logic required to understand the rest of this paper.
 
+\subsection{Basic concepts} This last subsection introduces explains the notation used this paper. 
+
+There is an ambient category and several internal categories. Some of the notational overlaps: the codomain, domain and identity operators are always called $\cod$, $\dom$ and $\id$ and $[n]$ always refers to the initial segment of the natural number object, even if that natural number object lives inside an internal category. When not talking about numbers, $0$, $1$, $+$ and $\times$ refer to initial and terminal objects and binary coproduct and product operators of either the ambient category or one of its internal categories. The unique map to the terminal object is $\bang$ and projection maps from products to factors are $\pi_i$ for $i\in \N$.
+
+Every object $I$ of the ambient category has an internal discrete category $I\disc$. For this category $\Ob(I\disc)=\Ar(I\disc)=I$ and $\cod=\dom=\id=\id(I)$.
+
+The \emph{set} of natural numbers is $\N$, and since it is a set, $i\in \N$ indicates membership. Other natural number objects are $\nno$, and $i\of\nno$ means that $i$ is a morphism whose codomain is $\nno$.
+
+Let $\cat C$ be an internal category. Its object of objects is $\Ob(\cat C)$ and its object of arrows is $\Ar(\cat C)$, so in this case $\cod$ and $\dom$ are morphisms $\Ar(\cat C)\to\Ob(\cat C)$ and $\id\of\Ob(\cat C)\to\Ar(\cat C)$. Let $\cat D$ be another internal category. The internal category of functors $\cat C\to\cat D$ is $\Func(\cat C,\cat D)$ or $\cat D^{\cat C}$.
+
 \subsection{Heyting bialgebras}
 This paper deals with several categories which have a higher dimensional version of the structure of Heyting algebras. Although the term \emph{extensive locally Cartesian closed category} covers what they are, I prefer a shorter term that highlights this connection.
 
@@ -114,7 +125,7 @@ This paper deals with several categories which have a higher dimensional version
 
 Heyting bialgebras which are posets are simply Heyting algebras. While Heyting algebras are models for constructive provability, the morphisms of the bialgebras directly model constructive proofs. As suggested by the Curry-Howard correspondence, the internal languages of these categories are a typed $\lambda$-calculus, know as \emph{extensional type theory}.
 
-Extensional type theory hides a part of the necessary diagram chasing in the proofs of this paper. The following subsections provides a quick introduction to the type theory and the conventions of this paper.
+If an internal category $\cat C$ of Heyting algebras \emph{has} limits for diagrams of shape $\cat D$, this means that the diagonal functor $\cat C\to\Func(\cat D,\cat C)$ has a right adjoint.
 
 \subsection{Dependent types}
 The atomic sentences of a type theory are type assignments $t\of T$ and equations $t=u$. Types are interpreted as objects of a category $\cat C$, while terms are interpreted as global sections. A proposition $t\of T$ is valid if the interpretation $\db t$ of $t$ is a global section of the interpretation $\db T$ of $T$ in $\cat C$. A proposition $t=u\of T$ is valid if $\db u=\db t$. 
@@ -185,31 +196,16 @@ For each $f\of X\to Y$ of $\cat A$, the \emph{internal category of fibres} $\cof
 
 A \emph{full internal subcategory} is the category of fibres of a generic morphism. The class $S$ and the category $\cof(\gen(S))$ are connected in the following way. Let $S/X$ be the category whose objects are morphism of $S$ whose codomain is $X$ and whose morphisms are arbitrary commutative triangles. because $S$ is closed under pullbacks, each $f\of X\to Y$ induces a \emph{reindexing functor} $f\ri\of S/Y\to S/X$. Generally $\cof(\gen(S))$ has a property if and only if $S/X$ has and $f\ri$ preserves the same property of each object $X$ and each morphism $f$ of $\cat A$. For example, the category $\cof(\gen(S))$ has dependent sums and products if $f\ri$ have left and right adjoints that satisfy the Beck Chevalley condition for each morphism $f\in S$.
 
-\hide{
-Move stuff on discrete isofibrations here?
-
-It is better to replace discrete isofibrations with $\cat S$-valued predicates or similar. We should use those throughout.
-}
-
 \subsection{Predicates} Traditional simplicial homotopy work with \emph{classes} of fibrations, cofibrations and weak equivalences. In order to make the theory constructive, we need constructions that \emph{witness} membership of those classes. Therefore, functors into a \emph{full internal Heyting bialgebra} replace classes in this paper. 
 
 If $\cat C$ is an internal groupoid and $\cat H$ is an internal Heyting bialgebra an internal functor $F\of\cat C\to\cat H$ represents the class of objects $\set F\subseteq \Ob(\cat C)$ where $X\of U$ if there is a morphism $1\to\Ar(\cat H)$ in the ambient category which maps to a global section $1\to FX$ inside $\cat H$. However, besides this class of global elements, $F$ has classes of local elements for each object $I$ of the ambient category and each functor $G\of I\disc \to \cat H$--where $I\disc$ is the discrete groupoid based on $I$--determined by morphisms $1\to\Ar(\Func(I\disc,\cat C))$ in the ambient category.
 
-
-
-
-\hide{
-Need to say more?
-
-}
-
-
-\hide{Adjust to the new classes below}
+If $f\of X\to Y$ is a morphism of $\cat C$, and if $FX$ has a global section, then so does $FY$. This limits the properties that are represented by functors. In most cases, we consider functors $\Core(\cat C)\to \cat S$ instead, where $\Core(\cat C)$ is the internal groupoid that has the same objects as $\cat C$ but only its isomorphisms for morphisms. That way the represented classes are closed under isomorphism objects, but nothing else.
 
 \section{Internal simplicial homotopy}
 This section develops the homotopy theory of Kan complexes internally in Heyting bialgebras. 
 
-The situation is as follows. The ambient category is a Heyting bialgebra $\cat A$ that has a natural number object $\nno$. The category $\cat A$ has a class $S$ of `small' maps which has a generic morphism $\gen(S)$. The internal category $\cat S = \cof(\gen(\cat S))$ of fibres of $\gen(S)$ is an internal Heyting bialgebra $\cat S$ and therefore has a category of simplicial objects $\cat S\s$. Here the internal version $\simCat$ of the category of simplicial sets comes from $\nno$.
+The situation is as follows. The ambient category is a Heyting bialgebra $\cat A$ that has a natural number object $\nno$. The category $\cat A$ has a class $S$ of `small' maps which has a generic morphism $\gen(S)$. The internal category $\cat S = \cof(\gen(\cat S))$ of fibres of $\gen(S)$ is an internal Heyting bialgebra and therefore has a category of simplicial objects $\cat S\s$. The internal version $\simCat$ of the category of simplicial sets comes from $\nno$.
 
 \begin{proposition} Every Heyting bialgebra with natural number object has an internal category of simplices.\end{proposition}
 
@@ -222,12 +218,12 @@ Universal quantification over $[m]$ reduces to a finite conjunction because $[m]
 \end{proof}
 
 \subsection{Filler operators}
-Kan fibrations are morphisms of simplicial sets that have the lifting property relative to the family of horn inclusions. This subsection focuses on the lifting properties. Extensional type theory offers no existential quantification to express the idea that `there is a lifting'. Instead extensional type theory requires a lifting operator that witnesses this fact.
+Kan fibrations are morphisms of simplicial sets that have the lifting property relative to the family of horn inclusions. This subsection focuses on the lifting properties. Extensional type theory offers no existential quantification to express the idea that `there is a lifting'. Extensional type theory requires a lifting operator that witnesses this fact.
 
 \begin{definition} Let $\nat\of(\cat S\s)\dual\times \cat S\s \to \cat S^{\nno\disc}$ be the functor which sends each pair of simplicial objects $X,Y$ to the object $\nat(X,Y)$ of morphisms between them--the object $\nat(X,Y)$ lives in $\cat S^{\nno\disc}$ because natural transformations are families of morphisms and $\cat S$ has exponentials.
 
 A morphism $f\of X\to Y$ of $\cat S\s$ has the \emph{global right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the global \emph{left} lifting property with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\nat(\id_J,f),\nat(g,\id_X))}$ 
-which is the factorization of the cone $\nat(\id_J,f)$, $\nat(g,\id_X))$ through the pullback cone of $\nat(\id_I,f)$ and $\nat(g,\id_Y)$
+which is the factorization of the span $\nat(\id_J,f)$, $\nat(g,\id_X)$ through the pullback cone of $\nat(\id_I,f)$ and $\nat(g,\id_Y)$
 is a \emph{split} epimorphism.
 \[\xy
 (34,20)*+{\nat(I,X)}="top",(0,10)*+{\nat(J,X)}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\nat(I,Y)}="right",(34,0)*+{\nat(J,Y)}="bottom"
@@ -237,25 +233,26 @@ is a \emph{split} epimorphism.
 A section of $\tuplet{f_\bang,g\ri}$ is a \emph{filler operator}.\label{lifting}
 \end{definition}
 
-The ordinary right lifting property only says that composition with $\tuplet{f_\bang,g\ri}$ induces a surjective function on global sections, while the \emph{local} right lifting property only requires that $\tuplet{f_\bang,g\ri}$ is a regular epimorphism. The global version formulated above is stronger than either of those in a constructive context.
+The ordinary right lifting property only says that composition with $\tuplet{f_\bang,g\ri}$ induces a surjective function on global sections, while the \emph{local} right lifting property only requires that $\tuplet{f_\bang,g\ri}$ is a regular epimorphism. The global version formulated above is stronger than either of those.
 
 A morphism can have a lifting property relative to a family or class of morphisms.
 
-\begin{definition}[Injective] For each morphisms $f$ of $\cat S\s$ let $\code{sections}(f)$ be the object of sections of $f$. An $I$-indexed-family of morphisms in $\cat S\s$ a morphism $a\of D\to E$ in $(\cat S\s)^{I\disc}$. Let $I\ri\of\cat S\s\to (\cat S\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$.
-\[ a\code{-injective}(f)=\code{sections}(I\ri(f)_\bang,a\ri) \]
-\end{definition}
+\begin{definition}[Injective]  For each morphism $f$ of $\cat S\s$ let $\code{sections}(f)$ be the object of sections of $f$. An $I$-indexed-family of morphisms in $\cat S\s$ a morphism $a\of D\to E$ in $(\cat S\s)^{I\disc}$. Let $I\ri\of\cat S\s\to (\cat S\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$.
 
-\begin{remark}
-Since $\cat S$ is not necessarily a regular category, subclasses of objects that have a certain property are habitually replaced by \emph{discrete isofibrations} (see definition \ref{discrete isofibrations} below). These generalized classes give each object an object of realizers for their presence in the class. The object $a\code{-injective}(f)$ is the object of realizers of the statement that $f$ is an $a$-injective.
-\end{remark}
+\[ a\code{-injective}(f)=\code{sections}(I\ri(f)_\bang,a\ri) \] %here
+
+Let $a\code{-injective}$ be the functor $\Core(\Func([1],\cat S))\to\Func(\nno\disc,\cat S)$ which sends each morphism $f$ to $\code{sections}(I\ri(f)_\bang,a\ri)$.
+\end{definition}
 
 \hide{Add?: These injectives satisfy the usual properties of closure under products, composition and pullback, thanks to specific constructions on filler operators.}
 
 Internal languages only quantify over objects and $\cat S$ does not have an object of $a$-injectives does not exist inside $\cat S$. The definition of $a$-anodynes therefore requires the ambient category $\cat A$.
 
+%here
+\hide{Figure this out: a map from lifting operators to liftings\dots}
 \begin{definition}
 The morphism $f$ is \emph{$a$-anodyne} for an $I$-indexed family of morphisms $a$ if the following object has a global section.
-\[ a\code{-anodyne}(f) = \Pi g\of \Ar(\cat S\s).\Pi s\of \code{sections}(a_!,(I\ri g)\ri).\code{sections}(f_!,g\ri) \]
+\[ a\code{-anodyne}(f) = \Pi g\of \Ar(\cat S\s).\Pi s\of \code{sections}(a_!,(I\ri g)\ri).\code{sections}(f_!,g\ri)\of\Func(\nno\disc,\cat S) \]
 Here $\Ar(\cat S\s)$ is the object of arrows of $\cat S\s$.
 \end{definition}
 
