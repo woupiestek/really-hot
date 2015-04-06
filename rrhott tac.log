@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  4 APR 2015 13:25
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  6 APR 2015 18:22
 entering extended mode
 **rrhott*tac.tex
 ("C:\Users\Wouter\Documents\GitHub\realy-hot\rrhott tac.tex"
@@ -451,35 +451,31 @@ LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
 (Font)              scaled to size 9.19995pt on input line 94.
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
 (Font)              scaled to size 6.89996pt on input line 94.
- [2] [3] [4] [5] [6]
-Overfull \hbox (9.66818pt too wide) detected at line 255
-\OML/cmm/m/it/12 a[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 ) = \OML/cmm/m/it/12 g \OT1/cmr/m/n/12 : [](\OMS
-/cmsy/m/n/12 S[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 \OML/cmm/m/it/12 s \OT1/cmr/m/n/12 : [](\OML/cmm/m/i
-t/12 a[]; \OT1/cmr/m/n/12 (\OML/cmm/m/it/12 I[]g\OT1/cmr/m/n/12 )[])\OML/cmm/m/it/12 :[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/1
-2 f[]; g[]\OT1/cmr/m/n/12 ) : [](\OT1/cmr/bx/n/12 N[]\OML/cmm/m/it/12 ; \OMS/cmsy/m/n/12 S\OT1/cmr/m/n/12 )
- []
+ [2] [3] [4] [5] [6] [7] [8] [9] [10] <xymatrix 3x2 306>
+[11] <xymatrix 2x2 182> <xymatrix 2x2 223> [12] [13] <xymatrix 2x2 184> [14]
+Underfull \vbox (badness 1259) has occurred while \output is active []
 
-[7] [8] [9] [10] <xymatrix 3x2 306> <xymatrix 2x2 182> [11] <xymatrix 2x2 223> [12] [13] <xymatrix 2x2 184> [14]
-<xymatrix 2x2 175> [15] <xymatrix 3x2 399> <xymatrix 3x2 409> [16] <xymatrix 3x2 312> <xymatrix 3x2 399> <xymatrix 2x2
-223> <xymatrix 3x2 398> [17] <xymatrix 3x2 409> <xymatrix 2x2 223> [18] <xymatrix 3x2 399> <xymatrix 3x2 402> [19]
-[20] <xymatrix 2x2 209> [21] [22] <xymatrix 5x2 317> [23] [24] <xymatrix 2x2 182> <xymatrix 2x2 183> [25] [26]
-<xymatrix 2x2 168> <xymatrix 2x2 184> [27] <xymatrix 3x2 349> <xymatrix 5x2 413> [28] <xymatrix 4x2 314> <xymatrix 4x2
-242> [29] <xymatrix 4x2 279> [30] <xymatrix 2x2 223> [31] <xymatrix 2x2 223> <xymatrix 2x2 224> <xymatrix 2x2 223>
-[32] [33] <xymatrix 2x2 168> [34] <xymatrix 2x2 182> [35] <xymatrix 4x2 436> [36] [37] [38]
-Underfull \hbox (badness 10000) in paragraph at lines 1339--1339
+ [15] <xymatrix 2x2 175> <xymatrix 3x2 399> [16]
+<xymatrix 3x2 409> <xymatrix 3x2 312> <xymatrix 3x2 399> [17] <xymatrix 2x2 223> <xymatrix 3x2 398> [18] <xymatrix 3x2
+409> <xymatrix 2x2 223> <xymatrix 3x2 399> [19] <xymatrix 3x2 402> [20] [21] <xymatrix 2x2 209> [22] [23] <xymatrix 5x2
+317> [24] [25] <xymatrix 2x2 182> <xymatrix 2x2 183> [26] <xymatrix 2x2 168> [27] <xymatrix 2x2 184> <xymatrix 3x2 349>
+<xymatrix 5x2 413> [28] <xymatrix 4x2 314> [29] <xymatrix 4x2 242> <xymatrix 4x2 279> [30] <xymatrix 2x2 223> [31]
+<xymatrix 2x2 223> <xymatrix 2x2 224> <xymatrix 2x2 223> [32] [33] <xymatrix 2x2 168> [34] [35] <xymatrix 2x2 182>
+[36] <xymatrix 4x2 436> [37] [38]
+Underfull \hbox (badness 10000) in paragraph at lines 1348--1348
 
  []
 
-[39] ("C:\Users\Wouter\Documents\GitHub\realy-hot\rrhott tac.aux")
+[39] [40] ("C:\Users\Wouter\Documents\GitHub\realy-hot\rrhott tac.aux")
 Package logreq Info: Writing requests to 'rrhott*tac.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 8789 strings out of 493922
- 129161 string characters out of 3147303
- 388664 words of memory out of 3000000
- 11987 multiletter control sequences out of 15000+200000
+ 8788 strings out of 493922
+ 129158 string characters out of 3147303
+ 389664 words of memory out of 3000000
+ 11986 multiletter control sequences out of 15000+200000
  19909 words of font info for 74 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  37i,15n,52p,1073b,937s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on "rrhott tac.dvi" (39 pages, 287592 bytes).
+Output written on "rrhott tac.dvi" (40 pages, 289004 bytes).

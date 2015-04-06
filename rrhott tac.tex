@@ -239,7 +239,7 @@ A morphism can have a lifting property relative to a family or class of morphism
 
 \begin{definition}[Injective]  For each morphism $f$ of $\cat S\s$ let $\code{sections}(f)$ be the object of sections of $f$. An $I$-indexed-family of morphisms in $\cat S\s$ a morphism $a\of D\to E$ in $(\cat S\s)^{I\disc}$. Let $I\ri\of\cat S\s\to (\cat S\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$.
 
-\[ a\code{-injective}(f)=\code{sections}(I\ri(f)_\bang,a\ri) \] %here
+\[ a\code{-injective}(f)=\code{sections}(I\ri(f)_\bang,a\ri) \]
 
 Let $a\code{-injective}$ be the functor $\Core(\Func([1],\cat S))\to\Func(\nno\disc,\cat S)$ which sends each morphism $f$ to $\code{sections}(I\ri(f)_\bang,a\ri)$.
 \end{definition}
@@ -248,27 +248,25 @@ Let $a\code{-injective}$ be the functor $\Core(\Func([1],\cat S))\to\Func(\nno\d
 
 Internal languages only quantify over objects and $\cat S$ does not have an object of $a$-injectives does not exist inside $\cat S$. The definition of $a$-anodynes therefore requires the ambient category $\cat A$.
 
-%here
-\hide{Figure this out: a map from lifting operators to liftings\dots}
 \begin{definition}
-The morphism $f$ is \emph{$a$-anodyne} for an $I$-indexed family of morphisms $a$ if the following object has a global section.
-\[ a\code{-anodyne}(f) = \Pi g\of \Ar(\cat S\s).\Pi s\of \code{sections}(a_!,(I\ri g)\ri).\code{sections}(f_!,g\ri)\of\Func(\nno\disc,\cat S) \]
-Here $\Ar(\cat S\s)$ is the object of arrows of $\cat S\s$.
+Since $\cat S$ may have too small products, the property of being $a$-anodyne for an $I$-indexed family of morphisms $a$ is represented by a functor valued in the following Heyting bialgebra.
+\[ \cat S'= \Func(\Core(\Func([1]\times\simCat\dual,\cat S)),\Func(\nno\disc,\cat S)) \]
+
+For each $f$ and $g$ of $\Core(\Func([1]\times\simCat\dual,\cat S))$, $a\code{-anodyne}(f)(g)$ is the object of morphisms that takes lifting operators for $a$ against $g$ to lifting operators for $f$ against $g$ as shown here below.
+\[ a\code{-anodyne}(f)(g) = \Pi s\of \code{sections}(a_!,(I\ri g)\ri).\code{sections}(f_!,g\ri) \]
+
+A morphism $f$ is \emph{$a$-anodyne} if $a\code{-anodyne}(f)$ has a global section inside $\cat S'$.
 \end{definition}
 
-A realizer for an $a$-anodyne $f$, i.e. an element of $a\code{-anodyne}(f)$, is a function that show how to apply a filler operator for the family $a$ to $f$.
+The global sections that witness that a morphism $f$ reduce the problem of lifting $f$ to the problem of lifting the member of the family $a$ using whatever constructions are available in $\cat S$.
 
 \subsection{Kan fibrations}
 The subsection completes the definition of Kan fibrations.
 
 Heyting bialgebras like $\cat S$ have all the finite objects: $0$, $1$, $1+1$, $1+1+1$, etc. Hence $\simCat$ is enriched over $\cat S$ and there exists a Yoneda embedding $\Delta\of \simCat \to \cat S^{\simCat \dual}$. 
 
-\begin{definition} For each $n\of \nno$ the \emph{cycle} $\cycle[n]$ is the sieve of non surjective functions of $\simplex[n]$. For each $n$ and $k\of\nno$ the \emph{horn} $\horn_k[n]$ is the sieve of the non decreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$. 
+\begin{definition} For each $n\of \nno$ the \emph{cycle} $\cycle[n]$ is the sieve of non surjective functions that is a subobject of $\simplex[n]$. For each $n$ and $k\of\nno$ the \emph{horn} $\horn_k[n]$ is the sieve of the non decreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$. These sieves are definable because being surjective is a decidable property of morphisms $[m]\to[n]$. 
 \end{definition}
-
-\hide{formulas for precision?}
-
-Being surjective is a decidable property of morphisms $[m]\to[n]$ so these sieves are definable. 
 
 \begin{definition} Cycles and horns form families of morphisms indexed over $\nno$ and over $\set{(n,k)\in\nno\times\nno| k\leq n }$ respectively.
 \begin{align*} 
@@ -289,19 +287,15 @@ Being surjective is a decidable property of morphisms $[m]\to[n]$ so these sieve
 \item An \emph{acyclic cofibration} is an anodyne morphism relative to the family of horn inclusions.
 \[ \code{acyclic-cofibration}(f) = \code{horns-anodyne}(f) \]
 \item A \emph{weak equivalence} is a morphism which factors as an acyclic fibration following an acyclic cofibration.
-\begin{align*} 
-&\code{weak-equivalence}(f) =\\
-&\set{(g,h)\in \Ar(\cat S\s)\times\Ar(\cat S\s) \middle| \begin{array}{c}
-(f=g\circ h)\times\\
-\code{acyclic-fibration}(h)\times\\
-\code{acyclic-cofibration}(g)
-\end{array}}
-\end{align*}
 \end{itemize}\label{Kan}
 
 The category of Kan complexes and morphisms of simplicial object is $\cat S\s\f$. Its objects are pairs $(X,\xi)$ where $X$ is an object of $\cat S$ and $\xi$ is a filler operator for $\bang_X\of X\to 1$. The filler operator merely serves as a witness of fibrancy and is \emph{not} preserves by morphisms $(X,\xi)\to(Y,\xi')$ which are arbitrary morphisms $X\to Y$.
 \end{definition}
 This paper usually leaves out `Kan' and simply talk about fibrations and complexes. 
+
+A witness for weak equivalence has to include a factorization of a morphism. An object of witnesses that considers all possible factorizations is a huge coproduct, which is hard to find a suitable internal Heyting bialgebra to contain it. Fortunately, this paper shows a couple of ways to factorize morphisms (propositions \ref{factor1} and \ref{factor2}). A witness for weak equivalence only has to show that one of these is an acyclic fibration following an acyclic cofibration. The groupoid of factorized morphisms is $\Core(\Func([2]\times\simCat\dual,\cat S))$ and the functor that represents the class of weak equivalences simply combines the functors that represent the classes of acyclics.
+
+%here
 
 \begin{remark}[Saturation] Injectives are closed under various constructions, notably compositions, finitary products and pullbacks. Every isomorphism is injective. Moreover, the filler operators for the new injectives are functions of the existing filler operators.
 \[
@@ -322,9 +316,9 @@ Anodynes have dual closure properties. Besides composition, they are closed unde
 A consequence of these closure properties, is that horn inclusions are cofibrations, therefore that acyclic fibrations are fibrations and therefore all acyclic cofibrations are cofibrations.
 \end{remark}
 
-The next section demonstrates that the morphisms of definition \ref{Kan} form a model structure on $\cat S\s$ theorem \ref{model category}.
+The next section demonstrates that the morphisms of definition \ref{Kan} form a model structure on $\cat S\s$ (theorem \ref{model category}).
 
-\section{Model structure}
+\section{Model structure}%class functors not mentioned in the sections below
 Simplicial homotopy theory have been robbed of the comforts of classical foundations: the axiom of choice, the principle of the excluded middle, infinite limits and colimits etc. Yet the standard model structure of simplicial sets survives in the category of Kan complexes. This section runs through of the simplicial homotopy of Kan complexes \citep{Hovey99,GJSHT} in order to demonstrate that the familiar theory is constructive.
 
 \subsection{Cofibrations}
@@ -336,6 +330,8 @@ While $\cat S$ may lack the structure required to soundly interpret existential 
 
 \begin{definition} A monomorphism is a \emph{free cofibration} if for each $i\in \nno$, there is an object $S_i$ of $i$-dimensional faces of $Y$ which are not in the image of $X$. This means that there are $s_i:Y[i]\to\bool$ such that all $S_i$ are pullbacks of $\true:1\to\bool$.
 \end{definition}
+
+Internally the representation of a free cofibration is much simpler than that of a cofibration, since the family of morphisms $s_i$--which is unique if it exists--is already witnesses membership.%hold that thought...
 
 \begin{lemma} Every free cofibration is a cofibration. \label{Reedy}
 \end{lemma}
@@ -362,7 +358,7 @@ The rest of this subsection shows the converse, i.e.\ every cofibration is free,
 \begin{proposition} Every morphism $f\of X\to Y$ of $\cat S\s$ factors as an acyclic fibration following a cofibration. \label{factor1} \end{proposition}
 
 \begin{proof}
-Let $Z$ be the following object of $\cat S$. For $n\of\nno$ $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
+Let $Z$ be the following object of $\cat S$. For each $n\of\nno$, $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
  $a\of[n]\to [p]$ is an epimorphism of $\simCat$ (so $p\leq n$),
  $b\of\LDMC[p]$ satisfies $b(\id_{[p]})=\true$ if an only if $a=\id_{[n]}$,
  $c\of \set{b}\to X$, where $\set{b}$ is the pullback of $t\of 1\to\LDMC$ along $b$ and 
@@ -440,9 +436,9 @@ W\times Z \ar[r] \ar@/_2ex/[rr]_{f\times\id} & \bullet \ar[r]^(.4){f\pp g} & X\t
 
 \end{definition}
 
-Allows $\cat S$ may omit some finite colimits, the following lemma show that pushout products of cofibrations always exist.
+Although $\cat S$ may omit some pushouts, the following lemma show that pushout products of cofibrations always exist.
 
-\begin{lemma} Pushout products of pairs of locally decidable monomorphisms exist and are locally decidable monomorphism. \end{lemma}
+\begin{lemma} Pushout products of pairs of locally decidable monomorphisms exist and are locally decidable monomorphisms. \end{lemma}
 
 \begin{proof} Let $f\of W\to X$ and $g\of Y\to Z$ be a pair of locally decidable monomorphisms. A pair $\tuplet{x,y}\of X\times Z$ belongs to the image of $f\pp g$ if either $x$ belong to the image of $f$ or $y$ belong to the image of $g$. This is a decidable property.
 \end{proof}
@@ -598,8 +594,17 @@ Because $\phi\circ(\id_{\simplex[1]\times h}) = h\circ \pi_1$, the cofibration $
 As promised the morphism $f$ factors as the fibration $f_1\circ g$ following the acyclic cofibration $h$.
 \end{proof}
 
+%here
+\hide{revisit the class of weak equivalences here?
+
+It seems that if there is a factorization into acyclics, any fibration-cofibration factorization that has one acyclic has two.
+
+}
+
 \subsection{Two-out-of-three}
 The category $\cat S\s$ has the two weak factorization systems that a model structure requires. This subsection demonstrates that the weak equivalences satisfy the 2-out-of-3 property and completes the proof that $\cat S\s\f$ is a model category.
+
+
 
 \begin{lemma}[2-out-of-3] Let $f\of X\to Y$ and $g\of Y\to Z$ be morphisms of $\cat S\s\f$. If any two of $f,g$ or $g\circ f$ are weak equivalences, then all three are. \label{toot}\end{lemma}
 
@@ -895,6 +900,8 @@ Lemma \ref{acyclic cofibrancy} means that there is a filler $h\of \simplex[m+\no
 By generalization there is a filler for each square with a horn inclusion $H(m,l)$ in it and by abstraction there is a filler operator that makes $Df$ a fibration in the sense of definition \ref{lifting}.
 \end{proof}
 
+
+\hide{We are gonna go without the discrete cofibrations}
 \section{Fibrant Universe}
 This section adds a new class of \emph{modest morphisms} $M\subseteq S$ with its own generic morphism $\gen(M)$ and full internal subcategory $\cof(\gen(M))$. The class $M$ contains all regular monomorphisms and is closed under composition and pullback.
 
@@ -905,12 +912,11 @@ This time, $M$ is internal to $\cat S$ too. This means that we require something
 \hide{replace discrete isofibrations with presheaves of the core or something like that. Couldn't we?}
 
 
-\mathssbxdef{Iso}
 
 \begin{definition}
 A \emph{discrete isofibration} is a functor $F\of\cat A\to \cat B$ which is fully faithful and which has a lifting property for isomorphisms. If $A$ is an object of $\cat A$ and if $f\of B\to FA$ is an isomorphism of $\cat B$ then there is an isomorphism $f'\of B'\to A$ such that $Ff'=f$. The internal version for locally Cartesian closed categories has a lifting operator, so $f'=l(X,f)$ for some element $l$ of.
-\[ \Pi X\of \Ob(\cat A).\Pi f\of \Iso(\cat B)/FX. \Iso(\cat A)/X \]
-Here $\Iso(\cat X)/Y$ is the object of isomorphisms of $\cat X$ whose codomains are $Y$.\label{discrete isofibrations}
+\[ \Pi X\of \Ob(\cat A).\Pi f\of \Ob(\Core(\cat B)/FX). \Ob(\Core(\cat A)/X) \]
+\label{discrete isofibrations}
 \end{definition}
 
 We can connect families of morphisms in the internal category $\cat S=\cof(\gen(S))$ to families of morphisms in the ambient category $\cat A$ by the following construction.
@@ -943,7 +949,7 @@ A morphism $\tuplet{f,s}\to \tuplet{g,t}$ is a commutative square $f\to g$. The 
 
 There is a related discrete isofibration $M\s\of \cat M\s\to \Func([1],\cat S\s)$ which represents the class of morphisms $f\of X\to Y$ such that $f[i]$ are members of $M$ for all $i\of \nno$. The category $\cat M\s$ is simply the category of functors $\Func(\simCat\dual,\cat M)$ and $M\s$ acts by composition with $M$.
 
-\hide{ Is dit genoeg? }
+\hide{ enough? }
 
 %end clarification
 
@@ -1205,6 +1211,9 @@ This morphism $k$ corresponds to a modest fibration $k'\of\bullet\to \simplex[1]
 \begin{theorem} The class $M\s\f$ of fibrations that are locally in $M$ has a generic morphism which is univalent. \label{univalent universe}\end{theorem} 
 
 \begin{proof} Proposition \ref{univalence} shows that a generic fibration is necessarily univalent. The generic morphism exists because fibrations descent along horn inclusions (theorem \ref{descent}). \end{proof}
+
+\hide{ About the Bezem-Coquand counterexample: it shows something about the homotopy equivalence of the fibres, while I only proof the weak equivalence of the fibres. When these equivalences coincide (cofibrant codomains) there is no undecidable degeneracy. My best guess is that the codomain in the counterexample is not cofibrant, at least not in the sense defined in the paper.}
+
 
 \section{Realizability categories}
 %hoe ver gaan?
