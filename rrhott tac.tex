@@ -295,9 +295,7 @@ This paper usually leaves out `Kan' and simply talk about fibrations and complex
 
 A witness for weak equivalence has to include a factorization of a morphism. An object of witnesses that considers all possible factorizations is a huge coproduct, which is hard to find a suitable internal Heyting bialgebra to contain it. Fortunately, this paper shows a couple of ways to factorize morphisms (propositions \ref{factor1} and \ref{factor2}). A witness for weak equivalence only has to show that one of these is an acyclic fibration following an acyclic cofibration. The groupoid of factorized morphisms is $\Core(\Func([2]\times\simCat\dual,\cat S))$ and the functor that represents the class of weak equivalences simply combines the functors that represent the classes of acyclics.
 
-%here
-
-\begin{remark}[Saturation] Injectives are closed under various constructions, notably compositions, finitary products and pullbacks. Every isomorphism is injective. Moreover, the filler operators for the new injectives are functions of the existing filler operators.
+\begin{remark}[Saturation] Injectives are closed under various constructions, notably compositions, finitary products and pullbacks. Every isomorphism is injective. Moreover, the filler operators for the new injectives are functions of the existing filler operators, which are represented by natural transformations of internal functors.
 \[
 \xy
 (0,12)*+{\bullet}="a",(12,12)*+{\bullet}="b",(24,12)*+{\bullet}="c",
@@ -318,8 +316,8 @@ A consequence of these closure properties, is that horn inclusions are cofibrati
 
 The next section demonstrates that the morphisms of definition \ref{Kan} form a model structure on $\cat S\s$ (theorem \ref{model category}).
 
-\section{Model structure}%class functors not mentioned in the sections below
-Simplicial homotopy theory have been robbed of the comforts of classical foundations: the axiom of choice, the principle of the excluded middle, infinite limits and colimits etc. Yet the standard model structure of simplicial sets survives in the category of Kan complexes. This section runs through of the simplicial homotopy of Kan complexes \citep{Hovey99,GJSHT} in order to demonstrate that the familiar theory is constructive.
+\section{Model structure}%class functors not mentioned in the sections below--"characteristic functors"
+Simplicial homotopy theory has been robbed of the comforts of classical foundations: the axiom of choice, the principle of the excluded middle, infinite limits and colimits etc. Yet the standard model structure of simplicial sets survives in the category of Kan complexes. This section runs through of the simplicial homotopy of Kan complexes \citep{Hovey99,GJSHT} in order to demonstrate that the familiar theory is constructive.
 
 \subsection{Cofibrations}
 This subsection characterizes the cofibrations of $\cat S\s$. It also proves that arbitrary morphisms factor as acyclic fibrations following cofibrations. The characteristic property is that a certain relation between the morphism and morphisms in the codomain is decidable.
@@ -331,7 +329,7 @@ While $\cat S$ may lack the structure required to soundly interpret existential 
 \begin{definition} A monomorphism is a \emph{free cofibration} if for each $i\in \nno$, there is an object $S_i$ of $i$-dimensional faces of $Y$ which are not in the image of $X$. This means that there are $s_i:Y[i]\to\bool$ such that all $S_i$ are pullbacks of $\true:1\to\bool$.
 \end{definition}
 
-Internally the representation of a free cofibration is much simpler than that of a cofibration, since the family of morphisms $s_i$--which is unique if it exists--is already witnesses membership.%hold that thought...
+Internally the representation of a free cofibration is much simpler than that of a cofibration, since the family of morphisms $s_i$--which is unique if it exists--already witnesses membership.%hold that thought...
 
 \begin{lemma} Every free cofibration is a cofibration. \label{Reedy}
 \end{lemma}
@@ -346,16 +344,19 @@ The inclusion $X\to Y_0 = X+\simCat\ri(A_0)$ is a pushout of $A_0$ copies of the
 For $i>0$, if $y\of S_i$ then $Y_i\cap y$ is the boundary of $y$, hence $Y_{i-1}\to Y_i$ is a pushout of $S_i$ copies of the cofibration $\cycle[j]\to\simplex[j]$ and hence a cofibration. Because $f\of X\to Y$ is the colimit of the inclusions $X\to Y_j$ and those inclusions are compositions of cofibrations, $f$ is a cofibration.
 \end{proof}
 
+\begin{remark} The thoroughly rigorous proof is the definition of a natural transformation between the characteristic functor of free cofibration $\Core(\Func([1],\cat S))\to \Func(\nno\disc,\cat S)$ and the characteristic functor of cofibrations $\Core(\Func([1],\cat S))\to \cat S'$. There is a canonical faithful functor $\Func(\nno\disc,\cat S)\to\cat S'$ that evens out the codomains. The witness of cofibrancy is the result of glueing lifting operators for cycle inclusions along the colimit inclusions. The proof above only mentions the most relevant parts of the construction instead. This is the default approach in the rest of this paper.\end{remark}
+
+\hide{ But it may be a lemma worth working out somewhere in this paper, if only in an appendix? }
+
 The rest of this subsection shows the converse, i.e.\ every cofibration is free, by factoring every morphism as an acyclic fibration following a free cofibration. The factorization requires objects of cofibrations constructed from a classifier of locally decidable subobjects as described below.
 
 \begin{definition} A monomorphism $m\of X\to Y$ of $\cat S\s$ is \emph{locally decidable} if for each $i\of\nno$ monomorphism $m[i]\of X[i]\to Y[i]$ is \emph{decidable}, i.e.\ isomorphic to a coproduct inclusion, in $\cat S$. \end{definition}
 
-
 \begin{lemma} The category $\cat S\s$ has a locally decidable monomorphism $t\of 1\to \LDMC$ such that every morphism is a locally decidable monomorphism if and only if it is a pullback of $t$. \end{lemma}
 
-\begin{proof} For any object $X$ of $\cat S\s$ let a \emph{decidable sieve} be a $p\of(\Sigma i\of\nno.X[i])\to\bool$ such that $p(x)=\true$ implies $p(x\circ X(f))=\true$ for each morphism $f\of [m]\to [n]$ of $\simCat$ and $x\in X[n]$. For each $i\in\nno$, $\LDMC[i]$ is the object of \emph{decidable sieves} of $\simplex[i]$. The Yoneda lemma takes care of the rest. \end{proof}
+\begin{proof} The morphism $t$ is defined in such a way that a witness that a morphism $f\of X\to Y$ is locally decidable is essentially already a pullback square $f\to t$. For any object $X$ of $\cat S\s$ let a \emph{decidable sieve} be a $p\of(\Sigma i\of\nno.X[i])\to\bool$ such that $p(x)=\true$ implies $p(x\circ X(f))=\true$ for each morphism $f\of [m]\to [n]$ of $\simCat$ and $x\in X[n]$. For each $i\in\nno$, $\LDMC[i]$ is the object of \emph{decidable sieves} of $\simplex[i]$. The Yoneda lemma takes care of the rest. \end{proof}
 
-\begin{proposition} Every morphism $f\of X\to Y$ of $\cat S\s$ factors as an acyclic fibration following a cofibration. \label{factor1} \end{proposition}
+\begin{proposition} Every morphism $f\of X\to Y$ of $\cat S\s$ factors as an acyclic fibration following a free cofibration. \label{factor1} \end{proposition}
 
 \begin{proof}
 Let $Z$ be the following object of $\cat S$. For each $n\of\nno$, $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
@@ -408,6 +409,8 @@ Y\ar[r]_\id \ar[ur]^k & Y
 \]
 For each simplex $y$ of $Y$, $k(y)=\tuplet{a,b,c,d}$. The simplex $y$ is in the image of $f$ if and only if $b=\top$ and this is decidable. A simplex $y$ for which $b\neq \top$ is nondegenerate if and only if $a=\id$ for the following reasons. The morphisms $k$ is a section of $h$ and hence a monomorphism. Monomorphisms preserve faces because faces are monomorphisms. The morphism $k$ commutes with the actions of morphisms in $\simCat$ and degenerates of $Z$ outside of the image of $g$ have $a\neq\id$.
 \end{proof}
+
+The equivalence means that one of the factorization systems that the model structure requires is already present. It also means that the simpler functor that represent the free cofibrations also represents the class of cofibrations.
 
 \subsection{Pullback exponentials}
 Kan complexes add additional structure that permits the factorization of morphisms of simplicial objects into Kan fibrations and acyclic cofibrations. Pullback exponentials and their duals, pushout products, are at the core of this argument.
@@ -599,12 +602,11 @@ As promised the morphism $f$ factors as the fibration $f_1\circ g$ following the
 
 It seems that if there is a factorization into acyclics, any fibration-cofibration factorization that has one acyclic has two.
 
+While it must be possible to use a specific factorisation everywhere, it can't be simple.
 }
 
 \subsection{Two-out-of-three}
 The category $\cat S\s$ has the two weak factorization systems that a model structure requires. This subsection demonstrates that the weak equivalences satisfy the 2-out-of-3 property and completes the proof that $\cat S\s\f$ is a model category.
-
-
 
 \begin{lemma}[2-out-of-3] Let $f\of X\to Y$ and $g\of Y\to Z$ be morphisms of $\cat S\s\f$. If any two of $f,g$ or $g\circ f$ are weak equivalences, then all three are. \label{toot}\end{lemma}
 
@@ -709,9 +711,10 @@ X\ar[r]^f\ar[d]_b & Y\ar[r]^h\ar[d]^d\ar[dr]^g & \bullet\ar[d]^k\\
 This means that weak equivalences indeed satisfy 2-out-of-3.
 \end{proof}
 
-\hide{Use the structure of discrete isofibration etc. to make this more convincing?}
+\begin{remark} At this point we finally have worked out enough structure to introduce a characteristic functor of the weak equivalences. Pick one the factorizations into a fibration following a cofibration form propositions \ref{factor1} or \ref{factor2}. The characteristic functor $\code{weak-equivalence}$ presents witnesses that the members of the chosen factorization are acyclic. The closure of this new class under 2-out-of-3 is a natural transformations of the functor $\code{weak-equivalence}$ and other functors constructed form it. The proof above indicates how to construct it. \end{remark}
 
 \subsection{Conclusion}
+For a definition of model categories see [\cite{Hovey99, GJSHT}]. The simplicial homotopy of Kan complexes is valid in the internal Heyting bialgebra $\cat S$ in the following sense.
 
 \begin{theorem}[Model category]
 With fibrations, weak equivalences and cofibrations defined as above $\cat S\s\f$ is a model category.
@@ -722,7 +725,7 @@ With fibrations, weak equivalences and cofibrations defined as above $\cat S\s\f
 Lemma \ref{factor1} shows that cofibrations and acyclic fibrations form a weak factorization system, considering that they satisfy a lifting property by definition \ref{Kan}. Lemma \ref{factor2} tells the same thing about fibrations and acyclic cofibrations. Lemma \ref{toot} demonstrates that if two of $f$, $g$ and $f\circ g$ are weak equivalences, then all three are. These three requirements define a model structure.
 \end{proof}
 
-\section{Descent}
+\section{Descent}%here
 This section shows constructively how lifting properties \emph{descend} along the horn inclusions $H(n,k)\of \horn_k[n]\to\simplex[n]$. This means that each fibration $f\of X\to\horn_k[n]$ is the pullback of a fibration $g\of Y\to\simplex[n]$ along $H(n,k)$. %is there a word to replace constructive here?
 
 \subsection{Higher dimensional case}
