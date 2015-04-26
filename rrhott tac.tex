@@ -597,14 +597,6 @@ Because $\phi\circ(\id_{\simplex[1]\times h}) = h\circ \pi_1$, the cofibration $
 As promised the morphism $f$ factors as the fibration $f_1\circ g$ following the acyclic cofibration $h$.
 \end{proof}
 
-%here
-\hide{revisit the class of weak equivalences here?
-
-It seems that if there is a factorization into acyclics, any fibration-cofibration factorization that has one acyclic has two.
-
-While it must be possible to use a specific factorisation everywhere, it can't be simple.
-}
-
 \subsection{Two-out-of-three}
 The category $\cat S\s$ has the two weak factorization systems that a model structure requires. This subsection demonstrates that the weak equivalences satisfy the 2-out-of-3 property and completes the proof that $\cat S\s\f$ is a model category.
 
@@ -706,12 +698,12 @@ Lifting $b$ against $c$ gives a morphism $l$ that is a weak equivalence because 
 \[\xymatrix{
 X\ar[r]^f\ar[d]_b & Y\ar[r]^h\ar[d]^d\ar[dr]^g & \bullet\ar[d]^k\\
 \bullet\ar@/_2ex/[rr]_a\ar@{.>}[r]^l & \bullet\ar[r]^c & Z
-}\]%here
+}\]
 
 This means that weak equivalences indeed satisfy 2-out-of-3.
 \end{proof}
 
-\begin{remark} At this point we finally have worked out enough structure to introduce a characteristic functor of the weak equivalences. Pick one the factorizations into a fibration following a cofibration form propositions \ref{factor1} or \ref{factor2}. The characteristic functor $\code{weak-equivalence}$ presents witnesses that the members of the chosen factorization are acyclic. The closure of this new class under 2-out-of-3 is a natural transformations of the functor $\code{weak-equivalence}$ and other functors constructed form it. The proof above indicates how to construct it. \end{remark}
+\begin{remark} At this point we finally have worked out enough structure to introduce a characteristic functor of the weak equivalences. Pick one the factorizations into a fibration following a cofibration form propositions \ref{factor1} or \ref{factor2}. The characteristic functor $\code{weak-equivalence}$ presents witnesses that the members of the chosen factorization are acyclic. The closure of this new class under 2-out-of-3 is a natural transformations of the functor $\code{weak-equivalence}$ and other functors constructed form it. The proof above has the elements of its construction. \end{remark}
 
 \subsection{Conclusion}
 For a definition of model categories see [\cite{Hovey99, GJSHT}]. The simplicial homotopy of Kan complexes is valid in the internal Heyting bialgebra $\cat S$ in the following sense.
@@ -725,8 +717,8 @@ With fibrations, weak equivalences and cofibrations defined as above $\cat S\s\f
 Lemma \ref{factor1} shows that cofibrations and acyclic fibrations form a weak factorization system, considering that they satisfy a lifting property by definition \ref{Kan}. Lemma \ref{factor2} tells the same thing about fibrations and acyclic cofibrations. Lemma \ref{toot} demonstrates that if two of $f$, $g$ and $f\circ g$ are weak equivalences, then all three are. These three requirements define a model structure.
 \end{proof}
 
-\section{Descent}%here
-This section shows constructively how lifting properties \emph{descend} along the horn inclusions $H(n,k)\of \horn_k[n]\to\simplex[n]$. This means that each fibration $f\of X\to\horn_k[n]$ is the pullback of a fibration $g\of Y\to\simplex[n]$ along $H(n,k)$. %is there a word to replace constructive here?
+\section{Descent}
+This section shows how lifting properties \emph{descend} along the horn inclusions $H(n,k)\of \horn_k[n]\to\simplex[n]$. This means that each fibration $f\of X\to\horn_k[n]$ is the pullback of a fibration $g\of Y\to\simplex[n]$ along $H(n,k)$.
 
 \subsection{Higher dimensional case}
 This subsection introduces a construction that works for dimensions $n>1$. For each fibration $f\of X\to \horn_k[n]$ each simplex in the descended fibration $Df\of DX\to \simplex[n]$ is the face of a filler for an acyclic cofibration which factors through $f$. This extends the range of the filler operator of $f$ while keeping it a pullback of $Df$ along $H(n,k)$. The following equivalence simplifies dealing with $\cat S\s/\simplex[n]$.
@@ -742,7 +734,7 @@ In the direction $\cat S\s/\simplex[n]\to \cat S^{(\simCat/[n])\dual}$ the equiv
 \[ \xi\of\simCat([m],[n])\mapsto g(\xi) \]
 \end{proof}
 
-%it is a functor $\cat S\s/\simplex[n]\to \cat S\s/\simplex[n]$ mind you!
+%the factorization is a functor $\cat S\s/\simplex[n]\to \cat S\s/\simplex[n]$ mind you!
 
 The dependent product along $H(n,k)\of \horn_k[n]\to\simplex[n]$ is the first half of the descent functor. It constructs fillers for a limited set of acyclic cofibrations. The following functor $K$ sends each $\simplex[n]$-indexed family of simplices to the family of simplices it will be a face of.
 
@@ -876,7 +868,7 @@ By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = H(n,k)\ri \simplex[K\xi
 \end{proof}
 
 \subsection{Conclusion}
-The only things separating this line and a proof of the descent theorem are the horns $H(n,k)$ where $n\leq 1$. There is no $H(n,k)$ for $n=0$. For $n=1$ there are two maps $H(1,i)\of 1\to \simplex[1]$ for which a simple construction exists.
+The only thing a proof of the descent theorem still needs are fillers for the horns $H(n,k)$ where $n\leq 1$. There is no $H(n,k)$ for $n=0$. For $n=1$ there are two maps $H(1,i)\of 1\to \simplex[1]$ for which a simple construction exists.
 
 \begin{lemma} If $f\of X\to 1$ is a fibration--i.e.\ if $X$ is a complex--then $\id_{\simplex[1]}\times f\of\simplex[1]\times X\to \simplex[1]$ is a fibration. \end{lemma}
 
@@ -906,65 +898,28 @@ By generalization there is a filler for each square with a horn inclusion $H(m,l
 
 \hide{We are gonna go without the discrete cofibrations}
 \section{Fibrant Universe}
-This section adds a new class of \emph{modest morphisms} $M\subseteq S$ with its own generic morphism $\gen(M)$ and full internal subcategory $\cof(\gen(M))$. The class $M$ contains all regular monomorphisms and is closed under composition and pullback.
+This section adds a new class of \emph{modest morphisms} $M\subseteq S$ with its own generic morphism $\gen(M)$ and full internal subcategory $\cof(\gen(M))$. The class has the following properties.
+\begin{itemize}
+\item All regular monomorphisms and is closed under composition and pullback. 
+\item The unique morphism $!\of\cod(\gen(M))\to 1$ is also a member of $S$.
+\end{itemize}
 
-\subsection{Discrete isofibrations}
-%begin clarification
-This time, $M$ is internal to $\cat S$ too. This means that we require something like a class of morphisms of $\cat S$ that belong to $M$. Concretely it is a discrete isofibration to $\Func([1],\cat S)$ that gives every arrow an object of realizers of modesty.
-
-\hide{replace discrete isofibrations with presheaves of the core or something like that. Couldn't we?}
-
-
-
-\begin{definition}
-A \emph{discrete isofibration} is a functor $F\of\cat A\to \cat B$ which is fully faithful and which has a lifting property for isomorphisms. If $A$ is an object of $\cat A$ and if $f\of B\to FA$ is an isomorphism of $\cat B$ then there is an isomorphism $f'\of B'\to A$ such that $Ff'=f$. The internal version for locally Cartesian closed categories has a lifting operator, so $f'=l(X,f)$ for some element $l$ of.
-\[ \Pi X\of \Ob(\cat A).\Pi f\of \Ob(\Core(\cat B)/FX). \Ob(\Core(\cat A)/X) \]
-\label{discrete isofibrations}
-\end{definition}
-
-We can connect families of morphisms in the internal category $\cat S=\cof(\gen(S))$ to families of morphisms in the ambient category $\cat A$ by the following construction.
-
-\begin{lemma}
-A generic triangle $\gen(S)_2$ for a class of morphisms $S$ is a commutative triangle such that every commutative triangle in $S$ is a pullback of the generic one. If $S$ is closed under composition and pullback and has a generic morphism $\gen(S)$, then is has a generic triangle.
-\end{lemma}
-
-\begin{proof}
-The triangle consists of morphisms $f\of X\to Y$ and $g\of Y\to Z$ and their composition, which are defined as follows.
-\begin{align*}
-Z &= \Ar(\cof(\gen(S)))\\
-Y &= \Sigma a\of\Ar(\cof(\gen(S))).\cod(a)\\
-g(a,x) &= a\\
-X &= \Sigma a\of\Ar(\cof(\gen(S))).\dom(a)\\
-f(a,x) &= a(x)
-\end{align*}
-
-\hide{actually construct the characteristic morphisms}
-\end{proof}
-
-We assume that the morphism $\bang\of\cod\gen(M)\to 1$ is a member of $S$. Therefore $\gen(M)$ and $\bang$ form a triangle in $S$, which is the pullback of the generic triangle $\gen(S)_2$ along some global section $\igen(M)\of 1\to \Ar(\cat S)$.
-
-The discrete isofibration that assumes the role of the class of morphisms $M$ is a functor $\cat M\to \Func([1],\cat S)$ where the internal category $\cat M$ is constructed as follows. The objects are pairs $\tuplet{f,s}$ where $f$ is a morphism of $\cat S$ and $y$ is a pullback square in $\cat S$ that witness that $f$ is a pullback of $\igen(M)$ and therefore an $M$-morphism.
+A functor $\code{M}:\Core(\Func([1],\cat S))\to \cat S$ represents the class of $M$ morphisms inside of the internal category $\cat S$. That functor sends each morphism $f$ to the object of pullback squares $f\to\igen(M)$. Here $\igen(M)$ is a global section of $\Ar(\cat S)$ which is the characteristic morphism of the commutative triangle that contains the $S$ morphisms $\gen(M)$ and $!\of\cod(\gen(M))\to 1$. 
 \[\xymatrix{
-\bullet\ar[d]_f\ar[r] & \bullet\ar[d]^{\igen(M)}\\
-\bullet\ar[r] & \bullet
+\bullet \ar[rr]^{\gen(M)}\ar[d] &&\bullet \ar[rr]\ar[d] && 1 \ar[d]^{\igen(M)}\\
+\Sigma f\of \Ar(\cat S).\dom(f)\ar[rr]_{(x,f)\mapsto (f(x),f)} && \Sigma f\of \Ar(\cat S).\cod(f)\ar[rr]_(.6){(y,f)\mapsto f} && \Ar(\cat S)
 }\]
-A morphism $\tuplet{f,s}\to \tuplet{g,t}$ is a commutative square $f\to g$. The pullback squares are ignored, so the projection $\pi_0$ becomes a fully faithful functor $M\of\cat M\to \Func([1],\cat S)$. Because isomorphisms of morphisms are pullback squares, the lifting operator that witnesses that $M$ is a discrete isofibration simply composes the isomorphisms and the pullback squares: $(\tuplet{f,s},g)\mapsto \tuplet {\dom g,s\circ g}$.
 
-There is a related discrete isofibration $M\s\of \cat M\s\to \Func([1],\cat S\s)$ which represents the class of morphisms $f\of X\to Y$ such that $f[i]$ are members of $M$ for all $i\of \nno$. The category $\cat M\s$ is simply the category of functors $\Func(\simCat\dual,\cat M)$ and $M\s$ acts by composition with $M$.
+An $M$ morphism between simplicial objects is a morphism $f\of X\to Y$ such that for each $i\of\nno$ each $f[i]$ is a member of $M$.
+From $\code M:\Core(\Func([1],\cat S))\to \cat S$ comes a functor $\code{M\s}:\Core(\Func([1],\cat S\s))\to \Func(\nno\disc,\cat S)$ that represents this class of morphisms.
 
-\hide{ enough? }
+\subsection{Lifted generic}%here... what is $\igen(M/s)$ ?
+Functors that represent classes have their own notion of generic morphism. Every morphism $g$ of an internal Heyting bialgebra $\cat C$ induces a object-of-pullbacks-functor $P\of\Core(\Func([1],\cat C))\to \cat C$. The morphism $g$ is generic for some other functor $G\of\Core(\Func([1],\cat C))\to \cat C$ is there is a natural transformation $G\to P$. For $\code M$ this morphism is identity by definition. This section show that how lift the generic morphism $\igen(M)$ of $\code M$ in $\cat S$ to a generic morphism $\igen(M\s)$ of $\code{M\s}$.
 
-%end clarification
+The way to get there is a bit roundabout. For each simplicial object $V$ there is an isomorphism between $V[n]$ and $\simplex[n]\to V$ by the Yoneda lemma. If $g\of U\to V$ is a generic morphism, then there must a natural equivalence between members of $V[n]$ and morphisms $\bullet\to \simplex[n]$ that belong to the class. By lemma \ref{slice equivalence} morphisms $\bullet\to \simplex[n]$ correspond to functors $\simCat/[n]\dual\to\cat S$ whose values are fibres of the generic morphism $\igen(M)$ of $M$. These in turn are members of $\simCat/[n]\dual\to\cof(\gen(M))^{\simCat/[n]\dual}$.
 
-\subsection{Lifted generic}
-The first step is to lift the generic morphism $\igen(M)$ of $M$ in $\cat S$ to a generic morphism $\igen(M\s)$ of $M\s$.
-
-The way to get there is a bit roundabout. If $\igen(M\s)$ were a the generic morphism, then there is an isomorphism between $V[n]$ and $\simplex[n]\to V$ by the Yoneda lemma and because $\igen(M\s)$ is generic also an isomorphism between $V[n]$ and the class of morphisms in $M\s$ whose codomain is $\simplex[n]$. By lemma \ref{slice equivalence} these correspond to functors $\simCat/[n]\dual\to\cat S$ whose values are fibres of the generic morphism $\igen(M)$ of $M$. 
-
-
-\hide{ does this still make sense? }
 \begin{lemma}
-For each $n\of\nno$ let $\igen(M\s)[n]$ be the pullback of $\igen(M)$ along the map $F\mapsto F(\id_{[n]})\of\cof(\igen(M))^{\simCat/[n]\dual}\to \cod(\igen(M))$. The morphism $\igen(M\s)$ is a generic morphism of $M\s$.
+For each $n\of\nno$ let $\igen(M\s)[n]$ be the pullback of $\igen(M)$ along the map $F\mapsto F(\id_{[n]})\of\cof(\gen(M))^{\simCat/[n]\dual}\to \cod(\gen(M))$. The morphism $\igen(M\s)$ is a generic morphism of $M\s$.
 \end{lemma}
 
 
@@ -994,7 +949,6 @@ The diagram hold for every $f$ and shows that $\igen(M\s)$ belongs to $M\s$ at t
 \end{proof}\hide{ Even if we cannot build $\cof(\igen(M))\s$ in $\cat S$, that does mean the pullback is not a modest morphism. }
 
 \subsection{Generic fibration}
-
 This subsection shows that the class $M\s\f$ of fibrations in $M\s$ has its own generic morphism $\igen(M\s\f)$.
 
 \begin{definition}
@@ -1022,9 +976,8 @@ There is a small technical issue here. The constructions used in the proof of \r
 This construction is the filler operator that proves that $\cod(\igen(M\s\f))$ is a complex.
 \end{proof}
 
-
 \subsection{Univalence}
-\hide{some text?}
+This subsection shows that $\gen(M\s\f)$ has the following property.
 
 \begin{definition}[Univalence]. A fibration $f\of X\to Y$ is \emph{univalent} if weakly equivalent fibres are connected by a path. This means that if $g,h\of Z\to Y$ and if there is a weak equivalence $k\of g\ri(X)\to h\ri(X)$ such that $h\ri(f)\circ k = g\ri(f)$, then there is a homotopy $\kappa\of g\to h$.
 \end{definition}
@@ -1209,8 +1162,6 @@ k[\chi^n_{n+1}](x,y) &= g[n](x)
 This morphism $k$ corresponds to a modest fibration $k'\of\bullet\to \simplex[1]\times W$ which is a pullback of $\igen(M\s\f)$.
 \end{proof}
 
-\subsection{Conclusion}\hide{some text?}
-
 \begin{theorem} The class $M\s\f$ of fibrations that are locally in $M$ has a generic morphism which is univalent. \label{univalent universe}\end{theorem} 
 
 \begin{proof} Proposition \ref{univalence} shows that a generic fibration is necessarily univalent. The generic morphism exists because fibrations descent along horn inclusions (theorem \ref{descent}). \end{proof}
@@ -1218,7 +1169,7 @@ This morphism $k$ corresponds to a modest fibration $k'\of\bullet\to \simplex[1]
 \hide{ About the Bezem-Coquand counterexample: it shows something about the homotopy equivalence of the fibres, while I only proof the weak equivalence of the fibres. When these equivalences coincide (cofibrant codomains) there is no undecidable degeneracy. My best guess is that the codomain in the counterexample is not cofibrant, at least not in the sense defined in the paper.}
 
 
-\section{Realizability categories}
+\section{Realizability categories}%here
 %hoe ver gaan?
 This section gives examples of Heyting bialgebras and generic morphisms and shows where the category of PERs from the introduction comes in.
 
