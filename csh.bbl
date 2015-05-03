@@ -1,0 +1,220 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.4 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{GJSHT}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Goerss}{G.}%
+     {Paul~G.}{P.~G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jardine}{J.}%
+     {John~F.}{J.~F.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Birkh\"auser}%
+  }
+  \strng{namehash}{GPGJJF1}
+  \strng{fullhash}{GPGJJF1}
+  \field{labelyear}{1999}
+  \field{sortinit}{G}
+  \field{isbn}{978-3-0348-8707-6}
+  \field{series}{Progress in Mathematics}
+  \field{title}{Simplicial Homotopy Theory}
+  \field{volume}{174}
+  \list{location}{1}{%
+    {Basel}%
+  }
+  \field{year}{1999}
+\endentry
+
+\entry{Hovey99}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Hovey}{H.}%
+     {Mark}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {American Mathematical Society}%
+  }
+  \strng{namehash}{HM1}
+  \strng{fullhash}{HM1}
+  \field{labelyear}{1999}
+  \field{sortinit}{H}
+  \field{isbn}{978-0-8218-4361-1}
+  \field{series}{Mathematical Surveys and Monographs}
+  \field{title}{Model Categories}
+  \field{volume}{63}
+  \list{location}{1}{%
+    {Providence}%
+  }
+  \field{year}{1999}
+\endentry
+
+\entry{MR1023803}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Hyland}{H.}%
+     {J.~M.~E.}{J.~M.~E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Robinson}{R.}%
+     {E.~P.}{E.~P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Rosolini}{R.}%
+     {Guiseppe}{G.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{HJMEREPRG1}
+  \strng{fullhash}{HJMEREPRG1}
+  \field{labelyear}{1990}
+  \field{sortinit}{H}
+  \verb{doi}
+  \verb 10.1112/plms/s3-60.1.1
+  \endverb
+  \field{issn}{0024-6115}
+  \field{number}{1}
+  \field{pages}{1\bibrangedash 36}
+  \field{title}{The discrete objects in the effective topos}
+  \verb{url}
+  \verb http://dx.doi.org/10.1112/plms/s3-60.1.1
+  \endverb
+  \field{volume}{60}
+  \field{journaltitle}{Proc. London Math. Soc. (3)}
+  \field{year}{1990}
+\endentry
+
+\entry{KLV12}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Kapulkin}{K.}%
+     {Chris}{C.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lumsdaine}{L.}%
+     {Peter}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Voevodsky}{V.}%
+     {Vladimir}{V.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{KCLPVV1}
+  \strng{fullhash}{KCLPVV1}
+  \field{labelyear}{2012}
+  \field{sortinit}{K}
+  \verb{eprint}
+  \verb 1211.2851
+  \endverb
+  \field{title}{The Simplicial Model of Univalent Foundations}
+  \field{journaltitle}{preprint}
+  \field{eprinttype}{arXiv}
+  \field{eprintclass}{math.lo}
+  \field{year}{2012}
+\endentry
+
+\entry{MR2479466}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Oosten}{O.}%
+     {Jaap}{J.}%
+     {van}{v.}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Elsevier B. V., Amsterdam}%
+  }
+  \strng{namehash}{OJv1}
+  \strng{fullhash}{OJv1}
+  \field{labelyear}{2008}
+  \field{sortinit}{O}
+  \field{isbn}{978-0-444-51584-1}
+  \field{pages}{xvi+310}
+  \field{series}{Studies in Logic and the Foundations of Mathematics}
+  \field{title}{Realizability: an introduction to its categorical side}
+  \field{volume}{152}
+  \field{year}{2008}
+\endentry
+
+\entry{MR1097022}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Rosolini}{R.}%
+     {Giuseppe}{G.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{RG1}
+  \strng{fullhash}{RG1}
+  \field{labelyear}{1990}
+  \field{sortinit}{R}
+  \verb{doi}
+  \verb 10.1142/S0129054190000242
+  \endverb
+  \field{issn}{0129-0541}
+  \field{note}{Third Italian Conference on Theoretical Computer Science
+  (Mantova, 1990)}
+  \field{number}{3}
+  \field{pages}{341\bibrangedash 353}
+  \field{title}{About modest sets}
+  \verb{url}
+  \verb http://dx.doi.org/10.1142/S0129054190000242
+  \endverb
+  \field{volume}{1}
+  \field{journaltitle}{Internat. J. Found. Comput. Sci.}
+  \field{year}{1990}
+\endentry
+
+\entry{hottbook}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{Univalent Foundations Program}}{U.}%
+     {The}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {\url{http://homotopytypetheory.org/book}}%
+  }
+  \strng{namehash}{UT1}
+  \strng{fullhash}{UT1}
+  \field{labelyear}{2013}
+  \field{sortinit}{U}
+  \field{title}{Homotopy Type Theory: Univalent Foundations of Mathematics}
+  \list{location}{1}{%
+    {Institute for Advanced Study}%
+  }
+  \field{year}{2013}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput
