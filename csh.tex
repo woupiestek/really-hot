@@ -18,7 +18,7 @@ Banacha 2\\
 02-097 Warszawa\\
 Poland}
 \eaddress{w.p.stekelenburg@gmail.com}
-\keywords{realizability, univalence, simplicial homotopy, modest sets, Kan complexes}
+\keywords{realizability, simplicial homotopy, Kan complexes}
 \amsclass{03D80, 18G30, 18G55}
 
 \newcommand\hide[1]{}
@@ -83,17 +83,41 @@ Poland}
 
 \begin{document}
 
-\begin{abstract} The paper show how to develop simplicial homotopy inside the category of assemblies, where the small object argument and minimal fibrations are unavailable. This way simplicial assemblies are a suitable model for homotopy type theory.\end{abstract}
+\begin{abstract} The paper show how to develop simplicial homotopy inside realizability categories like the category of assemblies, where the small object argument and minimal fibrations are unavailable. This way simplicial assemblies are a suitable model for homotopy type theory.\end{abstract}
 
 \maketitle
 
 \section{Introduction}
-This paper generalizes the classical model structure on simplicial sets to (internal) simplicial objects of \emph{extensive locally Cartesian closed categories}. Many of the traditional arguments rely on the decidability of monomorphisms, which is no longer valid here. The solution is to wrok with internalized simplicial objects, to limit the class of cofibrations and only develop the model structure on relatively well behaved fibrant objects (theorem \ref{model category}).
+This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory}. The intention is to interpret types as the homotopy types of the simplicial objects in the \emph{category of assemblies}. What makes this challenging, is that this category lacks some of the structure of the category of sets that \emph{classical homotopy theory} is build on. In the internal logic the principle of the excluded middle and the axiom of choice are false. The category of assemblies is not exact and lacks infinite limits and colimits. While there are \emph{generic monomorphisms}, they are not subobject classifiers. I deal with these issues in the following ways.
+\begin{enumerate}
+\item I look at simplicial objects of suitable internal categories. The advantage is that a realizer for being a simplicial object is available for any construction we need to make in the proofs.
+\item I limit the class of cofibrations. In classical simplicial homotopy theory every monomorphism is a cofibration. In this paper's version, we demand that certain properties of the monomorphism are decidable.
+\item The class of fibration also changes. Fibration come equipped with a \emph{fill operator} that realizes.
+\item I build the homotopy category out of the fibrant objects only. The small object argument that supplies fibrant replacements in classical homotopy requires infinite colimits that are unavailable.
+\end{enumerate}
+Out of interest in using the constructions in other contexts than the category of assemblies, this paper works with a generic \emph{extensive locally Cartesian closed category} with a \emph{natural number object} instead of the category of assemblies itself.
+
+
+\hide{In the right place?}
+\subsection{Internalization}
+The following methods help me to reason internally in extensive locally Cartesian closed categories that have little internal logic or their own. 
+
+Extensive means that the categories have finite coproducts and that pullbacks preserve them. Every extensive category $\cat E$ becomes an \emph{extensive site} $(\cat E, E)$ by adding the \emph{extensive topology} $E$, the least topology that contains the empty covers of initial objects and the binary covers $\set{ A\to A+B, B\to A+B}$ of binary coproducts. The topos $\cat T$ of sheaves over this site has a rich internal language, and the Yoneda embedding $\cat E\to \cat T$ includes $\cat E$ as the full subcategory of \emph{compact projectives}--the projective objects for which any covering family has a finite subcover.
+
+A truth value of $\cat T$ is a sieve on $\cat E$. Every `compact' proposition $p$ in the internal language of $\cat T$ has an object $P$ of witnesses or \emph{realizers} in $\cat E$. An object $U$ of $\cat E$ forces the proposition $p$ if there exists a morphism $U\to P$. So the focus of this paper is to show that morphisms exists between suitable objects object of locally Cartesian closed categories.
+
+\hide{proofs? citations?
+
+Note that the Yoneda embedding cannot preserve the natural number object, because the natural number object of $\cat T$ is not compact. The properties of the image of the NNO except compactness are a mystery.
+
+Is this so outlandish that Thomas couldn't figure it out himself?
+
+Would it be better as a theory of the simplicial homotopy of compacts in toposes?
+
+}
 
 \subsection{Related literature}
 Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}.
-
-Univalence is a desirable property for the universe of modest sets, because it implies that this universe is a model for homotopy type theory \citep{hottbook,KLV12}.
 
 \section{Preliminaries}
 This section surveys the categorical logic required to understand the rest of this paper.
@@ -104,15 +128,10 @@ We work in a category $\cat A$. The intended model is the category of assemblies
 \item The category $\cat A$ is \emph{locally Cartesian closed}. This means that for each object $X$ of $\cat A$ each slice $\cat A/X$ is Cartesian closed.
 \item The category $\cat A$ is extensive, which means that is has finite coproducts and that $\cat A/(X+Y)$ is equivalent to $(\cat A/X)\times(\cat A/Y)$ for each pair of objects $X$ and $Y$ of $\cat A$.
 \item The category $\cat A$ is extensive and has a \emph{natural number object} $\nno$.
-\item There is an internal full subcategory of small assemblies that is extensive and locally Cartesian closed and that has a terminal object.
+\item There is an internal category $\cat S$ that is extensive and locally Cartesian closed.% terminal object = $X^0$
 \end{enumerate}
 
 \newcommand\icat{\mathfrak}
-This last point requires an explanation. 
-
-The category of small assemblies is both a full subcategory $\icat S$ of $\cat A$ and an internal category $\cat S$ of $\cat A$. They are connected by a class of \emph{small morphisms} $S$ in $\icat S$ which is closed under pullbacks. The category $\icat S$ is the full subcategory of objects $X$ for which the unique morphism $\bang\of X\to 1$ is in $\icat S$.
-
-The class $S$ has a \emph{generic} morphism $\gen(S)$. `Generic' means that every small morphism $f\of X\to Y$ is the pullback along some \emph{characteristic} morphism $\chi(f)\of Y\to \cod(\gen(S))$--here $\cod(\gen(S))$ is the codomain of $\gen(S)$. The internal category $\cat S$ is the internal category of fibres of $\gen(S)$. This category has $\cod(\gen(S))$ as object of objects $\Ob(\cat S)$. The object of arrows $\Ar(\cat S)$ is the domain of the exponential of the morphisms $\gen(S)\times \id_{\Ob(\cat S)}$ and $\gen(S)\times \id_{\Ob(\cat S)}$ which are objects of the Cartesian closed slice category $\icat A/\Ob(\cat S)\times \Ob(\cat S)$. 
 
 That $\cat S$ is locally Cartesian closed and extensive means that is has the same properties as $\icat A$ in an internalized way. This internalization is possible because of the structure that $\icat A$ has. Local Cartesian closure implies that all pullbacks exist, since those are the Cartesian products of the slice categories. Since $\icat A$ has a terminal object, is has all finite limits. In this paper we assume that there is a function that chooses a limit for each diagram. This means that systems of equations between morphisms of $\icat A$ define isomorphism classes of objects of $\icat A$.  Now a systems of equations of morphism are an object declaration or specification language for $\icat A$. Thanks to the local exponentials, this language is part of an \emph{extensional type theory} that allows the definition of more complicated structures like internal locally Cartesian closed Categories. Extensibility adds finitary sums to the type theory. %hate this. don't know how to improve.
 
@@ -188,6 +207,7 @@ Extensiveness means that $\cat C$ has coproducts, that $\cat C/0$ is equivalent 
 The constants $\true$ and $\false$ denote the two global section of $1+1$. The function $\ttif$ is interpreted to satisfy the following equations.
 \[ \ttif(\true,t,u)=t\qquad\ttif(\false,t,u) = u\]
 
+\hide{
 \hide{does this require a separate explanation?}
 \subsection{Full internal subcategories}\label{full internal subcategory}
 Full internal subcategories tie several categorical notions together. 
@@ -201,8 +221,10 @@ For each $f\of X\to Y$ of $\cat A$, the \emph{internal category of fibres} $\cof
 \end{align*}\label{category of fibres}
 
 A \emph{full internal subcategory} is the category of fibres of a generic morphism. The class $S$ and the category $\cof(\gen(S))$ are connected in the following way. Let $S/X$ be the category whose objects are morphism of $S$ whose codomain is $X$ and whose morphisms are arbitrary commutative triangles. because $S$ is closed under pullbacks, each $f\of X\to Y$ induces a \emph{reindexing functor} $f\ri\of S/Y\to S/X$. Generally $\cof(\gen(S))$ has a property if and only if $S/X$ has and $f\ri$ preserves the same property of each object $X$ and each morphism $f$ of $\cat A$. For example, the category $\cof(\gen(S))$ has dependent sums and products if $f\ri$ have left and right adjoints that satisfy the Beck Chevalley condition for each morphism $f\in S$.
+}
 
-\subsection{Predicates} Traditional simplicial homotopy work with \emph{classes} of fibrations, cofibrations and weak equivalences. In order to make the theory constructive, we need constructions that \emph{witness} membership of those classes. Therefore, functors into full internal subcategories replace classes in this paper.
+\hide{ This is a problem\dots }
+\subsection{Predicates} Traditional simplicial homotopy work with \emph{classes} of fibrations, cofibrations and weak equivalences. In order to make the theory constructive, we need constructions that \emph{witness} membership of those classes.
 
 If $\cat C$ is an internal groupoid and $\cat H$ is an internal ELCCC an internal functor $F\of\cat C\to\cat H$ represents the class of objects $\set F\subseteq \Ob(\cat C)$ where $X\of U$ if there is a morphism $1\to\Ar(\cat H)$ in the ambient category which maps to a global section $1\to FX$ inside $\cat H$. However, besides this class of global elements, $F$ has classes of local elements for each object $I$ of the ambient category and each functor $G\of I\disc \to \cat H$--where $I\disc$ is the discrete groupoid based on $I$--determined by morphisms $1\to\Ar(\Func(I\disc,\cat C))$ in the ambient category.
 

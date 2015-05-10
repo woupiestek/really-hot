@@ -108,38 +108,6 @@
   \field{year}{1990}
 \endentry
 
-\entry{KLV12}{article}{}
-  \name{author}{3}{}{%
-    {{}%
-     {Kapulkin}{K.}%
-     {Chris}{C.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Lumsdaine}{L.}%
-     {Peter}{P.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Voevodsky}{V.}%
-     {Vladimir}{V.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{KCLPVV1}
-  \strng{fullhash}{KCLPVV1}
-  \field{labelyear}{2012}
-  \field{sortinit}{K}
-  \verb{eprint}
-  \verb 1211.2851
-  \endverb
-  \field{title}{The Simplicial Model of Univalent Foundations}
-  \field{journaltitle}{preprint}
-  \field{eprinttype}{arXiv}
-  \field{eprintclass}{math.lo}
-  \field{year}{2012}
-\endentry
-
 \entry{MR2479466}{book}{}
   \name{author}{1}{}{%
     {{}%
@@ -190,28 +158,6 @@
   \field{volume}{1}
   \field{journaltitle}{Internat. J. Found. Comput. Sci.}
   \field{year}{1990}
-\endentry
-
-\entry{hottbook}{book}{}
-  \name{author}{1}{}{%
-    {{}%
-     {{Univalent Foundations Program}}{U.}%
-     {The}{T.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {\url{http://homotopytypetheory.org/book}}%
-  }
-  \strng{namehash}{UT1}
-  \strng{fullhash}{UT1}
-  \field{labelyear}{2013}
-  \field{sortinit}{U}
-  \field{title}{Homotopy Type Theory: Univalent Foundations of Mathematics}
-  \list{location}{1}{%
-    {Institute for Advanced Study}%
-  }
-  \field{year}{2013}
 \endentry
 
 \lossort
