@@ -207,28 +207,20 @@ Extensiveness means that $\cat C$ has coproducts, that $\cat C/0$ is equivalent 
 The constants $\true$ and $\false$ denote the two global section of $1+1$. The function $\ttif$ is interpreted to satisfy the following equations.
 \[ \ttif(\true,t,u)=t\qquad\ttif(\false,t,u) = u\]
 
-\hide{
-\hide{does this require a separate explanation?}
-\subsection{Full internal subcategories}\label{full internal subcategory}
-Full internal subcategories tie several categorical notions together. 
+\subsection{Predicates} Traditional simplicial homotopy works with \emph{classes} of fibrations, cofibrations and weak equivalences which. The counterpart for internal categories is a functor that is monic on objects. This type of functors doesn't keep track of witnesses for membership, however, which is why we replace classes by a more general type of functor: discrete isofibrations. These generalized classes are automatically closed under isomorphism like the classes of fibrations, cofibrations an weak equivalences are supposed to be. 
 
-For each $f\of X\to Y$ of $\cat A$, the \emph{internal category of fibres} $\cof(f)$ of $f$ is defined as follows. The codomain $Y$ is the object of objects $\cof(f)_0$. The dependent sum $\Sigma a\of Y.\Sigma b\of Y.\Pi c\of X(a).X(b)$ where $X(a)$ is the fibre of $f$ over $a$ is the object of morphisms $\cof(f)_1$. The structural maps are the following. If $x,y\of \cof(f)_0$ and $(x,y,m)$ and $(w,x,n)\of\cof(f)_1$ then,
-\begin{align*}
-\dom(x,y,m) &= x & 
-\id(x) &= (x,x,\id_{X(a)})\\
-\cod(x,y,m) &= y &
-(x,y,m)\circ (w,x,n) &= (w,y,m\circ n)
-\end{align*}\label{category of fibres}
+\begin{definition}
+A functor $F\of \cat C\to\cat D$ is a \emph{discrete isofibration} if it is a fully faithful functor and has the following lifting property. For each isomorphism $g\of X\to FY$ in $\cat D$ there is a unique $h\of X'\to Y$ in $\cat C$ such that $Fh=g$. 
 
-A \emph{full internal subcategory} is the category of fibres of a generic morphism. The class $S$ and the category $\cof(\gen(S))$ are connected in the following way. Let $S/X$ be the category whose objects are morphism of $S$ whose codomain is $X$ and whose morphisms are arbitrary commutative triangles. because $S$ is closed under pullbacks, each $f\of X\to Y$ induces a \emph{reindexing functor} $f\ri\of S/Y\to S/X$. Generally $\cof(\gen(S))$ has a property if and only if $S/X$ has and $f\ri$ preserves the same property of each object $X$ and each morphism $f$ of $\cat A$. For example, the category $\cof(\gen(S))$ has dependent sums and products if $f\ri$ have left and right adjoints that satisfy the Beck Chevalley condition for each morphism $f\in S$.
-}
+An internal functor $F\of \cat C\to\cat D$ is a \emph{discrete isofibration} if there are witnesses to the properties in the last paragraph. The first witness is the inverse of the natural transformation $g\mapsto Fg\of \cat C(X,Y)\to\cat C(FX,FY)$. Let $\cat I$ be the indiscrete category of $2$ objects and let $T:1\to \cat I$ be the functor that points to one of the objects. There is a functor $\tuplet{F^{\cat I},\cat C^T}$ from $\cat C^{\cat I}$ into the pullback of $F$ and $\cat D^T\of \cat D^{\cat I}\to \cat D$. The second witness is an inverse of this functor.
+\[\xy
+(34,20)*+{\cat C}="top",(0,10)*+{\cat C^{\cat I}}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\cat D}="right",(34,0)*+{\cat D^{\cat I}}="bottom"
+\ar^{\cat C^T} "left";"top" \ar@{.>}|(.6){\tuplet{F^{\cat I},\cat C^T}} "left";"middle" \ar_{F^{\cat I}} "left";"bottom" \ar "middle";"bottom"
+\ar "middle";"top" \ar^(.6){F} "top";"right" \ar_(.6){\cat D^T} "bottom";"right"
+\endxy\]
+\end{definition}
 
-\hide{ This is a problem\dots }
-\subsection{Predicates} Traditional simplicial homotopy work with \emph{classes} of fibrations, cofibrations and weak equivalences. In order to make the theory constructive, we need constructions that \emph{witness} membership of those classes.
-
-If $\cat C$ is an internal groupoid and $\cat H$ is an internal ELCCC an internal functor $F\of\cat C\to\cat H$ represents the class of objects $\set F\subseteq \Ob(\cat C)$ where $X\of U$ if there is a morphism $1\to\Ar(\cat H)$ in the ambient category which maps to a global section $1\to FX$ inside $\cat H$. However, besides this class of global elements, $F$ has classes of local elements for each object $I$ of the ambient category and each functor $G\of I\disc \to \cat H$--where $I\disc$ is the discrete groupoid based on $I$--determined by morphisms $1\to\Ar(\Func(I\disc,\cat C))$ in the ambient category.
-
-If $f\of X\to Y$ is a morphism of $\cat C$, and if $FX$ has a global section, then so does $FY$. This limits the properties that are represented by functors. In most cases, we consider functors $\Core(\cat C)\to \cat S$ instead, where $\Core(\cat C)$ is the internal groupoid that has the same objects as $\cat C$ but only its isomorphisms for morphisms. That way the represented classes are closed under isomorphism objects, but nothing else.
+The category of discrete isofibrations with the same codomain is an ELCCC. This category replaces the poset of subcategories.
 
 \section{Internal simplicial homotopy}
 This section develops the homotopy theory of Kan complexes internally in ELCCCs. 
@@ -265,7 +257,9 @@ The ordinary right lifting property only says that composition with $\tuplet{f_\
 
 A morphism can have a lifting property relative to a family or class of morphisms.
 
-\begin{definition}[Injective]  For each morphism $f$ of $\cat S\s$ let $\code{sections}(f)$ be the object of sections of $f$. An $I$-indexed-family of morphisms in $\cat S\s$ a morphism $a\of D\to E$ in $(\cat S\s)^{I\disc}$. Let $I\ri\of\cat S\s\to (\cat S\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$.
+%here
+\begin{definition}[Injective] Let $\code{sections}$ be the discrete isofibration of sections. %more information needed?
+An $I$-indexed-family of morphisms in $\cat S\s$ a morphism $a\of D\to E$ in $(\cat S\s)^{I\disc}$. Let $I\ri\of\cat S\s\to (\cat S\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$.
 
 \[ a\code{-injective}(f)=\code{sections}(I\ri(f)_\bang,a\ri) \]
 
