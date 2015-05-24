@@ -79,6 +79,9 @@ Poland}
 \mathssbxdef{Func}
 \mathssbxdef[igen]{gen}
 
+\newcommand\ambient{\mathfrak A}
+
+
 \addbibresource{realizability}
 
 \begin{document}
@@ -86,6 +89,11 @@ Poland}
 \begin{abstract} The paper show how to develop simplicial homotopy inside realizability categories like the category of assemblies, where the small object argument and minimal fibrations are unavailable. This way simplicial assemblies are a suitable model for homotopy type theory.\end{abstract}
 
 \maketitle
+
+\hide{
+Thorough investigation of the background. If we have an ELCCC then the poset-reflection is a Heyting algebra. The reindexing morphisms between the poset reflections are Heyting algebra morphisms and its adjoints remain adjoints.
+
+}
 
 \section{Introduction}
 This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory}. The intention is to interpret types as the homotopy types of the simplicial objects in the \emph{category of assemblies}. What makes this challenging, is that this category lacks some of the structure of the category of sets that \emph{classical homotopy theory} is build on. In the internal logic the principle of the excluded middle and the axiom of choice are false. The category of assemblies is not exact and lacks infinite limits and colimits. While there are \emph{generic monomorphisms}, they are not subobject classifiers. I deal with these issues in the following ways.
@@ -98,22 +106,8 @@ This paper grew out of an attempt to build a \emph{recursive realizability} mode
 Out of interest in using the constructions in other contexts than the category of assemblies, this paper works with a generic \emph{extensive locally Cartesian closed category} with a \emph{natural number object} instead of the category of assemblies itself.
 
 
-\hide{In the right place?}
-\subsection{Internalization}
-The following methods help me to reason internally in extensive locally Cartesian closed categories that have little internal logic or their own. 
-
-Extensive means that the categories have finite coproducts and that pullbacks preserve them. Every extensive category $\cat E$ becomes an \emph{extensive site} $(\cat E, E)$ by adding the \emph{extensive topology} $E$, the least topology that contains the empty covers of initial objects and the binary covers $\set{ A\to A+B, B\to A+B}$ of binary coproducts. The topos $\cat T$ of sheaves over this site has a rich internal language, and the Yoneda embedding $\cat E\to \cat T$ includes $\cat E$ as the full subcategory of \emph{compact projectives}--the projective objects for which any covering family has a finite subcover.
-
-A truth value of $\cat T$ is a sieve on $\cat E$. Every `compact' proposition $p$ in the internal language of $\cat T$ has an object $P$ of witnesses or \emph{realizers} in $\cat E$. An object $U$ of $\cat E$ forces the proposition $p$ if there exists a morphism $U\to P$. So the focus of this paper is to show that morphisms exists between suitable objects object of locally Cartesian closed categories.
-
-\hide{proofs? citations?
-
-Note that the Yoneda embedding cannot preserve the natural number object, because the natural number object of $\cat T$ is not compact. The properties of the image of the NNO except compactness are a mystery.
-
-Is this so outlandish that Thomas couldn't figure it out himself?
-
-Would it be better as a theory of the simplicial homotopy of compacts in toposes?
-
+\hide{
+Take the exact completion of a ELCCC with NNO. The result is a $\Pi$-pretopos with NNO, enough projective and projectives that form a locally Cartesian closed subcategory. Not necessarily all W-types are available, but I don't need them in my proofs. The advantage is that I can get away from Thomas' extensional type theory, and back to the exact completions I am at home in.
 }
 
 \subsection{Related literature}
@@ -123,28 +117,23 @@ Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the 
 This section surveys the categorical logic required to understand the rest of this paper.
 
 \subsection{Set up}
-We work in a category $\cat A$. The intended model is the category of assemblies defined in \citep{MR1097022,MR1023803,MR2479466}, but in this paper we only use the following properties so that the theory applies to many examples.
+Rather than working directly with extensive locally Cartesian closed categories, we will be working with their exact completions--their ex/lex completions to be precise. These a \emph{$\Pi$-pretoposes with enough projectives} and their projectives form a locally Cartesian closed subcategory. $\Pi$-pretoposes are Heyting categories. Hence they have a first order intuitionist internal logic.
+
+The intended model is the ex/lex completion of category of assemblies defined in \citep{MR1097022,MR1023803,MR2479466}. This completion is not the famous \emph{effective topos}, but it is another realizability topos. Here we avoid the higher order aspects by sticking to the usual exactness properties.
+
+Let $\ambient$ be the ambient category.
 \begin{enumerate}
-\item The category $\cat A$ is \emph{locally Cartesian closed}. This means that for each object $X$ of $\cat A$ each slice $\cat A/X$ is Cartesian closed.
-\item The category $\cat A$ is extensive, which means that is has finite coproducts and that $\cat A/(X+Y)$ is equivalent to $(\cat A/X)\times(\cat A/Y)$ for each pair of objects $X$ and $Y$ of $\cat A$.
-\item The category $\cat A$ is extensive and has a \emph{natural number object} $\nno$.
+\item The category $\ambient$ is \emph{locally Cartesian closed}. This means that for each object $X$ of $\ambient$ each slice $\ambient/X$ is Cartesian closed.
+\item The category $\ambient$ is \emph{extensive}, which means that is has finite coproducts and that $\ambient/(X+Y)$ is equivalent to $(\ambient/X)\times(\ambient/Y)$ for each pair of objects $X$ and $Y$ of $\ambient$.
+\item The category $\ambient$ is exact in the sense of Bar.
+\item The category $\ambient$ has enough projectives. This means that projectives cover all other objects in the category.
+\item The category $\ambient$ is has a \emph{natural number object} $\nno$.
+\item The projectives in $\ambient$ form a locally Cartesian closed subcategory.
 \item There is an internal category $\cat S$ that is extensive and locally Cartesian closed.% terminal object = $X^0$
+%do we really want to proceed with this last bit, or are the 'simplicial sets' we defined earlier better?
 \end{enumerate}
 
-\newcommand\icat{\mathfrak}
-
-That $\cat S$ is locally Cartesian closed and extensive means that is has the same properties as $\icat A$ in an internalized way. This internalization is possible because of the structure that $\icat A$ has. Local Cartesian closure implies that all pullbacks exist, since those are the Cartesian products of the slice categories. Since $\icat A$ has a terminal object, is has all finite limits. In this paper we assume that there is a function that chooses a limit for each diagram. This means that systems of equations between morphisms of $\icat A$ define isomorphism classes of objects of $\icat A$.  Now a systems of equations of morphism are an object declaration or specification language for $\icat A$. Thanks to the local exponentials, this language is part of an \emph{extensional type theory} that allows the definition of more complicated structures like internal locally Cartesian closed Categories. Extensibility adds finitary sums to the type theory. %hate this. don't know how to improve.
-
-The category of small assemblies serves the following purpose. There is an internal category of simplices $\simCat$ in $\icat A$, so there is a internal category of small simplicial objects $\cat S\s = \Func(\simCat\dual,\cat S)$. On one hand this means that morphisms in $\icat A$ can witness--or \emph{realize}--the validity of statements in simplicial homotopy theory and that objects of $\icat A$ can serve as objects of realizers. The simplicial homotopy of this paper is realizable in that sense. One immediate consequence is that we limit the class of simplicial object by looking at the internal ones. The objects of $\cat S\s$ induce functors $\Delta\dual\to\cat A$--here $\Delta$ is the external category of simplices--but the intended model doesn't allow going back even if the functor only hits small assemblies. Hence internal simplicial objects are a stronger kind of simplicial object, and that implies better properties.
-
-Compared to classical homotopy, the structures we mentioned play the following role. The category $\cat A$ replaces the category of large sets and $\cat S$ replaces the category of small sets in the background of a classical homotopy theory. The members of $S$ are functions of large sets with small fibres, and $\gen(S)$ stands for the bundle of all small sets.
-
-
-%here
-\hide{What is below this line has not been adapted yet}
-\subsection{Basic concepts} This last subsection introduces explains the notation used this paper. 
-
-There is an ambient category and several internal categories. Some of the notational overlaps: the codomain, domain and identity operators are always called $\cod$, $\dom$ and $\id$ and $[n]$ always refers to the initial segment of the natural number object, even if that natural number object lives inside an internal category. When not talking about numbers, $0$, $1$, $+$ and $\times$ refer to initial and terminal objects and binary coproduct and product operators of either the ambient category or one of its internal categories. The unique map to the terminal object is $\bang$ and projection maps from products to factors are $\pi_i$ for $i\in \N$.
+\subsection{Notation} There is an ambient category and several internal categories. Some of the notation overlaps: the codomain, domain and identity operators are always called $\cod$, $\dom$ and $\id$ and $[n]$ always refers to the initial segment of the natural number object, even if that natural number object lives inside an internal category. When not talking about numbers, $0$, $1$, $+$ and $\times$ refer to initial and terminal objects and binary coproduct and product operators of either the ambient category or one of its internal categories. The unique map to the terminal object is $\bang$ and projection maps from products to factors are $\pi_i$ for $i\in \N$.
 
 Every object $I$ of the ambient category has an internal discrete category $I\disc$. For this category $\Ob(I\disc)=\Ar(I\disc)=I$ and $\cod=\dom=\id=\id(I)$.
 
@@ -152,9 +141,14 @@ The \emph{set} of natural numbers is $\N$, and since it is a set, $i\in \N$ indi
 
 Let $\cat C$ be an internal category. Its object of objects is $\Ob(\cat C)$ and its object of arrows is $\Ar(\cat C)$, so in this case $\cod$ and $\dom$ are morphisms $\Ar(\cat C)\to\Ob(\cat C)$ and $\id\of\Ob(\cat C)\to\Ar(\cat C)$. Let $\cat D$ be another internal category. The internal category of functors $\cat C\to\cat D$ is $\Func(\cat C,\cat D)$ or $\cat D^{\cat C}$.
 
+%here
+\hide{What is below this line has not been adapted yet}
+
 \hide{removed ELCCCs}
 
 \subsection{Dependent types}
+Dependent type theory describe the constructions of objects and morphisms that are available in a locally Cartesian closed category.
+
 The atomic sentences of a type theory are type assignments $t\of T$ and equations $t=u$. Types are interpreted as objects of a category $\cat C$, while terms are interpreted as global sections. A proposition $t\of T$ is valid if the interpretation $\db t$ of $t$ is a global section of the interpretation $\db T$ of $T$ in $\cat C$. A proposition $t=u\of T$ is valid if $\db u=\db t$. 
 
 The rules explain the interpretation of closed types and terms. This interpretation extend to dependent types an terms--i.e.\ types and terms that contain free variables--in the following manner. For each type $T_0$ a type $T_1$ that depends on $T_0$ is interpreted as an object of $\cat C/\db{T_0}$. A term $t_1\of T_1$ that depends on $T_0$ is a section of $\db{T_1}$. A further type $T_2$ that depends on both $T_0$ and $T_1$ is interpreted as an object $\db{T_2}\of(\cat C/\db{T_0})/\db{T_1}$ and a term $t_2\of T_2$ as a global section.
@@ -207,27 +201,11 @@ Extensiveness means that $\cat C$ has coproducts, that $\cat C/0$ is equivalent 
 The constants $\true$ and $\false$ denote the two global section of $1+1$. The function $\ttif$ is interpreted to satisfy the following equations.
 \[ \ttif(\true,t,u)=t\qquad\ttif(\false,t,u) = u\]
 
-\subsection{Predicates} Traditional simplicial homotopy works with \emph{classes} of fibrations, cofibrations and weak equivalences which. The counterpart for internal categories is a functor that is monic on objects. This type of functors doesn't keep track of witnesses for membership, however, which is why we replace classes by a more general type of functor: discrete isofibrations. These generalized classes are automatically closed under isomorphism like the classes of fibrations, cofibrations an weak equivalences are supposed to be. 
-
-\begin{definition}
-A functor $F\of \cat C\to\cat D$ is a \emph{discrete isofibration} if it is a fully faithful functor and has the following lifting property. For each isomorphism $g\of X\to FY$ in $\cat D$ there is a unique $h\of X'\to Y$ in $\cat C$ such that $Fh=g$. 
-
-An internal functor $F\of \cat C\to\cat D$ is a \emph{discrete isofibration} if there are witnesses to the properties in the last paragraph. The first witness is the inverse of the natural transformation $g\mapsto Fg\of \cat C(X,Y)\to\cat C(FX,FY)$. Let $\cat I$ be the indiscrete category of $2$ objects and let $T:1\to \cat I$ be the functor that points to one of the objects. There is a functor $\tuplet{F^{\cat I},\cat C^T}$ from $\cat C^{\cat I}$ into the pullback of $F$ and $\cat D^T\of \cat D^{\cat I}\to \cat D$. The second witness is an inverse of this functor.
-\[\xy
-(34,20)*+{\cat C}="top",(0,10)*+{\cat C^{\cat I}}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\cat D}="right",(34,0)*+{\cat D^{\cat I}}="bottom"
-\ar^{\cat C^T} "left";"top" \ar@{.>}|(.6){\tuplet{F^{\cat I},\cat C^T}} "left";"middle" \ar_{F^{\cat I}} "left";"bottom" \ar "middle";"bottom"
-\ar "middle";"top" \ar^(.6){F} "top";"right" \ar_(.6){\cat D^T} "bottom";"right"
-\endxy\]
-\end{definition}
-
-The category of discrete isofibrations with the same codomain is an ELCCC. This category replaces the poset of subcategories.
 
 \section{Internal simplicial homotopy}
-This section develops the homotopy theory of Kan complexes internally in ELCCCs. 
+This section develops the homotopy theory of Kan complexes internally in $\ambient$.
 
-The situation is as follows. The ambient category is an ELCCC $\cat A$ that has a natural number object $\nno$. The category $\cat A$ has a class $S$ of `small' maps which has a generic morphism $\gen(S)$. The internal category $\cat S = \cof(\gen(\cat S))$ of fibres of $\gen(S)$ is an internal ELCCC and therefore has a category of simplicial objects $\cat S\s$. The internal version $\simCat$ of the category of simplicial sets comes from $\nno$.
-
-\begin{proposition} Every ELCCC with natural number object has an internal category of simplices.\end{proposition}
+\begin{proposition} Every $\Pi$-pretopos with natural number object has an internal category of simplices.\end{proposition}
 
 \begin{proof} A natural number object allows the definition of predicates by recursion, so the order relation of $\nno$ is a recursive function $\mathord\leq\of\nno\times \nno \to \bool$. This is all we need to define the internal category of simplices.
 \begin{align*}
@@ -238,7 +216,13 @@ Universal quantification over $[m]$ reduces to a finite conjunction because $[m]
 \end{proof}
 
 \subsection{Filler operators}
-Kan fibrations are morphisms of simplicial sets that have the lifting property relative to the family of horn inclusions. This subsection focuses on the lifting properties. Extensional type theory offers no existential quantification to express the idea that `there is a lifting'. Extensional type theory requires a lifting operator that witnesses this fact.
+Kan fibrations are morphisms of simplicial sets that have the lifting property relative to the family of horn inclusions. This subsection focuses on the lifting properties.
+
+\hide{
+When dealing with projectives, the properties 'there is a lifting' and having a lifting operator coincide.
+
+We just need to be careful about non projective simplicial objects--these newbies may have unexpected properties.
+}
 
 \begin{definition} Let $\nat\of(\cat S\s)\dual\times \cat S\s \to \cat S^{\nno\disc}$ be the functor which sends each pair of simplicial objects $X,Y$ to the object $\nat(X,Y)$ of morphisms between them--the object $\nat(X,Y)$ lives in $\cat S^{\nno\disc}$ because natural transformations are families of morphisms and $\cat S$ has exponentials.
 
@@ -268,7 +252,7 @@ Let $a\code{-injective}$ be the functor $\Core(\Func([1],\cat S))\to\Func(\nno\d
 
 \hide{Add?: These injectives satisfy the usual properties of closure under products, composition and pullback, thanks to specific constructions on filler operators.}
 
-Internal languages only quantify over objects and $\cat S$ does not have an object of $a$-injectives does not exist inside $\cat S$. The definition of $a$-anodynes therefore requires the ambient category $\cat A$.
+Internal languages only quantify over objects and $\cat S$ does not have an object of $a$-injectives does not exist inside $\cat S$. The definition of $a$-anodynes therefore requires the ambient category $\ambient$.
 
 \begin{definition}
 Since $\cat S$ may have too small products, the property of being $a$-anodyne for an $I$-indexed family of morphisms $a$ is represented by a functor valued in the following ELCCC.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  16 MAY 2015 18:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  24 MAY 2015 16:10
 entering extended mode
 **csh.tex
 (C:\Users\Wouter\Documents\GitHub\realy-hot\csh.tex
@@ -403,18 +403,18 @@ File: english.lbx 2014/06/25 v2.9a biblatex localization (PK/JW/AB)
 \@quotelevel=\count226
 \@quotereset=\count227
  (C:\Users\Wouter\Documents\GitHub\realy-hot\csh.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
 Package biblatex Info: No input encoding detected.
 (biblatex)             Assuming 'ascii'.
 Package biblatex Info: Automatic encoding selection.
@@ -423,60 +423,60 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'csh.bbl' found.
 
 (C:\Users\Wouter\Documents\GitHub\realy-hot\csh.bbl)
-Package biblatex Info: Reference section=0 on input line 84.
-Package biblatex Info: Reference segment=0 on input line 84.
+Package biblatex Info: Reference section=0 on input line 87.
+Package biblatex Info: Reference segment=0 on input line 87.
  [1]
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 11.49994pt on input line 88.
+(Font)              scaled to size 11.49994pt on input line 91.
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 8.04996pt on input line 88.
+(Font)              scaled to size 8.04996pt on input line 91.
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 5.74997pt on input line 88.
-LaTeX Font Info:    Try loading font information for U+msa on input line 88.
+(Font)              scaled to size 5.74997pt on input line 91.
+LaTeX Font Info:    Try loading font information for U+msa on input line 91.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 88.
+LaTeX Font Info:    Try loading font information for U+msb on input line 91.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 88.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 91.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 88.
-LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 13.79993pt on input line 105.
-LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 9.19995pt on input line 105.
-LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 6.89996pt on input line 105.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 91.
 
 [2]
-LaTeX Font Info:    Try loading font information for U+euf on input line 136.
+LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
+(Font)              scaled to size 13.79993pt on input line 120.
+LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
+(Font)              scaled to size 9.19995pt on input line 120.
+LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
+(Font)              scaled to size 6.89996pt on input line 120.
+LaTeX Font Info:    Try loading font information for U+euf on input line 124.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\ueuf.fd"
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) [3] [4] [5] [6] [7] [8] [9] [10] [11] <xymatrix 3x2 306>
-<xymatrix 2x2 182> [12] <xymatrix 2x2 223> [13] [14] <xymatrix 2x2 184> [15] <xymatrix 2x2 175> [16] <xymatrix 3x2 399>
-<xymatrix 3x2 409> [17] <xymatrix 3x2 312> <xymatrix 3x2 399> <xymatrix 2x2 223> <xymatrix 3x2 398> [18] <xymatrix 3x2
-409> <xymatrix 2x2 223> [19] <xymatrix 3x2 399> <xymatrix 3x2 402> [20] [21] [22] <xymatrix 2x2 209> [23] <xymatrix 5x2
-317> [24] [25] <xymatrix 2x2 182> <xymatrix 2x2 183> [26]
-Underfull \hbox (badness 10000) in paragraph at lines 929--929
+) [3] [4] [5] [6] [7] [8] [9] <xymatrix 3x2 306> [10]
+<xymatrix 2x2 182> [11] <xymatrix 2x2 223> [12] [13] <xymatrix 2x2 184> [14] <xymatrix 2x2 175> [15] <xymatrix 3x2 399>
+<xymatrix 3x2 409> <xymatrix 3x2 312> [16] <xymatrix 3x2 399> <xymatrix 2x2 223> <xymatrix 3x2 398> [17] <xymatrix 3x2
+409> <xymatrix 2x2 223> [18] <xymatrix 3x2 399> <xymatrix 3x2 402> [19] [20] [21] <xymatrix 2x2 209> [22] <xymatrix 5x2
+317> [23] [24] <xymatrix 2x2 182> <xymatrix 2x2 183> [25]
+Underfull \hbox (badness 10000) in paragraph at lines 913--913
 
  []
 
-[27] (C:\Users\Wouter\Documents\GitHub\realy-hot\csh.aux)
+[26] (C:\Users\Wouter\Documents\GitHub\realy-hot\csh.aux)
 Package logreq Info: Writing requests to 'csh.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  8736 strings out of 493922
- 128479 string characters out of 3147303
- 377600 words of memory out of 3000000
+ 128482 string characters out of 3147303
+ 368604 words of memory out of 3000000
  11931 multiletter control sequences out of 15000+200000
  19806 words of font info for 75 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 37i,14n,52p,1086b,936s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,14n,52p,1066b,936s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on csh.dvi (27 pages, 194980 bytes).
+Output written on csh.dvi (26 pages, 186608 bytes).
