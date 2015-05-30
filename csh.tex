@@ -129,8 +129,6 @@ Let $\ambient$ be the ambient category.
 \item The category $\ambient$ has enough projectives. This means that projectives cover all other objects in the category.
 \item The category $\ambient$ is has a \emph{natural number object} $\nno$.
 \item The projectives in $\ambient$ form a locally Cartesian closed subcategory.
-\item There is an internal category $\cat S$ that is extensive and locally Cartesian closed.% terminal object = $X^0$
-%do we really want to proceed with this last bit, or are the 'simplicial sets' we defined earlier better?
 \end{enumerate}
 
 \subsection{Notation} There is an ambient category and several internal categories. Some of the notation overlaps: the codomain, domain and identity operators are always called $\cod$, $\dom$ and $\id$ and $[n]$ always refers to the initial segment of the natural number object, even if that natural number object lives inside an internal category. When not talking about numbers, $0$, $1$, $+$ and $\times$ refer to initial and terminal objects and binary coproduct and product operators of either the ambient category or one of its internal categories. The unique map to the terminal object is $\bang$ and projection maps from products to factors are $\pi_i$ for $i\in \N$.
@@ -215,6 +213,34 @@ This section develops the homotopy theory of Kan complexes internally in $\ambie
 Universal quantification over $[m]$ reduces to a finite conjunction because $[m]$ is a finite object, which is why it is allowed above. 
 \end{proof}
 
+\subsection{Internal simplicial objects}%under consideration as replacement for internal categories.
+As a replacement for the usual simplicial sets, we use the following structure in $\ambient$. These are essentially discrete opfibrations over $\simCat$.
+
+\mathrmdef{dim}
+\begin{definition} An \emph{internal simplicial object} is an object $X$ together with a morphism $\dim\of X\to\nno$ and an operator $\cdot$, whose domain is the following object.
+\[ \set{\tuplet{x,\xi}\of X\times\Ar(\simCat)| [\dim (x)]=\dom(\xi)} \]
+The codomain of $\cdot$ is $X$. The operator $\cdot$ satisfies $(x\cdot\alpha)\cdot\beta=x\cdot(\alpha\circ\beta)$ and $x\cdot\id_{[\dim x]}=x$.  
+
+A morphism of internal simplicial objects $(X,\dim,\cdot)\to (Y,\dim,\cdot)$ is a morphism $X\to Y$ that commutes with $\dim$ and $\cdot$. I.e. $f(x\cdot \xi)=f(x)\cdot\xi$ and $\dim(f(x))=\dim(x)$.
+\end{definition}\hide{ Is it feasible to rewrite the whole paper with these?}
+
+In a simplicial object $(X,\dim,\cdot)$, the $X$ is the object of simplices, $\dim$ is the number of dimensions of each simplex and $\cdot$ is the restriction functor.
+
+\begin{remark} When $\ambient$ has infinite colimits, any functor $\simCat\dual\to\ambient$ induces an internal simplicial object. The intended model does not have infinite colimits, however. The internal simplicial objects are a strict subcategory of the external ones in that case. That is also what gives this approach an advantage over earlier ones in the literature.%cite
+\end{remark}
+
+\hide{
+\subsection{Families}
+\begin{defin}
+For each object $I$ of $\ambient$ the category $\ambient/I\s$ of simplicial objects in the slice $\ambient/I$ is an \emph{$I$-indexed families of simplicial objects}. 
+\end{defin}
+
+Is there anything to prove here?
+
+Other thought: maybe treat the equivalence of $\ambient\s/J$ with $\ambient^{EJ}\s$ here, with $EJ$ the category of elements of the simplicial set $J$.
+
+}
+
 \subsection{Filler operators}
 Kan fibrations are morphisms of simplicial sets that have the lifting property relative to the family of horn inclusions. This subsection focuses on the lifting properties.
 
@@ -222,13 +248,15 @@ Kan fibrations are morphisms of simplicial sets that have the lifting property r
 When dealing with projectives, the properties 'there is a lifting' and having a lifting operator coincide.
 
 We just need to be careful about non projective simplicial objects--these newbies may have unexpected properties.
+
+Check when being projective plays a role.
 }
 
-\begin{definition} Let $\nat\of(\cat S\s)\dual\times \cat S\s \to \cat S^{\nno\disc}$ be the functor which sends each pair of simplicial objects $X,Y$ to the object $\nat(X,Y)$ of morphisms between them--the object $\nat(X,Y)$ lives in $\cat S^{\nno\disc}$ because natural transformations are families of morphisms and $\cat S$ has exponentials.
+\begin{definition} For each pair of internal simplicial objects $X,Y$ let $\nat(X,Y)$ be the object of morphisms between them.
 
-A morphism $f\of X\to Y$ of $\cat S\s$ has the \emph{global right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the global \emph{left} lifting property with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\nat(\id_J,f),\nat(g,\id_X))}$ 
+A morphism $f\of X\to Y$ of simplicial object has the \emph{right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the \emph{left} lifting property with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\nat(\id_J,f),\nat(g,\id_X))}$ 
 which is the factorization of the span $\nat(\id_J,f)$, $\nat(g,\id_X)$ through the pullback cone of $\nat(\id_I,f)$ and $\nat(g,\id_Y)$
-is a \emph{split} epimorphism.
+is a \emph{regular} epimorphism.
 \[\xy
 (34,20)*+{\nat(I,X)}="top",(0,10)*+{\nat(J,X)}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\nat(I,Y)}="right",(34,0)*+{\nat(J,Y)}="bottom"
 \ar^{\nat(g,\id_X)} "left";"top" \ar@{.>}|(.6){\tuplet{f_!,g\ri}} "left";"middle" \ar_{\nat(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
@@ -237,40 +265,36 @@ is a \emph{split} epimorphism.
 A section of $\tuplet{f_\bang,g\ri}$ is a \emph{filler operator}.\label{lifting}
 \end{definition}
 
-The ordinary right lifting property only says that composition with $\tuplet{f_\bang,g\ri}$ induces a surjective function on global sections, while the \emph{local} right lifting property only requires that $\tuplet{f_\bang,g\ri}$ is a regular epimorphism. The global version formulated above is stronger than either of those.
+\hide{explain why this is important}
+\begin{lemma} If $X$ and $Y$ are projective, then so is $\nat(X,Y)$. \end{lemma}
+
+\begin{proof} The object $\nat(X,Y)$ is a subobject of the fibred exponential $Y^X_\nno$ that is defined by a system of equations. Projectives are closed under all required constructions.
+\end{proof}
 
 A morphism can have a lifting property relative to a family or class of morphisms.
 
-%here
+
+\hide{
+n=New idea: everything follows form the projectivity of added faces.
+
+We don't need the object of realizers anymore either.
+}
+
+\hide{
+Explain $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ somewhere. It should be an internal simplicial object of the slice category. i.e. $(\ambient/I)\s$. 
+}
+%here: remove every reference to cat S
 \begin{definition}[Injective] Let $\code{sections}$ be the discrete isofibration of sections. %more information needed?
-An $I$-indexed-family of morphisms in $\cat S\s$ a morphism $a\of D\to E$ in $(\cat S\s)^{I\disc}$. Let $I\ri\of\cat S\s\to (\cat S\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$.
-
-\[ a\code{-injective}(f)=\code{sections}(I\ri(f)_\bang,a\ri) \]
-
-Let $a\code{-injective}$ be the functor $\Core(\Func([1],\cat S))\to\Func(\nno\disc,\cat S)$ which sends each morphism $f$ to $\code{sections}(I\ri(f)_\bang,a\ri)$.
+An $I$-indexed-family of morphisms in $\ambient\s$ a morphism $a\of D\to E$ in $(\ambient\s)^{I\disc}$. Let $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$.
 \end{definition}
 
-\hide{Add?: These injectives satisfy the usual properties of closure under products, composition and pullback, thanks to specific constructions on filler operators.}
-
-Internal languages only quantify over objects and $\cat S$ does not have an object of $a$-injectives does not exist inside $\cat S$. The definition of $a$-anodynes therefore requires the ambient category $\ambient$.
-
-\begin{definition}
-Since $\cat S$ may have too small products, the property of being $a$-anodyne for an $I$-indexed family of morphisms $a$ is represented by a functor valued in the following ELCCC.
-\[ \cat S'= \Func(\Core(\Func([1]\times\simCat\dual,\cat S)),\Func(\nno\disc,\cat S)) \]
-
-For each $f$ and $g$ of $\Core(\Func([1]\times\simCat\dual,\cat S))$, $a\code{-anodyne}(f)(g)$ is the object of morphisms that takes lifting operators for $a$ against $g$ to lifting operators for $f$ against $g$ as shown here below.
-\[ a\code{-anodyne}(f)(g) = \Pi s\of \code{sections}(a_!,(I\ri g)\ri).\code{sections}(f_!,g\ri) \]
-
-A morphism $f$ is \emph{$a$-anodyne} if $a\code{-anodyne}(f)$ has a global section inside $\cat S'$.
-\end{definition}
-
-The global sections that witness that a morphism $f$ reduce the problem of lifting $f$ to the problem of lifting the member of the family $a$ using whatever constructions are available in $\cat S$.
+\hide{ Here the definition of 'anodyne' used to go. May need a substitute. }
 
 \subsection{Kan fibrations}
+\hide{ significant rewriting will be needed here to avoid anodynes }
 The subsection completes the definition of Kan fibrations.
 
-ELCCCs like $\cat S$ have all the finite objects: $0$, $1$, $1+1$, $1+1+1$, etc. Hence $\simCat$ is enriched over $\cat S$ and there exists a Yoneda embedding $\Delta\of \simCat \to \cat S^{\simCat \dual}$. 
-
+\hide{ Add def. of sieve over $\simCat$ }
 \begin{definition} For each $n\of \nno$ the \emph{cycle} $\cycle[n]$ is the sieve of non surjective functions that is a subobject of $\simplex[n]$. For each $n$ and $k\of\nno$ the \emph{horn} $\horn_k[n]$ is the sieve of the non decreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$. These sieves are definable because being surjective is a decidable property of morphisms $[m]\to[n]$. 
 \end{definition}
 
@@ -286,7 +310,8 @@ ELCCCs like $\cat S$ have all the finite objects: $0$, $1$, $1+1$, $1+1+1$, etc.
 \[ \code{acyclic-fibration}(f) = \code{cycles-injective}(f) \]
 \item A \emph{Kan complex} or \emph{Kan fibrant object} is a simplicial object $X$ for which the unique morphism $X\to 1$ is a fibration.
 \[ \code{fibrant}(X) = \code{horns-injective}(\bang_X) \]
-\item A \emph{cofibration} is an anodyne morphism relative to the family of cycle inclusions.
+
+\item A \emph{cofibration} is an anodyne morphism relative to the family of cycle inclusions.% this table has to be delayed
 \[ \code{cofibration}(f) = \code{cycles-anodyne}(f) \]
 \item A \emph{cofibrant object} is a simplicial object $X$ for which the unique morphism $0\to X$ is a cofibration.
 \[ \code{cofibrant}(X) = \code{cycles-anodyne}(\bang_X) \]
@@ -295,11 +320,14 @@ ELCCCs like $\cat S$ have all the finite objects: $0$, $1$, $1+1$, $1+1+1$, etc.
 \item A \emph{weak equivalence} is a morphism which factors as an acyclic fibration following an acyclic cofibration.
 \end{itemize}\label{Kan}
 
-The category of Kan complexes and morphisms of simplicial object is $\cat S\s\f$. Its objects are pairs $(X,\xi)$ where $X$ is an object of $\cat S$ and $\xi$ is a filler operator for $\bang_X\of X\to 1$. The filler operator merely serves as a witness of fibrancy and is \emph{not} preserves by morphisms $(X,\xi)\to(Y,\xi')$ which are arbitrary morphisms $X\to Y$.
+The category of Kan complexes and morphisms of simplicial object is $\ambient\s\f$. \hide{
+In the categories we are looking at, the terminal object is projective. Therefore the internal and external concepts of having a filler operator coincide.
+[I am so angry]
+}
 \end{definition}
 This paper usually leaves out `Kan' and simply talk about fibrations and complexes. 
 
-A witness for weak equivalence has to include a factorization of a morphism. An object of witnesses that considers all possible factorizations is a huge coproduct, which is hard to find a suitable internal ELCCC to contain it. Fortunately, this paper shows a couple of ways to factorize morphisms (propositions \ref{factor1} and \ref{factor2}). A witness for weak equivalence only has to show that one of these is an acyclic fibration following an acyclic cofibration. The groupoid of factorized morphisms is $\Core(\Func([2]\times\simCat\dual,\cat S))$ and the functor that represents the class of weak equivalences simply combines the functors that represent the classes of acyclics.
+\hide{ no witnesses }
 
 \begin{remark}[Saturation] Injectives are closed under various constructions, notably compositions, finitary products and pullbacks. Every isomorphism is injective. Moreover, the filler operators for the new injectives are functions of the existing filler operators, which are represented by natural transformations of internal functors.
 \[
@@ -315,57 +343,53 @@ A witness for weak equivalence has to include a factorization of a morphism. An 
 \endxy
 \]
 
+%anodynes don't come beyond this point, fortunately
 Anodynes have dual closure properties. Besides composition, they are closed under finitary coproducts and pushouts. Isomorphisms are anodynes and all morphisms that are both injective and anodyne are isomorphisms. Moreover, for each adjoint pair of functors $F\dashv G$ between two categories that have their own classes of anodynes and injectives, the left adjoint $F$ preserves anodynes if an only if the right adjoint $G$ preserves injectives.
 
 A consequence of these closure properties, is that horn inclusions are cofibrations, therefore that acyclic fibrations are fibrations and therefore all acyclic cofibrations are cofibrations.
 \end{remark}
 
-The next section demonstrates that the morphisms of definition \ref{Kan} form a model structure on $\cat S\s$ (theorem \ref{model category}).
+The next section demonstrates that the morphisms of definition \ref{Kan} form a model structure on $\ambient\s$ (theorem \ref{model category}).
 
 \section{Model structure}%class functors not mentioned in the sections below--"characteristic functors"
 Simplicial homotopy theory has been robbed of the comforts of classical foundations: the axiom of choice, the principle of the excluded middle, infinite limits and colimits etc. Yet the standard model structure of simplicial sets survives in the category of Kan complexes. This section runs through of the simplicial homotopy of Kan complexes \citep{Hovey99,GJSHT} in order to demonstrate that the familiar theory is constructive.
 
 \subsection{Cofibrations}
-This subsection characterizes the cofibrations of $\cat S\s$. It also proves that arbitrary morphisms factor as acyclic fibrations following cofibrations. The characteristic property is that a certain relation between the morphism and morphisms in the codomain is decidable.
+This subsection characterizes the cofibrations of $\ambient\s$. It also proves that arbitrary morphisms factor as acyclic fibrations following cofibrations. The characteristic property is that a certain relation between the morphism and morphisms in the codomain is decidable.
 
 \begin{definition} A $y\of Y[n]$ is called an \emph{$n$-simplex} of $Y$. An $n$-simplex is \emph{degenerate} if there is an $s\of [n]\to [n]$ different from $\id_{[n]}$ such that $Y(s)(y)=y$. If there are no such $s$ and $x$, then $y$ is \emph{nondegenerate} and also called a \emph{face} of $Y$.\end{definition}
 
-While $\cat S$ may lack the structure required to soundly interpret existential quantification over arbitrary objects, this is not a problem with the set of morphisms $s\of [n]\to [n]$ different from $\id_{[n]}$ as it is finite.
-
+%This should more or less become the definition of cofibration, by adding something about projectivity.
 \begin{definition} A monomorphism is a \emph{free cofibration} if for each $i\in \nno$, there is an object $S_i$ of $i$-dimensional faces of $Y$ which are not in the image of $X$. This means that there are $s_i:Y[i]\to\bool$ such that all $S_i$ are pullbacks of $\true:1\to\bool$.
 \end{definition}
 
 Internally the representation of a free cofibration is much simpler than that of a cofibration, since the family of morphisms $s_i$--which is unique if it exists--already witnesses membership.%hold that thought...
 
-\begin{lemma} Every free cofibration is a cofibration. \label{Reedy}
-\end{lemma}
+%This lemma should talk about lifting properties only
+\begin{lemma} Every free cofibration is a cofibration. \label{Reedy}\end{lemma}
 
 \begin{proof} Suppose $f\of X\to Y$ is a free cofibration and $i\of\nno\mapsto S_i$ is the family of faces outside the image of $f$. 
 For each $i\of\nno$ let $Y_i$ be the sieve of $Y$ which omits the simplices in $S_j$ for $j>i$.
-Let $\simCat\ri\of \cat S\to\cat S\s$ be the constant simplicial assembly functor. 
+Let $\simCat\ri\of \ambient\to\ambient\s$ be the constant simplicial assembly functor. 
 Each $y\in S_i$ corresponds to a monomorphism $\simplex[i]\to Y$ which does not factor through $f$ by the Yoneda lemma.
 
-Cofibrations are closed under pushouts, finite and $\cat S$-indexed coproducts and transfinite compositions for all the usual reasons.
+Cofibrations are closed under pushouts, finite and internal coproducts and transfinite compositions for all the usual reasons.
 The inclusion $X\to Y_0 = X+\simCat\ri(A_0)$ is a pushout of $A_0$ copies of the cofibration $0\to 1$ and hence a cofibration.
 For $i>0$, if $y\of S_i$ then $Y_i\cap y$ is the boundary of $y$, hence $Y_{i-1}\to Y_i$ is a pushout of $S_i$ copies of the cofibration $\cycle[j]\to\simplex[j]$ and hence a cofibration. Because $f\of X\to Y$ is the colimit of the inclusions $X\to Y_j$ and those inclusions are compositions of cofibrations, $f$ is a cofibration.
 \end{proof}
 
-\begin{remark} The thoroughly rigorous proof is the definition of a natural transformation between the characteristic functor of free cofibration $\Core(\Func([1],\cat S))\to \Func(\nno\disc,\cat S)$ and the characteristic functor of cofibrations $\Core(\Func([1],\cat S))\to \cat S'$. There is a canonical faithful functor $\Func(\nno\disc,\cat S)\to\cat S'$ that evens out the codomains. The witness of cofibrancy is the result of glueing lifting operators for cycle inclusions along the colimit inclusions. The proof above only mentions the most relevant parts of the construction instead. This is the default approach in the rest of this paper.\end{remark}
-
-\hide{ But it may be a lemma worth working out somewhere in this paper, if only in an appendix? }
-
 The rest of this subsection shows the converse, i.e.\ every cofibration is free, by factoring every morphism as an acyclic fibration following a free cofibration. The factorization requires objects of cofibrations constructed from a classifier of locally decidable subobjects as described below.
 
-\begin{definition} A monomorphism $m\of X\to Y$ of $\cat S\s$ is \emph{locally decidable} if for each $i\of\nno$ monomorphism $m[i]\of X[i]\to Y[i]$ is \emph{decidable}, i.e.\ isomorphic to a coproduct inclusion, in $\cat S$. \end{definition}
+\begin{definition} A monomorphism $m\of X\to Y$ of $\ambient\s$ is \emph{locally decidable} if for each $i\of\nno$ monomorphism $m[i]\of X[i]\to Y[i]$ is \emph{decidable}, i.e.\ isomorphic to a coproduct inclusion, in $\ambient$. \end{definition}
 
-\begin{lemma} The category $\cat S\s$ has a locally decidable monomorphism $t\of 1\to \LDMC$ such that every morphism is a locally decidable monomorphism if and only if it is a pullback of $t$. \end{lemma}
+\begin{lemma} The category $\ambient\s$ has a locally decidable monomorphism $t\of 1\to \LDMC$ such that every morphism is a locally decidable monomorphism if and only if it is a pullback of $t$. \end{lemma}
 
-\begin{proof} The morphism $t$ is defined in such a way that a witness that a morphism $f\of X\to Y$ is locally decidable is essentially already a pullback square $f\to t$. For any object $X$ of $\cat S\s$ let a \emph{decidable sieve} be a $p\of(\Sigma i\of\nno.X[i])\to\bool$ such that $p(x)=\true$ implies $p(x\circ X(f))=\true$ for each morphism $f\of [m]\to [n]$ of $\simCat$ and $x\in X[n]$. For each $i\in\nno$, $\LDMC[i]$ is the object of \emph{decidable sieves} of $\simplex[i]$. The Yoneda lemma takes care of the rest. \end{proof}
+\begin{proof} The morphism $t$ is defined in such a way that a witness that a morphism $f\of X\to Y$ is locally decidable is essentially already a pullback square $f\to t$. For any object $X$ of $\ambient\s$ let a \emph{decidable sieve} be a $p\of(\Sigma i\of\nno.X[i])\to\bool$ such that $p(x)=\true$ implies $p(x\circ X(f))=\true$ for each morphism $f\of [m]\to [n]$ of $\simCat$ and $x\in X[n]$. For each $i\in\nno$, $\LDMC[i]$ is the object of \emph{decidable sieves} of $\simplex[i]$. The Yoneda lemma takes care of the rest. \end{proof}
 
-\begin{proposition} Every morphism $f\of X\to Y$ of $\cat S\s$ factors as an acyclic fibration following a free cofibration. \label{factor1} \end{proposition}
+\begin{proposition} Every morphism $f\of X\to Y$ of $\ambient\s$ factors as an acyclic fibration following a free cofibration. \label{factor1} \end{proposition}
 
 \begin{proof}
-Let $Z$ be the following object of $\cat S$. For each $n\of\nno$, $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
+Let $Z$ be the following object of $\ambient$. For each $n\of\nno$, $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
  $a\of[n]\to [p]$ is an epimorphism of $\simCat$ (so $p\leq n$),
  $b\of\LDMC[p]$ satisfies $b(\id_{[p]})=\true$ if an only if $a=\id_{[n]}$,
  $c\of \set{b}\to X$, where $\set{b}$ is the pullback of $t\of 1\to\LDMC$ along $b$ and 
@@ -445,14 +469,14 @@ W\times Z \ar[r] \ar@/_2ex/[rr]_{f\times\id} & \bullet \ar[r]^(.4){f\pp g} & X\t
 
 \end{definition}
 
-Although $\cat S$ may omit some pushouts, the following lemma show that pushout products of cofibrations always exist.
+Although $\ambient$ may omit some pushouts, the following lemma show that pushout products of cofibrations always exist.
 
 \begin{lemma} Pushout products of pairs of locally decidable monomorphisms exist and are locally decidable monomorphisms. \end{lemma}
 
 \begin{proof} Let $f\of W\to X$ and $g\of Y\to Z$ be a pair of locally decidable monomorphisms. A pair $\tuplet{x,y}\of X\times Z$ belongs to the image of $f\pp g$ if either $x$ belong to the image of $f$ or $y$ belong to the image of $g$. This is a decidable property.
 \end{proof}
 
-The following fundamental lemma of simplicial homotopy has a constructive proof and therefore holds in $\cat S\s$.
+The following fundamental lemma of simplicial homotopy has a constructive proof and therefore holds in $\ambient\s$.
 
 \begin{lemma}[Pushout product] If $f$ and $g$ are cofibrations, then so is $f\pp g$. Moreover, if either $f$ or $g$ is acyclic then so is $f\pp g$. \label{pushout product} \end{lemma}
 
@@ -498,7 +522,7 @@ B\ar[r]_{c^t} \ar[urr]_(.7){b^t} \ar@{.>}[ur]^{d^t} & Y^D \ar[r]_{Y^g} & Y^C
 
 
 \subsection{Deformation retracts}
-In the classical situation, acyclic cofibrations between Kan complexes are deformation retracts. These still play an important role in the model structure on $\cat S\s\f$.
+In the classical situation, acyclic cofibrations between Kan complexes are deformation retracts. These still play an important role in the model structure on $\ambient\s\f$.
 
 \begin{definition} A \emph{deformation retract} is a morphism $f\of X\to Y$ with a left inverse $g\of Y\to X$ and a homotopy $h\of \simplex[1]\times Y\to Y$ between $\id_Y$ and $f\circ g$, i.e.\ $h\circ (\Delta(\delta^1_0)\times \id_Y) = \id_Y$ and $h\circ (\Delta(\delta^1_1)\times \id_Y) = f\circ g$, where $\Delta(\delta^1_i)\of 1\to \simplex[1]$ are the points of $\simplex[1]$.
 \end{definition}
@@ -604,9 +628,9 @@ As promised the morphism $f$ factors as the fibration $f_1\circ g$ following the
 \end{proof}
 
 \subsection{Two-out-of-three}
-The category $\cat S\s$ has the two weak factorization systems that a model structure requires. This subsection demonstrates that the weak equivalences satisfy the 2-out-of-3 property and completes the proof that $\cat S\s\f$ is a model category.
+The category $\ambient\s\f$ has the two weak factorization systems that a model structure requires. This subsection demonstrates that the weak equivalences satisfy the 2-out-of-3 property and completes the proof that $\ambient\s\f$ is a model category.
 
-\begin{lemma}[2-out-of-3] Let $f\of X\to Y$ and $g\of Y\to Z$ be morphisms of $\cat S\s\f$. If any two of $f,g$ or $g\circ f$ are weak equivalences, then all three are. \label{toot}\end{lemma}
+\begin{lemma}[2-out-of-3] Let $f\of X\to Y$ and $g\of Y\to Z$ be morphisms of $\ambient\s\f$. If any two of $f,g$ or $g\circ f$ are weak equivalences, then all three are. \label{toot}\end{lemma}
 
 \begin{proof}
 Compositions of acyclic fibrations are acyclic fibrations and the same holds for acyclic cofibrations. All compositions of weak equivalences are weak equivalences if $g\circ f$ factors as an acyclic fibration following an acyclic cofibration, whenever $g$ is an acyclic cofibration and $f$ is an acyclic fibration.
@@ -712,10 +736,10 @@ This means that weak equivalences indeed satisfy 2-out-of-3.
 \begin{remark} At this point we finally have worked out enough structure to introduce a characteristic functor of the weak equivalences. Pick one the factorizations into a fibration following a cofibration form propositions \ref{factor1} or \ref{factor2}. The characteristic functor $\code{weak-equivalence}$ presents witnesses that the members of the chosen factorization are acyclic. The closure of this new class under 2-out-of-3 is a natural transformations of the functor $\code{weak-equivalence}$ and other functors constructed form it. The proof above has the elements of its construction. \end{remark}
 
 \subsection{Conclusion}
-For a definition of model categories see [\cite{Hovey99, GJSHT}]. The simplicial homotopy of Kan complexes is valid in the internal ELCCC $\cat S$ in the following sense.
+For a definition of model categories see [\cite{Hovey99, GJSHT}]. The simplicial homotopy of Kan complexes is valid in the internal ELCCC $\ambient$ in the following sense.
 
 \begin{theorem}[Model category]
-With fibrations, weak equivalences and cofibrations defined as above $\cat S\s\f$ is a model category.
+With fibrations, weak equivalences and cofibrations defined as above $\ambient\s\f$ is a model category.
 \label{model category}
 \end{theorem}
 
@@ -727,20 +751,21 @@ Lemma \ref{factor1} shows that cofibrations and acyclic fibrations form a weak f
 This section shows how lifting properties \emph{descend} along the horn inclusions $H(n,k)\of \horn_k[n]\to\simplex[n]$. This means that each fibration $f\of X\to\horn_k[n]$ is the pullback of a fibration $g\of Y\to\simplex[n]$ along $H(n,k)$.
 
 \subsection{Higher dimensional case}
-This subsection introduces a construction that works for dimensions $n>1$. For each fibration $f\of X\to \horn_k[n]$ each simplex in the descended fibration $Df\of DX\to \simplex[n]$ is the face of a filler for an acyclic cofibration which factors through $f$. This extends the range of the filler operator of $f$ while keeping it a pullback of $Df$ along $H(n,k)$. The following equivalence simplifies dealing with $\cat S\s/\simplex[n]$.
+This subsection introduces a construction that works for dimensions $n>1$. For each fibration $f\of X\to \horn_k[n]$ each simplex in the descended fibration $Df\of DX\to \simplex[n]$ is the face of a filler for an acyclic cofibration which factors through $f$. This extends the range of the filler operator of $f$ while keeping it a pullback of $Df$ along $H(n,k)$. The following equivalence simplifies dealing with $\ambient\s/\simplex[n]$.
 
-\begin{lemma} The categories $\cat S\s/\simplex[n]$ and $\cat S^{(\simCat/[n])\dual}$ are equivalent. \label{slice equivalence} \end{lemma}
+\hide{ this bit scares me. Has it actually gotten harder though? }
+\begin{lemma} The categories $\ambient\s/\simplex[n]$ and $\ambient^{(\simCat/[n])\dual}$ are equivalent. \label{slice equivalence} \end{lemma}
 
-\begin{proof} For $\xi\of[m]\to[n]$ in $\simCat$ let $[\xi]$ to denote the corresponding object of $\simCat/[n]$ and let $\simplex[\xi]$ be the representable functor generated by the Yoneda embedding. The equivalence links $\simplex[\xi]$ of $\cat S^{(\simCat/[n])\dual}$ to $\Delta\xi\of \simplex[m]\to \simplex[n]$ of $\cat S\s/\simplex[n]$.
+\begin{proof} For $\xi\of[m]\to[n]$ in $\simCat$ let $[\xi]$ to denote the corresponding object of $\simCat/[n]$ and let $\simplex[\xi]$ be the representable functor generated by the Yoneda embedding. The equivalence links $\simplex[\xi]$ of $\ambient^{(\simCat/[n])\dual}$ to $\Delta\xi\of \simplex[m]\to \simplex[n]$ of $\ambient\s/\simplex[n]$.
 
-In the direction $\cat S\s/\simplex[n]\to \cat S^{(\simCat/[n])\dual}$ the equivalence sends a $f\of X\to \simplex[n]$ to the presheaf $g$ which for all $\xi$ of $\simCat/[n]$ satisfies:
+In the direction $\ambient\s/\simplex[n]\to \ambient^{(\simCat/[n])\dual}$ the equivalence sends a $f\of X\to \simplex[n]$ to the presheaf $g$ which for all $\xi$ of $\simCat/[n]$ satisfies:
 \[ g[\xi] = \set{ x\of X(\dom(\xi)) | f(\dom(\xi))(x)=\xi } \]
 Here $\dom(\xi)$ is the domain of $\xi$.
-In the direction $\cat S\s/\simplex[n]\to \cat S^{(\simCat/[n])\dual}$ the equivalence sends a presheaf $g$ to the morphism $f$ which for each $m\of\nno$ represent the family of objects:
+In the direction $\ambient\s/\simplex[n]\to \ambient^{(\simCat/[n])\dual}$ the equivalence sends a presheaf $g$ to the morphism $f$ which for each $m\of\nno$ represent the family of objects:
 \[ \xi\of\simCat([m],[n])\mapsto g(\xi) \]
 \end{proof}
 
-%the factorization is a functor $\cat S\s/\simplex[n]\to \cat S\s/\simplex[n]$ mind you!
+%the factorization is a functor $\ambient\s/\simplex[n]\to \ambient\s/\simplex[n]$ mind you!
 
 The dependent product along $H(n,k)\of \horn_k[n]\to\simplex[n]$ is the first half of the descent functor. It constructs fillers for a limited set of acyclic cofibrations. The following functor $K$ sends each $\simplex[n]$-indexed family of simplices to the family of simplices it will be a face of.
 
@@ -771,7 +796,7 @@ The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical orde
 
 The norm $\norm\xi$ equals the number of ways the injection $\delta^n_k\of[n-1]\to[n]$ factors through $\xi$. Here $\delta^n_k(i)=i$ if $i<k$ and $i+1$ if $i\geq k$. The functor $K$ gives each such factorization $\phi\of[n-1]\to [m]$ a unique anchor point in $K(\xi)_k$. Now $K(\phi)\of K(\delta^n_k)\to \xi$ is a full simplex. Pulling back along $H(n,k)$ preserves the homotopy type of $\Delta(K(\phi))$ and that is the point of the construction.
 
-The second half of the descent functor is the endofunctor of $\cat S\s/\simplex[n]$ that is equivalent to the endofunctor $K\ri$ of $\cat S^{\simCat/[n]\dual}$ that satisfies $K\ri X[\xi] = X[K\xi]$.
+The second half of the descent functor is the endofunctor of $\ambient\s/\simplex[n]$ that is equivalent to the endofunctor $K\ri$ of $\ambient^{\simCat/[n]\dual}$ that satisfies $K\ri X[\xi] = X[K\xi]$.
 
 \begin{lemma} Let $Df = K\ri\depprod{H[n,k]}f\of K\ri\depprod{H[n,k]}X\to\simplex[n]$. Each $f\of X\to\horn_k[n]$ is a pullback of $Df$ along $H(n,k)$. \end{lemma}
 
@@ -791,7 +816,7 @@ This subsection shows that $Df$ is a fibration by reducing the following lifting
 The reduction is composed of two parts like the descent functor itself. The second part uses the adjunction between pulling back and dependent products. The first part fattens the horn up to help it survive the pullback. Some new notation helps to describe the constructions involved in the first part.
 
 
-\begin{definition} For each $\xi\of[m]\to[n]$ and $p\of[m]\to\bool$ let $\face^\xi(p)$ be the object of $\cat S^{\simCat/[n]\dual}$ which satisfies: 
+\begin{definition} For each $\xi\of[m]\to[n]$ and $p\of[m]\to\bool$ let $\face^\xi(p)$ be the object of $\ambient^{\simCat/[n]\dual}$ which satisfies: 
 \[ \face^\xi(p)[\alpha] = \set{\psi\of [\alpha]\to[\xi] | (\forall i\of \dom\alpha)(p(\xi(i))=\true)} \]
 \end{definition}
 
@@ -806,27 +831,27 @@ H(m,l)&=\bigcup_{i\of [m]-\set l} \face^\xi([m]-\set i)\\
 Let $\depsum K(p)\of [m+\norm\xi]\to \bool$ satisfy the following morphism--here $\mathord\land$ is the conjunction function of Booleans.
 \[ \depsum K(p)(\la(i))=p(i)\quad\depsum K(p)(\ka(\vec i)) = p(i_0)\land\dotsm\land p(i_n) \] 
 There is a natural isomorphism between
-\[ \cat S^{\simCat/[n]\dual}(H(m,l),K\ri -) \] and 
-\[ \cat S^{\simCat/[n]\dual}(\depsum KH(m,l),-) \] \label{K-universal}
+\[ \ambient^{\simCat/[n]\dual}(H(m,l),K\ri -) \] and 
+\[ \ambient^{\simCat/[n]\dual}(\depsum KH(m,l),-) \] \label{K-universal}
 \end{proposition}
 
 
-\begin{proof} The union $H(m,l)$ is the finite colimit of all the $\face^\xi(p)$, where $p\of[m]\to\bool$ satisfies $p(i)=\false$ for some $i\in [m]$. The Yoneda lemma induces an equivalence $\cat S^{\simCat/[n]\dual}(\face^\xi(p),K\ri X)\simeq X[K\face^\xi(p)]\simeq \cat S^{\simCat/[n]\dual}(\face^{K\xi}(\depsum K p),X)$ which is natural in $X$ for all such $p$. The morphism $\depsum KH(m,l)$ is the colimit of those $\face^{K\xi}(\depsum K p)$ for the following reasons.
+\begin{proof} The union $H(m,l)$ is the finite colimit of all the $\face^\xi(p)$, where $p\of[m]\to\bool$ satisfies $p(i)=\false$ for some $i\in [m]$. The Yoneda lemma induces an equivalence $\ambient^{\simCat/[n]\dual}(\face^\xi(p),K\ri X)\simeq X[K\face^\xi(p)]\simeq \ambient^{\simCat/[n]\dual}(\face^{K\xi}(\depsum K p),X)$ which is natural in $X$ for all such $p$. The morphism $\depsum KH(m,l)$ is the colimit of those $\face^{K\xi}(\depsum K p)$ for the following reasons.
 
 The operator $\depsum K$ satisfies $\depsum K(p\land q)=\depsum K(p)\land \depsum K(q)$ and $\face^{K\xi}$ sends conjunctions to intersections. Hence:
 \[ \face^{K\xi}(\depsum K(p\land q)) = \face^{K\xi}(\depsum K(p)\land \depsum K(q)) = \face^{K\xi}(\depsum K(p))\cap \face^{K\xi}(\depsum K(q)) \]
 For each $r\of[m+\norm\xi]\to \bool$ such that $\face^{K\xi}(r)$ is a face of the union $\depsum KH(m,l)$ the intersection $r'$ of all $p\of[m]\to \bool$ such that $\face^\xi(r)\subseteq\face^\xi(\depsum K(p))$ therefore satisfies $\face^\xi(r)\subseteq \face^{K\xi}(\depsum K(r'))$. For this reason $\depsum KH(m,l)=\colim_{\face^\xi(p)\subseteq H(m,l)}\face^{K\xi}(\depsum K p)$. Facewise natural equivalences therefore join into a single natural equivalence:
-\[ \cat S^{\simCat/[n]\dual}(H(m,l),K\ri -)\simeq\cat S^{\simCat/[n]\dual}(\depsum K H(m,l), -) \]
+\[ \ambient^{\simCat/[n]\dual}(H(m,l),K\ri -)\simeq\ambient^{\simCat/[n]\dual}(\depsum K H(m,l), -) \]
 \end{proof}
 
-As noted in lemma \ref{slice equivalence} $\depsum K H(m,l)$ has a counterpart in $\cat S/\simplex[n]$ which has a pullback $H(n,k)\ri \depsum K H(m,l)$ in $\cat S/\horn_k[n]$. The following examples of acyclic cofibrations helps to prove that this is an acyclic cofibration.
+As noted in lemma \ref{slice equivalence} $\depsum K H(m,l)$ has a counterpart in $\ambient\s/\simplex[n]$ which has a pullback $H(n,k)\ri \depsum K H(m,l)$ in $\ambient\s/\horn_k[n]$. The following examples of acyclic cofibrations helps to prove that this is an acyclic cofibration.
 
 \begin{lemma}[Face completion] Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have an edge $e$ in common. The inclusion $\bigcup F\to \simplex[p]$ is an acyclic cofibration. \label{face completion} \end{lemma}
 
 \begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$ and therefore an acyclic cofibration. Because acyclic cofibrations are closed under composition, $\bigcup F = F_0\to F_p = \simplex[p]$ is an acyclic cofibration. 
 \end{proof}
 
-\begin{lemma} The object $H(n,k)\ri \depsum K H(m,l)$ is a subobject of $H(n,l)\ri\simplex[K\xi]$ in $\cat S/\horn_k[n]$. The inclusion of their domains in $\cat S$, $H(n,k)\ri \depsum K H(m,l)$ is an acyclic cofibration. \label{acyclic cofibrancy} 
+\begin{lemma} In $\ambient\s/\horn_k[n]$, $H(n,k)\ri \depsum K H(m,l)$ is a subobject of $H(n,l)\ri\simplex[K\xi]$ . The inclusion of their domains in $\ambient\s$, $H(n,k)\ri \depsum K H(m,l)$ is an acyclic cofibration. \label{acyclic cofibrancy} 
 \[\xymatrix{
 \bullet \ar@{.>}[rr]^{H(n,k)\ri \depsum K H(m,l)} \ar[d] && \bullet\ar[rr]^{H(n,k)\ri\simplex(K\xi)}\ar[d] && \horn_k[n]\ar[d]^{H(n,k)}\\
 \bullet\ar[rr]_(.4){\depsum K H(m,l)} && \simplex[m+\norm\xi]\ar[rr]_(.6){\simplex(K\xi)} && \simplex[n]
