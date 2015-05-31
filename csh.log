@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  30 MAY 2015 19:05
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  31 MAY 2015 16:38
 entering extended mode
 **csh.tex
 (C:\Users\Wouter\Documents\GitHub\realy-hot\csh.tex
@@ -458,12 +458,12 @@ LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
 LaTeX Font Info:    Try loading font information for U+euf on input line 124.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\ueuf.fd"
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) [3] [4] [5] [6] [7] [8] <xymatrix 3x2 306> [9] <xymatrix
-2x2 182> [10] <xymatrix 2x2 223> [11] [12] <xymatrix 2x2 184> [13] <xymatrix 2x2 175> [14] <xymatrix 3x2 399> <xymatrix
-3x2 409> <xymatrix 3x2 312> [15] <xymatrix 3x2 399> <xymatrix 2x2 223> <xymatrix 3x2 398> [16] <xymatrix 3x2 409>
-<xymatrix 2x2 223> [17] <xymatrix 3x2 399> <xymatrix 3x2 402> [18] [19] [20] <xymatrix 2x2 209> [21] <xymatrix 5x2 317>
-[22] [23] <xymatrix 2x2 182> <xymatrix 2x2 183> [24]
-Underfull \hbox (badness 10000) in paragraph at lines 938--938
+) [3] [4] [5] [6] [7] [8] <xymatrix 3x2 306> <xymatrix 2x2
+182> [9] <xymatrix 2x2 223> [10] [11] <xymatrix 2x2 184> [12] <xymatrix 2x2 223> [13] <xymatrix 2x2 175> [14] <xymatrix
+3x2 399> <xymatrix 3x2 409> [15] <xymatrix 3x2 312> <xymatrix 3x2 399> <xymatrix 2x2 223> <xymatrix 3x2 398> [16]
+<xymatrix 3x2 409> <xymatrix 2x2 223> [17] <xymatrix 3x2 399> <xymatrix 3x2 402> [18] [19] <xymatrix 2x2 209> [20]
+[21] <xymatrix 5x2 317> [22] [23] <xymatrix 2x2 182> <xymatrix 2x2 183> [24]
+Underfull \hbox (badness 10000) in paragraph at lines 969--969
 
  []
 
@@ -471,12 +471,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 938--938
 Package logreq Info: Writing requests to 'csh.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 8736 strings out of 493922
- 128482 string characters out of 3147303
- 368604 words of memory out of 3000000
- 11931 multiletter control sequences out of 15000+200000
+ 8737 strings out of 493922
+ 128487 string characters out of 3147303
+ 366601 words of memory out of 3000000
+ 11932 multiletter control sequences out of 15000+200000
  19806 words of font info for 75 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  37i,14n,52p,1066b,936s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on csh.dvi (25 pages, 182564 bytes).
+Output written on csh.dvi (25 pages, 184656 bytes).

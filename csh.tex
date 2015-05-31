@@ -75,7 +75,7 @@ Poland}
 \newcommand\ex{_{\textrm{ex}}}
 \newcommand\citep[1]{[\cite{#1}]}
 
-\newcommand\code\mathtt
+
 \mathssbxdef{Func}
 \mathssbxdef[igen]{gen}
 
@@ -217,14 +217,17 @@ Universal quantification over $[m]$ reduces to a finite conjunction because $[m]
 As a replacement for the usual simplicial sets, we use the following structure in $\ambient$. These are essentially discrete opfibrations over $\simCat$.
 
 \mathrmdef{dim}
-\begin{definition} An \emph{internal simplicial object} is an object $X$ together with a morphism $\dim\of X\to\nno$ and an operator $\cdot$, whose domain is the following object.
-\[ \set{\tuplet{x,\xi}\of X\times\Ar(\simCat)| [\dim (x)]=\dom(\xi)} \]
-The codomain of $\cdot$ is $X$. The operator $\cdot$ satisfies $(x\cdot\alpha)\cdot\beta=x\cdot(\alpha\circ\beta)$ and $x\cdot\id_{[\dim x]}=x$.  
+\newcommand\base[1]{\mathbf{U}\!\left(#1\right)}
+\begin{definition} An \emph{internal simplicial object} $X=(\base X,\dim,\cdot)$ is an object $\base X$ together with a morphism $\dim\of \base X\to\nno$ and an operator $\cdot$, whose domain is the following object.
+\[ \set{\tuplet{x,\xi}\of \base X\times\Ar(\simCat)\middle| \dim (x)=\dom(\xi)} \]
+The codomain of $\cdot$ is $\base X$. The operator $\cdot$ satisfies $(x\cdot\alpha)\cdot\beta=x\cdot(\alpha\circ\beta)$ and $x\cdot\id_{[\dim x]}=x$.  
 
-A morphism of internal simplicial objects $(X,\dim,\cdot)\to (Y,\dim,\cdot)$ is a morphism $X\to Y$ that commutes with $\dim$ and $\cdot$. I.e. $f(x\cdot \xi)=f(x)\cdot\xi$ and $\dim(f(x))=\dim(x)$.
+A morphism of internal simplicial objects $X\to Y$ is a morphism $\base X\to \base Y$ that commutes with $\dim$ and $\cdot$. I.e. $f(x\cdot \xi)=f(x)\cdot\xi$ and $\dim(f(x))=\dim(x)$.
+
+The category of internal simplicial objects and morphisms of $\ambient$ is $\ambient\s$. For each object $I$ of $\ambient$, $(\ambient/I)\s$ is the internal category if simplicial objects of $\ambient/I$.
 \end{definition}\hide{ Is it feasible to rewrite the whole paper with these?}
 
-In a simplicial object $(X,\dim,\cdot)$, the $X$ is the object of simplices, $\dim$ is the number of dimensions of each simplex and $\cdot$ is the restriction functor.
+In a simplicial object $X$, $\base X$ is the object of simplices, $\dim$ is the dimension of each simplex. The operator $\cdot$ records how simplices of different dimensions fit together. 
 
 \begin{remark} When $\ambient$ has infinite colimits, any functor $\simCat\dual\to\ambient$ induces an internal simplicial object. The intended model does not have infinite colimits, however. The internal simplicial objects are a strict subcategory of the external ones in that case. That is also what gives this approach an advantage over earlier ones in the literature.%cite
 \end{remark}
@@ -241,7 +244,7 @@ Other thought: maybe treat the equivalence of $\ambient\s/J$ with $\ambient^{EJ}
 
 }
 
-\subsection{Filler operators}
+\subsection{Filler operators} %may need a new name
 Kan fibrations are morphisms of simplicial sets that have the lifting property relative to the family of horn inclusions. This subsection focuses on the lifting properties.
 
 \hide{
@@ -252,7 +255,7 @@ We just need to be careful about non projective simplicial objects--these newbie
 Check when being projective plays a role.
 }
 
-\begin{definition} For each pair of internal simplicial objects $X,Y$ let $\nat(X,Y)$ be the object of morphisms between them.
+\begin{definition} For each pair of internal simplicial objects $X$, $Y$ let $\nat(X,Y)$ be the object of morphisms between them.
 
 A morphism $f\of X\to Y$ of simplicial object has the \emph{right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the \emph{left} lifting property with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\nat(\id_J,f),\nat(g,\id_X))}$ 
 which is the factorization of the span $\nat(\id_J,f)$, $\nat(g,\id_X)$ through the pullback cone of $\nat(\id_I,f)$ and $\nat(g,\id_Y)$
@@ -283,41 +286,39 @@ We don't need the object of realizers anymore either.
 \hide{
 Explain $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ somewhere. It should be an internal simplicial object of the slice category. i.e. $(\ambient/I)\s$. 
 }
-%here: remove every reference to cat S
-\begin{definition}[Injective] Let $\code{sections}$ be the discrete isofibration of sections. %more information needed?
-An $I$-indexed-family of morphisms in $\ambient\s$ a morphism $a\of D\to E$ in $(\ambient\s)^{I\disc}$. Let $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$.
+\begin{definition}[Injective] An $I$-indexed-family of morphisms in $\ambient\s$ a morphism $a\of D\to E$ in $(\ambient\s)^{I\disc}$. Let $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$.
 \end{definition}
 
-\hide{ Here the definition of 'anodyne' used to go. May need a substitute. }
 
 \subsection{Kan fibrations}
-\hide{ significant rewriting will be needed here to avoid anodynes }
+\hide{ 
+
+Idea: define Kanfibrations, define cofibrations, demonstrate the lifting properties. Move on happily.
+
+
+}
 The subsection completes the definition of Kan fibrations.
 
-\hide{ Add def. of sieve over $\simCat$ }
-\begin{definition} For each $n\of \nno$ the \emph{cycle} $\cycle[n]$ is the sieve of non surjective functions that is a subobject of $\simplex[n]$. For each $n$ and $k\of\nno$ the \emph{horn} $\horn_k[n]$ is the sieve of the non decreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$. These sieves are definable because being surjective is a decidable property of morphisms $[m]\to[n]$. 
+\hide{ Add def. of sieve over $\simCat$
+Wrong: I was calling it a sieve because I was thinking of the category of elements of $\simplex[n]$
+$\ambient\s$ defined?
+Member functions for internal simplicial objects?
+ }
+\begin{definition} For each $n\in\N$, the $n$-simplex $\simplex[n]$ is the internal simplicial set where $\base{\simplex[n]}$ is the object of all morphisms $\phi$ in $\simCat$ such that $\cod(\phi) = n$, $\dim(\phi) = \dom(\phi)$ and $\phi\cdot \xi = \phi\circ \xi$.
+
+The \emph{cycle} $\cycle[n]$ is the subobject of non surjective functions of $\simplex[n]$. The $\dim$ and $\cdot$ are the same, and the bases are related as follows:
+\[ \base{\cycle[n]} = \set{\phi\of\base{\simplex[n]}| \exists i\of[n].\forall j\of \dom(\phi).\phi(i)\neq j } \]
+
+Similarly, for each $k\of[n]$ the \emph{horn} $\horn_k[n]$ is the sieve of the non decreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$.
+\[ \base{\horn_k[n]} = \set{\phi\of\base{\simplex[n]}| \exists i\of[n]-\set k.\forall j\of \dom(\phi).\phi(i)\neq j } \]
+These sieves are definable because being surjective is a decidable property of morphisms $[m]\to[n]$. 
 \end{definition}
 
 \begin{definition} Cycles and horns form families of morphisms indexed over $\nno$ and over $\set{(n,k)\in\nno\times\nno| k\leq n }$ respectively.
-\begin{align*} 
-\code{cycles}&\of\bullet\to \nno\\
- \code{horns}&\of\bullet\to\set{(n,k)\in\nno\times\nno| k\leq n }
-\end{align*}
 \begin{itemize}
 \item A \emph{Kan fibration} is an injective morphism relative to the family of all horn inclusions.
-\[ \code{fibration}(f) = \code{horns-injective}(f) \]
 \item An \emph{acyclic Kan fibration} is an injective morphism relative to the family of cycle inclusions.
-\[ \code{acyclic-fibration}(f) = \code{cycles-injective}(f) \]
 \item A \emph{Kan complex} or \emph{Kan fibrant object} is a simplicial object $X$ for which the unique morphism $X\to 1$ is a fibration.
-\[ \code{fibrant}(X) = \code{horns-injective}(\bang_X) \]
-
-\item A \emph{cofibration} is an anodyne morphism relative to the family of cycle inclusions.% this table has to be delayed
-\[ \code{cofibration}(f) = \code{cycles-anodyne}(f) \]
-\item A \emph{cofibrant object} is a simplicial object $X$ for which the unique morphism $0\to X$ is a cofibration.
-\[ \code{cofibrant}(X) = \code{cycles-anodyne}(\bang_X) \]
-\item An \emph{acyclic cofibration} is an anodyne morphism relative to the family of horn inclusions.
-\[ \code{acyclic-cofibration}(f) = \code{horns-anodyne}(f) \]
-\item A \emph{weak equivalence} is a morphism which factors as an acyclic fibration following an acyclic cofibration.
 \end{itemize}\label{Kan}
 
 The category of Kan complexes and morphisms of simplicial object is $\ambient\s\f$. \hide{
@@ -342,14 +343,16 @@ This paper usually leaves out `Kan' and simply talk about fibrations and complex
 \ar "a";"b" \ar "a";"d" \ar "b";"c" \ar "c";"e" \ar "d";"e" \ar@{.>} "d";"b" \ar@{.>} "d";"c"
 \endxy
 \]
-
-%anodynes don't come beyond this point, fortunately
-Anodynes have dual closure properties. Besides composition, they are closed under finitary coproducts and pushouts. Isomorphisms are anodynes and all morphisms that are both injective and anodyne are isomorphisms. Moreover, for each adjoint pair of functors $F\dashv G$ between two categories that have their own classes of anodynes and injectives, the left adjoint $F$ preserves anodynes if an only if the right adjoint $G$ preserves injectives.
-
-A consequence of these closure properties, is that horn inclusions are cofibrations, therefore that acyclic fibrations are fibrations and therefore all acyclic cofibrations are cofibrations.
 \end{remark}
 
 The next section demonstrates that the morphisms of definition \ref{Kan} form a model structure on $\ambient\s$ (theorem \ref{model category}).
+
+\hide{ What about acyclic cofibrations?
+
+We can introduce fibration without talking about acyclic cofibrations. We only need acyclic cofibrations between fibrant objects, and those are a kind of deformation retract--the first once mentioned in this paper where the homotopy commutes with the projection.
+
+There is an equivalence, so we can use the deformation retracts to define acyclic cofibrations. Great!
+}
 
 \section{Model structure}%class functors not mentioned in the sections below--"characteristic functors"
 Simplicial homotopy theory has been robbed of the comforts of classical foundations: the axiom of choice, the principle of the excluded middle, infinite limits and colimits etc. Yet the standard model structure of simplicial sets survives in the category of Kan complexes. This section runs through of the simplicial homotopy of Kan complexes \citep{Hovey99,GJSHT} in order to demonstrate that the familiar theory is constructive.
@@ -566,6 +569,35 @@ Y\ar@/_3ex/[rrr]_{\simplex(\delta^1_0)\times\id}&Y \ar[rr]|(.4){\simplex(\delta^
 The composition $A^{\simplex(\delta^1_0)}\circ d$ is filler for the square $k\circ a = b\circ f$. By abstraction there is a function that provides fillers for arbitrary commutative squares $f\to k$ where $k$ is a fibration. This proves $f$ is an acyclic cofibration.
 \end{proof}
 
+The inverse of the last lemma holds between fibrant objects.
+
+\begin{lemma} Between fibrant objects every acyclic cofibration $f\of X\to Y$ is a deformation retract with a left inverse $g\of Y\to X$ and a homotopy $h\of \simplex[1]\times Y\to Y$ that satisfies $h\circ(\id_{\simplex[1]}\times f) = f\circ \pi_1$. \end{lemma}
+
+\begin{proof} The lifting property gives the inverse straight away.
+\[ \xymatrix{
+X\ar[r]^\id\ar[d]_f & X\ar[d]^\bang\\
+Y\ar[r]_\bang \ar[ur]^g & 1
+}\]
+The homotopy comes from corollary \ref{triple lift}, where $f$ and $c\of 1+1\to\simplex[1]$ are the cofibrations and $\bang\of Y\to 1$ is the fibration.
+
+\[\xy
+(0,20)*+{X+X}="AC",(25,20)*+{\simplex[1]\times X}="BC",(50,20)*+{Y}="Y",
+(0,0)*+{Y+Y}="AD",(25,0)*+{\simplex[1]\times Y}="BD",(50,0)*+{1}="one"
+\ar^{c\times\id} "AC";"BC"
+\ar_{f+f} "AC";"AD"
+\ar_{c\times\id} "AD";"BD"
+\ar^(.3){(\id,f\circ g)} "AD";"Y"
+\ar|(.3){\id\times f} "BC";"BD"
+\ar^(.6){f\circ \pi_1} "BC";"Y"
+\ar@{.>}_{h} "BD";"Y"
+\ar_(.6){\bang} "BD";"one"
+\ar^{\bang} "Y";"one"
+\endxy\]
+
+
+\end{proof}
+
+
 \begin{lemma} Let $\pi\of \simplex[1]\times Y\to Y$ be the projection and let $c\of 1+1\to\simplex[1]$ be the cycle inclusion. Let $g\of Y\to X$ be a fibration, let $f\of X\to Y$ be a right inverse and let $h\of \simplex[1]\times Y \to Y$ be a homotopy that satisfies $g\circ h = g\circ \pi_1$. Then $f$ is an acyclic fibration. \label{deformation is acyclic}
 \hide{\[\xymatrix{
 Y+Y\ar[rr]^{(\id,f\circ g)}\ar[d]_{c\times \id} && Y\ar[d]^g \\
@@ -733,7 +765,6 @@ X\ar[r]^f\ar[d]_b & Y\ar[r]^h\ar[d]^d\ar[dr]^g & \bullet\ar[d]^k\\
 This means that weak equivalences indeed satisfy 2-out-of-3.
 \end{proof}
 
-\begin{remark} At this point we finally have worked out enough structure to introduce a characteristic functor of the weak equivalences. Pick one the factorizations into a fibration following a cofibration form propositions \ref{factor1} or \ref{factor2}. The characteristic functor $\code{weak-equivalence}$ presents witnesses that the members of the chosen factorization are acyclic. The closure of this new class under 2-out-of-3 is a natural transformations of the functor $\code{weak-equivalence}$ and other functors constructed form it. The proof above has the elements of its construction. \end{remark}
 
 \subsection{Conclusion}
 For a definition of model categories see [\cite{Hovey99, GJSHT}]. The simplicial homotopy of Kan complexes is valid in the internal ELCCC $\ambient$ in the following sense.
