@@ -278,7 +278,7 @@ A morphism can have a lifting property relative to a family or class of morphism
 
 
 \hide{
-n=New idea: everything follows form the projectivity of added faces.
+New idea: everything follows form the projectivity of added faces.
 
 We don't need the object of realizers anymore either.
 }
@@ -293,7 +293,7 @@ Explain $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ somewhere. It should be an 
 \subsection{Kan fibrations}
 \hide{ 
 
-Idea: define Kanfibrations, define cofibrations, demonstrate the lifting properties. Move on happily.
+Idea: define Kan fibrations, define cofibrations, demonstrate the lifting properties. Move on happily.
 
 
 }
@@ -368,6 +368,29 @@ This subsection characterizes the cofibrations of $\ambient\s$. It also proves t
 
 Internally the representation of a free cofibration is much simpler than that of a cofibration, since the family of morphisms $s_i$--which is unique if it exists--already witnesses membership.%hold that thought...
 
+\hide{maybe the wrong place. Notice how important it makes projectives. }
+To demonstrate the lifting property for these cofibrations we use a limited version of a classical principle.
+The \emph{axiom schema of dependent choice} says that for each non empty set $X$ and each entire relation $R$, for each $x\in X$ there is a function $f\of\N\to X$ such that $f(0)=x$ and $R(f(n),f(n+1))$ for each $n\in\N$. 
+Quantifying over all entire relations is not possible in the internal language of every pretopos and choice is limited to projective objects. The category $\ambient$ has plenty of those.
+
+\begin{theorem}[Dependent Choice]
+Let $X,R$ be objects of $\ambient$ and let $p,q\of R\to X$ be morphisms of which $p$ is a regular epimorphism. For each $x\of 1\to \nno$, there is a morphism $f\of\nno\to X$ such that $f(0)=x$ and $(f,f\circ s)\of \nno\to X\times X$--where $s$ is the successor morphism--factors through $(p,q)\of R\to X\times X$.
+\[\xymatrix{
+&& R\ar[d]^{(p,q)}\\
+\nno\ar[rr]_{(f,f\circ(s,\id))} \ar@{.>}[urr] && X\times X
+}\]
+\end{theorem}
+
+\begin{proof} Since $\ambient$ has enough projectives, there is a projective object $Y$ with a regular epimorphism $a\of Y\to X$. There is a $b\of Y\to R$ such that $p\circ b=a$ and a $c\of Y\to Y$ such that $a\circ c = q\circ b$, because $Y$ is projective and $p$ and $a$ are regular epimorphisms.
+\[\xymatrix{
+Y\ar@{.>}[rr]^c \ar@{.>}[dr]^b \ar[d]_a && Y\ar[d]^a\\
+X & R\ar[l]^p\ar[r]_q & X
+}\]
+Because $1$ is projective in $\ambient$, there is a $y\of 1\to Y$ such that $a\circ y = x$. Therefore there is a $d\of\nno\to Y$ such that $d(0)=y$ and $d\circ s = c\circ d$. Let $f=a\circ d$. Now $f = p\circ (b\circ d)$ and $f\circ s = q\circ (b\circ d)$, so $(f,f\circ s)$ factors through $(p,q)$.
+\end{proof}
+
+\begin{remark} Dependent choice may have counterexamples in slices over non projective objects, so it isn't valid in the internal language. \end{remark}
+
 %This lemma should talk about lifting properties only
 \begin{lemma} Every free cofibration is a cofibration. \label{Reedy}\end{lemma}
 
@@ -380,6 +403,10 @@ Cofibrations are closed under pushouts, finite and internal coproducts and trans
 The inclusion $X\to Y_0 = X+\simCat\ri(A_0)$ is a pushout of $A_0$ copies of the cofibration $0\to 1$ and hence a cofibration.
 For $i>0$, if $y\of S_i$ then $Y_i\cap y$ is the boundary of $y$, hence $Y_{i-1}\to Y_i$ is a pushout of $S_i$ copies of the cofibration $\cycle[j]\to\simplex[j]$ and hence a cofibration. Because $f\of X\to Y$ is the colimit of the inclusions $X\to Y_j$ and those inclusions are compositions of cofibrations, $f$ is a cofibration.
 \end{proof}
+
+\hide{
+Complete it. Show it works internally.
+}
 
 The rest of this subsection shows the converse, i.e.\ every cofibration is free, by factoring every morphism as an acyclic fibration following a free cofibration. The factorization requires objects of cofibrations constructed from a classifier of locally decidable subobjects as described below.
 
