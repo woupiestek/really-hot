@@ -10,7 +10,7 @@
 
 %\renewcommand*\ttdefault{pcr}
 
-\title{Realizable Simplicial Homotopy}
+\title{Weakly Predicative Simplicial Homotopy}
 \author{Wouter Pieter Stekelenburg}\copyrightyear{2015}
 \address{Faculty of Mathematics, Informatics and Mechanics\\
 University of Warsaw\\
@@ -87,6 +87,13 @@ Poland}
 \begin{document}
 
 \begin{abstract} The paper show how to develop simplicial homotopy inside realizability categories like the category of assemblies, where the small object argument and minimal fibrations are unavailable. This way simplicial assemblies are a suitable model for homotopy type theory.\end{abstract}
+
+\hide{
+Three papers:
+-simplicial homotopy
+-complete categories
+-the realizability model of HOTT
+}
 
 \maketitle
 
@@ -290,11 +297,15 @@ Explain $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ somewhere. It should be an 
 \end{definition}
 
 
-\subsection{Kan fibrations}
+\section{Cofibrations}%class functors not mentioned in the sections below--"characteristic functors"
+This section defines acyclic fibrations and cofibrations and shows that they form a weak factorization system on $\ambient\s$.
+
+\subsection{acyclic fibrations}
 \hide{ 
 
 Idea: define Kan fibrations, define cofibrations, demonstrate the lifting properties. Move on happily.
 
+New idea: go by factorization system.
 
 }
 The subsection completes the definition of Kan fibrations.
@@ -345,41 +356,43 @@ This paper usually leaves out `Kan' and simply talk about fibrations and complex
 \]
 \end{remark}
 
-The next section demonstrates that the morphisms of definition \ref{Kan} form a model structure on $\ambient\s$ (theorem \ref{model category}).
-
-\hide{ What about acyclic cofibrations?
-
-We can introduce fibration without talking about acyclic cofibrations. We only need acyclic cofibrations between fibrant objects, and those are a kind of deformation retract--the first once mentioned in this paper where the homotopy commutes with the projection.
-
-There is an equivalence, so we can use the deformation retracts to define acyclic cofibrations. Great!
-}
-
-\section{Model structure}%class functors not mentioned in the sections below--"characteristic functors"
-Simplicial homotopy theory has been robbed of the comforts of classical foundations: the axiom of choice, the principle of the excluded middle, infinite limits and colimits etc. Yet the standard model structure of simplicial sets survives in the category of Kan complexes. This section runs through of the simplicial homotopy of Kan complexes \citep{Hovey99,GJSHT} in order to demonstrate that the familiar theory is constructive.
 
 \subsection{Cofibrations}
-This subsection characterizes the cofibrations of $\ambient\s$. It also proves that arbitrary morphisms factor as acyclic fibrations following cofibrations. The characteristic property is that a certain relation between the morphism and morphisms in the codomain is decidable.
 
-\begin{definition} A $y\of Y[n]$ is called an \emph{$n$-simplex} of $Y$. An $n$-simplex is \emph{degenerate} if there is an $s\of [n]\to [n]$ different from $\id_{[n]}$ such that $Y(s)(y)=y$. If there are no such $s$ and $x$, then $y$ is \emph{nondegenerate} and also called a \emph{face} of $Y$.\end{definition}
+\begin{definition} A $y\of Y[n]$ is called an \emph{$n$-simplex} of $Y$. An $n$-simplex is \emph{degenerate} if there is an $s\of [n]\to [n]$ different from $\id_{[n]}$ such that $Y(s)(y)=y$. If there are no such $s$ and $x$, then $y$ is \emph{nondegenerate}. A nondegenerate simplex is called a \emph{face}.\end{definition}
 
 %This should more or less become the definition of cofibration, by adding something about projectivity.
-\begin{definition} A monomorphism is a \emph{free cofibration} if for each $i\in \nno$, there is an object $S_i$ of $i$-dimensional faces of $Y$ which are not in the image of $X$. This means that there are $s_i:Y[i]\to\bool$ such that all $S_i$ are pullbacks of $\true:1\to\bool$.
+\begin{definition} A monomorphism is a \emph{cofibration} if for each $i\in \nno$, there is an object $S_i$ of $i$-dimensional faces of $Y$ which are not in the image of $X$. This means that there are $s:\base Y\to\bool$ such that $s(x)=\true$ if and only if $x$ is a face and $x$ is not a member of $X$.
 \end{definition}
 
-Internally the representation of a free cofibration is much simpler than that of a cofibration, since the family of morphisms $s_i$--which is unique if it exists--already witnesses membership.%hold that thought...
+
+\hide{
+The principle we need says that certain transfinite compositions of regular epimorphisms are regular epimorphisms. 
+To make things more awkward, we are dealing with an internal family of morphisms rather than an external one.
+
+}
 
 \hide{maybe the wrong place. Notice how important it makes projectives. }
 To demonstrate the lifting property for these cofibrations we use a limited version of a classical principle.
 The \emph{axiom schema of dependent choice} says that for each non empty set $X$ and each entire relation $R$, for each $x\in X$ there is a function $f\of\N\to X$ such that $f(0)=x$ and $R(f(n),f(n+1))$ for each $n\in\N$. 
 Quantifying over all entire relations is not possible in the internal language of every pretopos and choice is limited to projective objects. The category $\ambient$ has plenty of those.
 
-\begin{theorem}[Dependent Choice]
+\begin{definition} The successor morphism $s\of\nno\to\nno$ induces an endofunctor $s\ri$ of $\ambient/\nno$. An $s\ri$-algebra is a morphism $f\of s\ri(X)\to X$ in $\ambient\nno$. A morphism $(X,f)\to(Y,g)$ is a morphism $h\of X\to Y$ such that $h\circ f = g\circ s\ri(h)$.
+
+For every object $Y$ of $\ambient$ there is a constant family $\nno\ri(Y)$ and for these constant families $s\ri(Y)\simeq Y$. The isomorphism turn constant families into trivial algebras. The \emph{transfinite composition} is a universal morphism of $s\ri$-algebras $h\of \nno\ri Y\to (X,f)$, i.e. for every other morphism $k\of \nno\ri Z\to (X,f)$ there is a morphism $l\of Z\to Y$ such that $h\circ s\ri(l)=k$.
+
+The dual notion for a coalgebra $X\to s\ri(X)$ is also called the transfinite composition of the coalgebra.
+\end{definition}\hide{Every isomorphism-algebra is a constant family.}
+
+\begin{proposition}[Dependent Choice]
+If an $s\ri$-algebra is a regular epimorphism, then so are its transfinite compositions.%Better this way!?
+
 Let $X,R$ be objects of $\ambient$ and let $p,q\of R\to X$ be morphisms of which $p$ is a regular epimorphism. For each $x\of 1\to \nno$, there is a morphism $f\of\nno\to X$ such that $f(0)=x$ and $(f,f\circ s)\of \nno\to X\times X$--where $s$ is the successor morphism--factors through $(p,q)\of R\to X\times X$.
 \[\xymatrix{
 && R\ar[d]^{(p,q)}\\
 \nno\ar[rr]_{(f,f\circ(s,\id))} \ar@{.>}[urr] && X\times X
 }\]
-\end{theorem}
+\end{proposition}
 
 \begin{proof} Since $\ambient$ has enough projectives, there is a projective object $Y$ with a regular epimorphism $a\of Y\to X$. There is a $b\of Y\to R$ such that $p\circ b=a$ and a $c\of Y\to Y$ such that $a\circ c = q\circ b$, because $Y$ is projective and $p$ and $a$ are regular epimorphisms.
 \[\xymatrix{
@@ -392,16 +405,22 @@ Because $1$ is projective in $\ambient$, there is a $y\of 1\to Y$ such that $a\c
 \begin{remark} Dependent choice may have counterexamples in slices over non projective objects, so it isn't valid in the internal language. \end{remark}
 
 %This lemma should talk about lifting properties only
-\begin{lemma} Every free cofibration is a cofibration. \label{Reedy}\end{lemma}
+\begin{lemma} Every cofibration has the left lifting property with respect to all acyclic fibrations. \label{Reedy}\end{lemma}
 
-\begin{proof} Suppose $f\of X\to Y$ is a free cofibration and $i\of\nno\mapsto S_i$ is the family of faces outside the image of $f$. 
-For each $i\of\nno$ let $Y_i$ be the sieve of $Y$ which omits the simplices in $S_j$ for $j>i$.
+\begin{proof} By definition every cofibration is an internal infinite composition of pushouts of cycle inclusions. 
+
+Suppose $f\of X\to Y$ is a free cofibration and $i\of\nno\mapsto S_i$ is the family of faces outside the image of $f$. 
+For each $i\of\nno$ let $Y_i$ be the union of $X$ with all $Y$ faces of $Y$ of dimension $\leq i$.
 Let $\simCat\ri\of \ambient\to\ambient\s$ be the constant simplicial assembly functor. 
 Each $y\in S_i$ corresponds to a monomorphism $\simplex[i]\to Y$ which does not factor through $f$ by the Yoneda lemma.
 
 Cofibrations are closed under pushouts, finite and internal coproducts and transfinite compositions for all the usual reasons.
 The inclusion $X\to Y_0 = X+\simCat\ri(A_0)$ is a pushout of $A_0$ copies of the cofibration $0\to 1$ and hence a cofibration.
 For $i>0$, if $y\of S_i$ then $Y_i\cap y$ is the boundary of $y$, hence $Y_{i-1}\to Y_i$ is a pushout of $S_i$ copies of the cofibration $\cycle[j]\to\simplex[j]$ and hence a cofibration. Because $f\of X\to Y$ is the colimit of the inclusions $X\to Y_j$ and those inclusions are compositions of cofibrations, $f$ is a cofibration.
+
+\hide{
+The exact use of the dependent choice principle is vague.
+}
 \end{proof}
 
 \hide{
@@ -471,6 +490,8 @@ For each simplex $y$ of $Y$, $k(y)=\tuplet{a,b,c,d}$. The simplex $y$ is in the 
 \end{proof}
 
 The equivalence means that one of the factorization systems that the model structure requires is already present. It also means that the simpler functor that represent the free cofibrations also represents the class of cofibrations.
+
+\section{Acyclic Cofibrations}
 
 \subsection{Pullback exponentials}
 Kan complexes add additional structure that permits the factorization of morphisms of simplicial objects into Kan fibrations and acyclic cofibrations. Pullback exponentials and their duals, pushout products, are at the core of this argument.
@@ -549,7 +570,6 @@ A\ar[r]^{a^t}\ar[d]_f & X^D\ar[r]^{X^g}\ar[d]^(.7){h^D} & X^C\ar[d]^{h^C}\\
 B\ar[r]_{c^t} \ar[urr]_(.7){b^t} \ar@{.>}[ur]^{d^t} & Y^D \ar[r]_{Y^g} & Y^C
 }\]}\label{triple lift}
 \end{corollary}
-
 
 \subsection{Deformation retracts}
 In the classical situation, acyclic cofibrations between Kan complexes are deformation retracts. These still play an important role in the model structure on $\ambient\s\f$.
@@ -686,6 +706,8 @@ Because $\phi\circ(\id_{\simplex[1]\times h}) = h\circ \pi_1$, the cofibration $
 As promised the morphism $f$ factors as the fibration $f_1\circ g$ following the acyclic cofibration $h$.
 \end{proof}
 
+
+\section{Model structure}
 \subsection{Two-out-of-three}
 The category $\ambient\s\f$ has the two weak factorization systems that a model structure requires. This subsection demonstrates that the weak equivalences satisfy the 2-out-of-3 property and completes the proof that $\ambient\s\f$ is a model category.
 
