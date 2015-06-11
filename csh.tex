@@ -93,6 +93,10 @@ Three papers:
 -simplicial homotopy
 -complete categories
 -the realizability model of HOTT
+
+
+Idee: reverse the order. definitions--theorem--lemmas. That way the purpose of the lemmas is set up from the start.
+
 }
 
 \maketitle
@@ -146,10 +150,6 @@ The \emph{set} of natural numbers is $\N$, and since it is a set, $i\in \N$ indi
 
 Let $\cat C$ be an internal category. Its object of objects is $\Ob(\cat C)$ and its object of arrows is $\Ar(\cat C)$, so in this case $\cod$ and $\dom$ are morphisms $\Ar(\cat C)\to\Ob(\cat C)$ and $\id\of\Ob(\cat C)\to\Ar(\cat C)$. Let $\cat D$ be another internal category. The internal category of functors $\cat C\to\cat D$ is $\Func(\cat C,\cat D)$ or $\cat D^{\cat C}$.
 
-%here
-\hide{What is below this line has not been adapted yet}
-
-\hide{removed ELCCCs}
 
 \subsection{Dependent types}
 Dependent type theory describe the constructions of objects and morphisms that are available in a locally Cartesian closed category.
@@ -288,9 +288,7 @@ A morphism can have a lifting property relative to a family or class of morphism
 New idea: everything follows form the projectivity of added faces.
 
 We don't need the object of realizers anymore either.
-}
 
-\hide{
 Explain $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ somewhere. It should be an internal simplicial object of the slice category. i.e. $(\ambient/I)\s$. 
 }
 \begin{definition}[Injective] An $I$-indexed-family of morphisms in $\ambient\s$ a morphism $a\of D\to E$ in $(\ambient\s)^{I\disc}$. Let $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the global right lifting property with respect to $a$.
@@ -298,17 +296,23 @@ Explain $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ somewhere. It should be an 
 
 
 \section{Cofibrations}%class functors not mentioned in the sections below--"characteristic functors"
-This section defines acyclic fibrations and cofibrations and shows that they form a weak factorization system on $\ambient\s$.
 
-\subsection{acyclic fibrations}
+\begin{definition} An \emph{internal factorization system} on a category consists of two classes of morphisms $L$ and $R$, with the properties that a morphism $l$ belongs to $L$ if an only if it has the left lifting property with respect all to members of $R$, $R$ has the dual property, and such that every morphism factors as a member of $R$ following a member of $L$.\end{definition}
+
+This section defines \emph{(acyclic) fibrations} and \emph{cofibrations} and shows that they form an \emph{internal factorization system} on $\ambient\s$.
+
+\subsection{fibrations}
 \hide{ 
 
 Idea: define Kan fibrations, define cofibrations, demonstrate the lifting properties. Move on happily.
 
 New idea: go by factorization system.
 
+1. The lifting properties of cofibrations
+2. Factorization property
+
 }
-The subsection completes the definition of Kan fibrations.
+Both fibrations and acyclic fibrations are defined the same way: they have the right lifting property with respect to a specific family of morphisms.
 
 \hide{ Add def. of sieve over $\simCat$
 Wrong: I was calling it a sieve because I was thinking of the category of elements of $\simplex[n]$
@@ -322,8 +326,10 @@ The \emph{cycle} $\cycle[n]$ is the subobject of non surjective functions of $\s
 
 Similarly, for each $k\of[n]$ the \emph{horn} $\horn_k[n]$ is the sieve of the non decreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$.
 \[ \base{\horn_k[n]} = \set{\phi\of\base{\simplex[n]}| \exists i\of[n]-\set k.\forall j\of \dom(\phi).\phi(i)\neq j } \]
-These sieves are definable because being surjective is a decidable property of morphisms $[m]\to[n]$. 
+
 \end{definition}
+
+These subobjects are definable in the internal language of $\ambient$ because being surjective is a decidable property of morphisms $[m]\to[n]$.
 
 \begin{definition} Cycles and horns form families of morphisms indexed over $\nno$ and over $\set{(n,k)\in\nno\times\nno| k\leq n }$ respectively.
 \begin{itemize}
@@ -337,11 +343,40 @@ In the categories we are looking at, the terminal object is projective. Therefor
 [I am so angry]
 }
 \end{definition}
-This paper usually leaves out `Kan' and simply talk about fibrations and complexes. 
+This paper usually leaves out `Kan' and simply talk about fibrations and complexes.
 
 \hide{ no witnesses }
 
-\begin{remark}[Saturation] Injectives are closed under various constructions, notably compositions, finitary products and pullbacks. Every isomorphism is injective. Moreover, the filler operators for the new injectives are functions of the existing filler operators, which are represented by natural transformations of internal functors.
+
+
+\subsection{Cofibrations}
+
+\begin{definition} A $y\of Y[n]$ is called an \emph{$n$-simplex} of $Y$. An $n$-simplex is \emph{degenerate} if there is an $s\of [n]\to [n]$ different from $\id_{[n]}$ such that $Y(s)(y)=y$. If there are no such $s$ and $x$, then $y$ is \emph{nondegenerate}. A nondegenerate simplex is called a \emph{face}. 
+
+A monomorphism $f\of X\to Y$ is a \emph{cofibration} if there is a projective object $S$ of all faces outside of the image of $f$.
+\end{definition}
+
+\begin{lemma} Acyclic fibrations and cofibrations form a weak factorizations system.
+\end{lemma}
+
+\begin{proof}
+Proposition \ref{factor1} shows that every morphisms factors as an acyclic fibration following a cofibration. Lemma \ref{Reedy} shows that cofibrations have the required lifting property. Finally, proposition \ref{cofibration characterization} shows that every morphisms that has the right lifting property with respect to every cofibration.
+\end{proof}
+
+
+\subsubsection{Lifting}
+The class of morphisms that has the right lifting property with respect to all fibrations, is closed under various constructions, notably compositions, finitary coproducts and pushouts. They are also closed under transfinite compositions of cochains \hide{lemma...}, which are defined as follows.
+
+\begin{definition} The successor morphism $s\of\nno\to\nno$ induces an endofunctor $s\ri$ of $\ambient/\nno$. A \emph{chain} is a morphism a morphism $f\of s\ri(X)\to X$ in $\ambient/\nno$.  A morphism of chains $(X,f)\to(Y,g)$ is a morphism $h\of X\to Y$ such that $h\circ f = g\circ s\ri(h)$.
+
+Dually, a morphism $f\of X\to s\ri(X)$ is a \emph{cochain} and a \emph{cochain morphism} commutes with cochains in the dual way.
+
+For every object $Y$ of $\ambient$ there is a constant family $\nno\ri(Y)$ and for these constant families $s\ri(Y)\simeq Y$. The isomorphism turn constant families into trivial algebras. The \emph{transfinite composition} is a universal morphism of $s\ri$-algebras $h\of \nno\ri Y\to (X,f)$, i.e. for every other morphism $k\of \nno\ri Z\to (X,f)$ there is a morphism $l\of Z\to Y$ such that $h\circ s\ri(l)=k$.
+
+The dual notion for a coalgebra $X\to s\ri(X)$ is also called the transfinite composition of the coalgebra.
+\end{definition}\hide{Every isomorphism-algebra is a constant family.}
+
+\hide{Every isomorphism is injective. Moreover, the filler operators for the new injectives are functions of the existing filler operators, which are represented by natural transformations of internal functors.
 \[
 \xy
 (0,12)*+{\bullet}="a",(12,12)*+{\bullet}="b",(24,12)*+{\bullet}="c",
@@ -354,16 +389,49 @@ This paper usually leaves out `Kan' and simply talk about fibrations and complex
 \ar "a";"b" \ar "a";"d" \ar "b";"c" \ar "c";"e" \ar "d";"e" \ar@{.>} "d";"b" \ar@{.>} "d";"c"
 \endxy
 \]
-\end{remark}
+}
+
+\begin{lemma} Every cofibration has the left lifting property with respect to all acyclic fibrations. \label{Reedy}\end{lemma}
+
+\begin{proof} By definition every cofibration is the transfinite composition of pushouts of coproducts of cycle inclusions.
+
+Suppose $f\of X\to Y$ is a free cofibration and $S$ is the family of faces outside the image of $f$. For each $i\of\nno$ let $Y_i$ be the union of $X$ with all faces of $Y$ of dimension strictly smaller than $i$. In particular $Y_0=X$.
+
+Every simplex of $Y$ is in $Y_i$ for some $i$. If a simplex $y\of\base Y$ is degenerate, then one can search the monomorphisms $[n]\to\dim y$ in $\simCat$ for the greatest $\mu$ such that $y\cdot\mu$ is a face. For this reason, the inclusion $Y_i\to\nno\ri Y$ is a transfinite composition.
+
+For each $i\of\nno$ let $S_i$ be the object of $n$-dimensional faces in $S$. Each $s\of S_i$ induces a monomorphism $s'\of\simplex[i]\to Y_{i+1}$. Since $Y_{i}$ has all simplices of dimension $i-1$, the intersection of $Y_i$ and $s'$ is $\cycle[i]$. Thus the inclusion $Y_i\to Y_{i+1}$ is the push out of $S_{i+1}$ copies of $\cycle[i]\to\simplex[i]$. 
+
+Cofibrations have the left lifting property by lemma \ref{saturation} below.
+\end{proof}
 
 
-\subsection{Cofibrations}
+\begin{lemma} The class of morphisms $L$ that has the left lifting property with respect to fibrations is closed under pushouts, coproducts over projectives and transfinite compositions. \label{saturation}
+\end{lemma}
 
-\begin{definition} A $y\of Y[n]$ is called an \emph{$n$-simplex} of $Y$. An $n$-simplex is \emph{degenerate} if there is an $s\of [n]\to [n]$ different from $\id_{[n]}$ such that $Y(s)(y)=y$. If there are no such $s$ and $x$, then $y$ is \emph{nondegenerate}. A nondegenerate simplex is called a \emph{face}.\end{definition}
+\begin{proof}
+In each case the construction induces an operation on the regular epimorphism in the diagram of the lifting property. 
+Regular epimorphisms in $\ambient\s$ are morphisms whose underlying morphisms are regular epimorphisms in $\ambient$, because it is a category of presheaves.%cite
+\hide{
+Maybe a simple argument is that exact completion and simplicial set forming commute?
+}
 
-%This should more or less become the definition of cofibration, by adding something about projectivity.
-\begin{definition} A monomorphism is a \emph{cofibration} if for each $i\in \nno$, there is an object $S_i$ of $i$-dimensional faces of $Y$ which are not in the image of $X$. This means that there are $s:\base Y\to\bool$ such that $s(x)=\true$ if and only if $x$ is a face and $x$ is not a member of $X$.
-\end{definition}
+In the case of the pushouts, the construction is a pullback, which preserve regular epimorphisms.
+
+Since projectives are closed under pullbacks in $\ambient$, the adjoint fibred exponentials preserve regular epimorphisms.
+
+\hide{%here
+Consider we are mixing objects of $\ambient$ and $\ambient\s$, so be careful.
+
+The lemma may be worth generalizing for 2-out-of-3.
+
+Examples of factorization systems: projective versus regular epic, decidable versus split epic
+}
+
+The transfinite compositions relies on the projectives of $\ambient\s$. Like $\ambient$, $\ambient\s$ has enough projectives. \hide{
+From $X_i\to X_{i+1}$ to $Y^{X_{i+1}}\to Y^{X_i}$. A projective cover $\to Y^X$ induces a cochain morphism $\nno\ri Y\to f$ by induction. This must factor through the transfinite composition.
+}
+
+\end{proof}
 
 
 \hide{
@@ -377,14 +445,8 @@ To demonstrate the lifting property for these cofibrations we use a limited vers
 The \emph{axiom schema of dependent choice} says that for each non empty set $X$ and each entire relation $R$, for each $x\in X$ there is a function $f\of\N\to X$ such that $f(0)=x$ and $R(f(n),f(n+1))$ for each $n\in\N$. 
 Quantifying over all entire relations is not possible in the internal language of every pretopos and choice is limited to projective objects. The category $\ambient$ has plenty of those.
 
-\begin{definition} The successor morphism $s\of\nno\to\nno$ induces an endofunctor $s\ri$ of $\ambient/\nno$. An $s\ri$-algebra is a morphism $f\of s\ri(X)\to X$ in $\ambient\nno$. A morphism $(X,f)\to(Y,g)$ is a morphism $h\of X\to Y$ such that $h\circ f = g\circ s\ri(h)$.
 
-For every object $Y$ of $\ambient$ there is a constant family $\nno\ri(Y)$ and for these constant families $s\ri(Y)\simeq Y$. The isomorphism turn constant families into trivial algebras. The \emph{transfinite composition} is a universal morphism of $s\ri$-algebras $h\of \nno\ri Y\to (X,f)$, i.e. for every other morphism $k\of \nno\ri Z\to (X,f)$ there is a morphism $l\of Z\to Y$ such that $h\circ s\ri(l)=k$.
-
-The dual notion for a coalgebra $X\to s\ri(X)$ is also called the transfinite composition of the coalgebra.
-\end{definition}\hide{Every isomorphism-algebra is a constant family.}
-
-\begin{proposition}[Dependent Choice]
+\begin{lemma}[Dependent Choice]
 If an $s\ri$-algebra is a regular epimorphism, then so are its transfinite compositions.%Better this way!?
 
 Let $X,R$ be objects of $\ambient$ and let $p,q\of R\to X$ be morphisms of which $p$ is a regular epimorphism. For each $x\of 1\to \nno$, there is a morphism $f\of\nno\to X$ such that $f(0)=x$ and $(f,f\circ s)\of \nno\to X\times X$--where $s$ is the successor morphism--factors through $(p,q)\of R\to X\times X$.
@@ -392,7 +454,7 @@ Let $X,R$ be objects of $\ambient$ and let $p,q\of R\to X$ be morphisms of which
 && R\ar[d]^{(p,q)}\\
 \nno\ar[rr]_{(f,f\circ(s,\id))} \ar@{.>}[urr] && X\times X
 }\]
-\end{proposition}
+\end{lemma}
 
 \begin{proof} Since $\ambient$ has enough projectives, there is a projective object $Y$ with a regular epimorphism $a\of Y\to X$. There is a $b\of Y\to R$ such that $p\circ b=a$ and a $c\of Y\to Y$ such that $a\circ c = q\circ b$, because $Y$ is projective and $p$ and $a$ are regular epimorphisms.
 \[\xymatrix{
@@ -404,24 +466,6 @@ Because $1$ is projective in $\ambient$, there is a $y\of 1\to Y$ such that $a\c
 
 \begin{remark} Dependent choice may have counterexamples in slices over non projective objects, so it isn't valid in the internal language. \end{remark}
 
-%This lemma should talk about lifting properties only
-\begin{lemma} Every cofibration has the left lifting property with respect to all acyclic fibrations. \label{Reedy}\end{lemma}
-
-\begin{proof} By definition every cofibration is an internal infinite composition of pushouts of cycle inclusions. 
-
-Suppose $f\of X\to Y$ is a free cofibration and $i\of\nno\mapsto S_i$ is the family of faces outside the image of $f$. 
-For each $i\of\nno$ let $Y_i$ be the union of $X$ with all $Y$ faces of $Y$ of dimension $\leq i$.
-Let $\simCat\ri\of \ambient\to\ambient\s$ be the constant simplicial assembly functor. 
-Each $y\in S_i$ corresponds to a monomorphism $\simplex[i]\to Y$ which does not factor through $f$ by the Yoneda lemma.
-
-Cofibrations are closed under pushouts, finite and internal coproducts and transfinite compositions for all the usual reasons.
-The inclusion $X\to Y_0 = X+\simCat\ri(A_0)$ is a pushout of $A_0$ copies of the cofibration $0\to 1$ and hence a cofibration.
-For $i>0$, if $y\of S_i$ then $Y_i\cap y$ is the boundary of $y$, hence $Y_{i-1}\to Y_i$ is a pushout of $S_i$ copies of the cofibration $\cycle[j]\to\simplex[j]$ and hence a cofibration. Because $f\of X\to Y$ is the colimit of the inclusions $X\to Y_j$ and those inclusions are compositions of cofibrations, $f$ is a cofibration.
-
-\hide{
-The exact use of the dependent choice principle is vague.
-}
-\end{proof}
 
 \hide{
 Complete it. Show it works internally.
@@ -429,16 +473,9 @@ Complete it. Show it works internally.
 
 The rest of this subsection shows the converse, i.e.\ every cofibration is free, by factoring every morphism as an acyclic fibration following a free cofibration. The factorization requires objects of cofibrations constructed from a classifier of locally decidable subobjects as described below.
 
-\begin{definition} A monomorphism $m\of X\to Y$ of $\ambient\s$ is \emph{locally decidable} if for each $i\of\nno$ monomorphism $m[i]\of X[i]\to Y[i]$ is \emph{decidable}, i.e.\ isomorphic to a coproduct inclusion, in $\ambient$. \end{definition}
+\begin{proposition} Every morphism $f\of X\to Y$ of $\ambient\s$ factors as an acyclic fibration following a cofibration. \label{factor1} \end{proposition}
 
-\begin{lemma} The category $\ambient\s$ has a locally decidable monomorphism $t\of 1\to \LDMC$ such that every morphism is a locally decidable monomorphism if and only if it is a pullback of $t$. \end{lemma}
-
-\begin{proof} The morphism $t$ is defined in such a way that a witness that a morphism $f\of X\to Y$ is locally decidable is essentially already a pullback square $f\to t$. For any object $X$ of $\ambient\s$ let a \emph{decidable sieve} be a $p\of(\Sigma i\of\nno.X[i])\to\bool$ such that $p(x)=\true$ implies $p(x\circ X(f))=\true$ for each morphism $f\of [m]\to [n]$ of $\simCat$ and $x\in X[n]$. For each $i\in\nno$, $\LDMC[i]$ is the object of \emph{decidable sieves} of $\simplex[i]$. The Yoneda lemma takes care of the rest. \end{proof}
-
-\begin{proposition} Every morphism $f\of X\to Y$ of $\ambient\s$ factors as an acyclic fibration following a free cofibration. \label{factor1} \end{proposition}
-
-\begin{proof}
-Let $Z$ be the following object of $\ambient$. For each $n\of\nno$, $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
+\begin{proof} Let $Z$ be the following object of $\ambient$. For each $n\of\nno$, $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
  $a\of[n]\to [p]$ is an epimorphism of $\simCat$ (so $p\leq n$),
  $b\of\LDMC[p]$ satisfies $b(\id_{[p]})=\true$ if an only if $a=\id_{[n]}$,
  $c\of \set{b}\to X$, where $\set{b}$ is the pullback of $t\of 1\to\LDMC$ along $b$ and 
@@ -475,6 +512,15 @@ A filler corresponds to a simplex $w=\tuplet{a,b,c,d}\of Z[n]$ for which $Y(a,d)
 These two cases cover all possible commutative squares with the cycle inclusion $k_n$, because there are finitely many monomorphisms $\xi\of [m]\to [n]$ and $a_\xi = \id$ is a decidable property. For this reason, $h$ has the global right lifting property which respect to the family of all cycle inclusions. Therefore $h$ is an acyclic cofibration.
 \end{proof} %yeah!
 
+
+
+\begin{definition} A monomorphism $m\of X\to Y$ of $\ambient\s$ is \emph{locally decidable} if for each $i\of\nno$ monomorphism $m[i]\of X[i]\to Y[i]$ is \emph{decidable}, i.e.\ isomorphic to a coproduct inclusion, in $\ambient$. \end{definition}
+
+\begin{lemma} The category $\ambient\s$ has a locally decidable monomorphism $t\of 1\to \LDMC$ such that every morphism is a locally decidable monomorphism if and only if it is a pullback of $t$. \end{lemma}
+
+\begin{proof} The morphism $t$ is defined in such a way that a witness that a morphism $f\of X\to Y$ is locally decidable is essentially already a pullback square $f\to t$. For any object $X$ of $\ambient\s$ let a \emph{decidable sieve} be a $p\of(\Sigma i\of\nno.X[i])\to\bool$ such that $p(x)=\true$ implies $p(x\circ X(f))=\true$ for each morphism $f\of [m]\to [n]$ of $\simCat$ and $x\in X[n]$. For each $i\in\nno$, $\LDMC[i]$ is the object of \emph{decidable sieves} of $\simplex[i]$. The Yoneda lemma takes care of the rest. \end{proof}
+
+
 The factorization in the proof above turns the implication in lemma \ref{Reedy} into an equivalence.
 
 \begin{proposition} A morphism $f\of X\to Y$ is a cofibration if and only if it is a free cofibration. \label{cofibration characterization} \end{proposition}
@@ -492,6 +538,31 @@ For each simplex $y$ of $Y$, $k(y)=\tuplet{a,b,c,d}$. The simplex $y$ is in the 
 The equivalence means that one of the factorization systems that the model structure requires is already present. It also means that the simpler functor that represent the free cofibrations also represents the class of cofibrations.
 
 \section{Acyclic Cofibrations}
+
+
+\begin{proposition} Every morphism $f\of X\to Y$ between Kan complexes factors as a fibration following an acyclic cofibration. \label{factor2} \end{proposition}
+
+\begin{proof} Because $\bang_Y\of Y\to 1$ is a fibration, the morphism $(d_0,d_1)\of Y^{\simplex[1]} \to Y\times Y$ defined by composition with the cycle inclusion $1+1\to \simplex[1]$ is a fibration and the components $d_i\of Y^{\simplex[1]}\to Y$ are acyclic fibrations by corollary \ref{pullback exponential}. Pulling back $(d_0,d_1)$ along $f\times \id_Y$ produces the \emph{homotopy graph} $Y/f$ of $f$ together with projections $f_0\of Y/f\to X$ and $f_1\of Y/f\to Y$ where $f_0$ is an acyclic fibration because it is the pullback of $d_0$ and $f_1$ is a fibration because it is the composition of the fibrations $(f_0,f_1)$ and $\pi_1\of X\times Y\to Y$.
+\[\xymatrix{
+Y/f \ar[r]\ar[d]_{(f_0,f_1)} & Y^{\simplex[1]} \ar[d]^{(d_0,d_1)} \\
+X\times Y \ar[r]_{f\times\id} & Y\times Y
+}\]
+
+There is a deformation retract $r=(\id_X,Y^\bang\circ f)\of X\to Y/f$ with $f_1$ as left inverse. The retract factors as an acyclic fibration $g\of W\to Y/f$ following a cofibration $h\of X\to W$. This cofibration has a left inverse $h' = f_0\circ g$, which is an acyclic fibration. There is a homotopy $\phi$ between $\id_{W}$ and $h\circ h'$ by lemma \ref{triple lift} and the following equations.
+\begin{align*}
+(\id_W,h\circ h')\circ(h+h)&=(h,h)= (h\circ\pi_1)\circ (c\times \id_X)\\
+h'\circ h\circ \pi_1&=\pi_1=(h'\circ\pi_1)\circ(\id_{\simplex[1]}\times h)\\
+h'\circ(\id_W,h\circ h')&=(h',h')= (h'\circ\pi_1)\circ (c\times \id_W)
+\end{align*}
+\[\xymatrix{
+X+X\ar[d]_{c\times \id}\ar[r]^{h+h} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\id,h\circ h')} & W\ar[d]^{h'}\\
+\simplex[1]\times X\ar[r]_{\id\times h} \ar[urr]^(.3){h\circ\pi_1}  & \simplex[1]\times W\ar[r]_(.6){h'\circ\pi_1} \ar@{.>}[ur]_\phi & X
+}\]
+Because $\phi\circ(\id_{\simplex[1]\times h}) = h\circ \pi_1$, the cofibration $h$ is acyclic by lemma \ref{retract is acyclic}. 
+
+As promised the morphism $f$ factors as the fibration $f_1\circ g$ following the acyclic cofibration $h$.
+\end{proof}
+
 
 \subsection{Pullback exponentials}
 Kan complexes add additional structure that permits the factorization of morphisms of simplicial objects into Kan fibrations and acyclic cofibrations. Pullback exponentials and their duals, pushout products, are at the core of this argument.
@@ -683,28 +754,6 @@ Because $\simplex(\delta^1_1)$ is an acyclic cofibration, $g\pe{\simplex(\delta^
 \subsection{Fibrant replacements}
 There is a conventional method for factoring morphisms between Kan complexes as fibrations following deformation retracts, which helps to prove the following proposition.
 
-\begin{proposition} Every morphism $f\of X\to Y$ between Kan complexes factors as a fibration following an acyclic cofibration. \label{factor2} \end{proposition}
-
-\begin{proof} Because $\bang_Y\of Y\to 1$ is a fibration, the morphism $(d_0,d_1)\of Y^{\simplex[1]} \to Y\times Y$ defined by composition with the cycle inclusion $1+1\to \simplex[1]$ is a fibration and the components $d_i\of Y^{\simplex[1]}\to Y$ are acyclic fibrations by corollary \ref{pullback exponential}. Pulling back $(d_0,d_1)$ along $f\times \id_Y$ produces the \emph{homotopy graph} $Y/f$ of $f$ together with projections $f_0\of Y/f\to X$ and $f_1\of Y/f\to Y$ where $f_0$ is an acyclic fibration because it is the pullback of $d_0$ and $f_1$ is a fibration because it is the composition of the fibrations $(f_0,f_1)$ and $\pi_1\of X\times Y\to Y$.
-\[\xymatrix{
-Y/f \ar[r]\ar[d]_{(f_0,f_1)} & Y^{\simplex[1]} \ar[d]^{(d_0,d_1)} \\
-X\times Y \ar[r]_{f\times\id} & Y\times Y
-}\]
-
-There is a deformation retract $r=(\id_X,Y^\bang\circ f)\of X\to Y/f$ with $f_1$ as left inverse. The retract factors as an acyclic fibration $g\of W\to Y/f$ following a cofibration $h\of X\to W$. This cofibration has a left inverse $h' = f_0\circ g$, which is an acyclic fibration. There is a homotopy $\phi$ between $\id_{W}$ and $h\circ h'$ by lemma \ref{triple lift} and the following equations.
-\begin{align*}
-(\id_W,h\circ h')\circ(h+h)&=(h,h)= (h\circ\pi_1)\circ (c\times \id_X)\\
-h'\circ h\circ \pi_1&=\pi_1=(h'\circ\pi_1)\circ(\id_{\simplex[1]}\times h)\\
-h'\circ(\id_W,h\circ h')&=(h',h')= (h'\circ\pi_1)\circ (c\times \id_W)
-\end{align*}
-\[\xymatrix{
-X+X\ar[d]_{c\times \id}\ar[r]^{h+h} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\id,h\circ h')} & W\ar[d]^{h'}\\
-\simplex[1]\times X\ar[r]_{\id\times h} \ar[urr]^(.3){h\circ\pi_1}  & \simplex[1]\times W\ar[r]_(.6){h'\circ\pi_1} \ar@{.>}[ur]_\phi & X
-}\]
-Because $\phi\circ(\id_{\simplex[1]\times h}) = h\circ \pi_1$, the cofibration $h$ is acyclic by lemma \ref{retract is acyclic}. 
-
-As promised the morphism $f$ factors as the fibration $f_1\circ g$ following the acyclic cofibration $h$.
-\end{proof}
 
 
 \section{Model structure}
@@ -827,7 +876,7 @@ With fibrations, weak equivalences and cofibrations defined as above $\ambient\s
 Lemma \ref{factor1} shows that cofibrations and acyclic fibrations form a weak factorization system, considering that they satisfy a lifting property by definition \ref{Kan}. Lemma \ref{factor2} tells the same thing about fibrations and acyclic cofibrations. Lemma \ref{toot} demonstrates that if two of $f$, $g$ and $f\circ g$ are weak equivalences, then all three are. These three requirements define a model structure.
 \end{proof}
 
-\section{Descent} %hoort dit er nog bij?
+\section{Descent} \hide{Does this belong here, or in a seperate paper?}
 This section shows how lifting properties \emph{descend} along the horn inclusions $H(n,k)\of \horn_k[n]\to\simplex[n]$. This means that each fibration $f\of X\to\horn_k[n]$ is the pullback of a fibration $g\of Y\to\simplex[n]$ along $H(n,k)$.
 
 \subsection{Higher dimensional case}
