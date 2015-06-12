@@ -427,10 +427,10 @@ The lemma may be worth generalizing for 2-out-of-3.
 Examples of factorization systems: projective versus regular epic, decidable versus split epic
 }
 
-The transfinite compositions relies on the projectives of $\ambient\s$. Like $\ambient$, $\ambient\s$ has enough projectives. \hide{
-From $X_i\to X_{i+1}$ to $Y^{X_{i+1}}\to Y^{X_i}$. A projective cover $\to Y^X$ induces a cochain morphism $\nno\ri Y\to f$ by induction. This must factor through the transfinite composition.
-}
+The transfinite compositions relies on the projectives of $\ambient\s$. Like $\ambient$, $\ambient\s$ has enough projectives. Let the morphism $f\of s\ri X\to X$ in $\ambient/\nno$ be a regular epimorphism. We can construct a regular epimorphism $\nno\ri Z\to X$ which is a morphism of cochains. It factors through the transfinite composition, and therefore the transfinite composition is a regular epimorphism too.
 
+
+Let $g\of Y\to \Sigma_\nno(X)$ be a projective cover. There is a morphism $h\of Y\to Y$ such that $f\circ \Sigma_\nno(g)\circ h=\Sigma_\nno(g)$, because $Y$ is projective. By induction there is a morphism $k\of\nno\times Y\to Y$ such that $k(0,y)=y$ and $k(n+1,y)=h(k(n,y))$. Let $Z=\set{(n,y)\of\nno\times Y| \dim(g(y))\leq n}$. The epimorphism is $g\circ k\of \nno\of Z\to X$. \hide{check this!}%here
 \end{proof}
 
 
