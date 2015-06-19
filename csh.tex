@@ -419,9 +419,7 @@ In the case of the pushouts, the construction is a pullback, which preserve regu
 
 Since projectives are closed under pullbacks in $\ambient$, the adjoint fibred exponentials preserve regular epimorphisms.
 
-\hide{%here
-Consider we are mixing objects of $\ambient$ and $\ambient\s$, so be careful.
-
+\hide{
 The lemma may be worth generalizing for 2-out-of-3.
 
 Examples of factorization systems: projective versus regular epic, decidable versus split epic
@@ -429,51 +427,17 @@ Examples of factorization systems: projective versus regular epic, decidable ver
 
 The transfinite compositions relies on the projectives of $\ambient\s$. Like $\ambient$, $\ambient\s$ has enough projectives. Let the morphism $f\of s\ri X\to X$ in $\ambient/\nno$ be a regular epimorphism. We can construct a regular epimorphism $\nno\ri Z\to X$ which is a morphism of cochains. It factors through the transfinite composition, and therefore the transfinite composition is a regular epimorphism too.
 
-
-Let $g\of Y\to \Sigma_\nno(X)$ be a projective cover. There is a morphism $h\of Y\to Y$ such that $f\circ \Sigma_\nno(g)\circ h=\Sigma_\nno(g)$, because $Y$ is projective. By induction there is a morphism $k\of\nno\times Y\to Y$ such that $k(0,y)=y$ and $k(n+1,y)=h(k(n,y))$. Let $Z=\set{(n,y)\of\nno\times Y| \dim(g(y))\leq n}$. The epimorphism is $g\circ k\of \nno\of Z\to X$. \hide{check this!}%here
+Let $g\of Y\to \Sigma_\nno(X)$ be a projective cover. There is a morphism $h\of Y\to Y$ such that $f\circ \Sigma_\nno(g)\circ h=\Sigma_\nno(g)$, because $Y$ is projective. By induction there is a morphism $k\of\nno\times Y\to Y$ such that $k(0,y)=y$ and $k(n+1,y)=h(k(n,y))$. Let $Z=\set{(n,y)\of\nno\times Y| \dim(g(y))\leq n}$. The epimorphism is $g\circ k\of \nno\of Z\to X$. \hide{check this!}
 \end{proof}
-
-
-\hide{
-The principle we need says that certain transfinite compositions of regular epimorphisms are regular epimorphisms. 
-To make things more awkward, we are dealing with an internal family of morphisms rather than an external one.
-
-}
-
-\hide{maybe the wrong place. Notice how important it makes projectives. }
-To demonstrate the lifting property for these cofibrations we use a limited version of a classical principle.
-The \emph{axiom schema of dependent choice} says that for each non empty set $X$ and each entire relation $R$, for each $x\in X$ there is a function $f\of\N\to X$ such that $f(0)=x$ and $R(f(n),f(n+1))$ for each $n\in\N$. 
-Quantifying over all entire relations is not possible in the internal language of every pretopos and choice is limited to projective objects. The category $\ambient$ has plenty of those.
-
-
-\begin{lemma}[Dependent Choice]
-If an $s\ri$-algebra is a regular epimorphism, then so are its transfinite compositions.%Better this way!?
-
-Let $X,R$ be objects of $\ambient$ and let $p,q\of R\to X$ be morphisms of which $p$ is a regular epimorphism. For each $x\of 1\to \nno$, there is a morphism $f\of\nno\to X$ such that $f(0)=x$ and $(f,f\circ s)\of \nno\to X\times X$--where $s$ is the successor morphism--factors through $(p,q)\of R\to X\times X$.
-\[\xymatrix{
-&& R\ar[d]^{(p,q)}\\
-\nno\ar[rr]_{(f,f\circ(s,\id))} \ar@{.>}[urr] && X\times X
-}\]
-\end{lemma}
-
-\begin{proof} Since $\ambient$ has enough projectives, there is a projective object $Y$ with a regular epimorphism $a\of Y\to X$. There is a $b\of Y\to R$ such that $p\circ b=a$ and a $c\of Y\to Y$ such that $a\circ c = q\circ b$, because $Y$ is projective and $p$ and $a$ are regular epimorphisms.
-\[\xymatrix{
-Y\ar@{.>}[rr]^c \ar@{.>}[dr]^b \ar[d]_a && Y\ar[d]^a\\
-X & R\ar[l]^p\ar[r]_q & X
-}\]
-Because $1$ is projective in $\ambient$, there is a $y\of 1\to Y$ such that $a\circ y = x$. Therefore there is a $d\of\nno\to Y$ such that $d(0)=y$ and $d\circ s = c\circ d$. Let $f=a\circ d$. Now $f = p\circ (b\circ d)$ and $f\circ s = q\circ (b\circ d)$, so $(f,f\circ s)$ factors through $(p,q)$.
-\end{proof}
-
-\begin{remark} Dependent choice may have counterexamples in slices over non projective objects, so it isn't valid in the internal language. \end{remark}
-
-
-\hide{
-Complete it. Show it works internally.
-}
 
 The rest of this subsection shows the converse, i.e.\ every cofibration is free, by factoring every morphism as an acyclic fibration following a free cofibration. The factorization requires objects of cofibrations constructed from a classifier of locally decidable subobjects as described below.
 
+%here
 \begin{proposition} Every morphism $f\of X\to Y$ of $\ambient\s$ factors as an acyclic fibration following a cofibration. \label{factor1} \end{proposition}
+
+\hide{$\LMDC$? 
+Tell something about the factorization, and adjust to the need for projective morphisms.
+}
 
 \begin{proof} Let $Z$ be the following object of $\ambient$. For each $n\of\nno$, $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
  $a\of[n]\to [p]$ is an epimorphism of $\simCat$ (so $p\leq n$),
