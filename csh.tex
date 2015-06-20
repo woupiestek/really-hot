@@ -224,7 +224,7 @@ Universal quantification over $[m]$ reduces to a finite conjunction because $[m]
 As a replacement for the usual simplicial sets, we use the following structure in $\ambient$. These are essentially discrete opfibrations over $\simCat$.
 
 \mathrmdef{dim}
-\newcommand\base[1]{\mathbf{U}\!\left(#1\right)}
+\newcommand\base{\mathbf{U}}
 \begin{definition} An \emph{internal simplicial object} $X=(\base X,\dim,\cdot)$ is an object $\base X$ together with a morphism $\dim\of \base X\to\nno$ and an operator $\cdot$, whose domain is the following object.
 \[ \set{\tuplet{x,\xi}\of \base X\times\Ar(\simCat)\middle| \dim (x)=\dom(\xi)} \]
 The codomain of $\cdot$ is $\base X$. The operator $\cdot$ satisfies $(x\cdot\alpha)\cdot\beta=x\cdot(\alpha\circ\beta)$ and $x\cdot\id_{[\dim x]}=x$.  
@@ -430,18 +430,60 @@ The transfinite compositions relies on the projectives of $\ambient\s$. Like $\a
 Let $g\of Y\to \Sigma_\nno(X)$ be a projective cover. There is a morphism $h\of Y\to Y$ such that $f\circ \Sigma_\nno(g)\circ h=\Sigma_\nno(g)$, because $Y$ is projective. By induction there is a morphism $k\of\nno\times Y\to Y$ such that $k(0,y)=y$ and $k(n+1,y)=h(k(n,y))$. Let $Z=\set{(n,y)\of\nno\times Y| \dim(g(y))\leq n}$. The epimorphism is $g\circ k\of \nno\of Z\to X$. \hide{check this!}
 \end{proof}
 
-The rest of this subsection shows the converse, i.e.\ every cofibration is free, by factoring every morphism as an acyclic fibration following a free cofibration. The factorization requires objects of cofibrations constructed from a classifier of locally decidable subobjects as described below.
+The rest of this subsection shows the converse, i.e.\ every cofibration is free, by factoring every morphism as an acyclic fibration following a free cofibration.
 
-%here
 \begin{proposition} Every morphism $f\of X\to Y$ of $\ambient\s$ factors as an acyclic fibration following a cofibration. \label{factor1} \end{proposition}
 
-\hide{$\LMDC$? 
-Tell something about the factorization, and adjust to the need for projective morphisms.
-}
 
-\begin{proof} Let $Z$ be the following object of $\ambient$. For each $n\of\nno$, $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
- $a\of[n]\to [p]$ is an epimorphism of $\simCat$ (so $p\leq n$),
- $b\of\LDMC[p]$ satisfies $b(\id_{[p]})=\true$ if an only if $a=\id_{[n]}$,
+\begin{proof} A morphism between cofibrant simplicial objects is a cofibration if its underlying monomorphism is decidable. These \emph{locally decidable maps} have a classifier $t\of 1\to \LDMC$, and for that reason each object $f\of X\to Y$ of $\ambient\s/Y$ has a classifier $g\of f\to h$ (with $h\of Z\to Y$), for partial maps whose domain is locally decidable (lemma \ref{generic cofibrations}).
+The codomain $h$ is the acyclic fibration, for the following reasons.
+
+For arbitrary $i\of\nno$ let $a\of A\to \simplex[i]$ be a cofibration, and let $x\of A\to Z$ and let $y\of \simplex[p]\to Y$ satisfy $h\circ x = y\circ a$. The object $A$ is cofibrant. The pullback $x\ri(g)\of x\ri(X)\to A$ of $g$ along $x$ is a cofibration because $g$ is a classifier. There is a map $k\of\simplex[p]\to Z$ such that $h\circ k = y$ and $k\ri(g) = a\circ x\ri(g)$, because cofibrations are closed under pullback. Characteristic morphisms are unique, so $k\circ a = x$.
+
+\[\xymatrix{
+x\ri(X) \ar[r]\ar[d]_{x\ri(g)} & X\ar[d]^g\\
+A\ar[r]^x \ar[d]_a & Z\ar[d]^h\\
+\simplex[i]\ar[r]_{y}\ar@{>}[ur]^k & Y
+}\]
+
+The cofibration $a\of A\to \simplex[i]$ can be any of the cycle inclusions that $h$ needs to lift in order to be an acyclic cofibration. Hence $h$ is an acyclic cofibration.
+
+\hide{While $g$ is locally decidable, how do we know that it is a cofibration?}
+\end{proof}
+
+\begin{definition} A monomorphism of $\ambient$ is \emph{decidable} if it is a pullback of one of the maps $1\to \bool$.
+A monomorphism $f\of X\to Y$ of $\ambient\s$ is \emph{locally decidable} if the underlying map $\base f\of \base X\to\base Y$ is decidable.
+\end{definition}
+
+\begin{lemma} Locally decidable monomorphisms are stable under pullback and there is a classifier $1\of 1\to \LDMC$ of locally decidable morphisms. \label{locally decidable} \end{lemma}
+
+\begin{proof} The functor $\base\cdot$ preserves pullbacks, so if the underlying map of $f$ is locally decidable, then its underlying map is locally decidable.
+For every $n\of\nno$ there is an object $\LDMC[n]$ that represents locally decidable subobjects $\bullet\to\simplex[n]$. It consist of maps $\base\simplex[n]\to\bool$ that characterize sieves on $[n]$. The family of objects $\LDMC$ is a simplicial set where $\cdot$ is defined by composition of characteristic maps with $\base\simplex \phi$ for morphisms $\phi$ of $\simCat$. That works because locally decidable subobject are closed under pullback. The classifier $t\of 1\to\LDMC$ maps to the full simplex $\simplex[n]$ in each dimension.
+
+An arbitrary locally decidable monomorphism $f\of X\to Y$ is a pullback of $t$ along the map that sends each simplex $s\of \base Y$ to the pullback of $f$ along the morphism $\sigma\of\simplex[\dim s]\to Y$ that sends $\id_{[\dim s]}$ to $s$.
+\end{proof}
+
+\begin{lemma} A monomorphism between cofibrant objects is a cofibration if and only if it is locally decidable. \label{cofibration iff locally decidable} \end{lemma}
+
+\begin{proof} For any cofibration $f\of X\to Y$ a simplex $s$ of $Y$ belongs to the image of $X$ if none of the restriction $s\cdot \phi$ along the finite number of monomorphisms $[n]\to[\dim s]$ is a face that doesn't belong to $X$, and this is a decidable property. Therefore cofibration are decidable monomorphisms.
+
+For a cofibrant object $Y$ faces form a decidable subobject that is projective. Decidable subobject of projective object are projective for the following reason. 
+
+Let $X$ be projective in $\ambient$ and let $f\of W\to X$ be a decidable subobject. Let $e\of Y\to Z$ be an epimorphism and let $a\of W\to Y$ and $b\of X\to Z$ satisfy $b\circ f=e\circ a$. Since $X$ is projective, there is a map $c\of X\to Y$ such that $e\circ c= b$. Let $d\of X\to Y$ satisfy $d(f(w))=a(w)$ and $d(x)=c(x)$ if $x$ is not in the image of $f$--this is what decidability allows us to do. Now $d$ is the filler that proves $f$ is projective.
+
+If a monomorphism $f\of X\to Y$ is locally decidable and $Y$ is projective, then the subobject object of faces of $Y$ that don't belong to $X$ is decidable and hence decidable projective too. This proves that locally decidable morphisms are cofibrations.
+\end{proof}
+
+\begin{definition} Let a \emph{locally decidable partial morphism} in $\ambient\s$ be a partial morphism whose domain is a locally decidable subobject.
+\end{definition}
+
+\begin{lemma} For each $f\of X\to Y$, $\ambient\s/Y$ has a classifier for locally decidable partial maps to $f$.\label{generic cofibrations} \end{lemma}
+
+\hide{ Contractible reflection given by the locally decidable partial map generator. }%here
+\begin{proof}
+For each $n\of\nno$, $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
+ $a\of[n]\to [p]$ is an epimorphism of $\simCat$ (so $p\leq n$), 
+ $b\of \LDMC[p]$ satisfies $b(\id_{[p]})=\true$ if an only if $a=\id_{[n]}$,%b is a cofibration too simplex[p]. That is instrumental.
  $c\of \set{b}\to X$, where $\set{b}$ is the pullback of $t\of 1\to\LDMC$ along $b$ and 
  $d\of \simplex[p]\to Y$ satisfies $f\circ c = d\circ b\ri(t)$.
 
@@ -452,12 +494,13 @@ Tell something about the factorization, and adjust to the need for projective mo
 
 In $\simCat$ every morphism $\phi\of [m]\to[n]$ factors uniquely as a monomorphism $m(\phi)$ following an epimorphism $e(\phi)$. For every $\phi\of [m]\to [n]$ and $\tuplet{a,b,c,d}\of Z[n]$ let
 \[ Z(\phi)\tuplet{a,b,c,d} = \left\{\begin{array}{cc}
-\tuplet{\id_{[n]},\top,a\circ\phi,Y(\phi)(d)} & b(\phi)=\true \\
+\tuplet{\id_{[n]},\top,c\circ\phi,Y(\phi)(d)} & b(\phi)=\true \\
 \tuplet{\begin{array}{c} e(a\circ \phi)\\ b\circ \simplex(m(a\circ \phi))\\ c \circ t\ri(\simplex(m(a\circ \phi)))\\ d\circ\simplex(m(a\circ \phi))\end{array}} & b(\phi)=\false
 \end{array}\right.
 \]
 Here $\top\of \simplex[p]\to\LDMC$ is the characteristic morphism of $\id\of\simplex[p]\to\simplex[p]$.
 
+%here: does this not need projectiveness?
 There is a morphism $g\of X\to Z$ which satisfies $g[n](x) = \tuplet{\id_{[n]},\top,\xi,f[n](x)}$ if $\xi\of\simplex[n] \to X$ is the morphism that satisfies $\xi(\id_{[n]})=x$. The morphism $g$ is a cofibration by lemma \ref{Reedy}.
 
 There is a morphism $h\of Z\to Y$ satisfying $h[n]\tuplet{a,b,c,d} = Y(a)(d)$ and this map is an acyclic fibration for the following reasons.
@@ -477,12 +520,6 @@ These two cases cover all possible commutative squares with the cycle inclusion 
 \end{proof} %yeah!
 
 
-
-\begin{definition} A monomorphism $m\of X\to Y$ of $\ambient\s$ is \emph{locally decidable} if for each $i\of\nno$ monomorphism $m[i]\of X[i]\to Y[i]$ is \emph{decidable}, i.e.\ isomorphic to a coproduct inclusion, in $\ambient$. \end{definition}
-
-\begin{lemma} The category $\ambient\s$ has a locally decidable monomorphism $t\of 1\to \LDMC$ such that every morphism is a locally decidable monomorphism if and only if it is a pullback of $t$. \end{lemma}
-
-\begin{proof} The morphism $t$ is defined in such a way that a witness that a morphism $f\of X\to Y$ is locally decidable is essentially already a pullback square $f\to t$. For any object $X$ of $\ambient\s$ let a \emph{decidable sieve} be a $p\of(\Sigma i\of\nno.X[i])\to\bool$ such that $p(x)=\true$ implies $p(x\circ X(f))=\true$ for each morphism $f\of [m]\to [n]$ of $\simCat$ and $x\in X[n]$. For each $i\in\nno$, $\LDMC[i]$ is the object of \emph{decidable sieves} of $\simplex[i]$. The Yoneda lemma takes care of the rest. \end{proof}
 
 
 The factorization in the proof above turns the implication in lemma \ref{Reedy} into an equivalence.
