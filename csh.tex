@@ -335,7 +335,8 @@ These subobjects are definable in the internal language of $\ambient$ because be
 \begin{itemize}
 \item A \emph{Kan fibration} is an injective morphism relative to the family of all horn inclusions.
 \item An \emph{acyclic Kan fibration} is an injective morphism relative to the family of cycle inclusions.
-\item A \emph{Kan complex} or \emph{Kan fibrant object} is a simplicial object $X$ for which the unique morphism $X\to 1$ is a fibration.
+\item A \emph{Kan complex} or \emph{Kan fibrant object} is a simplicial object $X$ for which the unique morphism $\bang_X\of X\to 1$ is a fibration.
+\item A \emph{Kan complex} $X$ is \emph{contractible} if $\bang_X\of X\to 1$ is acyclic.
 \end{itemize}\label{Kan}
 
 The category of Kan complexes and morphisms of simplicial object is $\ambient\s\f$. \hide{
@@ -431,9 +432,7 @@ Let $g\of Y\to \Sigma_\nno(X)$ be a projective cover. There is a morphism $h\of 
 \end{proof}
 
 The rest of this subsection shows the converse, i.e.\ every cofibration is free, by factoring every morphism as an acyclic fibration following a free cofibration.
-
 \begin{proposition} Every morphism $f\of X\to Y$ of $\ambient\s$ factors as an acyclic fibration following a cofibration. \label{factor1} \end{proposition}
-
 
 \begin{proof} A morphism between cofibrant simplicial objects is a cofibration if its underlying monomorphism is decidable. These \emph{locally decidable maps} have a classifier $t\of 1\to \LDMC$, and for that reason each object $f\of X\to Y$ of $\ambient\s/Y$ has a classifier $g\of f\to h$ (with $h\of Z\to Y$), for partial maps whose domain is locally decidable (lemma \ref{generic cofibrations}).
 The codomain $h$ is the acyclic fibration, for the following reasons.
@@ -463,9 +462,21 @@ For every $n\of\nno$ there is an object $\LDMC[n]$ that represents locally decid
 An arbitrary locally decidable monomorphism $f\of X\to Y$ is a pullback of $t$ along the map that sends each simplex $s\of \base Y$ to the pullback of $f$ along the morphism $\sigma\of\simplex[\dim s]\to Y$ that sends $\id_{[\dim s]}$ to $s$.
 \end{proof}
 
-\begin{lemma} A monomorphism between cofibrant objects is a cofibration if and only if it is locally decidable. \label{cofibration iff locally decidable} \end{lemma}
+\newcommand\partar\leftharpoonup
+\begin{definition} Let a \emph{locally decidable partial morphism} in $\ambient\s$ be a partial morphism whose domain is a locally decidable subobject. A pair of locally decidable partial morphism $f\of X\partar Y$ and $g\of Y\to Z$ composes to the partial morphism $g\circ f\of X\to Y$ whose domain is the pullback of $\dom g$ along $f$. The object $X_\bot$ are partially ordered: $s\leq t$ if $\dom(s)\subseteq\dom(t)$ and if the restriction of $t$ to the domain of $s$ equals $s$.%add diagrams?
+\end{definition}
 
-\begin{proof} For any cofibration $f\of X\to Y$ a simplex $s$ of $Y$ belongs to the image of $X$ if none of the restriction $s\cdot \phi$ along the finite number of monomorphisms $[n]\to[\dim s]$ is a face that doesn't belong to $X$, and this is a decidable property. Therefore cofibration are decidable monomorphisms.
+\begin{lemma} There is a \emph{locally decidable partial morphism classifier} $X\to X_\bot$ for every object $X$ of $\ambient\s$.\label{LDPMC} \end{lemma}
+
+\begin{proof} Let $X_\bot[n]$ consist of locally decidable morphisms $\simplex[n]\partar X$. The restriction along a morphism $\phi$ of $\simCat$ are defined by partial composition with $\simplex(\phi)$. The classifier $X\to X_\bot$ sends $x\of\base X$ to the morphism $\tilde x\of \simplex[\dim x]\to X$ that satisfies $\tilde x(\phi)=x\cdot \phi$.
+
+Let $f\of W\partar X$ be a locally decidable partial morphism. The map $w\mapsto f\circ \tilde w$ defines a map $g\of W\to X_\bot$. The morphism $f$ is the pullback of the classifier $X\to X_\bot$ along $g$.\end{proof}
+
+
+\begin{lemma} A monomorphism to a cofibrant object is a cofibration if and only if it is locally decidable.\label{cofibration iff locally decidable} \end{lemma}
+
+\begin{proof} 
+For any cofibration $f\of X\to Y$ a simplex $s$ of $Y$ belongs to the image of $X$ if none of the restriction $s\cdot \phi$ along the finite number of monomorphisms $[n]\to[\dim s]$ is a face that doesn't belong to $X$, and this is a decidable property. Therefore cofibration are decidable monomorphisms.
 
 For a cofibrant object $Y$ faces form a decidable subobject that is projective. Decidable subobject of projective object are projective for the following reason. 
 
@@ -474,53 +485,92 @@ Let $X$ be projective in $\ambient$ and let $f\of W\to X$ be a decidable subobje
 If a monomorphism $f\of X\to Y$ is locally decidable and $Y$ is projective, then the subobject object of faces of $Y$ that don't belong to $X$ is decidable and hence decidable projective too. This proves that locally decidable morphisms are cofibrations.
 \end{proof}
 
-\begin{definition} Let a \emph{locally decidable partial morphism} in $\ambient\s$ be a partial morphism whose domain is a locally decidable subobject.
-\end{definition}
+\begin{corollary} A monomorphism to a simplex is a cofibration if and only if it is locally decidable. \end{corollary}
 
+\begin{proof} For each $n\of\nno$ the object of faces of $\simplex[n]$ is the finite object of monomorphism to $[n]$ in $\simCat$. This is a projective object because the terminal object is projective. Monomorphisms are decidable. Therefore $\simplex[n]$ is cofibrant. Lemma \ref{cofibration iff locally decidable} now applies.
+\end{proof}
+
+\hide{
+\begin{lemma}[cofibrant replacement] Every object of $\ambient\s$ has a cofibrant replacement. \label{cofibrant replacement}\end{lemma}
+
+\begin{proof} Let $X$ be a simplicial object. There is a projective cover $c\of Y\to\base X$ in $\ambient$. Let $\base Z$ be the object of pairs $\tuplet{x,y}\of Y\times\Ar(\simCat)$ where $y$ is an epimorphism $[n]\to [\dim c(x)]$ for some $n\of\nno$. Let $\dim\tuplet{x,y} = \dom y$. 
+
+The restriction map is more complicated to define. Every morphism $\chi$ of $\simCat$ factors as a monomorphism $m(\chi)$ following an epimorphism $e(\chi)$. Let $\tuplet{x,y}\cdot\phi = \tuplet{ x\cdot m(y\circ \phi), e)$ where $x\cdot \mu$ for monomorphisms $\mu$ of $\simCat$ is defined as follows.
+
+We rely on dependent choice to define the operator for monomorphisms $\mu\of[i] \to [i+1]$. In each step the constraint is that $c(x\cdot \mu) = c(x)\cdot\mu$. For $i=0$ choose $x\cdot \mu$ freely within that constraint. If $\cdot$ is defined for $i$ and $\mu\of[i+1]\to [i+2]$, then choose $x\cdot \mu$ in such a way that $x\cdot \mu\circ \nu$ always agrees with earlier choices. %unclear
+
+\hide{Once again, we need a stepwise approach to ensure commutativity
+
+Look at the subcategory of monomorphisms, and gradually extend the functors. 
+
+First all the [0]\to [n]. These as chosen freely.
+[1]\to [n] Have to agree with former choices for the endpoints. 
+[2]\to [n] Have to agree with former choices for the paths. Is this always possible?
+etc.
+}
+
+
+
+% doesn't it fail in the lowest dimension? 1+1\to \simplex[1]!?
+
+%restricting to cofibration object becomes more attractive all the time.
+
+The faces of $Z$ are the pairs $\tuplet{x,y}$ where $x$ is a monomorphism.
+
+
+\end{proof}
+}
+
+%rephrasing may be necessary
 \begin{lemma} For each $f\of X\to Y$, $\ambient\s/Y$ has a classifier for locally decidable partial maps to $f$.\label{generic cofibrations} \end{lemma}
 
-\hide{ Contractible reflection given by the locally decidable partial map generator. }%here
-\begin{proof}
-For each $n\of\nno$, $Z[n]$ consist of quadruples $\tuplet{a,b,c,d}$ where 
+\hide{ A few ideas a tangled up in this proof 1. epimorphisms 2. partial simplices 3. everything commutes with $f$. 
+
+The epimorphisms: they make degeneracy decidable by setting faces apart form other morphisms.
+The partial simplices make the liftings possible.
+
+I put in a constraint that no longer makes sense. Moreover, I would prefer $d$ to come from somewhere else.
+
+What can we use? We only need to know the new non degenerates. 
+
+Break it up: one construction for partial maps -- contractible replacement -- one for making degeneracy decidable -- cofibrant replacement -- and explain how to combine afterward\dots
+
+
+}%here
+
+\begin{proof} Let $f\of X\to Y$ be any morphism of $\ambient/s$. Let $Y'$ be a projective cover of $\base f$. 
+
+For each $n\of\nno$, $Z[n]$ consist of quadruples $\tuplet{a,c,d}$ where 
  $a\of[n]\to [p]$ is an epimorphism of $\simCat$ (so $p\leq n$), 
- $b\of \LDMC[p]$ satisfies $b(\id_{[p]})=\true$ if an only if $a=\id_{[n]}$,%b is a cofibration too simplex[p]. That is instrumental.
- $c\of \set{b}\to X$, where $\set{b}$ is the pullback of $t\of 1\to\LDMC$ along $b$ and 
- $d\of \simplex[p]\to Y$ satisfies $f\circ c = d\circ b\ri(t)$.
+ $c\of X_\bot[p]$ (as in lemma \ref{LDPMC}) and
+ $d\of Y[p]$ satisfies $f\circ c\leq d$ in $Y_\bot$. %define extension? especially as member of $\base Y$
 
-\[\xymatrix{
-1\ar[d]_t & \set b\ar[l]\ar[d]_{b\ri(t)}\ar[r]^{c} & X\ar[d]^f \\
-\LDMC & \simplex[p]\ar[l]^b\ar[r]_d & Y
-}\]
-
-In $\simCat$ every morphism $\phi\of [m]\to[n]$ factors uniquely as a monomorphism $m(\phi)$ following an epimorphism $e(\phi)$. For every $\phi\of [m]\to [n]$ and $\tuplet{a,b,c,d}\of Z[n]$ let
-\[ Z(\phi)\tuplet{a,b,c,d} = \left\{\begin{array}{cc}
-\tuplet{\id_{[n]},\top,c\circ\phi,Y(\phi)(d)} & b(\phi)=\true \\
-\tuplet{\begin{array}{c} e(a\circ \phi)\\ b\circ \simplex(m(a\circ \phi))\\ c \circ t\ri(\simplex(m(a\circ \phi)))\\ d\circ\simplex(m(a\circ \phi))\end{array}} & b(\phi)=\false
+In $\simCat$ every morphism $\phi\of [m]\to[n]$ factors uniquely as a monomorphism $m(\phi)$ following an epimorphism $e(\phi)$. For every $\phi\of [m]\to [n]$ and $\tuplet{a,c,d}\of Z[n]$ let
+\[ \tuplet{a,c,d}\cdot\phi = \left\{\begin{array}{cc}
+\tuplet{\id_{[m]},c\cdot\phi,d\cdot\phi} & \phi\in\dom(c) \\
+\tuplet{\begin{array}{c} e(a\circ \phi)\\ c \cdot m(a\circ \phi)\\ d\cdot m(a\circ \phi)\end{array}} & \phi\not\in\dom(c)
 \end{array}\right.
 \]
-Here $\top\of \simplex[p]\to\LDMC$ is the characteristic morphism of $\id\of\simplex[p]\to\simplex[p]$.
 
-%here: does this not need projectiveness?
-There is a morphism $g\of X\to Z$ which satisfies $g[n](x) = \tuplet{\id_{[n]},\top,\xi,f[n](x)}$ if $\xi\of\simplex[n] \to X$ is the morphism that satisfies $\xi(\id_{[n]})=x$. The morphism $g$ is a cofibration by lemma \ref{Reedy}.
+\hide{There is a morphism $g\of X\to Z$ which satisfies $g[n](x) = \tuplet{\id_{[n]},\xi,f[n](x)}$ if $\xi\of\simplex[n] \to X$ is the morphism that satisfies $\xi(\phi)=x\cdot\phi$. The morphism $g$ is locally decidable.}%need a better argument for cofibrations.
 
-There is a morphism $h\of Z\to Y$ satisfying $h[n]\tuplet{a,b,c,d} = Y(a)(d)$ and this map is an acyclic fibration for the following reasons.
+There is a morphism $h\of Z\to Y$ satisfying $h[n]\tuplet{a,c,d} = d\cdot a$ and this map is an acyclic fibration for the following reasons.
 Let $z\of\cycle[n]\to Z$, $y\of\simplex[n]\to Y$ and let $h\circ z = y\circ k_n$ where $k_n\of\cycle[n]\to \simplex[n]$ is the inclusion of the boundary.
 \[\xymatrix{
 \cycle[n]\ar[d]_{k_n}\ar[r]^z & Z\ar[d]^h\\
 \simplex[n]\ar[r]_{y} & Y
 }\]
-The morphism $z\of\cycle[n]\to Z$ assigns a simplex $z(\xi) = \tuplet{a_\xi,b_\xi,c_\xi,d_\xi}$ to every non surjective morphism $\xi\of [m]\to[n]$.
-A filler corresponds to a simplex $w=\tuplet{a,b,c,d}\of Z[n]$ for which $Y(a,d) = y(\id_{\simplex[n]})\of Y[n]$ and where $Z(\xi)(w)=z_\xi$ for all non surjective $\xi\of [m]\to[n]$.
+The morphism $z\of\cycle[n]\to Z$ assigns a simplex $z_\xi = \tuplet{a_\xi,c_\xi,d_\xi}$ to every non surjective morphism $\xi\of [m]\to[n]$.
+A filler corresponds to a simplex $w=\tuplet{a,c,d}\of Z[n]$ for which $h(w) = d\cdot a = y(\id_{\simplex[n]})\of Y[n]$ and where $w\cdot \xi=z_\xi$ for all non surjective $\xi\of [m]\to[n]$.
 \begin{itemize}
-\item If $a_\xi=\id$ for all monomorphisms $\xi$, then $a=\id$. Let the morphism $b\of \simplex[n]\to \LDMC$ send all surjective $\xi\of[m]\to[n]$ to $\false$. For every other morphism $\phi\of [i]\to [j]$, let $b(\phi) = b_{m(\phi)}(e(\phi))$. If $b(\phi)=\true$, then $c(\phi) = c_{m(\phi)}(e(\phi))$. Finally $d$ is $y$ and $w=\tuplet{a,b,c,d}$.
-\item If $a_\xi\neq \id$ for some monomorphisms $\xi$, then there is a greatest monomorphism $\mu\of [m]\to[n]$ such that $\mu\neq \id$ but $a_\mu=\id$. The reason is that there are finitely many monomorphisms to $[n]$ and the subcategory of those monomorphisms $\xi$ for which $a(\xi)=\id$ is closed under pushouts. In this case $a$ is the unique inverse of $\mu$ for which $e(a\circ \xi) = a_\xi$ for all monomorphisms. Let $w = Y(a)(z_\mu)$.
+\item If $a_\xi=\id$ for all monomorphisms $\xi$, then $a=\id$.
+
+Let the morphism $b\of \simplex[n]\to \LDMC$ send all surjective $\xi\of[m]\to[n]$ to $\false$. For every other morphism $\phi\of [i]\to [j]$, let $b(\phi) = b_{m(\phi)}(e(\phi))$. If $b(\phi)=\true$, then $c(\phi) = c_{m(\phi)}(e(\phi))$. Finally $d=y(\id_{\simplex[n]})$ and $w=\tuplet{a,c,d}$.
+\item If $a_\xi\neq \id$ for some monomorphisms $\xi$, then there is a greatest monomorphism $\mu\of [m]\to[n]$ such that $\mu\neq \id$ but $a_\mu=\id$. The reason is that there are finitely many monomorphisms to $[n]$ and the subcategory of those monomorphisms $\xi$ for which $a(\xi)=\id$ is closed under pushouts. In this case $a$ is the unique inverse of $\mu$ for which $e(a\circ \xi) = a_\xi$ for all monomorphisms. Let $w = z_\mu\cdot a$.
 \end{itemize}
 
 These two cases cover all possible commutative squares with the cycle inclusion $k_n$, because there are finitely many monomorphisms $\xi\of [m]\to [n]$ and $a_\xi = \id$ is a decidable property. For this reason, $h$ has the global right lifting property which respect to the family of all cycle inclusions. Therefore $h$ is an acyclic cofibration.
 \end{proof} %yeah!
-
-
-
 
 The factorization in the proof above turns the implication in lemma \ref{Reedy} into an equivalence.
 
