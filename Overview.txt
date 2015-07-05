@@ -1,0 +1,13 @@
+There are realizability models for HOTT 
+  Pi-pretoposes with NNO have a simplicial homotopy
+    There is a cofibration-acyclic fibration factorization system
+    There is an acyclic cofibration-fibration factorization system
+      ...
+    The weak equivalences satisfy 2-out-of-3
+      ...
+  Generics have a fibrant codomain
+    ...
+  Exact completions preserve internal complete categories
+    ...
+ 
+      

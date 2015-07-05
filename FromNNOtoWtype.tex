@@ -1,0 +1,101 @@
+% LaTeX 2e document, TAC style, 36 pp, Xy-pic ver ?, MikTeX version ?
+
+\documentclass{tac}
+\usepackage{amssymb, amsmath}
+\usepackage[backend=bibtex,citestyle=authoryear-icomp]{biblatex}
+\usepackage[all]{xy}
+%\usepackage{cite}
+\usepackage{url}
+%\usepackage{graphicx}
+
+%\renewcommand*\ttdefault{pcr}
+
+\title{W-types in $\Pi$-pretoposes}
+\author{Wouter Pieter Stekelenburg}\copyrightyear{2015}
+\address{Faculty of Mathematics, Informatics and Mechanics\\
+University of Warsaw\\
+Banacha 2\\
+02-097 Warszawa\\
+Poland}
+\eaddress{w.p.stekelenburg@gmail.com}
+\keywords{realizability, simplicial homotopy, Kan complexes}
+\amsclass{03D80, 18G30, 18G55}
+
+\newcommand\hide[1]{}
+\newcommand\cat\mathcal
+\newcommand\set[1]{\left\{#1\right\}}
+\mathrmdef{id}
+\mathrmdef{dom}
+\mathrmdef{cod}
+\newcommand\ri{^*}
+\newcommand\N{\mathbb N}
+\mathbfdef[nno]{N}
+\newcommand\of:
+
+
+\begin{document}
+
+
+
+\maketitle
+
+%intoduction
+
+A $\Pi$-pretopos has a lot of the structure a topos has, but it misses the subobject classifier. Therefore the construction of $W$-types found in \hide{cite Moerdijk, van der Berg} is not possible here. This paper shows a different--more complicated--construction for $W$-types that does work.
+
+\section{Definitions}%more descriptive please
+This section explains $\Pi$-pretoposes and $W$-types.
+
+\newcommand\bieq{\cong}
+\begin{definition}[$\Pi$-pretopos] A \emph{$\Pi$-pretopos} is an exact and extensive locally Cartesian closed category. 
+
+A \emph{locally Cartesian closed category} is a category $\cat C$ where for each object $X$ the slice $\cat C/X$ is Cartesian closed.
+A category $\cat C$ is \emph{extensive} if it has finite coproducts and if for each pair of objects $X$ and $Y$ pulling back along coproduct inclusions induce an equivalence of categories $\cat C/(X+Y)\bieq\cat C/X\times \cat C/Y$. 
+
+A category is \emph{exact} if each pseudoequivalence relation $p,q\of X\to Z$ has a coequalizer $r\of Y\to Z$ and if the pullback of $r$along any $f\of W\to Z$ is the coequalizer of the pullbacks of $p$ and $q$. 
+A \emph{pseudoequivalence relation} is a parallel pair $p,q\of X\to Y$ such that there are morphism $r\of Y\to X$, $s\of X\to X$ and $t\of \set{(x,y)\of X\times X|p(x)=q(y)}\to X$ such that
+\begin{align*}
+p\circ r&=id_Y & q\circ r&=\id_Y\\
+p\circ s&=q & q\circ s&=p\\
+p\circ t&=p\circ \pi_1 & q\circ t&=q\circ \pi_0
+\end{align*}
+The morphism $\pi_0$ and $\pi_1$ stand for the maps $(x,y)\mapsto x$ and $(x,y)\mapsto y$ respectively.
+\end{definition}
+
+\begin{example} Every topos is a $\Pi$-pretopos and hence every category of sheaves on a site is one. \end{example}
+
+The idea is to have a category similar to the topos of sets, but without the subobject classifiers.
+
+\begin{definition} A \emph{$W$-type} is a initial algebra for a polynomial endofunctor. 
+
+An \emph{algebra} for an endofunctor $F\of \cat C\to\cat C$ is a pair $(X,f)$ where $X$ is an object of $\cat C$ and $f\of FX\to X$ is a morphism. A morphism of algebras $(X,f)\to(Y,g)$ is a morphism $h\of X\to Y$ such that $h\circ f=g\circ Fh$. An \emph{initial algebra} for $F$ is an initial object of the category of algebras and algebra morphisms of $F$.
+
+A \emph{polynomial endofunctor} is defined as follows. A morphism $f\of A\to B$ of a locally Cartesian closed category $\cat C$ induces an endofunctor $P_f(X) = A_!(A\ri(X)^f)$, where $A_!\of \cat C/A\to \cat C$ sends each `object' $g\of Y\to A$ of $\cat C/A$ to its codomain, $A\ri(X)^f$ is the exponential of $A\ri(X)$ and $f$ in $\cat C/A$ and $A\ri\of \cat C\to\cat C/A$ send each object $X$ to the projection $\pi_0\of A\times X\to A$. Any endofunctor is polynomial if it is naturally isomorphic to $P_f$ for some $f$.
+\end{definition}
+
+The definition is imprecise because a type is an isomorphism class of objects.
+
+\begin{example} Every natural number object $\nno$ is the initial algebra of the endofunctor $X\to X+1$ which is isomorphic to $P_f$ if $f$ is either of the morphisms $1\to 1+1$. Therefore it is a $W$-type.
+\end{example}
+
+The natural number object is a generic $W$-type that generates all others.
+
+\section{Main}%more descriptive title please
+
+An element of $W_f$ is a partial function $B^*\to A$ where $s(\vec x y)$ is defined if and only if $s(\vec x)=f(y)$. Unfortunately, this definition is impredicative. How a natural number object helps to overcome this problem is unclear.
+
+Finite powers are feasible.
+$f\of A\to \nno$
+
+\[ s(\vec xy)\mathord\downarrow \iff f(s(\vec x))<y \]
+
+Membership is decided by the parser $p\of \nno\times W_f \to 2$ which is defined as follows. 
+\begin{align*}
+p(0,\epsilon) &= 1 & p(n+1,\epsilon) &= 0\\
+p(0,x\vec y) &= 0 & p(n+1,x\vec y) &= p(n+f(x),\vec y)\\
+\end{align*}
+\[ W_f=\set{\vec x\of A^*\middle| p(1,\vec x)=1} \]
+
+
+
+\end{document}
