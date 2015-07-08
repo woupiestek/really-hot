@@ -378,21 +378,6 @@ For every object $Y$ of $\ambient$ there is a constant family $\nno\ri(Y)$ and f
 The dual notion for a coalgebra $X\to s\ri(X)$ is also called the transfinite composition of the coalgebra.
 \end{definition}\hide{Every isomorphism-algebra is a constant family.}
 
-\hide{Every isomorphism is injective. Moreover, the filler operators for the new injectives are functions of the existing filler operators, which are represented by natural transformations of internal functors.
-\[
-\xy
-(0,12)*+{\bullet}="a",(12,12)*+{\bullet}="b",(24,12)*+{\bullet}="c",
-(0,0)*+{\bullet}="d",(12,0)*+{\bullet}="e",(24,0)*+{\bullet}="f",
-\ar "a";"b" \ar "b";"c" \ar "a";"d" \ar^(.6){g\ri(f)} "b";"e" \ar^f "c";"f" \ar "d";"e" \ar_g "e";"f"
-\ar@{.>} "d";"c" \ar@{.>} "d";"b"
-\endxy
-\xy
-(0,12)*+{\bullet}="a",(12,12)*+{\bullet}="b",(12,6)*+{\bullet}="c",(0,0)*+{\bullet}="d",(12,0)*+{\bullet}="e"
-\ar "a";"b" \ar "a";"d" \ar "b";"c" \ar "c";"e" \ar "d";"e" \ar@{.>} "d";"b" \ar@{.>} "d";"c"
-\endxy
-\]
-}
-
 \begin{lemma} Every cofibration has the left lifting property with respect to all acyclic fibrations. \label{Reedy}\end{lemma}
 
 \begin{proof} By definition every cofibration is the transfinite composition of pushouts of coproducts of cycle inclusions.
@@ -427,11 +412,11 @@ Let $LY[n] = \Sigma i\of[n]. Y[i]\times\simCat^-(n,i)$ and for $\phi\of [m]\to [
 Let $l_Y\of LY\to Y$ satisfy $l_Y\tuplet{\epsilon,y}=y\cdot\epsilon$.
 
 The second step glues simplices of $X$ and $LY$ together into new ones. Define $d\of X+LY\to\nno$ as follows. %For $x\of X$, $d(x)=\dim(x)$, for $\tuplet{\epsilon,y}\of LY$, $d\tuplet{\epsilon,y} = \cod(\epsilon)$. 
-The pair $(f,l_Y)$stand for the morphism $X+LY\to Y$ that satisfies $(f,l_Y)(x)=f(x)$ for $x\of X$ and $(f,l_Y)(y) = l_Y(y)$ for $y\of LY$. Let $Z[n]\subseteq \Pi i\in[n].(X[i]+LY[i])^{\simCat^+(i,n)}$ consist of elements $z$ which satisfy for all $\alpha\of [j]\to [k]$ and $\beta\of [i]\to[j]$ in $\simCat^+$:
+The pair $(f,l_Y)$stand for the morphism $X+LY\to Y$ that satisfies $(f,l_Y)(x)=f(x)$ for $x\of X$ and $(f,l_Y)(y) = l_Y(y)$ for $y\of LY$. Let $Z[n]\subseteq \Pi i\in[n].(X[i]+LY[i])^{\simCat^+(i,n)}$ consist of elements $z$ which satisfy the following conditions for all $\alpha\of [j]\to [k]$ and $\beta\of [i]\to[j]$ in $\simCat^+$.
 \begin{enumerate}
 \item $(f,l_Y)(z(\alpha\circ\beta)) = (f,l_Y)(z(\alpha))\cdot\beta$;
-\item if $z(\alpha)\of X$ then $z(\alpha\circ\beta)\of X$.
-\item if $z(\id)\cdot \phi = z(\id)$ and $\phi\circ \mu = \mu \circ \phi'$ then $z(\mu)\circ \phi'= z(\mu)$ for all endomorphisms $\phi$ and $\phi'$ of $\simCat$.
+\item if $z(\alpha)\of X$ then $z(\alpha\circ\beta)\of X$;
+\item if $z(\alpha)=\tuplet{\epsilon,y}\of LY$ and $\epsilon\circ\beta$ is not monic, then $z(\alpha\circ\beta)\of LY$ and $z(\alpha\circ\beta)_0$ factors through $\epsilon\circ\beta$.
 \end{enumerate}
 For $\phi\of[m]\to [n]$, and $z\of Z[n]$, let $z\cdot\phi$ satisfy the following equation for all $\alpha$ of $\simCat^+$.
 \[ (z\cdot\phi)(\alpha) = z(m(\phi\circ\alpha))\cdot e(\phi\circ \alpha) \]
@@ -441,6 +426,9 @@ There is a morphism $g\of X\to Z$ which satisfies $g(x)(\alpha) = x\cdot\alpha$.
 
 There is a morphism $h\of Z\to Y$ which satisfies $h(z) = (f,l_Y)(z(\id_{[\dim(z)]}))$. This is an acyclic fibration thanks to the following filler operator. Let $a\of \cycle[n]\to Z$ and $b\of \simplex[n]\to Y$ satisfy $h\circ a = b\circ k$ where $k\of\cycle[n]\to\simplex[n]$ is the cycle inclusion. Let $c\of \simplex[n]\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $\phi$ is an epimorphism and $c(\phi)(\mu) = a(\phi)(\mu)$ otherwise. Now $c\circ k = a$ and $h\circ c = b$.
 \end{proof}
+
+\hide{ In acyclic cofibrations the codomain may have a distance function, that gives an upper bound to the number of compositions required to to reach it. I don't have time to work that out and check it right now.
+}
 
 The factorization in the proof above turns the implication in lemma \ref{Reedy} into an equivalence.
 
@@ -456,7 +444,20 @@ Y\ar[r]_\id \ar[ur]^k & Y
 A simplex $y$ of $Y$ is a face outside of the image of $f$ if $k(y)$ is a face outside of the image of $h$, and since the latter is decidable, the former is too.\end{proof}
 
 \section{Acyclic cofibrations} %here
+This section does not have a factorization of arbitrary morphisms into fibrations and acyclic cofibrations. Instead it shows that there is a factorization system in the subcategory of fibrant objects, where acyclic cofibrations are a kind of homotopy equivalence.
 
+\begin{definition} In the subcategory $\ambient\s\f$ of $\ambient\s$ a cofibration $f\of X\to Y$ is \emph{acyclic} if there is a $g\of Y\to X$ such that $g\circ f = \id_X$ and an $h\of \simplex[1]\times X\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and 
+$h\circ (\id_{\simplex[1]}\times f) = f\circ\pi_1$.
+\[\xymatrix{
+Y+Y\ar[d]_{k\times \id} \ar[dr]^{(\id,f\circ g)}\\
+\simplex[1]\times Y \ar[r]_(.6)h & Y\\
+\simplex[1]\times X \ar[r]_(.6){\pi_1}\ar[u]^{\id\times f} & X\ar[u]_f\\
+}\]
+\end{definition}
+
+%here
+
+% --- older writing below ---
 
 \begin{proposition} Every morphism $f\of X\to Y$ between Kan complexes factors as a fibration following an acyclic cofibration. \label{factor2} \end{proposition}
 
