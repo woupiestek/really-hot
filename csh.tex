@@ -446,28 +446,81 @@ A simplex $y$ of $Y$ is a face outside of the image of $f$ if $k(y)$ is a face o
 \section{Acyclic cofibrations} %here
 This section does not have a factorization of arbitrary morphisms into fibrations and acyclic cofibrations. Instead it shows that there is a factorization system in the subcategory of fibrant objects, where acyclic cofibrations are a kind of homotopy equivalence.
 
-\begin{definition} In the subcategory $\ambient\s\f$ of $\ambient\s$ a cofibration $f\of X\to Y$ is \emph{acyclic} if there is a $g\of Y\to X$ such that $g\circ f = \id_X$ and an $h\of \simplex[1]\times X\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and 
+\begin{definition} In the subcategory $\ambient\s\f$ of $\ambient\s$ a cofibration $f\of X\to Y$ is \emph{acyclic} if there is a $g\of Y\to X$ such that $g\circ f = \id_X$ and an $h\of \simplex[1]\times Y\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and 
 $h\circ (\id_{\simplex[1]}\times f) = f\circ\pi_1$.
 \[\xymatrix{
 Y+Y\ar[d]_{k\times \id} \ar[dr]^{(\id,f\circ g)}\\
 \simplex[1]\times Y \ar[r]_(.6)h & Y\\
 \simplex[1]\times X \ar[r]_(.6){\pi_1}\ar[u]^{\id\times f} & X\ar[u]_f\\
-}\]
+}\]\label{acyclic cofibration}
 \end{definition}
 
-%here
+\begin{theorem} Acyclic cofibrations and fibrations form a weak factorization system for $\ambient\s\f$. \end{theorem}
 
-% --- older writing below ---
+\begin{proof} Lemma \ref{acyclic have lifting} shows that acyclic cofibrations have the lifting property with respect to all fibrations. Lemma \ref{lifting is acyclic} shows the converse. Proposition \ref{factor2} shows that every morphism factors as a fibration following a cofibration. All three of them follow rely on a special property of cycle and horn inclusions (lemma \ref{triple lift}).
+\end{proof}
+
+\hide{
+to do: 
+proof triple lift
+proof that acyclic cofibrations have the required lifting properties
+
+proof that every morphism with these lifting properties is an acyclic cofibration. 
+proof factorization
+}
+
+
+\begin{lemma} Acyclic cofibrations have the left lifting property with respect to all fibrations. \label{acyclic have lifting}\end{lemma}
+
+\begin{proof} Let $f\of X\to Y$ be an acyclic cofibration, with inverse $g\of Y\to X$ and homotopy $h\of\simplex[1]\times Y\to Y$. Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. The composition $a\circ g\of Y\to A$ is a filler up to homotopy, which can be transported along the homotopy $h$ to become a proper filler. By lemma \ref{triple lift}, there is a $d\of \simplex[1]\times Y\to A$ such that $k\circ d=b\circ h$, $d\circ (\id_{\simplex[1]}\times f)= a\circ \pi_1$ and $d\circ (\simplex(\delta^1_1)\times \id_Y) = a\circ g$. %\delta^i_j must be introdcued somewhere
+
+Lemma \ref{triple lift} applies because the following equations hold.
+\begin{align*} 
+	(a\circ \pi_1)\circ (\simplex(\delta^1_1)\times\id_X) &= a = (a\circ g)\circ f\\
+	(b\circ h)\circ (\simplex(\delta^1_1)\times\id_Y) &= b\circ f\circ g = k\circ (a\circ g)\\
+	(b\circ h)\circ (\id_{\simplex[1]}\times f) &= b\circ f\circ \pi_1 = k\circ (a\circ \pi_1)
+\end{align*}
+\[\xymatrix{
+X\ar[d]_f \ar[rr]^(.4){\simplex(\delta^1_1)\times \id} && \simplex[1]\times X \ar[d]|(.6){\id\times f}\ar[r]^(.6){a\circ \pi_1} & A\ar[d]^k\\
+Y \ar[rr]_(.4){\simplex(\delta^1_1)\times \id}\ar[urrr]^(.3){a\circ g} && \simplex[1]\times Y\ar[r]_(.6){b\circ h}\ar@{.>}[ur]_d & B
+}\]
+
+Let $e=d\circ(\simplex(\delta^1_0)\times \id_Y)$, so $k\circ e=b\circ h\circ (\simplex(\delta^1_0)\times \id_Y) = b$ and $e\circ f = d\circ (\id_{\simplex[1]}\times f)\circ (\simplex(\delta^1_0)\times \id_X) = a$. Then $e$ is a filler for $b\circ f=k\circ a$. By generalization $f$ is an acyclic cofibration.
+\end{proof}
+
+\begin{lemma} In $\ambient\s\f$ every morphism that has the left lifting property with respect to all fibrations is an acyclic cofibration. \label{lifting is acyclic} \end{lemma}
+
+\begin{proof} An acyclic fibration is a fibration, because the right lifting property for cycle inclusions induces the right lifting property for horn inclusion. Therefore lemma \ref{cofibration characterization} tells us that every acyclic cofibration is a cofibration.
+
+Let $f\of X\to Y$ be a morphism with the left lifting property for all fibrations in $\ambient\s\f$. There is a morphism $g\of Y\to X$ such that $g\circ f = \id_X$ because $X$ is fibrant. 
+\[ \xymatrix{
+X\ar[d]_f \ar[r]^\id & X\ar[d]^\bang\\
+Y\ar[r]_\bang \ar@{.>}[ur]_h & 1
+}\]
+There is a morphism $h\of \simplex[1]\times Y\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and $h\circ (\id_{\simplex[1]}\times f) = f\circ\pi_1$ because $Y$ is fibrant and because of lemma \ref{triple lift}.
+\[ \xymatrix{
+X+X\ar[d]_{f+f}\ar[r]^{k\times\id} & \simplex[1]\times X \ar[r]^(.6){f\circ \pi_0}\ar[d] & Y\ar[d]^\bang\\
+Y+Y\ar[r]_{k\times\id} \ar[urr]^(.3){(\id,g)} & \simplex[1]\times Y \ar[r]_\bang\ar@{.>}[ur]_h & 1
+}\]
+Therefore $f$ is an acyclic cofibration by definition \ref{acyclic cofibration}.
+\end{proof}
 
 \begin{proposition} Every morphism $f\of X\to Y$ between Kan complexes factors as a fibration following an acyclic cofibration. \label{factor2} \end{proposition}
 
-\begin{proof} Because $\bang_Y\of Y\to 1$ is a fibration, the morphism $(d_0,d_1)\of Y^{\simplex[1]} \to Y\times Y$ defined by composition with the cycle inclusion $1+1\to \simplex[1]$ is a fibration and the components $d_i\of Y^{\simplex[1]}\to Y$ are acyclic fibrations by corollary \ref{pullback exponential}. Pulling back $(d_0,d_1)$ along $f\times \id_Y$ produces the \emph{homotopy graph} $Y/f$ of $f$ together with projections $f_0\of Y/f\to X$ and $f_1\of Y/f\to Y$ where $f_0$ is an acyclic fibration because it is the pullback of $d_0$ and $f_1$ is a fibration because it is the composition of the fibrations $(f_0,f_1)$ and $\pi_1\of X\times Y\to Y$.
-\[\xymatrix{
-Y/f \ar[r]\ar[d]_{(f_0,f_1)} & Y^{\simplex[1]} \ar[d]^{(d_0,d_1)} \\
-X\times Y \ar[r]_{f\times\id} & Y\times Y
-}\]
+\begin{proof} There is a simple factorization $f = p_0\circ r$ where $p_0\of Y/f\to Y$ and $r\of X\to Y/f$, where 
+\begin{align*}
+Y/f &= \set{(x,p)\of X\times Y^{\simplex[1]}| f(x) = p(*\mapsto 1) }\\
+p_0\tuplet{x,p} &= p(*\mapsto 0)\\
+r(x) &= \tuplet{x,*\mapsto f(x)}
+\end{align*}
 
-There is a deformation retract $r=(\id_X,Y^\bang\circ f)\of X\to Y/f$ with $f_1$ as left inverse. The retract factors as an acyclic fibration $g\of W\to Y/f$ following a cofibration $h\of X\to W$. This cofibration has a left inverse $h' = f_0\circ g$, which is an acyclic fibration. There is a homotopy $\phi$ between $\id_{W}$ and $h\circ h'$ by lemma \ref{triple lift} and the following equations.
+The morphism $r$ is not necessarily a cofibration, but factors as an acyclic fibration $g\of W\to Y/f$ following an cofibration $h\of X\to W$ by proposition \ref{factor1}. The morphism $h$ is an acyclic cofibration and the composition $p_0\circ g$ is a fibration for the following reasons.
+
+%here: introduce triple lift gently.
+
+%h is ac
+There is a morphism $p_1\of Y/f\to X$ that satisfies $p_1\tuplet{x,p}=x$. Let $h'=p_1\circ h$, so $h'\circ h = \id_X$.
+There is a homotopy $\phi$ between $\id_{W}$ and $h\circ h'$ by lemma \ref{triple lift} and the following equations. %introduce triple lift more gently
 \begin{align*}
 (\id_W,h\circ h')\circ(h+h)&=(h,h)= (h\circ\pi_1)\circ (c\times \id_X)\\
 h'\circ h\circ \pi_1&=\pi_1=(h'\circ\pi_1)\circ(\id_{\simplex[1]}\times h)\\
@@ -477,11 +530,30 @@ h'\circ(\id_W,h\circ h')&=(h',h')= (h'\circ\pi_1)\circ (c\times \id_W)
 X+X\ar[d]_{c\times \id}\ar[r]^{h+h} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\id,h\circ h')} & W\ar[d]^{h'}\\
 \simplex[1]\times X\ar[r]_{\id\times h} \ar[urr]^(.3){h\circ\pi_1}  & \simplex[1]\times W\ar[r]_(.6){h'\circ\pi_1} \ar@{.>}[ur]_\phi & X
 }\]
-Because $\phi\circ(\id_{\simplex[1]\times h}) = h\circ \pi_1$, the cofibration $h$ is acyclic by lemma \ref{retract is acyclic}. 
+Because $\phi\circ(\id_{\simplex[1]\times h}) = h\circ \pi_1$, the cofibration $h$ is acyclic by definition \ref{acyclic cofibration}. 
 
-As promised the morphism $f$ factors as the fibration $f_1\circ g$ following the acyclic cofibration $h$.
+%here
+%p_0\circ g is fib
+Since fibrations are closed under composition and since $g$ is an acyclic fibration, $p_0\circ g$ is a fibration if $p_0$ is. 
+
+Let $d\of A\to B$ be an acyclic cofibration and let $a\of A\to Y/f$ and $b\of B\to Y$ satisfy $p_0\circ a = b\circ d$. There is a morphism $c_0\of B\to X$ such that $c_0\circ d = p_1\circ a$ because $X$ is fibrant. There is a morphism $c_1\of\simplex[1]\times B\to Y$ such that $c_1\circ{(\id_{\simplex[1]}\times d)}$ is the transpose of $p_0\circ a$ and $c_0\circ (\simplex(\delta^1_1)\times \id_B) = f\circ c_1$ because $Y$ is fibrant and because of lemma \ref{triple lift}.
+\[\xy
+(0,20)*+{A}="AC",(25,20)*+{\simplex[1]\times A}="BC",(50,20)*+{Y}="Y",
+(0,0)*+{B}="AD",(25,0)*+{\simplex[1]\times B}="BD",(50,0)*+{1}="one"
+\ar^(.4){\simplex(\delta^1_1)\times\id} "AC";"BC"
+\ar_{d} "AC";"AD"
+\ar_(.4){\simplex(\delta^1_1)\times\id} "AD";"BD"
+\ar^(.3){f\circ c_0} "AD";"Y"
+\ar|(.3){\id\times d} "BC";"BD"
+\ar^(.6){a^t} "BC";"Y"
+\ar@{.>}_{c_1} "BD";"Y"
+\ar_(.6){\bang} "BD";"one"
+\ar^{\bang} "Y";"one"
+\endxy\]
+The transpose $c_1^t\of B\to Y^{\simplex[1]}$ of $c_1$ and $c_0$ together factor as a morphism $c\of B \to Y/f$ which is a filler for $p_0\circ a = b\circ d$. By generalization, $p_0$ is a fibration.
 \end{proof}
 
+% --- older writing below ---
 
 \subsection{Pullback exponentials}
 Kan complexes add additional structure that permits the factorization of morphisms of simplicial objects into Kan fibrations and acyclic cofibrations. Pullback exponentials and their duals, pushout products, are at the core of this argument.
@@ -561,117 +633,6 @@ B\ar[r]_{c^t} \ar[urr]_(.7){b^t} \ar@{.>}[ur]^{d^t} & Y^D \ar[r]_{Y^g} & Y^C
 }\]}\label{triple lift}
 \end{corollary}
 
-\subsection{Deformation retracts}
-In the classical situation, acyclic cofibrations between Kan complexes are deformation retracts. These still play an important role in the model structure on $\ambient\s\f$.
-
-\begin{definition} A \emph{deformation retract} is a morphism $f\of X\to Y$ with a left inverse $g\of Y\to X$ and a homotopy $h\of \simplex[1]\times Y\to Y$ between $\id_Y$ and $f\circ g$, i.e.\ $h\circ (\Delta(\delta^1_0)\times \id_Y) = \id_Y$ and $h\circ (\Delta(\delta^1_1)\times \id_Y) = f\circ g$, where $\Delta(\delta^1_i)\of 1\to \simplex[1]$ are the points of $\simplex[1]$.
-\end{definition}
-
-The following two lemmas explain how certain homotopies induce filler operators for fibrations and cofibrations. 
-
-\begin{lemma} Let $f\of X\to Y$ be a deformation retract with left inverse $g$ and homotopy $h$. If $f$ is a cofibration and $h\circ(\id_{\simplex[1]}\times f) = f\circ \pi_1$, then $f$ an acyclic cofibration.  \label{retract is acyclic}
-\[\xymatrix{
-\simplex[1]\times X \ar[r]^(.6){\pi_1}\ar[d]_{\id\times f} & X\ar[d]^f\\
-\simplex[1]\times Y \ar[r]_(.6)h & Y
-}\]
-\end{lemma}
-
-\begin{proof} 
-Let $k\of A\to B$ be a fibration and let $k\circ a = b\circ f$ for some $a\of X\to A$ and $b\of Y\to B$. 
-
-Corollary \ref{triple lift} helps out. The cofibrations are $f$ and $\simplex(\delta^1_1)$ and the latter of these is acyclic; the fibration is $k$; the the morphisms $a\circ g$, $a\circ \pi_1$ and $b\circ h$--where $\pi_1$ is the projection $\simplex[1]\times A\to A$--satisfy the following equations.
-\begin{align*} 
-	(a\circ \pi_1)\circ (\simplex(\delta^1_0)\times\id_X) &= a = (a\circ g)\circ f\\
-	(b\circ h)\circ (\simplex(\delta^1_0)\times\id_Y) &= b\circ f\circ g = k\circ (a\circ g)\\
-	(b\circ h)\circ (\id_{\simplex[1]}\times f) &= b\circ f\circ \pi_1 = k\circ (a\circ \pi_1)
-\end{align*}
-\hide{\[\xymatrix{
-X\ar[d]_f\ar@/^3ex/[rrr]^{\simplex(\delta^1_0)\times\id} &X\ar[d]_f \ar[rr]|(.4){\simplex(\delta^1_1)\times \id} && \simplex[1]\times X \ar[d]|(.6){\id\times f}\ar[r]|(.6){a\circ \pi_1} & A\ar[d]^k\\
-Y\ar@/_3ex/[rrr]_{\simplex(\delta^1_0)\times\id}&Y \ar[rr]|(.4){\simplex(\delta^1_1)\times \id}\ar[urrr]^(.3){a\circ g} && \simplex[1]\times Y\ar[r]|(.6){b\circ h}\ar@{.>}[ur]_d & B
-}\]}
-\[\xy
-(0,20)*+{X}="X1",(30,20)*+{\simplex[1]\times X}="X01",(50,20)*+{A}="A",(57,27)*+{X}="X0",
-(0,0)*+{Y}="Y1",(30,0)*+{\simplex[1]\times Y}="Y01",(50,0)*+{B}="B",(57,7)*+{Y}="Y0"
-\ar^f "X0";"Y0" \ar_(.4){\simplex(\delta^1_0)\times\id} "X0";"X01" \ar^a "X0";"A"
-\ar_f "X1";"Y1" \ar^(.4){\simplex(\delta^1_1)\times\id} "X1";"X01" 
-\ar_(.7){\id\times f} "X01";"Y01" \ar|(.6){a\circ\pi_0} "X01";"A"
-\ar_(.4)k "A";"B"
-\ar "Y0";"Y01" \ar^b "Y0";"B" \ar@{.>} "Y0";"A"
-\ar_(.4){\simplex(\delta^1_1)\times\id} "Y1";"Y01"
-\ar^(.3){a\circ g} "Y1";"A"
-\ar_(.6){b\circ h} "Y01";"B"
-\ar@{.>}|d "Y01";"A"
-\endxy\]
-
-The composition $A^{\simplex(\delta^1_0)}\circ d$ is filler for the square $k\circ a = b\circ f$. By abstraction there is a function that provides fillers for arbitrary commutative squares $f\to k$ where $k$ is a fibration. This proves $f$ is an acyclic cofibration.
-\end{proof}
-
-The inverse of the last lemma holds between fibrant objects.
-
-\begin{lemma} Between fibrant objects every acyclic cofibration $f\of X\to Y$ is a deformation retract with a left inverse $g\of Y\to X$ and a homotopy $h\of \simplex[1]\times Y\to Y$ that satisfies $h\circ(\id_{\simplex[1]}\times f) = f\circ \pi_1$. \end{lemma}
-
-\begin{proof} The lifting property gives the inverse straight away.
-\[ \xymatrix{
-X\ar[r]^\id\ar[d]_f & X\ar[d]^\bang\\
-Y\ar[r]_\bang \ar[ur]^g & 1
-}\]
-The homotopy comes from corollary \ref{triple lift}, where $f$ and $c\of 1+1\to\simplex[1]$ are the cofibrations and $\bang\of Y\to 1$ is the fibration.
-
-\[\xy
-(0,20)*+{X+X}="AC",(25,20)*+{\simplex[1]\times X}="BC",(50,20)*+{Y}="Y",
-(0,0)*+{Y+Y}="AD",(25,0)*+{\simplex[1]\times Y}="BD",(50,0)*+{1}="one"
-\ar^{c\times\id} "AC";"BC"
-\ar_{f+f} "AC";"AD"
-\ar_{c\times\id} "AD";"BD"
-\ar^(.3){(\id,f\circ g)} "AD";"Y"
-\ar|(.3){\id\times f} "BC";"BD"
-\ar^(.6){f\circ \pi_1} "BC";"Y"
-\ar@{.>}_{h} "BD";"Y"
-\ar_(.6){\bang} "BD";"one"
-\ar^{\bang} "Y";"one"
-\endxy\]
-
-
-\end{proof}
-
-
-\begin{lemma} Let $\pi\of \simplex[1]\times Y\to Y$ be the projection and let $c\of 1+1\to\simplex[1]$ be the cycle inclusion. Let $g\of Y\to X$ be a fibration, let $f\of X\to Y$ be a right inverse and let $h\of \simplex[1]\times Y \to Y$ be a homotopy that satisfies $g\circ h = g\circ \pi_1$. Then $f$ is an acyclic fibration. \label{deformation is acyclic}
-\hide{\[\xymatrix{
-Y+Y\ar[rr]^{(\id,f\circ g)}\ar[d]_{c\times \id} && Y\ar[d]^g \\
-\simplex[1]\times Y \ar[rr]_{g\circ\pi}\ar[urr]^h && X
-}\]}
-\[\xy
-(0,14)*+{Y+Y}="up left",(21,14)*+{Y}="up right",
-(0,0)*+{\simplex[1]\times Y}="down left",(21,0)*+{X}="down right"
-\ar^(.6){(\id,f\circ g)} "up left";"up right" \ar_{c\times \id} "up left";"down left"
-\ar^g "up right";"down right"
-\ar_(.6){g\circ\pi_1} "down left";"down right" \ar^h "down left";"up right"
-\endxy\]
-\end{lemma}
-
-\begin{proof}
-Thanks to the transpose $h^t\of Y\to Y^{\simplex[1]}$ of $h$, $g$ is a retract of $g\pe{\simplex(\delta^1_1)}$.
-\hide{\[\xymatrix{
-Y\ar[d]_g \ar[r]^{h^t} & Y^{\simplex[1]} \ar[d]_{g\pe{\simplex(\delta^1_1)}} \ar[dr]^{Y^{\simplex(\delta^1_1)}} \ar[rr]^{Y^{\simplex(\delta^1_0)}}&& Y \ar[d]^g\\
-X \ar[r]^{(X^\bang,f)} \ar[dr]_{X^\bang} \ar@/_3ex/[rr]_(.6)f & \bullet\ar[r]\ar[d] & Y \ar[d]_(.4)g & X \\
-& X^{\simplex[1]} \ar[r]_{X^{\simplex(\delta_1^1)}} \ar@/_2ex/[urr]_(.7){X^{\simplex(\delta^1_0)}}& X
-}\]}
-\[\xy
-(0,21)*+{Y}="Y0",(14,28)*+{Y^{\simplex[1]}}="Y1",(35,21)*+{Y}="Y2",(42,28)*+{Y}="Y3",
-(21,14)*+{\bullet}="center",
-(7,7)*+{X}="X0",(28,0)*+{X^{\simplex[1]}}="X1",(42,7)*+{X}="X2",(56,0)*+{X}="X3"
-\ar_g "Y0";"X0" \ar^{h^t} "Y0";"Y1"
-\ar_{g\pe{\simplex(\delta^1_1)}} "Y1";"center" \ar|{Y^{\simplex(\delta^1_1)}} "Y1";"Y2" \ar^{Y^{\simplex(\delta^1_0)}} "Y1";"Y3"
-\ar^g "Y2";"X2"\ar^g "Y3";"X3"
-\ar "center";"X1" \ar "center";"Y2"
-\ar^{(X^\bang,f)} "X0";"center" \ar_{X^\bang} "X0";"X1" \ar@/_2ex/_(.6)f "X0";"Y2"
-\ar^(.6){X^{\simplex(\delta_1^1)}} "X1";"X2" \ar_{X^{\simplex(\delta_0^1)}} "X1";"X3"
-\endxy\]
-Because $\simplex(\delta^1_1)$ is an acyclic cofibration, $g\pe{\simplex(\delta^1_1)}$ is an acyclic fibration by corollary \ref{pullback exponential}. Hence $f$ is an acyclic fibration if it is a fibration.
-\end{proof}
-
-\subsection{Fibrant replacements}
-There is a conventional method for factoring morphisms between Kan complexes as fibrations following deformation retracts, which helps to prove the following proposition.
 
 
 
@@ -706,7 +667,7 @@ h\circ (\id, k\circ k') &= (\phi\circ (\id_W\times h))\circ (c\times \id_W)
 X+X\ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\id,k\circ k')} & W\ar[d]^h\\
 \simplex[1]\times X\ar[r]_{\id\times k} \ar[urr]^(.3){k\circ \pi_1}  & \simplex[1]\times W\ar[r]_(.6){\phi\circ (\id\times h)} \ar@{.>}[ur]_\chi & Z
 }\]
-Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \pi_1$, lemma \ref{retract is acyclic} makes $k$ an acyclic cofibration.
+Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \pi_1$, definition \ref{acyclic cofibration} makes $k$ an acyclic cofibration.
 
 Let $g$ and $g\circ f$ be weak equivalences now.
 
@@ -726,7 +687,7 @@ Let $c\of 1+1\to\simplex[1]$ be the same cycle as above. There is homotopy $\phi
 X+X \ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times\id}\ar[r]^(.6){(\id,k\circ k')} & W\ar[d]^{g\circ h}\\
 \simplex[1]\times X \ar[r]_{\id\times k}\ar[urr]^(.3){k\circ\pi_1}& \simplex[1]\times W\ar[r]_{g\circ h\circ \pi_1}\ar@{.>}[ur]_\phi & Z
 }\]
-Because $\phi\circ (\id_{\simplex[1]}\times k)=k\circ \pi_1$, lemma \ref{retract is acyclic} says that $k$ is an acyclic cofibration.
+Because $\phi\circ (\id_{\simplex[1]}\times k)=k\circ \pi_1$, definition \ref{acyclic cofibration} says that $k$ is an acyclic cofibration.
 
 Next assume that $g$ and $g\circ f$ are acyclic cofibrations. Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. Because $B$ is fibrant, there is a $b'\of Z\to B$ such that $b'\circ g = b$. Lifting properties also imply that there is an $a'\of Z\to A$ such that $a'\circ g\circ f = a$ and $k\circ a'= b'$. So $b'\circ g$ is a filler for $k\circ a=b\circ f$. By abstraction, there is a filler operator that lifts $f$ against all fibrations.
 \[\xy
@@ -760,7 +721,7 @@ h\circ(\id_W,h'\circ h) &= (h,h) = (h\circ\pi_1)\circ(c\times\id_W)
 X+X\ar[r]^{k\circ f+k\circ f}\ar[d]_{c\times \id} & W+W\ar[r]^(.6){(\id,h'\circ h)}\ar[d]_(.3){c\times\id} & W\ar[d]^h\\
 \simplex[1]\times X\ar[r]_{\id\times k\circ f}\ar[urr]^(.3){k\circ f\circ\pi_1} & \simplex[1]\times W\ar[r]_(.6){h\circ \pi_1}\ar@{.>}[ur]_{\phi} & Y
 }\]
-Because $h\circ \phi = h\circ \pi_1$, lemma \ref{deformation is acyclic} says that $h$ is an acyclic fibration.
+Because $h\circ \phi = h\circ \pi_1$, definition \ref{acyclic cofibration} says that $h$ is an acyclic fibration.
 
 Next assume that $f$ and $g\circ f$ are acyclic fibrations. Let $k\of\cycle[n]\to\simplex[n]$ be the cycle inclusion. Let $a\of\cycle[n]\to Y$ and $b\of\simplex[n]\to Y$ satisfy $b\circ k = g \circ a$. Because $\cycle[n]$ is cofibrant, there is an $a'\of \cycle[n]\to X$ such that $f\circ a' = a$ and hence $(g\circ f)\circ a' = b\circ c$. There is a filler $b'\of\simplex[n]\to X$ for this commutative square. The morphism $f\circ b'$ is a filler for the square $b\circ k = g \circ a$. This proves $g$ is an acyclic fibration.
 
