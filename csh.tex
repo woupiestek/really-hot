@@ -457,19 +457,47 @@ Y+Y\ar[d]_{k\times \id} \ar[dr]^{(\id,f\circ g)}\\
 
 \begin{theorem} Acyclic cofibrations and fibrations form a weak factorization system for $\ambient\s\f$. \end{theorem}
 
-\begin{proof} Lemma \ref{acyclic have lifting} shows that acyclic cofibrations have the lifting property with respect to all fibrations. Lemma \ref{lifting is acyclic} shows the converse. Proposition \ref{factor2} shows that every morphism factors as a fibration following a cofibration. All three of them follow rely on a special property of cycle and horn inclusions (lemma \ref{triple lift}).
+\begin{proof} Lemma \ref{acyclic have lifting} shows that acyclic cofibrations have the lifting property with respect to all fibrations. Lemma \ref{lifting is acyclic} shows the converse. Proposition \ref{factor2} shows that every morphism factors as a fibration following a cofibration. 
 \end{proof}
 
-\hide{
-to do: 
-proof triple lift
-proof that acyclic cofibrations have the required lifting properties
+The proposition and the lemmas in this proof rely on a special property of cycle and horn inclusions (lemma \ref{triple lift}) which the next section explains.
 
-proof that every morphism with these lifting properties is an acyclic cofibration. 
-proof factorization
-}
+\subsection{Triple lifting property}
 
+\begin{lemma} Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
+\[\xy
+(0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
+(0,0)*+{A\times D}="AD",(25,0)*+{B\times D}="BD",(40,0)*+{Y}="Y"
+\ar^{f\times\id} "AC";"BC"
+\ar_{\id\times g} "AC";"AD"
+\ar_{f\times\id} "AD";"BD"
+\ar^{a} "AD";"X"
+\ar|(.6){\id\times g} "BC";"BD"
+\ar^(.6){b} "BC";"X"
+\ar@{.>}_{d} "BD";"X"
+\ar_(.6){c} "BD";"Y"
+\ar^{h} "X";"Y"
+\endxy\]
+\label{triple lift}
+\end{lemma}
 
+\begin{proof} The general case reduces to the cases where $f$ and $g$ are cycle or horn inclusions, because the lemma is equivalent to the statement that the following maps are (acyclic) fibrations. 
+\begin{align*}
+\tuplet{f\to h}&=\tuplet{h^{\id_B},\id_X^f}\of X^B \to Y^B\times_{Y^A} X^A\\
+\tuplet{g\to h}&=\tuplet{h^{\id_D},\id_X^g}\of X^D \to Y^D\times_{Y^C} X^C
+\end{align*}
+In the case where $h$ is an acyclic fibration the morphism $\tuplet{g\to h}$ is an acyclic cofibration if is has the lifting property for the family of cycle inclusions $k_i\of \cycle[i]\to\simplex[i]$ for $i\of\nno$, and in turn $\tuplet{k_n\to h}$ are acyclic cofibrations if the triple lifting property holds in the cases where $a=k_i$ and $b=k_j$ for all $i,j\of\nno$. For the cases where $f$ or $g$ are acyclic the same reduction takes us to products of cycle and horn inclusions.
+
+In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove that their pushout products $g\pp f$ are compositions of pushouts of sums of horns and cycles and therefore have the left lifting properties with respect to (acyclic) fibrations. 
+\[\xy
+(0,10)*+{W\times Y}="left",(20,10)*+{\bullet}="middle",(10,20)*+{X\times Y}="top",(10,0)*+{W\times Z}="bottom",(40,10)*+{X\times Z}="right"
+\ar^(.4){f\times \id} "left";"top" \ar_{\id\times g} "left";"bottom" \ar "top";"middle" \ar "bottom";"middle"
+\ar@{.>}|(.3){g\pp f} "middle";"right" \ar^{\id\times g} "top";"right" \ar_{f\times\id} "bottom";"right"
+\endxy\]
+Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one of $f$, $g$ and $h$ is acyclic.
+\end{proof}
+
+\subsection{Factorization system}
 \begin{lemma} Acyclic cofibrations have the left lifting property with respect to all fibrations. \label{acyclic have lifting}\end{lemma}
 
 \begin{proof} Let $f\of X\to Y$ be an acyclic cofibration, with inverse $g\of Y\to X$ and homotopy $h\of\simplex[1]\times Y\to Y$. Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. The composition $a\circ g\of Y\to A$ is a filler up to homotopy, which can be transported along the homotopy $h$ to become a proper filler. By lemma \ref{triple lift}, there is a $d\of \simplex[1]\times Y\to A$ such that $k\circ d=b\circ h$, $d\circ (\id_{\simplex[1]}\times f)= a\circ \pi_1$ and $d\circ (\simplex(\delta^1_1)\times \id_Y) = a\circ g$. %\delta^i_j must be introdcued somewhere
@@ -554,86 +582,6 @@ The transpose $c_1^t\of B\to Y^{\simplex[1]}$ of $c_1$ and $c_0$ together factor
 \end{proof}
 
 % --- older writing below ---
-
-\subsection{Pullback exponentials}
-Kan complexes add additional structure that permits the factorization of morphisms of simplicial objects into Kan fibrations and acyclic cofibrations. Pullback exponentials and their duals, pushout products, are at the core of this argument.
-
-\begin{definition} For each pair of morphisms $f\of W\to X$ and $g\of Y\to Z$ the \emph{pullback exponential} $g\pe f$ is the unique factorization of the span of the span $(Y^f, g^X)$ though the pullback of $Z^f$ and $g^W$. 
-\hide{\[\xymatrix{
-Y^X \ar@/^2ex/[rr]^{Y^f} \ar[dr]_{g^X} \ar@{.>}[r]_(.6){g\pe f}
-& \bullet \ar[r]\ar[d] & Y^W \ar[d]^{g^W} \\
-& Z^X \ar[r]_{Z^f} & Z^W
-}\]}
-
-For each pair of morphisms $f\of W\to X$ and $g\of Y\to Z$ the \emph{pushout product} $f\pp g$ is the unique factorization of the cospan $(f\times \id_Z , \id_X\times g)$ though the pushout of $f\times \id_Y$ and $\id_W\times g$. 
-\hide{\[\xymatrix{
-W\times Y \ar[r]^{f\times \id} \ar[d]_{\id\times g} \po & X\times Y \ar[d] \ar[dr]^{\id\times g} \\
-W\times Z \ar[r] \ar@/_2ex/[rr]_{f\times\id} & \bullet \ar[r]^(.4){f\pp g} & X\times Z
-}\]}
-\[\xy
-(0,10)*+{Y^X}="left",(20,10)*+{\bullet}="middle",(30,20)*+{Y^W}="top",(30,0)*+{Z^X}="bottom",(40,10)*+{Z^W}="right"
-\ar^{Y^f} "left";"top" \ar_{g^X} "left";"bottom" \ar@{.>}|(.6){g\pe f} "left";"middle" 
-\ar "middle";"top" \ar "middle";"bottom" \ar^{g^W} "top";"right" \ar_{Z^f} "bottom";"right"
-\endxy\xy
-(0,10)*+{W\times Y}="left",(20,10)*+{\bullet}="middle",(10,20)*+{X\times Y}="top",(10,0)*+{W\times Z}="bottom",(40,10)*+{X\times Z}="right"
-\ar^(.4){f\times \id} "left";"top" \ar_{\id\times g} "left";"bottom" \ar "top";"middle" \ar "bottom";"middle"
-\ar@{.>}|(.3){g\pp f} "middle";"right" \ar^{\id\times g} "top";"right" \ar_{f\times\id} "bottom";"right"
-\endxy\]
-
-\end{definition}
-
-Although $\ambient$ may omit some pushouts, the following lemma show that pushout products of cofibrations always exist.
-
-\begin{lemma} Pushout products of pairs of locally decidable monomorphisms exist and are locally decidable monomorphisms. \end{lemma}
-
-\begin{proof} Let $f\of W\to X$ and $g\of Y\to Z$ be a pair of locally decidable monomorphisms. A pair $\tuplet{x,y}\of X\times Z$ belongs to the image of $f\pp g$ if either $x$ belong to the image of $f$ or $y$ belong to the image of $g$. This is a decidable property.
-\end{proof}
-
-The following fundamental lemma of simplicial homotopy has a constructive proof and therefore holds in $\ambient\s$.
-
-\begin{lemma}[Pushout product] If $f$ and $g$ are cofibrations, then so is $f\pp g$. Moreover, if either $f$ or $g$ is acyclic then so is $f\pp g$. \label{pushout product} \end{lemma}
-
-\begin{proof} Reasoning internally, a simplex $\tuplet{x,z}$ of $X\times Z$ is outside of the image $f\pp g$ and nondegenerate if and only if both $x$ is outside of the image of $f$ and nondegenerate and $z$ is outside of the image of $g$ and nondegenerate. This is a decidable property of simplices of $X\times Z$ and hence $f\pp g$ is a cofibration by proposition \ref{cofibration characterization}. 
-
-Assume $f$ is an acyclic cofibration. Let $e$ be an arbitrary fibration. The problem of filling a commutative square with $f\pp g$ opposite to $e$ reduces to the problem of filling all commutative squares with the pushout product $h\pp k$ of a cycle inclusion $k\of \cycle[m]\to \simplex[m]$ and a horn inclusion $h\of \horn_k[n]\to\simplex[n]$ opposite to $e$. By standard simplicial homotopy, $h\pp k$ is an acyclic cofibration (see \cite{Hovey99} section 3.3, \cite{GJSHT} section I.5).
-
-For each horn inclusion $h\of \horn_k[n]\to \simplex[n]$ the pullback exponential $e\pe h$ is an acyclic fibration, because the problem of lifting a cycle inclusion $k\of \cycle[m]\to \simplex[m]$ reduces to the problem of lifting the acyclic cofibration $h\pp k$. Since $h\pp g$ has the global left lifting property with respect to all fibrations, it is an acyclic fibration. For the fibration $e$ this implies that $e\pe g$ is a fibration, because the problem of lifting a horn $h$ against $e\pe g$ reduces the the problem of lifting $g$ against the acyclic fibration $e\pe h$. This means that $f$ has the left lifting property with respect to $e\pe g$. By generalization $f\pp g$ has the left lifting property with respect to all fibrations, which means it is an acyclic cofibration.
-\end{proof}
-
-Lemma \ref{pushout product} has a counterpart for pullback exponentials.
-
-\begin{corollary} If $e\of U\to V$ is a fibration and $f\of W\to X$ is a cofibration, then $e\pe f$ is a fibration. Moreover, if either $f$ or $e$ are acyclic, then $e\pe f$ is acyclic. \label{pullback exponential}
-\end{corollary}
-
-The following corollary gives a lifted morphism without constructing a pushout product or pullback exponential.
-
-\begin{corollary} Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
-\hide{\[\xymatrix{
-A\times C\ar[r]^{f\times \id}\ar[d]_{\id\times g} & B\times C\ar[r]^b\ar[d]_(.3){\id\times g} & X\ar[d]^h\\
-A\times D\ar[r]_{f\times \id} \ar[urr]^(.3){a} & B\times D \ar[r]_c \ar@{.>}[ur]_{d} & Y
-}\]}
-\[\xy
-(0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
-(0,0)*+{A\times D}="AD",(25,0)*+{B\times D}="BD",(40,0)*+{Y}="Y"
-\ar^{f\times\id} "AC";"BC"
-\ar_{\id\times g} "AC";"AD"
-\ar_{f\times\id} "AD";"BD"
-\ar^{a} "AD";"X"
-\ar|(.6){\id\times g} "BC";"BD"
-\ar^(.6){b} "BC";"X"
-\ar@{.>}_{d} "BD";"X"
-\ar_(.6){c} "BD";"Y"
-\ar^{h} "X";"Y"
-\endxy\]
-
-\hide{Transposed view:
-\[\xymatrix{
-A\ar[r]^{a^t}\ar[d]_f & X^D\ar[r]^{X^g}\ar[d]^(.7){h^D} & X^C\ar[d]^{h^C}\\
-B\ar[r]_{c^t} \ar[urr]_(.7){b^t} \ar@{.>}[ur]^{d^t} & Y^D \ar[r]_{Y^g} & Y^C
-}\]}\label{triple lift}
-\end{corollary}
-
-
 
 
 \section{Model structure}
