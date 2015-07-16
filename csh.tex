@@ -500,20 +500,20 @@ Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one
 \subsection{Factorization system}
 \begin{lemma} Acyclic cofibrations have the left lifting property with respect to all fibrations. \label{acyclic have lifting}\end{lemma}
 
-\begin{proof} Let $f\of X\to Y$ be an acyclic cofibration, with inverse $g\of Y\to X$ and homotopy $h\of\simplex[1]\times Y\to Y$. Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. The composition $a\circ g\of Y\to A$ is a filler up to homotopy, which can be transported along the homotopy $h$ to become a proper filler. By lemma \ref{triple lift}, there is a $d\of \simplex[1]\times Y\to A$ such that $k\circ d=b\circ h$, $d\circ (\id_{\simplex[1]}\times f)= a\circ \pi_1$ and $d\circ (\simplex(\delta^1_1)\times \id_Y) = a\circ g$. %\delta^i_j must be introdcued somewhere
-
+\begin{proof} Let $f\of X\to Y$ be an acyclic cofibration, with inverse $g\of Y\to X$ and homotopy $h\of\simplex[1]\times Y\to Y$. Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. The composition $a\circ g\of Y\to A$ is a filler up to homotopy, which can be transported along the homotopy $h$ to become a proper filler. Let $d_0$ be the first horn inclusion $1\to \simplex[1]$. By lemma \ref{triple lift}, there is a $d\of \simplex[1]\times Y\to A$ such that $k\circ c=b\circ h$, $c\circ (\id_{\simplex[1]}\times f)= a\circ \pi_1$ and $c\circ (d_0\times \id_Y) = a\circ g$.
 Lemma \ref{triple lift} applies because the following equations hold.
+
 \begin{align*} 
 	(a\circ \pi_1)\circ (\simplex(\delta^1_1)\times\id_X) &= a = (a\circ g)\circ f\\
 	(b\circ h)\circ (\simplex(\delta^1_1)\times\id_Y) &= b\circ f\circ g = k\circ (a\circ g)\\
 	(b\circ h)\circ (\id_{\simplex[1]}\times f) &= b\circ f\circ \pi_1 = k\circ (a\circ \pi_1)
 \end{align*}
 \[\xymatrix{
-X\ar[d]_f \ar[rr]^(.4){\simplex(\delta^1_1)\times \id} && \simplex[1]\times X \ar[d]|(.6){\id\times f}\ar[r]^(.6){a\circ \pi_1} & A\ar[d]^k\\
-Y \ar[rr]_(.4){\simplex(\delta^1_1)\times \id}\ar[urrr]^(.3){a\circ g} && \simplex[1]\times Y\ar[r]_(.6){b\circ h}\ar@{.>}[ur]_d & B
+X\ar[d]_f \ar[rr]^(.4){d_0\times \id} && \simplex[1]\times X \ar[d]|(.6){\id\times f}\ar[r]^(.6){a\circ \pi_1} & A\ar[d]^k\\
+Y \ar[rr]_(.4){d_0\times \id}\ar[urrr]^(.3){a\circ g} && \simplex[1]\times Y\ar[r]_(.6){b\circ h}\ar@{.>}[ur]_c & B
 }\]
 
-Let $e=d\circ(\simplex(\delta^1_0)\times \id_Y)$, so $k\circ e=b\circ h\circ (\simplex(\delta^1_0)\times \id_Y) = b$ and $e\circ f = d\circ (\id_{\simplex[1]}\times f)\circ (\simplex(\delta^1_0)\times \id_X) = a$. Then $e$ is a filler for $b\circ f=k\circ a$. By generalization $f$ is an acyclic cofibration.
+Let $d_1$ be the other horn inclusion $1\to \simplex[1]$. Let $e=c\circ(d_1\times \id_Y)$, so $k\circ e=b\circ h\circ (d_1\times \id_Y) = b$ and $e\circ f = c\circ (\id_{\simplex[1]}\times f)\circ (d_1\times \id_X) = a$. Then $e$ is a filler for $b\circ f=k\circ a$. By generalization $f$ is an acyclic cofibration.
 \end{proof}
 
 \begin{lemma} In $\ambient\s\f$ every morphism that has the left lifting property with respect to all fibrations is an acyclic cofibration. \label{lifting is acyclic} \end{lemma}
@@ -544,7 +544,6 @@ r(x) &= \tuplet{x,*\mapsto f(x)}
 
 The morphism $r$ is not necessarily a cofibration, but factors as an acyclic fibration $g\of W\to Y/f$ following an cofibration $h\of X\to W$ by proposition \ref{factor1}. The morphism $h$ is an acyclic cofibration and the composition $p_0\circ g$ is a fibration for the following reasons.
 
-%here: introduce triple lift gently.
 
 %h is ac
 There is a morphism $p_1\of Y/f\to X$ that satisfies $p_1\tuplet{x,p}=x$. Let $h'=p_1\circ h$, so $h'\circ h = \id_X$.
@@ -560,17 +559,16 @@ X+X\ar[d]_{c\times \id}\ar[r]^{h+h} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\i
 }\]
 Because $\phi\circ(\id_{\simplex[1]\times h}) = h\circ \pi_1$, the cofibration $h$ is acyclic by definition \ref{acyclic cofibration}. 
 
-%here
 %p_0\circ g is fib
 Since fibrations are closed under composition and since $g$ is an acyclic fibration, $p_0\circ g$ is a fibration if $p_0$ is. 
 
-Let $d\of A\to B$ be an acyclic cofibration and let $a\of A\to Y/f$ and $b\of B\to Y$ satisfy $p_0\circ a = b\circ d$. There is a morphism $c_0\of B\to X$ such that $c_0\circ d = p_1\circ a$ because $X$ is fibrant. There is a morphism $c_1\of\simplex[1]\times B\to Y$ such that $c_1\circ{(\id_{\simplex[1]}\times d)}$ is the transpose of $p_0\circ a$ and $c_0\circ (\simplex(\delta^1_1)\times \id_B) = f\circ c_1$ because $Y$ is fibrant and because of lemma \ref{triple lift}.
+Let $d\of A\to B$ be an acyclic cofibration and let $a\of A\to Y/f$ and $b\of B\to Y$ satisfy $p_0\circ a = b\circ d$. There is a morphism $c_0\of B\to X$ such that $c_0\circ d = p_1\circ a$ because $X$ is fibrant. Let $e_0$ be one of the horn inclusions $1\to \simplex[1]$. There is a morphism $c_1\of\simplex[1]\times B\to Y$ such that $c_1\circ{(\id_{\simplex[1]}\times d)}$ is the transpose of $p_0\circ a$ and $c_0\circ (e_0\times \id_B) = f\circ c_1$ because $Y$ is fibrant and because of lemma \ref{triple lift}.
 \[\xy
 (0,20)*+{A}="AC",(25,20)*+{\simplex[1]\times A}="BC",(50,20)*+{Y}="Y",
 (0,0)*+{B}="AD",(25,0)*+{\simplex[1]\times B}="BD",(50,0)*+{1}="one"
-\ar^(.4){\simplex(\delta^1_1)\times\id} "AC";"BC"
+\ar^(.4){e_0\times\id} "AC";"BC"
 \ar_{d} "AC";"AD"
-\ar_(.4){\simplex(\delta^1_1)\times\id} "AD";"BD"
+\ar_(.4){e_0\times\id} "AD";"BD"
 \ar^(.3){f\circ c_0} "AD";"Y"
 \ar|(.3){\id\times d} "BC";"BD"
 \ar^(.6){a^t} "BC";"Y"
@@ -584,26 +582,39 @@ The transpose $c_1^t\of B\to Y^{\simplex[1]}$ of $c_1$ and $c_0$ together factor
 % --- older writing below ---
 
 
-\section{Model structure}
-\subsection{Two-out-of-three}
-The category $\ambient\s\f$ has the two weak factorization systems that a model structure requires. This subsection demonstrates that the weak equivalences satisfy the 2-out-of-3 property and completes the proof that $\ambient\s\f$ is a model category.
+\section{Model structure}%here
+For a definition of model categories see [\cite{Hovey99, GJSHT}]. The simplicial homotopy of Kan complexes is valid in the internal ELCCC $\ambient$ in the following sense.%give the definition here
 
+\begin{definition} In $\ambient\s\f$ a weak equivalence is a compositions of an acyclic fibration following an acyclic cofibration. \end{definition}
+
+%maybe we need to ague that we+f = af and we+c=ac
+%maybe that simplifies the proofs below
+
+\begin{theorem}[Model category]
+With fibrations, weak equivalences and cofibrations defined as above $\ambient\s\f$ is a model category.
+\label{model category}
+\end{theorem}
+
+\begin{proof}
+Lemma \ref{factor1} shows that cofibrations and acyclic fibrations form a weak factorization system, considering that they satisfy a lifting property by definition \ref{Kan}. Lemma \ref{factor2} tells the same thing about fibrations and acyclic cofibrations. Lemma \ref{toot} below demonstrates that if two of $f$, $g$ and $f\circ g$ are weak equivalences, then all three are. These three requirements define a model structure.
+\end{proof}
+
+
+\
 \begin{lemma}[2-out-of-3] Let $f\of X\to Y$ and $g\of Y\to Z$ be morphisms of $\ambient\s\f$. If any two of $f,g$ or $g\circ f$ are weak equivalences, then all three are. \label{toot}\end{lemma}
 
 \begin{proof}
-Compositions of acyclic fibrations are acyclic fibrations and the same holds for acyclic cofibrations. All compositions of weak equivalences are weak equivalences if $g\circ f$ factors as an acyclic fibration following an acyclic cofibration, whenever $g$ is an acyclic cofibration and $f$ is an acyclic fibration.
+Compositions of acyclic fibrations are acyclic fibrations and the same holds for acyclic cofibrations. \hide{last part is no longer obvious}
+All compositions of weak equivalences are weak equivalences if $g\circ f$ factors as an acyclic fibration following an acyclic cofibration, whenever $g$ is an acyclic cofibration and $f$ is an acyclic fibration.
 
-By proposition \ref{factor1} $g\circ f=h\circ k$ for some acyclic fibration $h\of W\to Z$ and a cofibration $k\of X\to W$. Since $Y$ is fibrant, $g$ has a left inverse $g'$ by the lifting property. Since $f \circ \id = g'\circ g\circ f= (g'\circ h)\circ k$ there is a morphism $k'$ such that $f\circ k' = g'\circ h$ and $k'\circ k = \id$, so $k$ has its own left inverse.
+%transport of acyclics
+By proposition \ref{factor1} $g\circ f=h\circ k$ for some acyclic fibration $h\of W\to Z$ and a cofibration $k\of X\to W$. Let $g'$ be the left inverse of $g$. Since $f \circ \id = g'\circ g\circ f= (g'\circ h)\circ k$ there is a morphism $k'$ such that $f\circ k' = g'\circ h$ and $k'\circ k = \id$, so $k$ has its own left inverse.
 \[\xymatrix{
 X\ar[d]_f \ar[r]_{k} \ar@/^2ex/[rr]^{\id} & W\ar[d]^h \ar[r]_{k'} & X\ar[d]^f\\
 Y \ar[r]^{g} \ar@/_2ex/[rr]_{\id} & Z \ar[r]^{g'} & Y
 }\]
 
-Let $c$ be the cycle $1+1\to\simplex[1]$. The fibrancy of $Z$ induces a homotopy between $\id_Z$ and $g\circ g'$, using lemma \ref{triple lift}.
-\[\xymatrix{
-Y+Y\ar[r]^{g+g}\ar[d]_{c\times\id} & Z+Z\ar[r]^(.6){(\id,g\circ g')}\ar[d]_(.3){c\times\id} & Z\\
-\simplex[1]\times Y\ar[r]_{\id\times g}\ar[urr]^(.3){g\circ\pi_1} & \simplex[1]\times Z\ar@{.>}[ur]_{\phi}
-}\]
+Let $\phi$ be a homotopy between $\id_Z$ and $g\circ g'$ such that $\phi\circ (\id\times g)=g\circ\pi_1$.
 
 There is a homotopy $\chi$ between $\id_W$ and $k\circ k'$ because of lemma \ref{triple lift}.
 \begin{align*}
@@ -617,6 +628,7 @@ X+X\ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\i
 }\]
 Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \pi_1$, definition \ref{acyclic cofibration} makes $k$ an acyclic cofibration.
 
+%
 Let $g$ and $g\circ f$ be weak equivalences now.
 
 First assume that $g$ and $g\circ f$ are acyclic fibrations. By proposition \ref{factor1}, $f$ factors as an acyclic fibration $h\of W\to Y$ following a cofibration $k\of X\to W$. Because $(g\circ f)\circ \id = (g\circ h)\circ k$ and $g\circ f$ is an acyclic fibration, $k$ has a left inverse $k'\of X\to W$ which satisfies $g\circ f\circ k' = g\circ h$. 
@@ -651,7 +663,9 @@ X\ar[r]_k\ar@/^2ex/[rr]^f\ar[d]_b & W\ar[r]_h\ar[d]^d & Y\ar[d]^g \\
 }\]
 Since $f = h\circ k$, $f$ is a weak equivalence.
 
+%
 The remaining case is where $f$ and $g\circ f$ are weak equivalences.
+
 
 First assume that $f$ and $g\circ f$ are acyclic cofibrations. The morphism $g$ factors as a fibration $h\of W\to Z$ following an acyclic cofibration $k\of Y\to W$ by lemma \ref{factor2}. Lifting properties give $h$ a right inverse $h'$.
 \[\xymatrix{
@@ -667,9 +681,24 @@ h\circ(\id_W,h'\circ h) &= (h,h) = (h\circ\pi_1)\circ(c\times\id_W)
 
 \[\xymatrix{
 X+X\ar[r]^{k\circ f+k\circ f}\ar[d]_{c\times \id} & W+W\ar[r]^(.6){(\id,h'\circ h)}\ar[d]_(.3){c\times\id} & W\ar[d]^h\\
-\simplex[1]\times X\ar[r]_{\id\times k\circ f}\ar[urr]^(.3){k\circ f\circ\pi_1} & \simplex[1]\times W\ar[r]_(.6){h\circ \pi_1}\ar@{.>}[ur]_{\phi} & Y
+\simplex[1]\times X\ar[r]_{\id\times (k\circ f)}\ar[urr]^(.3){k\circ f\circ\pi_1} & \simplex[1]\times W\ar[r]_(.6){h\circ \pi_1}\ar@{.>}[ur]_{\phi} & Y
 }\]
-Because $h\circ \phi = h\circ \pi_1$, definition \ref{acyclic cofibration} says that $h$ is an acyclic fibration.
+
+Let $a\of I\to J$ be an arbitrary cofibration and let $i\of I\to W$ and $j\of J\to Z$ satisfy $j\circ a=h\circ i$. Lemma \ref{triple lift} deforms $h'\circ j$ into a filler. Let $c_i$ be the morphisms $1\to \simplex[0]$.
+\begin{align*}
+\phi\circ(\id\times i)\circ (c_1\times \id) &= h'\circ h\circ i = h'\circ j\circ a \\
+h\circ h' \circ j &= j = j\circ \pi_1\circ(c_1\times\id) \\
+j\circ \pi_1\circ (\id\times a) &= j\circ a\circ \pi_1 = h\circ i \circ \pi_1\\
+h\circ \phi\circ(\id\times i) &= h \circ \pi_1 \circ (\id\times i) = h\circ i \circ \pi_1
+\end{align*}
+
+\[\xymatrix{
+I\ar[r]^{a}\ar[d]_{c_1\times \id} & J\ar[r]^(.6){h'\circ j}\ar[d]_(.3){c_1\times\id} & W\ar[d]^h\\
+\simplex[1]\times I\ar[r]_{\id\times a}\ar[urr]^(.3){\phi\circ(\id\times i)} & \simplex[1]\times J\ar[r]_(.6){j\circ \pi_1}\ar@{.>}[ur]_{\psi} & Z
+}\]
+The filler is $\psi\circ c_0$. By generalization, $h$ is an acyclic fibration and $f$ is a weak equivalence.
+
+
 
 Next assume that $f$ and $g\circ f$ are acyclic fibrations. Let $k\of\cycle[n]\to\simplex[n]$ be the cycle inclusion. Let $a\of\cycle[n]\to Y$ and $b\of\simplex[n]\to Y$ satisfy $b\circ k = g \circ a$. Because $\cycle[n]$ is cofibrant, there is an $a'\of \cycle[n]\to X$ such that $f\circ a' = a$ and hence $(g\circ f)\circ a' = b\circ c$. There is a filler $b'\of\simplex[n]\to X$ for this commutative square. The morphism $f\circ b'$ is a filler for the square $b\circ k = g \circ a$. This proves $g$ is an acyclic fibration.
 
@@ -691,18 +720,10 @@ X\ar[r]^f\ar[d]_b & Y\ar[r]^h\ar[d]^d\ar[dr]^g & \bullet\ar[d]^k\\
 This means that weak equivalences indeed satisfy 2-out-of-3.
 \end{proof}
 
+\hide{
+Characterize weak equivalences somehow.
+}
 
-\subsection{Conclusion}
-For a definition of model categories see [\cite{Hovey99, GJSHT}]. The simplicial homotopy of Kan complexes is valid in the internal ELCCC $\ambient$ in the following sense.
-
-\begin{theorem}[Model category]
-With fibrations, weak equivalences and cofibrations defined as above $\ambient\s\f$ is a model category.
-\label{model category}
-\end{theorem}
-
-\begin{proof}
-Lemma \ref{factor1} shows that cofibrations and acyclic fibrations form a weak factorization system, considering that they satisfy a lifting property by definition \ref{Kan}. Lemma \ref{factor2} tells the same thing about fibrations and acyclic cofibrations. Lemma \ref{toot} demonstrates that if two of $f$, $g$ and $f\circ g$ are weak equivalences, then all three are. These three requirements define a model structure.
-\end{proof}
 
 \section{Descent} \hide{Does this belong here, or in a seperate paper?}
 This section shows how lifting properties \emph{descend} along the horn inclusions $H(n,k)\of \horn_k[n]\to\simplex[n]$. This means that each fibration $f\of X\to\horn_k[n]$ is the pullback of a fibration $g\of Y\to\simplex[n]$ along $H(n,k)$.
