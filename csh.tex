@@ -91,12 +91,10 @@ Poland}
 \hide{
 Three papers:
 -simplicial homotopy
--complete categories
--the realizability model of HOTT
-
+-complete categories [how they are preserved]
+-the realizability model of HOTT [how to get  fibrant object out of a category]
 
 Idee: reverse the order. definitions--theorem--lemmas. That way the purpose of the lemmas is set up from the start.
-
 }
 
 \maketitle
@@ -116,11 +114,6 @@ This paper grew out of an attempt to build a \emph{recursive realizability} mode
 \end{enumerate}
 Out of interest in using the constructions in other contexts than the category of assemblies, this paper works with a generic \emph{extensive locally Cartesian closed category} with a \emph{natural number object} instead of the category of assemblies itself.
 
-
-\hide{
-Take the exact completion of a ELCCC with NNO. The result is a $\Pi$-pretopos with NNO, enough projective and projectives that form a locally Cartesian closed subcategory. Not necessarily all W-types are available, but I don't need them in my proofs. The advantage is that I can get away from Thomas' extensional type theory, and back to the exact completions I am at home in.
-}
-
 \subsection{Related literature}
 Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}.
 
@@ -128,7 +121,7 @@ Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the 
 This section surveys the categorical logic required to understand the rest of this paper.
 
 \subsection{Set up}
-Rather than working directly with extensive locally Cartesian closed categories, we will be working with their exact completions--their ex/lex completions to be precise. These a \emph{$\Pi$-pretoposes with enough projectives} and their projectives form a locally Cartesian closed subcategory. $\Pi$-pretoposes are Heyting categories. Hence they have a first order intuitionist internal logic.
+Rather than working directly with extensive locally Cartesian closed categories, we will be working with their exact completions--their ex/lex completions to be precise. These a \emph{$\Pi$-pretoposes}. $\Pi$-pretoposes are Heyting categories. Hence they have a first order intuitionist internal logic.
 
 The intended model is the ex/lex completion of category of assemblies defined in \citep{MR1097022,MR1023803,MR2479466}. This completion is not the famous \emph{effective topos}, but it is another realizability topos. Here we avoid the higher order aspects by sticking to the usual exactness properties.
 
@@ -137,19 +130,16 @@ Let $\ambient$ be the ambient category.
 \item The category $\ambient$ is \emph{locally Cartesian closed}. This means that for each object $X$ of $\ambient$ each slice $\ambient/X$ is Cartesian closed.
 \item The category $\ambient$ is \emph{extensive}, which means that is has finite coproducts and that $\ambient/(X+Y)$ is equivalent to $(\ambient/X)\times(\ambient/Y)$ for each pair of objects $X$ and $Y$ of $\ambient$.
 \item The category $\ambient$ is exact in the sense of Bar.
-\item The category $\ambient$ has enough projectives. This means that projectives cover all other objects in the category.
 \item The category $\ambient$ is has a \emph{natural number object} $\nno$.
-\item The projectives in $\ambient$ form a locally Cartesian closed subcategory.
 \end{enumerate}
 
-\subsection{Notation} There is an ambient category and several internal categories. Some of the notation overlaps: the codomain, domain and identity operators are always called $\cod$, $\dom$ and $\id$ and $[n]$ always refers to the initial segment of the natural number object, even if that natural number object lives inside an internal category. When not talking about numbers, $0$, $1$, $+$ and $\times$ refer to initial and terminal objects and binary coproduct and product operators of either the ambient category or one of its internal categories. The unique map to the terminal object is $\bang$ and projection maps from products to factors are $\pi_i$ for $i\in \N$.
+\subsection{Notation} The codomain, domain and identity operators are called $\cod$, $\dom$ and $\id$ and $[n]$ refers to the initial segment of the natural number object. When not talking about numbers, $0$, $1$, $+$ and $\times$ refer to initial and terminal objects and binary coproduct and product operators. The unique map to the terminal object is $\bang$ and projection maps from products to factors are $\pi_i$ for $i\in \N$.
 
-Every object $I$ of the ambient category has an internal discrete category $I\disc$. For this category $\Ob(I\disc)=\Ar(I\disc)=I$ and $\cod=\dom=\id=\id(I)$.
+Every object $I$ of the $\ambient$ has an internal discrete category $I\disc$. For this category $\Ob(I\disc)=\Ar(I\disc)=I$ and $\cod=\dom=\id=\id(I)$.
 
-The \emph{set} of natural numbers is $\N$, and since it is a set, $i\in \N$ indicates membership. Other natural number objects are $\nno$, and $i\of\nno$ means that $i$ is a morphism whose codomain is $\nno$.
+The \emph{set} of natural numbers is $\N$, and since it is a set, $i\in \N$ indicates membership. The natural number object of $\ambient$ is $\nno$, and $i\of\nno$ means that $i$ is a morphism whose codomain is $\nno$.
 
 Let $\cat C$ be an internal category. Its object of objects is $\Ob(\cat C)$ and its object of arrows is $\Ar(\cat C)$, so in this case $\cod$ and $\dom$ are morphisms $\Ar(\cat C)\to\Ob(\cat C)$ and $\id\of\Ob(\cat C)\to\Ar(\cat C)$. Let $\cat D$ be another internal category. The internal category of functors $\cat C\to\cat D$ is $\Func(\cat C,\cat D)$ or $\cat D^{\cat C}$.
-
 
 \subsection{Dependent types}
 Dependent type theory describe the constructions of objects and morphisms that are available in a locally Cartesian closed category.
@@ -188,7 +178,6 @@ The unit and counit induces a families of morphisms between the following famili
 \db{\Gamma\vdash t\of (\Sigma x\of T.V)}&\to \db{\Gamma\vdash \pi_1(t) \of V}
 \end{align*}
 Here $u[t/x]$ is the result of replacing every free occurrence of $x$ in $u$ with $t$; the type $V$ cannot contain $x$ as a free variable. Unit and co-units satisfy equations that ensure that $\pi_0\tuplet{t,u}=t$ and $\pi_1\tuplet{t,u}=u$ are valid for all terms $t$ and $u$.
-
 
 Let $\cat C$ be finitely complete and Cartesian closed. The functor $\dprod X\of\cat C/X\to \cat C$ sends each morphism $f\of Y\to X$ is the object $\set{g\of X\to Y| f\circ g = \id_X }$ of sections of $f$. It is the right adjoint of $X\ri$.
 
@@ -254,14 +243,6 @@ Other thought: maybe treat the equivalence of $\ambient\s/J$ with $\ambient^{EJ}
 \subsection{Filler operators} %may need a new name
 Kan fibrations are morphisms of simplicial sets that have the lifting property relative to the family of horn inclusions. This subsection focuses on the lifting properties.
 
-\hide{
-When dealing with projectives, the properties 'there is a lifting' and having a lifting operator coincide.
-
-We just need to be careful about non projective simplicial objects--these newbies may have unexpected properties.
-
-Check when being projective plays a role.
-}
-
 \begin{definition} For each pair of internal simplicial objects $X$, $Y$ let $\nat(X,Y)$ be the object of morphisms between them.
 
 A morphism $f\of X\to Y$ of simplicial object has the \emph{right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the \emph{left} lifting property with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\nat(\id_J,f),\nat(g,\id_X))}$ 
@@ -275,22 +256,9 @@ is a \emph{split} epimorphism.
 A section of $\tuplet{f_\bang,g\ri}$ is a \emph{filler operator}.\label{lifting}
 \end{definition}
 
-Note that this is an external property rather than an external one.
-
-\hide{explain why %is this is important?
-\begin{lemma} If $X$ and $Y$ are projective, then so is $\nat(X,Y)$. \end{lemma}
-
-\begin{proof} The object $\nat(X,Y)$ is a subobject of the fibred exponential $Y^X_\nno$ that is defined by a system of equations. Projectives are closed under all required constructions.
-\end{proof}
-}
 A morphism can have a lifting property relative to a family or class of morphisms.
 
-
 \hide{
-New idea: everything follows form the projectivity of added faces.
-
-We don't need the object of realizers anymore either.
-
 Explain $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ somewhere. It should be an internal simplicial object of the slice category. i.e. $(\ambient/I)\s$. 
 }
 \begin{definition}[Injective] An $I$-indexed-family of morphisms in $\ambient\s$ a morphism $a\of D\to E$ in $(\ambient\s)^{I\disc}$. Let $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the right lifting property with respect to $a$.
@@ -341,15 +309,9 @@ These subobjects are definable in the internal language of $\ambient$ because be
 \item A \emph{Kan complex} $X$ is \emph{contractible} if $\bang_X\of X\to 1$ is acyclic.
 \end{itemize}\label{Kan}
 
-The category of Kan complexes and morphisms of simplicial object is $\ambient\s\f$. \hide{
-In the categories we are looking at, the terminal object is projective. Therefore the internal and external concepts of having a filler operator coincide.
-[I am so angry]
-}
+The category of Kan complexes and morphisms of simplicial object is $\ambient\s\f$.
 \end{definition}
 This paper usually leaves out `Kan' and simply talk about fibrations and complexes.
-
-\hide{ no witnesses }
-
 
 \subsection{Cofibrations}
 This subsection proves that morphisms in $\ambient\s$ factor as acyclic fibrations following cofibrations. 
@@ -722,10 +684,7 @@ I\ar[r]^{a}\ar[d]_{c_1\times \id} & J\ar[r]^(.6){h'\circ j}\ar[d]_(.3){c_1\times
 The filler is $\psi\circ c_0$. By generalization, $h$ is an acyclic fibration and $f$ is a weak equivalence.
 \end{proof}
 
-
-
-
-
+\hide{ Idea: class of fibrations with a generic fibration and certain closure properties (limits) results in a fibrant codomain. }
 \section{Descent} \hide{Does this belong here, or in a separate paper?}
 This section shows how lifting properties \emph{descend} along the horn inclusions $H(n,k)\of \horn_k[n]\to\simplex[n]$. This means that each fibration $f\of X\to\horn_k[n]$ is the pullback of a fibration $g\of Y\to\simplex[n]$ along $H(n,k)$.
 
@@ -904,6 +863,7 @@ Because $\depprod{H(n,k)}$ is right adjoint to $H(n,k)\ri$ and because of lemma 
 Lemma \ref{acyclic cofibrancy} means that there is a filler $h\of \simplex[m+\norm\xi]\to X$ for the second commutative square, whose transpose fills the first.
 By generalization there is a filler for each square with a horn inclusion $H(m,l)$ in it and by abstraction there is a filler operator that makes $Df$ a fibration in the sense of definition \ref{lifting}.
 \end{proof}
+
 
 \section{Closing}
 

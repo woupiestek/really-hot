@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  18 JUL 2015 21:44
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  19 JUL 2015 00:34
 entering extended mode
 **csh.tex
 (C:\Users\Wouter\Documents\GitHub\realy-hot\csh.tex
@@ -427,42 +427,42 @@ Package biblatex Info: Reference section=0 on input line 87.
 Package biblatex Info: Reference segment=0 on input line 87.
  [1]
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 11.49994pt on input line 102.
+(Font)              scaled to size 11.49994pt on input line 100.
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 8.04996pt on input line 102.
+(Font)              scaled to size 8.04996pt on input line 100.
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 5.74997pt on input line 102.
-LaTeX Font Info:    Try loading font information for U+msa on input line 102.
+(Font)              scaled to size 5.74997pt on input line 100.
+LaTeX Font Info:    Try loading font information for U+msa on input line 100.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 102.
+LaTeX Font Info:    Try loading font information for U+msb on input line 100.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 102.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 100.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 102.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 100.
 
 [2]
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 13.79993pt on input line 131.
+(Font)              scaled to size 13.79993pt on input line 124.
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 9.19995pt on input line 131.
+(Font)              scaled to size 9.19995pt on input line 124.
 LaTeX Font Info:    Font shape `OT1/pzc/m/it' will be
-(Font)              scaled to size 6.89996pt on input line 131.
-LaTeX Font Info:    Try loading font information for U+euf on input line 135.
+(Font)              scaled to size 6.89996pt on input line 124.
+LaTeX Font Info:    Try loading font information for U+euf on input line 128.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\ueuf.fd"
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ) [3] [4] [5] [6] [7] [8] [9] <xymatrix 2x2 223> <xymatrix
 2x3 270> [10] [11] <xymatrix 4x2 409> <xymatrix 2x2 223> <xymatrix 3x2 390> [12] <xymatrix 3x2 399> [13] <xymatrix 3x2
 409> [14] <xymatrix 3x2 409> <xymatrix 3x2 399> [15] <xymatrix 2x2 223> <xymatrix 3x2 398> [16] <xymatrix 3x2 399>
 [17] [18] <xymatrix 2x2 209> [19] [20] <xymatrix 5x2 317> [21] [22] <xymatrix 2x2 182> <xymatrix 2x2 183> [23]
-Underfull \hbox (badness 10000) in paragraph at lines 917--917
+Underfull \hbox (badness 10000) in paragraph at lines 877--877
 
  []
 
@@ -478,4 +478,4 @@ Here is how much of TeX's memory you used:
  841 hyphenation exceptions out of 8191
  37i,14n,52p,1066b,936s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on csh.dvi (24 pages, 158516 bytes).
+Output written on csh.dvi (24 pages, 157508 bytes).
