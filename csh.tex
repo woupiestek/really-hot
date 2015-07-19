@@ -541,7 +541,6 @@ Let $d\of A\to B$ be an acyclic cofibration and let $a\of A\to Y/f$ and $b\of B\
 The transpose $c_1^t\of B\to Y^{\simplex[1]}$ of $c_1$ and $c_0$ together factor as a morphism $c\of B \to Y/f$ which is a filler for $p_0\circ a = b\circ d$. By generalization, $p_0$ is a fibration.
 \end{proof}
 
-% --- older writing below ---
 
 
 \section{Model structure}%here
@@ -684,9 +683,31 @@ I\ar[r]^{a}\ar[d]_{c_1\times \id} & J\ar[r]^(.6){h'\circ j}\ar[d]_(.3){c_1\times
 The filler is $\psi\circ c_0$. By generalization, $h$ is an acyclic fibration and $f$ is a weak equivalence.
 \end{proof}
 
+
+
 \hide{ Idea: class of fibrations with a generic fibration and certain closure properties (limits) results in a fibrant codomain. }
-\section{Descent} \hide{Does this belong here, or in a separate paper?}
-This section shows how lifting properties \emph{descend} along the horn inclusions $H(n,k)\of \horn_k[n]\to\simplex[n]$. This means that each fibration $f\of X\to\horn_k[n]$ is the pullback of a fibration $g\of Y\to\simplex[n]$ along $H(n,k)$.
+\section{Descent} 
+This purpose of this section is to replace arguments based on \emph{minimal fibrations} in simplicial homotopy theory, in particular those that are related to homotopy type theory. We assume that there is a class $M$ of \emph{modest fibrations} in $\ambient\s$ with the following properties.
+\begin{itemize}
+\item $M$ is closed under pullbacks along arbitrary morphisms.
+\item $M$ is closed under composition.
+\item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} is it is the equalizer of some parallel pair.
+\end{itemize}
+
+\newcommand\uni\upsilon
+\newcommand\chm\chi
+\begin{definition} A \emph{universal modest fibration} is a modest fibration $\uni\of U\to V$ such that every modest fibration $f\of X\to Y$ is the pullback of $\uni$ along a unique morphism $\chm(f)\of Y\to V$.
+\end{definition}
+
+
+\begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant.
+\end{theorem}
+
+
+\begin{proof} For each horn inclusion $h\of \horn_k[n]\to\simplex[n]$ and each pair of $v\of \horn_k[n]\to V$, the modest fibration $v\ri(\uni)\of \horn_k[n]\times_V U \to \horn_k[n]$ descends along $h$ to form a modest fibration $h_*(v\ri(\uni))\of \bullet\to\simplex[n]$ by theorem \ref{descent}. There is a $\chm(h_*(v\ri(\uni)))\of\simplex[n]\to V$ and $\chm(h_*(v\ri(\uni)))\circ h$ equals $v$ because of universality.
+\end{proof}
+
+% --- older writing below ---
 
 \subsection{Higher dimensional case}
 This subsection introduces a construction that works for dimensions $n>1$. For each fibration $f\of X\to \horn_k[n]$ each simplex in the descended fibration $Df\of DX\to \simplex[n]$ is the face of a filler for an acyclic cofibration which factors through $f$. This extends the range of the filler operator of $f$ while keeping it a pullback of $Df$ along $H(n,k)$. The following equivalence simplifies dealing with $\ambient\s/\simplex[n]$.

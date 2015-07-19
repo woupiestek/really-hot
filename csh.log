@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  19 JUL 2015 00:34
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  19 JUL 2015 14:50
 entering extended mode
 **csh.tex
 (C:\Users\Wouter\Documents\GitHub\realy-hot\csh.tex
@@ -462,7 +462,7 @@ File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 2x3 270> [10] [11] <xymatrix 4x2 409> <xymatrix 2x2 223> <xymatrix 3x2 390> [12] <xymatrix 3x2 399> [13] <xymatrix 3x2
 409> [14] <xymatrix 3x2 409> <xymatrix 3x2 399> [15] <xymatrix 2x2 223> <xymatrix 3x2 398> [16] <xymatrix 3x2 399>
 [17] [18] <xymatrix 2x2 209> [19] [20] <xymatrix 5x2 317> [21] [22] <xymatrix 2x2 182> <xymatrix 2x2 183> [23]
-Underfull \hbox (badness 10000) in paragraph at lines 877--877
+Underfull \hbox (badness 10000) in paragraph at lines 898--898
 
  []
 
@@ -470,12 +470,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 877--877
 Package logreq Info: Writing requests to 'csh.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 8719 strings out of 493922
- 128461 string characters out of 3147303
+ 8721 strings out of 493922
+ 128467 string characters out of 3147303
  390609 words of memory out of 3000000
- 11914 multiletter control sequences out of 15000+200000
+ 11916 multiletter control sequences out of 15000+200000
  19806 words of font info for 75 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  37i,14n,52p,1066b,936s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on csh.dvi (24 pages, 157508 bytes).
+Output written on csh.dvi (24 pages, 159308 bytes).
