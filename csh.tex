@@ -121,11 +121,10 @@ Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the 
 This section surveys the categorical logic required to understand the rest of this paper.
 
 \subsection{Set up}
-Rather than working directly with extensive locally Cartesian closed categories, we will be working with their exact completions--their ex/lex completions to be precise. These a \emph{$\Pi$-pretoposes}. $\Pi$-pretoposes are Heyting categories. Hence they have a first order intuitionist internal logic.
+The ambient category $\ambient$ where everything happens is a \emph{$\Pi$-pretopos}. $\Pi$-pretoposes are Heyting categories. Hence they have a first order intuitionist internal logic.
 
 The intended model is the ex/lex completion of category of assemblies defined in \citep{MR1097022,MR1023803,MR2479466}. This completion is not the famous \emph{effective topos}, but it is another realizability topos. Here we avoid the higher order aspects by sticking to the usual exactness properties.
 
-Let $\ambient$ be the ambient category.
 \begin{enumerate}
 \item The category $\ambient$ is \emph{locally Cartesian closed}. This means that for each object $X$ of $\ambient$ each slice $\ambient/X$ is Cartesian closed.
 \item The category $\ambient$ is \emph{extensive}, which means that is has finite coproducts and that $\ambient/(X+Y)$ is equivalent to $(\ambient/X)\times(\ambient/Y)$ for each pair of objects $X$ and $Y$ of $\ambient$.
@@ -543,7 +542,7 @@ The transpose $c_1^t\of B\to Y^{\simplex[1]}$ of $c_1$ and $c_0$ together factor
 
 
 
-\section{Model structure}%here
+\section{Model structure}
 For a definition of model categories see [\cite{Hovey99, GJSHT}]. The simplicial homotopy of Kan complexes is valid in the internal ELCCC $\ambient$ in the following sense.%give the definition here
 
 \begin{definition} In $\ambient\s\f$ a weak equivalence is a compositions of an acyclic fibration following an acyclic cofibration. \end{definition}
@@ -691,8 +690,9 @@ This purpose of this section is to replace arguments based on \emph{minimal fibr
 \begin{itemize}
 \item $M$ is closed under pullbacks along arbitrary morphisms.
 \item $M$ is closed under composition.
+%TODO: we may need a type of transfinite composition to deal with unbounded families of finite limits. Modest sets have these becaue they are a right class in some factorization.
 \item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} is it is the equalizer of some parallel pair.
-\end{itemize}
+\end{itemize} 
 
 \newcommand\uni\upsilon
 \newcommand\chm\chi
@@ -704,29 +704,54 @@ This purpose of this section is to replace arguments based on \emph{minimal fibr
 \end{theorem}
 
 
-\begin{proof} For each horn inclusion $h\of \horn_k[n]\to\simplex[n]$ and each pair of $v\of \horn_k[n]\to V$, the modest fibration $v\ri(\uni)\of \horn_k[n]\times_V U \to \horn_k[n]$ descends along $h$ to form a modest fibration $h_*(v\ri(\uni))\of \bullet\to\simplex[n]$ by theorem \ref{descent}. There is a $\chm(h_*(v\ri(\uni)))\of\simplex[n]\to V$ and $\chm(h_*(v\ri(\uni)))\circ h$ equals $v$ because of universality.
+\begin{proof} For each horn inclusion $h\of \horn_k[n]\to\simplex[n]$ and each pair of $v\of \horn_k[n]\to V$, the modest fibration $v\ri(\uni)\of \horn_k[n]\times_V U \to \horn_k[n]$ descends along $h$ to form a modest fibration $h_*(v\ri(\uni))\of \bullet\to\simplex[n]$ by lemma \ref{descent}. There is a $\chm(h_*(v\ri(\uni)))\of\simplex[n]\to V$ and $\chm(h_*(v\ri(\uni)))\circ h$ equals $v$ because of universality.
+\end{proof}
+
+\begin{lemma}[Descent]
+For each horn inclusion $h\of \horn_k[n]\to\simplex$ and each fibration $f\of X\to \horn_k[n]$ there is a fibration $Df\of Y\to\simplex[n]$ such that $f$ is the pullback of $Df$ along $h$.
+\label{descent}
+\end{lemma}
+
+\newcommand\hornInclusion[2]{h^{#1}_{#2}}
+
+\begin{proof} There are no horn inclusion for $n=0$. In the case $n=1$, there are two maps $1\to\simplex[1]$. In both case $Df=\pi_0\of \simplex[1]\times X \to\simplex[1]$ suffices. For all the cases were $n>0$ we use the following construction.
+
+The first part of the descent is simply the dependent product $h_*\of \ambient\s/\horn_k[n]\to \ambient\s/\simplex[n]$ along $h$. This dependent product exists and preserves membership of $M$ because its definition only requires finite limits. Moreover, because $h$ is monic, $h^*$ is fully faithful and its counit is a bijection. All of this is worked out in lemma \ref{h_*}. 
+
+The endofunctor $h_*$ does not preserve fibrations. The functor $h\ri$ adds simplices so freely that the filler operator of a fibration $f\of X\to \horn_k[n]$ cannot handle them anymore. The solution is an endofunctor $K\ri$ such that member of $K\ri(h^*(X))$ are homotopies between members of $X$ and $h_*(X)$. This solves the problem because it gives the filler operator of $f$ the extra information it needs, and removes problematic simplices. This is worked out in lemma \ref{descent2}. Because $K\ri$ satisfies $h\ri\circ K\ri = h\ri$ (see lemma \ref{f is pullback}), $h\ri\circ K\ri(f)$ is the required $Df$.
+\end{proof}
+
+
+\begin{lemma} Let $h\of \horn_k[n]\to \simplex[n]$ be a horn inclusion.
+\begin{enumerate}
+\item The reindexing functor $h\ri\of\ambient\s/\simplex[n]\to\ambient\s/\horn_k[n]$ has a right adjoint $h_*$.
+\item If $f\of X\to \horn_k[n]$ is a member of $M$, then so is $h_*(f)\of h_*(X)\to \simplex[n]$.
+\item The counit $h\ri\circ h_*\to\id_{\ambient\s/\horn_k[n]}$ is an isomorphism.
+\end{enumerate}\label{h_*} 
+\end{lemma}
+
+\newcommand\subs\Lambda
+\begin{proof} 
+A right adjoint to $h\ri$ only requires families of finite limits which are available even in $M$.
+
+Let $f\of X\to \horn_k[n]$. Define $h_*(f)\of h_*(X)\to \simplex[n]$ as follows. For $\phi\of\base(\simplex[n])$ let $\subs(\phi)$ be the object of those $\chi\of \base(\horn_k[n])$ such that there is a monomorphism $\chi\to \phi$ in $\simCat/[n]$. 
+\begin{align*}
+X^\phi &= \lim\limits_{\chi\of \subs(\phi)} \set{ x\of \base X | \base f(x) = \chi }\\
+\base(h_*(X)) &= \Sigma \phi\of\base(\simplex[n]). X^\phi\\
+\base(h_*(f)) &= \lambda\tuplet{\phi,x}\of h_*(X).\phi
+\end{align*}
+Since $h_*(f)$ should preserve dimension $\dim\tuplet{\phi,x}=\dom\phi$. The restriction map satisfies the following equation.
+\[ \tuplet{\phi,x}\cdot\chi = \tuplet{\phi\circ\chi,x(m(\phi\circ\chi))\cdot e(\phi\circ\chi)}\]
+
+The following transposition operators show that functor $h_*$ is right adjoint to $h\ri$.
+Let $\mu\of g\to h_*(f)$ in $\ambient\s/\simplex[n]$. The morphism $\xi$ is a member of $\dom(\mu(x)) = \Lambda(\xi)$ because $\xi$ is a member of $\base(\horn_k[n])$. The transpose $\mu^t\of h\ri(g) \to f$ sends $\tuplet{\xi,x}\of \horn_k[n]\times_{\simplex[n]}\dom g$ to $\mu(x)_1(\xi)$ assuming $\tuplet{\mu(x)_0,\mu(x)_1}=\mu(x)$. In the other direction, let $\nu\of h\ri(g)\to f$ in $\ambient\s/\horn_k[n]$. The transpose $\nu^t$ sends $x\of \dom g$ to $\tuplet{g(x),\lambda\xi\of\subs(g(x)).\nu\tuplet{\xi,x|\xi}}$, where $x|\xi$ is the restriction of $x$ along the monomorphism $\xi\to g(x)$ in $\simCat/[n]$. Writing out definitions shows that $(\mu^t)^t=\mu$ and $(\nu^t)^t=\nu$.
+
+The counit sends $\tuplet{\xi,\xi,x} \of h\ri h_*(X)\to X$ to $x(\xi)_1$ assuming $\tuplet{x(\xi)_0,x(\xi)_1}=x(\xi)$. Its inverse sends $x\of X$ to $\tuplet{f(x),f(x),\lambda \xi\of\subs(f(x)),\tuplet{\xi,x|\xi}}$.
 \end{proof}
 
 % --- older writing below ---
 
-\subsection{Higher dimensional case}
-This subsection introduces a construction that works for dimensions $n>1$. For each fibration $f\of X\to \horn_k[n]$ each simplex in the descended fibration $Df\of DX\to \simplex[n]$ is the face of a filler for an acyclic cofibration which factors through $f$. This extends the range of the filler operator of $f$ while keeping it a pullback of $Df$ along $H(n,k)$. The following equivalence simplifies dealing with $\ambient\s/\simplex[n]$.
-
-\hide{ this bit scares me. Has it actually gotten harder though? }
-\begin{lemma} The categories $\ambient\s/\simplex[n]$ and $\ambient^{(\simCat/[n])\dual}$ are equivalent. \label{slice equivalence} \end{lemma}
-
-\begin{proof} For $\xi\of[m]\to[n]$ in $\simCat$ let $[\xi]$ to denote the corresponding object of $\simCat/[n]$ and let $\simplex[\xi]$ be the representable functor generated by the Yoneda embedding. The equivalence links $\simplex[\xi]$ of $\ambient^{(\simCat/[n])\dual}$ to $\Delta\xi\of \simplex[m]\to \simplex[n]$ of $\ambient\s/\simplex[n]$.
-
-In the direction $\ambient\s/\simplex[n]\to \ambient^{(\simCat/[n])\dual}$ the equivalence sends a $f\of X\to \simplex[n]$ to the presheaf $g$ which for all $\xi$ of $\simCat/[n]$ satisfies:
-\[ g[\xi] = \set{ x\of X(\dom(\xi)) | f(\dom(\xi))(x)=\xi } \]
-Here $\dom(\xi)$ is the domain of $\xi$.
-In the direction $\ambient\s/\simplex[n]\to \ambient^{(\simCat/[n])\dual}$ the equivalence sends a presheaf $g$ to the morphism $f$ which for each $m\of\nno$ represent the family of objects:
-\[ \xi\of\simCat([m],[n])\mapsto g(\xi) \]
-\end{proof}
-
-%the factorization is a functor $\ambient\s/\simplex[n]\to \ambient\s/\simplex[n]$ mind you!
-
-The dependent product along $H(n,k)\of \horn_k[n]\to\simplex[n]$ is the first half of the descent functor. It constructs fillers for a limited set of acyclic cofibrations. The following functor $K$ sends each $\simplex[n]$-indexed family of simplices to the family of simplices it will be a face of.
+The following functor $K$ sends each $\simplex[n]$-indexed family of simplices to the family of simplices it will be a face of.
 
 \begin{definition}
 The following defines the functor $K\of\simCat/[n]\to\simCat/[n]$.
@@ -755,15 +780,38 @@ The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical orde
 
 The norm $\norm\xi$ equals the number of ways the injection $\delta^n_k\of[n-1]\to[n]$ factors through $\xi$. Here $\delta^n_k(i)=i$ if $i<k$ and $i+1$ if $i\geq k$. The functor $K$ gives each such factorization $\phi\of[n-1]\to [m]$ a unique anchor point in $K(\xi)_k$. Now $K(\phi)\of K(\delta^n_k)\to \xi$ is a full simplex. Pulling back along $H(n,k)$ preserves the homotopy type of $\Delta(K(\phi))$ and that is the point of the construction.
 
-The second half of the descent functor is the endofunctor of $\ambient\s/\simplex[n]$ that is equivalent to the endofunctor $K\ri$ of $\ambient^{\simCat/[n]\dual}$ that satisfies $K\ri X[\xi] = X[K\xi]$.
+%TODO define K\ri, 
 
-\begin{lemma} Let $Df = K\ri\depprod{H[n,k]}f\of K\ri\depprod{H[n,k]}X\to\simplex[n]$. Each $f\of X\to\horn_k[n]$ is a pullback of $Df$ along $H(n,k)$. \end{lemma}
+\begin{lemma} Let $Df = K\ri h_* f\of K\ri h_*X\to\simplex[n]$. Each $f\of X\to\horn_k[n]$ is a pullback of $Df$ along $H(n,k)$. \label{f is pullback}\end{lemma}
 
-\begin{proof} If $\xi\of [m]\to[n]$ is of $(\horn_k[n])[m]$, then $\norm\xi=0$ and $K\xi = \xi$. Lemma \ref{slice equivalence} and the Yoneda lemma imply that $f$ and the pullback of $K\ri\depprod{H[n,k]}f$ have isomorphic objects of simplices. \label{descent pullback}
+\begin{proof} %TODO
+\label{descent pullback}
 \end{proof}
 
+\begin{lemma} For each fibration $f\of X\to\horn_k[n]$, $Df=K\ri h_*f$ is a fibration. \label{descent2} \end{lemma}
+
+
+\begin{proof} Let $\simplex\xi\of \simplex[m]\to\simplex[n]$ and $g\of \horn_l[m]\to DX$ such that $Df\circ g = \simplex\xi\circ H(m,l)$. 
+\[
+	\xymatrix{
+		\horn_l[m]\ar[r]^g\ar[d]_{H(m,l)} & DX\ar[d]^{Df} \\
+		\simplex[m]\ar[r]_{\simplex\xi} & \simplex[n]
+	}	
+\]
+Because $h_*$ is right adjoint to $h\ri$ and because of lemma \ref{K-universal}, $g$ has a transpose $g^t$ and $f\circ g^t = \simplex(K\xi)\circ (h\ri \depsum{K} H(m,l))$.
+\[
+	\xymatrix{
+		\bullet\ar[r]^{g^t}\ar[d]_{h\ri \depsum K H(m,l)} & X\ar[d]^{f} \\
+		\simplex[m+\norm\xi]\ar[r]_(.6){\simplex(K\xi)} & \simplex[n]
+	}	
+\]
+Lemma \ref{acyclic cofibrancy} means that there is a filler $h\of \simplex[m+\norm\xi]\to X$ for the second commutative square, whose transpose fills the first.
+By generalization there is a filler for each square with a horn inclusion $H(m,l)$ in it and by abstraction there is a filler operator that makes $Df$ a fibration in the sense of definition \ref{lifting}.
+\end{proof}
+
+
 \subsection{Fibrancy}
-This subsection shows that $Df$ is a fibration by reducing the following lifting problems (for all $l\leq m\of\nno$) to ones that involves $f$ directly.
+This subsection shows that $Df$ is a fibration by reducing the following lifting problems (for all $l\leq m\of\nno$) to ones that involve $f$ directly.
 \begin{equation}
 	\xymatrix{
 		\horn_l[m]\ar[r]\ar[d]_{H(m,l)} & DX\ar[d]^{Df} \\
@@ -771,9 +819,6 @@ This subsection shows that $Df$ is a fibration by reducing the following lifting
 	}
 	\label{descent lifting problem}
 \end{equation}
-
-The reduction is composed of two parts like the descent functor itself. The second part uses the adjunction between pulling back and dependent products. The first part fattens the horn up to help it survive the pullback. Some new notation helps to describe the constructions involved in the first part.
-
 
 \begin{definition} For each $\xi\of[m]\to[n]$ and $p\of[m]\to\bool$ let $\face^\xi(p)$ be the object of $\ambient^{\simCat/[n]\dual}$ which satisfies: 
 \[ \face^\xi(p)[\alpha] = \set{\psi\of [\alpha]\to[\xi] | (\forall i\of \dom\alpha)(p(\xi(i))=\true)} \]
@@ -803,16 +848,16 @@ For each $r\of[m+\norm\xi]\to \bool$ such that $\face^{K\xi}(r)$ is a face of th
 \[ \ambient^{\simCat/[n]\dual}(H(m,l),K\ri -)\simeq\ambient^{\simCat/[n]\dual}(\depsum K H(m,l), -) \]
 \end{proof}
 
-As noted in lemma \ref{slice equivalence} $\depsum K H(m,l)$ has a counterpart in $\ambient\s/\simplex[n]$ which has a pullback $H(n,k)\ri \depsum K H(m,l)$ in $\ambient\s/\horn_k[n]$. The following examples of acyclic cofibrations helps to prove that this is an acyclic cofibration.
+$\depsum K H(m,l)$ has a counterpart in $\ambient\s/\simplex[n]$ which has a pullback $h\ri \depsum K H(m,l)$ in $\ambient\s/\horn_k[n]$. The following examples of acyclic cofibrations helps to prove that this is an acyclic cofibration.
 
 \begin{lemma}[Face completion] Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have an edge $e$ in common. The inclusion $\bigcup F\to \simplex[p]$ is an acyclic cofibration. \label{face completion} \end{lemma}
 
 \begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$ and therefore an acyclic cofibration. Because acyclic cofibrations are closed under composition, $\bigcup F = F_0\to F_p = \simplex[p]$ is an acyclic cofibration. 
 \end{proof}
 
-\begin{lemma} In $\ambient\s/\horn_k[n]$, $H(n,k)\ri \depsum K H(m,l)$ is a subobject of $H(n,l)\ri\simplex[K\xi]$ . The inclusion of their domains in $\ambient\s$, $H(n,k)\ri \depsum K H(m,l)$ is an acyclic cofibration. \label{acyclic cofibrancy} 
+\begin{lemma} In $\ambient\s/\horn_k[n]$, $h\ri \depsum K H(m,l)$ is a subobject of $H(n,l)\ri\simplex[K\xi]$ . The inclusion of their domains in $\ambient\s$, $h\ri \depsum K H(m,l)$ is an acyclic cofibration. \label{acyclic cofibrancy} 
 \[\xymatrix{
-\bullet \ar@{.>}[rr]^{H(n,k)\ri \depsum K H(m,l)} \ar[d] && \bullet\ar[rr]^{H(n,k)\ri\simplex(K\xi)}\ar[d] && \horn_k[n]\ar[d]^{H(n,k)}\\
+\bullet \ar@{.>}[rr]^{h\ri \depsum K H(m,l)} \ar[d] && \bullet\ar[rr]^{h\ri\simplex(K\xi)}\ar[d] && \horn_k[n]\ar[d]^{H(n,k)}\\
 \bullet\ar[rr]_(.4){\depsum K H(m,l)} && \simplex[m+\norm\xi]\ar[rr]_(.6){\simplex(K\xi)} && \simplex[n]
 }\]
 \end{lemma}
@@ -825,7 +870,7 @@ H(n,l)\ri\simplex[K\xi] &= \bigcup_{i\of([n]-\set{k})} \face^{K\xi}(\U(i))\\
 H(n,l)\ri \depsum K H(m,l)&= \bigcup_{\substack{i\of([n]-\set{k})\\j\of([m]-\set l)}} \face^{K\xi}(\U(i)\cap \A(j))
 \end{align*}
 
-Let's get the simple cases out of the way first. If $\norm\xi = 0$, then the inclusion is $H(m,l)$ because $\depsum K$ and $H(n,k)\ri$ preserve it. Hence the inclusion is an acyclic cofibration. Assume $\norm\xi>0$ for the rest of this proof.
+Let's get the simple cases out of the way first. If $\norm\xi = 0$, then the inclusion is $H(m,l)$ because $\depsum K$ and $h\ri$ preserve it. Hence the inclusion is an acyclic cofibration. Assume $\norm\xi>0$ for the rest of this proof.
 
 The following paragraphs show that the following inclusions are acyclic cofibrations:
 \begin{equation} \bigcup_{p\in[m]-\set l} \face^{K\xi}(\A(p)\cap\U(i))\to \face^{K\xi}(\U(i)) \label{facewise} \end{equation}
@@ -835,10 +880,10 @@ Because $n>1$, there are always $i\of[n]$ such that $i\neq k$, $i\neq \xi(l)$. T
 
 Now join the proven acyclic cofibration of \ref{facewise} together. Let
 \[ L=H(n,l)\ri \depsum K H(m,l)\cup\bigcup_{i\of([n]-\set{k,\xi(l)})}\face^{K\xi}(\U(i)) \]
-The map $H(n,l)\ri \depsum K H(m,l)\to L$ is an acyclic cofibration because it is a pushout of the coproduct of these simpler face inclusions. If $\xi(l)=k$, then $L=H(n,k)\ri \simplex[K\xi]$ and the proof is done. Otherwise the face $\face^{K\xi}(\U(\xi(l)))$ is left.
+The map $H(n,l)\ri \depsum K H(m,l)\to L$ is an acyclic cofibration because it is a pushout of the coproduct of these simpler face inclusions. If $\xi(l)=k$, then $L=h\ri \simplex[K\xi]$ and the proof is done. Otherwise the face $\face^{K\xi}(\U(\xi(l)))$ is left.
 
 
-For $\vec p \of\prod_{i\of([n]-\set k)}\xi_i$ let $\W(\vec p) = \U(\xi(l))-\set{ \la(q) | p_{\xi(q)} < q }$. For all $j\of\nno$ let $L_j = L\cup \bigcup_{ \ka(\vec p) < j } \face^{K\xi}(\W(\vec p))$. By this definition $L_0=L$ and $L_{m+\norm\xi+1} = H(n,k)\ri\simplex[K\xi]$ because if $p_i$ are the maximal elements of $\xi_i$ for each $i\of[n]-\set k$, then $\set{ \la(q) | p_{\xi(q)} < q }$ is empty and therefore $\W(\vec p) = \U(\xi(l))$.
+For $\vec p \of\prod_{i\of([n]-\set k)}\xi_i$ let $\W(\vec p) = \U(\xi(l))-\set{ \la(q) | p_{\xi(q)} < q }$. For all $j\of\nno$ let $L_j = L\cup \bigcup_{ \ka(\vec p) < j } \face^{K\xi}(\W(\vec p))$. By this definition $L_0=L$ and $L_{m+\norm\xi+1} = h\ri\simplex[K\xi]$ because if $p_i$ are the maximal elements of $\xi_i$ for each $i\of[n]-\set k$, then $\set{ \la(q) | p_{\xi(q)} < q }$ is empty and therefore $\W(\vec p) = \U(\xi(l))$.
 
 For every $j\of\nno$ the inclusion $L_j\to L_{j+1}$ is an acyclic cofibration for the following reasons.
 
@@ -854,36 +899,9 @@ Define $\vec p[l]\of\prod_{i\neq k} \xi_i$ to satisfy $\vec p[l]_i = l$ if $i=\x
 
 The supporting edge $\kappa(\vec p[l])\in\U(i)$ and $\W(\vec p)$ because those faces contain all edges in the image of $\ka$. The edge $\kappa(\vec p[l])$ is a member of $\A(q)$ when $\xi(q)=k$ or $\vec p[l]_{\xi(q)}=q$ by definition of $M(q)$. In other cases $\A(q)\cap\U(\xi(l))\cap \W(\vec p)$ is a subobject of one of the faces that do contain $\kappa(\vec p[l])$. If $q$ is the least element of $\xi_{\xi(q)}$, then $\A(q)\cap\W(\vec p)\subseteq \U(\xi(q))$. If $\xi(q-1)=\xi(q)$, then $\A(q)\cap \W(\vec p) \subseteq \W(\vec p[q-1])$ and $\kappa(\vec p[q-1])<\kappa(\vec p)$. Therefore $L_j\cap \face^{K\xi}(\W(\vec p))$ is a union of faces which contain the supporting edge $\ka(\vec p[l])$. By lemma \ref{face completion} $L_j\cap \face^{K\xi}(\W(\vec p))\to \face^{K\xi}(\W(\vec p))$ is an acyclic cofibration. Since it is a pushout of that map, $L_j\to L_{j+1} = L_j\cup \face^{K\xi}(\W(\vec p))$ too.
 
-By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = H(n,k)\ri \simplex[K\xi]$ and $L_j\to L_{j+1}$ is the identity. The same holds for all $L_j\to L_{j+1}$ where $K\xi(j+1)>k$ and where $j+1>m+\norm\xi$. Since acyclic cofibrations are closed under composition, both $L\to H(n,k)\ri \simplex[K\xi]$ and $H(n,k)\ri \depsum K H(m,l) \to H(n,k)\ri \simplex[K\xi]$ are acyclic cofibrations.
+By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = h\ri \simplex[K\xi]$ and $L_j\to L_{j+1}$ is the identity. The same holds for all $L_j\to L_{j+1}$ where $K\xi(j+1)>k$ and where $j+1>m+\norm\xi$. Since acyclic cofibrations are closed under composition, both $L\to h\ri \simplex[K\xi]$ and $h\ri \depsum K H(m,l) \to h\ri \simplex[K\xi]$ are acyclic cofibrations.
 \end{proof}
 
-\subsection{Conclusion}
-The only thing a proof of the descent theorem still needs are fillers for the horns $H(n,k)$ where $n\leq 1$. There is no $H(n,k)$ for $n=0$. For $n=1$ there are two maps $H(1,i)\of 1\to \simplex[1]$ for which a simple construction exists.
-
-\begin{lemma} If $f\of X\to 1$ is a fibration--i.e.\ if $X$ is a complex--then $\id_{\simplex[1]}\times f\of\simplex[1]\times X\to \simplex[1]$ is a fibration. \end{lemma}
-
-\begin{proof} The morphism $\id\times f$ is a pullback of $f$ along $\bang\of X\to 1$ and fibrations are closed under pullbacks. \end{proof}
-
-\begin{theorem} For each fibration $f\of X\to\horn_k[n]$, $Df=K\ri\depprod{H(n,k)}f$ is a fibration. \label{descent} \end{theorem}
-
-
-\begin{proof} Let $\simplex\xi\of \simplex[m]\to\simplex[n]$ and $g\of \horn_l[m]\to DX$ such that $Df\circ g = \simplex\xi\circ H(m,l)$. 
-\[
-	\xymatrix{
-		\horn_l[m]\ar[r]^g\ar[d]_{H(m,l)} & DX\ar[d]^{Df} \\
-		\simplex[m]\ar[r]_{\simplex\xi} & \simplex[n]
-	}	
-\]
-Because $\depprod{H(n,k)}$ is right adjoint to $H(n,k)\ri$ and because of lemma \ref{K-universal}, $g$ has a transpose $g^t$ and $f\circ g^t = \simplex(K\xi)\circ (H(n,k)\ri \depsum{K} H(m,l))$.
-\[
-	\xymatrix{
-		\bullet\ar[r]^{g^t}\ar[d]_{H(n,k)\ri \depsum K H(m,l)} & X\ar[d]^{f} \\
-		\simplex[m+\norm\xi]\ar[r]_(.6){\simplex(K\xi)} & \simplex[n]
-	}	
-\]
-Lemma \ref{acyclic cofibrancy} means that there is a filler $h\of \simplex[m+\norm\xi]\to X$ for the second commutative square, whose transpose fills the first.
-By generalization there is a filler for each square with a horn inclusion $H(m,l)$ in it and by abstraction there is a filler operator that makes $Df$ a fibration in the sense of definition \ref{lifting}.
-\end{proof}
 
 
 \section{Closing}
