@@ -65,7 +65,7 @@ Poland}
 \newcommand\la\lambda
 \newcommand\depprod{\Pi_}
 \newcommand\depsum{\Sigma_}
-\newcommand\face\delta
+\mathrmdef{face}
 \mathrmdef{colim}
 \newcommand\U{U}
 \newcommand\A{M}
@@ -690,11 +690,11 @@ This purpose of this section is to replace arguments based on \emph{minimal fibr
 \begin{itemize}
 \item $M$ is closed under pullbacks along arbitrary morphisms.
 \item $M$ is closed under composition.
-%TODO: we may need a type of transfinite composition to deal with unbounded families of finite limits. Modest sets have these becaue they are a right class in some factorization.
+%TODO: we may need a type of transfinite composition to deal with unbounded families of finite limits. Modest sets have these becaue they are a right class in some factorization system.
 \item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} is it is the equalizer of some parallel pair.
 \end{itemize} 
 
-\newcommand\uni\upsilon
+\mathrmdef{uni}
 \newcommand\chm\chi
 \begin{definition} A \emph{universal modest fibration} is a modest fibration $\uni\of U\to V$ such that every modest fibration $f\of X\to Y$ is the pullback of $\uni$ along a unique morphism $\chm(f)\of Y\to V$.
 \end{definition}
@@ -751,16 +751,14 @@ The counit sends $\tuplet{\xi,\xi,x} \of h\ri h_*(X)\to X$ to $x(\xi)_1$ assumin
 
 % --- older writing below ---
 
-The following functor $K$ sends each $\simplex[n]$-indexed family of simplices to the family of simplices it will be a face of.
-
 \begin{definition}
 The following defines the functor $K\of\simCat/[n]\to\simCat/[n]$.
 \begin{enumerate}
 \item A function $\xi\of[m]\to[n]$ cuts $[m]$ into $n+1$ posets $\xi_j = \set{i\of[m]|\xi(i)=j}$. 
-\item Let $\norm \xi$ be the number of elements of the product: \[\Pi i\of ([n]-\set k).\xi_i\] 
-\item Define $K(\xi)\of [m+\norm\xi]\to [n]$ as follows.
+\item Let $\norm \xi$ be the number of elements of the product $\Pi i\of ([n]-\set k).\xi_i$. 
+\item Define $K_0(\xi)\of [m+\norm\xi]\to [n]$ as follows.
 \[ 
-	K\xi(i) = \left\{
+	K_0(\xi)(i) = \left\{
 		\begin{array}{cc}
 			\xi(i) & \xi(i)<k \\
 			k & \xi(i-\norm\xi)\leq k \leq \xi(i)\\
@@ -768,23 +766,36 @@ The following defines the functor $K\of\simCat/[n]\to\simCat/[n]$.
 		\end{array}
 	\right.
 \]
-\item Let $\ka(\xi)\of\Pi i\of([n]-\set k).\xi_i \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\Pi i\of([n]-\set k).\xi_i$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K\xi(i)=k$.
+\item Let $\ka(\xi)\of\Pi i\of([n]-\set k).\xi_i \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\Pi i\of([n]-\set k).\xi_i$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
 
 The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical ordering. %more?
 
-\item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K(\xi)\circ\la(\xi) = \xi$.
-\item For each function $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
-\item Let $K(\phi)\of K(\xi)\to K(\xi')$ be the nondecreasing function which satisfies $K(\phi)\circ \ka(\xi) = \ka(\xi')\circ \Pi i\of([n]-\set k).\phi_i$ and $K(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
+\item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K_0(\xi)\circ\la(\xi) = \xi$.
+\item For each morphisms $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
+\item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \Pi i\of([n]-\set k).\phi_i$ and $K_0(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
 \end{enumerate}
 \end{definition}
 
-The norm $\norm\xi$ equals the number of ways the injection $\delta^n_k\of[n-1]\to[n]$ factors through $\xi$. Here $\delta^n_k(i)=i$ if $i<k$ and $i+1$ if $i\geq k$. The functor $K$ gives each such factorization $\phi\of[n-1]\to [m]$ a unique anchor point in $K(\xi)_k$. Now $K(\phi)\of K(\delta^n_k)\to \xi$ is a full simplex. Pulling back along $H(n,k)$ preserves the homotopy type of $\Delta(K(\phi))$ and that is the point of the construction.
+The norm $\norm\xi$ equals the number of ways the injection $\delta^n_k\of[n-1]\to[n]$ factors through $\xi$. Here $\delta^n_k(i)=i$ if $i<k$ and $i+1$ if $i\geq k$. The functor $K$ gives each such factorization $\phi\of[n-1]\to [m]$ a homotopy with a unique anchor point in $K(\xi)_k$.  Pulling back along $H(n,k)$ preserves the homotopy type of $\Delta(K_0(\xi))$ and that is the point of the construction. %TODO: improve or remove
 
-%TODO define K\ri, 
 
-\begin{lemma} Let $Df = K\ri h_* f\of K\ri h_*X\to\simplex[n]$. Each $f\of X\to\horn_k[n]$ is a pullback of $Df$ along $H(n,k)$. \label{f is pullback}\end{lemma}
+\begin{definition} For each $g\of Y\to \simplex[n]$ define $K\ri(g)\of K\ri(Y) \to \simplex [n]$ as follows.
+\begin{align*}
+\base(K\ri(Y)) &= \set{(x,\xi)\of\base(Y)\times\base(\simplex[n])| K_0(\xi) = g(y) }\\
+K\ri(g)(x,\xi) &= \xi\\
+\dim(x,\xi) &= \dom(\xi)\\
+(x,\xi)\cdot \phi &= (x\cdot K_1(\phi),\xi\circ K_1(\phi))
+\end{align*}
 
-\begin{proof} %TODO
+For each $m\of g\to g'$ in $\ambient\s/\simplex[n]$ define $K\ri(m)$ as follows.
+\[ K\ri(m)(x,\xi) = (m(x),\xi) \]
+\end{definition}
+
+\begin{lemma} Let $Df = K\ri h_* f\of K\ri h_*X\to\simplex[n]$. Each $f\of X\to\horn_k[n]$ is a pullback of $Df$ along $h$. \label{f is pullback}\end{lemma}
+
+\begin{proof}
+If $\xi\of\base(\horn_k[n])$, then $\xi$ is not onto $[n]-\set k$, which means that one of the $\xi_i$ is empty, $\norm \xi = 0$ and $K_0(\xi)=\xi$.
+This means that the fibres of $K\ri h_* f\of K\ri h_*X\to\simplex[n]$ that are preserved by $h\ri$, are isomorphic to those of $h_* f\of h_*X\to\simplex[n]$ to which lemma \ref{h_*} applies.
 \label{descent pullback}
 \end{proof}
 
@@ -814,94 +825,99 @@ By generalization there is a filler for each square with a horn inclusion $H(m,l
 This subsection shows that $Df$ is a fibration by reducing the following lifting problems (for all $l\leq m\of\nno$) to ones that involve $f$ directly.
 \begin{equation}
 	\xymatrix{
-		\horn_l[m]\ar[r]\ar[d]_{H(m,l)} & DX\ar[d]^{Df} \\
+		\horn_l[m]\ar[r]\ar[d] & DX\ar[d]^{Df} \\
 		\simplex[m]\ar[r]_{\Delta\xi} \ar@{.>}[ur] & \simplex[n]
 	}
 	\label{descent lifting problem}
 \end{equation}
 
-\begin{definition} For each $\xi\of[m]\to[n]$ and $p\of[m]\to\bool$ let $\face^\xi(p)$ be the object of $\ambient^{\simCat/[n]\dual}$ which satisfies: 
-\[ \face^\xi(p)[\alpha] = \set{\psi\of [\alpha]\to[\xi] | (\forall i\of \dom\alpha)(p(\xi(i))=\true)} \]
+
+%TODO: remove use of slice equivalence
+\begin{definition} For each $\xi\of[m]\to[n]$ and $p\of[m]\to\bool$ let $\face(\xi,p)$ be the object of $\ambient/\simplex[n]$ which satisfies: 
+%\[ \face(\xi,p)[\alpha] = \set{\psi\of [\alpha]\to[\xi] | (\forall i\of \dom\alpha)(p(\xi(\psi(i)))=\true)} \]
+\begin{align*}
+\base(\dom(\face(\xi,p))) &= \set{\psi\of[l]\to[m]| \forall i\of[l].p(\psi(i))=\true}\\
+\dim(\psi) &= \dom(\psi) \\
+\psi\cdot\phi &= \psi\circ\phi\\
+\face(\xi,p)(\psi) &= \xi\circ\psi
+\end{align*}
 \end{definition}
 
-Although the \emph{face} $\face^\xi(p)$ is either the initial object or isomorphic to some $\simplex[\alpha]$, it comes with a canonical monomorphism into $\simplex[\xi]$ which allows us to treat it as a subobject and describe other subobjects of simplices as unions of faces. For example, the horn inclusion in (\ref{descent lifting problem}) \emph{is} $\bigcup_{i\of [m]-\set k} \face^\xi([m]-\set i)$ if we read $[m]-\set i$ as both a type and as a substitute for its characteristic map $[m]\to\bool$.
+Although the \emph{face} $\face(\xi,p)$ are either initial objects or isomorphic to some $\simplex(\alpha)\of\simplex[l]\to\simplex[n]$, but come with canonical monomorphisms to $\simplex(\xi)$ which means they represent subobjects. Some other subobjects of simplices $\simplex[n]$ can therefore be described as unions of $\face(\xi,p)$. For example, the horn inclusion in (\ref{descent lifting problem}) \emph{is} $\bigcup_{i\of [m]-\set k} \face(\xi,[m]-\set i)$ if we read $[m]-\set i$ as both a type and as a substitute for its characteristic map $[m]\to\bool$.
 
+%where do I use this!?
 
-\begin{proposition} Let
-\begin{align*}
-H(m,l)&=\bigcup_{i\of [m]-\set l} \face^\xi([m]-\set i)\\
-\depsum KH(m,l)&=\bigcup_{i\of [m]-\set l} \face^{K\xi}(\depsum K([m]-\set i))
-\end{align*}
-Let $\depsum K(p)\of [m+\norm\xi]\to \bool$ satisfy the following morphism--here $\mathord\land$ is the conjunction function of Booleans.
+\begin{proposition}
+Let $\depsum K(p)\of [m+\norm\xi]\to \bool$ satisfy the following equation--here $\mathord\land$ is the conjunction of Booleans.
 \[ \depsum K(p)(\la(i))=p(i)\quad\depsum K(p)(\ka(\vec i)) = p(i_0)\land\dotsm\land p(i_n) \] 
-There is a natural isomorphism between
-\[ \ambient^{\simCat/[n]\dual}(H(m,l),K\ri -) \] and 
-\[ \ambient^{\simCat/[n]\dual}(\depsum KH(m,l),-) \] \label{K-universal}
+
+Let \begin{align*}
+H(m,l)&=\bigcup_{i\of [m]-\set l} \face(\xi,[m]-\set i)\\
+K_!H(m,l)&=\bigcup_{i\of [m]-\set l} \face(K_0(\xi),\depsum K([m]-\set i))
+\end{align*}
+There is a natural isomorphism \[ \ambient/\simplex[n](H(m,l),K\ri -) \simeq \ambient/\simplex[n](K_!H(m,l),-) \] \label{K-universal}
 \end{proposition}
 
 
-\begin{proof} The union $H(m,l)$ is the finite colimit of all the $\face^\xi(p)$, where $p\of[m]\to\bool$ satisfies $p(i)=\false$ for some $i\in [m]$. The Yoneda lemma induces an equivalence $\ambient^{\simCat/[n]\dual}(\face^\xi(p),K\ri X)\simeq X[K\face^\xi(p)]\simeq \ambient^{\simCat/[n]\dual}(\face^{K\xi}(\depsum K p),X)$ which is natural in $X$ for all such $p$. The morphism $\depsum KH(m,l)$ is the colimit of those $\face^{K\xi}(\depsum K p)$ for the following reasons.
+\begin{proof} If $P$ is the poset of all $p\of[m]\to\bool$ such that $p(l)=\true$ and $p(i)=\false$ for some $i\in [m]-\set{l}$, then $H(m,l) = \colim_{p\of P}\face(\xi,p)$.
+For each $p\of P$, $\face(\xi,p)$ is representable, and $\depsum K$ is a unique extension of $K_0$ to these faces which commutes with the inclusion $\face(\xi,p)\to\simplex(\xi)$. Therefore there is a natural equivalence.
+\[ \ambient/\simplex[n](\face(\xi,p),K\ri(-))\simeq \ambient/\simplex[n](\face(K_0(\xi),\depsum K p),-) \]
 
-The operator $\depsum K$ satisfies $\depsum K(p\land q)=\depsum K(p)\land \depsum K(q)$ and $\face^{K\xi}$ sends conjunctions to intersections. Hence:
-\[ \face^{K\xi}(\depsum K(p\land q)) = \face^{K\xi}(\depsum K(p)\land \depsum K(q)) = \face^{K\xi}(\depsum K(p))\cap \face^{K\xi}(\depsum K(q)) \]
-For each $r\of[m+\norm\xi]\to \bool$ such that $\face^{K\xi}(r)$ is a face of the union $\depsum KH(m,l)$ the intersection $r'$ of all $p\of[m]\to \bool$ such that $\face^\xi(r)\subseteq\face^\xi(\depsum K(p))$ therefore satisfies $\face^\xi(r)\subseteq \face^{K\xi}(\depsum K(r'))$. For this reason $\depsum KH(m,l)=\colim_{\face^\xi(p)\subseteq H(m,l)}\face^{K\xi}(\depsum K p)$. Facewise natural equivalences therefore join into a single natural equivalence:
-\[ \ambient^{\simCat/[n]\dual}(H(m,l),K\ri -)\simeq\ambient^{\simCat/[n]\dual}(\depsum K H(m,l), -) \]
+The operator $\depsum K$ satisfies $\depsum K(p\land q)=\depsum K(p)\land \depsum K(q)$ and $\face(K_0(\xi),$ sends conjunctions to intersections.
+\[ \face(K_0(\xi),\depsum K(p\land q)) = \face(K_0(\xi),\depsum K(p))\cap \face(K_0(\xi),\depsum K(q)) \]
+Since $P$ is closed under intersections, the colimit $\colim_{p\of P}\face(K_0(\xi),\depsum K p)$ is precisely the union $K_!H(m,l)$. Therefore the natural isomorphisms for $p:P$ induce the required natural isomorphism.
 \end{proof}
 
-$\depsum K H(m,l)$ has a counterpart in $\ambient\s/\simplex[n]$ which has a pullback $h\ri \depsum K H(m,l)$ in $\ambient\s/\horn_k[n]$. The following examples of acyclic cofibrations helps to prove that this is an acyclic cofibration.
-
-\begin{lemma}[Face completion] Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have an edge $e$ in common. The inclusion $\bigcup F\to \simplex[p]$ is an acyclic cofibration. \label{face completion} \end{lemma}
-
-\begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$ and therefore an acyclic cofibration. Because acyclic cofibrations are closed under composition, $\bigcup F = F_0\to F_p = \simplex[p]$ is an acyclic cofibration. 
-\end{proof}
-
-\begin{lemma} In $\ambient\s/\horn_k[n]$, $h\ri \depsum K H(m,l)$ is a subobject of $H(n,l)\ri\simplex[K\xi]$ . The inclusion of their domains in $\ambient\s$, $h\ri \depsum K H(m,l)$ is an acyclic cofibration. \label{acyclic cofibrancy} 
+\begin{lemma} In $\ambient\s/\horn_k[n]$, $h\ri \depsum K H(m,l)$ is a subobject of $h\ri\simplex(K\xi)$ . The inclusion of their domains in $\ambient\s$ is an acyclic cofibration. \label{acyclic cofibrancy} 
 \[\xymatrix{
 \bullet \ar@{.>}[rr]^{h\ri \depsum K H(m,l)} \ar[d] && \bullet\ar[rr]^{h\ri\simplex(K\xi)}\ar[d] && \horn_k[n]\ar[d]^{H(n,k)}\\
 \bullet\ar[rr]_(.4){\depsum K H(m,l)} && \simplex[m+\norm\xi]\ar[rr]_(.6){\simplex(K\xi)} && \simplex[n]
 }\]
 \end{lemma}
 
-
 \begin{proof} 
-Both $H(n,l)\ri\simplex[K\xi]$ and $H(n,l)\ri \depsum K H(m,l)$ have descriptions in terms of unions of faces. For $i\in [n]-\set k$ let $\U(i) = [m+\norm\xi]-\set{\la(j)|\xi(j)=i}$ and for $j\in [m]-\set k$ let $\A(j) = \depsum K([m]-\set j)$.
+Both $h\ri\simplex(K\xi)$ and $h\ri \depsum K H(m,l)$ have descriptions in terms of unions of faces. For $i\in [n]-\set k$ let $\U(i) = [m+\norm\xi]-\set{\la(j)|\xi(j)=i}$ and for $j\in [m]-\set k$ let $\A(j) = \depsum K([m]-\set j)$.
 \begin{align*}
-H(n,l)\ri\simplex[K\xi] &= \bigcup_{i\of([n]-\set{k})} \face^{K\xi}(\U(i))\\
-H(n,l)\ri \depsum K H(m,l)&= \bigcup_{\substack{i\of([n]-\set{k})\\j\of([m]-\set l)}} \face^{K\xi}(\U(i)\cap \A(j))
+h\ri\simplex(K\xi) &= \bigcup_{i\of([n]-\set{k})} \face(K_0(\xi),\U(i))\\
+h\ri \depsum K H(m,l)&= \bigcup_{\substack{i\of([n]-\set{k})\\j\of([m]-\set l)}} \face(K_0(\xi),\U(i)\cap \A(j))
 \end{align*}
 
 Let's get the simple cases out of the way first. If $\norm\xi = 0$, then the inclusion is $H(m,l)$ because $\depsum K$ and $h\ri$ preserve it. Hence the inclusion is an acyclic cofibration. Assume $\norm\xi>0$ for the rest of this proof.
 
 The following paragraphs show that the following inclusions are acyclic cofibrations:
-\begin{equation} \bigcup_{p\in[m]-\set l} \face^{K\xi}(\A(p)\cap\U(i))\to \face^{K\xi}(\U(i)) \label{facewise} \end{equation}
+\begin{equation} \bigcup_{p\in[m]-\set l} \face(K_0(\xi),\A(p)\cap\U(i))\to \face(K_0(\xi),\U(i)) \label{facewise} \end{equation}
 The case where $i=\xi(l)$ must be saved for last.
 
-Because $n>1$, there are always $i\of[n]$ such that $i\neq k$, $i\neq \xi(l)$. The set $F = \set{\face^{K\xi}(\A(p)\cap\U(i))}$ is inhabited and decidable. Each face in $F$ contains the edge $\la(l)$. By lemma \ref{face completion} the inclusion \ref{facewise} is an acyclic cofibration for all $i\in [n]-\set{k,\xi(l)}$.
+Because $n>1$, there are always $i\of[n]$ such that $i\neq k$, $i\neq \xi(l)$. The set $F = \set{\face(K_0(\xi),\A(p)\cap\U(i))}$ is inhabited and decidable. Each face in $F$ contains the edge $\la(l)$. By lemma \ref{face completion} the inclusion (\ref{facewise}) is an acyclic cofibration for all $i\in [n]-\set{k,\xi(l)}$.
 
 Now join the proven acyclic cofibration of \ref{facewise} together. Let
-\[ L=H(n,l)\ri \depsum K H(m,l)\cup\bigcup_{i\of([n]-\set{k,\xi(l)})}\face^{K\xi}(\U(i)) \]
-The map $H(n,l)\ri \depsum K H(m,l)\to L$ is an acyclic cofibration because it is a pushout of the coproduct of these simpler face inclusions. If $\xi(l)=k$, then $L=h\ri \simplex[K\xi]$ and the proof is done. Otherwise the face $\face^{K\xi}(\U(\xi(l)))$ is left.
+\[ L=h\ri \depsum K H(m,l)\cup\bigcup_{i\of([n]-\set{k,\xi(l)})}\face(K_0(\xi),\U(i)) \]
+The map $h\ri \depsum K H(m,l)\to L$ is an acyclic cofibration because it is a pushout of the coproduct of these simpler face inclusions. If $\xi(l)=k$, then $L=h\ri \simplex(K\xi)$ and the proof is done. Otherwise $\face(K_0(\xi),\U(\xi(l)))$ is left.
 
-
-For $\vec p \of\prod_{i\of([n]-\set k)}\xi_i$ let $\W(\vec p) = \U(\xi(l))-\set{ \la(q) | p_{\xi(q)} < q }$. For all $j\of\nno$ let $L_j = L\cup \bigcup_{ \ka(\vec p) < j } \face^{K\xi}(\W(\vec p))$. By this definition $L_0=L$ and $L_{m+\norm\xi+1} = h\ri\simplex[K\xi]$ because if $p_i$ are the maximal elements of $\xi_i$ for each $i\of[n]-\set k$, then $\set{ \la(q) | p_{\xi(q)} < q }$ is empty and therefore $\W(\vec p) = \U(\xi(l))$.
+For $\vec p \of\prod_{i\of([n]-\set k)}\xi_i$ let $\W(\vec p) = \U(\xi(l))-\set{ \la(q) | p_{\xi(q)} < q }$. For all $j\of\nno$ let $L_j = L\cup \bigcup_{ \ka(\vec p) < j } \face(K_0(\xi),\W(\vec p))$. By this definition $L_0=L$ and $L_{m+\norm\xi+1} = h\ri\simplex(K\xi)$ because if $p_i$ are the maximal elements of $\xi_i$ for each $i\of[n]-\set k$, then $\set{ \la(q) | p_{\xi(q)} < q }$ is empty and therefore $\W(\vec p) = \U(\xi(l))$.
 
 For every $j\of\nno$ the inclusion $L_j\to L_{j+1}$ is an acyclic cofibration for the following reasons.
 
 As long as $K\xi(j)<k$, $L_j = L$ because $j<\kappa(\vec p)$ for all $\vec p \of\prod_{i\of([n]-\set k)}\xi_i$. If $K\xi(j+1)<k$ too, then $L_j\to L_{j+1}$ is an acyclic cofibration because it is an identity. If $K\xi(j+1) = k$ then $j+1=\kappa(\vec p)$ or $j+1 = \la(p)$ for $p\of\xi_k$. First consider the case that $j+1=\ka(\vec p)$. 
 
-If $\vec p,\vec q\of\prod_{i\neq k} \xi_i$ and $p_i\leq q_i$ for all $i\of[n]-k$, then $\vec p \leq \vec q$ in the lexicographical order of the ordinal product and hence $\ka(\vec p)\leq \ka(\vec q)$. Therefore $\face^{K\xi}(\W(\vec p))\subseteq L_{\ka(\vec q)}$. For that reason, the intersection of $L_j$ and $\face^{K\xi}(\W(\vec p))$ is the union of the following families of faces.
+If $\vec p,\vec q\of\prod_{i\neq k} \xi_i$ and $p_i\leq q_i$ for all $i\of[n]-k$, then $\vec p \leq \vec q$ in the lexicographical order of the ordinal product and hence $\ka(\vec p)\leq \ka(\vec q)$. Therefore $\face(K_0(\xi),\W(\vec p))\subseteq L_{\ka(\vec q)}$. For that reason, the intersection of $L_j$ and $\face(K_0(\xi),\W(\vec p))$ is the union of the following families of faces.
 \begin{align*}
 \U(i)\cap \W(\vec p) &\textrm{ for $i\of[n]-\set{k,\xi(l)}$}\\
 \A(q)\cap\U(\xi(l))\cap \W(\vec p) &\textrm{ for $q\of[m]-\set l$}\\
 \W(\vec r)\cap \W(\vec p) &\textrm{ if $\kappa(\vec r)<\kappa(\vec p)$ }
 \end{align*}
-Define $\vec p[l]\of\prod_{i\neq k} \xi_i$ to satisfy $\vec p[l]_i = l$ if $i=\xi(l)$ and $\vec p[l]_i = p_i$ if $i\neq \xi(l)$. The intersection of $L_j$ and $\face^{K\xi}(\W(\vec p))$ is a union of faces which contain the supporting point $\kappa(\vec p[l])$ for the following reasons. 
+Define $\vec p[l]\of\prod_{i\neq k} \xi_i$ to satisfy $\vec p[l]_i = l$ if $i=\xi(l)$ and $\vec p[l]_i = p_i$ if $i\neq \xi(l)$. The intersection of $L_j$ and $\face(K_0(\xi),\W(\vec p))$ is a union of faces which contain the supporting point $\kappa(\vec p[l])$ for the following reasons. 
 
-The supporting edge $\kappa(\vec p[l])\in\U(i)$ and $\W(\vec p)$ because those faces contain all edges in the image of $\ka$. The edge $\kappa(\vec p[l])$ is a member of $\A(q)$ when $\xi(q)=k$ or $\vec p[l]_{\xi(q)}=q$ by definition of $M(q)$. In other cases $\A(q)\cap\U(\xi(l))\cap \W(\vec p)$ is a subobject of one of the faces that do contain $\kappa(\vec p[l])$. If $q$ is the least element of $\xi_{\xi(q)}$, then $\A(q)\cap\W(\vec p)\subseteq \U(\xi(q))$. If $\xi(q-1)=\xi(q)$, then $\A(q)\cap \W(\vec p) \subseteq \W(\vec p[q-1])$ and $\kappa(\vec p[q-1])<\kappa(\vec p)$. Therefore $L_j\cap \face^{K\xi}(\W(\vec p))$ is a union of faces which contain the supporting edge $\ka(\vec p[l])$. By lemma \ref{face completion} $L_j\cap \face^{K\xi}(\W(\vec p))\to \face^{K\xi}(\W(\vec p))$ is an acyclic cofibration. Since it is a pushout of that map, $L_j\to L_{j+1} = L_j\cup \face^{K\xi}(\W(\vec p))$ too.
+The supporting edge $\kappa(\vec p[l])\in\U(i)$ and $\W(\vec p)$ because those faces contain all edges in the image of $\ka$. The edge $\kappa(\vec p[l])$ is a member of $\A(q)$ when $\xi(q)=k$ or $\vec p[l]_{\xi(q)}=q$ by definition of $M(q)$. In other cases $\A(q)\cap\U(\xi(l))\cap \W(\vec p)$ is a subobject of one of the faces that do contain $\kappa(\vec p[l])$. If $q$ is the least element of $\xi_{\xi(q)}$, then $\A(q)\cap\W(\vec p)\subseteq \U(\xi(q))$. If $\xi(q-1)=\xi(q)$, then $\A(q)\cap \W(\vec p) \subseteq \W(\vec p[q-1])$ and $\kappa(\vec p[q-1])<\kappa(\vec p)$. Therefore $L_j\cap \face(K_0(\xi),\W(\vec p))$ is a union of faces which contain the supporting edge $\ka(\vec p[l])$. By lemma \ref{face completion} $L_j\cap \face(K_0(\xi),\W(\vec p))\to \face(K_0(\xi),\W(\vec p))$ is an acyclic cofibration. Since it is a pushout of that map, $L_j\to L_{j+1} = L_j\cup \face(K_0(\xi),\W(\vec p))$ too.
 
-By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = h\ri \simplex[K\xi]$ and $L_j\to L_{j+1}$ is the identity. The same holds for all $L_j\to L_{j+1}$ where $K\xi(j+1)>k$ and where $j+1>m+\norm\xi$. Since acyclic cofibrations are closed under composition, both $L\to h\ri \simplex[K\xi]$ and $h\ri \depsum K H(m,l) \to h\ri \simplex[K\xi]$ are acyclic cofibrations.
+By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = h\ri \simplex(K\xi)$ and $L_j\to L_{j+1}$ is the identity. The same holds for all $L_j\to L_{j+1}$ where $K\xi(j+1)>k$ and where $j+1>m+\norm\xi$. Since acyclic cofibrations are closed under composition, both $L\to h\ri \simplex(K\xi)$ and $h\ri \depsum K H(m,l) \to h\ri \simplex(K\xi)$ are acyclic cofibrations.
 \end{proof}
 
+%have we explained edge?
+\begin{lemma}[Face completion] Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have an edge $e$ in common. The inclusion $\bigcup F\to \simplex[p]$ is an acyclic cofibration. \label{face completion} \end{lemma}
+
+\begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$ and therefore an acyclic cofibration. Because acyclic cofibrations are closed under composition, $\bigcup F = F_0\to F_p = \simplex[p]$ is an acyclic cofibration. 
+\end{proof}
 
 
 \section{Closing}
