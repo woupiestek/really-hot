@@ -722,6 +722,7 @@ The endofunctor $h_*$ does not preserve fibrations. The functor $h\ri$ adds simp
 \end{proof}
 
 
+
 \begin{lemma} Let $h\of \horn_k[n]\to \simplex[n]$ be a horn inclusion.
 \begin{enumerate}
 \item The reindexing functor $h\ri\of\ambient\s/\simplex[n]\to\ambient\s/\horn_k[n]$ has a right adjoint $h_*$.
@@ -730,26 +731,31 @@ The endofunctor $h_*$ does not preserve fibrations. The functor $h\ri$ adds simp
 \end{enumerate}\label{h_*} 
 \end{lemma}
 
-\newcommand\subs\Lambda
 \begin{proof} 
+\newcommand\subs{\Lambda\ri}
 A right adjoint to $h\ri$ only requires families of finite limits which are available even in $M$.
-
-Let $f\of X\to \horn_k[n]$. Define $h_*(f)\of h_*(X)\to \simplex[n]$ as follows. For $\phi\of\base(\simplex[n])$ let $\subs(\phi)$ be the object of those $\chi\of \base(\horn_k[n])$ such that there is a monomorphism $\chi\to \phi$ in $\simCat/[n]$. 
+Let $f\of X\to \horn_k[n]$. Define $h_*(f)\of h_*(X)\to \simplex[n]$ as follows.
+For $\phi\of\base(\simplex[n])$ let $\subs(\phi)$ be the object of all monomorphism $\chi\of \bullet\to \dom \phi$ in $\simCat$ such that $\phi\circ \chi \in \base(\horn_k[n])$.
 \begin{align*}
-X^\phi &= \lim\limits_{\chi\of \subs(\phi)} \set{ x\of \base X | \base f(x) = \chi }\\
+X^\phi &= \lim\limits_{\chi\of \subs(\phi)} \set{ x\of \base X | \base f(x) = \phi\circ \chi }\\
 \base(h_*(X)) &= \Sigma \phi\of\base(\simplex[n]). X^\phi\\
 \base(h_*(f)) &= \lambda\tuplet{\phi,x}\of h_*(X).\phi
 \end{align*}
 Since $h_*(f)$ should preserve dimension $\dim\tuplet{\phi,x}=\dom\phi$. The restriction map satisfies the following equation.
-\[ \tuplet{\phi,x}\cdot\chi = \tuplet{\phi\circ\chi,x(m(\phi\circ\chi))\cdot e(\phi\circ\chi)}\]
+\[ \tuplet{\phi,x}\cdot\chi = \tuplet{\phi\circ\chi,x(m(\chi\circ-))\cdot e(\chi\circ-)}\] %TODO: point back to these definitions.
 
 The following transposition operators show that functor $h_*$ is right adjoint to $h\ri$.
-Let $\mu\of g\to h_*(f)$ in $\ambient\s/\simplex[n]$. The morphism $\xi$ is a member of $\dom(\mu(x)) = \Lambda(\xi)$ because $\xi$ is a member of $\base(\horn_k[n])$. The transpose $\mu^t\of h\ri(g) \to f$ sends $\tuplet{\xi,x}\of \horn_k[n]\times_{\simplex[n]}\dom g$ to $\mu(x)_1(\xi)$ assuming $\tuplet{\mu(x)_0,\mu(x)_1}=\mu(x)$. In the other direction, let $\nu\of h\ri(g)\to f$ in $\ambient\s/\horn_k[n]$. The transpose $\nu^t$ sends $x\of \dom g$ to $\tuplet{g(x),\lambda\xi\of\subs(g(x)).\nu\tuplet{\xi,x|\xi}}$, where $x|\xi$ is the restriction of $x$ along the monomorphism $\xi\to g(x)$ in $\simCat/[n]$. Writing out definitions shows that $(\mu^t)^t=\mu$ and $(\nu^t)^t=\nu$.
+Let $\mu\of g\to h_*(f)$ in $\ambient\s/\simplex[n]$. For all $x\of\dom(g)$, $\mu(x)$ is a pair $\tuplet{\phi,y}$ .
+The transpose $\mu^t\of h\ri(g) \to f$ sends $\tuplet{\xi,x}\of \horn_k[n]\times_{\simplex[n]}\dom g$ to $y(\id_{\dom(\xi)})$.
+In the other direction, let $\nu\of h\ri(g)\to f$ in $\ambient\s/\horn_k[n]$. The transpose $\nu^t$ sends $x\of \dom g$ to $\tuplet{g(x),\lambda\xi\of\subs(g(x)).\nu\tuplet{\xi,x\circ\xi}}$. Writing out definitions shows that $(\mu^t)^t=\mu$ and $(\nu^t)^t=\nu$.
 
-The counit sends $\tuplet{\xi,\xi,x} \of h\ri h_*(X)\to X$ to $x(\xi)_1$ assuming $\tuplet{x(\xi)_0,x(\xi)_1}=x(\xi)$. Its inverse sends $x\of X$ to $\tuplet{f(x),f(x),\lambda \xi\of\subs(f(x)),\tuplet{\xi,x|\xi}}$.
+The counit sends $\tuplet{\xi,\xi,x} \of h\ri h_*(X)\to X$ to $x(\xi)_1$ assuming $\tuplet{x(\xi)_0,x(\xi)_1}=x(\xi)$. Its inverse sends $x\of X$ to $\tuplet{f(x),f(x),\lambda \xi\of\subs(f(x)).\tuplet{\xi,x|\xi}}$.
 \end{proof}
 
+
+
 % --- older writing below ---
+%TODO somehow make the flow of this more natural
 
 \begin{definition}
 The following defines the functor $K\of\simCat/[n]\to\simCat/[n]$.
@@ -776,7 +782,7 @@ The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical orde
 \end{enumerate}
 \end{definition}
 
-The norm $\norm\xi$ equals the number of ways the injection $\delta^n_k\of[n-1]\to[n]$ factors through $\xi$. Here $\delta^n_k(i)=i$ if $i<k$ and $i+1$ if $i\geq k$. The functor $K$ gives each such factorization $\phi\of[n-1]\to [m]$ a homotopy with a unique anchor point in $K(\xi)_k$.  Pulling back along $H(n,k)$ preserves the homotopy type of $\Delta(K_0(\xi))$ and that is the point of the construction. %TODO: improve or remove
+The norm $\norm\xi$ equals the number of ways the injection $\delta^n_k\of[n-1]\to[n]$ factors through $\xi$. Here $\delta^n_k(i)=i$ if $i<k$ and $i+1$ if $i\geq k$. The functor $K$ gives each such factorization $\phi\of[n-1]\to [m]$ a homotopy with a unique anchor point in $K(\xi)_k$.  Pulling back along $H(n,k)$ preserves the homotopy type of $\simplex(K_0(\xi))$ which is the point of the construction. %TODO: improve or remove
 
 
 \begin{definition} For each $g\of Y\to \simplex[n]$ define $K\ri(g)\of K\ri(Y) \to \simplex [n]$ as follows.
@@ -832,9 +838,7 @@ This subsection shows that $Df$ is a fibration by reducing the following lifting
 \end{equation}
 
 
-%TODO: remove use of slice equivalence
 \begin{definition} For each $\xi\of[m]\to[n]$ and $p\of[m]\to\bool$ let $\face(\xi,p)$ be the object of $\ambient/\simplex[n]$ which satisfies: 
-%\[ \face(\xi,p)[\alpha] = \set{\psi\of [\alpha]\to[\xi] | (\forall i\of \dom\alpha)(p(\xi(\psi(i)))=\true)} \]
 \begin{align*}
 \base(\dom(\face(\xi,p))) &= \set{\psi\of[l]\to[m]| \forall i\of[l].p(\psi(i))=\true}\\
 \dim(\psi) &= \dom(\psi) \\
@@ -918,6 +922,31 @@ By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = h\ri \simplex(K\xi)$ an
 
 \begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$ and therefore an acyclic cofibration. Because acyclic cofibrations are closed under composition, $\bigcup F = F_0\to F_p = \simplex[p]$ is an acyclic cofibration. 
 \end{proof}
+
+\subsection{Different approach}
+Let $n>1$ and let $f\of X\to\horn_k[n]$ be an arbitrary fibration. This section shows to construct a fibration $D(f)\of D(X)\to \simplex[n]$ such that $f$ is a pullback of $D(f)$ along $f$.
+
+%TODO: Explain the construction informally.
+
+\begin{definition} For $\xi\of [m]\to[n]$ define $l(\xi)\of L(\xi)\to\horn_k[n]$ as follows. 
+\begin{align*}
+ L(\xi) &= \set{\phi:[l]\to [m+\norm\xi]\middle| K_0(\xi)\circ\phi \in \base(\horn_k[n]) }&
+ \dim(\phi) &= \dom(\phi)\\
+ \phi\cdot\chi &= \phi\circ\chi&
+ l(\xi)(\phi) &= K_0(\xi)\circ\phi
+\end{align*}
+
+For any $f\of X\to\horn_k[n]$ define $Df\of DX\to\simplex[n]$ as follows.
+\begin{align*}
+D(X) &= \set{\tuplet{\xi,x:l(\xi)\to f}\middle|\xi\in\base(\simplex[n])}&
+\dim\tuplet{\xi,x} &= \dim(\xi)\\
+\tuplet{\xi,x}\cdot\phi &= \tuplet{\xi\circ\phi,x\circ\simplex(\phi)}&
+D(f)\tuplet{\xi,x} &= \xi
+\end{align*}
+
+\end{definition}
+
+\begin{lemma} The functors $(\ambient\s/\horn_k[n])(l(\xi),f)$ and $(\ambient\s/\simplex[n])(\simplex(\xi),D(f))$ are naturally isomorphic. \end{lemma}
 
 
 \section{Closing}
