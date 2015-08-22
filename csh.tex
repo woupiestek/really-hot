@@ -924,29 +924,90 @@ By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = h\ri \simplex(K\xi)$ an
 \end{proof}
 
 \subsection{Different approach}
-Let $n>1$ and let $f\of X\to\horn_k[n]$ be an arbitrary fibration. This section shows to construct a fibration $D(f)\of D(X)\to \simplex[n]$ such that $f$ is a pullback of $D(f)$ along $f$.
 
-%TODO: Explain the construction informally.
+\begin{lemma} For $n>1$ there is a functor $D\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ which preserves fibrations and for which $h\ri\circ D$ is naturally equivalent to the identity functor. \end{lemma}
 
-\begin{definition} For $\xi\of [m]\to[n]$ define $l(\xi)\of L(\xi)\to\horn_k[n]$ as follows. 
+\newcommand\compact{\mathfrak{K}}
+\begin{proof}
+Let $\simplex\of\simCat \to \ambient\s$ be the embedding of the simplex category in the category of simplicial sets. There is a functor $K\of\simCat/[n]\to \ambient\s/\horn_k[n]$ that sends morphisms $\xi\of [m]\to[n]$ to weak equivalences $K\xi\of K[m]\to \horn_k[n]$, see \ref{the functor K}.%TODO
+A simplicial object is \emph{compact} if it is covered by a finite coproduct of simplices--for example all $\horn_k[n]$ are compact. Let $\compact$ be the full subcategory of $\ambient\s$ whose objects are compact. There is a \emph{right Kan extension} of $K$ along the inclusion $\compact/\simplex[n]\to\ambient\s/\horn^k[n]$ and this extension preserves acyclic cofibrations. %TODO
+There is a \emph{left Kan extension} $D$ of the inclusion $\simCat/[n]\to\ambient\s/[n]$ along $K$ which has all the desired properties. %TODO
+\end{proof}
+
+
+\hide{ 
+We probably need more properties to prove that the left extension is inverse to pulling back along $h$
+The morphisms aren't properly 'acyclic cofibrations' since their domains and codomains aren't fibrant.
+The morphisms $K(\xi)$ are not cofibrations. They probably are acyclic fibrations.
+}
+\begin{lemma} There is a functor $K\of \simCat/[n]\to\ambient\s/\horn_k[n]$ such that 
+\begin{enumerate}
+\item $K(\xi)\simeq\simplex(\xi)$ for all $\xi\of\base(\horn_k[n])$.
+\item $K(\xi)$ is a weak equivalence for all $\xi\of\base(\simplex[n])$.
+\item $K$ preserves intersections.
+\end{enumerate} \label{the functor K}
+%TODO: figure out what other properties we use/need.
+\end{lemma}
+
+\begin{proof} Start with the following definitions.
+\begin{enumerate}
+\item A function $\xi\of[m]\to[n]$ cuts $[m]$ into $n+1$ posets $\xi_j = \set{i\of[m]|\xi(i)=j}$. 
+\item Let $\norm \xi$ be the number of elements of the product $\Pi i\of ([n]-\set k).\xi_i$. 
+\item Define $K_0(\xi)\of [m+\norm\xi]\to [n]$ as follows.
+\[ 
+	K_0(\xi)(i) = \left\{
+		\begin{array}{cc}
+			\xi(i) & \xi(i)<k \\
+			k & \xi(i-\norm\xi)\leq k \leq \xi(i)\\
+			\xi(i-\norm\xi) & k<\xi(i-\norm\xi)
+		\end{array}
+	\right.
+\]
+\item Let $\ka(\xi)\of\Pi i\of([n]-\set k).\xi_i \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ form the ordinal product $\Pi i\of([n]-\set k).\xi_i$ to the interval of $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
+
+The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical ordering. %more?
+
+\item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K_0(\xi)\circ\la(\xi) = \xi$.
+\item For each morphism $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
+\item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \Pi i\of([n]-\set k).\phi_i$ and $K_0(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
+\item Define $K(\xi)\of K[m]\to\horn_k[n]$ as follows.
 \begin{align*}
- L(\xi) &= \set{\phi:[l]\to [m+\norm\xi]\middle| K_0(\xi)\circ\phi \in \base(\horn_k[n]) }&
- \dim(\phi) &= \dom(\phi)\\
- \phi\cdot\chi &= \phi\circ\chi&
- l(\xi)(\phi) &= K_0(\xi)\circ\phi
+\base(K[m]) &= \set{\phi\of [l]\to [m+\norm\xi]|K_0(\xi)\circ\phi\in\base(\horn_k[n]) } & \dim(\phi) &= \dom(\phi) \\
+\base(K(\xi))(\phi) &= K_1(\xi)\circ\phi & \phi\cdot\chi &= \phi\circ\chi
+\end{align*}
+This is the pullback $h\ri(\simplex(K_0(\xi)))$ of $\simplex(K_0(\xi))\of\simplex[m+\norm\xi]\to\simplex[n]$ along $h\of\horn_k[n]\to\simplex[n]$.
+\item For $f\of \xi\to\xi'$ let $\base(K(f))(\phi) = K_1(f)\circ \phi$.
+\end{enumerate}
+
+The functor $K$ satisfies the required properties for the following reasons.
+\begin{enumerate}
+\item If $\xi\of\base(\horn_k[n])$, then $\norm\xi=0$ and therefore $K_0(\xi) = \xi\of \base(\horn_k[n])$. The result is that $K(\xi)=\simplex(\xi)$.
+\item For $\xi\of\base(\horn_k[n])$ this statement is trivial. The $K_0$ turns all other $\xi$ into epimorphisms, which means that $\simplex(K_0(\xi))$ and $K(\xi) = h\ri(\simplex(K_0(\xi)))$ are acyclic fibrations. %I am a genius.
+\item Intersections are pullback squares of monomorphisms. Writing out the definition shows that $K_1$ preserves such squares. The functor $\simplex$ is fully faithful and $h^*$ has a left adjoint. Therefore $K$ preserves intersections. \hide{should this go somewhere else?}
+\end{enumerate}
+\end{proof}
+
+\begin{lemma} The functor $K$ has a left Kan extension $\tilde K$ along the inclusion $I\of \simCat/[n]\to\compact/\simplex[n]$. \label{left extension} \end{lemma}
+
+\begin{proof} The members of $\compact$ are finite colimits of simplexes. The category $\ambient$ has all finite colimits and therefore $\ambient\s/\horn_k[n]$ does too.\hide{do people know this?} The functor $\tilde K$ is simply equals $K$ for simplices and is defined to preserve finite colimits otherwise.
+For every functor $F\of\compact/\simplex[n]\to\ambient\s/\horn_k[n]$ and every natural transformation $\phi\of K\to FI$ there is a unique natural transformation $\tilde\phi\of \tilde K\to F$ such that $\tilde\phi I$ is $\phi$ composed with the isomorphism $\tilde KI\to K$. This follows from the universal properties of finite colimits. \hide{constructiveness: there must be a specified diagram to witness compactness}
+\end{proof}%TODO: should this not be a right extension!?
+
+%TODO acyclic cofibrations preservation lemma
+
+\begin{lemma} The inclusion $\simplex\of\simplex/[n]\to\ambient\s/\simplex[n]$ has a right Kan extension $D$ along $K$. \label{right extension} \end{lemma}
+
+\begin{proof} For each $f\of X\to\horn_k[n]$ define $D(f)\of D(X)\to\horn_k[n]$ as follows.
+\begin{align*}
+\base(D(X)) &= \Sigma\xi\of\base(\simplex[n]).(\ambient\s/\simplex[n])(K(\xi),f) &
+\dim\tuplet{\xi,x} &= \dom\xi \\
+\tuplet{\xi,x}\cdot\phi &= \tuplet{\xi\circ\phi,x\circ \simplex(K_1(\phi))} &
+\base(D(f))\tuplet{\xi,x} &= \xi 
 \end{align*}
 
-For any $f\of X\to\horn_k[n]$ define $Df\of DX\to\simplex[n]$ as follows.
-\begin{align*}
-D(X) &= \set{\tuplet{\xi,x:l(\xi)\to f}\middle|\xi\in\base(\simplex[n])}&
-\dim\tuplet{\xi,x} &= \dim(\xi)\\
-\tuplet{\xi,x}\cdot\phi &= \tuplet{\xi\circ\phi,x\circ\simplex(\phi)}&
-D(f)\tuplet{\xi,x} &= \xi
-\end{align*}
-
-\end{definition}
-
-\begin{lemma} The functors $(\ambient\s/\horn_k[n])(l(\xi),f)$ and $(\ambient\s/\simplex[n])(\simplex(\xi),D(f))$ are naturally isomorphic. \end{lemma}
+The natural transformation $\epsilon\of \simplex \to DK$ sends $\alpha\of \xi\circ \alpha \to \xi$ to $\tuplet{\xi,K_1\alpha}$. %TODO
+%It looks like another left Kan extension. Is the other right after all!?
+\end{proof}
 
 
 \section{Closing}
