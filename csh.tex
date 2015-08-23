@@ -987,15 +987,16 @@ The functor $K$ satisfies the required properties for the following reasons.
 \end{enumerate}
 \end{proof}
 
-\begin{lemma} The functor $K$ has a left Kan extension $\tilde K$ along the inclusion $I\of \simCat/[n]\to\compact/\simplex[n]$. \label{left extension} \end{lemma}
+\begin{lemma} The functor $K$ has a left Kan extension $\tilde K$ along the inclusion $\simplex\of \simCat/[n]\to\compact/\simplex[n]$. \label{left extension 1} \end{lemma}
 
-\begin{proof} The members of $\compact$ are finite colimits of simplexes. The category $\ambient$ has all finite colimits and therefore $\ambient\s/\horn_k[n]$ does too.\hide{do people know this?} The functor $\tilde K$ is simply equals $K$ for simplices and is defined to preserve finite colimits otherwise.
-For every functor $F\of\compact/\simplex[n]\to\ambient\s/\horn_k[n]$ and every natural transformation $\phi\of K\to FI$ there is a unique natural transformation $\tilde\phi\of \tilde K\to F$ such that $\tilde\phi I$ is $\phi$ composed with the isomorphism $\tilde KI\to K$. This follows from the universal properties of finite colimits. \hide{constructiveness: there must be a specified diagram to witness compactness}
-\end{proof}%TODO: should this not be a right extension!?
+\begin{proof} The members of $\compact$ are finite colimits of simplexes. The category $\ambient$ has all finite colimits and therefore $\ambient\s/\horn_k[n]$ does too.\hide{do people know this?} The functor $\tilde K$ is simply equals $K$ for simplices and is defined to preserve finite colimits otherwise. Hence there is an isomorphism $K\to \tilde K\circ \simplex$. 
+
+For every functor $F\of\compact/\simplex[n]\to\ambient\s/\horn_k[n]$ and every natural transformation $\phi\of K\to F\simplex$ there is a unique natural transformation $\tilde\phi\of \tilde K\to F$ such that $\tilde\phi I$ is $\phi$ composed with the isomorphism $\tilde K\circ \simplex\to K$. This follows from the universal properties of finite colimits.
+\end{proof}%Shockingly, they are both left extensions
 
 %TODO acyclic cofibrations preservation lemma
 
-\begin{lemma} The inclusion $\simplex\of\simplex/[n]\to\ambient\s/\simplex[n]$ has a right Kan extension $D$ along $K$. \label{right extension} \end{lemma}
+\begin{lemma} The inclusion $\simplex\of\simplex/[n]\to\ambient\s/\simplex[n]$ has a left Kan extension $D$ along $K$. \label{left extension 2} \end{lemma} 
 
 \begin{proof} For each $f\of X\to\horn_k[n]$ define $D(f)\of D(X)\to\horn_k[n]$ as follows.
 \begin{align*}
@@ -1005,8 +1006,10 @@ For every functor $F\of\compact/\simplex[n]\to\ambient\s/\horn_k[n]$ and every n
 \base(D(f))\tuplet{\xi,x} &= \xi 
 \end{align*}
 
-The natural transformation $\epsilon\of \simplex \to DK$ sends $\alpha\of \xi\circ \alpha \to \xi$ to $\tuplet{\xi,K_1\alpha}$. %TODO
-%It looks like another left Kan extension. Is the other right after all!?
+The natural transformation $\epsilon\of \simplex \to DK$ sends $\alpha\of \xi\circ \alpha \to \xi$ to $\tuplet{\xi,K_1\alpha}$.
+For each $F\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ and each $\phi\of \simplex\to FK$ define $\phi^t\of D\to F$ as follows.
+\[ \base(\phi^t)\tuplet{\xi,x} = (Fx\circ\base(\phi))(\id_{[\dom(\xi)]}) \]
+Now $\phi^t K\circ \epsilon = \phi$ proving that $D$ is the left Kan extension.
 \end{proof}
 
 
