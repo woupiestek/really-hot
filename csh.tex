@@ -923,15 +923,25 @@ By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = h\ri \simplex(K\xi)$ an
 \begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$ and therefore an acyclic cofibration. Because acyclic cofibrations are closed under composition, $\bigcup F = F_0\to F_p = \simplex[p]$ is an acyclic cofibration. 
 \end{proof}
 
-\subsection{Different approach}
+
+\section{Different approach}
+
+\hide{
+The construction of $D$ is not a problem. The problem is its left adjoint.
+
+Combining $h\ri$ and $K$ is a bad idea. May work in a Beck Chevalley context.
+
+Decidable sieves are enough, we don't need compacts.
+}
 
 \begin{lemma} For $n>1$ there is a functor $D\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ which preserves fibrations and for which $h\ri\circ D$ is naturally equivalent to the identity functor. \end{lemma}
 
 \newcommand\compact{\mathfrak{K}}
 \begin{proof}
-Let $\simplex\of\simCat \to \ambient\s$ be the embedding of the simplex category in the category of simplicial sets. There is a functor $K\of\simCat/[n]\to \ambient\s/\horn_k[n]$ that sends morphisms $\xi\of [m]\to[n]$ to weak equivalences $K\xi\of K[m]\to \horn_k[n]$, see \ref{the functor K}.%TODO
-A simplicial object is \emph{compact} if it is covered by a finite coproduct of simplices--for example all $\horn_k[n]$ are compact. Let $\compact$ be the full subcategory of $\ambient\s$ whose objects are compact. There is a \emph{right Kan extension} of $K$ along the inclusion $\compact/\simplex[n]\to\ambient\s/\horn^k[n]$ and this extension preserves acyclic cofibrations. %TODO
-There is a \emph{left Kan extension} $D$ of the inclusion $\simCat/[n]\to\ambient\s/[n]$ along $K$ which has all the desired properties. %TODO
+The functor $D$ is a composition $K^*\circ h_*$ where $h_*\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ is the right adjoint of $h\ri$. The functor $K^*$ is the left Kan extension of the embedding $\simplex\of\simCat \to \ambient\s$ of the simplex category along a functor $K\of\simCat/[n]\to \ambient\s/\horn_k[n]$, see \ref{the functor K}. %TODO--how do we use K?
+
+The category $\ambient\s$ may have too few colimits to give $D$ a left adjoint. There is however a left Kan extension $K_!$ of $K$ to the subcategory $\compact/\simplex[n]$ where $\compact$ consists of finite colimits of simplices. %TODO
+The functor $h\ri\circ K_!$ preserves acyclic cofibrations and therefore $D$ preserves fibrations. %TODO
 \end{proof}
 
 
@@ -999,12 +1009,12 @@ For every functor $F\of\compact/\simplex[n]\to\ambient\s/\horn_k[n]$ and every n
 \begin{lemma} The inclusion $\simplex\of\simplex/[n]\to\ambient\s/\simplex[n]$ has a left Kan extension $D$ along $K$. \label{left extension 2} \end{lemma} 
 
 \begin{proof} For each $f\of X\to\horn_k[n]$ define $D(f)\of D(X)\to\horn_k[n]$ as follows.
-\begin{align*}
+\hide{\begin{align*}
 \base(D(X)) &= \Sigma\xi\of\base(\simplex[n]).(\ambient\s/\simplex[n])(K(\xi),f) &
 \dim\tuplet{\xi,x} &= \dom\xi \\
 \tuplet{\xi,x}\cdot\phi &= \tuplet{\xi\circ\phi,x\circ \simplex(K_1(\phi))} &
 \base(D(f))\tuplet{\xi,x} &= \xi 
-\end{align*}
+\end{align*}}
 
 The natural transformation $\epsilon\of \simplex \to DK$ sends $\alpha\of \xi\circ \alpha \to \xi$ to $\tuplet{\xi,K_1\alpha}$.
 For each $F\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ and each $\phi\of \simplex\to FK$ define $\phi^t\of D\to F$ as follows.
