@@ -926,30 +926,44 @@ By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = h\ri \simplex(K\xi)$ an
 
 \section{Different approach}
 
-\hide{
-The construction of $D$ is not a problem. The problem is its left adjoint.
+\begin{theorem} For $n>1$ there is a functor $D\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ which preserves fibrations and for which $h\ri\circ D$ is naturally equivalent to the identity functor. \end{theorem}
 
-Combining $h\ri$ and $K$ is a bad idea. May work in a Beck Chevalley context.
-
-Decidable sieves are enough, we don't need compacts.
-}
-
-\begin{lemma} For $n>1$ there is a functor $D\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ which preserves fibrations and for which $h\ri\circ D$ is naturally equivalent to the identity functor. \end{lemma}
 
 \newcommand\compact{\mathfrak{K}}
+\newcommand\slice[1]{(\ambient\s/#1)}
 \begin{proof}
-The functor $D$ is a composition $K^*\circ h_*$ where $h_*\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ is the right adjoint of $h\ri$. The functor $K^*$ is the left Kan extension of the embedding $\simplex\of\simCat \to \ambient\s$ of the simplex category along a functor $K\of\simCat/[n]\to \ambient\s/\horn_k[n]$, see \ref{the functor K}. %TODO--how do we use K?
+The functor $D$ is the composition $K\ri\circ h_*$ of the following two functors. The functor $h_*\of\slice{\horn_k[n]}\to\slice{\simplex[n]}$ is the right adjoint of the functor $h\ri$ that pulls back morphisms along the inclusion $h\of\horn_k[n]\to\simplex[n]$. The reason that $h\ri$ has a right adjoint $h_*$, is that \ambient\s is an locally Cartesian closed Cartesian. The endofunctor $K\ri$ of $\slice{\simplex[n]}$ restores the lifting properties that $h_*$ doesn't preserve with information from higher dimensions. %todo: refer ahead
 
-The category $\ambient\s$ may have too few colimits to give $D$ a left adjoint. There is however a left Kan extension $K_!$ of $K$ to the subcategory $\compact/\simplex[n]$ where $\compact$ consists of finite colimits of simplices. %TODO
-The functor $h\ri\circ K_!$ preserves acyclic cofibrations and therefore $D$ preserves fibrations. %TODO
+A simplicial object is \emph{compact} if a finite coproduct of simplices covers it. 
+\hide{trouble ahead: finite colimits may be strict subcategory of compact, due to decidable equivalence relations. We really should stick to locally decidable sieves}
+The compact simplicial object form a subcategory $\compact$ of $\ambient\s$. When restricted to $\compact/\simplex[n]$, $K\ri$ has a left adjoint $K_\bang$ such that for compact $g\of Y\to \horn_k[n]$, $K_\bang(h\circ g)\simeq h\circ g$.%todo
+As a consequence $\slice{\simplex[n]}(g,h\ri(D(f)))\simeq \slice{\simplex[n]}(g,h\ri(h_*(f)))$ for all $f\of X\to\simplex[n]$ and all compact $g\of Y\to \horn_k[n]$.
+\begin{align*}
+\slice{\horn_k[n]}(g,h\ri(D(f)))&\simeq\slice{\simplex[n]}(h\circ g,K\ri(h_*(f)))\\
+&\simeq \slice{\simplex[n]}(K_\bang(h\circ g),h_*(f)) \\
+&\simeq \slice{\simplex[n]}(h\circ g,h_*(f)) \\
+&\simeq \slice{\horn_k[n]}(g,h\ri(h_*(f)))
+\end{align*}
+
+Simplicial objects satisfy a modified Yoneda lemma internally in $\ambient$.
+\[\xymatrix{
+\ambient\s(\simplex[n],X) \ar[r]^(.4)\simeq \ar[d]_{\ambient\s(\simplex(\phi),X)} & \set{x\of X\middle|\dim(x)=n}\ar[d]^{\lambda x. (x\cdot\phi)}\\
+\ambient\s(\simplex[m],X)\ar[r]_(.4)\simeq & \set{x\of X\middle|\dim(x)=m}
+}\]
+The modified Yoneda lemma tells us that $h\ri\circ D$ is isomorphic to $h\ri\circ h_*$ which is isomorphic to the identity functor because $h$ is a monomorphism.
+
+The composition $K_\bang\circ h_*$ preserves the left lifting property with respect to fibrations. %todo
+All of the horns $\horn_k[n]$ are compact, so every commutative square form a horn $h'$ to $Df$ is the transpose of a commutative square $K_\bang(h_*(h'))\to f$ where $K_\bang(h_*(h'))$ has the lef lifting property with respect to all fibrations. By generalization $D$ preserves fibrations. 
 \end{proof}
 
+\hide{The miracle is that $h_*$ preserves modest arrows, but this follows from the compactness of $h$.
 
-\hide{ 
-We probably need more properties to prove that the left extension is inverse to pulling back along $h$
-The morphisms aren't properly 'acyclic cofibrations' since their domains and codomains aren't fibrant.
-The morphisms $K(\xi)$ are not cofibrations. They probably are acyclic fibrations.
+Descending modest fibrations means descending two properties. The functor does both, but for completely different reasons.
+
 }
+
+The functor $K_\bang$ is a Kan extension of the following functor.
+
 \begin{lemma} There is a functor $K\of \simCat/[n]\to\ambient\s/\horn_k[n]$ such that 
 \begin{enumerate}
 \item $K(\xi)\simeq\simplex(\xi)$ for all $\xi\of\base(\horn_k[n])$.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  23 AUG 2015 23:09
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=latex 2014.7.2)  4 OCT 2015 15:54
 entering extended mode
 **csh.tex
 (C:\Users\Wouter\Documents\GitHub\realy-hot\csh.tex
@@ -461,22 +461,50 @@ File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ) [3] [4] [5] [6] [7] [8] [9] <xymatrix 2x2 223> <xymatrix
 2x3 270> [10] [11] <xymatrix 4x2 409> <xymatrix 2x2 223> <xymatrix 3x2 390> [12] <xymatrix 3x2 399> [13] <xymatrix 3x2
 409> [14] <xymatrix 3x2 409> <xymatrix 3x2 399> [15] <xymatrix 2x2 223> <xymatrix 3x2 398> [16] <xymatrix 3x2 399>
-[17] [18] [19] <xymatrix 2x2 182> <xymatrix 2x2 183> <xymatrix 2x2 202> [20] [21] <xymatrix 5x2 317> [22] [23] [24]
-[25]
-Underfull \hbox (badness 10000) in paragraph at lines 1035--1035
+[17] [18] [19] <xymatrix 2x2 182> <xymatrix 2x2 183> <xymatrix 2x2 202> [20] [21] <xymatrix 5x2 317> [22] [23]
+
+! LaTeX Error: \mathfrak allowed only in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.935 ...s a right adjoint $h_*$, is that \ambient
+                                                  \s is an locally Cartesian...
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.935 ...a right adjoint $h_*$, is that \ambient\s
+                                                   is an locally Cartesian c...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.935 ...n closed Cartesian. The endofunctor $K\ri
+                                                  $ of $\slice{\simplex[n]}$...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+<xymatrix 2x2 184> [24] [25] [26]
+Underfull \hbox (badness 10000) in paragraph at lines 1047--1047
 
  []
 
-[26] [27] (C:\Users\Wouter\Documents\GitHub\realy-hot\csh.aux)
+[27] (C:\Users\Wouter\Documents\GitHub\realy-hot\csh.aux)
 Package logreq Info: Writing requests to 'csh.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 8729 strings out of 493922
- 128553 string characters out of 3147303
+ 8730 strings out of 493922
+ 128558 string characters out of 3147303
  389619 words of memory out of 3000000
- 11924 multiletter control sequences out of 15000+200000
+ 11925 multiletter control sequences out of 15000+200000
  19806 words of font info for 75 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 37i,14n,52p,1176b,936s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,15n,52p,1176b,936s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on csh.dvi (27 pages, 171308 bytes).
+Output written on csh.dvi (27 pages, 174332 bytes).
