@@ -714,7 +714,7 @@ For each horn inclusion $h\of \horn_k[n]\to\simplex$ and each fibration $f\of X\
 
 \newcommand\hornInclusion[2]{h^{#1}_{#2}}
 
-\begin{proof} There are no horn inclusion for $n=0$. In the case $n=1$, there are two maps $1\to\simplex[1]$. In both case $Df=\pi_0\of \simplex[1]\times X \to\simplex[1]$ suffices. For all the cases were $n>0$ we use the following construction.
+\begin{proof} There is no horn inclusion for $n=0$. In the case $n=1$, there are two maps $1\to\simplex[1]$. In both case $Df=\pi_0\of \simplex[1]\times X \to\simplex[1]$ suffices. For all the cases were $n>0$ we use the following construction.
 
 The first part of the descent is simply the dependent product $h_*\of \ambient\s/\horn_k[n]\to \ambient\s/\simplex[n]$ along $h$. This dependent product exists and preserves membership of $M$ because its definition only requires finite limits. Moreover, because $h$ is monic, $h^*$ is fully faithful and its counit is a bijection. All of this is worked out in lemma \ref{h_*}. 
 
@@ -925,6 +925,12 @@ By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = h\ri \simplex(K\xi)$ an
 
 
 \section{Different approach}
+This section explains a functor $D$ that sends a fibration $f:X\to \horn_k[n]$ to fibration $Df:X\to\simplex[n]$ such that $f$ is the pullback of $Df$ along the horn inclusion $h\of\horn_k[n]\to\simplex[n]$. The construction extends the lifting property of $f$ to all of $\simplex[n]$ in an natural and constructive way, by reducing the problem of lifting a horn inclusion against $Df$ to the problem of lifting a finite set of horn inclusions against $f$. The construction only works for $n>1$. 
+
+Here is a rough sketch to explain the intuition behind the construction.
+For each $\xi\of [m]\to[n]$ the simplexes in the fibre of $Df$ over $\xi$ is a combination of a morphism $h\ri(\simplex(\xi))\to f$ together with a homotopy with a simplex in the fibre over the top edge $k$ of $\horn_k[n]$. The extra simplex records factorizations of morphisms $\simplex[k]\to \simplex[n]$ through $\xi$ that don't factor through $h$ and are otherwise lost in the pullback. With the homotopy the fibration $Df$ can lift horns by letting $f$ lift a homotopic morphisms, for which $f$ has the right lifting property because it is a fibration.
+
+%here
 
 \begin{theorem} For $n>1$ there is a functor $D\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ which preserves fibrations and for which $h\ri\circ D$ is naturally equivalent to the identity functor. \end{theorem}
 
@@ -932,7 +938,10 @@ By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = h\ri \simplex(K\xi)$ an
 \newcommand\compact{\mathfrak{K}}
 \newcommand\slice[1]{(\ambient\s/#1)}
 \begin{proof}
-The functor $D$ is the composition $K\ri\circ h_*$ of the following two functors. The functor $h_*\of\slice{\horn_k[n]}\to\slice{\simplex[n]}$ is the right adjoint of the functor $h\ri$ that pulls back morphisms along the inclusion $h\of\horn_k[n]\to\simplex[n]$. The reason that $h\ri$ has a right adjoint $h_*$, is that \ambient\s is an locally Cartesian closed Cartesian. The endofunctor $K\ri$ of $\slice{\simplex[n]}$ restores the lifting properties that $h_*$ doesn't preserve with information from higher dimensions. %todo: refer ahead
+The morphism $Df$ is constructed in such a way that the problem of lifting a horn inclusion $g$ against $Df$ reduces to the problem of lifting a morphism $g'$ against $f$ that has the left lifting property with respect to all fibrations. %todo explain further.
+
+
+The functor $D$ is the composition $K\ri\circ h_*$ of the following two functors. The functor $h_*\of\slice{\horn_k[n]}\to\slice{\simplex[n]}$ is the right adjoint of the functor $h\ri$ that pulls back morphisms along the inclusion $h\of\horn_k[n]\to\simplex[n]$. The reason that $h\ri$ has a right adjoint $h_*$, is that $\ambient\s$ is an locally Cartesian closed Cartesian. The endofunctor $K\ri$ of $\slice{\simplex[n]}$ restores the lifting properties that $h_*$ doesn't preserve with information from higher dimensions. %todo: refer ahead
 
 A simplicial object is \emph{compact} if a finite coproduct of simplices covers it. 
 \hide{trouble ahead: finite colimits may be strict subcategory of compact, due to decidable equivalence relations. We really should stick to locally decidable sieves}
