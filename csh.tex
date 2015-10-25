@@ -927,10 +927,39 @@ By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = h\ri \simplex(K\xi)$ an
 \section{Different approach}
 This section explains a functor $D$ that sends a fibration $f:X\to \horn_k[n]$ to fibration $Df:X\to\simplex[n]$ such that $f$ is the pullback of $Df$ along the horn inclusion $h\of\horn_k[n]\to\simplex[n]$. The construction extends the lifting property of $f$ to all of $\simplex[n]$ in an natural and constructive way, by reducing the problem of lifting a horn inclusion against $Df$ to the problem of lifting a finite set of horn inclusions against $f$. The construction only works for $n>1$. 
 
-Here is a rough sketch to explain the intuition behind the construction.
-For each $\xi\of [m]\to[n]$ the simplexes in the fibre of $Df$ over $\xi$ is a combination of a morphism $h\ri(\simplex(\xi))\to f$ together with a homotopy with a simplex in the fibre over the top edge $k$ of $\horn_k[n]$. The extra simplex records factorizations of morphisms $\simplex[k]\to \simplex[n]$ through $\xi$ that don't factor through $h$ and are otherwise lost in the pullback. With the homotopy the fibration $Df$ can lift horns by letting $f$ lift a homotopic morphisms, for which $f$ has the right lifting property because it is a fibration.
+Here is a sketch to explain the intuition behind the construction.
 
-%here
+For each $\xi\of \base\simplex[n]$ the simplexes in the fibre of $Df$ over $\xi$ is a combination of a morphism $h\ri(\simplex(\xi))\to f$ together with a homotopy with a simplex in the fibre over the top edge $k$ of $\horn_k[n]$. The extra simplex records factorizations of morphisms $\simplex[k]\to \simplex[n]$ through $\xi$ that don't factor through $h$ and are therefore lost in the pullback.
+
+The construction uses a functors $K$ and $L\of\simCat/[n]\to\simCat/[n]$ and natural monomorphisms $\ka\of \id_{\simCat}\to K$ and $\la \of L\to K$. Here $L$ is the simplex in the fibre of $k$, $K$ the homotopy and for each $\xi\of[m]\to[n]$ the monomorphisms $\ka$ and $\la$ are the inclusion of $\xi$ and $L\xi$ as endpoints into $K\xi$.
+
+The functors $K$ extends to certain small simplices in $\ambient\s$, so we can apply them to horn inclusions $h_l[m]\of\horn_l[m]\to\simplex[m]$. %todo:prove & ref
+The pullback of $K(h_l[m])$ along $h\of\horn_k[n]\to\simplex[n]$ has the left lifting property with respect to fibrations. %todo:prove & ref
+The functor $K$ also induces a functor $K\ri\of\ambient\s/\simplex[n]\to\ambient\s/\simplex[n]$ which has a natural isomorphism $\ambient\s/\simplex[n](X,K\ri Y)$ and $\ambient\s/\simplex[n](KX,Y)$ for small enough simplices $X$. %todo:ref
+These three properties together imply the main theorem of this section. %todo:ref
+
+\hide{
+\begin{theorem} Let $h_*$ be the right adjoint of $h\ri\of \ambient\s/\simplex[n]\to\ambient\s/\horn_k[n]$. Let $D = K\ri\circ h_*$. If $f\of X\to\horn_k[n]$ is a fibration, then so is $Df\of DX\to\simplex[n]$. \end{theorem}
+
+\begin{proof} For each horn inclusion $h_l[m]\of\horn_l[m]\to\simplex[m]$ there is a natural isomorphism between commutative squares $h_l[m]\to Df$ and $K(h_l[m])\to f$. The commutative square $K(h_l[m])\to f$ has a filler and therefore its dual has to. 
+\end{proof}
+}
+
+
+
+
+%try the oher way around...
+
+% suppose we have ... do ...
+
+%For each $\xi\of[m]\to[n]$ let $\norm\xi$ be the number of factorizations of $\delta^n_k\of[n-1]\to[n]$. 
+
+
+
+
+
+
+
 
 \begin{theorem} For $n>1$ there is a functor $D\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ which preserves fibrations and for which $h\ri\circ D$ is naturally equivalent to the identity functor. \end{theorem}
 
