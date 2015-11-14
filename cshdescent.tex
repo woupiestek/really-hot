@@ -1,29 +1,33 @@
-\hide{ Idea: class of fibrations with a generic fibration and certain closure properties (limits) results in a fibrant codomain. }
+\documentclass[csh.tex]{subfiles}
+\begin{document}
+
 \section{Descent} 
 This purpose of this section is to replace arguments based on \emph{minimal fibrations} in simplicial homotopy theory, in particular those that are related to homotopy type theory. We assume that there is a class $M$ of \emph{modest fibrations} in $\ambient\s$ with the following properties.
 \begin{itemize}
 \item $M$ is closed under pullbacks along arbitrary morphisms.
 \item $M$ is closed under composition.
-%TODO: we may need a type of transfinite composition to deal with unbounded families of finite limits. Modest sets have these because they are a right class in some factorization system.
+\item $M$ is closed under fibred exponentiation. This means that if $f:X\to Z$ belongs to $M$ and $g:Y\to Z$ is an arbitrary morphism, the fibred exponential $f^g_Z:\prod_{z\of Z} X_z^{Y_z}\to Z$ is in $M$ too.
+
+This requirement may give us more limits than we need, but the intended model of modest morphisms in $\Asm\ex$ satisfies it.
+%TODO: investigate which exponentials we actually need.
+
 \item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} is it is the equalizer of some parallel pair.
 \end{itemize} 
 
+The interesting case is where $M$ has the following structure in addition to the properties above.
+
 \mathrmdef{uni}
 \newcommand\chm\chi
-\begin{definition} A \emph{universal modest fibration} is a modest fibration $\uni\of U\to V$ such that every modest fibration $f\of X\to Y$ is the pullback of $\uni$ along a unique morphism $\chm(f)\of Y\to V$.
+\begin{definition} A \keyword{universal modest fibration} is a modest fibration $\uni\of U\to V$ such that every modest fibration $f\of X\to Y$ is the pullback of $\uni$ along a unique morphism $\chm(f)\of Y\to V$.
 \end{definition}
 
+The following fact makes the universal modest fibration a potential model of homotopy type theory.
 
 \begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant.
 \end{theorem}
 
-
-\begin{proof} For each horn inclusion $h\of \horn_k[n]\to\simplex[n]$ and each pair of $v\of \horn_k[n]\to V$, the modest fibration $v\ri(\uni)\of \horn_k[n]\times_V U \to \horn_k[n]$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex[n]$ by lemma \ref{descent}. There is a $\chm(D(v\ri(\uni)))\of\simplex[n]\to V$ and $\chm(h_*(v\ri(\uni)))\circ h$ equals $v$ because of universality.
+\begin{proof} For each horn inclusion $h\of \horn_k[n]\to\simplex[n]$ and each pair of $v\of \horn_k[n]\to V$, the modest fibration $v\ri(\uni)\of \horn_k[n]\times_V U \to \horn_k[n]$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex[n]$ by lemma \ref{descent}. There is a $\chm(D(v\ri(\uni)))\of\simplex[n]\to V$ and $\chm(h_*(v\ri(\uni)))\circ h$ equals $v$ by definition \ref{universal modest fibration}.
 \end{proof}
-
-
-
-
 
 \begin{lemma}[Descent]
 For each horn inclusion $h\of \horn_k[n]\to\simplex$ and each fibration $f\of X\to \horn_k[n]$ there is a fibration $Df\of Y\to\simplex[n]$ such that $f$ is the pullback of $Df$ along $h$.
@@ -31,20 +35,113 @@ For each horn inclusion $h\of \horn_k[n]\to\simplex$ and each fibration $f\of X\
 \end{lemma}
 
 \newcommand\hornInclusion[2]{h^{#1}_{#2}}
+\newcommand\decidableSieves{\mathfrak D}
 
 \begin{proof} There is no horn inclusion for $n=0$. In the case $n=1$, there are two maps $1\to\simplex[1]$. In both case $Df=\pi_0\of \simplex[1]\times X \to\simplex[1]$ suffices. For all the cases were $n>0$ we use the following construction.
 
-The first part of the descent is simply the dependent product $h_*\of \ambient\s/\horn_k[n]\to \ambient\s/\simplex[n]$ along $h$. This dependent product exists and preserves membership of $M$ because its definition only requires finite limits. Moreover, because $h$ is monic, $h^*$ is fully faithful and its counit is a bijection. All of this is worked out in lemma \ref{h_*}. 
-
-The endofunctor $h_*$ does not preserve fibrations. The functor $h\ri$ adds simplices so freely that the filler operator of a fibration $f\of X\to \horn_k[n]$ cannot handle them anymore. The solution is an endofunctor $K\ri$ such that member of $K\ri(h^*(X))$ are homotopies between members of $X$ and $h_*(X)$. This solves the problem because it gives the filler operator of $f$ the extra information it needs, and removes problematic simplices. This is worked out in lemma \ref{descent2}. Because $K\ri$ satisfies $h\ri\circ K\ri = h\ri$ (see lemma \ref{f is pullback}), $h\ri\circ K\ri(f)$ is the required $Df$.
+The category $\ambient\s$ of simplicial objects has a subcategory $\decidableSieves$ which contains all cofibrations into simplices up to isomorphism (see: definition \ref{decidable sieve}.
+There is an endofunctor $K:\decidableSieves/\simplex[n]\to\decidableSieves/\simplex[n]$ with the property that $h\ri\circ K$ preserves the left lifting property with respect to fibrations. %todo: lemma
+The functor $D$ satisfies the following natural equivalence.
+\[ \ambient\s/\simplex[n](d, Df)\simeq \ambient\s/\horn_k[n](h\ri K(d), Df) \]
+This equivalence means that the problem of lifting a horn inclusion $h'$ against $Df$ reduces to the problem of lifting $K(h')$ against $f$, which is already solved for all cases where $f$ is a fibration. Hence $D$ preserves fibrations.
 \end{proof}
 
+The rest of this chapter works out the details of the construction.
 
+\subsection{Definitions}
+\begin{definition} A \keyword{decidable sieve} is a simplex $X$ for which there is a cofibration $X\to\simplex[n]$ for some $n\of\nno$. Decidable sieves form a subcategory category $\decidableSieves$ of $\ambient\s$.
+\end{definition}
+
+The following notation allows us to classify decidable sieves.
+
+%language of decidable sieves?
+\begin{definition} For each $\xi\of[m]\to[n]$ and $p\of[m]\to\bool$ let $\face(\xi,p)$ be the object of $\ambient/\simplex[n]$ which satisfies: 
+\begin{align*}
+\base(\dom(\face(\xi,p))) &= \set{\psi\of[l]\to[m]| \forall i\of[l].p(\psi(i))=\true}\\
+\dim(\psi) &= \dom(\psi) \\
+\psi\cdot\phi &= \psi\circ\phi\\
+\face(\xi,p)(\psi) &= \xi\circ\psi
+\end{align*}
+\end{definition}
+
+Although the \emph{face} $\face(\xi,p)$ are either initial objects or isomorphic to some $\simplex(\alpha)\of\simplex[l]\to\simplex[n]$, they come with canonical monomorphisms to $\simplex(\xi)$ which means they represent subobjects. Some other subobjects of simplices $\simplex[n]$ can therefore be described as unions of $\face(\xi,p)$. For example, the horn inclusion in (\ref{descent lifting problem}) \emph{is} $\bigcup_{i\of [m]-\set k} \face(\xi,[m]-\set i)$ if we read $[m]-\set i$ as both a type and as a substitute for its characteristic map $[m]\to\bool$.
+
+To define $K$, it is easier to first just consider simplices, and then expand to faces and decidable sieves.
+
+%The functor K
+\begin{definition}
+The following defines the functor $K\of\simCat/[n]\to\simCat/[n]$.
+\begin{enumerate}
+\item A function $\xi\of[m]\to[n]$ cuts $[m]$ into $n+1$ posets $\xi_j = \set{i\of[m]|\xi(i)=j}$. 
+\item Let $\norm \xi$ be the number of elements of the product $\Pi i\of ([n]-\set k).\xi_i$. 
+\item Define $K_0(\xi)\of [m+\norm\xi]\to [n]$ as follows.
+\[ 
+	K_0(\xi)(i) = \left\{
+		\begin{array}{cc}
+			\xi(i) & \xi(i)<k \\
+			k & \xi(i-\norm\xi)\leq k \leq \xi(i)\\
+			\xi(i-\norm\xi) & k<\xi(i-\norm\xi)
+		\end{array}
+	\right.
+\]
+\item Let $\ka(\xi)\of\Pi i\of([n]-\set k).\xi_i \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\Pi i\of([n]-\set k).\xi_i$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
+
+The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical ordering. %more?
+
+\item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K_0(\xi)\circ\la(\xi) = \xi$.
+\item For each morphisms $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
+\item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \Pi i\of([n]-\set k).\phi_i$ and $K_0(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
+\end{enumerate}
+\end{definition}
+
+To extend $K$ to $\decidableSieves/\simplex[n]$ we simply make it preserve filtered colimits.
+
+\begin{definition} The following makes $K$ to an endofunctor of $\decidableSieves/\simplex[n]$.
+For each $\face(\xi,p)$ let $\depsum K(p)\of [m+\norm\xi]\to \bool$ satisfy the following equation--here $\mathord\land$ is the conjunction of Booleans.
+\[ \depsum K(p)(\la(i))=p(i)\quad\depsum K(p)(\ka(\vec i)) = p(i_0)\land\dotsm\land p(i_n) \] 
+Let $K\face(\xi,p) = \face(K_0(\xi),\depsum K(p))$, and let $K$ preserve unions of subobjects.
+%TODO: prove that this is a functor
+\end{definition}
+
+
+
+The norm $\norm\xi$ equals the number of ways the injection $\delta^n_k\of[n-1]\to[n]$ factors through $\xi$. Here $\delta^n_k(i)=i$ if $i<k$ and $i+1$ if $i\geq k$. The functor $K$ gives each such factorization $\phi\of[n-1]\to [m]$ a homotopy with a unique anchor point in $K(\xi)_k$.  Pulling back along $H(n,k)$ preserves the homotopy type of $\simplex(K_0(\xi))$ which is the point of the construction. %TODO: improve or remove
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% refactand
+\begin{definition} For each $g\of Y\to \simplex[n]$ define $K\ri(g)\of K\ri(Y) \to \simplex [n]$ as follows.
+\begin{align*}
+\base(K\ri(Y)) &= \set{(x,\xi)\of\base(Y)\times\base(\simplex[n])| K_0(\xi) = g(y) }\\
+K\ri(g)(x,\xi) &= \xi\\
+\dim(x,\xi) &= \dom(\xi)\\
+(x,\xi)\cdot \phi &= (x\cdot K_1(\phi),\xi\circ K_1(\phi))
+\end{align*}
+
+For each $m\of g\to g'$ in $\ambient\s/\simplex[n]$ define $K\ri(m)$ as follows.
+\[ K\ri(m)(x,\xi) = (m(x),\xi) \]
+\end{definition}
 
 \begin{lemma} Let $h\of \horn_k[n]\to \simplex[n]$ be a horn inclusion.
 \begin{enumerate}
 \item The reindexing functor $h\ri\of\ambient\s/\simplex[n]\to\ambient\s/\horn_k[n]$ has a right adjoint $h_*$.
-\item If $f\of X\to \horn_k[n]$ is a member of $M$, then so is $h_*(f)\of h_*(X)\to \simplex[n]$.
 \item The counit $h\ri\circ h_*\to\id_{\ambient\s/\horn_k[n]}$ is an isomorphism.
 \end{enumerate}\label{h_*} 
 \end{lemma}
@@ -75,45 +172,6 @@ The counit sends $\tuplet{\xi,\xi,x} \of h\ri h_*(X)\to X$ to $x(\xi)_1$ assumin
 % --- older writing below ---
 %TODO somehow make the flow of this more natural
 
-\begin{definition}
-The following defines the functor $K\of\simCat/[n]\to\simCat/[n]$.
-\begin{enumerate}
-\item A function $\xi\of[m]\to[n]$ cuts $[m]$ into $n+1$ posets $\xi_j = \set{i\of[m]|\xi(i)=j}$. 
-\item Let $\norm \xi$ be the number of elements of the product $\Pi i\of ([n]-\set k).\xi_i$. 
-\item Define $K_0(\xi)\of [m+\norm\xi]\to [n]$ as follows.
-\[ 
-	K_0(\xi)(i) = \left\{
-		\begin{array}{cc}
-			\xi(i) & \xi(i)<k \\
-			k & \xi(i-\norm\xi)\leq k \leq \xi(i)\\
-			\xi(i-\norm\xi) & k<\xi(i-\norm\xi)
-		\end{array}
-	\right.
-\]
-\item Let $\ka(\xi)\of\Pi i\of([n]-\set k).\xi_i \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\Pi i\of([n]-\set k).\xi_i$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
-
-The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical ordering. %more?
-
-\item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K_0(\xi)\circ\la(\xi) = \xi$.
-\item For each morphisms $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
-\item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \Pi i\of([n]-\set k).\phi_i$ and $K_0(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
-\end{enumerate}
-\end{definition}
-
-The norm $\norm\xi$ equals the number of ways the injection $\delta^n_k\of[n-1]\to[n]$ factors through $\xi$. Here $\delta^n_k(i)=i$ if $i<k$ and $i+1$ if $i\geq k$. The functor $K$ gives each such factorization $\phi\of[n-1]\to [m]$ a homotopy with a unique anchor point in $K(\xi)_k$.  Pulling back along $H(n,k)$ preserves the homotopy type of $\simplex(K_0(\xi))$ which is the point of the construction. %TODO: improve or remove
-
-
-\begin{definition} For each $g\of Y\to \simplex[n]$ define $K\ri(g)\of K\ri(Y) \to \simplex [n]$ as follows.
-\begin{align*}
-\base(K\ri(Y)) &= \set{(x,\xi)\of\base(Y)\times\base(\simplex[n])| K_0(\xi) = g(y) }\\
-K\ri(g)(x,\xi) &= \xi\\
-\dim(x,\xi) &= \dom(\xi)\\
-(x,\xi)\cdot \phi &= (x\cdot K_1(\phi),\xi\circ K_1(\phi))
-\end{align*}
-
-For each $m\of g\to g'$ in $\ambient\s/\simplex[n]$ define $K\ri(m)$ as follows.
-\[ K\ri(m)(x,\xi) = (m(x),\xi) \]
-\end{definition}
 
 \begin{lemma} Let $Df = K\ri h_* f\of K\ri h_*X\to\simplex[n]$. Each $f\of X\to\horn_k[n]$ is a pullback of $Df$ along $h$. \label{f is pullback}\end{lemma}
 
@@ -156,16 +214,6 @@ This subsection shows that $Df$ is a fibration by reducing the following lifting
 \end{equation}
 
 
-\begin{definition} For each $\xi\of[m]\to[n]$ and $p\of[m]\to\bool$ let $\face(\xi,p)$ be the object of $\ambient/\simplex[n]$ which satisfies: 
-\begin{align*}
-\base(\dom(\face(\xi,p))) &= \set{\psi\of[l]\to[m]| \forall i\of[l].p(\psi(i))=\true}\\
-\dim(\psi) &= \dom(\psi) \\
-\psi\cdot\phi &= \psi\circ\phi\\
-\face(\xi,p)(\psi) &= \xi\circ\psi
-\end{align*}
-\end{definition}
-
-Although the \emph{face} $\face(\xi,p)$ are either initial objects or isomorphic to some $\simplex(\alpha)\of\simplex[l]\to\simplex[n]$, but come with canonical monomorphisms to $\simplex(\xi)$ which means they represent subobjects. Some other subobjects of simplices $\simplex[n]$ can therefore be described as unions of $\face(\xi,p)$. For example, the horn inclusion in (\ref{descent lifting problem}) \emph{is} $\bigcup_{i\of [m]-\set k} \face(\xi,[m]-\set i)$ if we read $[m]-\set i$ as both a type and as a substitute for its characteristic map $[m]\to\bool$.
 
 %where do I use this!?
 
@@ -391,3 +439,4 @@ For each $F\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ and each $\phi\of
 \[ \base(\phi^t)\tuplet{\xi,x} = (Fx\circ\base(\phi))(\id_{[\dom(\xi)]}) \]
 Now $\phi^t K\circ \epsilon = \phi$ proving that $D$ is the left Kan extension.
 \end{proof}
+\end{document}

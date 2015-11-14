@@ -1,6 +1,7 @@
 % LaTeX 2e document, TAC style, 36 pp, Xy-pic ver ?, MikTeX version ?
 
 \documentclass{tac}
+\usepackage{subfiles}
 \usepackage{amssymb, amsmath}
 \usepackage[backend=bibtex,citestyle=authoryear-icomp]{biblatex}
 \usepackage[all]{xy}
@@ -38,7 +39,6 @@ Poland}
 \mathssbxdef{Asm}
 \newcommand\bang{!}
 \newcommand\of{:}
-%\renewcommand\to{\mathord\rightarrow}
 \newcommand\simplex\Delta
 \newcommand\cycle{\partial\Delta}
 \newcommand\horn\Lambda
@@ -74,12 +74,13 @@ Poland}
 \mathrmdef{hcg}
 \newcommand\ex{_{\textrm{ex}}}
 \newcommand\citep[1]{[\cite{#1}]}
-
-
+\mathrmdef{dim}
+\newcommand\base{\mathbf{U}}
 \mathssbxdef{Func}
 \mathssbxdef[igen]{gen}
-
 \newcommand\ambient{\mathfrak A}
+
+\newcommand\keyword[1]{\emph{#1}\label{#1}}
 
 
 \addbibresource{realizability}
@@ -211,8 +212,6 @@ Universal quantification over $[m]$ reduces to a finite conjunction because $[m]
 \subsection{Internal simplicial objects}%under consideration as replacement for internal categories.
 As a replacement for the usual simplicial sets, we use the following structure in $\ambient$. These are essentially discrete opfibrations over $\simCat$.
 
-\mathrmdef{dim}
-\newcommand\base{\mathbf{U}}
 \begin{definition} An \emph{internal simplicial object} $X=(\base X,\dim,\cdot)$ is an object $\base X$ together with a morphism $\dim\of \base X\to\nno$ and an operator $\cdot$, whose domain is the following object.
 \[ \set{\tuplet{x,\xi}\of \base X\times\Ar(\simCat)\middle| \dim (x)=\dom(\xi)} \]
 The codomain of $\cdot$ is $\base X$. The operator $\cdot$ satisfies $(x\cdot\alpha)\cdot\beta=x\cdot(\alpha\circ\beta)$ and $x\cdot\id_{[\dim x]}=x$.  
@@ -684,7 +683,7 @@ The filler is $\psi\circ c_0$. By generalization, $h$ is an acyclic fibration an
 
 
 
-\input{cshdescent}
+\subfile{cshdescent}
 
 \section{Closing}
 
