@@ -1,6 +1,8 @@
 \documentclass[csh.tex]{subfiles}
 \begin{document}
 
+\hide{ Use diagrams instead of decidable sieves. Take the category of monomorphisms in $\horn$.}
+
 \section{Descent} 
 This purpose of this section is to replace arguments based on \emph{minimal fibrations} in simplicial homotopy theory, in particular those that are related to homotopy type theory. We assume that there is a class $M$ of \emph{modest fibrations} in $\ambient\s$ with the following properties.
 \begin{itemize}
@@ -35,22 +37,40 @@ For each horn inclusion $h\of \horn_k[n]\to\simplex$ and each fibration $f\of X\
 \end{lemma}
 
 \newcommand\hornInclusion[2]{h^{#1}_{#2}}
-\newcommand\decidableSieves{\mathfrak D}
 
 \begin{proof} There is no horn inclusion for $n=0$. In the case $n=1$, there are two maps $1\to\simplex[1]$. In both case $Df=\pi_0\of \simplex[1]\times X \to\simplex[1]$ suffices. For all the cases were $n>0$ we use the following construction.
 
-The category $\ambient\s$ of simplicial objects has a subcategory $\decidableSieves$ which contains all cofibrations into simplices up to isomorphism (see: definition \ref{decidable sieve}.
-There is an endofunctor $K:\decidableSieves/\simplex[n]\to\decidableSieves/\simplex[n]$ with the property that $h\ri\circ K$ preserves the left lifting property with respect to fibrations. %todo: lemma
+
+There is an endofunctor $K:\simCat/[n]\to\simCat/[n]$ that preserves intersections (see lemma \ref{intersection}). The functor can be extended to (finite) colimits of simplices in $\ambient\s/\simplex[n]$. In this extended form $h\ri\circ K$ preserves the left lifting property with respect to fibrations.%todo: lemma
+
 The functor $D$ satisfies the following natural equivalence.
-\[ \ambient\s/\simplex[n](d, Df)\simeq \ambient\s/\horn_k[n](h\ri K(d), Df) \]
+\[ \ambient\s/\simplex[n](\simplex(\xi), Df)\simeq \ambient\s/\horn_k[n](h\ri \simplex(K(\xi)), f) \]
 This equivalence means that the problem of lifting a horn inclusion $h'$ against $Df$ reduces to the problem of lifting $K(h')$ against $f$, which is already solved for all cases where $f$ is a fibration. Hence $D$ preserves fibrations.
 \end{proof}
 
 The rest of this chapter works out the details of the construction.
 
+\newcommand\pdmc{\mathbf p}
+\newcommand\partar\rightharpoonup
 \subsection{Definitions}
-\begin{definition} A \keyword{decidable sieve} is a simplex $X$ for which there is a cofibration $X\to\simplex[n]$ for some $n\of\nno$. Decidable sieves form a subcategory category $\decidableSieves$ of $\ambient\s$.
+
+\begin{definition} 
+For each simplex $X$ there is a classifier $\pdmc_X\of X\to X_\bot$ for partial maps $f\of W\partar X$ such that the underlying map of the inclusion of the domain $\base(\dom f)\to \base(W)$ is decidable. It is defined as follows.
+\begin{align*}
+X_\bot(n) &= 1+\Sigma x\of X.\simCat_+(\dim(x),n)\\
+\base(X_\bot) &= \Sigma n\of \nno.X_\bot(n)\\
+\dim(n,x) &= n\\
+\end{align*}
+\newcommand\empt\bot
+Here $\simCat_+(\dim(x),n)$ is the object of monomorphisms $\dim(x)\to n$. Therefore $1+\Sigma x\of X.\simCat_+(\dim(x),n)$ consists of an element $\empt$ that represents the empty function and pairs $(x,f)$ where $f$ is a monomorphism $[\dim(x)]\to [n]$. To turn this into a proper simplex define the actions of $\phi\of[m]\to[n]$ as follows.
+\begin{align*}
+(n,\empt)\cdot\phi &= (m,\empt) \\
+(n,x,f)\cdot\phi &= (m,x\cdot f\ri(\phi),\phi\ri(f))&&\textrm{if the pullback of $\phi$ and $f$ exists in $\simCat$.}\\
+(n,x,f)\cdot\phi &= (m,\empt)&&\textrm{if the pullback of $\phi$ and $f$ doesn't exist.}
+\end{align*}
+The morphism $\pdmc_X\of X\to X_\bot$ sends $x$ to $(\dim(x),x,\id_{\dim(x)})$
 \end{definition}
+
 
 The following notation allows us to classify decidable sieves.
 
@@ -64,9 +84,8 @@ The following notation allows us to classify decidable sieves.
 \end{align*}
 \end{definition}
 
-Although the \emph{face} $\face(\xi,p)$ are either initial objects or isomorphic to some $\simplex(\alpha)\of\simplex[l]\to\simplex[n]$, they come with canonical monomorphisms to $\simplex(\xi)$ which means they represent subobjects. Some other subobjects of simplices $\simplex[n]$ can therefore be described as unions of $\face(\xi,p)$. For example, the horn inclusion in (\ref{descent lifting problem}) \emph{is} $\bigcup_{i\of [m]-\set k} \face(\xi,[m]-\set i)$ if we read $[m]-\set i$ as both a type and as a substitute for its characteristic map $[m]\to\bool$.
+Although the \emph{face} $\face(\xi,p)$ are either initial objects or isomorphic to some $\simplex(\alpha)\of\simplex[l]\to\simplex[n]$, they come with canonical monomorphisms to $\simplex(\xi)$ which means they represent subobjects. Other subobjects of simplices $\simplex[n]$ can therefore be described as unions of $\face(\xi,p)$. For example, the horn inclusion in (\ref{descent lifting problem}) \emph{is} $\bigcup_{i\of [m]-\set k} \face(\xi,[m]-\set i)$ if we read $[m]-\set i$ as both a type and as a substitute for its characteristic map $[m]\to\bool$. All \emph{finite} unions of faces are cofibrations.
 
-To define $K$, it is easier to first just consider simplices, and then expand to faces and decidable sieves.
 
 %The functor K
 \begin{definition}
@@ -94,35 +113,34 @@ The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical orde
 \end{enumerate}
 \end{definition}
 
-To extend $K$ to $\decidableSieves/\simplex[n]$ we simply make it preserve filtered colimits.
+\begin{lemma} An \keyword{intersection} is a pullback of monomorphisms. The functor $K$ preserves intersections. \end{lemma}
 
-\begin{definition} The following makes $K$ to an endofunctor of $\decidableSieves/\simplex[n]$.
-For each $\face(\xi,p)$ let $\depsum K(p)\of [m+\norm\xi]\to \bool$ satisfy the following equation--here $\mathord\land$ is the conjunction of Booleans.
-\[ \depsum K(p)(\la(i))=p(i)\quad\depsum K(p)(\ka(\vec i)) = p(i_0)\land\dotsm\land p(i_n) \] 
-Let $K\face(\xi,p) = \face(K_0(\xi),\depsum K(p))$, and let $K$ preserve unions of subobjects.
+\begin{proof} Let $f\of\alpha\to\beta$, $g\of\alpha\to\gamma$, $h\of\beta\to\delta$ and $k\of\gamma\to\delta$ form an intersections
+
+\end{proof}
+
+
+\begin{definition} Let $\xi\of[m]\to[n]$ and let $c\of X\to\simplex [m]$ be a cofibration. Define $K(c)\of K(X) \to \simplex[m+\norm\xi]$ as follows. Note that $\kappa(\xi)\of[m]\to[m+\norm\xi]$ induces a functor $\kappa(\xi)\ri\of\simCat/[m+\norm\xi]\to\simCat/[m]$.
+\begin{align*}
+\base(KX) &= \set{(x,y)\of\base(X)\times\base(\simplex[m+\norm\xi]) | \kappa(\xi)\ri(y) = c(x) }\\
+\dim(x,y)&= \dom(y)\\
+(x,y)\cdot\phi &= (x\cdot \kappa\ri(\phi),y\circ\phi)\\
+Kc(x,y) &= y
+\end{align*}
+\[\xymatrix{
+\bullet \ar[rr]^{\kappa(\xi)\ri(\phi)}\ar[d] && [\dim(x)] \ar[r]^{c(x)}\ar[d] & [m]\ar[d]^{\kappa(\xi)} \\
+\bullet \ar[rr]_\phi && \bullet \ar[r]_y & [m+\norm\xi]
+}\]
+
+Let $\xi'\of [m']\to[n]$ and let $d\of Y\to \simplex[m']$ be a cofibration. For morphisms $(f,b):(X,c)\to (Y,d)$ let $Kf(x,y) = (f(x),K(b)\circ y)$--%TODO explain b\circ y. This doesn't actually help us that much\dots
 %TODO: prove that this is a functor
 \end{definition}
 
+\hide{ Always these complications. What am I missing that I keep running into these?}
 
 
+\section{Junk}
 The norm $\norm\xi$ equals the number of ways the injection $\delta^n_k\of[n-1]\to[n]$ factors through $\xi$. Here $\delta^n_k(i)=i$ if $i<k$ and $i+1$ if $i\geq k$. The functor $K$ gives each such factorization $\phi\of[n-1]\to [m]$ a homotopy with a unique anchor point in $K(\xi)_k$.  Pulling back along $H(n,k)$ preserves the homotopy type of $\simplex(K_0(\xi))$ which is the point of the construction. %TODO: improve or remove
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
