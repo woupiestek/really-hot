@@ -25,8 +25,7 @@ The interesting case is where $M$ has the following structure in addition to the
 
 The following fact makes the universal modest fibration a potential model of homotopy type theory.
 
-\begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant.
-\end{theorem}
+\begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant. \end{theorem}
 
 \begin{proof} For each horn inclusion $h\of \horn_k[n]\to\simplex[n]$ and each pair of $v\of \horn_k[n]\to V$, the modest fibration $v\ri(\uni)\of \horn_k[n]\times_V U \to \horn_k[n]$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex[n]$ by lemma \ref{descent}. There is a $\chm(D(v\ri(\uni)))\of\simplex[n]\to V$ and $\chm(h_*(v\ri(\uni)))\circ h$ equals $v$ by definition \ref{universal modest fibration}.
 \end{proof}
@@ -40,15 +39,76 @@ For each horn inclusion $h\of \horn_k[n]\to\simplex$ and each fibration $f\of X\
 
 \begin{proof} There is no horn inclusion for $n=0$. In the case $n=1$, there are two maps $1\to\simplex[1]$. In both case $Df=\pi_0\of \simplex[1]\times X \to\simplex[1]$ suffices. For all the cases were $n>0$ we use the following construction.
 
-
-There is an endofunctor $K:\simCat/[n]\to\simCat/[n]$ that preserves intersections (see lemma \ref{intersection}). The functor can be extended to (finite) colimits of simplices in $\ambient\s/\simplex[n]$. In this extended form $h\ri\circ K$ preserves the left lifting property with respect to fibrations.%todo: lemma
-
-The functor $D$ satisfies the following natural equivalence.
-\[ \ambient\s/\simplex[n](\simplex(\xi), Df)\simeq \ambient\s/\horn_k[n](h\ri \simplex(K(\xi)), f) \]
-This equivalence means that the problem of lifting a horn inclusion $h'$ against $Df$ reduces to the problem of lifting $K(h')$ against $f$, which is already solved for all cases where $f$ is a fibration. Hence $D$ preserves fibrations.
+The functor $D$ is defined to have the following relation with a functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
+\[ \ambient\s/\simplex[n](\simplex(\xi), Df)\simeq \ambient\s/\horn_k[n](K(\xi), f) \]
+This is possible because $\ambient\s/\simplex[n]$ is equivalent to the category of presheaves over $\simCat/[n]$ and the Yoneda lemma applies to those presheaves. %lemma?
+The relation of $D$ and $K$ allows us to reduce the problem of lifting a horn against $Df$ to the problem of lifting some finite colimit of objects in the image of $K$ against $f$. These finite colimits have the require lifting property by lemma %...
 \end{proof}
 
-The rest of this chapter works out the details of the construction.
+The rest of this section works out the definition and the properties of $K$.
+
+%The functor K
+\begin{definition}
+The following defines the functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
+\begin{enumerate}
+\item A function $\xi\of[m]\to[n]$ cuts $[m]$ into $n+1$ posets $\xi_j = \set{i\of[m]|\xi(i)=j}$. 
+\item Let $\norm \xi$ be the number of elements of the product $\Pi i\of ([n]-\set k).\xi_i$. 
+\item Define $K_0(\xi)\of [m+\norm\xi]\to [n]$ as follows.
+\[ 
+	K_0(\xi)(i) = \left\{
+		\begin{array}{cc}
+			\xi(i) & \xi(i)<k \\
+			k & \xi(i-\norm\xi)\leq k \leq \xi(i)\\
+			\xi(i-\norm\xi) & k<\xi(i-\norm\xi)
+		\end{array}
+	\right.
+\]
+\item Let $\ka(\xi)\of\Pi i\of([n]-\set k).\xi_i \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\Pi i\of([n]-\set k).\xi_i$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
+
+The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical ordering. %more?
+
+\item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the unique nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K_0(\xi)\circ\la(\xi) = \xi$.
+\item For each morphisms $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
+\item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the unique nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \Pi i\of([n]-\set k).\phi_i$ and $K_0(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
+\end{enumerate}
+
+The maps $(K_0,K_1)$ define an endofunctor of $\simCat/[n]$. To get the functor, let $K(\xi) = h\ri(\simplex(K_0(\xi)))$ for objects $\xi$ of $\simCat/[n]$ and $K(\phi) = h\ri(\simplex(K_1(\phi)))$ for morphisms, where $h\ri$ is the reindexing functor $\ambient\s/\simplex[n]\to\ambient\s/\horn_k[n]$ along the horn inclusion $h\of \horn_k[n]\to\simplex[n]$. Concretely, $K$ satisfies the following equations for all objects $\xi$ of $\simCat/[n]$, all $x\of \base(\dom(K(\xi)))$ and all arrows $\phi$ of $\simCat/[n]$.
+\begin{align*}
+\base(\dom(K(\xi))) &= \set{ x\of\base\simplex[m+\norm\xi]| K_0(\xi)\circ x\of\base\horn_k[n]}\\
+K(\xi)(x) &= K_0(\xi)\circ x \\
+\dim(x) &= \dom(x) \\
+x\cdot\phi &= x\circ\phi \\
+K(\phi)(x) &= K_1(\phi)\circ x
+\end{align*}
+\end{definition}
+
+\begin{lemma} An \keyword{intersection} is a pullback square of monomorphisms. The functor $K$ preserves all intersections of $\simCat/[n]$. \end{lemma}
+
+\begin{proof} %here
+
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\hide{The fibration $Df$ is the result of gluing new simplices to $h\circ f$ in order to provide fillers for horn inclusion that don't factor through $f$. The right adjoint $h_*$ of the pullback functor $h\ri$, which satisfies $h_*(f) = (h\circ f)^h_{\simplex[n]}$, glues many new simplices to $h\circ f$. Unfortunately, it glues in so many new simplices, that $h_*(f)$ is not weakly equivalent to $f$ anymore.
+
+The functor $K$ sends each object $\xi\of[m]\to[n]$ of $\simCat/[n]$ to a homotopy between the pullback of $\simplex(\xi)\of\simplex[m]\to\simplex[n]$ and a simplex in the fibre over the vertex $k$ of $\horn_k[n]$. The functor $D$ is a modification of $h_*$ that only glues in new simplices when these homotopies exist. That guarantees weak equivalence and preservation of fibration.}
+
 
 \newcommand\pdmc{\mathbf p}
 \newcommand\partar\rightharpoonup
@@ -86,38 +146,6 @@ The following notation allows us to classify decidable sieves.
 
 Although the \emph{face} $\face(\xi,p)$ are either initial objects or isomorphic to some $\simplex(\alpha)\of\simplex[l]\to\simplex[n]$, they come with canonical monomorphisms to $\simplex(\xi)$ which means they represent subobjects. Other subobjects of simplices $\simplex[n]$ can therefore be described as unions of $\face(\xi,p)$. For example, the horn inclusion in (\ref{descent lifting problem}) \emph{is} $\bigcup_{i\of [m]-\set k} \face(\xi,[m]-\set i)$ if we read $[m]-\set i$ as both a type and as a substitute for its characteristic map $[m]\to\bool$. All \emph{finite} unions of faces are cofibrations.
 
-
-%The functor K
-\begin{definition}
-The following defines the functor $K\of\simCat/[n]\to\simCat/[n]$.
-\begin{enumerate}
-\item A function $\xi\of[m]\to[n]$ cuts $[m]$ into $n+1$ posets $\xi_j = \set{i\of[m]|\xi(i)=j}$. 
-\item Let $\norm \xi$ be the number of elements of the product $\Pi i\of ([n]-\set k).\xi_i$. 
-\item Define $K_0(\xi)\of [m+\norm\xi]\to [n]$ as follows.
-\[ 
-	K_0(\xi)(i) = \left\{
-		\begin{array}{cc}
-			\xi(i) & \xi(i)<k \\
-			k & \xi(i-\norm\xi)\leq k \leq \xi(i)\\
-			\xi(i-\norm\xi) & k<\xi(i-\norm\xi)
-		\end{array}
-	\right.
-\]
-\item Let $\ka(\xi)\of\Pi i\of([n]-\set k).\xi_i \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\Pi i\of([n]-\set k).\xi_i$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
-
-The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical ordering. %more?
-
-\item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K_0(\xi)\circ\la(\xi) = \xi$.
-\item For each morphisms $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
-\item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \Pi i\of([n]-\set k).\phi_i$ and $K_0(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
-\end{enumerate}
-\end{definition}
-
-\begin{lemma} An \keyword{intersection} is a pullback of monomorphisms. The functor $K$ preserves intersections. \end{lemma}
-
-\begin{proof} Let $f\of\alpha\to\beta$, $g\of\alpha\to\gamma$, $h\of\beta\to\delta$ and $k\of\gamma\to\delta$ form an intersections
-
-\end{proof}
 
 
 \begin{definition} Let $\xi\of[m]\to[n]$ and let $c\of X\to\simplex [m]$ be a cofibration. Define $K(c)\of K(X) \to \simplex[m+\norm\xi]$ as follows. Note that $\kappa(\xi)\of[m]\to[m+\norm\xi]$ induces a functor $\kappa(\xi)\ri\of\simCat/[m+\norm\xi]\to\simCat/[m]$.
