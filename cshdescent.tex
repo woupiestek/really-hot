@@ -42,7 +42,7 @@ For each horn inclusion $h\of \horn_k[n]\to\simplex$ and each fibration $f\of X\
 The functor $D$ is defined to have the following relation with a functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
 \[ \ambient\s/\simplex[n](\simplex(\xi), Df)\simeq \ambient\s/\horn_k[n](K(\xi), f) \]
 This is possible because $\ambient\s/\simplex[n]$ is equivalent to the category of presheaves over $\simCat/[n]$ and the Yoneda lemma applies to those presheaves. %lemma?
-The relation of $D$ and $K$ allows us to reduce the problem of lifting a horn against $Df$ to the problem of lifting some finite colimit of objects in the image of $K$ against $f$. These finite colimits have the require lifting property by lemma %...
+The relation of $D$ and $K$ allows us to reduce the problem of lifting a horn against $Df$ to the problem of lifting some finite colimit of objects in the image of $K$ against $f$. These finite colimits have the required left lifting property by lemma %...
 \end{proof}
 
 The rest of this section works out the definition and the properties of $K$.
@@ -65,10 +65,10 @@ The following defines the functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
 \]
 \item Let $\ka(\xi)\of\Pi i\of([n]-\set k).\xi_i \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\Pi i\of([n]-\set k).\xi_i$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
 
-The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical ordering. %more?
+The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical ordering. The map $K_0$ adds the lexicographical product of most of the fibres of a map $\xi\of[m]\to[n]$ to the fibre over $k$. %more?
 
 \item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the unique nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K_0(\xi)\circ\la(\xi) = \xi$.
-\item For each morphisms $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
+\item For each morphism $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
 \item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the unique nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \Pi i\of([n]-\set k).\phi_i$ and $K_0(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
 \end{enumerate}
 
@@ -82,27 +82,47 @@ K(\phi)(x) &= K_1(\phi)\circ x
 \end{align*}
 \end{definition}
 
+Thanks to the following property, the natural equivalence of homset above extends to horn inclusions.
+
 \begin{lemma} An \keyword{intersection} is a pullback square of monomorphisms. The functor $K$ preserves all intersections of $\simCat/[n]$. \end{lemma}
 
-\begin{proof} %here
-
+\begin{proof} The easiest way to see that is to describe the monomorphisms in the intersection as decidable predicates on the domain of a map $\xi\of[m]\to[n]$. Maps $[m]\to\bool$ that equals $\true$ at least once characterize monomorphisms to $\xi$. The action of the endofunctor $(K_0,K_1)$ on the monomorphism has a parallel on predicates. For each $p\of[m]\to\bool$ the following equations define $p^K\of [m+\norm\xi]\to\bool$. 
+\begin{align*}
+p^K(\kappa(\vec x)) &= \forall i\of[m]-\set k.p(x_i) &
+p^K(\lambda(x)) &= p(x)
+\end{align*}
+It all works out because $\forall i\of[m]-\set k.p(x_i)\land q(x_i)$ is equivalent to $(\forall i\of[m]-\set k.p(x_i))\land(\forall i\of[m]-\set k.q(x_i))$.
 \end{proof}
 
+\begin{definition}
+For each $f\of X\to\horn_k[n]$ the functor $D\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ satisfies the following equations.
+\begin{align*}
+\base(\dom(D(f))) &= \sum_{\xi\of\base\simplex[n]}(\ambient\s/\horn_k[n])(K(\xi),f)\\
+\dim(\xi,x) &= \dom\xi\\
+(\xi,x)\cdot\phi &= (\xi\circ\phi,x\circ K(\phi))\\
+D(f)(\xi,x) &= \xi
+\end{align*}
+On morphisms in $\ambient\s/\horn_k[n]$, the functor $D$ acts by composition: $Dm(\xi,x) = (\xi,m\circ x)$.
+\end{definition}
+
+If $\ambient$ has infinite colimits, the functor $D$ has a left adjoint $K'$ that satisfies $K'\simplex\simeq K$. We cannot rely on that property here. The functor $K$ does to finite colimits or simplices, including horn inclusions like $\horn_l[m]\to\simplex[m]$. The reason $D$ preserves fibrations and their right lifting property, is that its partial left adjoint preserves the left lifting property. The following proof shows this that the result of applying $K$ to a horn inclusion is the pushout of a composition of sums of horn inclusions.
 
 
 
+%here
+\hide{
+It is all pointless. I am stuck repeating the same explanation over an over again. It does not get any better.
 
+There is no compromise between exactness and clarity here.
+}
 
-
-
-
-
-
-
-
-
-
-
+\begin{align*}
+u_{i\of[n]} &\of[m+\norm\xi]\to 2\\
+u_i(x) &= (K_0\xi(x)\neq i)\\
+v_{i\of[m]} &\of[m+\norm\xi]\to 2\\
+v_i(\kappa(\xi)(\vec x)) &= \bigvee_{j\neq k} (x_j\neq i)\\
+v_i(\lambda(\xi)(x)) &= (x\neq i)
+\end{align*}
 
 
 \hide{The fibration $Df$ is the result of gluing new simplices to $h\circ f$ in order to provide fillers for horn inclusion that don't factor through $f$. The right adjoint $h_*$ of the pullback functor $h\ri$, which satisfies $h_*(f) = (h\circ f)^h_{\simplex[n]}$, glues many new simplices to $h\circ f$. Unfortunately, it glues in so many new simplices, that $h_*(f)$ is not weakly equivalent to $f$ anymore.
