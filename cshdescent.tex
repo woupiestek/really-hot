@@ -105,93 +105,103 @@ D(f)(\xi,x) &= \xi
 On morphisms in $\ambient\s/\horn_k[n]$, the functor $D$ acts by composition: $Dm(\xi,x) = (\xi,m\circ x)$.
 \end{definition}
 
-If $\ambient$ has infinite colimits, the functor $D$ has a left adjoint $K'$ that satisfies $K'\simplex\simeq K$. We cannot rely on that property here. The functor $K$ does to finite colimits or simplices, including horn inclusions like $\horn_l[m]\to\simplex[m]$. The reason $D$ preserves fibrations and their right lifting property, is that its partial left adjoint preserves the left lifting property. The following proof shows this that the result of applying $K$ to a horn inclusion is the pushout of a composition of sums of horn inclusions.
+If $\ambient$ has infinite colimits, the functor $D$ has a left adjoint $K'$ that satisfies $K'\simplex\simeq K$. We cannot rely on that property here. The functor $K$ does extend to finite colimits of simplices. Preservation of intersections implies that $K$ also applies to finite unions of simplices like $\horn_l[m]$. The reason $D$ preserves fibrations and their right lifting property, is that its partial left adjoint preserves the left lifting property. 
+
+\begin{definition}[Face notation] We introduce a notation for monomorphisms in $\simCat/[n]$ or more accurately for the result of applying $\simplex$ to them. For $\xi\of[m]\to[n]$ and $\phi\of[m]\to\bool$ let $\face(\xi,p)\of \dom(\face(\xi,p))\to \simplex[m]$ satisfy
+\begin{align*}
+\base(\dom(\face(\xi,p))) &= \set{\alpha\of\base(\simplex[m])\middle|\forall i\of \dom(\alpha).\phi\circ\alpha(i)=1}\\
+\dim(\alpha) &= \dom(\alpha)\\
+\alpha\cdot\chi &= \alpha\cdot\chi\\
+\face(\xi,p)(\alpha) &= \alpha
+\end{align*}
+\[\xymatrix{
+\bullet\ar[rr]^{\face(\xi,\phi)}\ar[dr] && \simplex[m]\ar[dl]^{\simplex(\xi)} \\
+& \simplex[n]
+}\]
+\end{definition}
+
+With the help of this notation, we describe commutative triangles of monomorphisms as follows.
+\begin{align}
+&\horn_l[m]\stackrel{\hat h}\to \simplex[m]\stackrel{\simplex(\xi)}\to \simplex[n] = \bigvee_{i\of [m]-\set l} \face(\xi,x\mapsto x\neq i)\\
+&K(\horn_l[m])\stackrel{K(\hat h)}\to \simplex[m+\norm\xi]\stackrel{\simplex(K_0(\xi))}\to \simplex[n] = \bigvee_{j\of [m]-\set l} \face(K_0(\xi),v_j)\\
+&h\ri(K(\horn_l[m]))\stackrel{h\ri(K(\hat h))}\to h\ri(\simplex[m+\norm\xi])\stackrel{h\ri(\simplex(K_0(\xi)))}\to \horn_l[n] = \\
+&\quad\left(\bigvee_{i\of[n]-\set k} \face(K_0(\xi),u_i)\right)\wedge\left(\bigvee_{j\of [m]-\set l} \face(K_0(\xi),v_j)\right)=\\
+&\quad\left(\bigvee_{\substack{i\of[n]-\set k\\j\of [m]-\set l}}\face(K_0(\xi),u_i\land v_j)\right)\\
+&h\ri(\simplex[m+\norm\xi])\stackrel{h}\to \simplex[m+\norm\xi]\stackrel{K_0(\xi)}\to \simplex[n] =\left(\bigvee_{i\of[n]-\set k} \face(K_0(\xi),u_i)\right)
+\end{align}
+\begin{center}
+where
+\end{center}
+\begin{align*}
+u_i(x) &= (K_0\xi(x)\neq i) & 
+v_i(\kappa(\xi)(\vec x)) &= \bigwedge_{j\of [n]-\set k} (x_j\neq i)\\
+v_i(\lambda(\xi)(x)) &= (x\neq i)&
+u_i\land v_i(x) &= u_i(x)\land v_i(x)
+\end{align*}
+
+
+\begin{lemma} The monomorphism $h\ri K(\hat h)\of$
+\[ \left(\bigvee_{\substack{i\of[n]-\set{k}\\j\of [m]-\set l}}\face(K_0(\xi),u_i\land v_j)\right)\to\left(\bigvee_{i\of[n]-\set{k}} \face(K_0(\xi),u_i)\right) \] 
+has the left lifting property with respect to all fibrations.\end{lemma}
+
+\begin{proof}The class of morphisms with the left lifting property is closed under compositions and pushouts. The monomorphism $h\ri K(\hat h)$ belongs to this class because of this closure property.
+
+Decompose $h\ri K(\hat h)$ as the inclusions of the following three subobjects.
+\begin{align*}
+A &=\dom(h\ri K(\hat h))=\left(\bigvee_{\substack{i\of[n]-\set{k}\\j\of [m]-\set l}}\face(K_0(\xi),u_i\land v_j)\right)\\
+B &=\left(\bigvee_{j\of[m]-\set l}\face(K_0(\xi),u_{\xi(l)}\land v_j)\right)\vee \left(\bigvee_{i\of[n]-\set{k,\xi(l)}}\face(K_0(\xi),u_i)\right)\\
+C &=\cod(h\ri K(\hat h))=\left(\bigvee_{i\of[n]-\set{k}} \face(K_0(\xi),u_i)\right)
+\end{align*}
+
+Decompose $A\to B$ as the inclusions of the following subobjects that satisfy $A_0=A$ and $A_{n+1}=B$.
+\[ A_{j\of[n+1]} = A\vee \left(\bigvee_{i\of[j]-\set{k,j,\xi(l)}}\face(K_0(\xi),u_i)\right) \]
+Each inclusion $A_j\to A_{j+1}$ is a pushout of the map $A_j\cap \face(K_0(\xi),u_{j+1}) \to \face(K_0(\xi),u_{j+1})$, where
+\begin{align*} A_j\cap \face(K_0(\xi),u_{j+1}) = &\left(\bigvee_{i\of[m]-\set l}\face(K_0(\xi),u_{j+1}\land v_{i})\right)\vee \\
+&\left(\bigvee_{i\of[j+1]-\set{k,\xi(l)}}\face(K_0(\xi),u_i\land u_{j+1})\right)\end{align*}
+The faces $\face(K_0(\xi),u_{j+1}\land v_{i})$ and $\face(K_0(\xi),u_i\land u_{j+1})$ all contain the point $\lambda(l)$ of $\simplex[m+\norm\xi]$ which means that lemma \ref{face completion} applies to the inclusion $A_j\cap \face(K_0(\xi),u_{j+1}) \to \face(K_0(\xi),u_{j+1})$. Hence $A\to B$ is a cofibration.
+
+If $\xi(l)=k$, then $B=C$ and the proof is complete. So suppose $\xi(l)=i\neq k$. First define the following maps $[m+\norm\xi]\to\bool$ for each $\vec p \of\prod_{i\of [n]-\set k}\xi_i$.
+\begin{align*}
+w_{\vec p}(\kappa(\vec q)) &= \true &
+w_{\vec p}(\lambda(q)) &= ((\xi(q)=k\vee q\leq p_{\xi(q)})\land\xi(q)\neq \xi(l))
+\end{align*}
+Decompose $B\to C$ as the inclusions of the following subobjects that satisfy $B_0=B$ and $B_{m+\norm\xi+1}=C$.
+\[ B_{j\of[m+\norm\xi+1]} = B \vee \left(\bigvee_{\kappa(\vec p)<j} \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})\right)\]
+Each inclusion $B_j\to B_{j+1}$ is a pushout of the map $B_j\cap \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p}) \to \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})$, where
+\begin{align*} B_{\kappa(\vec p)}\cap \face(K_0(\xi),\land w_{\vec p}) = 
+&\bigvee_{i\of [n]-\set{\xi(l),k}}\face(K_0\xi,u_i\land w_{\vec p})\vee\\
+&\bigvee_{i\of [m]-\set l} \face(K_0\xi,v_i\land w_{\vec p})\vee\\
+&\bigvee_{\kappa(\vec q)<\kappa(\vec p)} \face(K_0\xi,w_{\vec q}\land w_{\vec p})
+\end{align*}
+Let $\vec p[l]\of \prod_{i\of [n]-\set k}\xi_i$ satisfy $p[l]_j = l$ if $\xi(l)=j$ and $p[l]_i=p_i$ otherwise. The point $\kappa(p[l])$ is a member of $\face(K_0\xi,u_i\land w_{\vec p})$ for all $i\of [n]-\set{\xi(l),k}$. It is also a member of $\face(K_0\xi,w_{\vec q}\land w_{\vec p})$ for all $\vec q\of \prod_{i\of [n]-\set k}\xi_i$ such that $\kappa(\vec q)<\kappa(\vec p)$. In the remaining faces $\face(K_0\xi,v_i\land w_{\vec p})$ for $i\of [m]-\set l$, if not $v_i(\kappa(\vec p[l]))$ then by definition not $\bigwedge_{j\of [n]-\set k} (p[l]_j\neq i)$. So there is a $j\of [n]-\set k$ such that $p[l]_j=i$.
+\hide{the hardest part has yet to come} %here
+\end{proof}
 
 
 
-%here
-\hide{
+\begin{lemma}[Face completion] Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have a point $e$ of $\simplex[p]$ in common. The inclusion $\bigcup F\to \simplex[p]$ has the left lifting property with respect to all fibrations. \label{face completion} \end{lemma}
+
+\begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$. Therefore the inclusion has the left lifting property. Because composition preserves the left lifting property, $\bigcup F = F_0\to F_p = \simplex[p]$ has it too. 
+\end{proof}
+
+
+
+
+
+\hide{ We can break this up into faces already\dots }
+
+\hide{turn this into a bunch of lemma's:
+
+The following proof shows this that the result of applying $K$ to a horn inclusion is the pushout of a composition of sums of horn inclusions.
+
 It is all pointless. I am stuck repeating the same explanation over an over again. It does not get any better.
 
 There is no compromise between exactness and clarity here.
 }
 
-\begin{align*}
-u_{i\of[n]} &\of[m+\norm\xi]\to 2\\
-u_i(x) &= (K_0\xi(x)\neq i)\\
-v_{i\of[m]} &\of[m+\norm\xi]\to 2\\
-v_i(\kappa(\xi)(\vec x)) &= \bigvee_{j\neq k} (x_j\neq i)\\
-v_i(\lambda(\xi)(x)) &= (x\neq i)
-\end{align*}
-
-
-\hide{The fibration $Df$ is the result of gluing new simplices to $h\circ f$ in order to provide fillers for horn inclusion that don't factor through $f$. The right adjoint $h_*$ of the pullback functor $h\ri$, which satisfies $h_*(f) = (h\circ f)^h_{\simplex[n]}$, glues many new simplices to $h\circ f$. Unfortunately, it glues in so many new simplices, that $h_*(f)$ is not weakly equivalent to $f$ anymore.
-
-The functor $K$ sends each object $\xi\of[m]\to[n]$ of $\simCat/[n]$ to a homotopy between the pullback of $\simplex(\xi)\of\simplex[m]\to\simplex[n]$ and a simplex in the fibre over the vertex $k$ of $\horn_k[n]$. The functor $D$ is a modification of $h_*$ that only glues in new simplices when these homotopies exist. That guarantees weak equivalence and preservation of fibration.}
-
-
-\newcommand\pdmc{\mathbf p}
-\newcommand\partar\rightharpoonup
-\subsection{Definitions}
-
-\begin{definition} 
-For each simplex $X$ there is a classifier $\pdmc_X\of X\to X_\bot$ for partial maps $f\of W\partar X$ such that the underlying map of the inclusion of the domain $\base(\dom f)\to \base(W)$ is decidable. It is defined as follows.
-\begin{align*}
-X_\bot(n) &= 1+\Sigma x\of X.\simCat_+(\dim(x),n)\\
-\base(X_\bot) &= \Sigma n\of \nno.X_\bot(n)\\
-\dim(n,x) &= n\\
-\end{align*}
-\newcommand\empt\bot
-Here $\simCat_+(\dim(x),n)$ is the object of monomorphisms $\dim(x)\to n$. Therefore $1+\Sigma x\of X.\simCat_+(\dim(x),n)$ consists of an element $\empt$ that represents the empty function and pairs $(x,f)$ where $f$ is a monomorphism $[\dim(x)]\to [n]$. To turn this into a proper simplex define the actions of $\phi\of[m]\to[n]$ as follows.
-\begin{align*}
-(n,\empt)\cdot\phi &= (m,\empt) \\
-(n,x,f)\cdot\phi &= (m,x\cdot f\ri(\phi),\phi\ri(f))&&\textrm{if the pullback of $\phi$ and $f$ exists in $\simCat$.}\\
-(n,x,f)\cdot\phi &= (m,\empt)&&\textrm{if the pullback of $\phi$ and $f$ doesn't exist.}
-\end{align*}
-The morphism $\pdmc_X\of X\to X_\bot$ sends $x$ to $(\dim(x),x,\id_{\dim(x)})$
-\end{definition}
-
-
-The following notation allows us to classify decidable sieves.
-
-%language of decidable sieves?
-\begin{definition} For each $\xi\of[m]\to[n]$ and $p\of[m]\to\bool$ let $\face(\xi,p)$ be the object of $\ambient/\simplex[n]$ which satisfies: 
-\begin{align*}
-\base(\dom(\face(\xi,p))) &= \set{\psi\of[l]\to[m]| \forall i\of[l].p(\psi(i))=\true}\\
-\dim(\psi) &= \dom(\psi) \\
-\psi\cdot\phi &= \psi\circ\phi\\
-\face(\xi,p)(\psi) &= \xi\circ\psi
-\end{align*}
-\end{definition}
-
-Although the \emph{face} $\face(\xi,p)$ are either initial objects or isomorphic to some $\simplex(\alpha)\of\simplex[l]\to\simplex[n]$, they come with canonical monomorphisms to $\simplex(\xi)$ which means they represent subobjects. Other subobjects of simplices $\simplex[n]$ can therefore be described as unions of $\face(\xi,p)$. For example, the horn inclusion in (\ref{descent lifting problem}) \emph{is} $\bigcup_{i\of [m]-\set k} \face(\xi,[m]-\set i)$ if we read $[m]-\set i$ as both a type and as a substitute for its characteristic map $[m]\to\bool$. All \emph{finite} unions of faces are cofibrations.
-
-
-
-\begin{definition} Let $\xi\of[m]\to[n]$ and let $c\of X\to\simplex [m]$ be a cofibration. Define $K(c)\of K(X) \to \simplex[m+\norm\xi]$ as follows. Note that $\kappa(\xi)\of[m]\to[m+\norm\xi]$ induces a functor $\kappa(\xi)\ri\of\simCat/[m+\norm\xi]\to\simCat/[m]$.
-\begin{align*}
-\base(KX) &= \set{(x,y)\of\base(X)\times\base(\simplex[m+\norm\xi]) | \kappa(\xi)\ri(y) = c(x) }\\
-\dim(x,y)&= \dom(y)\\
-(x,y)\cdot\phi &= (x\cdot \kappa\ri(\phi),y\circ\phi)\\
-Kc(x,y) &= y
-\end{align*}
-\[\xymatrix{
-\bullet \ar[rr]^{\kappa(\xi)\ri(\phi)}\ar[d] && [\dim(x)] \ar[r]^{c(x)}\ar[d] & [m]\ar[d]^{\kappa(\xi)} \\
-\bullet \ar[rr]_\phi && \bullet \ar[r]_y & [m+\norm\xi]
-}\]
-
-Let $\xi'\of [m']\to[n]$ and let $d\of Y\to \simplex[m']$ be a cofibration. For morphisms $(f,b):(X,c)\to (Y,d)$ let $Kf(x,y) = (f(x),K(b)\circ y)$--%TODO explain b\circ y. This doesn't actually help us that much\dots
-%TODO: prove that this is a functor
-\end{definition}
-
-\hide{ Always these complications. What am I missing that I keep running into these?}
-
+%here
 
 \section{Junk}
-The norm $\norm\xi$ equals the number of ways the injection $\delta^n_k\of[n-1]\to[n]$ factors through $\xi$. Here $\delta^n_k(i)=i$ if $i<k$ and $i+1$ if $i\geq k$. The functor $K$ gives each such factorization $\phi\of[n-1]\to [m]$ a homotopy with a unique anchor point in $K(\xi)_k$.  Pulling back along $H(n,k)$ preserves the homotopy type of $\simplex(K_0(\xi))$ which is the point of the construction. %TODO: improve or remove
-
-
-
 % refactand
 \begin{definition} For each $g\of Y\to \simplex[n]$ define $K\ri(g)\of K\ri(Y) \to \simplex [n]$ as follows.
 \begin{align*}
@@ -347,12 +357,6 @@ Define $\vec p[l]\of\prod_{i\neq k} \xi_i$ to satisfy $\vec p[l]_i = l$ if $i=\x
 The supporting edge $\kappa(\vec p[l])\in\U(i)$ and $\W(\vec p)$ because those faces contain all edges in the image of $\ka$. The edge $\kappa(\vec p[l])$ is a member of $\A(q)$ when $\xi(q)=k$ or $\vec p[l]_{\xi(q)}=q$ by definition of $M(q)$. In other cases $\A(q)\cap\U(\xi(l))\cap \W(\vec p)$ is a subobject of one of the faces that do contain $\kappa(\vec p[l])$. If $q$ is the least element of $\xi_{\xi(q)}$, then $\A(q)\cap\W(\vec p)\subseteq \U(\xi(q))$. If $\xi(q-1)=\xi(q)$, then $\A(q)\cap \W(\vec p) \subseteq \W(\vec p[q-1])$ and $\kappa(\vec p[q-1])<\kappa(\vec p)$. Therefore $L_j\cap \face(K_0(\xi),\W(\vec p))$ is a union of faces which contain the supporting edge $\ka(\vec p[l])$. By lemma \ref{face completion} $L_j\cap \face(K_0(\xi),\W(\vec p))\to \face(K_0(\xi),\W(\vec p))$ is an acyclic cofibration. Since it is a pushout of that map, $L_j\to L_{j+1} = L_j\cup \face(K_0(\xi),\W(\vec p))$ too.
 
 By the time $j+1 = \la(p)$ for some $p\of \xi_k$, $L_j = h\ri \simplex(K\xi)$ and $L_j\to L_{j+1}$ is the identity. The same holds for all $L_j\to L_{j+1}$ where $K\xi(j+1)>k$ and where $j+1>m+\norm\xi$. Since acyclic cofibrations are closed under composition, both $L\to h\ri \simplex(K\xi)$ and $h\ri \depsum K H(m,l) \to h\ri \simplex(K\xi)$ are acyclic cofibrations.
-\end{proof}
-
-%have we explained edge?
-\begin{lemma}[Face completion] Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have an edge $e$ in common. The inclusion $\bigcup F\to \simplex[p]$ is an acyclic cofibration. \label{face completion} \end{lemma}
-
-\begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$ and therefore an acyclic cofibration. Because acyclic cofibrations are closed under composition, $\bigcup F = F_0\to F_p = \simplex[p]$ is an acyclic cofibration. 
 \end{proof}
 
 
