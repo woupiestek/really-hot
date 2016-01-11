@@ -77,7 +77,8 @@ Poland}
 \mathrmdef{dim}
 \newcommand\base{\mathbf{U}}
 \mathssbxdef{Func}
-\mathssbxdef[igen]{gen}
+%\mathssbxdef[igen]{gen}
+\mathssbxdef[sub]{Sub}
 \newcommand\ambient{\mathfrak A}
 
 \newcommand\keyword[1]{\emph{#1}\label{#1}}
@@ -93,7 +94,7 @@ Poland}
 Three papers:
 -simplicial homotopy
 -complete categories [how they are preserved]
--the realizability model of HOTT [how to get  fibrant object out of a category]
+-the realizability model of HOTT [how to get a fibrant object out of a category]
 
 Idee: reverse the order. definitions--theorem--lemmas. That way the purpose of the lemmas is set up from the start.
 }
@@ -105,163 +106,7 @@ Thorough investigation of the background. If we have an ELCCC then the poset-ref
 
 }
 
-\section{Introduction}
-This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory}. The intention is to interpret types as the homotopy types of the simplicial objects in the \emph{category of assemblies}. What makes this challenging, is that this category lacks some of the structure of the category of sets that \emph{classical homotopy theory} is build on. In the internal logic the principle of the excluded middle and the axiom of choice are false. The category of assemblies is not exact and lacks infinite limits and colimits. While there are \emph{generic monomorphisms}, they are not subobject classifiers. I deal with these issues in the following ways.
-\begin{enumerate}
-\item I look at simplicial objects of suitable internal categories. The advantage is that a realizer for being a simplicial object is available for any construction we need to make in the proofs.
-\item I limit the class of cofibrations. In classical simplicial homotopy theory every monomorphism is a cofibration. In this paper's version, we demand that certain properties of the monomorphism are decidable.
-\item The class of fibration also changes. Fibration come equipped with a \emph{fill operator} that realizes.
-\item I build the homotopy category out of the fibrant objects only. The small object argument that supplies fibrant replacements in classical homotopy requires infinite colimits that are unavailable.
-\end{enumerate}
-Out of interest in using the constructions in other contexts than the category of assemblies, this paper works with a generic \emph{extensive locally Cartesian closed category} with a \emph{natural number object} instead of the category of assemblies itself.
-
-\subsection{Related literature}
-Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}.
-
-\section{Preliminaries}
-This section surveys the categorical logic required to understand the rest of this paper.
-
-\subsection{Set up}
-The ambient category $\ambient$ where everything happens is a \emph{$\Pi$-pretopos}. $\Pi$-pretoposes are Heyting categories. Hence they have a first order intuitionist internal logic.
-
-The intended model is the ex/lex completion of category of assemblies defined in \citep{MR1097022,MR1023803,MR2479466}. This completion is not the famous \emph{effective topos}, but it is another realizability topos. Here we avoid the higher order aspects by sticking to the usual exactness properties.
-
-\begin{enumerate}
-\item The category $\ambient$ is \emph{locally Cartesian closed}. This means that for each object $X$ of $\ambient$ each slice $\ambient/X$ is Cartesian closed.
-\item The category $\ambient$ is \emph{extensive}, which means that is has finite coproducts and that $\ambient/(X+Y)$ is equivalent to $(\ambient/X)\times(\ambient/Y)$ for each pair of objects $X$ and $Y$ of $\ambient$.
-\item The category $\ambient$ is exact in the sense of Bar.
-\item The category $\ambient$ is has a \emph{natural number object} $\nno$.
-\end{enumerate}
-
-\subsection{Notation} The codomain, domain and identity operators are called $\cod$, $\dom$ and $\id$ and $[n]$ refers to the initial segment of the natural number object. When not talking about numbers, $0$, $1$, $+$ and $\times$ refer to initial and terminal objects and binary coproduct and product operators. The unique map to the terminal object is $\bang$ and projection maps from products to factors are $\pi_i$ for $i\in \N$.
-
-Every object $I$ of the $\ambient$ has an internal discrete category $I\disc$. For this category $\Ob(I\disc)=\Ar(I\disc)=I$ and $\cod=\dom=\id=\id(I)$.
-
-The \emph{set} of natural numbers is $\N$, and since it is a set, $i\in \N$ indicates membership. The natural number object of $\ambient$ is $\nno$, and $i\of\nno$ means that $i$ is a morphism whose codomain is $\nno$.
-
-Let $\cat C$ be an internal category. Its object of objects is $\Ob(\cat C)$ and its object of arrows is $\Ar(\cat C)$, so in this case $\cod$ and $\dom$ are morphisms $\Ar(\cat C)\to\Ob(\cat C)$ and $\id\of\Ob(\cat C)\to\Ar(\cat C)$. Let $\cat D$ be another internal category. The internal category of functors $\cat C\to\cat D$ is $\Func(\cat C,\cat D)$ or $\cat D^{\cat C}$.
-
-\subsection{Dependent types}
-Dependent type theory describe the constructions of objects and morphisms that are available in a locally Cartesian closed category.
-
-The atomic sentences of a type theory are type assignments $t\of T$ and equations $t=u$. Types are interpreted as objects of a category $\cat C$, while terms are interpreted as global sections. A proposition $t\of T$ is valid if the interpretation $\db t$ of $t$ is a global section of the interpretation $\db T$ of $T$ in $\cat C$. A proposition $t=u\of T$ is valid if $\db u=\db t$. 
-
-The rules explain the interpretation of closed types and terms. This interpretation extend to dependent types an terms--i.e.\ types and terms that contain free variables--in the following manner. For each type $T_0$ a type $T_1$ that depends on $T_0$ is interpreted as an object of $\cat C/\db{T_0}$. A term $t_1\of T_1$ that depends on $T_0$ is a section of $\db{T_1}$. A further type $T_2$ that depends on both $T_0$ and $T_1$ is interpreted as an object $\db{T_2}\of(\cat C/\db{T_0})/\db{T_1}$ and a term $t_2\of T_2$ as a global section.
-\hide{\[\xymatrix{
-& \bullet\ar[dl]^{\db{T_2}}\ar[d]\\ 
-\bullet\ar[r]_{\db{T_1}}\ar@/^/[ur]^{\db{t_2}} & \db{T_0}
-}\]}
-\[\xy
-(0,12)*+{\bullet} = "top left",(24,12)*+{\bullet} = "top right",(12,0)*+{\db{T_0}} = "bottom"
-\ar "top right";"bottom" \ar_{\db{T_1}} "top left";"bottom" 
-\ar@/^/@{->}^{\db{T_2}} "top right";"top left"
-\ar@/^/@{->}^{\db{t_2}} "top left";"top right"
-\endxy\]
-So types and terms dependent on $T_0$ and $T_1$ are interpreted as the objects and global sections of the double slice category $(\cat C/\db{T_0})/\db{T_1}$.
-
-We deal with higher numbers of free variables by repetition. A context $\Gamma$ is a list $x_0\of T_0,x_1\of T_1,x_2\of T_2,\dots$ of type assignment to variables in which each type depends on the ones before it. The types that depend on the context are objects of the repeated slice category $\cat C/\db{T_0}/\db{T_1}/\db{T_2}/\dotsm$ and the terms are interpreted as its objects. 
-
-The purpose of the variables is to clarify the dependencies. There are functors $\db T\ri\of\cat C\to \cat C/\db T$ which sends each object $X$ to the projection $\pi_0\of(\db T\times X)\to \db T$. By default the context dependent interpretation $\db{x\of T\vdash U}$ of a type $U$ equal $\db T\ri(\db U)$ (and assume that $\db U$ is an object of $\cat C$) unless $U$ explicitly depends on $T$. The same convention applies to terms.
-
-\subsection{Dependent sums and products}
-This subsection discusses two constructions of types that this paper uses regularly.
-
-%dependent sums
-
-For each object $X$, $\dsum X\of\cat C/X\to \cat C$ is the functor that sends each morphism $f\of Y\to X$ to its domain $Y$.
-
-Dependent sum type look like $\Sigma x\of T.U$. The elements are pairs $\tuplet{x,y}$ such that $x\of T$ and $y\of U$. For arbitrary terms $t\of(\Sigma x\of T)$, $\pi_0(t)$ and $\pi_1(t)$ represent two values in the tuple $t$. The context dependent interpretation satisfies:
-\[ \db{\Gamma\vdash\Sigma x\of T.U} = \dsum {\db T}(\db{\Gamma,x\of T\vdash U}) \]
-The unit and counit induces a families of morphisms between the following families of objects.
-\begin{align*}
-\db{\Gamma\vdash t\of T}\times\db{\Gamma\vdash u\of U[t/x]} &\to \db{\Gamma\vdash \tuplet{t, u}\of(\Sigma x\of T.U)}\\
-\db{\Gamma\vdash t\of (\Sigma x\of T.V)}&\to \db{\Gamma\vdash \pi_1(t) \of V}
-\end{align*}
-Here $u[t/x]$ is the result of replacing every free occurrence of $x$ in $u$ with $t$; the type $V$ cannot contain $x$ as a free variable. Unit and co-units satisfy equations that ensure that $\pi_0\tuplet{t,u}=t$ and $\pi_1\tuplet{t,u}=u$ are valid for all terms $t$ and $u$.
-
-Let $\cat C$ be finitely complete and Cartesian closed. The functor $\dprod X\of\cat C/X\to \cat C$ sends each morphism $f\of Y\to X$ is the object $\set{g\of X\to Y| f\circ g = \id_X }$ of sections of $f$. It is the right adjoint of $X\ri$.
-
-Product types look like $\Pi x\of T.U$. The elements are $\lambda$-terms $\lambda x\of T.u$, such that $u[t/x]\of U[t/x]$ whenever $t\of T$. A $\lambda$-term $\lambda x\of T.u$ and a term $t\of T$ have an \emph{application} $(\lambda x\of T.u)(t)$. The context dependent interpretation satisfies:
-\[ \db{\Gamma\vdash\Pi x\of T.U} = \dprod {\db T}(\db{\Gamma,x\of T\vdash U}) \]
-The unit and the counit induce the following families of morphism:
-\begin{align*}
-\db{\Gamma\vdash t\of T}\times\db{\Gamma\vdash u\of(\Pi y\of T.U)}&\to\db{\Gamma\vdash u(t)\of U[u/y]}\\
-\db{\Gamma\vdash u\of V}&\to\db{\Gamma\vdash (\lambda x\of T.u)\of(\Pi x\of T.V)}
-\end{align*}
-Here $V$ cannot depend on $x$. Unit and co-units satisfy equations that ensure that $(\lambda x\of T.u)(t) = u[t/x]$ and $(\lambda x\of T.u(x))=u$.
-
-Extensiveness means that $\cat C$ has coproducts, that $\cat C/0$ is equivalent to the terminal category and that $\cat C/(X+Y)\cong (\cat C/X)\times(\cat C/Y)$. In the presence of dependent coproducts, a type $\bool$ that stands for the object $1+1$ and a way to introduce types and terms that dependent on $\bool$ suffice to add all binary coproducts.
-\[ \db{\Gamma\vdash t\of T}\times\db{\Gamma\vdash u\of U}\to\db{\Gamma,b\of\bool\vdash \ttif(b,t,u)\of\ttif(b,T,U)} \]
-The constants $\true$ and $\false$ denote the two global section of $1+1$. The function $\ttif$ is interpreted to satisfy the following equations.
-\[ \ttif(\true,t,u)=t\qquad\ttif(\false,t,u) = u\]
-
-
-\section{Internal simplicial homotopy}
-This section develops the homotopy theory of Kan complexes internally in $\ambient$.
-
-\begin{proposition} Every $\Pi$-pretopos with natural number object has an internal category of simplices.\end{proposition}
-
-\begin{proof} A natural number object allows the definition of predicates by recursion, so the order relation of $\nno$ is a recursive function $\mathord\leq\of\nno\times \nno \to \bool$. This is all we need to define the internal category of simplices.
-\begin{align*}
-[n] &= \set{x\of\nno\middle| x\leq n}\\
-\simCat([m],[n]) &= \set{f\of[m]\to[n]\middle|\forall x,y\of [m].x\leq y\to f(x)\leq f(y)}
-\end{align*}
-Universal quantification over $[m]$ reduces to a finite conjunction because $[m]$ is a finite object, which is why it is allowed above. 
-\end{proof}
-
-\subsection{Internal simplicial objects}%under consideration as replacement for internal categories.
-As a replacement for the usual simplicial sets, we use the following structure in $\ambient$. These are essentially discrete opfibrations over $\simCat$.
-
-\begin{definition} An \emph{internal simplicial object} $X=(\base X,\dim,\cdot)$ is an object $\base X$ together with a morphism $\dim\of \base X\to\nno$ and an operator $\cdot$, whose domain is the following object.
-\[ \set{\tuplet{x,\xi}\of \base X\times\Ar(\simCat)\middle| \dim (x)=\dom(\xi)} \]
-The codomain of $\cdot$ is $\base X$. The operator $\cdot$ satisfies $(x\cdot\alpha)\cdot\beta=x\cdot(\alpha\circ\beta)$ and $x\cdot\id_{[\dim x]}=x$.  
-
-A morphism of internal simplicial objects $X\to Y$ is a morphism $\base X\to \base Y$ that commutes with $\dim$ and $\cdot$. I.e. $f(x\cdot \xi)=f(x)\cdot\xi$ and $\dim(f(x))=\dim(x)$.
-
-The category of internal simplicial objects and morphisms of $\ambient$ is $\ambient\s$. For each object $I$ of $\ambient$, $(\ambient/I)\s$ is the internal category if simplicial objects of $\ambient/I$.
-\end{definition}\hide{ Is it feasible to rewrite the whole paper with these?}
-
-In a simplicial object $X$, $\base X$ is the object of simplices, $\dim$ is the dimension of each simplex. The operator $\cdot$ records how simplices of different dimensions fit together. 
-
-\begin{remark} When $\ambient$ has infinite colimits, any functor $\simCat\dual\to\ambient$ induces an internal simplicial object. The intended model does not have infinite colimits, however. The internal simplicial objects are a strict subcategory of the external ones in that case. That is also what gives this approach an advantage over earlier ones in the literature.%cite
-\end{remark}
-
-\hide{
-\subsection{Families}
-\begin{defin}
-For each object $I$ of $\ambient$ the category $\ambient/I\s$ of simplicial objects in the slice $\ambient/I$ is an \emph{$I$-indexed families of simplicial objects}. 
-\end{defin}
-
-Is there anything to prove here?
-
-Other thought: maybe treat the equivalence of $\ambient\s/J$ with $\ambient^{EJ}\s$ here, with $EJ$ the category of elements of the simplicial set $J$.
-
-}
-
-\subsection{Filler operators} %may need a new name
-Kan fibrations are morphisms of simplicial sets that have the lifting property relative to the family of horn inclusions. This subsection focuses on the lifting properties.
-
-\begin{definition} For each pair of internal simplicial objects $X$, $Y$ let $\nat(X,Y)$ be the object of morphisms between them.
-
-A morphism $f\of X\to Y$ of simplicial object has the \emph{right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the \emph{left} lifting property with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\nat(\id_J,f),\nat(g,\id_X))}$ 
-which is the factorization of the span $\nat(\id_J,f)$, $\nat(g,\id_X)$ through the pullback cone of $\nat(\id_I,f)$ and $\nat(g,\id_Y)$
-is a \emph{split} epimorphism.
-\[\xy
-(34,20)*+{\nat(I,X)}="top",(0,10)*+{\nat(J,X)}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\nat(I,Y)}="right",(34,0)*+{\nat(J,Y)}="bottom"
-\ar^{\nat(g,\id_X)} "left";"top" \ar@{.>}|(.6){\tuplet{f_!,g\ri}} "left";"middle" \ar_{\nat(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
-\ar "middle";"top" \ar^(.6){\nat(\id_I,f)} "top";"right" \ar_(.6){\nat(g,\id_Y)} "bottom";"right"
-\endxy\]
-A section of $\tuplet{f_\bang,g\ri}$ is a \emph{filler operator}.\label{lifting}
-\end{definition}
-
-A morphism can have a lifting property relative to a family or class of morphisms.
-
-\hide{
-Explain $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ somewhere. It should be an internal simplicial object of the slice category. i.e. $(\ambient/I)\s$. 
-}
-\begin{definition}[Injective] An $I$-indexed-family of morphisms in $\ambient\s$ a morphism $a\of D\to E$ in $(\ambient\s)^{I\disc}$. Let $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the right lifting property with respect to $a$.
-\end{definition}
-
+\subfile{cshintro}
 
 \section{Cofibrations}%class functors not mentioned in the sections below--"characteristic functors"
 
