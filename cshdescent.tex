@@ -23,7 +23,7 @@ The interesting case is where $M$ has the following structure in addition to the
 
 The following fact makes the universal modest fibration a potential model of homotopy type theory.
 
-\begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant. \end{theorem}
+\begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant. \label{fibrant universe} \end{theorem}
 
 \begin{proof} For each horn inclusion $h\of \horn_k[n]\to\simplex[n]$ and each pair of $v\of \horn_k[n]\to V$, the modest fibration $v\ri(\uni)\of \horn_k[n]\times_V U \to \horn_k[n]$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex[n]$ by lemma \ref{descent}. There is a $\chm(D(v\ri(\uni)))\of\simplex[n]\to V$ and $\chm(h_*(v\ri(\uni)))\circ h$ equals $v$ by definition \ref{universal modest fibration}.
 \end{proof}
@@ -153,7 +153,7 @@ C &=\cod(h\ri K(\hat h))=\left(\bigvee_{i\of[n]-\set{k}} \face(K_0(\xi),u_i)\rig
 
 Decompose $A\to B$ as the inclusions of the following subobjects that satisfy $A_0=A$ and $A_{n+1}=B$.
 \[ A_{j\of[n+1]} = A\vee \left(\bigvee_{i\of[j]-\set{k,j,\xi(l)}}\face(K_0(\xi),u_i)\right) \]
-Each inclusion $A_j\to A_{j+1}$ is a pushout of the map $A_j\cap \face(K_0(\xi),u_{j+1}) \to \face(K_0(\xi),u_{j+1})$, where
+Each inclusion $A_j\to A_{j+1}$ is a pushout of the inclusion of $A_j\cap \face(K_0(\xi),u_{j+1})$ into $\face(K_0(\xi),u_{j+1})$, where
 \begin{align*} A_j\cap \face(K_0(\xi),u_{j+1}) = &\left(\bigvee_{i\of[m]-\set l}\face(K_0(\xi),u_{j+1}\land v_{i})\right)\vee \\
 &\left(\bigvee_{i\of[j+1]-\set{k,\xi(l)}}\face(K_0(\xi),u_i\land u_{j+1})\right)\end{align*}
 The faces $\face(K_0(\xi),u_{j+1}\land v_{i})$ and $\face(K_0(\xi),u_i\land u_{j+1})$ all contain the point $\lambda(l)$ of $\simplex[m+\norm\xi]$ which means that lemma \ref{face completion} applies to the inclusion $A_j\cap \face(K_0(\xi),u_{j+1}) \to \face(K_0(\xi),u_{j+1})$. Hence $A\to B$ has the left lifting property.
@@ -168,7 +168,7 @@ Decompose $B\to C$ as the inclusions of the following subobjects that satisfy $B
 
 When $j\neq\kappa(\vec p)$ for any $\vec p \of \prod_{i\of [n]-\set k}\xi_i$, the inclusion $B_j\to B_{j+1}$ is the identity arrow, which satsifies the left lifting property trivially. 
 
-Suppose $j\neq\kappa(\vec p)$. Each inclusion $B_j\to B_{j+1}$ is a pushout of the map $B_j\cap \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p}) \to \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})$, where
+Suppose $j\neq\kappa(\vec p)$. Each inclusion $B_j\to B_{j+1}$ is a pushout of the inclusion of $B_j\cap \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})$ into $\face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})$, where
 \begin{align*} B_j\cap \face(K_0(\xi),w_{\vec p}) = 
 &\bigvee_{i\of [n]-\set{\xi(l),k}}\face(K_0\xi,u_i\land w_{\vec p})\vee\\
 &\bigvee_{i\of [m]-\set l} \face(K_0\xi,v_i\land w_{\vec p})\vee\\
