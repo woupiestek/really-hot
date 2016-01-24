@@ -17,66 +17,39 @@ The paper works out suitable definition of fibrations, cofibrations and their ac
 \subsection{Related literature}
 Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}. The intended model is the \emph{ex/lex completion} \citep{MR1600009} of category of assemblies defined in \citep{MR1097022,MR1023803,MR2479466}. This completion is not the famous \emph{effective topos}, but it is another realizability topos. 
 
-\section{Preliminaries}% new idea: do simplicial homotopy, work out notation along the way.
-This section surveys the categorical logic required to understand the rest of this paper.
+\section{Internal simplicial objects}
+Internal simplicial homotopy has a notion of simplicial object of $\ambient$ which does rely on external $\ambient$-valued presheaves, but on internal structures.
 
-\subsection{Set up}
-The ambient category $\ambient$ where everything happens is a \emph{$\Pi$-pretopos} which means the following.
+\begin{definition} A \keyword{simplicial object} $X$ is a triplet $\tuplet{\base X, \dim, \cdot}$ where $\base X$ is an object of $\ambient$, $\dim$ is a morphism $\base X\to \nno$. The operator $\cdot$ is has the following properties. Let $\Ar(\simCat)$ be the object of non decreasing functions between decidable, finite and inhabited initial segments of the natural numbers. The domain $\dom(\cdot)$ of $\cdot$ is the following object. 
+\[ \set{\tuplet{x,\xi}\of \base X\times \Ar(\simCat)\middle| \dim(x) = \max(\cod(\xi))}\]
+The codomain $\cod(\cdot)$ of $\cdot$ is $\base X$. The operator $\cdot$ satisfies the following equations.
+\begin{align*}
+\dim(x\cdot\xi) &= \max(\dom(\xi))\\
+x\cdot \id &= x \\
+x\cdot(\alpha\circ\beta)&=(x\cdot\alpha)\cdot\beta 
+\end{align*}
 
-\begin{enumerate}
-\item The category $\ambient$ is \emph{locally Cartesian closed}. This means that for each object $X$ of $\ambient$ each slice $\ambient/X$ is Cartesian closed.
-\item The category $\ambient$ is \emph{extensive}, which means that is has finite coproducts and that $\ambient/(X+Y)$ is equivalent to $(\ambient/X)\times(\ambient/Y)$ for each pair of objects $X$ and $Y$ of $\ambient$.
-\item The category $\ambient$ is \emph{exact} in the sense of Barr. This means that all weak groupoids (see definition \ref{weak groupoid}) have coequalizers, and that those coequalizers are stable under pullback.
-\item The category $\ambient$ is has a \emph{natural number object}.
-\end{enumerate}
-
-\begin{definition} A \keyword{weak groupoid} consists of a pair of objects $X_0$, $X_1$ and morphisms $r\of X_0\to X_1$ and $s,t\of X_1\to X_0$ such that $s\circ r= t\circ r = \id_{X_0}$ such that for each $x,y,z\of X_0$ if two of $\tuplet{x,y}$, $\tuplet{x,z}$ and $\tuplet{y,z}$ are in the image of $\tuplet{s,t}\of X_1\to X_0\times X_0$, the third is too. A \emph{coequalizer} for a weak groupoid is a coequalizer of $s$ and $t$.
+A \emph{morphism of simplicial objects} $X\to Y$ is a morphism $f\of\base X\to\base Y$ which commutes with $\dim$ and $\cdot$. The object of morphisms $X\to Y$ in $\ambient$ itself is $\nat(X,Y)$. It represents families of morphisms $X\to Y$, i.e. for each object $I$ of $\ambient$ there is a natural bijection between morphisms $I\to \nat(X,Y)$ and morphisms $I\times X\to Y$ which commute with $\dim$ and $\cdot$ and their $\id_I$-fold multiples.
 \end{definition}
 
-We keep track of the distinction between internal and external natural numbers. The \emph{set} of natural numbers is $\N$, and since it is a set, $i\in \N$ indicates membership. The natural number object of $\ambient$ is $\nno$ and $i\of\nno$ means that $i$ is a morphism with codomain $\nno$.
+This definition is consistent with the definition of initial presheaves in \citep{MR1300636}. The definition is valid because $\ambient$ is an $\Pi$-pretopos with a natural number object $\nno$. Decidable, finite and inhabited initial segments of the natural numbers have a classifier.
+\[  \lambda\tuplet{i,j}.j\of\set{\tuplet{i,j}\of\nno\times\nno\middle|i\leq j}\to \nno \]
+The relation $\leq$ is decidable, and comprehension on decidable predicates to define subobjects in $\ambient$, because there are pullbacks and classifiers of decidable subobjects $1\to \bool = 1+1$. Here $1$ is a terminal object and $+$ a binary coproduct.
 
-This combination of properties implies that 
-\begin{enumerate}
-\item The category $\ambient$ has all colimits and that reindexing functors preserve them. 
-\item The category $\ambient$ is a \emph{Heyting category}. This means that for each object $X$ the poset of subobjects $\sub(X)$ is a Heyting algebra and that for each $f\of X\to Y$ the preimage map $f\ri\of\sub(Y)\to\sub(X)$ is a morphism of Heyting algebras.  
-\end{enumerate}
+Local Cartesian closure means that there is an object $A$ of morphisms between the initial segments. Local Cartesian closure also implies that there is a subobject of non decreasing morphisms $\Ar(\simCat)$.
+\[ \Pi f\of A,i,j\of\nno,x\of\set{y\of 1|i\leq j}.\set{y\of 1|f(i)\leq f(j)}\]
+However, because $\ambient$ is also exact and extensive, it is a Heyting category, so the same subject has a more familiar definition.
+\[ \Ar(\simCat)=\set{f\of A|\forall i,j\of\nno.i\leq j \to f(i)\leq f(j)} \]
 
-Using only this structure there is a category of internal simplicial objects $\ambient\s$ of $\ambient$ were most of the action in this paper happens. we use the following notation to help do this.
+\begin{definition} This object is the object of arrows of of the \emph{internal category of simplices} $\simCat$, whose object of objects $\Ob(\simCat)$ is $\nno$. The category of \emph{simplicial objects and morphisms} of $\ambient$ is $\ambient\s$.
+\end{definition}
 
-\begin{definition} Of internal categories the codomain, domain and identity operators are called $\cod$, $\dom$ and $\id$. When not talking about numbers, $0$, $1$, $+$ and $\times$ refer to initial and terminal objects and binary coproduct and product operators. The unique map to the terminal object is $\bang$ and projection maps from products to factors are $\pi_i$ for $i\in \N$.
+\begin{remark} We assume that all of the structure on $\ambient$ comes from functors. So several functors between categories related to $\ambient$ has right adjoint that give $\ambient$ its limits and exponentials and some functor have left adjoint that give ambient colimits. Definitions in terms of universal properties only define objects up to isomorphism. Our assumption ensures that there are functors that hit all the necessary isomorphism classes, when we only specify a functor up to isomorphism.
+\end{remark}
 
-Let $\cat C$ be an internal category. Its object of objects is $\Ob(\cat C)$ and its object of arrows is $\Ar(\cat C)$, so in this case $\cod$ and $\dom$ are morphisms $\Ar(\cat C)\to\Ob(\cat C)$ and $\id\of\Ob(\cat C)\to\Ar(\cat C)$. Let $\cat D$ be another internal category.
+We internalize the lifting properties to define Kan complexes with as follows.
 
-Every object $I$ of the $\ambient$ has an internal discrete category $I\disc$. For this category $\Ob(I\disc)=\Ar(I\disc)=I$ and $\cod=\dom=\id=\id_I$.
-
-Let $[n]=\set{i\of\nno|i\leq n}$. The fact that $\ambient$ is a Heyting category justifies the use of set builder notation here. Let $\simCat$ be the internal category of non decreasing morphisms between inhabited initial segments of $\nno$--which exists by proposition \ref{simplex category}. 
-
- An \keyword{internal simplicial object} $X=(\base X,\dim,\cdot)$ is an object $\base X$ together with a morphism $\dim\of \base X\to\nno$ and an operator $\cdot$, whose domain is the following object.
-\[ \set{\tuplet{x,\xi}\of \base X\times\Ar(\simCat)\middle| [\dim (x)]=\dom(\xi)} \]
-The codomain of $\cdot$ is $\base X$. The operator $\cdot$ satisfies $(x\cdot\alpha)\cdot\beta=x\cdot(\alpha\circ\beta)$ and $x\cdot\id_{[\dim x]}=x$.  
-
-A morphism of internal simplicial objects $X\to Y$ is a morphism $\base X\to \base Y$ that commutes with $\dim$ and $\cdot$. I.e. $f(x\cdot \xi)=f(x)\cdot\xi$ and $\dim(f(x))=\dim(x)$.
-
-The category of internal simplicial objects and morphisms of $\ambient$ is $\ambient\s$.
-\end{definition}\hide{ Is it feasible to rewrite the whole paper with these?}
-
-In a simplicial object $X$, $\base X$ is the object of simplices, $\dim$ is the dimension of each simplex. The operator $\cdot$ records how simplices of different dimensions fit together. 
-
-\begin{proposition} Every $\Pi$-pretopos with natural number object has an internal category of simplices. \label{simplex category} \end{proposition}
-
-\begin{proof} A natural number object allows the definition of predicates by recursion, so the order relation of $\nno$ is a recursive function $\mathord\leq\of\nno\times \nno \to \bool$. This is all we need to define the internal category of simplices.
-\begin{align*}
-[n] &= \set{x\of\nno\middle| x\leq n}\\
-\simCat([m],[n]) &= \set{f\of[m]\to[n]\middle|\forall x,y\of [m].x\leq y\to f(x)\leq f(y)}
-\end{align*}
-Universal quantification over $[m]$ reduces to a finite conjunction because $[m]$ is a finite object, which is why it is allowed above. 
-\end{proof}
-
-
-Kan fibrations are morphisms of simplicial sets that have the lifting property relative to the family of horn inclusions. This subsection focuses on defining lifting properties.
-
-\begin{definition} For each pair of internal simplicial objects $X$, $Y$ let $\nat(X,Y)$ be the object of morphisms between them.
-
+\begin{definition}
 A morphism $f\of X\to Y$ of simplicial object has the \emph{right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the \emph{left} lifting property with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\nat(\id_J,f),\nat(g,\id_X))}$ 
 which is the factorization of the span $\nat(\id_J,f)$, $\nat(g,\id_X)$ through the pullback cone of $\nat(\id_I,f)$ and $\nat(g,\id_Y)$
 is a \emph{split} epimorphism.
@@ -88,13 +61,26 @@ is a \emph{split} epimorphism.
 A section of $\tuplet{f_\bang,g\ri}$ is a \emph{filler operator}.\label{lifting}
 \end{definition}
 
-A morphism can have a lifting property relative to a family or class of morphisms.
+This version of the lifting property is powerful enough to lift arbitrary families of morphism both internal and external.
 
-\hide{
-Explain $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ somewhere. It should be an internal simplicial object of the slice category. i.e. $(\ambient/I)\s$. 
-}
-\begin{definition}[Injective] An $I$-indexed-family of morphisms in $\ambient\s$ a morphism $a\of D\to E$ in $(\ambient\s)^{I\disc}$. Let $I\ri\of\ambient\s\to (\ambient\s)^{I\disc}$ be the diagonal functor. A morphism $f\of X\to Y$ is \emph{$a$-injective} if $I\ri f$ has the right lifting property with respect to $a$.
+\subsection{Summary}
+For completeness we not that $\ambient$ being \emph{$\Pi$-pretopos} means all of the following.
+
+\begin{enumerate}
+\item The category $\ambient$ is \emph{locally Cartesian closed}. This means that for each object $X$ of $\ambient$ each slice $\ambient/X$ is Cartesian closed.
+\item The category $\ambient$ is \emph{extensive}, which means that is has finite coproducts and that $\ambient/(X+Y)$ is equivalent to $(\ambient/X)\times(\ambient/Y)$ for each pair of objects $X$ and $Y$ of $\ambient$.
+\item The category $\ambient$ is \emph{exact} in the sense of Barr. This means that all weak groupoids (see definition \ref{weak groupoid}) have coequalizers, and that those coequalizers are stable under pullback.
+\end{enumerate}
+
+\begin{definition} A \keyword{weak groupoid} consists of a pair of objects $X_0$, $X_1$ and morphisms $r\of X_0\to X_1$ and $s,t\of X_1\to X_0$ such that $s\circ r= t\circ r = \id_{X_0}$ such that for each $x,y,z\of X_0$ if two of $\tuplet{x,y}$, $\tuplet{x,z}$ and $\tuplet{y,z}$ are in the image of $\tuplet{s,t}\of X_1\to X_0\times X_0$, the third is too. A \emph{coequalizer} for a weak groupoid is a coequalizer of $s$ and $t$.
 \end{definition}
 
+The category $\ambient$ is has a \emph{natural number object}. To keep track of the distinction between internal and external natural numbers, let \emph{set} of natural numbers be $\N$, and use $i\in \N$ to indicate membership. The natural number object of $\ambient$ is $\nno$ and $i\of\nno$ means that $i$ is a morphism with codomain $\nno$.
+
+This combination of properties implies the following.
+\begin{enumerate}
+\item The category $\ambient$ has all colimits and that reindexing functors preserve them. 
+\item The category $\ambient$ is a \emph{Heyting category}. This means that for each object $X$ the poset of subobjects $\sub(X)$ is a Heyting algebra and that for each $f\of X\to Y$ the preimage map $f\ri\of\sub(Y)\to\sub(X)$ is a morphism of Heyting algebras.  
+\end{enumerate}
 
 \end{document}
