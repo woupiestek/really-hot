@@ -1,0 +1,44 @@
+\documentclass[csh.tex]{subfiles}
+\begin{document}
+
+\section{Model Structure}
+This section outlines the proof of the main theorem of this section. We start with definition the core concepts.
+
+\begin{definition} A \keyword{model structure} on a category $\cat C$ consist of three sets of morphism: the \emph{fibrations} $F$, the \emph{cofibrations} $C$ and the \emph{weak equivalences} $W$ which have the following properties. 
+\begin{itemize}
+\item The set $W$ satisfies \emph{2-out-of-3} which means that for every pair of morphisms $f\of X\to Y$ and $g\of Y\to Z$ of $\cat C$, if two out of $f$, $g$ and $g\circ f$ are in $W$ so is the third. 
+\item The pairs of sets $(C,F\cap W)$ and $(C\cap W,F)$ are \emph{internal factorization systems}. 
+\end{itemize}
+
+Internal factorization systems are pairs of set of morphisms $(L,R)$ in a category with the following properties.
+\begin{itemize}
+\item A morphism $l$ belongs to $L$ if an only if it has the left lifting property with respect all to members of $R$.
+\item The class $R$ has the dual property.
+\item Every morphism factors as a member of $R$ following a member of $L$.
+\end{itemize}
+
+Members of $C\cap W$ are called \emph{acyclic cofibrations} and members of $F\cap W$ are called fibrations.
+\end{definition}
+
+In ambient we make the following selections. 
+
+\begin{definition} A morphism $f\of X\to Y$ of category $\ambient\s$ is a \keyword{fibration} if it has the right lifting property with respect to the family of all \emph{horn inclusions}. The \emph{horn} $\horn_k[n]$ for $n\of\nno$ and $k\of[n]$ is the subobject of $\simplex[n]$ for which $\base\horn_k[n]$ consists of morphism of $\simCat$ to $[n]$ which miss at least one member of $[n]$ other different from $k$. The \emph{horn inclusion} is the monomorphism $\horn_k[n]\to\simplex[n]$. The \emph{family of horn inclusions} is the sum of all horn inclusions $\Sigma k\leq n\of\nno.\horn_k[n]\to \Sigma k\leq n\of\nno.\simplex[n]$ as it exists as a morphism of $\ambient\s$.
+
+The lifting property that $f$ satisfies is defined in a slice category of $\ambient\s$. Let $I = \set{\tuplet{n,k}\of\nno\times\nno|k\leq n}$. There is a \emph{discrete simplicial set} $I\disc$ which satisfies $\base(I\disc) = \nno\times I$, $\dim\tuplet{n,x}=n$ and $\tuplet{n,x}\cdot\phi=\tuplet{n,x}$ for $\phi\of[m]\to[n]$. The family of horn inclusions is a morphism in $\ambient\s/I\disc$. So is the multiple $I\disc\times f\of I\disc\times X\to I\disc\times Y$ if $f$. This multiple $I\disc\times f$ has the right lifting property with respect to $\Sigma k\leq n\of\nno.\horn_k[n]\to \Sigma k\leq n\of\nno.\simplex[n]$.
+\end{definition}
+
+This is one of several internal versions of the classical definition of \emph{Kan fibration}.
+
+\begin{definition} A morphism $f\of X\to Y$ of category $\ambient\s$ is a \keyword{cofibration} if subobject of faces of $Y$ which are not in the image of $X$ is decidable. A \emph{face} of $Y$ is a $y\of\base Y$ such that if $\phi\of [\dim(y)]\to [\dim(y)]$ and $y\cdot \phi = y$, then $\phi = \id_{\dim(y)}$. Hence $f$ is a cofibration if there is a morphism $\psi\of\base Y\to\bool$ such that $\psi(y)=\true$ if an only if $y$ is a face and there is no $x\of \base X$ such that $f(x)=y$. 
+\end{definition}
+
+%here
+\hide{
+definition of weak equivalence
+
+definition of the category of complexes
+
+model structure theorem
+}
+
+\end{document}

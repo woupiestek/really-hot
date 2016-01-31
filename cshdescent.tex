@@ -16,24 +16,20 @@ This requirement may give us more limits than we need, but the intended model of
 
 The interesting case is where $M$ has the following structure in addition to the properties above.
 
-\mathrmdef{uni}
-\newcommand\chm\chi
-\begin{definition} A \keyword{universal modest fibration} is a modest fibration $\uni\of U\to V$ such that every modest fibration $f\of X\to Y$ is the pullback of $\uni$ along a unique morphism $\chm(f)\of Y\to V$.
+\begin{definition} A \keyword{universal modest fibration} is a modest fibration $\uni\of U\to V$ such that every modest fibration $f\of X\to Y$ is the pullback of $\uni$ along a unique morphism $\chi(f)\of Y\to V$.
 \end{definition}
 
 The following fact makes the universal modest fibration a potential model of homotopy type theory.
 
 \begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant. \label{fibrant universe} \end{theorem}
 
-\begin{proof} For each horn inclusion $h\of \horn_k[n]\to\simplex[n]$ and each pair of $v\of \horn_k[n]\to V$, the modest fibration $v\ri(\uni)\of \horn_k[n]\times_V U \to \horn_k[n]$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex[n]$ by lemma \ref{descent}. There is a $\chm(D(v\ri(\uni)))\of\simplex[n]\to V$ and $\chm(h_*(v\ri(\uni)))\circ h$ equals $v$ by definition \ref{universal modest fibration}.
+\begin{proof} For each horn inclusion $h\of \horn_k[n]\to\simplex[n]$ and each pair of $v\of \horn_k[n]\to V$, the modest fibration $v\ri(\uni)\of \horn_k[n]\times_V U \to \horn_k[n]$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex[n]$ by lemma \ref{descent}. There is a $\chi(D(v\ri(\uni)))\of\simplex[n]\to V$ and $\chi(h_*(v\ri(\uni)))\circ h$ equals $v$ by definition \ref{universal modest fibration}.
 \end{proof}
 
 \begin{lemma}[Descent]
 For each horn inclusion $h\of \horn_k[n]\to\simplex$ and each fibration $f\of X\to \horn_k[n]$ there is a fibration $Df\of Y\to\simplex[n]$ such that $f$ is the pullback of $Df$ along $h$.
 \label{descent}
 \end{lemma}
-
-\newcommand\hornInclusion[2]{h^{#1}_{#2}}
 
 \begin{proof} There is no horn inclusion for $n=0$. In the case $n=1$, there are two maps $1\to\simplex[1]$. In both case $Df=\pi_0\of \simplex[1]\times X \to\simplex[1]$ suffices. For all the cases were $n>0$ we use the following construction.
 

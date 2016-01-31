@@ -56,6 +56,8 @@ Poland}
 \newcommand\base{\mathbf{U}}
 \mathssbxdef[sub]{Sub}
 \newcommand\ambient{\mathfrak A}
+\mathrmdef{uni}
+\newcommand\disc{_{\rm disc}}
 
 \newcommand\keyword[1]{\emph{#1}\label{#1}}
 
@@ -83,6 +85,8 @@ Thorough investigation of the background. If we have an ELCCC then the poset-ref
 }
 
 \subfile{cshintro}
+
+\subfile{cshmodel}
 
 \section{Cofibrations}%class functors not mentioned in the sections below--"characteristic functors"
 
@@ -143,7 +147,7 @@ This subsection proves that morphisms in $\ambient\s$ factor as acyclic fibratio
 
 \begin{definition} A $y\of Y[n]$ is called an \emph{$n$-simplex} of $Y$. An $n$-simplex is \emph{degenerate} if there is an $s\of [n]\to [n]$ different from $\id_{[n]}$ such that $Y(s)(y)=y$. If there are no such $s$ and $x$, then $y$ is \emph{nondegenerate}. A nondegenerate simplex is called a \emph{face}. 
 
-A subobject $W\of X$ is decidable, if there is a morphism $X\to\bool$ such that $W$ is the pullback of one of the morphisms $1\to\bool$. A monomorphism $f\of X\to Y$ is a \emph{cofibration} if the subobject $S$ of all faces outside of the image of $f$ is decidable. \label{cofibration}
+A subobject $W\of X$ is decidable, if there is a morphism $X\to\bool$ such that $W$ is the pullback of one of the morphisms $1\to\bool$. A monomorphism $f\of X\to Y$ is a \emph{cofibration} if the subobject $S$ of all faces outside of the image of $f$ is decidable.
 \end{definition}
 
 \begin{lemma} Acyclic fibrations and cofibrations form a weak factorizations system.
