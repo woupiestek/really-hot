@@ -75,6 +75,8 @@ For completeness we not that $\ambient$ being \emph{$\Pi$-pretopos} means all of
 \begin{definition} A \keyword{weak groupoid} consists of a pair of objects $X_0$, $X_1$ and morphisms $r\of X_0\to X_1$ and $s,t\of X_1\to X_0$ such that $s\circ r= t\circ r = \id_{X_0}$ such that for each $x,y,z\of X_0$ if two of $\tuplet{x,y}$, $\tuplet{x,z}$ and $\tuplet{y,z}$ are in the image of $\tuplet{s,t}\of X_1\to X_0\times X_0$, the third is too. A \emph{coequalizer} for a weak groupoid is a coequalizer of $s$ and $t$.
 \end{definition}
 
+\begin{example} Every topos is a $\Pi$-pretopos so $\ambient$ can be any topos with a natural number object like the topos of sets. \end{example}
+
 The category $\ambient$ is has a \emph{natural number object}. To keep track of the distinction between internal and external natural numbers, let \emph{set} of natural numbers be $\N$, and use $i\in \N$ to indicate membership. The natural number object of $\ambient$ is $\nno$ and $i\of\nno$ means that $i$ is a morphism with codomain $\nno$.
 
 This combination of properties implies the following.
