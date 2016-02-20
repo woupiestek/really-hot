@@ -1,0 +1,141 @@
+\documentclass[csh.tex]{subfiles}
+\begin{document}
+
+\section{Acyclic cofibrations}
+This section does not have a factorization of arbitrary morphisms into fibrations and acyclic cofibrations. Instead it shows that there is a factorization system in the subcategory of fibrant objects, where acyclic cofibrations are a kind of homotopy equivalence.
+
+\hide{%we need to revert this meaning of acyclic cofibration to the original one
+\begin{definition} In the subcategory $\ambient\s\f$ of $\ambient\s$ a cofibration $f\of X\to Y$ is \emph{acyclic} if there is a $g\of Y\to X$ such that $g\circ f = \id_X$ and an $h\of \simplex[1]\times Y\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and 
+$h\circ (\id_{\simplex[1]}\times f) = f\circ\pi_1$.
+\[\xymatrix{
+Y+Y\ar[d]_{k\times \id} \ar[dr]^{(\id,f\circ g)}\\
+\simplex[1]\times Y \ar[r]_(.6)h & Y\\
+\simplex[1]\times X \ar[r]_(.6){\pi_1}\ar[u]^{\id\times f} & X\ar[u]_f\\
+}\]\label{acyclic cofibration}
+\end{definition}}
+
+\begin{theorem} Acyclic cofibrations and fibrations form a weak factorization system for $\ambient\s\f$. \end{theorem}
+
+\begin{proof} Lemma \ref{acyclic have lifting} shows that acyclic cofibrations have the lifting property with respect to all fibrations. Lemma \ref{lifting is acyclic} shows the converse. Proposition \ref{factor2} shows that every morphism factors as a fibration following a cofibration. 
+\end{proof}
+
+The proposition and the lemmas in this proof rely on a special property of cycle and horn inclusions (lemma \ref{triple lift}) which the next section explains.
+
+\subsection{Triple lifting property}
+
+\begin{lemma} Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
+\[\xy
+(0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
+(0,0)*+{A\times D}="AD",(25,0)*+{B\times D}="BD",(40,0)*+{Y}="Y"
+\ar^{f\times\id} "AC";"BC"
+\ar_{\id\times g} "AC";"AD"
+\ar_{f\times\id} "AD";"BD"
+\ar^{a} "AD";"X"
+\ar|(.6){\id\times g} "BC";"BD"
+\ar^(.6){b} "BC";"X"
+\ar@{.>}_{d} "BD";"X"
+\ar_(.6){c} "BD";"Y"
+\ar^{h} "X";"Y"
+\endxy\]
+\label{triple lift}
+\end{lemma}
+
+\begin{proof} The general case reduces to the cases where $f$ and $g$ are cycle or horn inclusions, because the lemma is equivalent to the statement that the following maps are (acyclic) fibrations. 
+\begin{align*}
+\tuplet{f\to h}&=\tuplet{h^{\id_B},\id_X^f}\of X^B \to Y^B\times_{Y^A} X^A\\
+\tuplet{g\to h}&=\tuplet{h^{\id_D},\id_X^g}\of X^D \to Y^D\times_{Y^C} X^C
+\end{align*}
+In the case where $h$ is an acyclic fibration the morphism $\tuplet{g\to h}$ is an acyclic cofibration if is has the lifting property for the family of cycle inclusions $k_i\of \cycle[i]\to\simplex[i]$ for $i\of\nno$, and in turn $\tuplet{k_n\to h}$ are acyclic cofibrations if the triple lifting property holds in the cases where $a=k_i$ and $b=k_j$ for all $i,j\of\nno$. For the cases where $f$ or $g$ are acyclic the same reduction takes us to products of cycle and horn inclusions.
+
+In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove that their pushout products $g\pp f$ are compositions of pushouts of sums of horns and cycles and therefore have the left lifting properties with respect to (acyclic) fibrations. 
+\[\xy
+(0,10)*+{W\times Y}="left",(20,10)*+{\bullet}="middle",(10,20)*+{X\times Y}="top",(10,0)*+{W\times Z}="bottom",(40,10)*+{X\times Z}="right"
+\ar^(.4){f\times \id} "left";"top" \ar_{\id\times g} "left";"bottom" \ar "top";"middle" \ar "bottom";"middle"
+\ar@{.>}|(.3){g\pp f} "middle";"right" \ar^{\id\times g} "top";"right" \ar_{f\times\id} "bottom";"right"
+\endxy\]
+Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one of $f$, $g$ and $h$ is acyclic.
+\end{proof}
+
+\subsection{Factorization system}
+\begin{lemma} Acyclic cofibrations have the left lifting property with respect to all fibrations. \label{acyclic have lifting}\end{lemma}
+
+\begin{proof} Let $f\of X\to Y$ be an acyclic cofibration, with inverse $g\of Y\to X$ and homotopy $h\of\simplex[1]\times Y\to Y$. Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. The composition $a\circ g\of Y\to A$ is a filler up to homotopy, which can be transported along the homotopy $h$ to become a proper filler. Let $d_0$ be the first horn inclusion $1\to \simplex[1]$. By lemma \ref{triple lift}, there is a $d\of \simplex[1]\times Y\to A$ such that $k\circ c=b\circ h$, $c\circ (\id_{\simplex[1]}\times f)= a\circ \pi_1$ and $c\circ (d_0\times \id_Y) = a\circ g$.
+Lemma \ref{triple lift} applies because the following equations hold.
+
+\begin{align*} 
+	(a\circ \pi_1)\circ (\simplex(\delta^1_1)\times\id_X) &= a = (a\circ g)\circ f\\
+	(b\circ h)\circ (\simplex(\delta^1_1)\times\id_Y) &= b\circ f\circ g = k\circ (a\circ g)\\
+	(b\circ h)\circ (\id_{\simplex[1]}\times f) &= b\circ f\circ \pi_1 = k\circ (a\circ \pi_1)
+\end{align*}
+\[\xymatrix{
+X\ar[d]_f \ar[rr]^(.4){d_0\times \id} && \simplex[1]\times X \ar[d]|(.6){\id\times f}\ar[r]^(.6){a\circ \pi_1} & A\ar[d]^k\\
+Y \ar[rr]_(.4){d_0\times \id}\ar[urrr]^(.3){a\circ g} && \simplex[1]\times Y\ar[r]_(.6){b\circ h}\ar@{.>}[ur]_c & B
+}\]
+
+Let $d_1$ be the other horn inclusion $1\to \simplex[1]$. Let $e=c\circ(d_1\times \id_Y)$, so $k\circ e=b\circ h\circ (d_1\times \id_Y) = b$ and $e\circ f = c\circ (\id_{\simplex[1]}\times f)\circ (d_1\times \id_X) = a$. Then $e$ is a filler for $b\circ f=k\circ a$. By generalization $f$ is an acyclic cofibration.
+\end{proof}
+
+\begin{lemma} In $\ambient\s\f$ every morphism that has the left lifting property with respect to all fibrations is an acyclic cofibration. \label{lifting is acyclic} \end{lemma}
+
+\begin{proof} An acyclic fibration is a fibration, because the right lifting property for cycle inclusions induces the right lifting property for horn inclusion. Therefore lemma \ref{cofibration characterization} tells us that every acyclic cofibration is a cofibration.
+
+Let $f\of X\to Y$ be a morphism with the left lifting property for all fibrations in $\ambient\s\f$. There is a morphism $g\of Y\to X$ such that $g\circ f = \id_X$ because $X$ is fibrant. 
+\[ \xymatrix{
+X\ar[d]_f \ar[r]^\id & X\ar[d]^\bang\\
+Y\ar[r]_\bang \ar@{.>}[ur]_h & 1
+}\]
+There is a morphism $h\of \simplex[1]\times Y\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and $h\circ (\id_{\simplex[1]}\times f) = f\circ\pi_1$ because $Y$ is fibrant and because of lemma \ref{triple lift}.
+\[ \xymatrix{
+X+X\ar[d]_{f+f}\ar[r]^{k\times\id} & \simplex[1]\times X \ar[r]^(.6){f\circ \pi_0}\ar[d] & Y\ar[d]^\bang\\
+Y+Y\ar[r]_{k\times\id} \ar[urr]^(.3){(\id,g)} & \simplex[1]\times Y \ar[r]_\bang\ar@{.>}[ur]_h & 1
+}\]
+Therefore $f$ is an acyclic cofibration by definition \ref{acyclic cofibration}.
+\end{proof}
+
+\begin{proposition} Every morphism $f\of X\to Y$ between Kan complexes factors as a fibration following an acyclic cofibration. \label{factor2} \end{proposition}
+
+\begin{proof} There is a simple factorization $f = p_0\circ r$ where $p_0\of Y/f\to Y$ and $r\of X\to Y/f$, where 
+\begin{align*}
+Y/f &= \set{(x,p)\of X\times Y^{\simplex[1]}| f(x) = p(*\mapsto 1) }\\
+p_0\tuplet{x,p} &= p(*\mapsto 0)\\
+r(x) &= \tuplet{x,*\mapsto f(x)}
+\end{align*}
+
+The morphism $r$ is not necessarily a cofibration, but factors as an acyclic fibration $g\of W\to Y/f$ following an cofibration $h\of X\to W$ by proposition \ref{factor1}. The morphism $h$ is an acyclic cofibration and the composition $p_0\circ g$ is a fibration for the following reasons.
+
+
+%h is ac
+There is a morphism $p_1\of Y/f\to X$ that satisfies $p_1\tuplet{x,p}=x$. Let $h'=p_1\circ h$, so $h'\circ h = \id_X$.
+There is a homotopy $\phi$ between $\id_{W}$ and $h\circ h'$ by lemma \ref{triple lift} and the following equations. %introduce triple lift more gently
+\begin{align*}
+(\id_W,h\circ h')\circ(h+h)&=(h,h)= (h\circ\pi_1)\circ (c\times \id_X)\\
+h'\circ h\circ \pi_1&=\pi_1=(h'\circ\pi_1)\circ(\id_{\simplex[1]}\times h)\\
+h'\circ(\id_W,h\circ h')&=(h',h')= (h'\circ\pi_1)\circ (c\times \id_W)
+\end{align*}
+\[\xymatrix{
+X+X\ar[d]_{c\times \id}\ar[r]^{h+h} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\id,h\circ h')} & W\ar[d]^{h'}\\
+\simplex[1]\times X\ar[r]_{\id\times h} \ar[urr]^(.3){h\circ\pi_1}  & \simplex[1]\times W\ar[r]_(.6){h'\circ\pi_1} \ar@{.>}[ur]_\phi & X
+}\]
+Because $\phi\circ(\id_{\simplex[1]\times h}) = h\circ \pi_1$, the cofibration $h$ is acyclic by definition \ref{acyclic cofibration}. 
+
+%p_0\circ g is fib
+Since fibrations are closed under composition and since $g$ is an acyclic fibration, $p_0\circ g$ is a fibration if $p_0$ is. 
+
+Let $d\of A\to B$ be an acyclic cofibration and let $a\of A\to Y/f$ and $b\of B\to Y$ satisfy $p_0\circ a = b\circ d$. There is a morphism $c_0\of B\to X$ such that $c_0\circ d = p_1\circ a$ because $X$ is fibrant. Let $e_0$ be one of the horn inclusions $1\to \simplex[1]$. There is a morphism $c_1\of\simplex[1]\times B\to Y$ such that $c_1\circ{(\id_{\simplex[1]}\times d)}$ is the transpose of $p_0\circ a$ and $c_0\circ (e_0\times \id_B) = f\circ c_1$ because $Y$ is fibrant and because of lemma \ref{triple lift}.
+\[\xy
+(0,20)*+{A}="AC",(25,20)*+{\simplex[1]\times A}="BC",(50,20)*+{Y}="Y",
+(0,0)*+{B}="AD",(25,0)*+{\simplex[1]\times B}="BD",(50,0)*+{1}="one"
+\ar^(.4){e_0\times\id} "AC";"BC"
+\ar_{d} "AC";"AD"
+\ar_(.4){e_0\times\id} "AD";"BD"
+\ar^(.3){f\circ c_0} "AD";"Y"
+\ar|(.3){\id\times d} "BC";"BD"
+\ar^(.6){a^t} "BC";"Y"
+\ar@{.>}_{c_1} "BD";"Y"
+\ar_(.6){\bang} "BD";"one"
+\ar^{\bang} "Y";"one"
+\endxy\]
+The transpose $c_1^t\of B\to Y^{\simplex[1]}$ of $c_1$ and $c_0$ together factor as a morphism $c\of B \to Y/f$ which is a filler for $p_0\circ a = b\circ d$. By generalization, $p_0$ is a fibration.
+\end{proof}
+
+\end{document}

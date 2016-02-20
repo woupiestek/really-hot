@@ -1,0 +1,148 @@
+\documentclass[csh.tex]{subfiles}
+\begin{document}
+\section{Cofibrations}%class functors not mentioned in the sections below--"characteristic functors"
+
+\begin{definition} An \emph{internal factorization system} on a category consists of two classes of morphisms $L$ and $R$, with the following properties.
+\begin{itemize}
+\item A morphism $l$ belongs to $L$ if an only if it has the left lifting property with respect all to members of $R$.
+\item The class $R$ has the dual property.
+\item Every morphism factors as a member of $R$ following a member of $L$.
+\end{itemize}
+\end{definition}
+
+This section defines \emph{acyclic fibrations} and \emph{cofibrations} and shows that they form an \emph{internal factorization system} on $\ambient\s$.
+
+\subsection{fibrations}
+\hide{ 
+
+Idea: define Kan fibrations, define cofibrations, demonstrate the lifting properties. Move on happily.
+
+New idea: go by factorization system.
+
+1. The lifting properties of cofibrations
+2. Factorization property
+
+}
+Both fibrations and acyclic fibrations are defined the same way: they have the right lifting property with respect to a specific family of morphisms.
+
+\hide{ Add def. of sieve over $\simCat$
+Wrong: I was calling it a sieve because I was thinking of the category of elements of $\simplex[n]$
+$\ambient\s$ defined?
+Member functions for internal simplicial objects?
+ }
+\begin{definition} For each $n\in\N$, the $n$-simplex $\simplex[n]$ is the internal simplicial set where $\base{\simplex[n]}$ is the object of all morphisms $\phi$ in $\simCat$ such that $\cod(\phi) = n$, $\dim(\phi) = \dom(\phi)$ and $\phi\cdot \xi = \phi\circ \xi$.
+
+The \emph{cycle} $\cycle[n]$ is the subobject of non surjective functions of $\simplex[n]$. The $\dim$ and $\cdot$ are the same, and the bases are related as follows:
+\[ \base{\cycle[n]} = \set{\phi\of\base{\simplex[n]}| \exists i\of[n].\forall j\of \dom(\phi).\phi(i)\neq j } \]
+
+Similarly, for each $k\of[n]$ the \emph{horn} $\horn_k[n]$ is the sieve of the non decreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$.
+\[ \base{\horn_k[n]} = \set{\phi\of\base{\simplex[n]}| \exists i\of[n]-\set k.\forall j\of \dom(\phi).\phi(i)\neq j } \]
+
+\end{definition}
+
+These subobjects are definable in the internal language of $\ambient$ because being surjective is a decidable property of morphisms $[m]\to[n]$.
+
+\begin{definition} Cycles and horns form families of morphisms indexed over $\nno$ and over $\set{(n,k)\in\nno\times\nno| k\leq n }$ respectively.
+\begin{itemize}
+\item A \emph{Kan fibration} is an injective morphism relative to the family of all horn inclusions.
+\item An \emph{acyclic Kan fibration} is an injective morphism relative to the family of cycle inclusions.
+\item A \emph{Kan complex} or \emph{Kan fibrant object} is a simplicial object $X$ for which the unique morphism $\bang_X\of X\to 1$ is a fibration.
+\item A \emph{Kan complex} $X$ is \emph{contractible} if $\bang_X\of X\to 1$ is acyclic.
+\end{itemize}\label{Kan}
+
+The category of Kan complexes and morphisms of simplicial object is $\ambient\s\f$.
+\end{definition}
+This paper usually leaves out `Kan' and simply talk about fibrations and complexes.
+
+\subsection{Cofibrations}
+This subsection proves that morphisms in $\ambient\s$ factor as acyclic fibrations following cofibrations. 
+
+\begin{definition} A $y\of Y[n]$ is called an \emph{$n$-simplex} of $Y$. An $n$-simplex is \emph{degenerate} if there is an $s\of [n]\to [n]$ different from $\id_{[n]}$ such that $Y(s)(y)=y$. If there are no such $s$ and $x$, then $y$ is \emph{nondegenerate}. A nondegenerate simplex is called a \emph{face}. 
+
+A subobject $W\of X$ is decidable, if there is a morphism $X\to\bool$ such that $W$ is the pullback of one of the morphisms $1\to\bool$. A monomorphism $f\of X\to Y$ is a \emph{cofibration} if the subobject $S$ of all faces outside of the image of $f$ is decidable.
+\end{definition}
+
+\begin{lemma} Acyclic fibrations and cofibrations form a weak factorizations system.
+\end{lemma}
+
+\begin{proof} Proposition \ref{factor1} shows that every morphisms factors as an acyclic fibration following a cofibration. Lemma \ref{Reedy} shows that cofibrations have the required lifting property. Finally, proposition \ref{cofibration characterization} shows that every morphisms that has the right lifting property with respect to every cofibration.
+\end{proof}
+
+
+\subsubsection{Lifting}
+The class of morphisms that has the right lifting property with respect to all fibrations, is closed under various constructions, notably compositions, finitary coproducts and pushouts. They are also closed under transfinite compositions of cochains \hide{lemma...}, which are defined as follows.
+
+\begin{definition} The successor morphism $s\of\nno\to\nno$ induces an endofunctor $s\ri$ of $\ambient/\nno$. A \emph{chain} is a morphism a morphism $f\of s\ri(X)\to X$ in $\ambient/\nno$.  A morphism of chains $(X,f)\to(Y,g)$ is a morphism $h\of X\to Y$ such that $h\circ f = g\circ s\ri(h)$.
+
+Dually, a morphism $f\of X\to s\ri(X)$ is a \emph{cochain} and a \emph{cochain morphism} commutes with cochains in the dual way.
+
+For every object $Y$ of $\ambient$ there is a constant family $\nno\ri(Y)$ and for these constant families $s\ri(Y)\simeq Y$. The isomorphism turn constant families into trivial algebras. The \emph{transfinite composition} is a universal morphism of $s\ri$-algebras $h\of \nno\ri Y\to (X,f)$, i.e. for every other morphism $k\of \nno\ri Z\to (X,f)$ there is a morphism $l\of Z\to Y$ such that $h\circ s\ri(l)=k$.
+
+The dual notion for a coalgebra $X\to s\ri(X)$ is also called the transfinite composition of the coalgebra.
+\end{definition}\hide{Every isomorphism-algebra is a constant family.}
+
+\begin{lemma} Every cofibration has the left lifting property with respect to all acyclic fibrations. \label{Reedy}\end{lemma}
+
+\begin{proof} By definition every cofibration is the transfinite composition of pushouts of coproducts of cycle inclusions.
+
+Suppose $f\of X\to Y$ is a free cofibration and $S$ is the family of faces outside the image of $f$. For each $i\of\nno$ let $Y_i$ be the union of $X$ with all faces of $Y$ of dimension strictly smaller than $i$. In particular $Y_0=X$.
+
+Every simplex of $Y$ is in $Y_i$ for some $i$. If a simplex $y\of\base Y$ is degenerate, then one can search the monomorphisms $[n]\to\dim y$ in $\simCat$ for the greatest $\mu$ such that $y\cdot\mu$ is a face. For this reason, the inclusion $Y_i\to\nno\ri Y$ is a transfinite composition.
+
+For each $i\of\nno$ let $S_i$ be the object of $n$-dimensional faces in $S$. Each $s\of S_i$ induces a monomorphism $s'\of\simplex[i]\to Y_{i+1}$. Since $Y_{i}$ has all simplices of dimension $i-1$, the intersection of $Y_i$ and $s'$ is $\cycle[i]$. Thus the inclusion $Y_i\to Y_{i+1}$ is the push out of $S_{i+1}$ copies of $\cycle[i]\to\simplex[i]$. 
+
+Cofibrations have the left lifting property by lemma \ref{saturation} below.
+\end{proof}
+
+
+\begin{lemma} The class of morphisms $L$ that has the left lifting property with respect to fibrations is closed under pushouts, coproducts indexed over arbitrary object of $\ambient$ and transfinite compositions. \label{saturation}
+\end{lemma}
+
+\begin{proof}
+In each case the construction induces an operation on the split epimorphism in the diagram of the lifting property. 
+In the case of the pushouts, the construction is a pullback, which preserves split epimorphisms.
+Fibred exponentials also preserve split epimorphisms. Finally infinite compositions of split epimorphisms are split.
+\end{proof}
+
+
+\begin{proposition} Every morphism factors as an acyclic fibration following a cofibration. \label{factor1} \end{proposition}
+
+\begin{proof} The construction is based on the fact that $\simCat$ is a \emph{Reedy category}. \hide{cite!} Let $\simCat^+$ be the full subcategory of monomorphisms and $\simCat^-$ that of epimorphisms. For each morphism $\phi$ of $\simCat$ let $m(\phi)$ be the monic and $e(\phi)$ the epic factors again.
+
+The first step is to cover $Y$ with another simplicial set $LY$ where degeneracy is decidable.
+Let $LY[n] = \Sigma i\of[n]. Y[i]\times\simCat^-(n,i)$ and for $\phi\of [m]\to [n]$ of $\simCat$ and $\tuplet{\epsilon,y}\of LY[n]$ let the following equation hold.
+\[\tuplet{\epsilon,y}\cdot \phi=\tuplet{e(\epsilon\circ \phi),y\cdot m(\epsilon\circ\phi)}\]
+Let $l_Y\of LY\to Y$ satisfy $l_Y\tuplet{\epsilon,y}=y\cdot\epsilon$.
+
+The second step glues simplices of $X$ and $LY$ together into new ones. Define $d\of X+LY\to\nno$ as follows. %For $x\of X$, $d(x)=\dim(x)$, for $\tuplet{\epsilon,y}\of LY$, $d\tuplet{\epsilon,y} = \cod(\epsilon)$. 
+The pair $(f,l_Y)$stand for the morphism $X+LY\to Y$ that satisfies $(f,l_Y)(x)=f(x)$ for $x\of X$ and $(f,l_Y)(y) = l_Y(y)$ for $y\of LY$. Let $Z[n]\subseteq \Pi i\in[n].(X[i]+LY[i])^{\simCat^+(i,n)}$ consist of elements $z$ which satisfy the following conditions for all $\alpha\of [j]\to [k]$ and $\beta\of [i]\to[j]$ in $\simCat^+$.
+\begin{enumerate}
+\item $(f,l_Y)(z(\alpha\circ\beta)) = (f,l_Y)(z(\alpha))\cdot\beta$;
+\item if $z(\alpha)\of X$ then $z(\alpha\circ\beta)\of X$;
+\item if $z(\alpha)=\tuplet{\epsilon,y}\of LY$ and $\epsilon\circ\beta$ is not monic, then $z(\alpha\circ\beta)\of LY$ and $z(\alpha\circ\beta)_0$ factors through $\epsilon\circ\beta$.
+\end{enumerate}
+For $\phi\of[m]\to [n]$, and $z\of Z[n]$, let $z\cdot\phi$ satisfy the following equation for all $\alpha$ of $\simCat^+$.
+\[ (z\cdot\phi)(\alpha) = z(m(\phi\circ\alpha))\cdot e(\phi\circ \alpha) \]
+By these definitions, $Z$ is a simplicial object.
+
+There is a morphism $g\of X\to Z$ which satisfies $g(x)(\alpha) = x\cdot\alpha$. It is a cofibration because a simplex $z$ is nondegenerate and outside of the image of $g$ if and only if $z(\id_{[\dim(z)]}) = \tuplet{\id_{[\dim(z)]},y}$ for some simplex $y\of Y[\dim(z)]$. The definition of $LY$ ensures that ensures that elements with this property are nondegenerate while condition 3 ensures that if $z(\id)$ is degenerate, then so is all of $z$.
+
+There is a morphism $h\of Z\to Y$ which satisfies $h(z) = (f,l_Y)(z(\id_{[\dim(z)]}))$. This is an acyclic fibration thanks to the following filler operator. Let $a\of \cycle[n]\to Z$ and $b\of \simplex[n]\to Y$ satisfy $h\circ a = b\circ k$ where $k\of\cycle[n]\to\simplex[n]$ is the cycle inclusion. Let $c\of \simplex[n]\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $\phi$ is an epimorphism and $c(\phi)(\mu) = a(\phi)(\mu)$ otherwise. Now $c\circ k = a$ and $h\circ c = b$.
+\end{proof}
+
+\hide{ In acyclic cofibrations the codomain may have a distance function, that gives an upper bound to the number of compositions required to to reach it. I don't have time to work that out and check it right now.
+}
+
+The factorization in the proof above turns the implication in lemma \ref{Reedy} into an equivalence.
+
+\begin{proposition} A morphism has the left lifting property with respect to all acyclic fibrations if and only if it is a cofibration. \label{cofibration characterization} \end{proposition}
+
+\begin{proof} Lemma \ref{Reedy} shows the `if' direction. For `only if' factor $f\of X\to Y$ as in the proof of lemma \ref{factor1} to get a free cofibration $g\of X\to Z$ and an acyclic fibration $h\of Z\to Y$. Because $\id_Y\circ f = h\circ g$ there is a $k\of Y\to Z$ such that $h\circ k = \id_Y$ and $k\circ f = g$ by the global lifting property. 
+\[
+\xymatrix{
+X\ar[d]_f \ar[r]^g & Z\ar[d]^h\\
+Y\ar[r]_\id \ar[ur]^k & Y
+}
+\]
+A simplex $y$ of $Y$ is a face outside of the image of $f$ if $k(y)$ is a face outside of the image of $h$, and since the latter is decidable, the former is too.\end{proof}
+\end{document}
