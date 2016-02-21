@@ -98,8 +98,7 @@ h\circ (\id, k\circ k') &= (\phi\circ (\id_W\times h))\circ (c\times \id_W)
 X+X\ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\id,k\circ k')} & W\ar[d]^h\\
 \simplex[1]\times X\ar[r]_{\id\times k} \ar[urr]^(.3){k\circ \pi_1}  & \simplex[1]\times W\ar[r]_(.6){\phi\circ (\id\times h)} \ar@{.>}[ur]_\chi & Z
 }\]
-Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \pi_1$, definition \ref{acyclic cofibration} makes $k$ an acyclic cofibration.
-
+Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \pi_1$, $k$ is a weakly invertible cofibration by definition \ref{weakly invertible} and an acyclic cofibration by lemma \ref{acyclic have lifting}.
 \end{proof}
 
 \begin{lemma} If $f\of X\to Y$, $g\of X\to Y$ and if $g$ and $g\circ f$ are acyclic cofibrations, then $f$ is an acyclic cofibration \label{left cancellation} \end{lemma}
@@ -142,7 +141,7 @@ Let $c\of 1+1\to\simplex[1]$ be the same cycle as above. There is homotopy $\phi
 X+X \ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times\id}\ar[r]^(.6){(\id,k\circ k')} & W\ar[d]^{g\circ h}\\
 \simplex[1]\times X \ar[r]_{\id\times k}\ar[urr]^(.3){k\circ\pi_1}& \simplex[1]\times W\ar[r]_{g\circ h\circ \pi_1}\ar@{.>}[ur]_\phi & Z
 }\]
-Because $\phi\circ (\id_{\simplex[1]}\times k)=k\circ \pi_1$, definition \ref{acyclic cofibration} says that $k$ is an acyclic cofibration. Therefore $f$ is a weak equivalence.\end{proof}
+Because $\phi\circ (\id_{\simplex[1]}\times k)=k\circ \pi_1$, definition \ref{weakly invertible} says that $k$ is a weakly invertible cofibration and lemma \ref{acyclic have lifting} says that $k$ is an acyclic cofibration. Therefore $f$ is a weak equivalence.\end{proof}
 
 \begin{lemma} If $f\of X\to Y$, $g\of X\to Y$ and if $f$ and $g\circ f$ are acyclic cofibrations, then $g$ is a weak equivalence.\label{shared retract} \end{lemma}
 
