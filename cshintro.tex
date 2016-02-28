@@ -1,22 +1,5 @@
 \documentclass[csh.tex]{subfiles}
 \begin{document}
-
-
-\section{Introduction}\hide{dump assemblies--write about simplicial homotopy}
-This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory}. The intention is to interpret types as the homotopy types of the simplicial objects in the \emph{category of assemblies}. What makes this challenging, is that this category lacks some of the structure of the category of sets that \emph{classical homotopy theory} is build on. In the internal logic the principle of the excluded middle and the axiom of choice are false. The category of assemblies is not exact and lacks infinite limits and colimits. While there are \emph{generic monomorphisms}, they are not subobject classifiers. I offer the following solutions.
-\begin{enumerate}
-\item Take the exact completion of the category of assemblies. This is not the effective topos but another realizability topos.
-\item Limit the class of cofibrations. In classical simplicial homotopy theory every mono\-morphism is a cofibration. We demand that certain properties of the monomorphisms are decidable.
-\item Strengthen the lifting property. Fibrations come equipped with a \emph{filler operator} that specifies a solution for each of the basic lifting problems.
-\item Build the homotopy category out of fibrant objects only. This way we don't need the infinite colimits that make the small object argument of classical simplicial homotopy work.
-\end{enumerate}
-To avoid the distracting peculiarities of the category of assemblies and its exact completion this paper works with a generic \emph{$\Pi$-pretopos} with a \emph{natural number object} instead of the category of assemblies itself.
-
-The paper works out suitable definition of fibrations, cofibrations and their acyclic counterparts (definitions \ref{model structure}) and proves that they form a model structure on the category of Kan complexes (theorem \ref{model category}). The last section confirms that certain universal fibrations actually live in the category of Kan complexes (theorem \ref{fibrant universe}). 
-
-\subsection{Related literature}
-Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}. The intended model is the \emph{ex/lex completion} \citep{MR1600009} of category of assemblies defined in \citep{MR1097022,MR1023803,MR2479466}. This completion is not the famous \emph{effective topos}, but it is another realizability topos. 
-
 \section{Internal simplicial objects}
 Internal simplicial homotopy has a notion of simplicial object of $\ambient$ which does rely on external $\ambient$-valued presheaves, but on internal structures.
 
@@ -41,7 +24,7 @@ Local Cartesian closure means that there is an object $A$ of morphisms between t
 However, because $\ambient$ is also exact and extensive, it is a Heyting category, so the same subject has a more familiar definition.
 \[ \Ar(\simCat)=\set{f\of A|\forall i,j\of\nno.i\leq j \to f(i)\leq f(j)} \]
 
-\begin{definition} This object is the object of arrows of of the \emph{internal category of simplices} $\simCat$, whose object of objects $\Ob(\simCat)$ is $\nno$. The category of \emph{simplicial objects and morphisms} of $\ambient$ is $\ambient\s$.
+\begin{definition} The object $\Ar(\simCat)$ is the object of arrows of the internal \keyword{category of simplices} $\simCat$, whose object of objects $\Ob(\simCat)$ is $\nno$. The category of \emph{simplicial objects and morphisms} of $\ambient$ is $\ambient\s$.
 \end{definition}
 
 \begin{remark} We assume that all of the structure on $\ambient$ comes from functors. So several functors between categories related to $\ambient$ has right adjoint that give $\ambient$ its limits and exponentials and some functor have left adjoint that give ambient colimits. Definitions in terms of universal properties only define objects up to isomorphism. Our assumption ensures that there are functors that hit all the necessary isomorphism classes, when we only specify a functor up to isomorphism.

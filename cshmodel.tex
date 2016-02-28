@@ -17,20 +17,23 @@ Internal factorization systems are pairs of set of morphisms $(L,R)$ in a catego
 \item Every morphism factors as a member of $R$ following a member of $L$.
 \end{itemize}
 
-Members of $C\cap W$ are called \emph{acyclic cofibrations} and members of $F\cap W$ are called fibrations.
+Members of $C\cap W$ are called \emph{acyclic cofibrations} and members of $F\cap W$ are called \emph{acyclic fibrations}.
 \end{definition}
 
 In ambient we make the following selections. 
 
-\begin{definition} A morphism $f\of X\to Y$ of category $\ambient\s$ is a \keyword{fibration} if it has the right lifting property with respect to the family of all \emph{horn inclusions}, which is defined as follows. The \emph{horn} $\horn_k[n]$ for $n\of\nno$ and $k\of[n]$ is the subobject of $\simplex[n]$ for which $\base\horn_k[n]$ consists of morphism of $\simCat$ to $[n]$ which miss at least one member of $[n]$ other different from $k$. The \emph{horn inclusion} is the monomorphism $\horn_k[n]\to\simplex[n]$. The \emph{family of horn inclusions} is the sum of all horn inclusions $\Sigma k\leq n\of\nno.\horn_k[n]\to \Sigma k\leq n\of\nno.\simplex[n]$ as it exists as a morphism of $\ambient\s$.
+\begin{definition} A morphism $f\of X\to Y$ of category $\ambient\s$ is a \keyword{fibration} if it has the right lifting property with respect to the family of all \emph{horn inclusions}, which is defined as follows. 
+
+For each $n\in\N$, the $n$-\keyword{simplex} $\simplex[n]$ is the internal simplicial set where $\base{\simplex[n]}$ is the object of all morphisms $\phi$ in $\simCat$ such that $\cod(\phi) = n$, $\dim(\phi) = \dom(\phi)$ and $\phi\cdot \xi = \phi\circ \xi$. For each $k\of[n]$ the \keyword{horn} $\horn_k[n]$ is the subobject of the non decreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$.
+\[ \base{\horn_k[n]} = \set{\phi\of\base{\simplex[n]}| \exists i\of[n]-\set k.\forall j\of \dom(\phi).\phi(i)\neq j } \]
+The \keyword{horn inclusion} is the monomorphism $\horn_k[n]\to\simplex[n]$. The \emph{family of horn inclusions} is the sum of all horn inclusions $\Sigma k\leq n\of\nno.\horn_k[n]\to \Sigma k\leq n\of\nno.\simplex[n]$ that exists as a morphism of $\ambient\s$.
 
 The lifting property that $f$ satisfies is defined in a slice category of $\ambient\s$. Let $I = \set{\tuplet{n,k}\of\nno\times\nno|k\leq n}$. There is a \emph{discrete simplicial set} $I\disc$ which satisfies $\base(I\disc) = \nno\times I$, $\dim\tuplet{n,x}=n$ and $\tuplet{n,x}\cdot\phi=\tuplet{n,x}$ for $\phi\of[m]\to[n]$. The family of horn inclusions is a morphism in $\ambient\s/I\disc$. So is the multiple $I\disc\times f\of I\disc\times X\to I\disc\times Y$ of $f$. The morphism $f$ is a fibration if $I\disc\times f$ has the right lifting property with respect to $\Sigma k\leq n\of\nno.\horn_k[n]\to \Sigma k\leq n\of\nno.\simplex[n]$.
 \end{definition}
 
 If $\ambient$ is the topos of sets the morphism that satisfy this definition are precisely \emph{Kan fibrations}. 
 
-\begin{definition} A monomorphism $f\of X\to Y$ of category $\ambient\s$ is a \keyword{cofibration} if subobject of faces of $Y$ which are not in the image of $X$ is decidable. A \emph{face} of $Y$ is a $y\of\base Y$ such that if $\phi\of [\dim(y)]\to [\dim(y)]$ and $y\cdot \phi = y$, then $\phi = \id_{\dim(y)}$. Hence $f$ is a cofibration if there is a morphism $\psi\of\base Y\to\bool$ such that $\psi(y)=\true$ if an only if $y$ is a face and there is no $x\of \base X$ such that $f(x)=y$. 
-\end{definition}
+\begin{definition} A monomorphism $f\of X\to Y$ of category $\ambient\s$ is a \keyword{cofibration} if subobject of faces of $Y$ which are not in the image of $X$ is decidable. A \keyword{face} of $Y$ is a $y\of\base Y$ such that if $\phi\of [\dim(y)]\to [\dim(y)]$ and $y\cdot \phi = y$, then $\phi = \id_{\dim(y)}$. Elements of $\base Y$ which are not faces are called \keyword{degenerate}, so a face is a non degenerate element of $\base Y$. Hence $f$ is a cofibration if there is a morphism $\psi\of\base Y\to\bool$ such that $\psi(y)=\false$ if an only if $y$ is degenerate or equal to $f(x)$ for some $x\of \base X$.\end{definition}
 
 In the category of simplicial sets all monomorphism a cofibrations. Decidability comes for free there.
 
@@ -54,7 +57,7 @@ With fibrations, weak equivalences and cofibrations defined as above $\ambient\s
 \end{theorem}
 
 \begin{proof}
-Lemma \ref{factor1} shows that cofibrations and acyclic fibrations form a weak factorization system, considering that they satisfy a lifting property by definition \ref{Kan}. Lemma \ref{factor2} tells the same thing about fibrations and acyclic cofibrations. Lemma \ref{toot} below demonstrates that if two of $f$, $g$ and $f\circ g$ are weak equivalences, then all three are. These three requirements define a model structure.
+Lemma \ref{factorization system 1} shows that cofibrations and acyclic fibrations form a weak factorization system. Lemma \ref{factorization system 2} tells the same thing about fibrations and acyclic cofibrations. Lemma \ref{toot} demonstrates that if two of $f$, $g$ and $f\circ g$ are weak equivalences, then all three are. These three requirements define a model structure.
 \end{proof}
 
 \begin{lemma}[2-out-of-3] Let $f\of X\to Y$ and $g\of Y\to Z$ be morphisms of $\ambient\s\f$. If any two of $f,g$ or $g\circ f$ are weak equivalences, then all three are. \label{toot}\end{lemma}

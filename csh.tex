@@ -82,8 +82,26 @@ Idee: reverse the order. definitions--theorem--lemmas. That way the purpose of t
 
 \hide{
 Thorough investigation of the background. If we have an ELCCC then the poset-reflection is a Heyting algebra. The reindexing morphisms between the poset reflections are Heyting algebra morphisms and its adjoints remain adjoints.
-
 }
+
+\section*{Introduction}\hide{dump assemblies--write about simplicial homotopy}
+This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory}. The intention is to interpret types as the homotopy types of the simplicial objects in the \emph{category of assemblies}. What makes this challenging, is that this category lacks some of the structure of the category of sets that \emph{classical homotopy theory} is build on. In the internal logic the principle of the excluded middle and the axiom of choice are false. The category of assemblies is not exact and lacks infinite limits and colimits. While there are \emph{generic monomorphisms}, they are not subobject classifiers. I offer the following solutions.
+\begin{enumerate}
+\item Take the exact completion of the category of assemblies. This is not the effective topos but another realizability topos.
+\item Limit the class of cofibrations. In classical simplicial homotopy theory every mono\-morphism is a cofibration. We demand that certain properties of the monomorphisms are decidable.
+\item Strengthen the lifting property. Fibrations come equipped with a \emph{filler operator} that specifies a solution for each of the basic lifting problems.
+\item Build the homotopy category out of fibrant objects only. This way we don't need the infinite colimits that make the small object argument of classical simplicial homotopy work.
+\end{enumerate}
+To avoid the distracting peculiarities of the category of assemblies and its exact completion this paper works with a generic \emph{$\Pi$-pretopos} with a \emph{natural number object} instead of the category of assemblies itself.
+
+The paper works out suitable definition of fibrations, cofibrations and their acyclic counterparts (definitions \ref{model structure}) and proves that they form a model structure on the category of Kan complexes (theorem \ref{model category}). The last section confirms that certain universal fibrations actually live in the category of Kan complexes (theorem \ref{fibrant universe}). 
+
+\subsection*{Related literature}
+Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}. The intended model is the \emph{ex/lex completion} \citep{MR1600009} of category of assemblies defined in \citep{MR1097022,MR1023803,MR2479466}. This completion is not the famous \emph{effective topos}, but it is another realizability topos. 
+
+\subsection*{Acknowledgments} 
+I am grateful to the Warsaw Center of Mathematics and Computer Science for the opportunity to write this paper. I am also grateful for discussions with Marek Zawadowski and the seminars on simplicial homotopy theory he organized during my stay at Warsaw University. Richard Garner, Peter LeFanu Lumsdaine and Thomas Streicher made invaluable comments on early drafts of this paper.
+
 
 \subfile{cshintro}
 
@@ -94,13 +112,6 @@ Thorough investigation of the background. If we have an ELCCC then the poset-ref
 \subfile{cshfactor2}
 
 \subfile{cshdescent}
-
-\section{Closing}
-
-\subsection*{Acknowledgments} 
-I am grateful to the Warsaw Center of Mathematics and Computer Science for the opportunity to write this paper. I am also grateful for discussions with Marek Zawadowski and the seminars on simplicial homotopy theory he organized during my stay at Warsaw University. Richard Garner, Peter LeFanu Lumsdaine and Thomas Streicher made invaluable comments on early drafts of this paper.
-
-
 
 \printbibliography
 

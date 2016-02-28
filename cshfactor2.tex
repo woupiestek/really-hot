@@ -10,7 +10,7 @@ Two definition of acyclic cofibrations are also fighting: 1. lifting against fib
 }
 
 
-\begin{theorem} Acyclic cofibrations and fibrations form a weak factorization system for $\ambient\s\f$. \end{theorem}
+\begin{lemma} Acyclic cofibrations and fibrations form an in internal factorization system on $\ambient\s\f$. \label{factorization system 2} \end{lemma}
 
 \begin{proof} Lemma \ref{acyclic have lifting} shows that weakly invertible cofibrations (see definition \ref{weakly invertible}) are acyclic cofibrations. Lemma \ref{lifting is acyclic} shows the converse. Proposition \ref{factor2} shows that every morphism factors as a fibration following a weakly invertible cofibration. 
 \end{proof}
@@ -44,7 +44,7 @@ Let $d_1$ be the other horn inclusion $1\to \simplex[1]$. Let $e=c\circ(d_1\time
 
 \begin{lemma} All acyclic cofibrations in $\ambient\s\f$ are weakly invertible.\label{lifting is acyclic} \end{lemma}
 
-\begin{proof} An acyclic fibration is a fibration, because the right lifting property for cofibrations implies the right lifting property for horn inclusions. Therefore lemma \ref{cofibration characterization} tells us that every acyclic cofibration is a cofibration.
+\begin{proof} An acyclic fibration is a fibration, because the right lifting property for cofibrations implies the right lifting property for horn inclusions. Therefore every acyclic cofibration is a cofibration.
 
 Let $f\of X\to Y$ be a morphism with the left lifting property for all fibrations in $\ambient\s\f$. There is a morphism $g\of Y\to X$ such that $g\circ f = \id_X$ because $X$ is fibrant. 
 \[ \xymatrix{
@@ -58,10 +58,6 @@ Y+Y\ar[r]_{k\times\id} \ar[urr]^(.3){(\id,g)} & \simplex[1]\times Y \ar[r]_\bang
 }\]
 Therefore $f$ is a weakly invertible cofibration by definition \ref{weakly invertible}.
 \end{proof}
-
-
-
-
 
 The proposition and the lemmas in this proof rely on a special property of cycle and horn inclusions (lemma \ref{triple lift}) which the next section explains.
 
