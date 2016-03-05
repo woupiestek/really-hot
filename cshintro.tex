@@ -12,39 +12,25 @@ x\cdot \id &= x \\
 x\cdot(\alpha\circ\beta)&=(x\cdot\alpha)\cdot\beta 
 \end{align*}
 
-A \emph{morphism of simplicial objects} $X\to Y$ is a morphism $f\of\base X\to\base Y$ which commutes with $\dim$ and $\cdot$. The object of morphisms $X\to Y$ in $\ambient$ itself is $\nat(X,Y)$. It represents families of morphisms $X\to Y$, i.e. for each object $I$ of $\ambient$ there is a natural bijection between morphisms $I\to \nat(X,Y)$ and morphisms $I\times X\to Y$ which commute with $\dim$ and $\cdot$ and their $\id_I$-fold multiples.
+A \emph{morphism of simplicial objects} $X\to Y$ is a morphism $f\of\base X\to\base Y$ which commutes with $\dim$ and $\cdot$. Together with simplicial objects, they form the category of simplicial objects and morphisms $\ambient\s$.
+
+The category $\ambient\s$ is enriched over $\ambient$. The object of morphisms $X\to Y$ in $\ambient$ itself is $\nat(X,Y)$. It represents families of morphisms $X\to Y$, i.e. for each object $I$ of $\ambient$ there is a natural bijection between morphisms $I\to \nat(X,Y)$ and morphisms $I\times X\to Y$ which commute with $\dim$ and $\cdot$ and their $\id_I$-fold multiples.
 \end{definition}
 
-This definition is consistent with the definition of initial presheaves in \citep{MR1300636}. The definition is valid because $\ambient$ is an $\Pi$-pretopos with a natural number object $\nno$. Decidable, finite and inhabited initial segments of the natural numbers have a classifier.
+This definition is consistent with the definition of initial presheaves in \citep{MR1300636}. The definition is valid because $\ambient$ is a $\Pi$-pretopos with a natural number object $\nno$. Decidable, finite and inhabited initial segments of the natural numbers have a classifier.
 \[  \lambda\tuplet{i,j}.j\of\set{\tuplet{i,j}\of\nno\times\nno\middle|i\leq j}\to \nno \]
 The relation $\leq$ is decidable, and comprehension on decidable predicates to define subobjects in $\ambient$, because there are pullbacks and classifiers of decidable subobjects $1\to \bool = 1+1$. Here $1$ is a terminal object and $+$ a binary coproduct.
 
 Local Cartesian closure means that there is an object $A$ of morphisms between the initial segments. Local Cartesian closure also implies that there is a subobject of non decreasing morphisms $\Ar(\simCat)$.
 \[ \Pi f\of A,i,j\of\nno,x\of\set{y\of 1|i\leq j}.\set{y\of 1|f(i)\leq f(j)}\]
-However, because $\ambient$ is also exact and extensive, it is a Heyting category, so the same subject has a more familiar definition.
+However, because $\ambient$ is also exact and extensive, it is a Heyting category, so the same subobject has a more familiar definition.
 \[ \Ar(\simCat)=\set{f\of A|\forall i,j\of\nno.i\leq j \to f(i)\leq f(j)} \]
 
-\begin{definition} The object $\Ar(\simCat)$ is the object of arrows of the internal \keyword{category of simplices} $\simCat$, whose object of objects $\Ob(\simCat)$ is $\nno$. The category of \emph{simplicial objects and morphisms} of $\ambient$ is $\ambient\s$.
+\begin{definition} The object $\Ar(\simCat)$ is the object of arrows of the internal \keyword{category of simplices} $\simCat$, whose object of objects $\Ob(\simCat)$ is $\nno$.
 \end{definition}
 
-\begin{remark} We assume that all of the structure on $\ambient$ comes from functors. So several functors between categories related to $\ambient$ has right adjoint that give $\ambient$ its limits and exponentials and some functor have left adjoint that give ambient colimits. Definitions in terms of universal properties only define objects up to isomorphism. Our assumption ensures that there are functors that hit all the necessary isomorphism classes, when we only specify a functor up to isomorphism.
+\begin{remark} We assume that all of the structure on $\ambient$ comes from functors. So several functors between categories related to $\ambient$ have right adjoints that give $\ambient$ its limits and exponentials and some functors have left adjoints that give ambient colimits. Definitions in terms of universal properties only define objects up to isomorphism. Our assumption ensures that there are functors that hit all the necessary isomorphism classes, when we only specify a functor up to isomorphism.
 \end{remark}
-
-We internalize the lifting properties to define Kan complexes with as follows.
-
-\begin{definition}
-A morphism $f\of X\to Y$ of simplicial object has the \emph{right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the \emph{left} lifting property with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\nat(\id_J,f),\nat(g,\id_X))}$ 
-which is the factorization of the span $\nat(\id_J,f)$, $\nat(g,\id_X)$ through the pullback cone of $\nat(\id_I,f)$ and $\nat(g,\id_Y)$
-is a \emph{split} epimorphism.
-\[\xy
-(34,20)*+{\nat(I,X)}="top",(0,10)*+{\nat(J,X)}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\nat(I,Y)}="right",(34,0)*+{\nat(J,Y)}="bottom"
-\ar^{\nat(g,\id_X)} "left";"top" \ar@{.>}|(.6){\tuplet{f_!,g\ri}} "left";"middle" \ar_{\nat(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
-\ar "middle";"top" \ar^(.6){\nat(\id_I,f)} "top";"right" \ar_(.6){\nat(g,\id_Y)} "bottom";"right"
-\endxy\]
-A section of $\tuplet{f_\bang,g\ri}$ is a \emph{filler operator}.\label{lifting}
-\end{definition}
-
-This version of the lifting property is powerful enough to lift arbitrary families of morphism both internal and external.
 
 \subsection{Summary}
 For completeness we not that $\ambient$ being \emph{$\Pi$-pretopos} means all of the following.
@@ -65,7 +51,7 @@ The category $\ambient$ is has a \emph{natural number object}. To keep track of 
 This combination of properties implies the following.
 \begin{enumerate}
 \item The category $\ambient$ has all colimits and that reindexing functors preserve them. 
-\item The category $\ambient$ is a \emph{Heyting category}. This means that for each object $X$ the poset of subobjects $\sub(X)$ is a Heyting algebra and that for each $f\of X\to Y$ the preimage map $f\ri\of\sub(Y)\to\sub(X)$ is a morphism of Heyting algebras.  
+\item The category $\ambient$ is a \emph{Heyting category}. This means that for each object $X$ the poset of subobjects $\sub(X)$ is a Heyting algebra and that for each $f\of X\to Y$ the preimage map $f\ri\of\sub(Y)\to\sub(X)$ is a morphism of Heyting algebras. %todo: Beck-Chevalley?
 \end{enumerate}
 
 \end{document}

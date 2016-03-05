@@ -4,23 +4,31 @@
 \section{Model Structure}
 This section outlines the proof of the main theorem of this section. We start with definition the core concepts.
 
-\begin{definition} A \keyword{model structure} on a category $\cat C$ consist of three sets of morphism: the \emph{fibrations} $F$, the \emph{cofibrations} $C$ and the \emph{weak equivalences} $W$ which have the following properties. 
+\begin{definition} An \keyword{model structure} on a $\cat A$-enriched category $\cat C$ consist of three sets of morphism: the \emph{fibrations} $F$, the \emph{cofibrations} $C$ and the \emph{weak equivalences} $W$ which have the following properties. 
 \begin{itemize}
-\item The set $W$ satisfies \emph{2-out-of-3} which means that for every pair of morphisms $f\of X\to Y$ and $g\of Y\to Z$ of $\cat C$, if two out of $f$, $g$ and $g\circ f$ are in $W$ so is the third. 
-\item The pairs of sets $(C,F\cap W)$ and $(C\cap W,F)$ are \emph{internal factorization systems}. 
+\item The set $W$ satisfies \emph{2-out-of-3} which means that for every pair of morphisms $f\of X\to Y$ and $g\of Y\to Z$ of $\cat C$, if two out of $f$, $g$ and $g\circ f$ are in $W$ then all are. 
+\item The pairs of sets $(C,F\cap W)$ and $(C\cap W,F)$ are \emph{enriched factorization systems}. 
 \end{itemize}
 
-Internal factorization systems are pairs of set of morphisms $(L,R)$ in a category with the following properties.
+Categories with such a structure are \emph{model categories}. Members of $C\cap W$ are called \keyword{acyclic cofibrations} and members of $F\cap W$ are called \keyword{acyclic fibrations}.
+
+An \keyword{enriched factorization system} is a pairs of set of morphisms $(L,R)$ of an enriched category with the following properties.
 \begin{itemize}
-\item A morphism $l$ belongs to $L$ if an only if it has the left lifting property with respect all to members of $R$.
-\item The class $R$ has the dual property.
+\item A morphism belong to $L$ if and only if it has the \emph{left lifting property} with respect all to members of $R$.
+\item A morphism belong to $R$ if and only if it has the \emph{right lifting property} with respect all to members of $L$.
 \item Every morphism factors as a member of $R$ following a member of $L$.
 \end{itemize}
 
-Members of $C\cap W$ are called \emph{acyclic cofibrations} and members of $F\cap W$ are called \emph{acyclic fibrations}.
+A morphism $f\of X\to Y$ of an $\cat A$-enriched category $\cat C$ has the \emph{right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the \emph{left lifting property} with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\cat C(\id_J,f),\cat C(g,\id_X))}$ which is the factorization of the span $\cat C(\id_J,f)$, $\cat C(g,\id_X)$ through the pullback cone of $\cat C(\id_I,f)$ and $\cat C(g,\id_Y)$ is a \emph{split} epimorphism.
+\[\xy
+(34,20)*+{\cat C(I,X)}="top",(0,10)*+{\cat C(J,X)}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\cat C(I,Y)}="right",(34,0)*+{\cat C(J,Y)}="bottom"
+\ar^{\cat C(g,\id_X)} "left";"top" \ar@{.>}|(.6){\tuplet{f_!,g\ri}} "left";"middle" \ar_{\cat C(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
+\ar "middle";"top" \ar^(.6){\cat C(\id_I,f)} "top";"right" \ar_(.6){\cat C(g,\id_Y)} "bottom";"right"
+\endxy\]
+A section of $\tuplet{f_\bang,g\ri}$ is a \keyword{filler operator}.
 \end{definition}
 
-In ambient we make the following selections. 
+In $\ambient\s$ we make the following selections. 
 
 \begin{definition} A morphism $f\of X\to Y$ of category $\ambient\s$ is a \keyword{fibration} if it has the right lifting property with respect to the family of all \emph{horn inclusions}, which is defined as follows. 
 
@@ -45,14 +53,8 @@ We want our theorems to work in a $\Pi$-pretopos $\ambient$ that doesn't have in
 \begin{definition} A \keyword{complex} is a tuple $\tuplet{\base X,\dim,\cdot,\filler}$ where $\tuplet{\base X,\dim,\cdot}$ is a simplicial object and $\filler$ a lifting operator for the morphism $\bang\of \tuplet{\base X,\dim,\cdot}\to 1$. A morphism of complexes is simply a morphism of simplicial objects. The \emph{category of complexes} and morphisms of complexes is $\ambient\s\f$.
 \end{definition}
 
-\hide{everything below was cut from somewhere else. because we changed the definitions, we need to check our language.
-
-In particular: the fact that an acyclic cofibrations between fibrant objects is a kind of homotopy equivalence was taken as definition for some time.
-
-}
-
 \begin{theorem}[Model category]
-With fibrations, weak equivalences and cofibrations defined as above $\ambient\s\f$ is a model category.
+With fibrations, weak equivalences and cofibrations defined as above the $\ambient$-enriched category $\ambient\s\f$ is a model category.
 \label{model category}
 \end{theorem}
 

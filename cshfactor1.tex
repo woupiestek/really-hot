@@ -60,29 +60,32 @@ For each $i\of\nno$ let $S_i$ be the object of $n$-dimensional faces in $S$. Eac
 Cofibrations have the left lifting property by lemma \ref{saturation} below.
 \end{proof}
 
-\begin{definition} The successor morphism $s\of\nno\to\nno$ induces an endofunctor $s\ri$ of $\ambient/\nno$. A \keyword{cochain} is a morphism a morphism $f\of X\to s\ri(X)$ in $\ambient/\nno$. A morphism of cochains $(X,f)\to(Y,g)$ is a morphism $h\of X\to Y$ such that $s\ri(h)\circ f = g\circ h$.
+\begin{definition} Let $\cat A$ be a $\Pi$-pretopos with a natural number object $\nno$. The successor morphism $s\of\nno\to\nno$ induces an endofunctor $s\ri$ of $\ambient/\nno$. A \keyword{cochain} is a morphism $f\of X\to s\ri(X)$ in $\cat A/\nno$. A morphism of cochains $(X,f)\to(Y,g)$ is a morphism $h\of X\to Y$ such that $s\ri(h)\circ f = g\circ h$.
 
-For every object $Y$ of $\ambient$ there is a constant family $\nno\ri(Y)$ and an isomorphism $\nno\ri(Y)\simeq s\ri(\nno\ri(Y))$. The \keyword{transfinite composition} of a cochain $(X,g)$ is a cochain morphism $h\of (X,f)\to\nno\ri Y$ such that for every other morphism $k\of (X,f)\to\nno\ri Z$ there is a unique morphism $l\of Z\to Y$ such that $s\ri(l)\circ h=k$.
+For every object $Y$ of $\ambient$ there is a constant family $\nno\ri(Y)$ and an isomorphism $\nno\ri(Y)\simeq s\ri(\nno\ri(Y))$. The \keyword{transfinite composition} of a cochain $(X,g)$ is a cochain morphism $\traco(g)\of (X,f)\to\nno\ri Y$ such that for every other morphism $k\of (X,f)\to\nno\ri Z$ there is a unique morphism $l\of Z\to Y$ such that $s\ri(l)\circ \traco(g)=k$.
 \end{definition}
 
 \begin{lemma} The class of morphisms $L$ that has the left lifting property with respect to fibrations is closed under pushouts, coproducts indexed over objects of $\ambient$ and transfinite compositions. \label{saturation}\end{lemma}
 
 \begin{proof}
-%todo: this needs more work to be convincing.
-In each case the construction induces an operation on the split epimorphism in the diagram of the lifting property. 
-In the case of the pushouts, the construction is a pullback, which preserves split epimorphisms.
-Fibred exponentials also preserve split epimorphisms. Finally infinite compositions of split epimorphisms are split.
+In each case the construction induces an operation on the split epimorphism in the diagram of the lifting property. These operations happen to preserve split epimorphisms.
+
+Suppose $h\of I'\to J'$ is a pushout of $g\of I\to J$ where $g$ has the left lifting property with respect to $f\of X\to Y$. Because the functors $\nat(-,X)$ and $\nat(-,Y)\of(\ambient\s)\dual\to\ambient$ send pushouts to pullbacks, $\tuplet{f_!,h\ri}$ is a pullback of $\tuplet{f_!,g\ri}$ and the former is a split epimorphism because the latter is.
+\hide{ It is probably a good idea to add a diagram here, but let's postpone actually drawing one.
+\[\xy
+(34,40)*+{\nat(I,X)}="top",(0,20)*+{\nat(J,X)}="left",(24,20)*+{\bullet}="middle",(44,20)*+{\nat(I,Y)}="right",(34,0)*+{\nat(J,Y)}="bottom"
+,%
+(34,50)*+{\nat(I',X)}="top2",(0,30)*+{\nat(J',X)}="left2",(24,30)*+{\bullet}="middle2",(44,30)*+{\nat(I',Y)}="right2",(34,10)*+{\nat(J',Y)}="bottom2"
+%
+\ar^{\nat(g,\id_X)} "left";"top" \ar@{.>}|(.6){\tuplet{f_!,g\ri}} "left";"middle" \ar_{\nat(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
+\ar "middle";"top" \ar^(.6){\nat(\id_I,f)} "top";"right" \ar_(.6){\nat(g,\id_Y)} "bottom";"right"
+%
+\ar^{\nat(h,\id_X)} "left2";"top2" \ar@{.>}|(.6){\tuplet{f_!,h\ri}} "left2";"middle2" \ar_{\nat(\id_{J'},f)} "left2";"bottom2" \ar "middle2";"bottom2"
+\ar "middle2";"top2" \ar^(.6){\nat(\id_{I'},f)} "top2";"right2" \ar_(.6){\nat(h,\id_Y)} "bottom2";"right2"
+\endxy\]}
+
+Suppose $h\of(\Pi i\of I.\nat(X(i),Y(i)))$ represents a family of morphisms of that share the left property. That means $\tuplet{(I\disc\ri(f))_!,h\ri}$ is a split epimorphism and therefore so is its transpose $\tuplet{f_!,\Sigma_I(h)\ri}$, where $\Sigma_I(h)$ is the indexed coproduct of the family $h$.
+
+Finally, suppose that a cochain $(Z,h)$ has the left lifting property. That means $\tuplet{\nno\disc\ri(f)_!,h\ri}$ is a split epimorphism. For the transfinite composition $\traco(h)$, $\tuplet{f_!,\traco(h)\ri}$ if also split.
 \end{proof}
-
-
-\hide{\begin{proposition} A morphism has the left lifting property with respect to all contractible morphisms if and only if it is a cofibration. \label{cofibration characterization} \end{proposition}
-
-\begin{proof} Factor any morphism $f\of X\to Y$ as in the proof of lemma \ref{factor1} to get a cofibration $g\of X\to Z$ and a contractible $h\of Z\to Y$. Because $\id_Y\circ f = h\circ g$ there is a $k\of Y\to Z$ such that $h\circ k = \id_Y$ and $k\circ f = g$ by the lifting property.
-\[
-\xymatrix{
-X\ar[d]_f \ar[r]^g & Z\ar[d]^h\\
-Y\ar[r]_\id \ar[ur]^k & Y
-}
-\]
-A simplex $y$ of $Y$ is a face outside of the image of $f$ if $k(y)$ is a face outside of the image of $h$ and since the latter is decidable, the former is too.\end{proof}}
 \end{document}
