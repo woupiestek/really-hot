@@ -4,12 +4,6 @@
 \section{Fibrations}
 This section introduces a class of cofibrations and proof that they from an internal factorization system with fibrations (see definitions \ref{model structure}) in the category of complexes $\ambient\s\f$ (see definition \ref{complex}).
 
-\hide{
-Two definition of acyclic fibration are fighting: 1. lifting cofibrations, 2. lifting cycles
-Two definition of acyclic cofibrations are also fighting: 1. lifting against fibrations, 2. having a weak inverse.
-}
-
-
 \begin{lemma} Acyclic cofibrations and fibrations form an in internal factorization system on $\ambient\s\f$. \label{factorization system 2} \end{lemma}
 
 \begin{proof} Lemma \ref{acyclic have lifting} shows that weakly invertible cofibrations (see definition \ref{weakly invertible}) are acyclic cofibrations. Lemma \ref{lifting is acyclic} shows the converse. Proposition \ref{factor2} shows that every morphism factors as a fibration following a weakly invertible cofibration. 
@@ -59,11 +53,7 @@ Y+Y\ar[r]_{k\times\id} \ar[urr]^(.3){(\id,g)} & \simplex[1]\times Y \ar[r]_\bang
 Therefore $f$ is a weakly invertible cofibration by definition \ref{weakly invertible}.
 \end{proof}
 
-The proposition and the lemmas in this proof rely on a special property of cycle and horn inclusions (lemma \ref{triple lift}) which the next section explains.
-
-\subsection{Triple lifting property}
-
-\begin{lemma} Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
+\begin{lemma}[Triple lifting property] Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
 \[\xy
 (0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
 (0,0)*+{A\times D}="AD",(25,0)*+{B\times D}="BD",(40,0)*+{Y}="Y"
@@ -80,15 +70,14 @@ The proposition and the lemmas in this proof rely on a special property of cycle
 \label{triple lift}
 \end{lemma}
 
-\hide{todo: clarify what fibrations and cofibrations are here, and adjust accordingly}
-\begin{proof} The general case reduces to the cases where $f$ and $g$ are cycle or horn inclusions, because the lemma is equivalent to the statement that the following maps are (acyclic) fibrations. 
+\begin{proof} The general case reduces to the cases where $f$ and $g$ are cycle or horn inclusions, because the lemma is equivalent to the statement that the following maps are (acyclic) fibrations and because acyclic cofibrations are contractible (see definition \ref{contractible}).
 \begin{align*}
 \tuplet{f\to h}&=\tuplet{h^{\id_B},\id_X^f}\of X^B \to Y^B\times_{Y^A} X^A\\
 \tuplet{g\to h}&=\tuplet{h^{\id_D},\id_X^g}\of X^D \to Y^D\times_{Y^C} X^C
 \end{align*}
-In the case where $h$ is an acyclic fibration the morphism $\tuplet{g\to h}$ is an acyclic cofibration if is has the lifting property for the family of cycle inclusions $k_i\of \cycle[i]\to\simplex[i]$ for $i\of\nno$, and in turn $\tuplet{k_n\to h}$ are acyclic cofibrations if the triple lifting property holds in the cases where $a=k_i$ and $b=k_j$ for all $i,j\of\nno$. For the cases where $f$ or $g$ are acyclic the same reduction takes us to products of cycle and horn inclusions.
+In the case where $h$ is an acyclic fibration the morphism $\tuplet{g\to h}$ is an acyclic fibration if is has the lifting property for the family of cycle inclusions $k_i\of \cycle[i]\to\simplex[i]$ for $i\of\nno$, and in turn $\tuplet{k_n\to h}$ are acyclic cofibrations if the triple lifting property holds in the cases where $a=k_i$ and $b=k_j$ for all $i,j\of\nno$. For the cases where $f$ or $g$ are acyclic the same reduction takes us to products of cycle and horn inclusions.
 
-In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove that their pushout products $g\pp f$ are compositions of pushouts of sums of horns and cycles and therefore have the left lifting properties with respect to (acyclic) fibrations. 
+In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove that their pushout products $g\pp f$ are compositions of pushouts of sums of horns and cycles and therefore have the left lifting properties with respect to (acyclic) fibrations (see lemma \ref{saturation}).
 \[\xy
 (0,10)*+{W\times Y}="left",(20,10)*+{\bullet}="middle",(10,20)*+{X\times Y}="top",(10,0)*+{W\times Z}="bottom",(40,10)*+{X\times Z}="right"
 \ar^(.4){f\times \id} "left";"top" \ar_{\id\times g} "left";"bottom" \ar "top";"middle" \ar "bottom";"middle"
@@ -96,8 +85,6 @@ In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove 
 \endxy\]
 Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one of $f$, $g$ and $h$ is acyclic.
 \end{proof}
-
-\subsection{Factorization system}
 
 \begin{proposition} Every morphism $f\of X\to Y$ of $\ambient\s\f$ factors as a fibration following a weakly invertible cofibration. \label{factor2} \end{proposition}
 
@@ -112,7 +99,7 @@ The morphism $r$ is not necessarily a cofibration, but factors as an acyclic fib
 
 %h is ac
 There is a morphism $p_1\of Y/f\to X$ that satisfies $p_1\tuplet{x,p}=x$. Let $h'=p_1\circ h$, so $h'\circ h = \id_X$.
-There is a homotopy $\phi$ between $\id_{W}$ and $h\circ h'$ by lemma \ref{triple lift} and the following equations. %introduce triple lift more gently
+There is a homotopy $\phi$ between $\id_{W}$ and $h\circ h'$ by lemma \ref{triple lift} and the following equations.
 \begin{align*}
 (\id_W,h\circ h')\circ(h+h)&=(h,h)= (h\circ\pi_1)\circ (c\times \id_X)\\
 h'\circ h\circ \pi_1&=\pi_1=(h'\circ\pi_1)\circ(\id_{\simplex[1]}\times h)\\

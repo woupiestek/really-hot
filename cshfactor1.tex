@@ -1,8 +1,6 @@
 \documentclass[csh.tex]{subfiles}
 \begin{document}
 \section{Cofibrations}
-\hide{check reverences to cycle inclusions, as they are playing a smaller role now}
-
 This sections introduces a new type of morphism with similar properties as fibrations and shows that they form an internal factorization system with cofibrations on $\ambient\s$ (see definition \ref{model structure}).
 
 \begin{lemma} Acyclic fibrations and cofibrations form an internal factorization system on $\ambient\s$. \label{factorization system 1}. \end{lemma}
@@ -32,7 +30,7 @@ Let $LY[n] = \Sigma i\of[n]. Y[i]\times\simCat^-(n,i)$ and for $\phi\of [m]\to [
 Let $l_Y\of LY\to Y$ satisfy $l_Y\tuplet{\epsilon,y}=y\cdot\epsilon$.
 
 The second step glues simplices of $X$ and $LY$ together into new ones.
-The pair $(f,l_Y)$ stand for the morphism $X+LY\to Y$ that satisfies $(f,l_Y)(x)=f(x)$ for $x\of X$ and $(f,l_Y)(y) = l_Y(y)$ for $y\of LY$. Let $Z[n]\subseteq \Pi i\in[n].(X[i]+LY[i])^{\simCat^+(i,n)}$ consist of elements $z$ which satisfy the following conditions for all $\alpha\of [j]\to [k]$ and $\beta\of [i]\to[j]$ in $\simCat^+$.
+The pair $(f,l_Y)$ stand for the morphism $X+LY\to Y$ that satisfies $(f,l_Y)(x)=f(x)$ for $x\of X$ and $(f,l_Y)(y) = l_Y(y)$ for $y\of LY$. Let $Z[n]\subseteq \product{i\in[n]}{(X[i]+LY[i])^{\simCat^+(i,n)}}$ consist of elements $z$ which satisfy the following conditions for all $\alpha\of [j]\to [k]$ and $\beta\of [i]\to[j]$ in $\simCat^+$.
 \begin{enumerate}
 \item $(f,l_Y)(z(\alpha\circ\beta)) = (f,l_Y)(z(\alpha))\cdot\beta$;
 \item if $z(\alpha)\of X$ then $z(\alpha\circ\beta)\of X$;
@@ -71,20 +69,8 @@ For every object $Y$ of $\ambient$ there is a constant family $\nno\ri(Y)$ and a
 In each case the construction induces an operation on the split epimorphism in the diagram of the lifting property. These operations happen to preserve split epimorphisms.
 
 Suppose $h\of I'\to J'$ is a pushout of $g\of I\to J$ where $g$ has the left lifting property with respect to $f\of X\to Y$. Because the functors $\nat(-,X)$ and $\nat(-,Y)\of(\ambient\s)\dual\to\ambient$ send pushouts to pullbacks, $\tuplet{f_!,h\ri}$ is a pullback of $\tuplet{f_!,g\ri}$ and the former is a split epimorphism because the latter is.
-\hide{ It is probably a good idea to add a diagram here, but let's postpone actually drawing one.
-\[\xy
-(34,40)*+{\nat(I,X)}="top",(0,20)*+{\nat(J,X)}="left",(24,20)*+{\bullet}="middle",(44,20)*+{\nat(I,Y)}="right",(34,0)*+{\nat(J,Y)}="bottom"
-,%
-(34,50)*+{\nat(I',X)}="top2",(0,30)*+{\nat(J',X)}="left2",(24,30)*+{\bullet}="middle2",(44,30)*+{\nat(I',Y)}="right2",(34,10)*+{\nat(J',Y)}="bottom2"
-%
-\ar^{\nat(g,\id_X)} "left";"top" \ar@{.>}|(.6){\tuplet{f_!,g\ri}} "left";"middle" \ar_{\nat(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
-\ar "middle";"top" \ar^(.6){\nat(\id_I,f)} "top";"right" \ar_(.6){\nat(g,\id_Y)} "bottom";"right"
-%
-\ar^{\nat(h,\id_X)} "left2";"top2" \ar@{.>}|(.6){\tuplet{f_!,h\ri}} "left2";"middle2" \ar_{\nat(\id_{J'},f)} "left2";"bottom2" \ar "middle2";"bottom2"
-\ar "middle2";"top2" \ar^(.6){\nat(\id_{I'},f)} "top2";"right2" \ar_(.6){\nat(h,\id_Y)} "bottom2";"right2"
-\endxy\]}
 
-Suppose $h\of(\Pi i\of I.\nat(X(i),Y(i)))$ represents a family of morphisms of that share the left property. That means $\tuplet{(I\disc\ri(f))_!,h\ri}$ is a split epimorphism and therefore so is its transpose $\tuplet{f_!,\Sigma_I(h)\ri}$, where $\Sigma_I(h)$ is the indexed coproduct of the family $h$.
+Suppose $h\of(\product{i\of I}{\nat(X(i),Y(i))})$ represents a family of morphisms of that share the left property. That means $\tuplet{(I\disc\ri(f))_!,h\ri}$ is a split epimorphism and therefore so is its transpose $\tuplet{f_!,\Sigma_I(h)\ri}$, where $\Sigma_I(h)$ is the indexed coproduct of the family $h$.
 
 Finally, suppose that a cochain $(Z,h)$ has the left lifting property. That means $\tuplet{\nno\disc\ri(f)_!,h\ri}$ is a split epimorphism. For the transfinite composition $\traco(h)$, $\tuplet{f_!,\traco(h)\ri}$ if also split.
 \end{proof}

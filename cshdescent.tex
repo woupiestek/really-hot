@@ -6,7 +6,7 @@ This purpose of this section is to replace arguments based on \emph{minimal fibr
 \begin{itemize}
 \item $M$ is closed under pullbacks along arbitrary morphisms.
 \item $M$ is closed under composition.
-\item $M$ is closed under fibred exponentiation. This means that if $f:X\to Z$ belongs to $M$ and $g:Y\to Z$ is an arbitrary morphism, the fibred exponential $f^g_Z:\prod_{z\of Z} X_z^{Y_z}\to Z$ is in $M$ too.
+\item $M$ is closed under fibred exponentiation. This means that if $f:X\to Z$ belongs to $M$ and $g:Y\to Z$ is an arbitrary morphism, the fibred exponential $f^g_Z\of(\product{z\of Z}{X_z^{Y_z}})\to Z$ is in $M$ too.
 
 This requirement may give us more limits than we need, but the intended model of modest morphisms in $\Asm\ex$ satisfies it.
 %TODO: investigate which exponentials we actually need.
@@ -46,7 +46,7 @@ The rest of this section works out the definition and the properties of $K$.
 The following defines the functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
 \begin{enumerate}
 \item A function $\xi\of[m]\to[n]$ cuts $[m]$ into $n+1$ posets $\xi_j = \set{i\of[m]|\xi(i)=j}$. 
-\item Let $\norm \xi$ be the number of elements of the product $\Pi i\of ([n]-\set k).\xi_i$. 
+\item Let $\norm \xi$ be the number of elements of the product $\product{i\of ([n]-\set k)}{\xi_i}$. 
 \item Define $K_0(\xi)\of [m+\norm\xi]\to [n]$ as follows.
 \[ 
 	K_0(\xi)(i) = \left\{
@@ -57,13 +57,13 @@ The following defines the functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
 		\end{array}
 	\right.
 \]
-\item Let $\ka(\xi)\of\Pi i\of([n]-\set k).\xi_i \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\Pi i\of([n]-\set k).\xi_i$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
+\item Let $\ka(\xi)\of\product{i\of([n]-\set k)}{\xi_i} \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\product{i\of([n]-\set k)}{\xi_i}$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
 
-The lexical product means that $\Pi i\of([n]-\set k).\xi_i$ get the lexical ordering. The map $K_0$ adds the lexicographical product of most of the fibres of a map $\xi\of[m]\to[n]$ to the fibre over $k$. %more?
+The lexical product means that $\product{i\of([n]-\set k)}{\xi_i}$ get the lexical ordering. The map $K_0$ adds the lexicographical product of most of the fibres of a map $\xi\of[m]\to[n]$ to the fibre over $k$. %more?
 
 \item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the unique nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K_0(\xi)\circ\la(\xi) = \xi$.
-\item For each morphism $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\Pi i\of([n]-\set k).\phi_i$ be the corresponding map of the (lexical) products $\Pi i\of([n]-\set k).\xi_i\to\Pi i\of([n]-\set k).\xi'_i$.
-\item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the unique nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \Pi i\of([n]-\set k).\phi_i$ and $K_0(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
+\item For each morphism $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\product{i\of([n]-\set k)}{\phi_i}$ be the corresponding map of the (lexical) products $\product{i\of([n]-\set k)}{\xi_i}\to\product{i\of([n]-\set k)}{\xi'_i}$.
+\item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the unique nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \product{i\of([n]-\set k)}{\phi_i}$ and $K_0(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
 \end{enumerate}
 
 The maps $(K_0,K_1)$ define an endofunctor of $\simCat/[n]$. To get the functor, let $K(\xi) = h\ri(\simplex(K_0(\xi)))$ for objects $\xi$ of $\simCat/[n]$ and $K(\phi) = h\ri(\simplex(K_1(\phi)))$ for morphisms, where $h\ri$ is the reindexing functor $\ambient\s/\simplex[n]\to\ambient\s/\horn_k[n]$ along the horn inclusion $h\of \horn_k[n]\to\simplex[n]$. Concretely, $K$ satisfies the following equations for all objects $\xi$ of $\simCat/[n]$, all $x\of \base(\dom(K(\xi)))$ and all arrows $\phi$ of $\simCat/[n]$.
@@ -154,7 +154,7 @@ Each inclusion $A_j\to A_{j+1}$ is a pushout of the inclusion of $A_j\cap \face(
 &\left(\bigvee_{i\of[j+1]-\set{k,\xi(l)}}\face(K_0(\xi),u_i\land u_{j+1})\right)\end{align*}
 The faces $\face(K_0(\xi),u_{j+1}\land v_{i})$ and $\face(K_0(\xi),u_i\land u_{j+1})$ all contain the point $\lambda(l)$ of $\simplex[m+\norm\xi]$ which means that lemma \ref{face completion} applies to the inclusion $A_j\cap \face(K_0(\xi),u_{j+1}) \to \face(K_0(\xi),u_{j+1})$. Hence $A\to B$ has the left lifting property.
 
-If $\xi(l)=k$, then $B=C$ and the proof is complete. Suppose $\xi(l)=i\neq k$. First define the following maps $[m+\norm\xi]\to\bool$ for each $\vec p \of\prod_{i\of [n]-\set k}\xi_i$.
+If $\xi(l)=k$, then $B=C$ and the proof is complete. Suppose $\xi(l)=i\neq k$. First define the following maps $[m+\norm\xi]\to\bool$ for each $\vec p \of\product{i\of [n]-\set k}{\xi_i}$.
 \begin{align*}
 w_{\vec p}(\kappa(\vec q)) &= \true &
 w_{\vec p}(\lambda(q)) &= ((\xi(q)=k\vee q\leq p_{\xi(q)})\land\xi(q)\neq \xi(l))
@@ -162,7 +162,7 @@ w_{\vec p}(\lambda(q)) &= ((\xi(q)=k\vee q\leq p_{\xi(q)})\land\xi(q)\neq \xi(l)
 Decompose $B\to C$ as the inclusions of the following subobjects that satisfy $B_0=B$ and $B_{m+\norm\xi+1}=C$.
 \[ B_{j\of[m+\norm\xi+1]} = B \vee \left(\bigvee_{\kappa(\vec p)<j} \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})\right)\]
 
-When $j\neq\kappa(\vec p)$ for any $\vec p \of \prod_{i\of [n]-\set k}\xi_i$, the inclusion $B_j\to B_{j+1}$ is the identity arrow, which satsifies the left lifting property trivially. 
+When $j\neq\kappa(\vec p)$ for any $\vec p \of \product{i\of [n]-\set k}{\xi_i}$, the inclusion $B_j\to B_{j+1}$ is the identity arrow, which satsifies the left lifting property trivially. 
 
 Suppose $j\neq\kappa(\vec p)$. Each inclusion $B_j\to B_{j+1}$ is a pushout of the inclusion of $B_j\cap \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})$ into $\face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})$, where
 \begin{align*} B_j\cap \face(K_0(\xi),w_{\vec p}) = 
@@ -170,7 +170,7 @@ Suppose $j\neq\kappa(\vec p)$. Each inclusion $B_j\to B_{j+1}$ is a pushout of t
 &\bigvee_{i\of [m]-\set l} \face(K_0\xi,v_i\land w_{\vec p})\vee\\
 &\bigvee_{\kappa(\vec q)<j} \face(K_0\xi,w_{\vec q}\land w_j)
 \end{align*}
-Let $\vec p[l]\of \prod_{i\of [n]-\set k}\xi_i$ satisfy $p[l]_j = l$ if $\xi(l)=j$ and $p[l]_i=p_i$ otherwise. The point $\kappa(p[l])$ is a member of $\face(K_0\xi,u_i\land w_{\vec p})$ for all $i\of [n]-\set{\xi(l),k}$. It is also a member of $\face(K_0\xi,w_{\vec q}\land w_{\vec p})$ for all $\vec q\of \prod_{i\of [n]-\set k}\xi_i$ such that $\kappa(\vec q)<\kappa(\vec p)$. When $\kappa(\vec p[l])$ is not a member of $\face(K_0\xi,v_i\land w_{\vec p})$ for some $i$, then $\face(K_0\xi,v_i\land w_{\vec p})$ is a subobject of a face of $B_j\cap \face(K_0(\xi),\land w_{\vec p})$ that does contain $\kappa(\vec p[l])$.
+Let $\vec p[l]\of \product{i\of [n]-\set k}{\xi_i}$ satisfy $p[l]_j = l$ if $\xi(l)=j$ and $p[l]_i=p_i$ otherwise. The point $\kappa(p[l])$ is a member of $\face(K_0\xi,u_i\land w_{\vec p})$ for all $i\of [n]-\set{\xi(l),k}$. It is also a member of $\face(K_0\xi,w_{\vec q}\land w_{\vec p})$ for all $\vec q\of \product{i\of [n]-\set k}{\xi_i}$ such that $\kappa(\vec q)<\kappa(\vec p)$. When $\kappa(\vec p[l])$ is not a member of $\face(K_0\xi,v_i\land w_{\vec p})$ for some $i$, then $\face(K_0\xi,v_i\land w_{\vec p})$ is a subobject of a face of $B_j\cap \face(K_0(\xi),\land w_{\vec p})$ that does contain $\kappa(\vec p[l])$.
 
 Let $i\of[m]-\set l$. If not $v_i(\kappa(\vec p[l]))$ then by definition $\xi(i)\neq k$ and $(p[l]_\xi(i) = i)$. If $i$ is the least member of $\xi_{\xi(i)}$, then $\face(K_0\xi,v_i\land w_{\vec p})\subseteq \face(K_0\xi,u_{\xi(i)}\land w_{\vec p})$. If $\xi(i-1)=\xi(i)$, then $\kappa(\vec p[i-1])<\kappa(\vec p)$ and $\face(K_0\xi,v_i\land w_{\vec p})\subseteq \face(K_0\xi,W_{\vec p[i-1]}\land w_{\vec p})$.
 
