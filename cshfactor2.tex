@@ -75,7 +75,7 @@ Therefore $f$ is a weakly invertible cofibration by definition \ref{weakly inver
 \tuplet{f\to h}&=\tuplet{h^{\id_B},\id_X^f}\of X^B \to Y^B\times_{Y^A} X^A\\
 \tuplet{g\to h}&=\tuplet{h^{\id_D},\id_X^g}\of X^D \to Y^D\times_{Y^C} X^C
 \end{align*}
-In the case where $h$ is an acyclic fibration the morphism $\tuplet{g\to h}$ is an acyclic fibration if is has the lifting property for the family of cycle inclusions $k_i\of \cycle[i]\to\simplex[i]$ for $i\of\nno$, and in turn $\tuplet{k_n\to h}$ are acyclic cofibrations if the triple lifting property holds in the cases where $a=k_i$ and $b=k_j$ for all $i,j\of\nno$. For the cases where $f$ or $g$ are acyclic the same reduction takes us to products of cycle and horn inclusions.
+In the case where $h$ is an acyclic fibration the morphism $\tuplet{g\to h}$ is an acyclic fibration if is has the lifting property for the family of cycle inclusions $k_i\of \cycle[i]\to\simplex[i]$ for $i\of\nno$. In turn $\tuplet{k_n\to h}$ are acyclic cofibrations if the triple lifting property holds in the cases where $a=k_i$ and $b=k_j$ for all $i,j\of\nno$. For the cases where $f$ or $g$ are acyclic the same reduction takes us to products of cycle and horn inclusions.
 
 In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove that their pushout products $g\pp f$ are compositions of pushouts of sums of horns and cycles and therefore have the left lifting properties with respect to (acyclic) fibrations (see lemma \ref{saturation}).
 \[\xy
@@ -90,9 +90,9 @@ Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one
 
 \begin{proof} There is a simple factorization $f = p_0\circ r$ where $p_0\of Y/f\to Y$ and $r\of X\to Y/f$, where 
 \begin{align*}
-Y/f &= \set{(x,p)\of X\times Y^{\simplex[1]}| f(x) = p(*\mapsto 1) }\\
-p_0\tuplet{x,p} &= p(*\mapsto 0)\\
-r(x) &= \tuplet{x,*\mapsto f(x)}
+Y/f &= \set{(x,p)\of X\times Y^{\simplex[1]}| f(x) = p(\function{*}{1}) }\\
+p_0\tuplet{x,p} &= p(\function{*}{0})\\
+r(x) &= \tuplet{x,\function{*}{f(x)}}
 \end{align*}
 
 The morphism $r$ is not necessarily a cofibration, but factors as an acyclic fibration $g\of W\to Y/f$ following an cofibration $h\of X\to W$ by proposition \ref{factor1}. The morphism $h$ is a weakly invertible cofibration and the composition $p_0\circ g$ is a fibration for the following reasons.

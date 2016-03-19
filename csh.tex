@@ -61,7 +61,8 @@ Poland}
 \mathrmdef{filler}
 \newcommand\traco\omega
 
-\newcommand\product[2]{\Pi #1. #2}
+\newcommand\product[2]{\Pi #1 \mapsto #2}
+\newcommand\function[2]{\lambda #1 \mapsto #2}
 
 \newcommand\keyword[1]{\emph{#1}\label{#1}}
 
@@ -70,7 +71,7 @@ Poland}
 
 \begin{document}
 
-\begin{abstract} The paper show how to develop simplicial homotopy inside realizability categories like the category of assemblies, where the small object argument and minimal fibrations are unavailable. This way simplicial assemblies are a suitable model for homotopy type theory.\end{abstract}
+\begin{abstract} This paper aims to help with the development of new models of homotopy type theory, in particular with models that are based on realizability toposes. For this purpose it develops an internal simplicial homotopy that does not rely on the \emph{small object argument} or \emph{minimal fibrations} as these require structure that realizability toposes lack.\end{abstract}
 
 \hide{
 Three papers:
@@ -84,22 +85,21 @@ Idee: reverse the order. definitions--theorem--lemmas. That way the purpose of t
 \maketitle
 
 \section*{Introduction}
-This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory} following the example of \citep{KLV12}. The intention is to interpret types as the homotopy types of the simplicial objects in the \emph{category of assemblies}. What makes this challenging, is that this category lacks some of the structure of the category of sets that \emph{classical homotopy theory} is build on. In the internal logic the principle of the excluded middle and the axiom of choice are false. The category of assemblies is not exact and lacks infinite limits and colimits. While there are \emph{generic monomorphisms}, they are not subobject classifiers. I offer the following solutions.
+This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory} following the example of \citep{KLV12}. The intention is to interpret types as the homotopy types of certain simplicial objects in the \emph{effective topos}. This category lacks some of the structure of the category of sets underlying classical homotopy theory. In the internal logic the principle of the excluded middle and the axiom of choice are false. The category of assemblies is not exact and lacks infinite limits and colimits. While there are \emph{generic monomorphisms} there are no subobject classifiers. We work around these issues in the following way.
 \begin{enumerate}
-\item Take the exact completion of the category of assemblies. This is not the effective topos but another realizability topos.
-\item Limit the class of cofibrations. In classical simplicial homotopy theory every mono\-morphism is a cofibration. We demand that certain properties of the monomorphisms are decidable.
-\item Strengthen the lifting property. Fibrations come equipped with a \emph{filler operator} that specifies a solution for each of the basic lifting problems.
-\item Build the homotopy category out of fibrant objects only. This way we don't need the infinite colimits that make the small object argument of classical simplicial homotopy work.
+\item Limit the class of cofibrations. In classical simplicial homotopy theory every mono\-morphism is a cofibration. We demand that certain properties of the monomorphisms are decidable so classical arguments remain valid.
+\item Strengthen the lifting property. Fibrations come equipped with a \emph{filler operator} that gives solutions for a family of generic lifting problems.
+\item Build the homotopy category out of fibrant objects only. That way we avoid needing fibrant replacements.
 \end{enumerate}
-To avoid the distracting peculiarities of the category of assemblies and its exact completion this paper works with a generic \emph{$\Pi$-pretopos} with a \emph{natural number object} instead of the category of assemblies itself.
+To avoid distracting peculiarities of the realizability categories this paper works with a generic \emph{$\Pi$-pretopos} with a \emph{natural number object}. 
 
-The paper works out suitable definition of fibrations, cofibrations and their acyclic counterparts (definitions \ref{model structure}) and proves that they form a model structure on the category of Kan complexes (theorem \ref{model category}). The last section confirms that certain universal fibrations actually live in the category of Kan complexes (theorem \ref{fibrant universe}). 
+\subsection*{Conclusion} There are definitions of fibrations, cofibrations and their acyclic counterparts (definitions \ref{model structure}) in $\Pi$-pretoposes that make the category of Kan complexes a \emph{model category} (theorem \ref{model category}). Certain \emph{universal fibrations} (definition \ref{universal modest fibration}) automatically live in the category of Kan complexes (theorem \ref{fibrant universe}).
 
 \subsection*{Related literature}
-Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}. The intended model is the \emph{ex/lex completion} \citep{MR1600009} of category of assemblies defined in \citep{MR1097022,MR1023803,MR2479466}. This completion is not the famous \emph{effective topos}, but it is another realizability topos. 
+Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}. The intended model was the \emph{ex/lex completion} \citep{MR1600009} of category of assemblies defined in \citep{MR1097022,MR2479466,MR1023803}. This completion is not the famous \emph{effective topos}, but it is another realizability topos. 
 
 \subsection*{Acknowledgments} 
-I am grateful to the Warsaw Center of Mathematics and Computer Science for the opportunity to write this paper. I am also grateful for discussions with Marek Zawadowski and the seminars on simplicial homotopy theory he organized during my stay at Warsaw University. Richard Garner, Peter LeFanu Lumsdaine and Thomas Streicher made invaluable comments on early drafts of this paper.
+I am grateful to the Warsaw Center of Mathematics and Computer Science for the opportunity to do the research leading to this paper. I am also grateful for discussions with Marek Zawadowski and the seminars on simplicial homotopy theory he organized during my stay at Warsaw University. Richard Garner, Peter LeFanu Lumsdaine and Thomas Streicher made invaluable comments on early drafts of this paper.
 
 
 \subfile{cshintro}
