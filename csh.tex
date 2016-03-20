@@ -85,18 +85,23 @@ Idee: reverse the order. definitions--theorem--lemmas. That way the purpose of t
 \maketitle
 
 \section*{Introduction}
-This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory} following the example of \citep{KLV12}. The intention is to interpret types as the homotopy types of certain simplicial objects in the \emph{effective topos}. This category lacks some of the structure of the category of sets underlying classical homotopy theory. In the internal logic the principle of the excluded middle and the axiom of choice are false. The category of assemblies is not exact and lacks infinite limits and colimits. While there are \emph{generic monomorphisms} there are no subobject classifiers. We work around these issues in the following way.
+This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory} following the example of \citep{KLV12}. That model uses the category of simplicial sets. Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}.
+
+The intention is to interpret types as the homotopy types of certain simplicial objects in a \emph{realizability topos} (see \citep{MR2479466}). These toposes lack some of the structure of the category of sets underlying classical homotopy theory. In the internal logic the principle of the excluded middle and the axiom of choice can be invalid. They can lack infinite limits and colimits. We work around these issues in the following way.
 \begin{enumerate}
 \item Limit the class of cofibrations. In classical simplicial homotopy theory every mono\-morphism is a cofibration. We demand that certain properties of the monomorphisms are decidable so classical arguments remain valid.
-\item Strengthen the lifting property. Fibrations come equipped with a \emph{filler operator} that gives solutions for a family of generic lifting problems.
+\item Strengthen the lifting property. Fibrations come equipped with a \emph{filler operator} that gives solutions for a family of basic lifting problems.
 \item Build the homotopy category out of fibrant objects only. That way we avoid needing fibrant replacements.
 \end{enumerate}
-To avoid distracting peculiarities of the realizability categories this paper works with a generic \emph{$\Pi$-pretopos} with a \emph{natural number object}. 
+To avoid distracting peculiarities of the realizability topos this paper works with a generic \emph{$\Pi$-pretopos} with a \emph{natural number object}. That makes our simplicial homotopy predicative as well as constructive.
 
 \subsection*{Conclusion} There are definitions of fibrations, cofibrations and their acyclic counterparts (definitions \ref{model structure}) in $\Pi$-pretoposes that make the category of Kan complexes a \emph{model category} (theorem \ref{model category}). Certain \emph{universal fibrations} (definition \ref{universal modest fibration}) automatically live in the category of Kan complexes (theorem \ref{fibrant universe}).
 
-\subsection*{Related literature}
-Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}. The intended model was the \emph{ex/lex completion} \citep{MR1600009} of category of assemblies defined in \citep{MR1097022,MR2479466,MR1023803}. This completion is not the famous \emph{effective topos}, but it is another realizability topos. 
+\subsection*{Intended model} The \emph{category of assemblies} which is the category of $\neg\neg$-separated objects of the effective topos up to equivalence, has several \emph{strongly} complete internal categories that are not posets, in particular the \emph{category of modest sets} \citep{MR1097022,MR2479466,MR1023803}. \emph{Strongly complete} means that the externalization of the internal category is a complete fibred category. The category of assemblies is not exact, but the \emph{ex/lex completion} \citep{MR1600009} preserves strongly complete internal categories. This exact completion is not the effective topos, but it is a kind of realizability topos and it is the intended ambient category $\ambient$ in this paper. 
+
+The fact that we have a topos with a complete category that is not a poset is interesting, because complete internal categories in Grothendieck toposes are necessarily posets. The latter fact is traditionally attributed to Peter Freyd.
+
+In the ex/lex completion, \emph{modest fibrations} are fibrations whose underlying morphisms are families of modest sets or quotients of such families by modest families of equivalence relations. There is a \emph{universal modest fibration} (see definition \ref{universal modest fibration}) which is a \emph{univalent fibration} and hence a potential model of homotopy type theory.
 
 \subsection*{Acknowledgments} 
 I am grateful to the Warsaw Center of Mathematics and Computer Science for the opportunity to do the research leading to this paper. I am also grateful for discussions with Marek Zawadowski and the seminars on simplicial homotopy theory he organized during my stay at Warsaw University. Richard Garner, Peter LeFanu Lumsdaine and Thomas Streicher made invaluable comments on early drafts of this paper.
