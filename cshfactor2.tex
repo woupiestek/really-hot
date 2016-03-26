@@ -53,39 +53,6 @@ Y+Y\ar[r]_{k\times\id} \ar[urr]^(.3){(\id,g)} & \simplex[1]\times Y \ar[r]_\bang
 Therefore $f$ is a weakly invertible cofibration by definition \ref{weakly invertible}.
 \end{proof}
 
-\begin{lemma}[Triple lifting property] Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
-\[\xy
-(0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
-(0,0)*+{A\times D}="AD",(25,0)*+{B\times D}="BD",(40,0)*+{Y}="Y"
-\ar^{f\times\id} "AC";"BC"
-\ar_{\id\times g} "AC";"AD"
-\ar_{f\times\id} "AD";"BD"
-\ar^{a} "AD";"X"
-\ar|(.6){\id\times g} "BC";"BD"
-\ar^(.6){b} "BC";"X"
-\ar@{.>}_{d} "BD";"X"
-\ar_(.6){c} "BD";"Y"
-\ar^{h} "X";"Y"
-\endxy\]
-\label{triple lift}
-\end{lemma}
-
-\begin{proof} The general case reduces to the cases where $f$ and $g$ are cycle or horn inclusions, because the lemma is equivalent to the statement that the following maps are (acyclic) fibrations and because acyclic cofibrations are contractible (see definition \ref{contractible}).
-\begin{align*}
-\tuplet{f\to h}&=\tuplet{h^{\id_B},\id_X^f}\of X^B \to Y^B\times_{Y^A} X^A\\
-\tuplet{g\to h}&=\tuplet{h^{\id_D},\id_X^g}\of X^D \to Y^D\times_{Y^C} X^C
-\end{align*}
-In the case where $h$ is an acyclic fibration the morphism $\tuplet{g\to h}$ is an acyclic fibration if is has the lifting property for the family of cycle inclusions $k_i\of \cycle[i]\to\simplex[i]$ for $i\of\nno$. In turn $\tuplet{k_n\to h}$ are acyclic cofibrations if the triple lifting property holds in the cases where $a=k_i$ and $b=k_j$ for all $i,j\of\nno$. For the cases where $f$ or $g$ are acyclic the same reduction takes us to products of cycle and horn inclusions.
-
-In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove that their pushout products $g\pp f$ are compositions of pushouts of sums of horns and cycles and therefore have the left lifting properties with respect to (acyclic) fibrations (see lemma \ref{saturation}).
-\[\xy
-(0,10)*+{W\times Y}="left",(20,10)*+{\bullet}="middle",(10,20)*+{X\times Y}="top",(10,0)*+{W\times Z}="bottom",(40,10)*+{X\times Z}="right"
-\ar^(.4){f\times \id} "left";"top" \ar_{\id\times g} "left";"bottom" \ar "top";"middle" \ar "bottom";"middle"
-\ar@{.>}|(.3){g\pp f} "middle";"right" \ar^{\id\times g} "top";"right" \ar_{f\times\id} "bottom";"right"
-\endxy\]
-Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one of $f$, $g$ and $h$ is acyclic.
-\end{proof}
-
 \begin{proposition} Every morphism $f\of X\to Y$ of $\ambient\s\f$ factors as a fibration following a weakly invertible cofibration. \label{factor2} \end{proposition}
 
 \begin{proof} There is a simple factorization $f = p_0\circ r$ where $p_0\of Y/f\to Y$ and $r\of X\to Y/f$, where 

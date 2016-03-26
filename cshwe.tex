@@ -1,0 +1,163 @@
+\documentclass[csh.tex]{subfiles}
+\begin{document}
+\section{Weak Equivalences}
+This section demonstrates that the weak equivalences of definition \ref{weak equivalence} satisfy the two out of three property that definition \ref{model structure} requires of them.
+
+\begin{lemma}[2-out-of-3] Let $f\of X\to Y$ and $g\of Y\to Z$ be morphisms of $\ambient\s\f$. If any two of $f,g$ or $g\circ f$ are weak equivalences, then all three are. \label{toot}\end{lemma}
+
+\begin{proof} Weak equivalences are closed under composition by lemma \ref{composition of weak equivalences}.
+
+Let $g$ and $g\circ f$ be arbitrary weak equivalences. The morphism $f$ factors as an acyclic fibration $h\of W\to Y$ following a cofibration $k\of X\to W$ by proposition \ref{factor2}. Because weak equivalences are closed under composition (see \ref{composition of weak equivalences}), $g\circ h$ is a weak equivalence. The morphism $k$ is acyclic for the following reasons. Factor both $g\circ f$ and $g\circ h$ as acyclic fibrations following acyclic cofibrations, so $g\circ f = a\circ b$ and $g\circ h = c\circ d$. The lifting properties induce a morphism $l$ such that $l\circ b = d\circ k$ and $c\circ l = a$. Lemma \ref{shared retract 2} says that $l$ is a weak equivalence because $a$ and $c$ are acyclic fibrations. 
+Because of closure under composition, the morphism $l\circ b = d\circ k$ is both a weak equivalence and a cofibration and hence an acyclic cofibration. Since $d$ and $d\circ k$ are an acyclic cofibrations, so is $k$ by lemma \ref{left cancellation}.
+\[\xymatrix{
+X\ar[r]_k\ar@/^2ex/[rr]^f\ar[d]_b & W\ar[r]_h\ar[d]^d & Y\ar[d]^g \\
+\bullet\ar@/_2ex/[rr]_a\ar@{.>}[r]^l & \bullet\ar[r]^c & Z
+}\]
+Since $f = h\circ k$, $f$ is a weak equivalence.
+
+The case where $f$ and $g\circ f$ are weak equivalences is dual to the case above and the reasoning is the same. Acyclic cofibrations satisfy lemma \ref{shared retract} where acyclic fibrations satisfy lemma \ref{shared retract 2}. Acyclic fibrations satisfy lemma \ref{right cancellation} where acyclic cofibrations satisfy lemma \ref{left cancellation}.
+
+This means that weak equivalences indeed satisfy 2-out-of-3.
+\end{proof}
+
+\begin{lemma} Weak equivalences are closed under composition. \label{composition of weak equivalences}\end{lemma}
+
+\begin{proof} Compositions of acyclic fibrations are acyclic fibrations and the same holds for acyclic cofibrations.
+All compositions of weak equivalences are weak equivalences, if $g\circ f$ factors as an acyclic fibration following an acyclic cofibration for each acyclic cofibration $g$ and acyclic fibration $f$.
+
+%transport of acyclics
+By proposition \ref{factor1} $g\circ f=h\circ k$ for some acyclic fibration $h\of W\to Z$ and a cofibration $k\of X\to W$. Let $g'$ be the left inverse of $g$. Since $f \circ \id = g'\circ g\circ f= (g'\circ h)\circ k$ there is a morphism $k'$ such that $f\circ k' = g'\circ h$ and $k'\circ k = \id$, so $k$ has its own left inverse.
+\[\xymatrix{
+X\ar[d]_f \ar[r]_{k} \ar@/^2ex/[rr]^{\id} & W\ar[d]^h \ar[r]_{k'} & X\ar[d]^f\\
+Y \ar[r]^{g} \ar@/_2ex/[rr]_{\id} & Z \ar[r]^{g'} & Y
+}\]
+
+Let $\phi$ be a homotopy between $\id_Z$ and $g\circ g'$ such that $\phi\circ (\id\times g)=g\circ\pi_1$.
+
+There is a homotopy $\chi$ between $\id_W$ and $k\circ k'$ by lemma \ref{triple lift}.
+\begin{align*}
+(\id, k\circ k')\circ (k+k) &= (k,k) = k\circ \pi_1\circ(c\times\id_X)\\
+h\circ (k \circ \pi_1) &= (\phi\circ (\id_W\times h))\circ (\id_{\simplex[1]} \times k)\\
+h\circ (\id, k\circ k') &= (\phi\circ (\id_W\times h))\circ (c\times \id_W)
+\end{align*}
+\[\xymatrix{
+X+X\ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\id,k\circ k')} & W\ar[d]^h\\
+\simplex[1]\times X\ar[r]_{\id\times k} \ar[urr]^(.3){k\circ \pi_1}  & \simplex[1]\times W\ar[r]_(.6){\phi\circ (\id\times h)} \ar@{.>}[ur]_\chi & Z
+}\]
+Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \pi_1$, $k$ is a weakly invertible cofibration by definition \ref{weakly invertible} and an acyclic cofibration by lemma \ref{acyclic have lifting}.
+\end{proof}
+
+\begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $g$ and $g\circ f$ are acyclic cofibrations, then $f$ is an acyclic cofibration \label{left cancellation} \end{lemma}
+
+\begin{proof} Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. Because $B$ is fibrant, there is a $b'\of Z\to B$ such that $b'\circ g = b$. Lifting properties also imply that there is an $a'\of Z\to A$ such that $a'\circ g\circ f = a$ and $k\circ a'= b'$. So $b'\circ g$ is a filler for $k\circ a=b\circ f$. By abstraction, there is a filler operator that lifts $f$ against all fibrations and that makes $f$ an acyclic cofibration.
+\[\xy
+(0,28)*+{X}="x",(14\halfrootthree,21)*+{A}="a",(0,14)*+{Y}="y",(14\halfrootthree,7)*+{B}="b",(0,0)*+{Z}="z"
+\ar^a "x";"a" \ar_f "x";"y" \ar^k "a";"b" \ar^(.25)b "y";"b" \ar_g "y";"z"
+\ar@{.>}_{b'} "z";"b" \ar@{.>}^(.75){a'} "z";"a"
+\endxy\]
+\end{proof}
+
+\begin{lemma}[Triple lifting property] Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
+\[\xy
+(0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
+(0,0)*+{A\times D}="AD",(25,0)*+{B\times D}="BD",(40,0)*+{Y}="Y"
+\ar^{f\times\id} "AC";"BC"
+\ar_{\id\times g} "AC";"AD"
+\ar_{f\times\id} "AD";"BD"
+\ar^{a} "AD";"X"
+\ar|(.6){\id\times g} "BC";"BD"
+\ar^(.6){b} "BC";"X"
+\ar@{.>}_{d} "BD";"X"
+\ar_(.6){c} "BD";"Y"
+\ar^{h} "X";"Y"
+\endxy\]
+\label{triple lift}
+\end{lemma}
+
+\begin{proof} The general case reduces to the cases where $f$ and $g$ are cycle or horn inclusions, because the lemma is equivalent to the statement that the following maps are (acyclic) fibrations and because acyclic cofibrations are contractible (see definition \ref{contractible}).
+\begin{align*}
+\tuplet{f\to h}&=\tuplet{h^{\id_B},\id_X^f}\of X^B \to Y^B\times_{Y^A} X^A\\
+\tuplet{g\to h}&=\tuplet{h^{\id_D},\id_X^g}\of X^D \to Y^D\times_{Y^C} X^C
+\end{align*}
+In the case where $h$ is an acyclic fibration the morphism $\tuplet{g\to h}$ is an acyclic fibration if is has the lifting property for the family of cycle inclusions $k_i\of \cycle[i]\to\simplex[i]$ for $i\of\nno$. In turn $\tuplet{k_n\to h}$ are acyclic cofibrations if the triple lifting property holds in the cases where $a=k_i$ and $b=k_j$ for all $i,j\of\nno$. For the cases where $f$ or $g$ are acyclic the same reduction takes us to products of cycle and horn inclusions.
+
+In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove that their pushout products $g\pp f$ are compositions of pushouts of sums of horns and cycles and therefore have the left lifting properties with respect to (acyclic) fibrations (see lemma \ref{saturation}).
+\[\xy
+(0,10)*+{W\times Y}="left",(20,10)*+{\bullet}="middle",(10,20)*+{X\times Y}="top",(10,0)*+{W\times Z}="bottom",(40,10)*+{X\times Z}="right"
+\ar^(.4){f\times \id} "left";"top" \ar_{\id\times g} "left";"bottom" \ar "top";"middle" \ar "bottom";"middle"
+\ar@{.>}|(.3){g\pp f} "middle";"right" \ar^{\id\times g} "top";"right" \ar_{f\times\id} "bottom";"right"
+\endxy\]
+Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one of $f$, $g$ and $h$ is acyclic.
+\end{proof}
+
+\begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $f$ and $g\circ f$ are acyclic fibrations, then $g$ is an acyclic fibration. \label{right cancellation}\end{lemma}
+
+\begin{proof} This is nearly the dual of lemma \ref{left cancellation} and dual reasoning gives $g$ the right lifting property for all cycle inclusions  which makes $g$ contractible (see definition \ref{contractible}) and an acyclic cofibration by lemma \ref{Reedy}.
+
+\[\xy
+(14\halfrootthree,28)*+{X}="x", (0,21)*+{\cycle[n]}="v", (14\halfrootthree,14)*+{Y}="y", (0,7)*+{\simplex[n]}="w", (14\halfrootthree,0)*+{Z}="z"
+\ar@{.>}^{a'} "v";"x" \ar_(.75)a "v";"y" \ar_k "v";"w"
+\ar@{.>}_(.25){b'} "w";"x" \ar_b "w";"z"
+\ar "x";"y" \ar "y";"z"
+\endxy\]
+
+The reason the dual reasoning works is that for the cycles $\cycle[n]$ from definition \ref{contractible} the unique morphism $\bang\of 0\to \cycle[n]$ is a cofibration. Here $0=0\disc$ is the initial object of $\ambient\s$. A member of $\base(\cycle[n])$ is a face if it is an identity morphism, and this is a decidable property of morphism in $\simCat$. No faces are in the image of $\bang$.
+\end{proof}
+
+\begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $g$ and $g\circ f$ are acyclic fibrations, then $f$ is a weak equivalence.\label{shared retract 2} \end{lemma}
+
+\begin{proof} By proposition \ref{factor1}, $f$ factors as an acyclic fibration $h\of W\to Y$ following a cofibration $k\of X\to W$. Because $(g\circ f)\circ \id = (g\circ h)\circ k$ and $g\circ f$ is an acyclic fibration, $k$ has a left inverse $k'\of X\to W$ which satisfies $g\circ f\circ k' = g\circ h$. 
+\[\xymatrix{
+X\ar[d]_k \ar[r]^\id & X\ar[d]^{g\circ f}\\
+W\ar[r]_{g\circ h} \ar@{.>}[ur]^{k'} & Z
+}\]
+
+Let $c\of 1+1\to\simplex[1]$ be the same cycle as above. There is homotopy $\phi$ between $\id_W$ and $k\circ k'$ by lemma \ref{triple lift} and the following equations.
+\begin{align*}
+(\id,k\circ k')\circ(k+k) &= (k,k) = (k\circ\pi_1)\circ (c\times\id_X)\\
+(g\circ h)\circ (k\circ \pi_1) &= (g\circ h\circ \pi_1)\circ(\id\times k)\\
+(g\circ h)\circ (\id,k\circ k') &= (g\circ h\circ \pi_1)\circ(c\times\id_W)
+\end{align*}
+\[\xymatrix{
+X+X \ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times\id}\ar[r]^(.6){(\id,k\circ k')} & W\ar[d]^{g\circ h}\\
+\simplex[1]\times X \ar[r]_{\id\times k}\ar[urr]^(.3){k\circ\pi_1}& \simplex[1]\times W\ar[r]_{g\circ h\circ \pi_1}\ar@{.>}[ur]_\phi & Z
+}\]
+Because $\phi\circ (\id_{\simplex[1]}\times k)=k\circ \pi_1$, definition \ref{weakly invertible} says that $k$ is a weakly invertible cofibration and lemma \ref{acyclic have lifting} says that $k$ is an acyclic cofibration. Therefore $f$ is a weak equivalence.\end{proof}
+
+\begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $f$ and $g\circ f$ are acyclic cofibrations, then $g$ is a weak equivalence.\label{shared retract} \end{lemma}
+
+\begin{proof} \hide{The morphism $g$ factors as a fibration $h\of W\to Z$ following an acyclic cofibration $k\of Y\to W$ by lemma \ref{factor2}. Lifting properties give $h$ a right inverse $h'$.
+\[\xymatrix{
+X\ar[r]^{k\circ f}\ar[d]_{g\circ f} & W\ar[d]^h\\
+Z\ar[r]_\id \ar[ur]^{h'} & Z
+}\]
+Lemma \ref{triple lift} provides a homotopy $\phi$ between $\id_W$ and $h'\circ h$, because the following equations hold.
+\begin{align*}
+(\id,h'\circ h)\circ(k\circ f+k\circ f)&= (k\circ f,k\circ f) = (k\circ f\circ \pi_1)\circ(c\times \id_Y)\\
+h\circ(k\circ f\circ\pi_1) &= g\circ f\circ\pi_1 = (h\circ\pi_1)\circ(\id_{\simplex[1]}\times (k\circ f))\\
+h\circ(\id_W,h'\circ h) &= (h,h) = (h\circ\pi_1)\circ(c\times\id_W)
+\end{align*}
+
+\[\xymatrix{
+X+X\ar[r]^{k\circ f+k\circ f}\ar[d]_{c\times \id} & W+W\ar[r]^(.6){(\id,h'\circ h)}\ar[d]_(.3){c\times\id} & W\ar[d]^h\\
+\simplex[1]\times X\ar[r]_{\id\times (k\circ f)}\ar[urr]^(.3){k\circ f\circ\pi_1} & \simplex[1]\times W\ar[r]_(.6){h\circ \pi_1}\ar@{.>}[ur]_{\phi} & Y
+}\]}
+
+This lemma is dual to lemma \ref{shared retract 2}. The morphism $g$ factors as a fibration $h\of W\to Z$ following an acyclic cofibration $k\of Y\to W$ by lemma \ref{factor2}. The dual of the proof of lemma \ref{shared retract 2} doesn't show that $h$ is an acyclic fibration directly, but it does show that $h$ has a right inverse $h'\of Z\to W$ and that there is a homotopy $\phi\of\simplex[1]\times W\to W$ between $\id_W$ and $h'\circ h$.
+
+Let $a\of I\to J$ be an arbitrary cofibration and let $i\of I\to W$ and $j\of J\to Z$ satisfy $j\circ a=h\circ i$. Lemma \ref{triple lift} deforms $h'\circ j$ into a filler. Let $c_i$ be the morphisms $1\to \simplex[0]$.
+\begin{align*}
+\phi\circ(\id\times i)\circ (c_1\times \id) &= h'\circ h\circ i = h'\circ j\circ a \\
+h\circ h' \circ j &= j = j\circ \pi_1\circ(c_1\times\id) \\
+j\circ \pi_1\circ (\id\times a) &= j\circ a\circ \pi_1 = h\circ i \circ \pi_1\\
+h\circ \phi\circ(\id\times i) &= h \circ \pi_1 \circ (\id\times i) = h\circ i \circ \pi_1
+\end{align*}
+
+\[\xymatrix{
+I\ar[r]^{a}\ar[d]_{c_1\times \id} & J\ar[r]^(.6){h'\circ j}\ar[d]_(.3){c_1\times\id} & W\ar[d]^h\\
+\simplex[1]\times I\ar[r]_{\id\times a}\ar[urr]^(.3){\phi\circ(\id\times i)} & \simplex[1]\times J\ar[r]_(.6){j\circ \pi_1}\ar@{.>}[ur]_{\psi} & Z
+}\]
+The filler is $\psi\circ c_0$. By generalization, $h$ is an acyclic fibration and $f$ is a weak equivalence.
+\end{proof}
+
+\end{document}

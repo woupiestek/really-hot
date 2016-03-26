@@ -56,7 +56,11 @@ The category $\ambient$ is has a \emph{natural number object}. To keep track of 
 This combination of properties implies the following.
 \begin{enumerate}
 \item The category $\ambient$ has all colimits and reindexing functors preserve them. 
-\item The category $\ambient$ is a \emph{Heyting category}. This means that for each object $X$ the poset of subobjects $\sub(X)$ is a Heyting algebra and that for each $f\of X\to Y$ the preimage map $f\ri\of\sub(Y)\to\sub(X)$ is a morphism of Heyting algebras. Moreover, $f\ri$ has both adjoints and those adjoints satisfy the \emph{Beck-Chevalley} property.
+\item The category $\ambient$ is a \emph{Heyting category}. 
+
+Technically this means that for each object $X$ the poset of subobjects $\sub(X)$ is a Heyting algebra and that for each $f\of X\to Y$ the preimage map $f\ri\of\sub(Y)\to\sub(X)$ is a morphism of Heyting algebras. Moreover, for each morphism $f$, $f\ri$ has both adjoints--right adjoint $\forall_f$ and left adjoint $\exists_f$--and those adjoints satisfy the \emph{Beck-Chevalley condition} which says that quantification and substitution commute over pullback squares. If $f\circ g = h\circ k$ is a pullback square, then $f\ri\circ\exists_h=\exists_g\circ k\ri$.
+
+Practically this means that $\ambient$ is a model for a constructive first order logic, hence that predicates define subobjects and that constructive theorems are valid in the internal language.
 \end{enumerate}
 
 \end{document}
