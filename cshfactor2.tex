@@ -2,11 +2,9 @@
 \begin{document}
 
 \section{Fibrations}
-This section introduces a class of cofibrations and proof that they from an internal factorization system with fibrations (see definitions \ref{model structure}) in the category of complexes $\ambient\s\f$ (see definition \ref{complex}).
-
 \begin{lemma} Acyclic cofibrations and fibrations form an in internal factorization system on $\ambient\s\f$. \label{factorization system 2} \end{lemma}
 
-\begin{proof} Lemma \ref{acyclic have lifting} shows that weakly invertible cofibrations (see definition \ref{weakly invertible}) are acyclic cofibrations. Lemma \ref{lifting is acyclic} shows the converse. Proposition \ref{factor2} shows that every morphism factors as a fibration following a weakly invertible cofibration. 
+\begin{proof} Lemma \ref{acyclic have lifting} shows that weakly invertible cofibrations (see definition \ref{weakly invertible}) are acyclic cofibrations. Lemma \ref{lifting is acyclic} shows the converse. Proposition \ref{factor2} shows that every morphism factors as a fibration following a weakly invertible cofibration.
 \end{proof}
 
 \begin{definition} In the subcategory $\ambient\s\f$ of $\ambient\s$ a cofibration $f\of X\to Y$ is \keyword{weakly invertible} if there is a $g\of Y\to X$ such that $g\circ f = \id_X$ and an $h\of \simplex[1]\times Y\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and 
@@ -55,7 +53,7 @@ Therefore $f$ is a weakly invertible cofibration by definition \ref{weakly inver
 
 \begin{proposition} Every morphism $f\of X\to Y$ of $\ambient\s\f$ factors as a fibration following a weakly invertible cofibration. \label{factor2} \end{proposition}
 
-\begin{proof} There is a simple factorization $f = p_0\circ r$ where $p_0\of Y/f\to Y$ and $r\of X\to Y/f$, where 
+\begin{proof} There is a simple factorization $f = p_0\circ r$ where $p_0\of Y/f\to Y$ and $r\of X\to Y/f$ and where 
 \begin{align*}
 Y/f &= \set{(x,p)\of X\times Y^{\simplex[1]}| f(x) = p(\function{*}{1}) }\\
 p_0\tuplet{x,p} &= p(\function{*}{0})\\
@@ -95,7 +93,7 @@ Let $d\of A\to B$ be a weakly invertible cofibration and let $a\of A\to Y/f$ and
 \ar_(.6){\bang} "BD";"one"
 \ar^{\bang} "Y";"one"
 \endxy\]
-The transpose $c_1^t\of B\to Y^{\simplex[1]}$ of $c_1$ and $c_0$ together factor as a morphism $c\of B \to Y/f$ which is a filler for $p_0\circ a = b\circ d$. By generalization, $p_0$ is a fibration.
+The transpose $c_1^t\of B\to Y^{\simplex[1]}$ of $c_1$ and $c_0$ together factor as a morphism $c\of B \to Y/f$ which is a filler for $p_0\circ a = b\circ d$. By generalization, $p_0$ has the right lifting property with respect to all acyclic cofibrations and therefore is a fibration.
 \end{proof}
 
 \end{document}

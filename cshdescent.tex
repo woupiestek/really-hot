@@ -1,7 +1,7 @@
 \documentclass[csh.tex]{subfiles}
 \begin{document}
 
-\section{Descent} 
+\section{Descent}
 This purpose of this section is to replace arguments based on \emph{minimal fibrations} in simplicial homotopy theory, in particular those that are related to homotopy type theory. We assume that there is a class $M$ of \emph{modest fibrations} in $\ambient\s$ with the following properties.
 \begin{itemize}
 \item $M$ is closed under pullbacks along arbitrary morphisms.
@@ -57,12 +57,12 @@ The following defines the functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
 		\end{array}
 	\right.
 \]
-\item Let $\ka(\xi)\of\product{i\of([n]-\set k)}{\xi_i} \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexical product $\product{i\of([n]-\set k)}{\xi_i}$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
+\item Let $\ka(\xi)\of\product{i\of([n]-\set k)}{\xi_i} \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexicographical product $\product{i\of([n]-\set k)}{\xi_i}$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
 
-The lexical product means that $\product{i\of([n]-\set k)}{\xi_i}$ get the lexical ordering. The map $K_0$ adds the lexicographical product of most of the fibres of a map $\xi\of[m]\to[n]$ to the fibre over $k$. %more?
+The lexicographical product means that $\product{i\of([n]-\set k)}{\xi_i}$ get the lexicographical ordering. This ordering determines priority by comparing elements in sequence. That means $\vec x < \vec y$ if there are $i$ such that $x_i \neq y_i$, and for the least such $i$ $x_i<y_i$. The map $K_0$ adds the lexicographical product of most of the fibres of a map $\xi\of[m]\to[n]$ to the fibre over $k$. %more?
 
 \item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the unique nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K_0(\xi)\circ\la(\xi) = \xi$.
-\item For each morphism $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\product{i\of([n]-\set k)}{\phi_i}$ be the corresponding map of the (lexical) products $\product{i\of([n]-\set k)}{\xi_i}\to\product{i\of([n]-\set k)}{\xi'_i}$.
+\item For each morphism $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\product{i\of([n]-\set k)}{\phi_i}$ be the corresponding map of the (lexicographical) products $\product{i\of([n]-\set k)}{\xi_i}\to\product{i\of([n]-\set k)}{\xi'_i}$.
 \item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the unique nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \product{i\of([n]-\set k)}{\phi_i}$ and $K_0(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
 \end{enumerate}
 
@@ -76,7 +76,7 @@ K(\phi)(x) &= K_1(\phi)\circ x
 \end{align*}
 \end{definition}
 
-Thanks to the following property, the natural equivalence of homset above extends to horn inclusions.
+Thanks to the following property, the natural equivalence of homsets above extends to horn inclusions.
 
 \begin{lemma} An \keyword{intersection} is a pullback square of monomorphisms. The functor $K$ preserves all intersections of $\simCat/[n]$. \end{lemma}
 
@@ -103,13 +103,13 @@ If $\ambient$ has infinite colimits, the functor $D$ has a left adjoint $K'$ tha
 
 \begin{definition}[Face notation] We introduce a notation for monomorphisms in $\simCat/[n]$ or more accurately for the result of applying $\simplex$ to them. For $\xi\of[m]\to[n]$ and $\phi\of[m]\to\bool$ let $\face(\xi,p)\of \dom(\face(\xi,p))\to \simplex[m]$ satisfy
 \begin{align*}
-\base(\dom(\face(\xi,p))) &= \set{\alpha\of\base(\simplex[m])\middle|\forall i\of \dom(\alpha).\phi\circ\alpha(i)=1}\\
+\base(\dom(\face(\xi,p))) &= \set{\alpha\of\base(\simplex[m])\middle|\forall i\of \dom(\alpha).p\circ\alpha(i)=\true}\\
 \dim(\alpha) &= \dom(\alpha)\\
 \alpha\cdot\chi &= \alpha\cdot\chi\\
 \face(\xi,p)(\alpha) &= \alpha
 \end{align*}
 \[\xymatrix{
-\bullet\ar[rr]^{\face(\xi,\phi)}\ar[dr] && \simplex[m]\ar[dl]^{\simplex(\xi)} \\
+\bullet\ar[rr]^{\face(\xi,p)}\ar[dr] && \simplex[m]\ar[dl]^{\simplex(\xi)} \\
 & \simplex[n]
 }\]
 \end{definition}
@@ -177,13 +177,9 @@ Let $i\of[m]-\set l$. If not $v_i(\kappa(\vec p[l]))$ then by definition $\xi(i)
 Since $B_j\cap \face(K_0(\xi),\land w_{\vec p})$ is a unions of faces that have the point $\vec p[l]$ in common, lemma \ref{face completion} applies to the inclusion $B_j\cap \face(K_0(\xi),\land w_{\vec p})\to \face(K_0(\xi),\land w_{\vec p})$. Therefore $B_j\to B_{j+1}$, $B\to C$ and $h\ri K(\hat h)\of A\to C$ all have the left lifting property.
 \end{proof}
 
-We conclude with a simple but fundamental lemma about monomorphisms that have the left lifting property. 
-
 \begin{lemma}[Face completion] Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have a point $e$ of $\simplex[p]$ in common. The inclusion $\bigcup F\to \simplex[p]$ has the left lifting property with respect to all fibrations. \label{face completion} \end{lemma}
 
 \begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$. Therefore the inclusion has the left lifting property. Because composition preserves the left lifting property, $\bigcup F = F_0\to F_p = \simplex[p]$ has it too. 
 \end{proof}
-
-
 
 \end{document}

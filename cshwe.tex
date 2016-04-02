@@ -79,7 +79,9 @@ Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \p
 \tuplet{f\to h}&=\tuplet{h^{\id_B},\id_X^f}\of X^B \to Y^B\times_{Y^A} X^A\\
 \tuplet{g\to h}&=\tuplet{h^{\id_D},\id_X^g}\of X^D \to Y^D\times_{Y^C} X^C
 \end{align*}
-In the case where $h$ is an acyclic fibration the morphism $\tuplet{g\to h}$ is an acyclic fibration if is has the lifting property for the family of cycle inclusions $k_i\of \cycle[i]\to\simplex[i]$ for $i\of\nno$. In turn $\tuplet{k_n\to h}$ are acyclic cofibrations if the triple lifting property holds in the cases where $a=k_i$ and $b=k_j$ for all $i,j\of\nno$. For the cases where $f$ or $g$ are acyclic the same reduction takes us to products of cycle and horn inclusions.
+In the case where $h$ is an acyclic fibration the morphism $\tuplet{g\to h}$ is an acyclic fibration if is has the lifting property for the family of cycle inclusions $k_i\of \cycle[i]\to\simplex[i]$ for $i\of\nno$, because acyclic fibrations are contractible morphisms (see lemma \ref{Reedy}). In turn $\tuplet{k_n\to h}$ are acyclic cofibrations if the triple lifting property holds in the cases where $a=k_i$ and $b=k_j$ for all $i,j\of\nno$.
+
+For the cases where $f$ or $g$ are acyclic the same reduction takes us to products of cycle and horn inclusions. If $f$ is acyclic, the problem of lifting $f$ against $g\to h$ reduces to the problem of lifting horn inclusions. The problem of lifting a possibly not acyclic $g$ against $k\to h$, where $k$ is a horn inclusion, reduces to the problem of lifting cycle inclusions by lemma \ref{Reedy}.
 
 In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove that their pushout products $g\pp f$ are compositions of pushouts of sums of horns and cycles and therefore have the left lifting properties with respect to (acyclic) fibrations (see lemma \ref{saturation}).
 \[\xy
