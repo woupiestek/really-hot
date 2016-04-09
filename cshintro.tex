@@ -14,7 +14,7 @@ x\cdot(\alpha\circ\beta)&=(x\cdot\alpha)\cdot\beta
 
 A \emph{morphism of simplicial objects} $X\to Y$ is a morphism $f\of\base X\to\base Y$ which commutes with $\dim$ and $\cdot$. Together with simplicial objects, they form the category of simplicial objects and morphisms $\ambient\s$.
 
-The category $\ambient\s$ is enriched over $\ambient$. The object of morphisms $X\to Y$ in $\ambient$ itself is $\nat(X,Y)$. It represents families of morphisms $X\to Y$, i.e. for each object $I$ of $\ambient$ there is a natural bijection between morphisms $I\to \nat(X,Y)$ and morphisms $I\times X\to Y$ which commute with $\dim$ and $\cdot$ and their $\id_I$-fold multiples.
+The category $\ambient\s$ is enriched over $\ambient$. The object of morphisms $X\to Y$ in $\ambient$ is $\nat(X,Y)$. It represents families of morphisms $X\to Y$, i.e. for each object $I$ of $\ambient$ there is a natural bijection between morphisms $I\to \nat(X,Y)$ and morphisms $I\times X\to Y$ which commute with $\dim$, $\cdot$ and their $I$-fold multiples.
 \end{definition}
 
 \begin{example} A simple kind of simplicial object is the \keyword{discrete} simplicial object. There is one for each object $I$ of $\ambient$: 
@@ -24,7 +24,7 @@ Note the $\function{x}{f(x)}$ notation for morphisms of $\ambient$ the paper use
 
 This definition is consistent with the definition of initial presheaves in \citep{MR1300636}. The definition is valid because $\ambient$ is a $\Pi$-pretopos with a natural number object $\nno$. Decidable, finite and inhabited initial segments of the natural numbers have a classifier.
 \[  \function{\tuplet{i,j}}j\of\set{\tuplet{i,j}\of\nno\times\nno\middle|i\leq j}\to \nno \]
-The relation $\leq$ is decidable and comprehension on decidable predicates to define subobjects in $\ambient$, because there are pullbacks and classifiers of decidable subobjects $1\to \bool = 1+1$. Here $1$ is a terminal object and $+$ a binary coproduct.
+The relation $\leq$ is decidable. Comprehension on decidable predicates defines subobjects in $\ambient$, because there classifiers of decidable subobjects $1\to \bool = 1+1$. Here $1$ is a terminal object and $+$ a binary coproduct.
 
 Local Cartesian closure means that there is an object $A$ of morphisms between the initial segments. Local Cartesian closure also implies that there is a subobject of non decreasing morphisms $\Ar(\simCat)$.
 \[ \product{f\of A,i,j\of\nno,x\of\set{y\of 1|i\leq j}}{\set{y\of 1|f(i)\leq f(j)}}\]

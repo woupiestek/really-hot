@@ -11,7 +11,7 @@ This purpose of this section is to replace arguments based on \emph{minimal fibr
 This requirement may give us more limits than we need, but the intended model of modest morphisms in $\Asm\ex$ satisfies it.
 %TODO: investigate which exponentials we actually need.
 
-\item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} is it is the equalizer of some parallel pair.
+\item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} if it is an equalizer.
 \end{itemize} 
 
 The interesting case is where $M$ has the following structure in addition to the properties above.
@@ -33,7 +33,7 @@ For each horn inclusion $h\of \horn_k[n]\to\simplex$ and each fibration $f\of X\
 
 \begin{proof} There is no horn inclusion for $n=0$. In the case $n=1$, there are two maps $1\to\simplex[1]$. In both case $Df=\pi_0\of \simplex[1]\times X \to\simplex[1]$ suffices. For all the cases were $n>0$ we use the following construction.
 
-The functor $D$ is defined to have the following relation with a functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
+The functor $D$ is defined (see definition \ref{descent functor}) to have the following relation with a functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
 \[ \ambient\s/\simplex[n](\simplex(\xi), Df)\simeq \ambient\s/\horn_k[n](K(\xi), f) \]
 This is possible because $\ambient\s/\simplex[n]$ is equivalent to the category of presheaves over $\simCat/[n]$ and the Yoneda lemma applies to those presheaves. %lemma?
 The relation of $D$ and $K$ allows us to reduce the problem of lifting a horn against $Df$ to the problem of lifting some finite colimit of objects in the image of $K$ against $f$. These finite colimits have the required left lifting property by lemma \ref{left lifting property}.
@@ -57,9 +57,12 @@ The following defines the functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
 		\end{array}
 	\right.
 \]
-\item Let $\ka(\xi)\of\product{i\of([n]-\set k)}{\xi_i} \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexicographical product $\product{i\of([n]-\set k)}{\xi_i}$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
+\item Let $\ka(\xi)\of\product{i\of([n]-\set k)}{\xi_i} \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the \emph{lexicographical product} $\product{i\of([n]-\set k)}{\xi_i}$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
 
-The lexicographical product means that $\product{i\of([n]-\set k)}{\xi_i}$ get the lexicographical ordering. This ordering determines priority by comparing elements in sequence. That means $\vec x < \vec y$ if there are $i$ such that $x_i \neq y_i$, and for the least such $i$ $x_i<y_i$. The map $K_0$ adds the lexicographical product of most of the fibres of a map $\xi\of[m]\to[n]$ to the fibre over $k$. %more?
+\item In the \keyword{lexicographical product} $\product{i\of([n]-\set k)}{\xi_i}$ tuples get the \keyword{lexicographical ordering}. This ordering determines priority by comparing elements in sequence.
+\begin{align*} 
+(x_0,x_1,\dotsc) \leq_{\rm lex} (x_0,x_1,\dotsc) \iff& x_0\leq y_0 \land (x_0=y_0 \to (x_1,\dotsc)\leq_{\rm lex}(y_1,\dotsc))
+\end{align*}
 
 \item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the unique nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K_0(\xi)\circ\la(\xi) = \xi$.
 \item For each morphism $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\product{i\of([n]-\set k)}{\phi_i}$ be the corresponding map of the (lexicographical) products $\product{i\of([n]-\set k)}{\xi_i}\to\product{i\of([n]-\set k)}{\xi'_i}$.
@@ -96,7 +99,7 @@ For each $f\of X\to\horn_k[n]$ the functor $D\of \ambient\s/\horn_k[n]\to\ambien
 (\xi,x)\cdot\phi &= (\xi\circ\phi,x\circ K(\phi))\\
 D(f)(\xi,x) &= \xi
 \end{align*}
-On morphisms in $\ambient\s/\horn_k[n]$, the functor $D$ acts by composition: $Dm(\xi,x) = (\xi,m\circ x)$.
+On morphisms in $\ambient\s/\horn_k[n]$, the functor $D$ acts by composition: $Dm(\xi,x) = (\xi,m\circ x)$. \label{descent functor}
 \end{definition}
 
 If $\ambient$ has infinite colimits, the functor $D$ has a left adjoint $K'$ that satisfies $K'\simplex\simeq K$. We cannot rely on that property here. The functor $K$ does extend to finite colimits of simplices. Preservation of intersections implies that $K$ also applies to finite unions of simplices like $\horn_l[m]$. The reason $D$ preserves fibrations and their right lifting property, is that its partial left adjoint preserves the left lifting property. 

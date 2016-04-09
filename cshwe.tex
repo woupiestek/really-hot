@@ -8,7 +8,7 @@ This section demonstrates that the weak equivalences of definition \ref{weak equ
 \begin{proof} Weak equivalences are closed under composition by lemma \ref{composition of weak equivalences}.
 
 Let $g$ and $g\circ f$ be arbitrary weak equivalences. The morphism $f$ factors as an acyclic fibration $h\of W\to Y$ following a cofibration $k\of X\to W$ by proposition \ref{factor2}. Because weak equivalences are closed under composition (see \ref{composition of weak equivalences}), $g\circ h$ is a weak equivalence. The morphism $k$ is acyclic for the following reasons. Factor both $g\circ f$ and $g\circ h$ as acyclic fibrations following acyclic cofibrations, so $g\circ f = a\circ b$ and $g\circ h = c\circ d$. The lifting properties induce a morphism $l$ such that $l\circ b = d\circ k$ and $c\circ l = a$. Lemma \ref{shared retract 2} says that $l$ is a weak equivalence because $a$ and $c$ are acyclic fibrations. 
-Because of closure under composition, the morphism $l\circ b = d\circ k$ is both a weak equivalence and a cofibration and hence an acyclic cofibration. Since $d$ and $d\circ k$ are an acyclic cofibrations, so is $k$ by lemma \ref{left cancellation}.
+Because of closure under composition, the morphism $l\circ b = d\circ k$ is both a weak equivalence and a cofibration and hence an acyclic cofibration. Since $d$ and $d\circ k$ are acyclic cofibrations, so is $k$ by lemma \ref{left cancellation}.
 \[\xymatrix{
 X\ar[r]_k\ar@/^2ex/[rr]^f\ar[d]_b & W\ar[r]_h\ar[d]^d & Y\ar[d]^g \\
 \bullet\ar@/_2ex/[rr]_a\ar@{.>}[r]^l & \bullet\ar[r]^c & Z
@@ -47,16 +47,6 @@ X+X\ar[d]_{c\times \id}\ar[r]^{k+k} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\i
 Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \pi_1$, $k$ is a weakly invertible cofibration by definition \ref{weakly invertible} and an acyclic cofibration by lemma \ref{acyclic have lifting}.
 \end{proof}
 
-\begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $g$ and $g\circ f$ are acyclic cofibrations, then $f$ is an acyclic cofibration \label{left cancellation} \end{lemma}
-
-\begin{proof} Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. Because $B$ is fibrant, there is a $b'\of Z\to B$ such that $b'\circ g = b$. Lifting properties also imply that there is an $a'\of Z\to A$ such that $a'\circ g\circ f = a$ and $k\circ a'= b'$. So $b'\circ g$ is a filler for $k\circ a=b\circ f$. By abstraction, there is a filler operator that lifts $f$ against all fibrations and that makes $f$ an acyclic cofibration.
-\[\xy
-(0,28)*+{X}="x",(14\halfrootthree,21)*+{A}="a",(0,14)*+{Y}="y",(14\halfrootthree,7)*+{B}="b",(0,0)*+{Z}="z"
-\ar^a "x";"a" \ar_f "x";"y" \ar^k "a";"b" \ar^(.25)b "y";"b" \ar_g "y";"z"
-\ar@{.>}_{b'} "z";"b" \ar@{.>}^(.75){a'} "z";"a"
-\endxy\]
-\end{proof}
-
 \begin{lemma}[Triple lifting property] Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
 \[\xy
 (0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
@@ -90,6 +80,16 @@ In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove 
 \ar@{.>}|(.3){g\pp f} "middle";"right" \ar^{\id\times g} "top";"right" \ar_{f\times\id} "bottom";"right"
 \endxy\]
 Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one of $f$, $g$ and $h$ is acyclic.
+\end{proof}
+
+\begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $g$ and $g\circ f$ are acyclic cofibrations, then $f$ is an acyclic cofibration \label{left cancellation} \end{lemma}
+
+\begin{proof} Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. Because $B$ is a complex, there is a $b'\of Z\to B$ such that $b'\circ g = b$. Lifting properties also imply that there is an $a'\of Z\to A$ such that $a'\circ g\circ f = a$ and $k\circ a'= b'$. So $b'\circ g$ is a filler for $k\circ a=b\circ f$. By generalization this construction lifts $f$ against all fibrations and that makes $f$ an acyclic cofibration.
+\[\xy
+(0,28)*+{X}="x",(14\halfrootthree,21)*+{A}="a",(0,14)*+{Y}="y",(14\halfrootthree,7)*+{B}="b",(0,0)*+{Z}="z"
+\ar^a "x";"a" \ar_f "x";"y" \ar^k "a";"b" \ar^(.25)b "y";"b" \ar_g "y";"z"
+\ar@{.>}_{b'} "z";"b" \ar@{.>}^(.75){a'} "z";"a"
+\endxy\]
 \end{proof}
 
 \begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $f$ and $g\circ f$ are acyclic fibrations, then $g$ is an acyclic fibration. \label{right cancellation}\end{lemma}

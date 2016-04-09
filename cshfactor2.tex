@@ -2,7 +2,9 @@
 \begin{document}
 
 \section{Fibrations}
-\begin{lemma} Acyclic cofibrations and fibrations form an in internal factorization system on $\ambient\s\f$. \label{factorization system 2} \end{lemma}
+This section show that fibrations are part of a factorization system as well.
+
+\begin{lemma} Acyclic cofibrations and fibrations form an enriched factorization system on $\ambient\s\f$. \label{factorization system 2} \end{lemma}
 
 \begin{proof} Lemma \ref{acyclic have lifting} shows that weakly invertible cofibrations (see definition \ref{weakly invertible}) are acyclic cofibrations. Lemma \ref{lifting is acyclic} shows the converse. Proposition \ref{factor2} shows that every morphism factors as a fibration following a weakly invertible cofibration.
 \end{proof}
@@ -43,7 +45,7 @@ Let $f\of X\to Y$ be a morphism with the left lifting property for all fibration
 X\ar[d]_f \ar[r]^\id & X\ar[d]^\bang\\
 Y\ar[r]_\bang \ar@{.>}[ur]_h & 1
 }\]
-There is a morphism $h\of \simplex[1]\times Y\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and $h\circ (\id_{\simplex[1]}\times f) = f\circ\pi_1$ because $Y$ is fibrant and because of lemma \ref{triple lift}.
+There is a morphism $h\of \simplex[1]\times Y\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and $h\circ (\id_{\simplex[1]}\times f) = f\circ\pi_1$ because $Y$ is a complex and because of lemma \ref{triple lift}.
 \[ \xymatrix{
 X+X\ar[d]_{f+f}\ar[r]^{k\times\id} & \simplex[1]\times X \ar[r]^(.6){f\circ \pi_0}\ar[d] & Y\ar[d]^\bang\\
 Y+Y\ar[r]_{k\times\id} \ar[urr]^(.3){(\id,g)} & \simplex[1]\times Y \ar[r]_\bang\ar@{.>}[ur]_h & 1
