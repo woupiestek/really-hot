@@ -8,7 +8,8 @@
 \usepackage{url}
 
 \title{Constructive Simplicial Homotopy}
-\author{Wouter Pieter Stekelenburg}\copyrightyear{2015}
+\author{Wouter Pieter Stekelenburg}
+\copyrightyear{2015,2016}
 \address{Faculty of Mathematics, Informatics and Mechanics\\
 University of Warsaw\\
 Banacha 2\\
@@ -62,7 +63,7 @@ Poland}
 \newcommand\traco\omega
 
 \newcommand\product[2]{\Pi #1 \mapsto #2}
-\newcommand\coproduct[2]{\amalg #1 \mapsto #2}
+\newcommand\coproduct[2]{\Sigma #1 \mapsto #2}
 \newcommand\function[2]{\lambda #1 \mapsto #2}
 
 \newcommand\keyword[1]{\emph{#1}\label{#1}}
@@ -72,7 +73,7 @@ Poland}
 
 \begin{document}
 
-\begin{abstract} This paper aims to help with the development of new models of homotopy type theory, in particular with models that are based on realizability toposes. For this purpose it develops an internal simplicial homotopy that does not rely on the \emph{small object argument} or \emph{minimal fibrations} as these require structure that realizability toposes lack.\end{abstract}
+\begin{abstract} This paper aims to help the development of new models of homotopy type theory, in particular with models that are based on realizability toposes. For this purpose it develops the foundations of an internal simplicial homotopy that does not rely on classical principles that are not valid in realizability toposes and related categories.\end{abstract}
 
 \hide{
 Three papers:
@@ -86,9 +87,9 @@ Idee: reverse the order. definitions--theorem--lemmas. That way the purpose of t
 \maketitle
 
 \section*{Introduction}
-This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory} following the example of \citep{KLV12}. That model uses the category of simplicial sets. Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}.
+This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory} following the example of \citep{KLV12}. Their model is based on the category of simplicial sets. Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}.
 
-The intention is to interpret types as the homotopy types of certain simplicial objects in a \emph{realizability topos} (see \citep{MR2479466}). These toposes lack some of the structure of the category of sets underlying classical homotopy theory. In the internal logic the principle of the excluded middle and the axiom of choice can be invalid. They can lack infinite limits and colimits. We work around these issues in the following way.
+In the intended model types are homotopy types of certain simplicial objects in a \emph{realizability topos} (see \citep{MR2479466}). These toposes lack some of the structure of the category of sets underlying classical homotopy theory. In the internal logic the principle of the excluded middle and the axiom of choice can be invalid. They can lack infinite limits and colimits. We work around these issues in the following way.
 \begin{enumerate}
 \item Limit the class of cofibrations. In classical simplicial homotopy theory every mono\-morphism is a cofibration. We demand that certain properties of the monomorphisms are decidable so classical arguments remain valid.
 \item Strengthen the lifting property. Fibrations come equipped with a \emph{filler operator} that gives solutions for a family of basic lifting problems.

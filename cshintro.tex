@@ -3,7 +3,7 @@
 \section{Internal simplicial objects}
 Internal simplicial homotopy has a notion of simplicial object of $\ambient$ which does rely on external $\ambient$-valued presheaves, but on internal structures.
 
-\begin{definition} A \keyword{simplicial object} $X$ of $\ambient$ is a triplet $\tuplet{\base X, \dim, \cdot}$ where $\base X$ is an object of $\ambient$, $\dim$ is a morphism $\base X\to \nno$. The operator $\cdot$ is has the following properties. Let $\Ar(\simCat)$ be the object of non decreasing functions between decidable, finite and inhabited initial segments of the natural numbers. The domain $\dom(\cdot)$ of $\cdot$ is the following object. 
+\begin{definition} A \keyword{simplicial object} $X$ of $\ambient$ is a triple $\tuplet{\base X, \dim, \cdot}$ where $\base X$ is an object of $\ambient$, $\dim$ is a morphism $\base X\to \nno$. Here $\nno$ is the \keyword{natural number object} of $\ambient$. The operator $\cdot$ is has the following properties. Let $\Ar(\simCat)$ be the object of non decreasing functions between decidable, finite and inhabited initial segments of the natural numbers. The domain $\dom(\cdot)$ of $\cdot$ is the following object. 
 \[ \set{\tuplet{x,\xi}\of \base X\times \Ar(\simCat)\middle| \dim(x) = \max(\cod(\xi))}\]
 The codomain $\cod(\cdot)$ of $\cdot$ is $\base X$. The operator $\cdot$ satisfies the following equations.
 \begin{align*}
@@ -34,8 +34,7 @@ However, because $\ambient$ is also exact and extensive, it is a Heyting categor
 \begin{definition} The object $\Ar(\simCat)$ is the object of arrows of the internal \keyword{category of simplices} $\simCat$, whose object of objects $\Ob(\simCat)$ is $\nno$. Composition is defined as ordinary function composition.
 \end{definition}
 
-\begin{remark} We assume that all of the structure on $\ambient$ comes from functors. So several functors between categories related to $\ambient$ have right adjoints that give $\ambient$ its limits and exponentials and some functors have left adjoints that give $\ambient$ colimits. Definitions in terms of universal properties only define objects up to isomorphism. Our assumption ensures that there are functors that hit all the necessary isomorphism classes, when we only specify a functor up to isomorphism.
-\end{remark}
+For completeness we recall the definition of $\Pi$-pretoposes below.
 
 \begin{definition} 
 That $\ambient$ is a $\Pi$-\keyword{pretopos} means all of the following.
@@ -51,8 +50,6 @@ A \keyword{weak groupoid} consists of a pair of objects $X_0$, $X_1$ and morphis
 
 \begin{example} Every topos is a $\Pi$-pretopos so $\ambient$ can be any topos with a natural number object like the topos of sets. \end{example}
 
-The category $\ambient$ is has a \emph{natural number object}. To keep track of the distinction between internal and external natural numbers, let the \emph{set} of natural numbers be $\N$ and use $i\in \N$ to indicate membership. The natural number object of $\ambient$ is $\nno$ and $i\of\nno$ means that $i$ is a morphism with codomain $\nno$.
-
 This combination of properties implies the following.
 \begin{enumerate}
 \item The category $\ambient$ has all colimits and reindexing functors preserve them. 
@@ -62,5 +59,8 @@ Technically this means that for each object $X$ the poset of subobjects $\sub(X)
 
 Practically this means that $\ambient$ is a model for a constructive first order logic, hence that predicates define subobjects and that constructive theorems are valid in the internal language.
 \end{enumerate}
+
+\begin{remark} We assume that all of the structure on $\ambient$ comes from functors. So several functors between categories related to $\ambient$ have right adjoints that give $\ambient$ its limits and exponentials and some functors have left adjoints that give $\ambient$ colimits. Definitions in terms of universal properties only define objects up to isomorphism. Our assumption ensures that there are functors that hit all the necessary isomorphism classes, when we only specify a functor up to isomorphism.
+\end{remark}
 
 \end{document}

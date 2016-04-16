@@ -57,16 +57,17 @@ The following defines the functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
 		\end{array}
 	\right.
 \]
-\item Let $\ka(\xi)\of\product{i\of([n]-\set k)}{\xi_i} \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the \emph{lexicographical product} $\product{i\of([n]-\set k)}{\xi_i}$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
 
 \item In the \keyword{lexicographical product} $\product{i\of([n]-\set k)}{\xi_i}$ tuples get the \keyword{lexicographical ordering}. This ordering determines priority by comparing elements in sequence.
 \begin{align*} 
 (x_0,x_1,\dotsc) \leq_{\rm lex} (x_0,x_1,\dotsc) \iff& x_0\leq y_0 \land (x_0=y_0 \to (x_1,\dotsc)\leq_{\rm lex}(y_1,\dotsc))
 \end{align*}
 
+\item Let $\ka(\xi)\of\product{i\of([n]-\set k)}{\xi_i} \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexicographical product $\product{i\of([n]-\set k)}{\xi_i}$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
+
 \item Let $\la(\xi)\of[m]\to[m+\norm\xi]$ be the unique nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm\xi$ if $\xi(i)\geq k$. Moreover $K_0(\xi)\circ\la(\xi) = \xi$.
 \item For each morphism $\phi\of\xi\to\xi'$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\product{i\of([n]-\set k)}{\phi_i}$ be the corresponding map of the (lexicographical) products $\product{i\of([n]-\set k)}{\xi_i}\to\product{i\of([n]-\set k)}{\xi'_i}$.
-\item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the unique nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \product{i\of([n]-\set k)}{\phi_i}$ and $K_0(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
+\item Let $K_1(\phi)\of K_0(\xi)\to K_0(\xi')$ be the unique nondecreasing function which satisfies $K_1(\phi)\circ \ka(\xi) = \ka(\xi')\circ \product{i\of([n]-\set k)}{\phi_i}$ and $K_1(\phi)\circ \la(\xi) = \la(\xi')\circ \phi$.
 \end{enumerate}
 
 The maps $(K_0,K_1)$ define an endofunctor of $\simCat/[n]$. To get the functor, let $K(\xi) = h\ri(\simplex(K_0(\xi)))$ for objects $\xi$ of $\simCat/[n]$ and $K(\phi) = h\ri(\simplex(K_1(\phi)))$ for morphisms, where $h\ri$ is the reindexing functor $\ambient\s/\simplex[n]\to\ambient\s/\horn_k[n]$ along the horn inclusion $h\of \horn_k[n]\to\simplex[n]$. Concretely, $K$ satisfies the following equations for all objects $\xi$ of $\simCat/[n]$, all $x\of \base(\dom(K(\xi)))$ and all arrows $\phi$ of $\simCat/[n]$.
@@ -150,20 +151,21 @@ B &=\left(\bigvee_{j\of[m]-\set l}\face(K_0(\xi),u_{\xi(l)}\land v_j)\right)\vee
 C &=\cod(h\ri K(\hat h))=\left(\bigvee_{i\of[n]-\set{k}} \face(K_0(\xi),u_i)\right)
 \end{align*}
 
-Decompose $A\to B$ as the inclusions of the following subobjects that satisfy $A_0=A$ and $A_{n+1}=B$.
-\[ A_{j\of[n+1]} = A\vee \left(\bigvee_{i\of[j]-\set{k,j,\xi(l)}}\face(K_0(\xi),u_i)\right) \]
+Decompose $A\to B$ as a series of inclusions $A_j\to A_j+1$ that satisfy $A_0=A$ and $A_{n+1}=B$. For $j\of[n+1]$ define $A_j$ as follows.
+\[ A_j = A\vee \left(\bigvee_{i\of[j]-\set{k,j,\xi(l)}}\face(K_0(\xi),u_i)\right) \]
 Each inclusion $A_j\to A_{j+1}$ is a pushout of the inclusion of $A_j\cap \face(K_0(\xi),u_{j+1})$ into $\face(K_0(\xi),u_{j+1})$, where
 \begin{align*} A_j\cap \face(K_0(\xi),u_{j+1}) = &\left(\bigvee_{i\of[m]-\set l}\face(K_0(\xi),u_{j+1}\land v_{i})\right)\vee \\
 &\left(\bigvee_{i\of[j+1]-\set{k,\xi(l)}}\face(K_0(\xi),u_i\land u_{j+1})\right)\end{align*}
-The faces $\face(K_0(\xi),u_{j+1}\land v_{i})$ and $\face(K_0(\xi),u_i\land u_{j+1})$ all contain the point $\lambda(l)$ of $\simplex[m+\norm\xi]$ which means that lemma \ref{face completion} applies to the inclusion $A_j\cap \face(K_0(\xi),u_{j+1}) \to \face(K_0(\xi),u_{j+1})$. Hence $A\to B$ has the left lifting property.
+The faces $\face(K_0(\xi),u_{j+1}\land v_{i})$ and $\face(K_0(\xi),u_i\land u_{j+1})$ all contain the point $\lambda(l)$ of $\simplex[m+\norm\xi]$ which means that lemma \ref{face completion} applies to the inclusion $A_j\land \face(K_0(\xi),u_{j+1}) \to \face(K_0(\xi),u_{j+1})$. Hence $A\to B$ has the left lifting property.
 
 If $\xi(l)=k$, then $B=C$ and the proof is complete. Suppose $\xi(l)=i\neq k$. First define the following maps $[m+\norm\xi]\to\bool$ for each $\vec p \of\product{i\of [n]-\set k}{\xi_i}$.
 \begin{align*}
 w_{\vec p}(\kappa(\vec q)) &= \true &
 w_{\vec p}(\lambda(q)) &= ((\xi(q)=k\vee q\leq p_{\xi(q)})\land\xi(q)\neq \xi(l))
 \end{align*}
-Decompose $B\to C$ as the inclusions of the following subobjects that satisfy $B_0=B$ and $B_{m+\norm\xi+1}=C$.
-\[ B_{j\of[m+\norm\xi+1]} = B \vee \left(\bigvee_{\kappa(\vec p)<j} \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})\right)\]
+
+Decompose $B\to C$ as a series of inclusions $B_j\to B_j+1$ that satisfy $B_0=B$ and $B_{m+\norm\xi+1}=C$. For $j\of[m+\norm\xi+1]$ define $B_j$ as follows.
+\[ B_j = B \vee \left(\bigvee_{\kappa(\vec p)<j} \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})\right)\]
 
 When $j\neq\kappa(\vec p)$ for any $\vec p \of \product{i\of [n]-\set k}{\xi_i}$, the inclusion $B_j\to B_{j+1}$ is the identity arrow, which satsifies the left lifting property trivially. 
 
