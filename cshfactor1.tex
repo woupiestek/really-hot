@@ -3,7 +3,7 @@
 \section{Cofibrations}
 This section show that the cofibrations from definition \ref{cofibration} are part of an enriched factorization system (see definition \ref{enriched factorization system}) on $\ambient\s$--not just on the subcategory of complexes.
 
-\begin{lemma} Cofibrations and acyclic fibrations form an enriched factorization system on $\ambient\s$. \label{factorization system 1}. \end{lemma}
+\begin{lemma} Cofibrations and acyclic fibrations form an enriched factorization system on $\ambient\s$. \label{factorization system 1} \end{lemma}
 
 \begin{proof} Proposition \ref{factor1} shows that every morphism factors as a \emph{contractible morphism} (see definition \ref{contractible}) following a cofibration. Acyclic fibrations are examples of contractible morphisms (see example \ref{acyclic means contractible}). Lemma \ref{Reedy} shows that contractible morphisms are acyclic fibrations. Hence contractible morphisms and acyclic fibrations are the same class of morphism and this class form the right class of a factorization system with cofibrations on the left (see definition \ref{enriched factorization system}).
 \end{proof}
@@ -30,7 +30,7 @@ Let $LY[n] = \coproduct{i\of[n]}{Y[i]\times\simCat^-(n,i)}$ and for $\phi\of [m]
 Let $l_Y\of LY\to Y$ satisfy $l_Y\tuplet{\epsilon,y}=y\cdot\epsilon$.
 
 The second step glues simplices of $X$ and $LY$ together into new ones.
-The pair $(f,l_Y)$ stand for the morphism $X+LY\to Y$ that satisfies $(f,l_Y)(x)=f(x)$ for $x\of X$ and $(f,l_Y)(y) = l_Y(y)$ for $y\of LY$. Let $Z[n]\subseteq \product{i\in[n]}{(X[i]+LY[i])^{\simCat^+(i,n)}}$ consist of elements $z$ which satisfy the following conditions for all $\alpha\of [j]\to [k]$ and $\beta\of [i]\to[j]$ in $\simCat^+$.
+The pair $(f,l_Y)$ stands for the morphism $X+LY\to Y$ that satisfies $(f,l_Y)(x)=f(x)$ for $x\of X$ and $(f,l_Y)(y) = l_Y(y)$ for $y\of LY$. Let $Z[n]\subseteq \product{i\in[n]}{(X[i]+LY[i])^{\simCat^+(i,n)}}$ consist of elements $z$ which satisfy the following conditions for all $\alpha\of [j]\to [k]$ and $\beta\of [i]\to[j]$ in $\simCat^+$.
 \begin{enumerate}
 \item $(f,l_Y)(z(\alpha\circ\beta)) = (f,l_Y)(z(\alpha))\cdot\beta$;
 \item if $z(\alpha)\of X$ then $z(\alpha\circ\beta)\of X$;
@@ -47,7 +47,7 @@ There is a morphism $h\of Z\to Y$ which satisfies $h(z) = (f,l_Y)(z(\id_{[\dim(z
 
 \begin{lemma} Contractible morphisms are acyclic fibrations.\label{Reedy}\end{lemma}
 
-\begin{proof} The class of morphisms that have the left lifting property with respect to contractible morphism is saturated (see lemma \ref{saturation}). The rest proof shows that all cofibrations are in this class. That implies that all contractible morphisms have the right lifting property with respect to all cofibrations and therefore are acyclic fibrations.
+\begin{proof} The class of morphisms that have the left lifting property with respect to contractible morphism is saturated (see lemma \ref{saturation}). The rest of this proof shows that all cofibrations are in this class. That implies that all contractible morphisms have the right lifting property with respect to all cofibrations and therefore are acyclic fibrations.
 
 Suppose $f\of X\to Y$ is a cofibration and $S$ is the family of faces outside the image of $f$. For each $i\of\nno$ let $Y_i$ be the union of $X$ with all faces of $Y$ of dimension strictly smaller than $i$. In particular $Y_0=X$.
 
@@ -58,7 +58,7 @@ For each $i\of\nno$ let $S_i$ be the object of $n$-dimensional faces in $S$. Eac
 
 \begin{definition} Let $\cat A$ be a $\Pi$-pretopos with a natural number object $\nno$. The successor morphism $s\of\nno\to\nno$ induces an endofunctor $s\ri$ of $\cat A/\nno$. A \keyword{cochain} is a morphism $f\of X\to s\ri(X)$ in $\cat A/\nno$. A morphism of cochains $(X,f)\to(Y,g)$ is a morphism $h\of X\to Y$ such that $s\ri(h)\circ f = g\circ h$.
 
-For every object $Y$ of $\cat A$ there is a constant family $\nno\ri(Y)$ and a canonical isomorphism $\nno\ri(Y)\simeq s\ri(\nno\ri(Y))$ which makes $\nno\ri(Y)$ a cochain. The \keyword{transfinite composition} of a cochain $(X,g)$ is a cochain morphism $\traco(g)\of (X,f)\to\nno\ri Y$ such that for every other morphism $k\of (X,f)\to\nno\ri Z$ there is a unique morphism $l\of Z\to Y$ such that $s\ri(l)\circ \traco(g)=k$.
+For every object $Y$ of $\cat A$ there is a constant family $\nno\ri(Y)$ and a canonical isomorphism $\nno\ri(Y)\simeq s\ri(\nno\ri(Y))$ which makes $\nno\ri(Y)$ a cochain. The \keyword{transfinite composition} of a cochain $(X,f)$ is a cochain morphism $\traco(g)\of (X,f)\to\nno\ri Y$ such that for every other morphism $k\of (X,f)\to\nno\ri Z$ there is a unique morphism $l\of Z\to Y$ such that $s\ri(l)\circ \traco(g)=k$. In other words, it is an initial object in the comma category $(X,f)/\nno\ri$.\hide{Introducing comma category, while not defining it}
 \end{definition}
 
 \begin{lemma} The class of morphisms $L$ that has the left lifting property with respect to fibrations is closed under pushouts, coproducts indexed over objects of $\ambient$ and transfinite compositions. \label{saturation}\end{lemma}
@@ -70,6 +70,6 @@ Suppose $h\of I'\to J'$ is a pushout of $g\of I\to J$ where $g$ has the left lif
 
 Suppose $h\of(\product{i\of I}{\nat(X(i),Y(i))})$ represents a family of morphisms of that share the left lifting property. That means $\tuplet{(I\disc\ri(f))_!,h\ri}$ is a split epimorphism and therefore so is its transpose $\tuplet{f_!,\amalg_I(h)\ri}$, where $\amalg_I(h)\of\nat(\coproduct{i\of I}{X(i)},\coproduct{i\of I}{Y(i)})$ is the indexed coproduct of the family $h$.%Should we keep using $\Sigma$ for coproducts?
 
-Finally, suppose that a cochain $(Z,h)$ has the left lifting property. That means $\tuplet{\nno\disc\ri(f)_!,h\ri}$ is a split epimorphism. For the transfinite composition $\traco(h)$, $\tuplet{f_!,\traco(h)\ri}$ is therefore also split.
+Finally, suppose that a cochain $(Z,h)$ has the left lifting property. That means $\tuplet{\nno\disc\ri(f)_!,h\ri}$ is a split epimorphism. For the transfinite composition $\traco(h)$, the morphism $\tuplet{f_!,\traco(h)\ri}$ is therefore also split.
 \end{proof}
 \end{document}

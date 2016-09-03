@@ -15,7 +15,7 @@ X\ar[r]_k\ar@/^2ex/[rr]^f\ar[d]_b & W\ar[r]_h\ar[d]^d & Y\ar[d]^g \\
 }\]
 Since $f = h\circ k$, $f$ is a weak equivalence.
 
-The case where $f$ and $g\circ f$ are weak equivalences is dual to the case above and the reasoning is the same. Acyclic cofibrations satisfy lemma \ref{shared retract} where acyclic fibrations satisfy lemma \ref{shared retract 2}. Acyclic fibrations satisfy lemma \ref{right cancellation} where acyclic cofibrations satisfy lemma \ref{left cancellation}.
+The case where $f$ and $g\circ f$ are weak equivalences is dual to the case above and the reasoning is the same. Compositions of acyclic cofibrations are weak equivalence by lemma \ref{shared retract} where compositions of acyclic fibrations are by lemma \ref{shared retract 2}. Acyclic fibrations satisfy lemma \ref{right cancellation} where acyclic cofibrations satisfy lemma \ref{left cancellation}.
 
 This means that weak equivalences indeed satisfy 2-out-of-3.
 \end{proof}
@@ -64,7 +64,7 @@ Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \p
 \label{triple lift}
 \end{lemma}
 
-\begin{proof} The general case reduces to the cases where $f$ and $g$ are cycle or horn inclusions, because the lemma is equivalent to the statement that the following maps are (acyclic) fibrations and because acyclic cofibrations are contractible (see definition \ref{contractible}).
+\begin{proof} The general case reduces to the cases where $f$ and $g$ are cycle or horn inclusions, because the lemma is equivalent to the statement that the following maps $\tuplet{f\to h}$ and $\tuplet{g\to h}$ are (acyclic) fibrations and because acyclic cofibrations are contractible (see definition \ref{contractible}).
 \begin{align*}
 \tuplet{f\to h}&=\tuplet{h^{\id_B},\id_X^f}\of X^B \to Y^B\times_{Y^A} X^A\\
 \tuplet{g\to h}&=\tuplet{h^{\id_D},\id_X^g}\of X^D \to Y^D\times_{Y^C} X^C
