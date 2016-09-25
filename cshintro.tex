@@ -1,9 +1,9 @@
 \documentclass[csh.tex]{subfiles}
 \begin{document}
 \section{Internal simplicial objects}
-Internal simplicial homotopy has a notion of simplicial object of $\ambient$ which does rely on external $\ambient$-valued presheaves, but on internal structures.
+The simplicial homotopy of this paper uses an internal notion of simplicial object of $\ambient$ instead of some kind of $\ambient$-valued presheaves.
 
-\begin{definition} A \keyword{simplicial object} $X$ of $\ambient$ is a triple $\tuplet{\base X, \dim, \cdot}$ where $\base X$ is an object of $\ambient$, $\dim$ is a morphism $\base X\to \nno$. Here $\nno$ is the \keyword{natural number object} of $\ambient$. The operator $\cdot$ is has the following properties. Let $\Ar(\simCat)$ be the object of non decreasing functions between decidable, finite and inhabited initial segments of the natural numbers. The domain $\dom(\cdot)$ of $\cdot$ is the following object. 
+\begin{definition} A \keyword{simplicial object} $X$ of $\ambient$ is a triple $\tuplet{\base X, \dim, \cdot}$ where $\base X$ is an object of $\ambient$ and $\dim$ is a morphism $\base X\to \nno$. Here $\nno$ is the \keyword{natural number object} of $\ambient$. The operator $\cdot$ is has the following properties. Let $\Ar(\simCat)$ be the object of non decreasing functions between decidable, finite and inhabited initial segments of the natural numbers. The domain $\dom(\cdot)$ of $\cdot$ is the following object. 
 \[ \set{\tuplet{x,\xi}\of \base X\times \Ar(\simCat)\middle| \dim(x) = \max(\cod(\xi))}\]
 The codomain $\cod(\cdot)$ of $\cdot$ is $\base X$. The operator $\cdot$ satisfies the following equations.
 \begin{align*}
@@ -28,7 +28,7 @@ The relation $\leq$ is decidable. Comprehension on decidable predicates defines 
 
 Local Cartesian closure means that there is an object $A$ of morphisms between the initial segments. Local Cartesian closure also implies that there is a subobject of non decreasing morphisms $\Ar(\simCat)$.
 \[ \product{f\of A,i,j\of\nno,x\of\set{y\of 1|i\leq j}}{\set{y\of 1|f(i)\leq f(j)}}\]
-However, because $\ambient$ is also exact and extensive, it is a Heyting category, so the same subobject has a more familiar definition.
+Because $\ambient$ is also exact and extensive, it is a Heyting category, so the same subobject has a more familiar definition.
 \[ \Ar(\simCat)=\set{f\of A|\forall i,j\of\nno.i\leq j \to f(i)\leq f(j)} \]
 
 \begin{definition} The object $\Ar(\simCat)$ is the object of arrows of the internal \keyword{category of simplices} $\simCat$, whose object of objects $\Ob(\simCat)$ is $\nno$. Composition is defined as ordinary function composition.
@@ -42,13 +42,13 @@ That $\ambient$ is a $\Pi$-\keyword{pretopos} means all of the following.
 \begin{enumerate}
 \item The category $\ambient$ is \emph{locally Cartesian closed}. This means that for each object $X$ of $\ambient$ each slice $\ambient/X$ is Cartesian closed.
 \item The category $\ambient$ is \emph{extensive}, which means that is has finite coproducts and that $\ambient/(X+Y)$ is equivalent to $(\ambient/X)\times(\ambient/Y)$ for each pair of objects $X$ and $Y$ of $\ambient$.
-\item The category $\ambient$ is \emph{exact} in the sense of Barr. This means that all weak groupoids (see below) have coequalizers and that those coequalizers are stable under pullback.
+\item The category $\ambient$ is \emph{exact} in the sense of Barr. This means that all pseudo-equivalence relations (see below) have coequalizers and that those coequalizers are stable under pullback.
 \end{enumerate}
 
-A \keyword{weak groupoid} consists of a pair of objects $X_0$, $X_1$ and morphisms $r\of X_0\to X_1$ and $s,t\of X_1\to X_0$ such that $s\circ r= t\circ r = \id_{X_0}$ such that for each $x,y,z\of X_0$ if two of $\tuplet{x,y}$, $\tuplet{x,z}$ and $\tuplet{y,z}$ are in the image of $\tuplet{s,t}\of X_1\to X_0\times X_0$, the third is too. A \emph{coequalizer} for a weak groupoid is a coequalizer of $s$ and $t$.
+A \keyword{pseudo-equivalence relation} consists of a pair of objects $X_0$, $X_1$ and morphisms $r\of X_0\to X_1$ and $s,t\of X_1\to X_0$ such that $s\circ r= t\circ r = \id_{X_0}$ such that for each $x,y,z\of X_0$ if two of $\tuplet{x,y}$, $\tuplet{x,z}$ and $\tuplet{y,z}$ are in the image of $\tuplet{s,t}\of X_1\to X_0\times X_0$, the third is too. A \emph{coequalizer} for a pseudo-equivalence relation is a coequalizer of $s$ and $t$.
 \end{definition}
 
-\begin{example} Every topos is a $\Pi$-pretopos so $\ambient$ can be any topos with a natural number object like the topos of sets. \end{example}
+\begin{example} Every topos is a $\Pi$-pretopos so any topos with a natural number object, like the topos of sets, is candidate for $\ambient$. \end{example}
 
 This combination of properties implies the following.
 \begin{enumerate}

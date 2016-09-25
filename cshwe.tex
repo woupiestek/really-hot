@@ -84,7 +84,7 @@ Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one
 
 \begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $g$ and $g\circ f$ are acyclic cofibrations, then $f$ is an acyclic cofibration \label{left cancellation} \end{lemma}
 
-\begin{proof} Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. Because $B$ is a complex, there is a $b'\of Z\to B$ such that $b'\circ g = b$. Lifting properties also imply that there is an $a'\of Z\to A$ such that $a'\circ g\circ f = a$ and $k\circ a'= b'$. So $b'\circ g$ is a filler for $k\circ a=b\circ f$. By generalization this construction lifts $f$ against all fibrations and that makes $f$ an acyclic cofibration.
+\begin{proof} Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. Because $B$ is a complex, there is a $b'\of Z\to B$ such that $b'\circ g = b$. Lifting properties also imply that there is an $a'\of Z\to A$ such that $a'\circ g\circ f = a$ and $k\circ a'= b'$. So $b'\circ g$ is a filler for $k\circ a=b\circ f$. Generalizing, this construction lifts $f$ against all fibrations and that makes $f$ an acyclic cofibration.
 \[\xy
 (0,28)*+{X}="x",(14\halfrootthree,21)*+{A}="a",(0,14)*+{Y}="y",(14\halfrootthree,7)*+{B}="b",(0,0)*+{Z}="z"
 \ar^a "x";"a" \ar_f "x";"y" \ar^k "a";"b" \ar^(.25)b "y";"b" \ar_g "y";"z"
@@ -159,7 +159,7 @@ h\circ \phi\circ(\id\times i) &= h \circ \pi_1 \circ (\id\times i) = h\circ i \c
 I\ar[r]^{a}\ar[d]_{c_1\times \id} & J\ar[r]^(.6){h'\circ j}\ar[d]_(.3){c_1\times\id} & W\ar[d]^h\\
 \simplex[1]\times I\ar[r]_{\id\times a}\ar[urr]^(.3){\phi\circ(\id\times i)} & \simplex[1]\times J\ar[r]_(.6){j\circ \pi_1}\ar@{.>}[ur]_{\psi} & Z
 }\]
-The filler is $\psi\circ c_0$. By generalization, $h$ is an acyclic fibration and $f$ is a weak equivalence.
+The filler is $\psi\circ c_0$. Generalizing, $h$ is an acyclic fibration and $f$ is a weak equivalence.
 \end{proof}
 
 \end{document}
