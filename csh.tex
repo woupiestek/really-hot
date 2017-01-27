@@ -86,17 +86,16 @@ Idea: reverse the order. definitions--theorem--lemmas. That way the purpose of t
 \maketitle
 
 \section*{Introduction}
-This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory} following the example of \citep{KLV12}. Their model is based on the category of simplicial sets. Simplicial homotopy is the homotopy of simplicial sets. It is equivalent to the homotopy of CW complexes which are a category of topological spaces \citep{Hovey99,GJSHT}.
-
-In the intended model types are homotopy types of certain simplicial objects in a \emph{realizability topos} (see \citep{MR2479466}). These toposes lack some of the structure of the category of sets underlying classical homotopy theory. In the internal logic the principle of the excluded middle and the axiom of choice can be invalid. They can lack infinite limits and colimits. We work around these issues in the following way.
+This paper grew out of an attempt to build a \emph{recursive realizability} model for \emph{homotopy type theory} following the example of \citep{KLV12}. The idea was simply to do simplicial homotopy (see \citep{Hovey99,GJSHT}) in a \emph{realizability topos} (see \citep{MR2479466}). 
+What makes this challenging is that realizability toposes may lack infinite limits and colimits and that the internal logic does not always satisfy the principle of the excluded middle and the axiom of choice. We face these challenges with the following tactics.
 \begin{enumerate}
 \item Limit the class of cofibrations. In classical simplicial homotopy theory every mono\-morphism is a cofibration. We demand that certain properties of the monomorphisms are decidable so classical arguments remain valid.
 \item Strengthen the lifting property. Fibrations come equipped with a \emph{filler operator} that gives solutions for a family of basic lifting problems.
 \item Build the homotopy category out of fibrant objects only, so we don't need fibrant replacements.
 \end{enumerate}
-To avoid distracting peculiarities of the realizability topos this paper works with a generic \emph{$\Pi$-pretopos} with a \emph{natural number object}. That makes our simplicial homotopy predicative as well as constructive.
+To avoid distracting peculiarities of realizability toposes, and to underline that the proofs are predicative as well as constructive, this paper works with a generic \emph{$\Pi$-pretopos} (see definition \ref{pretopos}) with a \emph{natural number object}.
 
-\subsection*{Intended model} The \emph{category of assemblies} which is the category of $\neg\neg$-separated objects of the effective topos up to equivalence, has several \emph{strongly} complete internal categories that are not posets, in particular the \emph{category of modest sets} \citep{MR1097022,MR2479466,MR1023803}. \emph{Strongly complete} means that the externalization of the internal category is a complete fibred category. The category of assemblies is not exact, but the \emph{ex/lex completion} \citep{MR1600009} preserves strongly complete internal categories. This exact completion is not the effective topos, but it is a kind of realizability topos and it is the intended ambient category $\ambient$ in this paper. 
+\subsection*{Intended model} The \emph{category of assemblies}, which is the category of $\neg\neg$-separated objects of the effective topos up to equivalence, has several \emph{strongly} complete internal categories that are not posets, in particular the \emph{category of modest sets} \citep{MR1097022,MR2479466,MR1023803}. \emph{Strongly complete} means that the externalization of the internal category is a complete fibred category. The category of assemblies is not exact, but the \emph{ex/lex completion} \citep{MR1600009} preserves strongly complete internal categories. This exact completion is not the effective topos, but it is a kind of realizability topos and it is the intended ambient category $\ambient$ in this paper. 
 
 The topos with a complete internal category that is not a poset is interesting, because complete internal categories in Grothendieck toposes are necessarily posets. This fact is traditionally attributed to Peter Freyd.
 

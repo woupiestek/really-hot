@@ -12,7 +12,7 @@ This section defines a model structure on a category of $\ambient\s$.
 \item The pairs of sets $(C,F\cap W)$ and $(C\cap W,F)$ are \emph{enriched factorization systems} (see definition \ref{enriched factorization system}). 
 \end{itemize}
 
-Categories with such a structure are \emph{model categories}. Members of $C\cap W$ are called \keyword{acyclic cofibrations} and members of $F\cap W$ are called \keyword{acyclic fibrations}.
+Categories with such a structure are \emph{model categories}.
 \end{definition}
 
 This notion of model structure is the ordinary one, except for the kind of factorization systems the morphisms in it form.
@@ -40,9 +40,9 @@ In $\ambient\s$ we make the following selections.
 
 For each $n\in\N$, the $n$-\keyword{simplex} $\simplex[n]$ is the internal simplicial set where $\base{\simplex[n]}$ is the object of all morphisms $\phi$ in $\simCat$ such that $\cod(\phi) = n$, $\dim(\phi) = \dom(\phi)$ and $\phi\cdot \xi = \phi\circ \xi$. Here $\N$ is the \keyword{set of natural numbers} that exists outside of $\ambient$. For each $k\of[n]$ the \keyword{horn} $\horn_k[n]$ is the subobject of the non decreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$.
 \[ \base{\horn_k[n]} = \set{\phi\of\base{\simplex[n]}| \exists i\of[n]-\set k.\forall j\of \dom(\phi).\phi(i)\neq j } \]
-The \keyword{horn inclusion} is the monomorphism $\horn_k[n]\to\simplex[n]$. The \emph{family of horn inclusions} is the sum of all horn inclusions $\coproduct{k\leq n\of\nno}{\horn_k[n]}\to \coproduct{k\leq n\of\nno}{\simplex[n]}$ that exists as a morphism of $\ambient\s$.
+The \keyword{horn inclusion} is the monomorphism $\horn_k[n]\to\simplex[n]$. The \emph{family of horn inclusions} is the sum of all horn inclusions $\coproduct{k\leq n\of\nno}{\horn_k[n]}\to \coproduct{k\leq n\of\nno}{\simplex[n]}$ that exists as a morphism of $\ambient\s$. Note that $\coproduct{x\of y}{f(x)}$ is the notation for dependent coproducts in this paper.
 
-The lifting property that $f$ satisfies is defined in a slice category of $\ambient\s$. Let $I = \set{\tuplet{n,k}\of\nno\times\nno|k\leq n}$. The family of horn inclusions is a morphism in $\ambient\s/I\disc$ (see example \ref{discrete}). So is the multiple $I\disc\times f\of I\disc\times X\to I\disc\times Y$ of $f$. The morphism $f$ is a fibration if $I\disc\times f$ has the right lifting property with respect to $\coproduct{k\leq n\of\nno}{\horn_k[n]}\to \coproduct{k\leq n\of\nno}{\simplex[n]}$.
+The lifting property that $f$ satisfies, is defined in a slice category of $\ambient\s$. Let $I = \set{\tuplet{n,k}\of\nno\times\nno|k\leq n}$. The family of horn inclusions is a morphism in $\ambient\s/I\disc$ (see example \ref{discrete}). So is the multiple $I\disc\times f\of I\disc\times X\to I\disc\times Y$ of $f$. The morphism $f$ is a fibration if $I\disc\times f$ has the right lifting property with respect to $\coproduct{k\leq n\of\nno}{\horn_k[n]}\to \coproduct{k\leq n\of\nno}{\simplex[n]}$. 
 \end{definition}
 
 \begin{example} If $\ambient$ is the topos of sets, then the morphisms that satisfy this definition are precisely the \emph{Kan fibrations}. In that case the axiom of choice implies a filler operator exists. \end{example}
@@ -56,7 +56,7 @@ The lifting property that $f$ satisfies is defined in a slice category of $\ambi
 
 The theorems in this paper should work in a $\Pi$-pretopos $\ambient$ that doesn't have infinite colimits. The small object argument uses such colimits to provide factorizations of morphisms and therefore we cannot use it here. To get a model structure we retreat to a subcategory of $\ambient\s$.
 
-\begin{definition} A \keyword{complex} is a tuple $\tuplet{\base X,\dim,\cdot,\filler}$ where $\tuplet{\base X,\dim,\cdot}$ is a simplicial object and $\filler$ is a filler operator (see definition \ref{enriched factorization system}) for the unique morphism $\bang\of \tuplet{\base X,\dim,\cdot}\to 1\disc$. A morphism of complexes is simply a morphism of simplicial objects. The \emph{category of complexes} and morphisms of complexes is $\ambient\s\f$.
+\begin{definition} A \keyword{complex} is a tuple $\tuplet{\base X,\dim,\cdot,\filler}$ where $\tuplet{\base X,\dim,\cdot}$ is a simplicial object and $\filler$ is a filler operator (see definition \ref{enriched factorization system}) that makes the unique morphism $\bang\of \tuplet{\base X,\dim,\cdot}\to 1\disc$ a fibration. A morphism of complexes is simply a morphism of simplicial objects. The \emph{category of complexes} and morphisms of complexes is $\ambient\s\f$.
 \end{definition}
 
 \begin{example} Each discrete simplicial object has a canonical filler operator, which means that $\function{I\of\ambient}{I\disc}$ factors through the category of complexes. All simplices are complexes. Horns are not, however.
@@ -70,7 +70,7 @@ With fibrations, weak equivalences and cofibrations defined as above the $\ambie
 \end{theorem}
 
 \begin{proof}
-Lemma \ref{factorization system 1} shows that cofibrations and acyclic fibrations form a weak factorization system. Lemma \ref{factorization system 2} tells the same thing about fibrations and acyclic cofibrations. Lemma \ref{toot} demonstrates that if two of $f$, $g$ and $f\circ g$ are weak equivalences, then all three are. These three requirements define a model structure.
+Lemma \ref{factorization system 1} shows that cofibrations and acyclic fibrations form a weak factorization system. Lemma \ref{toot} demonstrates that if two of $f$, $g$ and $f\circ g$ are weak equivalences, then all three are. Lemma \ref{factorization system 2} tells the same thing about fibrations and acyclic cofibrations. Hence $\ambient\s\f$ is has a model structure by definition \ref{model structure}.
 \end{proof}
 
 \end{document}

@@ -12,12 +12,12 @@ This section show that the cofibrations from definition \ref{cofibration} are pa
 
 The \emph{cycle} $\cycle[n]$ is the subobject of non surjective functions of $\simplex[n]$. The $\dim$ and $\cdot$ are the same and the bases are related as follows:
 \[ \base(\cycle[n]) = \set{\phi\of\base(\simplex[n])| \exists i\of[n].\forall j\of \dom(\phi).\phi(i)\neq j } \]
-The \keyword{cycle inclusion} is the monomorphism $\cycle[n]\to\simplex[n]$. The \emph{family of cycle inclusions} is the sum of all cycle inclusions $\coproduct{n\of\nno}{\cycle[n]}\to \coproduct{k\leq n\of\nno}{\simplex[n]}$ that exists as a morphism of $\ambient\s$. Note that $\coproduct{x\of y}{z(x)}$ denotes the \keyword{indexed coproduct} of the $y$-indexed family $z$.
+The \keyword{cycle inclusion} is the monomorphism $\cycle[n]\to\simplex[n]$. The \emph{family of cycle inclusions} is the sum of all cycle inclusions $\coproduct{n\of\nno}{\cycle[n]}\to \coproduct{k\leq n\of\nno}{\simplex[n]}$ that exists as a morphism of $\ambient\s$.
 
 Definition \ref{fibration} explains how lifting properties with respect to families work.
 \end{definition}
 
-\begin{example} Each cycle inclusion $\cycle[n]\to\simplex[n]$ is a cofibration because $\id_{[n]}\of[n]\to[n]$ is the unique face of $\simplex[n]$ not in $\cycle[n]$ and equility with $\id$ is decidable in $\simCat$. Therefore every acyclic fibration is a contractible morphism. \label{acyclic means contractible}\end{example}
+\begin{example} Each cycle inclusion $\cycle[n]\to\simplex[n]$ is a cofibration because $\id_{[n]}\of[n]\to[n]$ is the unique face of $\simplex[n]$ not in $\cycle[n]$ and equality with $\id$ is decidable in $\simCat$. Therefore every acyclic fibration is a contractible morphism. \label{acyclic means contractible}\end{example}
 
 \begin{proposition} Every morphism factors as a contractible morphism following a cofibration. \label{factor1} \end{proposition}
 
@@ -27,22 +27,31 @@ Let $\simCat^+$ be the subcategory of monomorphisms and $\simCat^-$ that of epim
 The first step is to cover $Y$ with another simplicial set $LY$ where degeneracy is decidable.
 Let $LY[n] = \coproduct{i\of[n]}{Y[i]\times\simCat^-(n,i)}$ and for $\phi\of [m]\to [n]$ of $\simCat$ and $\tuplet{\epsilon,y}\of LY[n]$ let the following equation hold.
 \[\tuplet{\epsilon,y}\cdot \phi=\tuplet{e(\epsilon\circ \phi),y\cdot m(\epsilon\circ\phi)}\]
+A pair $\tuplet{\epsilon,y}$ is a face of $LY$ if and only if $\epsilon=\id$ and equality is a decidable property of morphisms in $\simCat^+$.
 Let $l_Y\of LY\to Y$ satisfy $l_Y\tuplet{\epsilon,y}=y\cdot\epsilon$.
 
-The second step glues simplices of $X$ and $LY$ together into new ones.
-The pair $(f,l_Y)$ stands for the morphism $X+LY\to Y$ that satisfies $(f,l_Y)(x)=f(x)$ for $x\of X$ and $(f,l_Y)(y) = l_Y(y)$ for $y\of LY$. Let $Z[n]\subseteq \product{i\in[n]}{(X[i]+LY[i])^{\simCat^+(i,n)}}$ consist of elements $z$ which satisfy the following conditions for all $\alpha\of [j]\to [k]$ and $\beta\of [i]\to[j]$ in $\simCat^+$.
+\hide{ $l_Y$ may be an equivalence, but not an acyclic fibration in a constructive way }
+
+The second step glues simplices from $X$ and $LY$ together.
+The pair $(f,l_Y)$ stands for the morphism $X+LY\to Y$ that satisfies $(f,l_Y)(x)=f(x)$ for $x\of X$ and $(f,l_Y)(y) = l_Y(y)$ for $y\of LY$.
+Let $Z[n]\subseteq \product{i\of[n]}{(X[i]+LY[i])^{\simCat^+([i],[n])}}$ (where $\simCat^+([i],[n])$ is the object of monomorphisms $[i]\to [n]$) consist of elements $z$ which satisfy the following conditions for all $\alpha\of [j]\to [k]$ and $\beta\of [i]\to[j]$ in $\simCat^+$.
 \begin{enumerate}
 \item $(f,l_Y)(z(\alpha\circ\beta)) = (f,l_Y)(z(\alpha))\cdot\beta$;
 \item if $z(\alpha)\of X$ then $z(\alpha\circ\beta)\of X$;
-\item if $z(\alpha)=\tuplet{\epsilon,y}\of LY$ and $\epsilon\circ\beta$ is not monic, then $z(\alpha\circ\beta)\of LY$ and $z(\alpha\circ\beta)_0$ factors through $\epsilon\circ\beta$.
+\item if $z(\alpha)=\tuplet{\epsilon,y}\of LY$ and $\epsilon\circ\beta$ is not monic, then $z(\alpha\circ\beta) = \tuplet{\epsilon',y'}\of LY$ and $\epsilon'$ factors through $\epsilon\circ\beta$.
 \end{enumerate}
 For $\phi\of[m]\to [n]$ and $z\of Z[n]$, let $z\cdot\phi$ satisfy the following equation for all $\alpha$ of $\simCat^+$.
 \[ (z\cdot\phi)(\alpha) = z(m(\phi\circ\alpha))\cdot e(\phi\circ \alpha) \]
 By these definitions, $Z=(\coproduct{n\of\nno}{Z[n]},\function{\tuplet{n,z}}n,\cdot)$ is a simplicial object.
 
-There is a morphism $g\of X\to Z$ which satisfies $g(x)(\alpha) = x\cdot\alpha$. It is a cofibration because a $z\of\base Z$ is nondegenerate and outside of the image of $g$ if and only if $z(\id_{[\dim(z)]}) = \tuplet{\id_{[\dim(z)]},y}$ for some $y\of Y[\dim(z)]$. The definition of $LY$ ensures that elements with this property are nondegenerate while condition 3 ensures that if $z(\id)$ is degenerate, then so is all of $z$.
+Let $g\of X\to Z$ satisfy $g(x)(\alpha) = x\cdot\alpha$. It is a cofibration because a $z\of\base Z$ is nondegenerate and outside of the image of $g$ if and only if $z(\id_{[\dim(z)]}) = \tuplet{\id_{[\dim(z)]},y}$ for some $y\of Y[\dim(z)]$. The definition of $LY$ ensures that elements with this property are nondegenerate while condition 3 ensures that if $z(\id)$ is degenerate, then so is all of $z$.
 
-There is a morphism $h\of Z\to Y$ which satisfies $h(z) = (f,l_Y)(z(\id_{[\dim(z)]}))$. This morphism is contractible thanks to the following filler construction. Let $a\of \cycle[n]\to Z$ and $b\of \simplex[n]\to Y$ satisfy $h\circ a = b\circ k$ where $k\of\cycle[n]\to\simplex[n]$ is the cycle inclusion. Let $c\of \simplex[n]\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $\phi$ is an epimorphism and $c(\phi)(\mu) = a(\phi)(\mu)$ otherwise. Now $c\circ k = a$ and $h\circ c = b$ so $c$ is a filler. There is a morphism in $\ambient\s$ that maps each commutative square $h\circ a = b\circ k$ to this filler $c$ because $\ambient\s$ is locally Cartesian closed and being an epimorphism is a decidable property of morphisms of $\simCat$.
+Let $h\of Z\to Y$ satisfy $h(z) = (f,l_Y)(z(\id_{[\dim(z)]}))$. This morphism is contractible thanks to the following filler construction, that defines a filler operator because it works for arbitrary cycle inclusions $k\of\cycle[n]\to\simplex[n]$ and because $\ambient \s$ is locally Cartesian closed.
+
+Let $a\of \cycle[n]\to Z$ and $b\of \simplex[n]\to Y$ satisfy $h\circ a = b\circ k$.
+Since $k$ is essentially the complement of the subobject of epimorphisms of $\simplex[n]$ a filler $c$ can be defined as follows.
+Let $c\of \simplex[n]\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $\phi$ is an epimorphism and $c(\phi) = a(\phi)$ for $\phi$ in the image of $k$. By this definition $c\circ k = a$ and $h\circ c = b$.
+
 \end{proof}\hide{ Codomains of contractibles may have a distance function, that gives a lower bound to the number of compositions required to to reach it. I don't have time to work that out and check it right now.}
 
 \begin{lemma} Contractible morphisms are acyclic fibrations.\label{Reedy}\end{lemma}
