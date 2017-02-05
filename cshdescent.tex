@@ -12,6 +12,8 @@ This requirement may give us more limits than we need, but the intended model of
 %TODO: investigate which exponentials we actually need.
 
 \item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} if it is an equalizer.
+
+Since $\ambient$ may lack a subobject classifier, there can be irregular monomorphisms.
 \end{itemize} 
 
 The interesting case is where $M$ has the following structure in addition to the properties above.
@@ -23,7 +25,16 @@ The following fact makes the universal modest fibration a potential model of hom
 
 \begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant. \label{fibrant universe} \end{theorem}
 
-\begin{proof} For each horn inclusion $h\of \horn_k[n]\to\simplex[n]$ and each pair of $v\of \horn_k[n]\to V$, the modest fibration $v\ri(\uni)\of \horn_k[n]\times_V U \to \horn_k[n]$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex[n]$ by lemma \ref{descent}. There is a $\chi(D(v\ri(\uni)))\of\simplex[n]\to V$ and $\chi(h_*(v\ri(\uni)))\circ h$ equals $v$ by definition \ref{universal modest fibration}.
+\begin{proof} For each horn inclusion $h\of \horn_k[n]\to\simplex[n]$ and each $v\of \horn_k[n]\to V$, the modest fibration $v\ri(\uni)\of \horn_k[n]\times_V U \to \horn_k[n]$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex[n]$ by lemma \ref{descent}.
+
+\hide{
+something about an actual filler.
+see that is the point: we need to descent the whole family of lifting problems.
+descending individual cases may not be persuasive enough in this and other cases.
+on the other hand: if the constructiveness of the proofs is not convincing enough, then there is nothing I can do.
+}
+
+There is a $\chi(D(v\ri(\uni)))\of\simplex[n]\to V$ and $\chi(h_*(v\ri(\uni)))\circ h$ equals $v$ by definition \ref{universal modest fibration}. These fillers forms a filler operator, which make $\bang\of V\to 1$ a fibration. %is there no more to understand here?
 \end{proof}
 
 \begin{lemma}[Descent]
@@ -60,7 +71,7 @@ The following defines the functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
 
 \item In the \keyword{lexicographical product} $\product{i\of([n]-\set k)}{\xi_i}$ tuples get the \keyword{lexicographical ordering}. This ordering determines priority by comparing elements in sequence.
 \begin{align*} 
-(x_0,x_1,\dotsc) \leq_{\rm lex} (x_0,x_1,\dotsc) \iff& x_0\leq y_0 \land (x_0=y_0 \to (x_1,\dotsc)\leq_{\rm lex}(y_1,\dotsc))
+(x_0,x_1,\dotsc) \leq_{\rm lex} (y_0,y_1,\dotsc) \iff& x_0\leq y_0 \land (x_0=y_0 \to (x_1,\dotsc)\leq_{\rm lex}(y_1,\dotsc))
 \end{align*}
 
 \item Let $\ka(\xi)\of\product{i\of([n]-\set k)}{\xi_i} \to [m+\norm\xi]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexicographical product $\product{i\of([n]-\set k)}{\xi_i}$ to the interval in $[m+\norm\xi]$ which starts at the least $i$ such that $K_0(\xi)(i)=k$.
@@ -105,7 +116,7 @@ On morphisms in $\ambient\s/\horn_k[n]$, the functor $D$ acts by composition: $D
 
 If $\ambient$ has infinite colimits, the functor $D$ has a left adjoint $K'$ that satisfies $K'\simplex\simeq K$. We cannot rely on that property here. The functor $K$ does extend to finite colimits of simplices. Preservation of intersections implies that $K$ also applies to finite unions of simplices like $\horn_l[m]$. The reason $D$ preserves fibrations and their right lifting property, is that its partial left adjoint preserves the left lifting property. 
 
-\begin{definition}[Face notation] We introduce a notation for monomorphisms in $\simCat/[n]$ or more accurately for the result of applying $\simplex$ to them. For $\xi\of[m]\to[n]$ and $\phi\of[m]\to\bool$ let $\face(\xi,p)\of \dom(\face(\xi,p))\to \simplex[m]$ satisfy
+\begin{definition}[Face notation] We introduce a notation for monomorphisms in $\simCat/[n]$ or more accurately for the result of applying the functor $\simplex\of \simCat/[n] \to \ambient\s/\simplex[n]$ to them. For $\xi\of[m]\to[n]$ and $\phi\of[m]\to\bool$ let $\face(\xi,p)\of \dom(\face(\xi,p))\to \simplex[m]$ satisfy
 \begin{align*}
 \base(\dom(\face(\xi,p))) &= \set{\alpha\of\base(\simplex[m])\middle|\forall i\of \dom(\alpha).p\circ\alpha(i)=\true}\\
 \dim(\alpha) &= \dom(\alpha)\\
@@ -118,7 +129,7 @@ If $\ambient$ has infinite colimits, the functor $D$ has a left adjoint $K'$ tha
 }\]
 \end{definition}
 
-With the help of this notation, we describe commutative triangles of monomorphisms as follows.
+With the help of this notation, important commutative triangles of monomorphisms can be written as follows.
 \begin{align}
 &\horn_l[m]\stackrel{\hat h}\to \simplex[m]\stackrel{\simplex(\xi)}\to \simplex[n] = \bigvee_{i\of [m]-\set l} \face(\xi,\function x{x\neq i})\\
 &K(\horn_l[m])\stackrel{K(\hat h)}\to \simplex[m+\norm\xi]\stackrel{\simplex(K_0(\xi))}\to \simplex[n] = \bigvee_{j\of [m]-\set l} \face(K_0(\xi),v_j)\\
@@ -151,7 +162,7 @@ B &=\left(\bigvee_{j\of[m]-\set l}\face(K_0(\xi),u_{\xi(l)}\land v_j)\right)\vee
 C &=\cod(h\ri K(\hat h))=\left(\bigvee_{i\of[n]-\set{k}} \face(K_0(\xi),u_i)\right)
 \end{align*}
 
-Decompose $A\to B$ as a series of inclusions $A_j\to A_j+1$ that satisfy $A_0=A$ and $A_{n+1}=B$. For $j\of[n+1]$ define $A_j$ as follows.
+Decompose $A\to B$ as a series of inclusions $A_j\to A_{j+1}$ that satisfy $A_0=A$ and $A_{n+1}=B$ by defining $A_j$ for $j\of[n+1]$ as follows.
 \[ A_j = A\vee \left(\bigvee_{i\of[j]-\set{k,j,\xi(l)}}\face(K_0(\xi),u_i)\right) \]
 Each inclusion $A_j\to A_{j+1}$ is a pushout of the inclusion of $A_j\cap \face(K_0(\xi),u_{j+1})$ into $\face(K_0(\xi),u_{j+1})$, where
 \begin{align*} A_j\cap \face(K_0(\xi),u_{j+1}) = &\left(\bigvee_{i\of[m]-\set l}\face(K_0(\xi),u_{j+1}\land v_{i})\right)\vee \\
@@ -184,7 +195,7 @@ Since $B_j\cap \face(K_0(\xi),\land w_{\vec p})$ is a unions of faces that have 
 
 \begin{lemma}[Face completion] Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have a point $e$ of $\simplex[p]$ in common. The inclusion $\bigcup F\to \simplex[p]$ has the left lifting property with respect to all fibrations. \label{face completion} \end{lemma}
 
-\begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. If a $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ opposes $e$, it is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$. Therefore the inclusion has the left lifting property. Because composition preserves the left lifting property, $\bigcup F = F_0\to F_p = \simplex[p]$ has it too. 
+\begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. A $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ either contains $e$ or is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$. Therefore the inclusion has the left lifting property. Because composition preserves the left lifting property, $\bigcup F = F_0\to F_p = \simplex[p]$ has it too. 
 \end{proof}
 
 \end{document}

@@ -2,15 +2,20 @@
 \begin{document}
 
 \section{Fibrations}
-This section show that fibrations are part of a factorization system as well.
+This section shows that fibrations are part of a factorization system as well.
 
 \begin{lemma} Acyclic cofibrations and fibrations form an enriched factorization system on $\ambient\s\f$. \label{factorization system 2} \end{lemma}
 
 \begin{proof} Lemma \ref{acyclic have lifting} shows that weakly invertible cofibrations (see definition \ref{weakly invertible}) are acyclic cofibrations. Lemma \ref{lifting is acyclic} shows the converse. Proposition \ref{factor2} shows that every morphism factors as a fibration following a weakly invertible cofibration.
 \end{proof}
 
-\begin{definition} In the subcategory $\ambient\s\f$ of $\ambient\s$ a cofibration $f\of X\to Y$ is \keyword{weakly invertible} if there is a $g\of Y\to X$ such that $g\circ f = \id_X$ and an $h\of \simplex[1]\times Y\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and 
-$h\circ (\id_{\simplex[1]}\times f) = f\circ\pi_1$.
+\begin{definition} Let $f,g\of X\to Y$ be a pair of morphisms of $\ambient\s$. A \keyword{homotopy} between $f$ and $g$ is a morphism $h\of \simplex[1]\times X \to Y$ such that $h\circ (k\times \id_X) = (f,g)\of 1+1 \to \simplex[1]$, where $k\of 1+1\to\simplex[1]$ is the cycle inclusion.
+\[\xymatrix{
+X+X \ar[dr]^{(f,g)} \ar[d]_{k\times\id}\\
+\simplex[1]\times X \ar[r]_h & Y
+}\]
+
+In $\ambient\s$ a cofibration $f\of X\to Y$ is \keyword{weakly invertible} if there is a $g\of Y\to X$ such that $g\circ f = \id_X$ and a homotopy $h\of \simplex[1]\times Y\to Y$ between $f\circ g$ and $\id_Y$ such that $h\circ (\id_{\simplex[1]}\times f) = f\circ\pi_1$, where $\pi_1\of \simplex[1]\times X \to X$ is the projection.
 \[\xymatrix{
 Y+Y\ar[d]_{k\times \id} \ar[dr]^{(\id,f\circ g)}\\
 \simplex[1]\times Y \ar[r]_(.6)h & Y\\
@@ -33,7 +38,42 @@ X\ar[d]_f \ar[rr]^(.4){d_0\times \id} && \simplex[1]\times X \ar[d]|(.6){\id\tim
 Y \ar[rr]_(.4){d_0\times \id}\ar[urrr]^(.3){a\circ g} && \simplex[1]\times Y\ar[r]_(.6){b\circ h}\ar@{.>}[ur]_c & B
 }\]
 
-Let $d_1$ be the other horn inclusion $1\to \simplex[1]$. Let $e=c\circ(d_1\times \id_Y)$, so $k\circ e=b\circ h\circ (d_1\times \id_Y) = b$ and $e\circ f = c\circ (\id_{\simplex[1]}\times f)\circ (d_1\times \id_X) = a$. Then $e$ is a filler for $b\circ f=k\circ a$. Generalizing, $f$ is a weakly invertible cofibration.
+Let $d_1$ be the other horn inclusion $1\to \simplex[1]$. Let $e=c\circ(d_1\times \id_Y)$, so $k\circ e=b\circ h\circ (d_1\times \id_Y) = b$ and $e\circ f = c\circ (\id_{\simplex[1]}\times f)\circ (d_1\times \id_X) = a$. Then $e$ is a filler for $b\circ f=k\circ a$. Since $f$ has fillers for arbitrary fibrations $k$, it is an acyclic cofibration.
+\end{proof}
+
+\begin{lemma}[Triple lifting property] Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
+\[\xy
+(0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
+(0,0)*+{A\times D}="AD",(25,0)*+{B\times D}="BD",(40,0)*+{Y}="Y"
+\ar^{f\times\id} "AC";"BC"
+\ar_{\id\times g} "AC";"AD"
+\ar_{f\times\id} "AD";"BD"
+\ar^{a} "AD";"X"
+\ar|(.6){\id\times g} "BC";"BD"
+\ar^(.6){b} "BC";"X"
+\ar@{.>}_{d} "BD";"X"
+\ar_(.6){c} "BD";"Y"
+\ar^{h} "X";"Y"
+\endxy\]
+\label{triple lift}
+\end{lemma}
+
+\begin{proof} The general case reduces to the cases where $f$ and $g$ are cycle or horn inclusions, because the lemma is equivalent to the statement that the following maps $\tuplet{f\to h}$ and $\tuplet{g\to h}$ are (acyclic) fibrations and because acyclic fibrations are contractible (see definition \ref{contractible}).
+\begin{align*}
+\tuplet{f\to h}&=\tuplet{h^{\id_B},\id_X^f}\of X^B \to Y^B\times_{Y^A} X^A\\
+\tuplet{g\to h}&=\tuplet{h^{\id_D},\id_X^g}\of X^D \to Y^D\times_{Y^C} X^C
+\end{align*}
+In the case where $h$ is an acyclic fibration the morphism $\tuplet{g\to h}$ is an acyclic fibration if is has the lifting property for the family of cycle inclusions $k_i\of \cycle[i]\to\simplex[i]$ for $i\of\nno$, because acyclic fibrations are contractible morphisms (see lemma \ref{Reedy}). In turn $\tuplet{k_n\to h}$ are acyclic cofibrations if the triple lifting property holds in the cases where $a=k_i$ and $b=k_j$ for all $i,j\of\nno$.
+
+For the cases where $f$ or $g$ are acyclic the same reduction takes us to products of cycle and horn inclusions. If $f$ is acyclic, the problem of lifting $f$ against $g\to h$ reduces to the problem of lifting horn inclusions. The problem of lifting a possibly not acyclic $g$ against $k\to h$, where $k$ is a horn inclusion, reduces to the problem of lifting cycle inclusions by lemma \ref{Reedy}.
+
+In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove that their pushout products $g\pp f$ are compositions of pushouts of sums of horns and cycles and therefore have the left lifting properties with respect to (acyclic) fibrations (see lemma \ref{saturation}).
+\[\xy
+(0,10)*+{W\times Y}="left",(20,10)*+{\bullet}="middle",(10,20)*+{X\times Y}="top",(10,0)*+{W\times Z}="bottom",(40,10)*+{X\times Z}="right"
+\ar^(.4){f\times \id} "left";"top" \ar_{\id\times g} "left";"bottom" \ar "top";"middle" \ar "bottom";"middle"
+\ar@{.>}|(.3){g\pp f} "middle";"right" \ar^{\id\times g} "top";"right" \ar_{f\times\id} "bottom";"right"
+\endxy\]
+Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one of $f$, $g$ and $h$ is acyclic.
 \end{proof}
 
 \begin{lemma} All acyclic cofibrations in $\ambient\s\f$ are weakly invertible.\label{lifting is acyclic} \end{lemma}
@@ -57,7 +97,7 @@ Therefore $f$ is a weakly invertible cofibration by definition \ref{weakly inver
 
 \begin{proof} There is a simple factorization $f = p_0\circ r$ where $p_0\of Y/f\to Y$ and $r\of X\to Y/f$ and where 
 \begin{align*}
-Y/f &= \set{(x,p)\of X\times Y^{\simplex[1]}| f(x) = p(\function{*}{1}) }\\
+Y/f &= \set{\tuplet{x,p}\of X\times Y^{\simplex[1]}\middle| f(x) = p(\function{*}{1}) }\\
 p_0\tuplet{x,p} &= p(\function{*}{0})\\
 r(x) &= \tuplet{x,\function{*}{f(x)}}
 \end{align*}
