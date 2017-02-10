@@ -1,0 +1,164 @@
+\documentclass{tac}
+\usepackage{amssymb, amsmath}
+\usepackage[backend=bibtex,citestyle=authoryear-icomp]{biblatex}
+\usepackage[all]{xy}
+\usepackage{url}
+
+\title{Constructive Simplicial Homotopy}
+\author{Wouter Pieter Stekelenburg}
+\copyrightyear{2015,2016,2017}
+\address{Faculty of Mathematics, Informatics and Mechanics\\
+University of Warsaw\\
+Banacha 2\\
+02-097 Warszawa\\
+Poland}
+\eaddress{w.p.stekelenburg@gmail.com}
+\keywords{realizability, simplicial homotopy, Kan complexes}
+\amsclass{03D80, 18G30, 18G55}
+
+\newcommand\hide[1]{}
+\newcommand\cat\mathcal
+\newcommand\set[1]{\left\{#1\right\}}
+\mathrmdef{id}
+\mathrmdef{dom}
+\mathrmdef{cod}
+\newcommand\ri{^*}
+\newcommand\N{\mathbb N}
+\mathbfdef[nno]{N}
+\newcommand\dual{^{\mathrm{op}}}
+\mathbfdef[simCat]\Delta
+\newcommand\s{^{\simCat\dual}}
+\newcommand\bang{!}
+\newcommand\of{:}
+\newcommand\simplex\Delta
+\newcommand\cycle{\partial\Delta}
+\newcommand\horn\Lambda
+\newcommand\f{_f}
+\newcommand\tuplet[1]{\left\langle #1 \right\rangle}
+\newcommand\true{\mathtt{true}}
+\newcommand\false{\mathtt{false}}
+\newcommand\bool{\mathtt{bool}}
+\mathrmdef{nat}
+\mathssbxdef{Ar}
+\mathssbxdef{Ob}
+\newcommand\pp{\mathbin\diamond}
+\newcommand\norm[1]{\Vert #1 \Vert}
+\newcommand\ka\kappa
+\newcommand\la\lambda
+\mathrmdef{face}
+\mathrmdef{colim}
+\newcommand\ex{_{\textrm{ex}}}
+\newcommand\citep[1]{[\cite{#1}]}
+\mathrmdef{dim}
+\newcommand\base{\mathbf{U}}
+\mathssbxdef[sub]{Sub}
+\newcommand\ambient{\mathfrak A}
+\mathrmdef{uni}
+\newcommand\disc{_{\rm disc}}
+\mathrmdef{filler}
+\newcommand\traco\omega
+
+\newcommand\product[2]{\Pi #1 \mapsto #2}
+\newcommand\coproduct[2]{\Sigma #1 \mapsto #2}
+\newcommand\function[2]{\lambda #1 \mapsto #2}
+
+\newcommand\keyword[1]{\emph{#1}\label{#1}}
+
+
+\begin{document}
+We are working out exactly what a \emph{horn or cycle filler} operator is, just like we worked out what a simplicial set is, in hopes of making the proof clearer and more convincing.
+
+
+
+The lifting property is more demanding because it has to take all cases into account.
+I work in all kinds of slice categories to hide to gory details, and keep track of additional requirement:
+For a particular $f\of X\to Y$ and the family of horns $h\of D\to C$.
+\begin{align*}
+P &= \set{ \tuplet{a,b}\of(D\to X)\times(C\to Y)| f\circ a = b \circ h }\\
+\dim(a(\tuplet{\phi,k})) &=\max(\cod(\phi))\\
+\dim(b(\tuplet{\phi,k})) &= \max(\cod(\phi))\\
+a(\tuplet{\phi,k})\cdot\chi &= a(\tuplet{\phi\circ \chi,k}) \\
+b(\tuplet{\phi,k})\cdot\chi &= b(\tuplet{\phi\circ \chi,k}) \\
+\end{align*}
+\begin{itemize}
+\item The cycle case is simpler, because we can drop the $k$-index.
+\item The filler satisfies the same restrictions on dimensionality and restrictions, plus $c\circ h = a$ and $f\circ c = b$.
+\end{itemize}
+
+We now get a simplified notion of what a filler operator for both families are, and can try to rewrite the proofs in order to build exactly such an operator.
+
+Suppose we work out an official definition of horn and cycle fillers. What might happen?
+The step from the filler to lifting cofibrations may be less obvious, requiring some updates of the proofs and definition.
+Not the acyclic though, just the weakly invertible.
+
+\newcommand\HLP{\mathrm{HLP}}
+\begin{definition}
+Let  Let $f\of X\to Y$ be an arbitrary morphism of $\ambient\s$. The object of horn lifting problems is 
+\[\HLP(f) = \set{\tuplet{a,b}\of \base X^D\times \base Y^C \middle|\begin{array}{l}
+  f\circ a = b\circ h,\\
+  \dim(b\tuplet{\phi,k}) = \max(\dom\phi),\\
+  b\tuplet{\phi,k}\cdot\chi = b\tuplet{\phi\circ \chi,k},\\
+	a\tuplet{\phi,k}\cdot\chi = a\tuplet{\phi\circ \chi,k}
+\end{array}}\]
+Here $h\of D\to C$ is the inclusion of the following objects in $\ambient$.
+\begin{align*}
+C &= \coproduct{\phi\of\Ar(\simCat)}\cod(\phi) \\
+D &= \set{\tuplet{\phi,k}\of C \middle| \exists i\of\cod(\phi)-\set k. \forall j\of\dom(\phi).\phi(j)\neq i}
+\end{align*}
+A \keyword{horn filler} is a morphism $c\of\HLP(f)\to \base X^C$ that satisfies the following equations. 
+\begin{align*} c\tuplet{a,b}\circ h &= a & f\circ c\tuplet{a,b} &= b \end{align*}
+A \emph{fibration} of $\ambient\s$ is a morphism with a horn filler.
+\end{definition}
+
+%Cycle fillers 
+\newcommand\CLP{\mathrm{CLP}}
+\begin{definition}
+Let $f\of X\to Y$ be an arbitrary morphism of $\ambient\s$. The object of cycle lifting problems is 
+\[\CLP(f) = \set{\tuplet{a,b}\of \base X^D\times \base Y^C \middle|\begin{array}{l}
+  f\circ a = b\circ h,\\
+  \dim(b(\phi)) = \max(\dom\phi),\\
+  b(\phi)\cdot\chi = b(\phi\circ \chi),\\
+  a(\phi)\cdot\chi = a(\phi\circ \chi)
+\end{array}}\]
+Here $h\of D\to C$ is the inclusion of the following objects in $\ambient$.
+\begin{align*}
+C &= \Ar(\simCat) \\
+D &= \set{\phi\of C \middle| \exists i\of\cod(\phi).\forall j\of\dom(\phi).\phi(j)\neq i}
+\end{align*}
+A \keyword{cycle filler} is a morphism $c\of\CLP(f)\to \base X^C$ that satisfies the following equations. 
+\begin{align*} c\tuplet{a,b}\circ h &= a & f\circ c\tuplet{a,b} &= b \end{align*}
+A morphism  of $\ambient\s$ is \emph{contractible} if it has a cycle filler.
+\end{definition}
+
+Where do we have problems with generalizations?
+\begin{itemize}
+\item proposition on the factorization of $f$ as a contractible morphism following a cofibration.
+\item the triple lifting property
+\item if $f$ and $g\circ f$ are contractible, then so is $g$. I put a more direct prove here.
+\item fibrancy of the universal modest fibration
+\end{itemize}
+
+\section{Triple lifting property}
+We derive this from the equality of contractible and the acyclic fibrations. The core argument is that $\tuplet{f\to g}$ is a fibration if $f\of A\to B$ is a cofibration and $g\of X\to Y$ is a fibration, and contractible if $g$ is contractible or $f$ is acyclic. So how to define the horn and cycle fillers?
+
+\[ \tuplet{f\to g} = \function{x\of X^B}\tuplet{g\circ x,x\circ f}\of X^B \to Y^B\times_{Y^A} X^A \]
+
+Another approach is to take the pushout product of the families and construct the desired fillers there.
+
+Take push out product of the family of horns with the family of cycles, then find a filler.
+If $f$ is contractible, take the pushout product of the family of cycles with itself, and find a filler for that too.
+Then use adjoints etc. to prove the lemma.
+We may be able to pull it of without products, however. The triple lift for the families is a special case form which we derive all the special cases.
+
+How far would we get with just the family of cycles along an (acyclic) cofibration?
+
+The ultimate point is that we can fill the pushout product by systematically using fillers for simplices.
+That algorithmic reduction of a triple lifting problem to a horn or cycle lifting problem can be done inside $\ambient$ to show that elementary triple lifting problems have a solution if horn or cycle lifting problems have. There rest is the reduction of the general triple lifting problem to the product of the families.
+
+The reduction uses monotone monics $[m + n]\to[m]\times[n]$. 
+We start with a collection of $[m+n-1]$-dimensional faces in the pushout product. Unless $m=0$ or $n=0$ we have no $[m+n]$ dimensional faces however. So these need to be glued in, one by one.
+These can be lexicographically ordered again, after which we ensure that they get filled.
+I.e. we build a sequence $A_i\to A_{i+1}$ of approximations and show that each requires a well defined application of the preexisting filler operator.
+Clearly, the result is a proof in the same style as the descent proof, with one important difference: we don't rely on saturation, but an a filler operator to do the job.
+\end{document}
+
