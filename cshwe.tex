@@ -58,16 +58,16 @@ Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \p
 
 \begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $f$ and $g\circ f$ are acyclic fibrations, then $g$ is an acyclic fibration. \label{right cancellation}\end{lemma}
 
-\begin{proof} This is nearly the dual of lemma \ref{left cancellation} and dual reasoning gives $g$ the right lifting property for all cycle inclusions  which makes $g$ contractible (see definition \ref{contractible}) and an acyclic cofibration by lemma \ref{Reedy}.
+\begin{proof} Being acyclic is equivalent to being contractible (see definition \ref{contractible}) by example \ref{acyclic means contractible} and lemma \ref{Reedy}. Reasoning dual to that in the proof of lemma \ref{left cancellation} gives $g$ the right lifting property for the family of cycle inclusions.
 
 \[\xy
-(14\halfrootthree,28)*+{X}="x", (0,21)*+{\cycle[n]}="v", (14\halfrootthree,14)*+{Y}="y", (0,7)*+{\simplex[n]}="w", (14\halfrootthree,0)*+{Z}="z"
-\ar@{.>}^{a'} "v";"x" \ar_(.75)a "v";"y" \ar_k "v";"w"
-\ar@{.>}_(.25){b'} "w";"x" \ar_b "w";"z"
-\ar "x";"y" \ar "y";"z"
+(28,28)*+{X}="x", (0,21)*+{\coproduct{n\of\nno}\cycle[n]}="v", (28,14)*+{Y}="y", (0,7)*+{\coproduct{n\of\nno}\simplex[n]}="w", (28,0)*+{Z}="z"
+\ar@{.>}^(.67){a'} "v";"x" \ar_(.67)a "v";"y" \ar "v";"w"
+\ar@{.>}_(.75){b'} "w";"x" \ar_(.67)b "w";"z"
+\ar^f "x";"y" \ar^g "y";"z"
 \endxy\]
 
-The reason the dual reasoning works is that for the cycles $\cycle[n]$ from definition \ref{contractible} the unique morphism $\bang\of 0\to \cycle[n]$ is a cofibration. Here $0=0\disc$ is the initial object of $\ambient\s$. A member of $\base(\cycle[n])$ is a face if it is an identity morphism, and this is a decidable property of morphisms in $\simCat$. No faces are in the image of $\bang$.
+Dual reasoning works because the unique morphism $\coproduct{n\of\nno}\cycle[n]$ is a cofibration. A member of $\base(\coproduct{n\of\nno}\cycle[n])$ is a face if it is the pair $\tuplet{n,\id_n}$ for some $n\of\nno$ and this is a decidable property. No faces are in the image of $\bang$.
 \end{proof}
 
 \begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $g$ and $g\circ f$ are acyclic fibrations, then $f$ is a weak equivalence.\label{shared retract 2} \end{lemma}

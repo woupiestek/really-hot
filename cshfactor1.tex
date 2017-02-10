@@ -21,7 +21,7 @@ Definition \ref{fibration} explains how lifting properties with respect to famil
 
 \begin{proposition} Every morphism factors as a contractible morphism following a cofibration. \label{factor1} \end{proposition}
 
-\begin{proof} \hide{The construction is based on the fact that $\simCat$ is a \emph{Reedy category}.} 
+\begin{proof}
 Let $\simCat^+$ be the subcategory of monomorphisms and $\simCat^-$ that of epimorphisms of $\simCat$ (see definition \ref{category of simplices}). For each morphism $\phi$ of $\simCat$ let $m(\phi)$ be the monic and $e(\phi)$ the epic factors.
 
 The first step is to cover $Y$ with another simplicial set $LY$ where degeneracy is decidable.
@@ -70,7 +70,7 @@ For each $i\of\nno$ let $S_i$ be the object of $n$-dimensional faces in $S$. Eac
 For every object $Y$ of $\cat A$ there is a constant family $\nno\ri(Y)$ and a canonical isomorphism $\nno\ri(Y)\simeq s\ri(\nno\ri(Y))$ which makes $\nno\ri(Y)$ a cochain. The \keyword{transfinite composition} of a cochain $(X,f)$ is a cochain morphism $\traco(g)\of (X,f)\to\nno\ri Y$ such that for every other morphism $k\of (X,f)\to\nno\ri Z$ there is a unique morphism $l\of Z\to Y$ such that $s\ri(l)\circ \traco(g)=k$. In other words, it is an initial object in the comma category $(X,f)/\nno\ri$.\hide{Introducing comma category, while not defining it}
 \end{definition}
 
-\begin{lemma} The class of morphisms $L$ that has the left lifting property with respect to fibrations is closed under pushouts, coproducts indexed over objects of $\ambient$ and transfinite compositions. \label{saturation}\end{lemma}
+\begin{lemma} The class of acyclic cofibrations is closed under pushouts, coproducts indexed over objects of $\ambient$ and transfinite compositions. \label{saturation}\end{lemma}
 
 \begin{proof}
 In each case the construction induces an operation on the split epimorphism in the diagram of the lifting property. These operations happen to preserve split epimorphisms.
