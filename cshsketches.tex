@@ -160,5 +160,84 @@ We start with a collection of $[m+n-1]$-dimensional faces in the pushout product
 These can be lexicographically ordered again, after which we ensure that they get filled.
 I.e. we build a sequence $A_i\to A_{i+1}$ of approximations and show that each requires a well defined application of the preexisting filler operator.
 Clearly, the result is a proof in the same style as the descent proof, with one important difference: we don't rely on saturation, but an a filler operator to do the job.
+
+\paragraph{set up for triple lift}
+We need to fill $\simplex[m]\times \cycle[n]\cup \horn_k[m]\times\simplex[n]$. The first subdivision is along $\set{k}\times \simplex[n]$, whose point we will use as tops of horns to fill. The second subdivision is along $[m]-\set{k}$. We include down sets into each new $m+n$ dimensional face we glue in, until we are completes. The last subdivision is along dimension, as it seems we need face completion to get the required horns.
+
+The main point of course is that we have a construction and therefore a filler operator that works on arbitrary horns.
+
+Can we focus on greater collections than individual simplicies? At least in the intermediate steps we can\dots
+
+
+\paragraph{subdivisions}
+We want to systematically subdivide the problem of filling
+\[ A = \simplex[m]\times \cycle[n]\cup \horn_k[m]\times\simplex[n] \to \simplex[m]\times \simplex[n] \]
+Damn this is hard.
+
+Each monic $[m+n]\to [m]\times [n]$ must be glued in at some stage. This gluing in possible if we have a horn.
+That is a base point $l$ such that the composition with monics $[m+n-1]\to [m+n]$ that hit $l$ have already been included at an earlier stage.
+
+One thing we know: composition of these monotone monic with the projections $\to[m]$ an $\to[n]$ are surjective. Why?
+By induction over $m+n$. Case 0 is trivial. Otherwise the second last element must be lesser in one of the variables,
+hence inside the $m+n-1$ dimensional subsquares. The induction hypothesis makes the compositions of the submonic surjective. This forces $f(m+n) = (m,n)$, answering when either of those are hit.
+
+What do we start with?
+\begin{itemize}
+\item All monics $[m+n-1] \to ([m]-\set{i})\times[n]$, where $i\neq k$.
+\item All monics $[m+n-1] \to [m]\times ([n]-\set{j})$
+\item No monics $[m+n-1] \to ([m]-\set{k})\times[n]$
+\end{itemize}
+For each face we glue in, the intersection with the previous complex cannot be a cycle however.
+Given a supporting point, there can be no monics that omit it.
+This is why the spine $\set{k}\times[n]$ is the unique supply of supporting points.
+
+Monotone monics cannot meander. The set of elements that intersect the spin is always a simple interval.
+
+What worries me is that adding any monic necessarily adds all the monics that miss each point along the spine.
+
+Suppose $M_j$ consists of monics that intersect the $k$-spine in $j+1$ places. Is this the proper selection?
+Do we every get any monics for free? I.e. without explicitly gluing them in?
+
+Let's try the most difficult situation and hope for the best.
+
+$M_{i,j}$ where $i\leq j\of[n]$ is the set of monotone monics that hit the points $(k,i)$ to $(k,j)$.
+For gluing in $f$ we pick $(k,i)$ as top. Now $f\circ d_l$ for $l\neq k+i$ should already be present, while
+$f\circ d_{k+i}$ should not.
+
+We look for the first point where $f(k+j+n)_1 > j$ and swap all those points!?
+Nope, we need to subdivide one step further.
+
+Better approach: the 'distance' of two monotone monics is the number of places they don't coincide.
+There is a specific monic that we start with, and then we progressively add in monics at greater distances.
+Note the law $f(k)_0+f(k)_1=k$, which may be even better than out surjectivity claims.
+
+So let's try again: $f_0(l) = \tuplet{l,0}$ if $l\leq k$, $f_0(l) = \tuplet{k,l-k}$ if $l$ is between $k$ and $k+n$, and 
+$f_0(l) = \tuplet{l-n,n}$ if $l\geq n+k$. We gluing the faces in order of their distance (a number of steps from the basis figure)
+to this monic. That way, we can rely on the overlap to prove required faces are present.
+
+The only problem is choosing the base point is such a way that the opposing face is absent. Can we always do this?
+
+Let $f$ be glued in, and $g$ be different from in in point $p\of[m+n]$. For $g\circ \partial_q$ if $q\neq p$ we know those faces are available.
+We also need a base point, however. Some place where $f_0$ and $g_0$ are both $k$.
+Then we note that all opposites to where $f_0=k$ have been added however\dots
+What am I saying? All subfaces of $g$ are different from $f$ except $g\circ \partial_p$!
+
+In general, the surjectivity ensures we can use the $k$-spine to glue in any face. What we need is the opposite:
+a proof that the face opposing the choosen base point has not lready been glued in!
+
+So for $f$ let the least $p$ such that $f(p)_0=k$ be the base point. We would hate for $f\circ\partial_p$ to be present, and there is exactly one face that could case this tragedy: $f + (p \mapsto \tuplet{k-1,f_1(p)+1})$. Its least point is $p+1$, so that gives us a criterion for ordering faces: the least points that hit $k$ 
+
+The existing subfaces seem like causes for $f\circ\partial_p$ existence, but that requires either coordinate of $f(p) = \tuplet{k,x}$ not to occur anymore.
+In the first case, that forces $f(p-1)_0=k-1$ and $f(p+1)_0=k+1$, which is in the missing $([m]-\set k)\times [n]$ area. In the second, $f(p-1) = \tuplet{k,x-1}$, which means that $p$ is not the least point, contradicting an assumption. We in fact hardly notice the preexisting faces.
+
+The main part is then 'face completion': we have a base point and dimension by dimension glue in the necessary faces, noting that we already have all the $[m+n-2]$ ones already.
+
+\paragraph{considerations}
+What matters for the case c-c-af is that the pushout product is a cofibration, which requires no reductions.
+The cases c-ac-f and ac-c-f are where the reduction to the family of horns is needed.
+Still, we should be comfortable with just the case of a pushout product of the family with an arbitrary cofibrations.
+
+
+
 \end{document}
 
