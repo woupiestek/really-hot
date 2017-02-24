@@ -168,6 +168,10 @@ The main point of course is that we have a construction and therefore a filler o
 
 Can we focus on greater collections than individual simplicies? At least in the intermediate steps we can\dots
 
+\paragraph{considerations}
+What matters for the case c-c-af is that the pushout product is a cofibration, which requires no reductions.
+The cases c-ac-f and ac-c-f are where the reduction to the family of horns is needed.
+Still, we should be comfortable with just the case of a pushout product of the family with an arbitrary cofibrations.
 
 \paragraph{subdivisions}
 We want to systematically subdivide the problem of filling
@@ -223,7 +227,7 @@ Then we note that all opposites to where $f_0=k$ have been added however\dots
 What am I saying? All subfaces of $g$ are different from $f$ except $g\circ \partial_p$!
 
 In general, the surjectivity ensures we can use the $k$-spine to glue in any face. What we need is the opposite:
-a proof that the face opposing the choosen base point has not lready been glued in!
+a proof that the face opposing the chosen base point has not already been glued in!
 
 So for $f$ let the least $p$ such that $f(p)_0=k$ be the base point. We would hate for $f\circ\partial_p$ to be present, and there is exactly one face that could case this tragedy: $f + (p \mapsto \tuplet{k-1,f_1(p)+1})$. Its least point is $p+1$, so that gives us a criterion for ordering faces: the least points that hit $k$ 
 
@@ -232,10 +236,119 @@ In the first case, that forces $f(p-1)_0=k-1$ and $f(p+1)_0=k+1$, which is in th
 
 The main part is then 'face completion': we have a base point and dimension by dimension glue in the necessary faces, noting that we already have all the $[m+n-2]$ ones already.
 
-\paragraph{considerations}
-What matters for the case c-c-af is that the pushout product is a cofibration, which requires no reductions.
-The cases c-ac-f and ac-c-f are where the reduction to the family of horns is needed.
-Still, we should be comfortable with just the case of a pushout product of the family with an arbitrary cofibrations.
+\paragraph{Setting up again}
+More analysis: every monic can be seen as a sequence of increments in either vertical or horizontal directions. Hence the number of monics is the old familiar:
+\[ \left(\begin{array}{c}m+n\\n\end{array}\right) \] 
+Everywhere a monic 'turns a corner', we can invert that corner to find another monic. This is an adjacent face. 
+
+The main thing to worry about are the faces of $([m]-\set k)\times [n]$. This makes certain faces $[m+n] \to [m]\times [n]$ dangerous,
+precisely the faces that only hit $k$ in one point. Perhaps those are the only ones to look out for, or perhaps we risk chocking of intermediate faces the same way if we don't tread carefully. This is all very unclear, but the reason seems to be that there is no best solution, rather than that it is hard to pick the right ordering.
+
+If we gradually diminish the number of places $p$ where $f_0(p)=k$, we gradually glue in lower dimensional monics of $([m]-\set k)\times [n]$, which makes it more likely that wanted faces are available.
+
+A smarter choice of base point revolves are the inversion of the corner. Now we know that the faces we want are already there\dots
+So the base point should move around a lot, rather than stick to the $k$-spine.
+
+There is a clear starting point:
+\begin{align*}
+f(p) &= \tuplet{p,0} & p&\leq k\\
+f(k+p) &= \tuplet{k,p} & p&\leq n\\
+f(k+n+p) &= \tuplet{k+p,n} & p&\leq m-k
+\end{align*}
+Then the ordering depends on how many points a monic has in common with this one. We can always invert the least point of difference, when a monic's turn comes up.
+
+All monics are going to have two points in common: $(0,0)$ and $(m,n)$.
+If a monic $g$ has only three point in common with $f$, could the third point be outside of the $k$-spine? 
+Nope: $g(p)=\tuplet{k,p-k}$ somewhere, and $f(p)=\tuplet{k,p-k}$.
+
+How do we glue in $f$?
+There are at most two faces not already present: $f\circ d_k$ and $f\circ d_{k+n}$. If $k=0$ or $k=m$ this reduces to 1, which is ideal.
+Otherwise we can first glue in $f\circ d_{k+n}$, and then proceed. I am unsure if this step is unavoidable.
+
+We order the set of monics in such a way that a monic appears earlier in the ordering, if it has more points in common with $f$.
+It is more difficult than that though
+
+Inverting a point of difference will not always bring us back all the way to $f$. 
+The following measure of distance is probably better:
+\[ d(f,g) = \sum_{p\of[m+n]}| f_0(p)-g_0(p) | \]
+It has the property that each inversion in the right direction bring a morphism closer to $f$.
+
+In order to glue in a new face, we need a base point and all $(n+m-1)$-dimensional faces not containing that point.
+
+Some of these faces are present in less distant faces\dots
+Vertical or horizontal stretches do not present a problem if we pick a base point on the $k$-spine, because they are present in the starting material!
+The are only three options. The submonic omits a vertical point, a horizontal point or is part of a face closer to $f$. Distance therefore does the trick.
+
+So the matter of the actual ordering remains.
+
+The choice model makes us think about the places where vertical moves happen: $n$ places to pick out of $m+n$ ones.
+We subsequently make these choices, picking one element above the other, in each step leaving enough points to work with.
+We could also consider the game of increasing distances. Where do you choose to deviate form $f$.
+That way we can create an ordering based on partial distance sums, or the list of pointwise distances.
+
+Subtracting $f_0-g_0$ give a list of number that we can order lexicographically, using an ordering on numbers, e.g. based on $|n+\epsilon|$ where $|\epsilon|<0.5$.
+An this gives the ordering which we will use for the faces.
+
+
+\section{Triple lifting}
+The triple lifting lemma is the work horse of constructive homotopy theory. The purpose of this section is to convince you that this lemma is valid in the internal language $\ambient$, because it is constructive and predicative to a sufficient amount.
+
+\begin{lemma}[Triple lifting property] Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
+\[\xy
+(0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
+(0,0)*+{A\times D}="AD",(25,0)*+{B\times D}="BD",(40,0)*+{Y}="Y"
+\ar^{f\times\id} "AC";"BC"
+\ar_{\id\times g} "AC";"AD"
+\ar_{f\times\id} "AD";"BD"
+\ar^{a} "AD";"X"
+\ar|(.6){\id\times g} "BC";"BD"
+\ar^(.6){b} "BC";"X"
+\ar@{.>}_{d} "BD";"X"
+\ar_(.6){c} "BD";"Y"
+\ar^{h} "X";"Y"
+\endxy\]
+\label{triple lift}
+\end{lemma}
+
+\begin{proof} 
+Cut down the variety of lifting problems with the following strategies.
+\begin{itemize}
+\item Using symmetry, derive the cases where $g$ is acyclic from those where $f$ is.
+\item By definition, there is an equivalence between lifting acyclic cofibrations and having a filler operator for the family of horns. Use this to reduce the cases where $f$ is acyclic to the case where $f$ is the family of horns.
+\item By lemma \ref{Reedy}, there is an equivalence between lifting cofibrations and having a filler operator for the family of cycles. Use this to reduce the cases where $g$ is an arbitrary cofibration to the case where $g$ is the family of cycles and do the same for $f$.
+\end{itemize}
+These reductions can be proved with the \emph{pullback power} construction and some diagram chasing.
+\[\xy
+(34,20)*+{X^C}="top",(0,10)*+{X^D}="left",(24,10)*+{\bullet}="middle",(44,10)*+{Y^C}="right",(34,0)*+{Y^D}="bottom"
+\ar^{X^g} "left";"top" \ar@{.>}|(.6){h^g} "left";"middle" \ar_{h^D} "left";"bottom" \ar "middle";"bottom"
+\ar "middle";"top" \ar^(.6){h^C} "top";"right" \ar_(.6){Y^g} "bottom";"right"
+\endxy\]
+The triple lifting problem is equivalent to the simple lifting problem of $f$ against $h^g$.
+This leaves two tasks.
+\begin{enumerate}
+\item Prove that if $h$ has a filler operator for cycles, it has a triple filler operator for the cases where $f$ and $g$ are both the family of cycles.
+\item Prove that if $h$ has a filler operator for horn, it can also handle all triple lifting problems involving the family of horns $f$ and the family of cycles $g$.
+\end{enumerate}
+
+In both cases there is a subobject of $B\times D$ that is the pushout of $f\times C$ and $A\times g$, because the underlying monomorphisms of $f$ and $g$ are decidable.
+\[ \set{\tuplet{x,y}\of B\times D\middle| (x\of f(A)) \vee (y\of g(C)) }\]
+Since pushout preserve left lifting properties, a filler operator for the pushout product is sufficient.
+
+For $m > 0$ and $n > 0$ none of the faces of $\simplex[m]\times \simplex[n]$ belong to either $\cycle[m]\times \cycle[n]$ or $\horn_k[m]\times\cycle[n]$ for any $k\of[m]$, because the faces are $m+n$-dimensional, and the faces of either $\simplex[m]$ or $\simplex[n]$ are not. The cases where $m=0$ or $n=0$ are trivial because $\simplex[0] \simeq 1$, $\cycle[0]\simeq 0$ and $\horn_0[0]$ does not exist. Since the pushout product is a countable sum of these inclusions, it is a cofibration. This settles the case where both $f$ and $g$ are cycle inclusions, because $h$ is an acyclic fibration.
+
+%here
+The case where $f$ is the family of horn inclusions is more complicated.
+For each $m,n\of\nno$ the faces of $\simplex[m]\times\simplex[n]$ coinside with morphisms $f\of[m+n]\to[m]\times[n]$ that satisfy $f(p)_0+f_1(p)=p$. 
+\end{proof}
+
+
+\hide{ 
+The case for $f$ acyclic seems simpler, but perhaps pushout products are not as ubiquitous as I thought. I don't see how we can decide if a degenerate simplex belongs to the image of a cofibration. The problem is determining that $x\cdot \phi = x$ for some $\phi\of[\dim x]\to[\dim x]$, since $=$ is not always decidable. This in turn that pushout products may not be available for all cofibrations.
+
+The trick involves regularity: the family of faces exists internally, and therefore so does its union.
+
+Not good enough! We would need a union of faces inside. We can create a 'least pseudo-complement'. 
+}
 
 
 
