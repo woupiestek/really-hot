@@ -332,13 +332,39 @@ This leaves two tasks.
 
 In both cases there is a subobject of $B\times D$ that is the pushout of $f\times C$ and $A\times g$, because the underlying monomorphisms of $f$ and $g$ are decidable.
 \[ \set{\tuplet{x,y}\of B\times D\middle| (x\of f(A)) \vee (y\of g(C)) }\]
-Since pushout preserve left lifting properties, a filler operator for the pushout product is sufficient.
+Since pushouts preserve left lifting properties, a filler operator for the pushout product is sufficient.
 
 For $m > 0$ and $n > 0$ none of the faces of $\simplex[m]\times \simplex[n]$ belong to either $\cycle[m]\times \cycle[n]$ or $\horn_k[m]\times\cycle[n]$ for any $k\of[m]$, because the faces are $m+n$-dimensional, and the faces of either $\simplex[m]$ or $\simplex[n]$ are not. The cases where $m=0$ or $n=0$ are trivial because $\simplex[0] \simeq 1$, $\cycle[0]\simeq 0$ and $\horn_0[0]$ does not exist. Since the pushout product is a countable sum of these inclusions, it is a cofibration. This settles the case where both $f$ and $g$ are cycle inclusions, because $h$ is an acyclic fibration.
 
 %here
-The case where $f$ is the family of horn inclusions is more complicated.
-For each $m,n\of\nno$ the faces of $\simplex[m]\times\simplex[n]$ coinside with morphisms $f\of[m+n]\to[m]\times[n]$ that satisfy $f(p)_0+f_1(p)=p$. 
+The case where $f$ is the family of horn inclusions is more complicated. For each $m > 0$, $k\of[m]$ and $n\of\nno$ the filler operator of the fibration $h$ can glue in the faces of $\simplex[m]\times\simplex[n]$ one by one, if they are put in a suitable ordering. 
+
+Defining suitable orderings is aided by the fact that the faces of $\simplex[m]\times\simplex[n]$ coinside with non decreasing monomorphisms $\phi\of[m+n]\to[m]\times[n]$, which satisfy $\phi(p)_0+\phi_1(p)=p$. There are exactly $\binom{m+n}m$ of such morphisms. Let $F$ be this set of morphisms. 
+Define $\phi_0\of[m+n]\to[m]\times[n]$ as follows.
+\begin{align*}
+\phi_0(p) &= \tuplet{p,0} & p&\leq k\\
+\phi_0(k+p) &= \tuplet{k,p} & p&\leq n\\
+\phi_0(k+n+p) &= \tuplet{k+p,n} & p&\leq m-k
+\end{align*}
+For all $i < \binom{m+n}m - 1$ define $\phi_{i+1}$ as follows. Assign unique number $X(\phi)$ to each $\phi\of F$ using the following formula.
+\[X(\phi) = \sum_{p\of[m+n]}\phi_0(p)\left(\frac1m\right)^p \]
+First we add the elements with $X(\phi) > X(\phi_0)$ in order of increasing $X(\phi)$. So if $F-\set{\phi_j|j\of[i]}$ has such element, let $\phi_{i+1}$ be the one with the least $X(\phi)$. If those have been exhausted, let $\phi_{i+1}$ be the member of $F-\set{\phi_j|j\of[i]}$ with the greatest $X(\phi)$.
+\hide{Perhaps we don't need the function at all--the construction is what counts.}
+
+Let $H_i$ be the join of $\simplex[m]\times\cycle[n]\cup\horn_k[m]\times\simplex[n]$ with the faces $\phi_j$ for all $j<i$.
+Let $d_i\of[m+n-1]\to[m+n]$ be the unique monic that skips $i$. 
+For gluing in $\phi_0$ we need a case distinction on the value of $k\of[m]$.
+\hide{This is turn into a prove that the pushout product is an acyclic cofibration... which is fine, I guess}
+
+\begin{itemize}
+\item If $k=0$ then $\phi_0\circ d_i$ for $i < n$ are part of $\simplex[m]\times\cycle[n]$. For $i > n$ they are part of $\horn_0[m]\times\simplex[n]$. These simplices form a horn $\horn_n[m+n]\to\simplex[m]\times\cycle[n]\cup\horn_0[m]\times\simplex[n]\to Y$ to apply the filler operator of $h$ to.
+\item If $k=m$ then  $\phi_0\circ d_i$ for $i < m$ are part of $\horn_0[m]\times\simplex[n]$. For $i > m$ they are part of $\simplex[m]\times\cycle[n]$.
+These simplices form a horn $\horn_m[m+n]\to\simplex[m]\times\cycle[n]\cup\horn_m[m]\times\simplex[n]$ to apply the filler operator of $h$ to.
+\item Otherwise, $\phi_0\circ d_i$ for $i < k$ or $i > n+k$ belong to $\horn_k[m]\times\simplex[n]$ and for $i > k$ and $i < k + n$ belong to $\simplex[m]\times\cycle[n]$, meaning we are missing two faces instead of one. There is a horn $\horn_n[m+n-1]\to\simplex[m]\times\cycle[n]\cup\horn_k[m]\times\simplex[n]$, consisting of subsimplices of $\phi_0\circ d_{n+k}$. Once filled, there is a horn $\horn_n[m+n]\to\simplex[m]\times\cycle[n]\cup\horn_k[m]\times\simplex[n]$ whose filler is all of $\phi_0$.
+\end{itemize}
+
+%here
+
 \end{proof}
 
 
