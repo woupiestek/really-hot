@@ -41,6 +41,54 @@ Y \ar[rr]_(.4){d_0\times \id}\ar[urrr]^(.3){a\circ g} && \simplex[1]\times Y\ar[
 Let $d_1$ be the other horn inclusion $1\to \simplex[1]$. Let $e=c\circ(d_1\times \id_Y)$, so $k\circ e=b\circ h\circ (d_1\times \id_Y) = b$ and $e\circ f = c\circ (\id_{\simplex[1]}\times f)\circ (d_1\times \id_X) = a$. Then $e$ is a filler for $b\circ f=k\circ a$. Since $f$ has fillers for arbitrary fibrations $k$, it is an acyclic cofibration.
 \end{proof}
 
+\begin{lemma} Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
+\[\xy
+(0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
+(0,0)*+{A\times D}="AD",(25,0)*+{B\times D}="BD",(40,0)*+{Y}="Y"
+\ar^{f\times\id} "AC";"BC"
+\ar_{\id\times g} "AC";"AD"
+\ar_{f\times\id} "AD";"BD"
+\ar^{a} "AD";"X"
+\ar|(.6){\id\times g} "BC";"BD"
+\ar^(.6){b} "BC";"X"
+\ar@{.>}_{d} "BD";"X"
+\ar_(.6){c} "BD";"Y"
+\ar^{h} "X";"Y"
+\endxy\]
+\label{triple lift}
+\end{lemma}
+
+\begin{proof} 
+Cut down the variety of lifting problems with the following strategies.
+\begin{itemize}
+\item Using symmetry, derive the cases where $g$ is acyclic from those where $f$ is.
+\item By definition, there is an equivalence between lifting acyclic cofibrations and having a filler operator for the family of horns. Use this to reduce the cases where $f$ is acyclic to the case where $f$ is the family of horns.
+\item By lemma \ref{Reedy}, there is an equivalence between lifting cofibrations and having a filler operator for the family of cycles. Use this to reduce the cases where $g$ is an arbitrary cofibration to the case where $g$ is the family of cycles and do the same for $f$.
+\end{itemize}
+These reductions can be proved with the \emph{pullback power} construction and some diagram chasing.
+\[\xy
+(34,20)*+{X^C}="top",(0,10)*+{X^D}="left",(24,10)*+{\bullet}="middle",(44,10)*+{Y^C}="right",(34,0)*+{Y^D}="bottom"
+\ar^{X^g} "left";"top" \ar@{.>}|(.6){h^g} "left";"middle" \ar_{h^D} "left";"bottom" \ar "middle";"bottom"
+\ar "middle";"top" \ar^(.6){h^C} "top";"right" \ar_(.6){Y^g} "bottom";"right"
+\endxy\]
+The triple lifting problem is equivalent to the simple lifting problem of $f$ against $h^g$.
+This leaves two tasks.
+\begin{enumerate}
+\item Prove that if $h$ has a filler operator for cycles, it has a triple filler operator for the cases where $f$ and $g$ are both the family of cycles.
+\item Prove that if $h$ has a filler operator for horn, it can also handle all triple lifting problems involving the family of horns $f$ and the family of cycles $g$.
+\end{enumerate}
+
+In both cases there is a subobject of $B\times D$ that is the pushout of $f\times C$ and $A\times g$, because the underlying monomorphisms of $f$ and $g$ are decidable.
+\[ \set{\tuplet{x,y}\of B\times D\middle| (x\of f(A)) \vee (y\of g(C)) }\]
+Since pushouts preserve left lifting properties, a filler operator for the pushout product is sufficient.
+
+For $m > 0$ and $n > 0$ none of the faces of $\simplex[m]\times \simplex[n]$ belong to either $\simplex[m]\times \cycle[n]$ or $\horn_k[m]\times\simplex[n]$ for any $k\of[m]$, because the faces are $m+n$-dimensional, and the faces of either $\simplex[m]$ or $\simplex[n]$ are not. The cases where $m=0$ or $n=0$ are trivial because $\simplex[0] \simeq 1$, $\cycle[0]\simeq 0$ and $\horn_0[0]$ does not exist. Since the pushout product is a countable sum of these inclusions, it is a cofibration. This settles the case where both $f$ and $g$ are the family cycle inclusions, because $h$ is an acyclic fibration.
+
+The case where $f$ is the family of horn inclusions is more complicated. Fortunately, this case is worked out in the proof of lemma A.1 in \citep{DD&DIS11}, where \emph{inner anodyne} is what this paper calls acyclic and \emph{box product} is pushout product. Note that all necessary properties of simplices are decidable. Since the pushout product of $f$ and $g$ is an acyclic cofibration, $h$ provides a filler.
+\end{proof}
+\hide{perhaps we should adopt the same terms as that paper.}
+
+\hide{
 \begin{lemma}[Triple lifting property] Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
 \[\xy
 (0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
@@ -75,6 +123,7 @@ In the cases where $f$ and $g$ are horn or cycle inclusions it is easy to prove 
 \endxy\]
 Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one of $f$, $g$ and $h$ is acyclic.
 \end{proof}
+}
 
 \begin{lemma} All acyclic cofibrations in $\ambient\s\f$ are weakly invertible.\label{lifting is acyclic} \end{lemma}
 
