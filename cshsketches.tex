@@ -66,9 +66,37 @@ Poland}
 
 
 \begin{document}
+
+
+\section{24/3/17}
+Two parts stay difficult to understand, because they generalize in the internal language.
+\begin{itemize}
+\item proposition on the factorization of $f$ as a contractible morphism following a cofibration.
+\item fibrancy of the universal modest fibration
+\end{itemize}
+
+The trouble with the factorization must be that we need to show a filler operator for the family of cycles. Other than a rewording of the current text, I don't see much to improve here.
+
+This whole part is based on Reedy's work, and it would be better to reflect that somehow.
+I don't know how to do that yet.
+
+\paragraph{Some observations on the relation with Reedy's work}
+Reedy shows how a model structure on a small complete category can be lifted to functor categories. My starting point neither has a model structure, nor all colimits.
+My construction combines the latching and the matching factorizations of the Reedy categories to yield only one of the factorizations of the model structure.
+The latching part seem to ensure cofibrations, while the matching part ensures fillers.
+The external induction hurts. Everything should be related to the internal natural number object.
+Note that Reedy factorization is quite complicated, and the paper tries skips to the result.
+
+There is a factorization of morphisms in the ambient category based on decidable monomorphism following split epimorphisms.
+Reedy's construction lifts this to the category of simplicial objects.
+Cofibrations are decidable monomorphism lifted as Reedy defines.
+Contractibles are split epi's lifted as Reedy defines.
+It stands to reason that his proof could be useful, if it weren't for the external induction in it.
+
+It is good to look up the definitions again, if only for the confirmation that the proof in the paper is not more complication than necessary.
+
+\section{10/3/17}
 We are working out exactly what a \emph{horn or cycle filler} operator is, just like we worked out what a simplicial set is, in hopes of making the proof clearer and more convincing.
-
-
 
 The lifting property is more demanding because it has to take all cases into account.
 I work in all kinds of slice categories to hide to gory details, and keep track of additional requirement:

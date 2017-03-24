@@ -54,6 +54,9 @@ Let $c\of \simplex[n]\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $\p
 
 \end{proof}\hide{ Codomains of contractibles may have a distance function, that gives a lower bound to the number of compositions required to to reach it. I don't have time to work that out and check it right now.}
 
+\begin{remark} The construction is the proof of lemma \ref{factor1} are related to Reedy model structures \citep{Reedy}. In the ambient category $\ambient$ morphisms factor as split epimorphism following decidable monomorphisms thanks to coproducts. Cofibrations are lifted versions of decidable monomorphisms and contractible fibrations are lifted versions of split epimorphisms and they form a factorization system on $\ambient\s$ by a similar construction. Unfortunately, external induction is not strong enough to proof things in the internal language of $\ambient$.
+\end{remark}
+
 \begin{lemma} Contractible morphisms are acyclic fibrations.\label{Reedy}\end{lemma}
 
 \begin{proof} The class of morphisms that have the left lifting property with respect to contractible morphism is saturated (see lemma \ref{saturation}). The rest of this proof shows that all cofibrations are in this class. That implies that all contractible morphisms have the right lifting property with respect to all cofibrations and therefore are acyclic fibrations.
