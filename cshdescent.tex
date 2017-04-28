@@ -6,14 +6,10 @@ This purpose of this section is to replace arguments based on \emph{minimal fibr
 \begin{itemize}
 \item $M$ is closed under pullbacks along arbitrary morphisms.
 \item $M$ is closed under composition.
-\item $M$ is closed under fibred exponentiation. This means that if $f:X\to Z$ belongs to $M$ and $g:Y\to Z$ is an arbitrary morphism, the fibred exponential $f^g_Z\of(\product{z\of Z}{X_z^{Y_z}})\to Z$ is in $M$ too.
-
-This requirement may give us more limits than we need, but the intended model of modest morphisms in the ex/lex completion of the category of assemblies satisfies it.
+\item $M$ is closed under fibred exponentiation. This means that if $f:X\to Z$ belongs to $M$ and $g:Y\to Z$ is an arbitrary morphism, the fibred exponential $f^g_Z\of(\product{z\of Z}{X_z^{Y_z}})\to Z$ is in $M$ too. This requirement may give us more limits than we need, but the intended model of modest morphisms in the ex/lex completion of the category of assemblies satisfies it.
 %TODO: investigate which exponentials we actually need.
 
-\item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} if it is an equalizer.
-
-Since $\ambient$ may lack a subobject classifier, there can be irregular monomorphisms.
+\item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} if it is an equalizer. Since $\ambient$ may lack a subobject classifier, there can be irregular monomorphisms which $M$ can afford to miss.
 \end{itemize} 
 
 The interesting case is where $M$ has the following structure in addition to the properties above.
@@ -93,7 +89,7 @@ K(\phi)(x) &= K_1(\phi)\circ x
 
 Thanks to the following property, the natural equivalence of homsets above extends to horn inclusions.
 
-\begin{lemma} An \keyword{intersection} is a pullback square of monomorphisms. The functor $K$ preserves all intersections of $\simCat/[n]$. \end{lemma}
+\begin{lemma} An \keyword{intersection} in $\simCat$ is a pullback square of monomorphisms. The functor $K$ preserves all intersections of $\simCat/[n]$. \end{lemma}
 
 \begin{proof} The easiest way to see that is to describe the monomorphisms in the intersection as decidable predicates on the domain of a map $\xi\of[m]\to[n]$. Maps $[m]\to\bool$ that equals $\true$ at least once characterize monomorphisms to $\xi$. The action of the endofunctor $(K_0,K_1)$ on the monomorphism has a parallel on predicates. For each $p\of[m]\to\bool$ the following equations define $p^K\of [m+\norm\xi]\to\bool$. 
 \begin{align*}

@@ -25,7 +25,7 @@ Definition \ref{fibration} explains how lifting properties with respect to famil
 Let $\simCat^+$ be the subcategory of monomorphisms and $\simCat^-$ that of epimorphisms of $\simCat$ (see definition \ref{category of simplices}). For each morphism $\phi$ of $\simCat$ let $m(\phi)$ be the monic and $e(\phi)$ the epic factors.
 
 The first step is to cover $Y$ with another simplicial set $LY$ where degeneracy is decidable.
-Let $LY[n] = \coproduct{i\of[n]}{Y[i]\times\simCat^-(n,i)}$ and for $\phi\of [m]\to [n]$ of $\simCat$ and $\tuplet{\epsilon,y}\of LY[n]$ let the following equation hold.
+Let $LY[n] = \coproduct{i\of[n]}{\simCat^-(n,i)\times Y[i]}$ and for $\phi\of [m]\to [n]$ of $\simCat$ and $\tuplet{\epsilon,y}\of LY[n]$ let the following equation hold.
 \[\tuplet{\epsilon,y}\cdot \phi=\tuplet{e(\epsilon\circ \phi),y\cdot m(\epsilon\circ\phi)}\]
 A pair $\tuplet{\epsilon,y}$ is a face of $LY$ if and only if $\epsilon=\id$ and equality is a decidable property of morphisms in $\simCat^+$.
 Let $l_Y\of LY\to Y$ satisfy $l_Y\tuplet{\epsilon,y}=y\cdot\epsilon$.
