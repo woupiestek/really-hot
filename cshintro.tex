@@ -1,9 +1,9 @@
 \documentclass[csh.tex]{subfiles}
 \begin{document}
 \section{Internal simplicial objects}
-The simplicial homotopy of this paper uses an internal notion of simplicial object of $\ambient$ instead of some kind of $\ambient$-valued presheaves.
+The \emph{ambient category} that provides the object and morphisms everything in this paper is constructed of, is a $\Pi$-pretopos (see definition \ref{pretopos}) $\ambient$ with natural number object $\nno$. The simplicial homotopy here concerns a kind of internal simplicial object of $\ambient$ instead of $\ambient$-valued presheaves.
 
-\begin{definition} A \keyword{simplicial object} $X$ of $\ambient$ is a triple $\tuplet{\base X, \dim, \cdot}$ where $\base X$ is an object of $\ambient$ and $\dim$ is a morphism $\base X\to \nno$. Here $\nno$ is the \keyword{natural number object} of $\ambient$. The operator $\cdot$ is has the following properties. Let $\Ar(\simCat)$ be the object of non decreasing functions between decidable, finite and inhabited initial segments of the natural numbers. The domain $\dom(\cdot)$ of $\cdot$ is the following object. 
+\begin{definition} A \keyword{simplicial object} $X$ of $\ambient$ is a triple $\tuplet{\base X, \dim, \cdot}$ where $\base X$ is an object of $\ambient$ and $\dim$ is a morphism $\base X\to \nno$. Here $\nno$ is the \keyword{natural number object} of $\ambient$. The operator $\cdot$ is has the following properties. Let $\Ar(\simCat)$ be the object of nondecreasing functions between decidable, finite and inhabited initial segments of the natural numbers. The domain $\dom(\cdot)$ of $\cdot$ is the following object. 
 \[ \set{\tuplet{x,\xi}\of \base X\times \Ar(\simCat)\middle| \dim(x) = \max(\cod(\xi))}\]
 The codomain $\cod(\cdot)$ of $\cdot$ is $\base X$. The operator $\cdot$ satisfies the following equations.
 \begin{align*}
@@ -14,7 +14,7 @@ x\cdot(\alpha\circ\beta)&=(x\cdot\alpha)\cdot\beta
 
 A \emph{morphism of simplicial objects} $X\to Y$ is a morphism $f\of\base X\to\base Y$ which commutes with $\dim$ and $\cdot$. Together with simplicial objects, they form the \emph{category of simplicial objects and morphisms} $\ambient\s$.
 
-The category $\ambient\s$ is enriched over $\ambient$. The object of morphisms $X\to Y$ in $\ambient$ is $\nat(X,Y)$. It represents families of morphisms $X\to Y$, i.e. for each object $I$ of $\ambient$ there is a natural bijection between morphisms $I\to \nat(X,Y)$ and morphisms $I\times X\to Y$ which commute with $\dim$, $\cdot$ and their $I$-fold multiples.
+The category $\ambient\s$ is enriched over $\ambient$. The object of morphisms $X\to Y$ of $\ambient\s$ in $\ambient$ is $\nat(X,Y)$. It represents families of morphisms $X\to Y$, i.e. for each object $I$ of $\ambient$ there is a natural bijection between morphisms $I\to \nat(X,Y)$ and morphisms $I\times X\to Y$ which commute with $\dim$, $\cdot$ and their $I$-fold multiples.
 \end{definition}
 
 \begin{example} A simple kind of simplicial object is the \keyword{discrete} simplicial object. There is one for each object $I$ of $\ambient$: 
@@ -26,8 +26,8 @@ This definition is consistent with the definition of initial presheaves in \cite
 \[  \function{\tuplet{i,j}}j\of\set{\tuplet{i,j}\of\nno\times\nno\middle|i\leq j}\to \nno \]
 The relation $\leq$ is decidable. Comprehension on decidable predicates defines subobjects in $\ambient$, because there are classifiers of decidable subobjects $1\to \bool = 1+1$. Here $1$ is a terminal object and $+$ a binary coproduct.
 
-Local Cartesian closure means that there is an object $A$ of morphisms between the initial segments. Local Cartesian closure also implies that there is a subobject of non decreasing morphisms $\Ar(\simCat)$.
-\[ \product{f\of A,i,j\of\nno,x\of\set{y\of 1|i\leq j}}{\set{y\of 1|f(i)\leq f(j)}}\]
+Local Cartesian closure means that there is an object $A$ of morphisms between the initial segments. Local Cartesian closure also implies that there is a subobject of nondecreasing morphisms $\Ar(\simCat)$.
+\[ \Ar(\simCat)=\product{f\of A,i,j\of\nno,x\of\set{y\of 1|i\leq j}}{\set{y\of 1|f(i)\leq f(j)}}\]
 Note that $\product{x\of y} z(x)$ is the notation for the dependent product. 
 Because $\ambient$ is also exact and extensive, it is a Heyting category, so the same subobject has a more familiar definition.
 \[ \Ar(\simCat)=\set{f\of A|\forall i,j\of\nno.i\leq j \to f(i)\leq f(j)} \]
@@ -56,9 +56,9 @@ This combination of properties implies the following.
 \item The category $\ambient$ has all colimits and reindexing functors preserve them. 
 \item The category $\ambient$ is a \emph{Heyting category}. 
 
-Technically this means that for each object $X$ the poset of subobjects $\sub(X)$ is a Heyting algebra and that for each $f\of X\to Y$ the preimage map $f\ri\of\sub(Y)\to\sub(X)$ is a morphism of Heyting algebras. Moreover, for each morphism $f$, $f\ri$ has both adjoints--right adjoint $\forall_f$ and left adjoint $\exists_f$--and those adjoints satisfy the \emph{Beck-Chevalley condition} which says that quantification and substitution commute over pullback squares. If $f\circ g = h\circ k$ is a pullback square, then $f\ri\circ\exists_h=\exists_g\circ k\ri$.
+Technically being a Heyting category means that for each object $X$ the poset of subobjects $\sub(X)$ is a Heyting algebra and that for each $f\of X\to Y$ the preimage map $f\ri\of\sub(Y)\to\sub(X)$ is a morphism of Heyting algebras. Moreover, for each morphism $f$, $f\ri$ has both adjoints--right adjoint $\forall_f$ and left adjoint $\exists_f$--and those adjoints satisfy the \emph{Beck-Chevalley condition} which says that quantification and substitution commute over pullback squares. If $f\circ g = h\circ k$ is a pullback square, then $f\ri\circ\exists_h=\exists_g\circ k\ri$.
 
-Practically this means that $\ambient$ is a model for a constructive first order logic, hence that predicates define subobjects and that constructive theorems are valid in the internal language.
+Practically being a Heyting category means being a model for a constructive first order logic. Hence first order predicates define subobjects and constructive theorems are valid in the internal language.
 \end{enumerate}
 
 \begin{remark} Assume throughout this paper that all of the structure on $\ambient$ comes from functors. Limits and exponentials come from right adjoints to functors between categories related to $\ambient$ and colimits come from left adjoints. This assumption ensures that many functors only specified up to isomorphism can be constructed.

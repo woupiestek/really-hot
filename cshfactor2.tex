@@ -79,17 +79,18 @@ This leaves two tasks.
 \end{enumerate}
 
 In both cases there is a subobject of $B\times D$ that is the pushout of $f\times C$ and $A\times g$, because the underlying monomorphisms of $f$ and $g$ are decidable.
-\[ \set{\tuplet{x,y}\of B\times D\middle| (x\of f(A)) \vee (y\of g(C)) }\]
-Since pushouts preserve left lifting properties, a filler operator for the pushout product is sufficient.
 
-For $m > 0$ and $n > 0$ none of the faces of $\simplex[m]\times \simplex[n]$ belong to either $\simplex[m]\times \cycle[n]$ or $\horn_k[m]\times\simplex[n]$ for any $k\of[m]$, because the faces are $m+n$-dimensional, and the faces of either $\simplex[m]$ or $\simplex[n]$ are not. The cases where $m=0$ or $n=0$ are trivial because $\simplex[0] \simeq 1$, $\cycle[0]\simeq 0$ and $\horn_0[0]$ does not exist. Since the pushout product is a countable sum of these inclusions, it is a cofibration. This settles the case where both $f$ and $g$ are the family cycle inclusions, because $h$ is an acyclic fibration.
+\[ f \pp g = \set{\tuplet{x,y}\of B\times D\middle| (x\of f(A)) \vee (y\of g(C)) }\]
+Since pushouts preserve left lifting properties, a filler operator for the inclusion $f\pp g \to B\times D$ is sufficient.
 
-The case where $f$ is the family of horn inclusions is more complicated. Fortunately, this case is worked out in the proof of lemma A.1 in \citep{DD&DIS11}, where \emph{inner anodyne} is what this paper calls acyclic and \emph{box product} is pushout product. Note that all necessary properties of simplices are decidable. Since the pushout product of $f$ and $g$ is an acyclic cofibration, $h$ provides a filler.
+For $m > 0$ and $n > 0$ none of the faces of $\simplex[m]\times \simplex[n]$ belong to either $\simplex[m]\times \cycle[n]$ or $\horn_k[m]\times\simplex[n]$ for any $k\of[m]$, because the faces are $m+n$-dimensional, and the faces of either $\simplex[m]$ or $\simplex[n]$ are not. The cases where $m=0$ or $n=0$ are trivial because $\simplex[0] \simeq 1$, $\cycle[0]\simeq 0$ and $\horn_0[0]$ does not exist. Since the inclusion $f\pp g \to B\times D$ is a countable sum of these inclusions, it is a cofibration. This settles the case where both $f$ and $g$ are the family cycle inclusions, because $h$ is an acyclic fibration.
+
+The case where $f$ is the family of horn inclusions is more complicated. Fortunately, this case is worked out in the proof of lemma A.1 in \citep{DD&DIS11}, where \emph{inner anodyne} is what this paper calls acyclic and \emph{box product} is the $\pp$ operator in $f\pp g$ above. Note that all necessary properties of simplices are decidable. Since the inclusion $f\pp g\to B\times D$ is an acyclic cofibration, $h$ provides a filler.
 \end{proof}
 \hide{perhaps we should adopt the same terms as that paper.}
 
 \hide{
-\begin{lemma}[Triple lifting property] Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
+\begin{lemma} Let $f\of A\to B$ and $g\of C\to D$ be cofibrations and let $h\of X\to Y$ be a fibration. Let $a\of A\times D\to X$, $b\of B\times C\to X$ and $c\of B \times D\to Y$ satisfy $a\circ(\id_A\times g) = b\circ(f\times \id_C)$, $h\circ a=c\circ(f\times \id_D)$ and $h\circ b=c\circ(\id_B\times g)$. If one of $f$, $g$ or $h$ is acyclic, then there is a $d\of B\times D\to X$ such that $d\circ(f\times\id_D)=a$, $d\circ(\id_B\times g)=b$ and $h\circ d = c$.
 \[\xy
 (0,20)*+{A\times C}="AC",(25,20)*+{B\times C}="BC",(40,20)*+{X}="X",
 (0,0)*+{A\times D}="AD",(25,0)*+{B\times D}="BD",(40,0)*+{Y}="Y"
@@ -127,7 +128,7 @@ Therefore the lemma holds for every pair of cofibrations $f$, $g$ as long as one
 
 \begin{lemma} All acyclic cofibrations in $\ambient\s\f$ are weakly invertible.\label{lifting is acyclic} \end{lemma}
 
-\begin{proof} An acyclic fibration is a fibration, because the right lifting property for cofibrations implies the right lifting property for horn inclusions. Therefore every acyclic cofibration is a cofibration.
+\begin{proof} An acyclic fibration is a fibration, because the right lifting property for cofibrations implies the right lifting property for the family of horn inclusions. Therefore every acyclic cofibration is a cofibration.
 
 Let $f\of X\to Y$ be a morphism with the left lifting property for all fibrations in $\ambient\s\f$. There is a morphism $g\of Y\to X$ such that $g\circ f = \id_X$ because $X$ is fibrant. 
 \[ \xymatrix{

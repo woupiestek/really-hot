@@ -1,7 +1,7 @@
 \documentclass[csh.tex]{subfiles}
 \begin{document}
 \section{Cofibrations}
-This section show that the cofibrations from definition \ref{cofibration} are part of an enriched factorization system (see definition \ref{enriched factorization system}) on $\ambient\s$--not just on the subcategory of complexes.
+This section show that the cofibrations from definition \ref{cofibration} are part of an enriched factorization system (see definition \ref{enriched factorization system}) on all of $\ambient\s$ instead of just on the subcategory of complexes.
 
 \begin{lemma} Cofibrations and acyclic fibrations form an enriched factorization system on $\ambient\s$. \label{factorization system 1} \end{lemma}
 
@@ -54,12 +54,12 @@ Let $c\of \simplex[n]\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $\p
 
 \end{proof}\hide{ Codomains of contractibles may have a distance function, that gives a lower bound to the number of compositions required to to reach it. I don't have time to work that out and check it right now.}
 
-\begin{remark} The construction is the proof of lemma \ref{factor1} are related to Reedy model structures \citep{Reedy}. In the ambient category $\ambient$ morphisms factor as split epimorphism following decidable monomorphisms thanks to coproducts. Cofibrations are lifted versions of decidable monomorphisms and contractible fibrations are lifted versions of split epimorphisms and they form a factorization system on $\ambient\s$ by a similar construction. Unfortunately, external induction is not strong enough to proof things in the internal language of $\ambient$.
+\begin{remark} The construction is the proof of lemma \ref{factor1} are related to Reedy model structures \citep{Reedy74}. In the ambient category $\ambient$ morphisms factor as split epimorphism following decidable monomorphisms thanks to coproducts. Cofibrations are lifted versions of decidable monomorphisms and contractible fibrations are lifted versions of split epimorphisms and they form a factorization system on $\ambient\s$ by a similar construction. Unfortunately, external induction is not strong enough to proof things in the internal language of $\ambient$.
 \end{remark}
 
 \begin{lemma} Contractible morphisms are acyclic fibrations.\label{Reedy}\end{lemma}
 
-\begin{proof} The class of morphisms that have the left lifting property with respect to contractible morphism is saturated (see lemma \ref{saturation}). The rest of this proof shows that all cofibrations are in this class. That implies that all contractible morphisms have the right lifting property with respect to all cofibrations and therefore are acyclic fibrations.
+\begin{proof} The class of morphisms that have the left lifting property with respect to contractible morphism is saturated (see definition \ref{saturated} and lemma \ref{saturation}). The rest of this proof shows that all cofibrations are in this class. That implies that all contractible morphisms have the right lifting property with respect to all cofibrations and therefore are acyclic fibrations.
 
 Suppose $f\of X\to Y$ is a cofibration and $S$ is the family of faces outside the image of $f$. For each $i\of\nno$ let $Y_i$ be the union of $X$ with all faces of $Y$ of dimension strictly smaller than $i$. In particular $Y_0=X$.
 
@@ -68,9 +68,13 @@ Every $y\of\base(Y)$ is in $Y_i$ for some $i\leq \dim(y)$. If a $y\of\base Y$ is
 For each $i\of\nno$ let $S_i$ be the object of $n$-dimensional faces in $S$. Each $s\of S_i$ induces a monomorphism $s'\of\simplex[i]\to Y_{i+1}$. Since $Y_{i}$ has all simplices of dimension $i-1$, the intersection of $Y_i$ and $s'$ is $\cycle[i]$. Thus the inclusion $Y_i\to Y_{i+1}$ is the pushout of $S_{i+1}$ copies of $\cycle[i]\to\simplex[i]$.
 \end{proof}
 
-\begin{definition} Let $\cat A$ be a $\Pi$-pretopos with a natural number object $\nno$. The successor morphism $s\of\nno\to\nno$ induces an endofunctor $s\ri$ of $\cat A/\nno$. A \keyword{cochain} is a morphism $f\of X\to s\ri(X)$ in $\cat A/\nno$. A morphism of cochains $(X,f)\to(Y,g)$ is a morphism $h\of X\to Y$ such that $s\ri(h)\circ f = g\circ h$.
+\begin{definition} A class of morphisms is \keyword{saturated} if it is closed under pushouts, retracts and transfinite compositions. Closure under transfinite composition is defined as follows.
 
-For every object $Y$ of $\cat A$ there is a constant family $\nno\ri(Y)$ and a canonical isomorphism $\nno\ri(Y)\simeq s\ri(\nno\ri(Y))$ which makes $\nno\ri(Y)$ a cochain. The \keyword{transfinite composition} of a cochain $(X,f)$ is a cochain morphism $\traco(g)\of (X,f)\to\nno\ri Y$ such that for every other morphism $k\of (X,f)\to\nno\ri Z$ there is a unique morphism $l\of Z\to Y$ such that $s\ri(l)\circ \traco(g)=k$. In other words, it is an initial object in the comma category $(X,f)/\nno\ri$.\hide{Introducing comma category, while not defining it}
+Let $\cat A$ be a $\Pi$-pretopos with a natural number object $\nno$. The successor morphism $s\of\nno\to\nno$ induces an endofunctor $s\ri$ of $\cat A/\nno$. A \keyword{cochain} is a morphism $f\of X\to s\ri(X)$ in $\cat A/\nno$. A morphism of cochains $(X,f)\to(Y,g)$ is a morphism $h\of X\to Y$ such that $s\ri(h)\circ f = g\circ h$.
+
+For every object $Y$ of $\cat A$ there is a constant family $\nno\ri(Y)$ and a canonical isomorphism $\nno\ri(Y)\simeq s\ri(\nno\ri(Y))$ which makes $\nno\ri(Y)$ a cochain. The \keyword{transfinite composition} of a cochain $(X,f)$ is a cochain morphism $\traco(f)\of (X,f)\to\nno\ri Y$ such that for every other morphism $k\of (X,f)\to\nno\ri Z$ there is a unique morphism $l\of Z\to Y$ such that $s\ri(l)\circ \traco(f)=k$. In other words, it is an initial object in the comma category $(X,f)/\nno\ri$.\hide{Introducing comma category, while not defining it}
+
+A class of morphism $S$ is closed under transfinite composition if for each cochain $(X,f)$ whose underlying morphism is in $S$, the underlying morphism of the transfinite composition $\traco(f)$ is in $S$ as well.
 \end{definition}
 
 \begin{lemma} The class of acyclic cofibrations is closed under pushouts, coproducts indexed over objects of $\ambient$ and transfinite compositions. \label{saturation}\end{lemma}

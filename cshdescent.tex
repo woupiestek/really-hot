@@ -2,7 +2,9 @@
 \begin{document}
 
 \section{Descent}
-This purpose of this section is to replace arguments based on \emph{minimal fibrations} in simplicial homotopy theory, in particular those that are related to homotopy type theory. Assume that there is a class $M$ of \emph{modest fibrations} in $\ambient\s$ with the following properties.
+A univalent universe that could serve as a model for homotopy type theory, has to live inside the category of complexes $\ambient\s\f$ itself because the model structure is limited to that part. This section shows that fibrancy is automatic for universal fibrations of certain classes of morphisms.
+
+Assume that there is a class $M$ of \emph{modest fibrations} in $\ambient\s$ with the following properties.
 \begin{itemize}
 \item $M$ is closed under pullbacks along arbitrary morphisms.
 \item $M$ is closed under composition.
@@ -33,7 +35,7 @@ on the other hand: if the constructiveness of the proofs is not convincing enoug
 There is a $\chi(D(v\ri(\uni)))\of\simplex[n]\to V$ and $\chi(h_*(v\ri(\uni)))\circ h$ equals $v$ by definition \ref{universal modest fibration}. These fillers forms a filler operator, which make $\bang\of V\to 1$ a fibration. %is there no more to understand here?
 \end{proof}
 
-\begin{lemma}[Descent]
+\begin{lemma}
 For each horn inclusion $h\of \horn_k[n]\to\simplex$ and each fibration $f\of X\to \horn_k[n]$ there is a fibration $Df\of Y\to\simplex[n]$ such that $f$ is the pullback of $Df$ along $h$.
 \label{descent}
 \end{lemma}
@@ -89,7 +91,7 @@ K(\phi)(x) &= K_1(\phi)\circ x
 
 Thanks to the following property, the natural equivalence of homsets above extends to horn inclusions.
 
-\begin{lemma} An \keyword{intersection} in $\simCat$ is a pullback square of monomorphisms. The functor $K$ preserves all intersections of $\simCat/[n]$. \end{lemma}
+\begin{lemma} In $\simCat$ an \keyword{intersection} is a pullback square of monomorphisms. The functor $K$ preserves all intersections of $\simCat/[n]$. \end{lemma}
 
 \begin{proof} The easiest way to see that is to describe the monomorphisms in the intersection as decidable predicates on the domain of a map $\xi\of[m]\to[n]$. Maps $[m]\to\bool$ that equals $\true$ at least once characterize monomorphisms to $\xi$. The action of the endofunctor $(K_0,K_1)$ on the monomorphism has a parallel on predicates. For each $p\of[m]\to\bool$ the following equations define $p^K\of [m+\norm\xi]\to\bool$. 
 \begin{align*}
@@ -112,7 +114,7 @@ On morphisms in $\ambient\s/\horn_k[n]$, the functor $D$ acts by composition: $D
 
 If $\ambient$ has infinite colimits, the functor $D$ has a left adjoint $K'$ that satisfies $K'\simplex\simeq K$. We cannot rely on that property here. The functor $K$ does extend to finite colimits of simplices. Preservation of intersections implies that $K$ also applies to finite unions of simplices like $\horn_l[m]$. The reason $D$ preserves fibrations and their right lifting property, is that its partial left adjoint preserves the left lifting property. 
 
-\begin{definition}[Face notation] We introduce a notation for monomorphisms in $\simCat/[n]$ or more accurately for the result of applying the functor $\simplex\of \simCat/[n] \to \ambient\s/\simplex[n]$ to them. For $\xi\of[m]\to[n]$ and $\phi\of[m]\to\bool$ let $\face(\xi,p)\of \dom(\face(\xi,p))\to \simplex[m]$ satisfy
+\begin{definition} We introduce a notation for monomorphisms in $\simCat/[n]$ or more accurately for the result of applying the functor $\simplex\of \simCat/[n] \to \ambient\s/\simplex[n]$ to them. For $\xi\of[m]\to[n]$ and $\phi\of[m]\to\bool$ let $\face(\xi,p)\of \dom(\face(\xi,p))\to \simplex[m]$ satisfy
 \begin{align*}
 \base(\dom(\face(\xi,p))) &= \set{\alpha\of\base(\simplex[m])\middle|\forall i\of \dom(\alpha).p\circ\alpha(i)=\true}\\
 \dim(\alpha) &= \dom(\alpha)\\
@@ -189,7 +191,7 @@ Let $i\of[m]-\set l$. If not $v_i(\kappa(\vec p[l]))$ then by definition $\xi(i)
 Since $B_j\cap \face(K_0(\xi),\land w_{\vec p})$ is a unions of faces that have the point $\vec p[l]$ in common, lemma \ref{face completion} applies to the inclusion $B_j\cap \face(K_0(\xi),\land w_{\vec p})\to \face(K_0(\xi),\land w_{\vec p})$. Therefore $B_j\to B_{j+1}$, $B\to C$ and $h\ri K(\hat h)\of A\to C$ all have the left lifting property.
 \end{proof}
 
-\begin{lemma}[Face completion] Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have a point $e$ of $\simplex[p]$ in common. The inclusion $\bigcup F\to \simplex[p]$ has the left lifting property with respect to all fibrations. \label{face completion} \end{lemma}
+\begin{lemma} Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have a point $e$ of $\simplex[p]$ in common. The inclusion $\bigcup F\to \simplex[p]$ has the left lifting property with respect to all fibrations. \label{face completion} \end{lemma}
 
 \begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. A $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ either contains $e$ or is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$. Therefore the inclusion has the left lifting property. Because composition preserves the left lifting property, $\bigcup F = F_0\to F_p = \simplex[p]$ has it too. 
 \end{proof}
