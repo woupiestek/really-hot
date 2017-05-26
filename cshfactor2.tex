@@ -62,26 +62,26 @@ Let $d_1$ be the other horn inclusion $1\to \simplex[1]$. Let $e=c\circ(d_1\time
 Cut down the variety of lifting problems with the following strategies.
 \begin{itemize}
 \item Using symmetry, derive the cases where $g$ is acyclic from those where $f$ is.
-\item By definition, there is an equivalence between lifting acyclic cofibrations and having a filler operator for the family of horns. Use this to reduce the cases where $f$ is acyclic to the case where $f$ is the family of horns.
-\item By lemma \ref{Reedy}, there is an equivalence between lifting cofibrations and having a filler operator for the family of cycles. Use this to reduce the cases where $g$ is an arbitrary cofibration to the case where $g$ is the family of cycles and do the same for $f$.
+\item By definition, there is an equivalence between lifting acyclic cofibrations and having a filler for the family of horns. Use this to reduce the cases where $f$ is acyclic to the case where $f$ is the family of horns.
+\item By lemma \ref{Reedy}, there is an equivalence between lifting cofibrations and having a filler for the family of cycles. Use this to reduce the cases where $g$ is an arbitrary cofibration to the case where $g$ is the family of cycles and do the same for $f$.
 \end{itemize}
 These reductions can be proved with the \emph{pullback power} construction and some diagram chasing.
 \[\xy
 (34,20)*+{X^C}="top",(0,10)*+{X^D}="left",(24,10)*+{\bullet}="middle",(44,10)*+{Y^C}="right",(34,0)*+{Y^D}="bottom"
-\ar^{X^g} "left";"top" \ar@{.>}|(.6){h^g} "left";"middle" \ar_{h^D} "left";"bottom" \ar "middle";"bottom"
+\ar^{X^g} "left";"top" \ar@{.>}|(.6){h^{\otimes g}} "left";"middle" \ar_{h^D} "left";"bottom" \ar "middle";"bottom"
 \ar "middle";"top" \ar^(.6){h^C} "top";"right" \ar_(.6){Y^g} "bottom";"right"
 \endxy\]
-The triple lifting problem is equivalent to the simple lifting problem of $f$ against $h^g$.
+The triple lifting problem is equivalent to the simple lifting problem of $f$ against $h^{\otimes g}$.
 This leaves two tasks.
 \begin{enumerate}
-\item Prove that if $h$ has a filler operator for cycles, it has a triple filler operator for the cases where $f$ and $g$ are both the family of cycles.
-\item Prove that if $h$ has a filler operator for horn, it can also handle all triple lifting problems involving the family of horns $f$ and the family of cycles $g$.
+\item Prove that if $h$ has a filler for cycles, it has a triple filler for the cases where $f$ and $g$ are both the family of cycles.
+\item Prove that if $h$ has a filler for horn, it can also handle all triple lifting problems involving the family of horns $f$ and the family of cycles $g$.
 \end{enumerate}
 
 In both cases there is a subobject of $B\times D$ that is the pushout of $f\times C$ and $A\times g$, because the underlying monomorphisms of $f$ and $g$ are decidable.
 
 \[ f \pp g = \set{\tuplet{x,y}\of B\times D\middle| (x\of f(A)) \vee (y\of g(C)) }\]
-Since pushouts preserve left lifting properties, a filler operator for the inclusion $f\pp g \to B\times D$ is sufficient.
+Since pushouts preserve left lifting properties, a filler for the inclusion $f\pp g \to B\times D$ is sufficient.
 
 For $m > 0$ and $n > 0$ none of the faces of $\simplex[m]\times \simplex[n]$ belong to either $\simplex[m]\times \cycle[n]$ or $\horn_k[m]\times\simplex[n]$ for any $k\of[m]$, because the faces are $m+n$-dimensional, and the faces of either $\simplex[m]$ or $\simplex[n]$ are not. The cases where $m=0$ or $n=0$ are trivial because $\simplex[0] \simeq 1$, $\cycle[0]\simeq 0$ and $\horn_0[0]$ does not exist. Since the inclusion $f\pp g \to B\times D$ is a countable sum of these inclusions, it is a cofibration. This settles the case where both $f$ and $g$ are the family cycle inclusions, because $h$ is an acyclic fibration.
 
@@ -135,7 +135,7 @@ Let $f\of X\to Y$ be a morphism with the left lifting property for all fibration
 X\ar[d]_f \ar[r]^\id & X\ar[d]^\bang\\
 Y\ar[r]_\bang \ar@{.>}[ur]_h & 1
 }\]
-There is a morphism $h\of \simplex[1]\times Y\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and $h\circ (\id_{\simplex[1]}\times f) = f\circ\pi_1$ because $Y$ is a complex and because of lemma \ref{triple lift}.
+There is a morphism $h\of \simplex[1]\times Y\to Y$ such that $h\circ k = (\id_Y,f\circ g)$ if $k\of 1+1\to\simplex[1]$ is the cycle inclusion and $h\circ (\id_{\simplex[1]}\times f) = f\circ\pi_1$ because $Y$ is fibrant and because of lemma \ref{triple lift}.
 \[ \xymatrix{
 X+X\ar[d]_{f+f}\ar[r]^{k\times\id} & \simplex[1]\times X \ar[r]^(.6){f\circ \pi_0}\ar[d] & Y\ar[d]^\bang\\
 Y+Y\ar[r]_{k\times\id} \ar[urr]^(.3){(\id,g)} & \simplex[1]\times Y \ar[r]_\bang\ar@{.>}[ur]_h & 1
@@ -145,7 +145,7 @@ Therefore $f$ is a weakly invertible cofibration by definition \ref{weakly inver
 
 \begin{proposition} Every morphism $f\of X\to Y$ of $\ambient\s\f$ factors as a fibration following a weakly invertible cofibration. \label{factor2} \end{proposition}
 
-\begin{proof} There is a simple factorization $f = p_0\circ r$ where $p_0\of Y/f\to Y$ and $r\of X\to Y/f$ and where 
+\begin{proof} Define $Y/f$, $p_0\of Y/f\to Y$ and $r\of X\to Y/f$ as follows. 
 \begin{align*}
 Y/f &= \set{\tuplet{x,p}\of X\times Y^{\simplex[1]}\middle| f(x) = p(\function{*}{1}) }\\
 p_0\tuplet{x,p} &= p(\function{*}{0})\\
@@ -167,11 +167,9 @@ X+X\ar[d]_{c\times \id}\ar[r]^{h+h} & W+W\ar[d]_(.3){c\times \id}\ar[r]^(.6){(\i
 \simplex[1]\times X\ar[r]_{\id\times h} \ar[urr]^(.3){h\circ\pi_1}  & \simplex[1]\times W\ar[r]_(.6){h'\circ\pi_1} \ar@{.>}[ur]_\phi & X
 }\]
 Because $\phi\circ(\id_{\simplex[1]\times h}) = h\circ \pi_1$, the cofibration $h$ is weakly invertible by definition \ref{weakly invertible}. 
-
 %p_0\circ g is fib
-Since fibrations are closed under composition and since $g$ is an acyclic fibration, $p_0\circ g$ is a fibration if $p_0$ is. 
 
-Let $d\of A\to B$ be a weakly invertible cofibration and let $a\of A\to Y/f$ and $b\of B\to Y$ satisfy $p_0\circ a = b\circ d$. There is a morphism $c_0\of B\to X$ such that $c_0\circ d = p_1\circ a$ because $X$ is fibrant. Let $e_0$ be one of the horn inclusions $1\to \simplex[1]$. There is a morphism $c_1\of\simplex[1]\times B\to Y$ such that $c_1\circ{(\id_{\simplex[1]}\times d)}$ is the transpose of $p_0\circ a$ and $c_0\circ (e_0\times \id_B) = f\circ c_1$ because $Y$ is fibrant and because of lemma \ref{triple lift}.
+Since fibrations are closed under composition and since $g$ is an acyclic fibration, $p_0\circ g$ is a fibration if $p_0$ is. Let $d\of A\to B$ be a weakly invertible cofibration and let $a\of A\to Y/f$ and $b\of B\to Y$ satisfy $p_0\circ a = b\circ d$. There is a morphism $c_0\of B\to X$ such that $c_0\circ d = p_1\circ a$ because $X$ is fibrant. Let $e_0$ be one of the horn inclusions $1\to \simplex[1]$. There is a morphism $c_1\of\simplex[1]\times B\to Y$ such that $c_1\circ{(\id_{\simplex[1]}\times d)}$ is the transpose of $p_0\circ a$ and $c_0\circ (e_0\times \id_B) = f\circ c_1$ because $Y$ is fibrant and because of lemma \ref{triple lift}.
 \[\xy
 (0,20)*+{A}="AC",(25,20)*+{\simplex[1]\times A}="BC",(50,20)*+{Y}="Y",
 (0,0)*+{B}="AD",(25,0)*+{\simplex[1]\times B}="BD",(50,0)*+{1}="one"

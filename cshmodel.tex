@@ -18,7 +18,7 @@ Categories with such a structure are \emph{model categories}.
 This notion of model structure is the ordinary one, except for the kind of factorization systems the morphisms in it form.
 
 \begin{definition}
-An \keyword{enriched factorization system} is a pairs of set of morphisms $(L,R)$ of an enriched category with the following properties.
+An \keyword{enriched factorization system} is a pair of sets of morphisms $(L,R)$ of an enriched category with the following properties.
 \begin{itemize}
 \item A morphism belong to $L$ if and only if it has the \emph{left lifting property} with respect all to members of $R$.
 \item A morphism belong to $R$ if and only if it has the \emph{right lifting property} with respect all to members of $L$.
@@ -31,21 +31,42 @@ A morphism $f\of X\to Y$ of an $\cat A$-enriched category $\cat C$ has the \emph
 \ar^{\cat C(g,\id_X)} "left";"top" \ar@{.>}|(.6){\tuplet{f_!,g\ri}} "left";"middle" \ar_{\cat C(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
 \ar "middle";"top" \ar^(.6){\cat C(\id_I,f)} "top";"right" \ar_(.6){\cat C(g,\id_Y)} "bottom";"right"
 \endxy\]
-A section of $\tuplet{f_\bang,g\ri}$ is a \keyword{filler operator}.
+A section of $\tuplet{f_\bang,g\ri}$ is a \keyword{filler}.
 \end{definition}
 
 In $\ambient\s$ we make the following selections. 
 
-\begin{definition} A morphism $f\of X\to Y$ of $\ambient\s$ is a \keyword{fibration} if it has the right lifting property with respect to the family of all \emph{horn inclusions}, which is defined as follows. 
+\begin{definition} A morphism $f\of X\to Y$ of $\ambient\s$ is a \keyword{fibration} if it has the right lifting property with respect to the \emph{discrete family} of all \emph{horn inclusions}.
 
-For each $n\in\N$, the $n$-\keyword{simplex} $\simplex[n]$ is the internal simplicial set where $\base{\simplex[n]}$ is the object of all morphisms $\phi$ in $\simCat$ such that $\cod(\phi) = n$, $\dim(\phi) = \dom(\phi)$ and $\phi\cdot \xi = \phi\circ \xi$. Here $\N$ is the \keyword{set of natural numbers} that exists outside of $\ambient$. For each $k\of[n]$ the \keyword{horn} $\horn_k[n]$ is the subobject of the nondecreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$.
+Let $\set\geq = \set{\tuplet{n,k}\of \nno\times\nno |n\geq k}$ in $\ambient$.
+The simplicial set $\simplex_{\set\geq}$ satisfies:
+\begin{align*}
+\base(\simplex_{\set\geq}) &= \set{\tuplet{\phi,k}\of\Ar(\simCat)\times\nno| k\leq \cod(\phi) } \\
+\dim\tuplet{\phi,k} &= \dom(\phi) \\
+\tuplet{\phi,k}\cdot \xi &= \tuplet{\phi\circ\xi,k}
+\end{align*}
+The simplicial set $\horn_{\set\geq}$ satisfies:
+\begin{align*}
+\base(\horn_{\set\geq}) &= \set{(\phi,k)\of\Ar(\simCat)\times\nno\middle| 
+\begin{array}{l}
+k\leq \cod(\phi),\\
+\exists i\of\nno.\left\{\begin{array}{l}i\leq \cod(\phi), i\neq k,\\ \forall j\of \dom(\phi).\phi(j)\neq i \end{array}\right. 
+\end{array}
+} \\
+\dim\tuplet{\phi,k} &= \dom(\phi) \\
+\tuplet{\phi,k}\cdot \xi &= \tuplet{\phi\circ\xi,k}
+\end{align*}
+The simplicial object $\horn_{\set\geq}$ is subobject of $\simplex_{\set\geq}$ by definition. The inclusion $\horn_{\set\geq}\to\simplex_{\set\geq}$ is the family of all horn inclusions.
+
+
+\hide{For each natural number $n$, the $n$-\keyword{simplex} $\simplex[n]$ is the internal simplicial set where $\base{\simplex[n]}$ is the object of all morphisms $\phi$ in $\simCat$ such that $\cod(\phi) = n$, $\dim(\phi) = \dom(\phi)$ and $\phi\cdot \xi = \phi\circ \xi$. Here $\N$ is the \keyword{set of natural numbers} that exists outside of $\ambient$. For each $k\of[n]$ the \keyword{horn} $\horn_k[n]$ is the subobject of the nondecreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$.
 \[ \base{\horn_k[n]} = \set{\phi\of\base{\simplex[n]}| \exists i\of[n]-\set k.\forall j\of \dom(\phi).\phi(i)\neq j } \]
 The \keyword{horn inclusion} is the monomorphism $\horn_k[n]\to\simplex[n]$. The \emph{family of horn inclusions} is the sum of all horn inclusions $\coproduct{k\leq n\of\nno}{\horn_k[n]}\to \coproduct{k\leq n\of\nno}{\simplex[n]}$ that exists as a morphism of $\ambient\s$. Note that $\coproduct{x\of y}{f(x)}$ is the notation for dependent coproducts in this paper.
 
-The lifting property that $f$ satisfies, is defined in a slice category of $\ambient\s$. Let $I = \set{\tuplet{n,k}\of\nno\times\nno|k\leq n}$. The family of horn inclusions is a morphism in $\ambient\s/I\disc$ (see example \ref{discrete}). So is the multiple $I\disc\times f\of I\disc\times X\to I\disc\times Y$ of $f$. The morphism $f$ is a fibration if $I\disc\times f$ has the right lifting property with respect to $\coproduct{k\leq n\of\nno}{\horn_k[n]}\to \coproduct{k\leq n\of\nno}{\simplex[n]}$. 
+The morphism $f$ is a fibration if $\set\geq\disc\ri(f)$ has the right lifting property with respect to $\horn_{\set\geq}\to \simplex_{\set\geq}$. Here $\set\geq\disc\ri\of \ambient\s\to\ambient\s/\set\geq\disc$ is the constant family functor.}
 \end{definition}
 
-\begin{example} If $\ambient$ is the topos of sets, then the morphisms that satisfy definition \ref{fibration} are precisely the \emph{Kan fibrations}. In that case the axiom of choice implies a filler operator exists. \end{example}
+\begin{example} If $\ambient$ is the topos of sets, then the morphisms that satisfy definition \ref{fibration} are precisely the \emph{Kan fibrations}. In that case the axiom of choice implies a filler exists. \end{example}
 
 \begin{definition} A monomorphism $f\of X\to Y$ of category $\ambient\s$ is a \keyword{cofibration} if the subobject of faces of $Y$ which are not in the image of $X$ is decidable. A \keyword{face} of $Y$ is a $y\of\base Y$ such that if $\phi\of [\dim(y)]\to [\dim(y)]$ in $\simCat$ and $y\cdot \phi = y$, then $\phi = \id_{\dim(y)}$. Elements of $\base Y$ which are not faces are called \keyword{degenerate}, so a face is a nondegenerate element of $\base Y$. Hence $f$ is a cofibration if there is a morphism $\psi\of\base Y\to\bool$ such that $\psi(y)=\false$ if an only if $y$ is degenerate or equal to $f(x)$ for some $x\of \base X$.\end{definition}
 
@@ -56,13 +77,14 @@ The lifting property that $f$ satisfies, is defined in a slice category of $\amb
 
 The \emph{small object argument} is a factorization method often applied in simplicial homotopy. Unfortunately, it relies on infinite colimits which $\ambient$ may lack. To get a model structure without the help of the small object argument we retreat to a subcategory of $\ambient\s$.
 
-\begin{definition} A \keyword{complex} is a tuple $\tuplet{\base X,\dim,\cdot,\filler}$ where $\tuplet{\base X,\dim,\cdot}$ is a simplicial object and $\filler$ is a filler operator (see definition \ref{enriched factorization system}) that makes the unique morphism $\bang\of \tuplet{\base X,\dim,\cdot}\to 1\disc$ a fibration. A morphism of complexes is simply a morphism of simplicial objects. The \emph{category of complexes} and morphisms of complexes is $\ambient\s\f$.
+\begin{definition} A simplicial object is \emph{fibrant} is the unique morphism $\bang\of X\to 1$ is a fibration.
+A \keyword{complex} is a tuple $\tuplet{\base X,\dim,\cdot,\filler}$ where $\tuplet{\base X,\dim,\cdot}$ is a simplicial object and $\filler$ is a filler (see definition \ref{enriched factorization system}) that makes the unique morphism $\bang\of \tuplet{\base X,\dim,\cdot}\to 1\disc$ a fibration. A morphism of complexes is a morphism of the simplicial objects that remain after forgetting the fillers. The \emph{category of complexes} and morphisms of complexes is $\ambient\s\f$.
 \end{definition}
 
-\begin{example} Each discrete simplicial object has a canonical filler operator, which means that the discrete simplicial object functor $\function{I\of\ambient}{I\disc}$ factors through the category of complexes. All simplices are complexes. Horns are not, however.
+\begin{example} Each discrete simplicial object has a canonical filler, which means that the discrete simplicial object functor $\function{I\of\ambient}{I\disc}$ factors through the category of complexes. All simplices are fibrant. Horns are not, however.
 \end{example}
 
-\begin{example} When $\ambient$ is the category of sets, then complexes are Kan complexes with a filler operator included. \end{example}
+\begin{example} When $\ambient$ is the category of sets, then complexes are Kan complexes with a filler included. \end{example}
 
 \begin{theorem}
 With fibrations, weak equivalences and cofibrations defined as above the $\ambient$-enriched category $\ambient\s\f$ is a model category.

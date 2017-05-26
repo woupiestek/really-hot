@@ -25,7 +25,7 @@ This means that weak equivalences indeed satisfy 2-out-of-3.
 \begin{proof} Compositions of acyclic fibrations are acyclic fibrations and the same holds for acyclic cofibrations.
 So all compositions of weak equivalences are weak equivalences, if $g\circ f$ factors as an acyclic fibration following an acyclic cofibration for each acyclic cofibration $g$ and acyclic fibration $f$ that can be composed.
 
-By proposition \ref{factor1} $g\circ f=h\circ k$ for some acyclic fibration $h\of W\to Z$ and a cofibration $k\of X\to W$. To show that the cofibration is acyclic, the rest of this proof shows that $k$ is weakly invertible (see definition \ref{weakly invertible}) because $g$ is. That acyclic cofibrations are weakly invertible and vice versa is proved in lemmas \ref{acyclic have lifting} and \ref{lifting is acyclic}.
+By proposition \ref{factor1} $g\circ f=h\circ k$ for some acyclic fibration $h\of W\to Z$ and a cofibration $k\of X\to W$. The rest of this proof shows that $k$ is weakly invertible (see definition \ref{weakly invertible}) if $g$ is. Since acyclic cofibrations are weakly invertible and vice versa--as proved in lemmas \ref{acyclic have lifting} and \ref{lifting is acyclic}--$g\circ f$ is a composition of an acyclic fibration following an acyclic cofibration and therefore a weak equivalence.
 
 Let $g'$ be the left inverse of $g$. Since $f \circ \id = g'\circ g\circ f= (g'\circ h)\circ k$ there is a morphism $k'$ such that $f\circ k' = g'\circ h$ and $k'\circ k = \id$, so $k$ has its own left inverse.
 \[\xymatrix{
@@ -48,7 +48,7 @@ Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \p
 
 \begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $g$ and $g\circ f$ are acyclic cofibrations, then $f$ is an acyclic cofibration \label{left cancellation} \end{lemma}
 
-\begin{proof} Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. Because $B$ is a complex, there is a $b'\of Z\to B$ such that $b'\circ g = b$. Lifting properties also imply that there is an $a'\of Z\to A$ such that $a'\circ g\circ f = a$ and $k\circ a'= b'$. So $b'\circ g$ is a filler for $k\circ a=b\circ f$. Generalizing, this construction lifts $f$ against all fibrations and that makes $f$ an acyclic cofibration.
+\begin{proof} Let $k\of A\to B$ be a fibration and let $a\of X\to A$ and $b\of Y\to B$ satisfy $k\circ a=b\circ f$. Because $B$ is fibrant, there is a $b'\of Z\to B$ such that $b'\circ g = b$. Lifting properties also imply that there is an $a'\of Z\to A$ such that $a'\circ g\circ f = a$ and $k\circ a'= b'$. So $b'\circ g$ is a filler for $k\circ a=b\circ f$. Generalizing, this construction lifts $f$ against all fibrations and that makes $f$ an acyclic cofibration.
 \[\xy
 (0,28)*+{X}="x",(14\halfrootthree,21)*+{A}="a",(0,14)*+{Y}="y",(14\halfrootthree,7)*+{B}="b",(0,0)*+{Z}="z"
 \ar^a "x";"a" \ar_f "x";"y" \ar^k "a";"b" \ar^(.25)b "y";"b" \ar_g "y";"z"
@@ -61,13 +61,13 @@ Because the homotopy satisfies $\chi\circ(\id_{\simplex[1]}\times k) = k\circ \p
 \begin{proof} Being acyclic is equivalent to being contractible (see definition \ref{contractible}) by example \ref{acyclic means contractible} and lemma \ref{Reedy}. Reasoning dual to that in the proof of lemma \ref{left cancellation} gives $g$ the right lifting property for the family of cycle inclusions.
 
 \[\xy
-(28,28)*+{X}="x", (0,21)*+{\coproduct{n\of\nno}\cycle[n]}="v", (28,14)*+{Y}="y", (0,7)*+{\coproduct{n\of\nno}\simplex[n]}="w", (28,0)*+{Z}="z"
+(14,28)*+{X}="x", (0,21)*+{\cycle_\nno}="v", (14,14)*+{Y}="y", (0,7)*+{\simplex_\nno}="w", (14,0)*+{Z}="z"
 \ar@{.>}^(.67){a'} "v";"x" \ar_(.67)a "v";"y" \ar "v";"w"
 \ar@{.>}_(.75){b'} "w";"x" \ar_(.67)b "w";"z"
 \ar^f "x";"y" \ar^g "y";"z"
 \endxy\]
 
-Dual reasoning works because the unique morphism $\coproduct{n\of\nno}\cycle[n]$ is a cofibration. A member of $\base(\coproduct{n\of\nno}\cycle[n])$ is a face if it is the pair $\tuplet{n,\id_n}$ for some $n\of\nno$ and this is a decidable property. No faces are in the image of $\bang$.
+Dual reasoning works because the unique morphism $\bang\of 0\to\cycle_\nno$ is a cofibration. A member of $\base(\cycle_\nno)$ is a face if it is a monomorphism of $\simCat$ and this is a decidable property. No faces are in the image of $\bang$.
 \end{proof}
 
 \begin{lemma} If $f\of X\to Y$, $g\of Y\to Z$ and if $g$ and $g\circ f$ are acyclic fibrations, then $f$ is a weak equivalence.\label{shared retract 2} \end{lemma}

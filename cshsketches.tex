@@ -67,6 +67,101 @@ Poland}
 
 \begin{document}
 
+\section{26/5/17}
+
+Transfinite compositions are not used explicitly anywhere, and don't seem like much of an addition.
+
+Okay, suppose $f\of X\to X$ is a chain. Feels like the inclusion $X_0 \to X - f(X)$ should be the transfinite composition. Of course, $X - f(X)$ is not a simplicial set, unless we can adjust the restriction operator, but the existence of a transfinite composition suggest than we can.
+
+Important change: rather than defining loose simplicial sets, I define the whole family in one go.
+This may have impact on later parts of the paper.
+
+Perhaps we better replace all coproducts with more direct definitions.
+
+So now we have a longer to do list:
+\begin{itemize}
+\item repair found errors
+\item don't use slice categories in the definition of enriched lifting\dots
+\item replace coproducts with subobjects where possible.
+\item track down where transfinite composition is used implicitly, make the argument explicit.
+  * page 9, lemma 3.6 the end.
+	
+\item try to get rid of transfinite compositions.
+\end{itemize}
+
+Important insight: left adjoints preserve left lifting properties and right adjoint preserve right lifting properties. 
+Hence the family lifting property reduces to the underlying lifting property!
+
+What we needed comes from the enriched part of the definition! This is now very unclear.
+Perhaps we need a lemma for this or something, but let's just see how far we get today.
+
+As it stands, the text suggest that a lot of power comes from defining the lifting property in the slice category. It does not. 
+There is an option to pull back morphism with left lifting property along \emph{discrete morphisms}, because of the enrichment. 
+That is the power I wanted, and should be using explicitly throughout my proofs.
+
+Another insight: the coproducts I seek are \emph{weighted coproducts}.
+
+But something seems to be missing now: how to get weighted colimits of members of the family?
+
+We are looking for a new proof of:
+\begin{lemma} Contractible morphisms are acyclic fibrations.\end{lemma}
+This seems a construction that actually breaks up the family filler operator internally.
+We need to make the case that this is permitted somehow\dots
+It doesn't follow from general rules about cofibrations. It must use discreteness somehow.
+
+Actually, we should have argued that the enrichment is over $\ambient/\nno$.
+That is where all problems seem to melt away.
+
+Perhaps there is a trick that makes all individual inclusions retracts of the family. 
+That might just be the most promising option.
+The only trouble is $0\to 1$.
+
+
+I have been needing a sum of hom objects, but got a product instead.
+That is an error. However, when I have repaired the definition, then we have what we need everywhere.
+
+This is applied stack semantics:
+The slice $\ambient\s/I\disc$ is enriched over the slice $\ambient/I$: $\nat(X,Y)[i] = \nat(X[i],Y[i])$.
+
+\paragraph{yet another def}
+
+\begin{definition} A morphism $f\of X\to Y$ of $\ambient\s$ is a \keyword{fibration} it is has a \emph{pointwise} right lifting property with respect to the family of horn inclusions.
+
+Let $\set\geq = \set{\tuplet{n,k}\of \nno\times\nno |n\geq k}$ in $\ambient$.
+The simplicial set $\simplex_{\set\geq}$ satisfies:
+\begin{align*}
+\base(\simplex_{\set\geq}) &= \set{\tuplet{\phi,k}\of\Ar(\simCat)\times\nno| k\leq \cod(\phi) } \\
+\dim\tuplet{\phi,k} &= \dom(\phi) \\
+\tuplet{\phi,k}\cdot \xi &= \tuplet{\phi\circ\xi,k}
+\end{align*}
+The simplicial set $\horn_{\set\geq}$ satisfies:
+\begin{align*}
+\base(\horn_{\set\geq}) &= \set{(\phi,k)\of\Ar(\simCat)\times\nno\middle| 
+\begin{array}{l}
+k\leq \cod(\phi),\\
+\exists i\of\nno.\left\{\begin{array}{l}i\leq \cod(\phi), i\neq k,\\ \forall j\of \dom(\phi).\phi(j)\neq i \end{array}\right. 
+\end{array}
+} \\
+\dim\tuplet{\phi,k} &= \dom(\phi) \\
+\tuplet{\phi,k}\cdot \xi &= \tuplet{\phi\circ\xi,k}
+\end{align*}
+The simplicial object $\horn_{\set\geq}$ is subobject of $\simplex_{\set\geq}$ by definition. 
+The inclusion $\horn_{\set\geq}\to\simplex_{\set\geq}$ is the family of all horn inclusions.
+
+The formula $\tuplet{\phi,k}\mapsto \tuplet{\dom(\phi),\cod(\phi),k}$ defines morphisms of simplices $\horn_{\set\geq}\to\set\geq\disc$ and $\simplex_{\set\geq}\to\set\geq\disc$ that commute with the inclusion, and make it a morphism in $\ambient\s/\set\geq\disc$. This category $\ambient\s/\set\geq\disc$ has an enrichment in $\ambient/\set\geq$, where $\nat(X,Y)$. If $\set\geq\ri(f)$ has the right lifting property with respect to the inclusion $\horn_{\set\geq}\to\set\geq\disc$ relative to the enrichment on $\ambient/\set\geq$.
+\end{definition}
+
+Perhaps this requires a new section, even if we use the notion only twice.
+
+I suppose the family thing is quite clear and correct. But this enrichment stuff doesn't clear much up.
+closer to the core, we could introduce a parametric variant of the enriched lifting property.
+
+We could introduce the notion of lifting versus a discrete family from the start. 
+
+Lifting discrete families as a core concept, to be introduced right after the enriched factorization system.
+
+I know what I need, but as usual, it is a struggle to write down.
+
 \section{28/4/17}
 Dwelling on the contractible-cofibration factorization. The latching an matching elements evidently are part of fibrant and cofibrant replacements, and perhaps the proof becomes clearer if we somehow use the replacements first. I don't see it working however.
 

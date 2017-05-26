@@ -16,7 +16,7 @@ Banacha 2\\
 02-097 Warszawa\\
 Poland}
 \eaddress{w.p.stekelenburg@gmail.com}
-\keywords{realizability, simplicial homotopy, Kan complexes}
+\keywords{realizability, simplicial homotopy, fibrant objects}
 \amsclass{03D80, 18G30, 18G55}
 
 \newcommand\hide[1]{}
@@ -26,7 +26,6 @@ Poland}
 \mathrmdef{dom}
 \mathrmdef{cod}
 \newcommand\ri{^*}
-\newcommand\N{\mathbb N}
 \mathbfdef[nno]{N}
 \newcommand\dual{^{\mathrm{op}}}
 \mathbfdef[simCat]\Delta
@@ -90,7 +89,7 @@ This paper grew out of an attempt to build a \emph{recursive realizability} mode
 Realizability toposes make simplicial homotopy harder because they may lack infinite limits and colimits and their internal logic does not always satisfy the principle of the excluded middle or the axiom of choice. We face these challenges with the following tactics.
 \begin{enumerate}
 \item Limit the class of cofibrations. In classical simplicial homotopy theory every mono\-morphism is a cofibration. We demand that certain properties of the monomorphisms are decidable so classical arguments remain valid.
-\item Strengthen the lifting property. Fibrations come equipped with a \emph{filler operator} that gives solutions for a family of basic lifting problems.
+\item Strengthen the lifting property. Fibrations come equipped with a \emph{filler} that gives solutions for a family of basic lifting problems.
 \item Build the homotopy category out of fibrant objects only, so we don't need fibrant replacements.
 \end{enumerate}
 To avoid distracting peculiarities of realizability toposes and to underline that the proofs are predicative as well as constructive, this paper works with a generic \emph{$\Pi$-pretopos} (see definition \ref{pretopos}) with a \emph{natural number object}.
@@ -105,10 +104,6 @@ In the ex/lex completion \emph{modest fibrations} are fibrations whose underlyin
 
 \subsection*{Acknowledgments} 
 I am grateful to the Warsaw Center of Mathematics and Computer Science for the opportunity to do the research leading to this paper. I am also grateful for discussions with Marek Zawadowski and the seminars on simplicial homotopy theory he organized during my stay at Warsaw University. Richard Garner, Peter LeFanu Lumsdaine and Thomas Streicher made invaluable comments on early drafts of this paper.
-
-\hide{
-The weakest points so far are the generalizations over families of horn and cycle inclusions. It simply is not always the case that the natural number object is the coproduct of countable copies of $1$, so we rely on the argument that the reasoning is constructive, and can therefore be internalized. Let's try to do better.
-}
 
 \subfile{cshintro}
 
