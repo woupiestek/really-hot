@@ -5,27 +5,49 @@ This section show that the cofibrations from definition \ref{cofibration} are pa
 
 \begin{lemma} Cofibrations and acyclic fibrations form an enriched factorization system on $\ambient\s$. \label{factorization system 1} \end{lemma}
 
-\begin{proof} Proposition \ref{factor1} shows that every morphism factors as a \emph{contractible morphism} (see definition \ref{contractible}) following a cofibration. Acyclic fibrations are examples of contractible morphisms (see example \ref{acyclic means contractible}). Lemma \ref{Reedy} shows that contractible morphisms are acyclic fibrations. Hence contractible morphisms and acyclic fibrations are the same class of morphism and this class form the right class of a factorization system with cofibrations on the left (see definition \ref{enriched factorization system}).
+\begin{proof} Proposition \ref{factor1} shows that every morphism factors as a \emph{contractible morphism} (see definition \ref{contractible}) following a cofibration. Acyclic fibrations are examples of contractible morphisms (see lemma \ref{acyclic means contractible}). Lemma \ref{Reedy} shows that contractible morphisms are acyclic fibrations. Hence contractible morphisms and acyclic fibrations are the same class of morphism and this class form the right class of a factorization system with cofibrations on the left (see definition \ref{enriched factorization system}).
 \end{proof}
 
-\begin{definition} A morphism $f\of X\to Y$ is \keyword{contractible} if it has the right lifting property with respect to the \emph{family of cycle inclusions} $\cycle_\nno \to \simplex_\nno$, which is defined as follows.
+\begin{definition} Let $\nno\disc\ri$ be the constant family functor $\ambient\s\to\ambient\s/\nno\disc$. 
+A morphism $f\of X\to Y$ is \keyword{contractible} if $\nno\ri(f)$ has the $\ambient/\nno$-enriched right lifting property with respect to the \emph{family of cycle inclusions}, which is defined as follows.
 
-The simplicial set $\simplex_\nno$ satisfies:
+The simplicial sets $\simplex_\nno$ and $\cycle_\nno$ satisfy:
 \begin{align*}
 \base(\simplex_\nno) &= \Ar(\simCat) \\
-\dim\tuplet{\phi,k} &= \dom(\phi) \\
+\base(\cycle_\nno) &= \set{\phi\of\Ar(\simCat)\middle|\exists i\of\nno.i\leq \cod(\phi),\forall j\of \dom(\phi).\phi(j)\neq i} \\
+\dim(\phi) &= \dom(\phi) \\
 \phi\cdot \xi &=\phi\circ\xi
 \end{align*}
-The simplicial set $\cycle_\nno$ satisfies:
-\begin{align*}
-\base(\simplex_\nno) &= \set{\phi\of\Ar(\simCat)\middle|\exists i\of\nno.i\leq \cod(\phi),\forall j\of \dom(\phi).\phi(j)\neq i} \\
-\dim\tuplet{\phi,k} &= \dom(\phi) \\
-\phi\cdot \xi &=\phi\circ\xi
-\end{align*}
-By these definitions $\cycle_\nno$ is a subobject of $\simplex_\nno$. The inclusion $\cycle_\nno \to \simplex_\nno$ is the family of cycle inclusions.
+By these definitions $\cycle_\nno$ is a subobject of $\simplex_\nno$. The formula $\function{\phi}\tuplet{\dom(\phi),\cod(\phi)}$ defined morphisms of simplices $\cycle_\nno\to \nno\disc$ and $\simplex_\nno\to \nno\disc$ that commute with the inclusion, which is therefore a monomorphism of $\ambient\s/\nno\disc$. This inclusion is the family of cycle inclusions.
 \end{definition}
 
-\begin{example} The inclusion of simplices $\cycle_\nno\to\simplex_\nno$ is a cofibration, because identity morphisms are a decidable subobject of $\Ar(\simCat)$ and also the set of faces of $\simplex_\nno$ outside of $\cycle_\nno$. Therefore every acyclic fibration is a contractible morphism. \label{acyclic means contractible}\end{example}
+\begin{lemma} Every acyclic fibration is a contractible morphism. \label{acyclic means contractible} \end{lemma}
+
+\begin{proof}
+Let $f\of X\to Y$ be an arbitrary acyclic fibration, let $k\of\cycle_\nno\to\simplex_\nno$ be the family of cycle inclusions and 
+let $\hom_\nno\of(\ambient\s/\nno\disc\dual\times \ambient\s/\nno\disc)\to \ambient/\nno$ be the enrichment of $\ambient\s/\nno\disc$ over $\ambient\nno$.
+The category $\ambient/\nno$ has an object that represents all lifting problems involving cycle inclusions and $f$.
+\[ p\of P\to \nno = \set{\tuplet{a,b}\of \hom_\nno(\cycle_\nno,\nno\ri(X))\times \hom_\nno(\simplex_\nno,\nno\ri(Y)) \middle|f\circ a = b\circ k} \]
+
+The simplicial sets $\simplex_P$ and $\cycle_P$ satisfy:
+\begin{align*}
+\base(\simplex_P) &= \set{ \tuplet{\phi,x}\of\Ar(\simCat)\times P | \cod(\phi) = p(x) } \\
+\base(\cycle_P) &= \set{\tuplet{\phi,x}\of\base(\simplex_P)\middle|\exists i\of\nno.i\leq \cod(\phi),\forall j\of \dom(\phi).\phi(j)\neq i} \\
+\dim\tuplet{\phi,x} &= \dom(\phi) \\
+\tuplet{\phi,x}\cdot \xi &=\phi\circ\xi
+\end{align*}
+
+The inclusion $k_P\of\cycle_P\to\simplex_P$ is a cofibration for the following reasons. The simplex $\tuplet{\phi,x}\of\simplex_P$ is a face if $\phi$ is monic, outside of $\cycle_P$ if $\phi$ is epic, so $\phi = \id_[n]$ for some $n\of \nno$. This is a decidable property as required. 
+
+For each $n\of\nno$ the members of the fibre $P[n]$ of $p$ over $n$ are pairs $\tuplet{a,b}$ where $a\of\cycle[n]\to X$ and $b\of \simplex[n]\to Y$ satisfy $f\circ a = b \circ k_n$. Here $\cycle[n]$ and $\simplex[n]$ are fibres over $n$ of the families. Define $a_P\of \cycle_P\to X$ and $b_P\of \cycle_P\to X$ as follows.
+\begin{align*}
+a_P\tuplet{\phi,\tuplet{a,b}} &= a(\phi)\\
+b_P\tuplet{\phi,\tuplet{a,b}} &= b(\phi)
+\end{align*}
+This way $f\circ a_P = b_P\circ k_P$, and since $f$ is an acyclic fibration, there is a $c_P\of \simplex_P\to X$ such that $f\circ c_P = b_P$ and $c_P\circ k_P = a_P$. This is the key.
+
+Back in $\ambient/\nno$, $c_P$ induces a morphism $p\to\hom_\nno(\simplex_\nno,\nno\ri(X))$, which is a section to the canonical morphism $\function c\tuplet{\nno\ri(f)\circ c,c\circ k}$ and hence a filler for $k$ against $\nno\ri(f)$. Therefore $f$ is contractible.
+\end{proof}
 
 \begin{proposition} Every morphism factors as a contractible morphism following a cofibration. \label{factor1} \end{proposition}
 
@@ -66,30 +88,19 @@ Let $c\of \simplex_\nno\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $
 
 \begin{lemma} Contractible morphisms are acyclic fibrations.\label{Reedy}\end{lemma}
 
-\begin{proof} The class of morphisms that have the left lifting property with respect to contractible morphism is saturated (see definition \ref{saturated} and lemma \ref{saturation}). The rest of this proof shows that all cofibrations are in this class. That implies that all contractible morphisms have the right lifting property with respect to all cofibrations and therefore are acyclic fibrations.
-
-Suppose $f\of X\to Y$ is a cofibration and $S$ is the family of faces outside the image of $f$.
-
-\hide{ what we actually use: $f$ is a pushout of a weighted colimit of cycle inclusions. This has a filler, because we can actually break up the single operator internally is $\ambient$. At least that has been my assumption. }
-
-For each $i\of\nno$ let $Y_i$ be the union of $X$ with all faces of $Y$ of dimension strictly smaller than $i$. In particular $Y_0=X$.
-
-Every $y\of\base(Y)$ is in $Y_i$ for some $i\leq \dim(y)$. If a $y\of\base Y$ is degenerate, then one can search the monomorphisms $[n]\to\dim(y)$ in $\simCat$ for the greatest $\mu$ such that $y\cdot\mu$ is a face. For this reason, the inclusion $Y_i\to\nno\ri Y$ is a transfinite composition.
-
-For each $i\of\nno$ let $S_i$ be the object of $n$-dimensional faces in $S$. Each $s\of S_i$ induces a monomorphism $s'\of\simplex[i]\to Y_{i+1}$. Since $Y_{i}$ has all simplices of dimension $i-1$, the intersection of $Y_i$ and $s'$ is $\cycle[i]$. Thus the inclusion $Y_i\to Y_{i+1}$ is the pushout of $S_{i+1}$ copies of $\cycle[i]\to\simplex[i]$.
-\end{proof}
-
-\begin{definition} A class of morphisms in an enriched category is \keyword{saturated} if it is closed under pushouts, retracts, compositions and weighted coproducts. \end{definition}
-
-\begin{lemma} The class of acyclic cofibrations is closed under pushouts, coproducts weighted over $\ambient$ and transfinite compositions. \label{saturation}\end{lemma}
-
 \begin{proof}
-In each case the construction induces an operation on the split epimorphism in the diagram of the lifting property. These operations happen to preserve split epimorphisms.
+Suppose $c\of I\to J$ is a cofibration and $F$ is the family of faces outside the image of $c$. 
+The simplicial sets $\simplex_F$ and $\cycle_F$ satisfy:
+\begin{align*}
+\base(\simplex_F) &= \set{ \tuplet{\phi,x}\of\Ar(\simCat)\times F | \cod(\phi) = \dim(x) } \\
+\base(\cycle_F) &= \set{\tuplet{\phi,x}\of\base(\simplex_F)\middle|\exists i\of\nno.i\leq \cod(\phi),\forall j\of \dom(\phi).\phi(j)\neq i} \\
+\dim\tuplet{\phi,x} &= \dom(\phi) \\
+\tuplet{\phi,x}\cdot \xi &=\phi\circ\xi
+\end{align*}
+Now $c$ is a pushout of the inclusion $k_F\of\cycle_F\to\simplex_F$, $\function{\tuplet{\phi,x}}x\cdot \phi$ 
 
-Suppose $h\of I'\to J'$ is a pushout of $g\of I\to J$ where $g$ has the left lifting property with respect to $f\of X\to Y$. Because the functors $\nat(-,X)$ and $\nat(-,Y)\of(\ambient\s)\dual\to\ambient$ send pushouts to pullbacks, $\tuplet{f_!,h\ri}$ is a pullback of $\tuplet{f_!,g\ri}$ and the former is a split epimorphism because the latter is.
+\hide{something about transfinite compositions is missing here.}
 
-Suppose $h\of(\product{i\of I}{\nat(X(i),Y(i))})$ represents a family of morphisms of that share the left lifting property. That means $\tuplet{(I\disc\ri(f))_!,h\ri}$ is a split epimorphism and therefore so is its transpose $\tuplet{f_!,\amalg_I(h)\ri}$, where $\amalg_I(h)\of\nat(\coproduct{i\of I}{X(i)},\coproduct{i\of I}{Y(i)})$ is the weighted coproduct of the family $h$.%Should we keep using $\Sigma$ for coproducts?
-
-Finally, compositions of split epimorphism are split epimorphisms.
 \end{proof}
+
 \end{document}

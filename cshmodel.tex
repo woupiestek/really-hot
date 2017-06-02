@@ -25,7 +25,7 @@ An \keyword{enriched factorization system} is a pair of sets of morphisms $(L,R)
 \item Every morphism factors as a member of $R$ following a member of $L$.
 \end{itemize}
 
-A morphism $f\of X\to Y$ of an $\cat A$-enriched category $\cat C$ has the \emph{right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the \emph{left lifting property} with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\cat C(\id_J,f),\cat C(g,\id_X))}$ which is the factorization of the span $\cat C(\id_J,f)$, $\cat C(g,\id_X)$ through the pullback cone of $\cat C(\id_I,f)$ and $\cat C(g,\id_Y)$ is a \emph{split} epimorphism.
+A morphism $f\of X\to Y$ of an $\cat A$-enriched category $\cat C$ has the \emph{($\cat A$ enriched) right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the \emph{left lifting property} with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\cat C(\id_J,f),\cat C(g,\id_X))}$ which is the factorization of the span $\cat C(\id_J,f)$, $\cat C(g,\id_X)$ through the pullback cone of $\cat C(\id_I,f)$ and $\cat C(g,\id_Y)$ is a \emph{split} epimorphism.
 \[\xy
 (34,20)*+{\cat C(I,X)}="top",(0,10)*+{\cat C(J,X)}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\cat C(I,Y)}="right",(34,0)*+{\cat C(J,Y)}="bottom"
 \ar^{\cat C(g,\id_X)} "left";"top" \ar@{.>}|(.6){\tuplet{f_!,g\ri}} "left";"middle" \ar_{\cat C(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
@@ -36,35 +36,32 @@ A section of $\tuplet{f_\bang,g\ri}$ is a \keyword{filler}.
 
 In $\ambient\s$ we make the following selections. 
 
-\begin{definition} A morphism $f\of X\to Y$ of $\ambient\s$ is a \keyword{fibration} if it has the right lifting property with respect to the \emph{discrete family} of all \emph{horn inclusions}.
+\begin{definition}
+Let $\set\geq = \set{\tuplet{n,k}\of \nno\times\nno |n\geq k}$ in $\ambient$ and let $\set\geq\disc\ri$ be the \keyword{constant family functor} $\ambient\to\ambient/\set\geq\disc$.
+A morphism $f\of X\to Y$ of $\ambient\s$ is a \keyword{fibration} if $\set\geq\disc\ri(f)$ has the $\ambient/\set\geq$-enriched right lifting property relative to the family of \emph{horn inclusions}, which is defined as follows.
 
-Let $\set\geq = \set{\tuplet{n,k}\of \nno\times\nno |n\geq k}$ in $\ambient$.
-The simplicial set $\simplex_{\set\geq}$ satisfies:
+The simplicial sets $\simplex_{\set\geq}$ and $\horn_{\set\geq}$ satisfy:
 \begin{align*}
-\base(\simplex_{\set\geq}) &= \set{\tuplet{\phi,k}\of\Ar(\simCat)\times\nno| k\leq \cod(\phi) } \\
+\base(\simplex_{\set\geq}) &= \set{\tuplet{\phi,k}\of\Ar(\simCat)\times\nno\middle| k\leq \cod(\phi) } \\
+\base(\horn_{\set\geq}) &= \set{\tuplet{\phi,k}\of\base(\simplex_{\set\geq})\middle| 
+\exists i\of[\cod(\phi)]-\set k.\forall j\of \dom(\phi).\phi(j)\neq i} \\
 \dim\tuplet{\phi,k} &= \dom(\phi) \\
 \tuplet{\phi,k}\cdot \xi &= \tuplet{\phi\circ\xi,k}
 \end{align*}
-The simplicial set $\horn_{\set\geq}$ satisfies:
-\begin{align*}
-\base(\horn_{\set\geq}) &= \set{(\phi,k)\of\Ar(\simCat)\times\nno\middle| 
-\begin{array}{l}
-k\leq \cod(\phi),\\
-\exists i\of\nno.\left\{\begin{array}{l}i\leq \cod(\phi), i\neq k,\\ \forall j\of \dom(\phi).\phi(j)\neq i \end{array}\right. 
-\end{array}
-} \\
-\dim\tuplet{\phi,k} &= \dom(\phi) \\
-\tuplet{\phi,k}\cdot \xi &= \tuplet{\phi\circ\xi,k}
-\end{align*}
-The simplicial object $\horn_{\set\geq}$ is subobject of $\simplex_{\set\geq}$ by definition. The inclusion $\horn_{\set\geq}\to\simplex_{\set\geq}$ is the family of all horn inclusions.
+The simplicial object $\horn_{\set\geq}$ is subobject of $\simplex_{\set\geq}$ by definition. 
+The formula $\function{\tuplet{\phi,k}}\tuplet{\dom(\phi),\cod(\phi),k}$ defines morphisms of simplices $\horn_{\set\leq}\to I\disc$ and $\simplex_{\set\leq}\to I\disc$, which are objects of $\ambient\s/I\disc$. The inclusion $\horn_{\set\geq}\to\simplex_{\set\geq}$ commutes with the morphisms to $I\disc$ and is therefore a morphism of $\ambient\s/I\disc$. This is the family of horn inclusions.
 
+\end{definition}
+
+\begin{remark}\label{fibred enrichment}
+For any object $I$ of $\ambient$, $\ambient\s/I\disc$ is enriched over $\ambient/I$. The hom-functor $\hom_I\of(\ambient\s/I\disc)\dual\times(\ambient\s/I\disc)\to\ambient/I$ sends $I\disc$ indexed families of simplicial objects to the $I$ indexed family of fibre wise hom-objects. The category $\ambient\s/I\disc$ is also enriched over $\ambient$ and over the category of sets, but those bifunctors may result in different classes of fibration. 
+\end{remark}
 
 \hide{For each natural number $n$, the $n$-\keyword{simplex} $\simplex[n]$ is the internal simplicial set where $\base{\simplex[n]}$ is the object of all morphisms $\phi$ in $\simCat$ such that $\cod(\phi) = n$, $\dim(\phi) = \dom(\phi)$ and $\phi\cdot \xi = \phi\circ \xi$. Here $\N$ is the \keyword{set of natural numbers} that exists outside of $\ambient$. For each $k\of[n]$ the \keyword{horn} $\horn_k[n]$ is the subobject of the nondecreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$.
 \[ \base{\horn_k[n]} = \set{\phi\of\base{\simplex[n]}| \exists i\of[n]-\set k.\forall j\of \dom(\phi).\phi(i)\neq j } \]
 The \keyword{horn inclusion} is the monomorphism $\horn_k[n]\to\simplex[n]$. The \emph{family of horn inclusions} is the sum of all horn inclusions $\coproduct{k\leq n\of\nno}{\horn_k[n]}\to \coproduct{k\leq n\of\nno}{\simplex[n]}$ that exists as a morphism of $\ambient\s$. Note that $\coproduct{x\of y}{f(x)}$ is the notation for dependent coproducts in this paper.
 
 The morphism $f$ is a fibration if $\set\geq\disc\ri(f)$ has the right lifting property with respect to $\horn_{\set\geq}\to \simplex_{\set\geq}$. Here $\set\geq\disc\ri\of \ambient\s\to\ambient\s/\set\geq\disc$ is the constant family functor.}
-\end{definition}
 
 \begin{example} If $\ambient$ is the topos of sets, then the morphisms that satisfy definition \ref{fibration} are precisely the \emph{Kan fibrations}. In that case the axiom of choice implies a filler exists. \end{example}
 
@@ -81,7 +78,7 @@ The \emph{small object argument} is a factorization method often applied in simp
 A \keyword{complex} is a tuple $\tuplet{\base X,\dim,\cdot,\filler}$ where $\tuplet{\base X,\dim,\cdot}$ is a simplicial object and $\filler$ is a filler (see definition \ref{enriched factorization system}) that makes the unique morphism $\bang\of \tuplet{\base X,\dim,\cdot}\to 1\disc$ a fibration. A morphism of complexes is a morphism of the simplicial objects that remain after forgetting the fillers. The \emph{category of complexes} and morphisms of complexes is $\ambient\s\f$.
 \end{definition}
 
-\begin{example} Each discrete simplicial object has a canonical filler, which means that the discrete simplicial object functor $\function{I\of\ambient}{I\disc}$ factors through the category of complexes. All simplices are fibrant. Horns are not, however.
+\begin{example} Each discrete simplicial object has a canonical filler, which means that the discrete simplicial object functor $\function{I\of\ambient}I\disc$ factors through the category of complexes. All simplices are fibrant. Horns are not, however.
 \end{example}
 
 \begin{example} When $\ambient$ is the category of sets, then complexes are Kan complexes with a filler included. \end{example}
