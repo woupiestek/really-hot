@@ -89,7 +89,14 @@ Let $c\of \simplex_\nno\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $
 \begin{lemma} Contractible morphisms are acyclic fibrations.\label{Reedy}\end{lemma}
 
 \begin{proof}
-Suppose $c\of I\to J$ is a cofibration and $F$ is the family of faces outside the image of $c$. 
+Suppose $c\of I\to J$ is a cofibration and $F$ is the family of faces outside the image of $c$.
+The cofibration $c$ is the transfinite composition of the inclusions between the following chain of subobjects of $J$ for $n\of\nno$.
+\begin{align*} 
+J_n &= \set{c(i)|i\of I}\cup\set{ j\of J \middle| \exists f\of F_{<n}, \xi\of[\dim(f)]\to [\dim(j)].f\cdot \xi = j }\\
+\textrm{where } F_{<n} &= \set{f\of F|\dim(f)<n}
+\end{align*}
+By this definition every $j\of J$ is a member of $J_{\dim(j)+1}$ because %yeah, why exactly? 
+
 The simplicial sets $\simplex_F$ and $\cycle_F$ satisfy:
 \begin{align*}
 \base(\simplex_F) &= \set{ \tuplet{\phi,x}\of\Ar(\simCat)\times F | \cod(\phi) = \dim(x) } \\
@@ -100,6 +107,7 @@ The simplicial sets $\simplex_F$ and $\cycle_F$ satisfy:
 Now $c$ is a pushout of the inclusion $k_F\of\cycle_F\to\simplex_F$, $\function{\tuplet{\phi,x}}x\cdot \phi$ 
 
 \hide{something about transfinite compositions is missing here.}
+
 
 \end{proof}
 

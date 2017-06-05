@@ -67,6 +67,77 @@ Poland}
 
 \begin{document}
 
+\section{5/6/17}
+The lifting operator should be a family of morphism, otherwise
+the piece-wise application doesn't make much sense.
+
+Indeed, work with families of morphisms until the last step.
+
+We have filler operators:
+\[ f_n\of \hom(K_n,X)\times_{\hom(K_n,Y)}\hom(K_{n+1},Y) \to \hom(K_{n+1},X) \]
+We define a new family of fillers using the following equations:
+\begin{align*}
+g_n &\of \hom(K_0,X)\times_{\hom(K_0,Y)}(\product{m\of\nno}\hom(K_m,Y))\to \hom(K_n,X)\\
+g_0(a,b) &= a\\
+g_{n+1}(a,b) &= f_n(g_n(a,b),b_{n+1})
+\end{align*}
+The $b$ must be a family as well and it probably must satisfy certain equations, like $b_0 = p\circ a$ and $b_{n+1}\circ c_n = b_n$.
+So that is a factor.
+Better yet $b\of K_\infty \to J$, etc.
+
+The last step is a pushout to get to the cofibrations.
+
+\paragraph{confusion}
+I took for granted that the set of faces outside of the image of a cofibration is a set of generators, in the sense that each simplex is either part of the domain of the cofibration, or comes form one of the faces. Is it?
+
+If we merely get a decidable subobject of generic simplices, do we get in trouble? Don't we also get the faces then?
+
+Damage assessment:
+\begin{enumerate}
+\item we prove the decidability of the set of faces in order to show that acyclic fibrations are contractible.
+\item the first factorization proof might actually become simpler
+with a set of generators
+\item the proof in the other direction is our problem now.
+\item doesn't seem to come up futher down the road.
+\end{enumerate}
+
+So what would be the danger of switching to a decidable subject of generators?
+So we loose decidability of genericity\dots do we need that?
+Once again the uses are restricted to this section, where we are better of with simple generators!
+
+A decidable set of generators. If we pull back a cofibration with this property, we get a new set of generators, hence no pain at all.
+
+This is good.
+
+I still feel like there is some danger. We cannot simply glue faces in and expect isomorphic results. I am afraid that some cofibrations are not going to be pushouts of powers of the family of cycles.
+
+Why did I define cofibrations differently anyway?
+
+Just adding the assumption that the set of faces outside of the image generates everything else corrects an oversight on my intuitions. It is probably provable that every simplex comes from a face using classical logic, by deriving a contradiction from the assumption that no restriction is nondegenerate.
+
+The problem is equality. In a classical setting $j\cdot \xi = j$ is either true or false. This is a luxury we don't have here, so degeneracy is no decidable. This hurts us more often than expected: when we have a set of generators without the guarantee of non degeneracy, we can never get it back when we need it.
+
+\section{4/6/17}
+Let $c\of I\to J$ be a cofibration and let $\phi\of\base J\to\bool$ classify the subject of faces of $J$ that aren't faces of $I$.
+Let $K\subseteq \nno\times J$ be the simplicial object that contain $\tuplet{n,j}$ if $\neq\phi(j\cdot\mu)$ for all monic $\mu$ with $\dom(\mu) > n$.
+In other words, simplices are only admitted if all of their restrictions are either in $I$, degenerate or of dimension less than $n$.
+Let $s\of K\to K$ be the map $\function{\tuplet{n,j}\of \nno\times K}\tuplet{n + 1,j}$ and use $b = \function i\tuplet{0,c(i)}\of I\to K$
+The familiar part is proving the left lifting property for $\tuplet{b,s}\of I + K\to K$, as it is a pushout of a power of $\cycle_\nno \to \simplex_\nno$.
+It feels stupid to need more than one pushout, but I am unsure what else to do.
+
+The second part involves constructing a filler for $\function{\tuplet{n,i}\of \nno\disc\times I}\tuplet{n,c(i)}$ with induction.
+The situation: $c=\tuplet{c_0,c_1}\of I + K\to K$ has the left lifting property. Now define $d\of\nno\disc\times I\to K$ recursively, by $d\tuplet{0,x} = c_0(x)$ and $d\tuplet{n + 1, x} = c_1(d(n,x))$. Then $d$ also has the left lifting property.
+
+Suppose $f\of \hom(I+K,X)\times_{\hom(I+K,Y)}\hom(K,Y) \to \hom(K,X)$ is a filler operator for $c$ against $p$.
+Define $g\of\hom(\nno\times I,X)\times_{\hom(\nno \times I,Y)}\hom(K,Y) \to \hom(K,X)$ as follows:
+\begin{align*}
+g(a,b) &= f(\tuplet{a_0,g(a_s,b)},b)\\
+\end{align*}
+That looks nice, but does it actually define a total function that satisfies the required equations?
+The equation is correct, i.e. a function that satisfies it is a filler for $d$ against $p$. It does not define the function well, however.
+This can be proved by induction I guess.
+
+Assuming $\tuplet{n,j}\of\dom(g)$ for $n < m$, $\tuplet{m,j}\of\dom(g)$ because\dots this works out when $K$ is graded.
 
 \section{2/6/17}
 The goal is weighted coproducts. Now the discrete object are weighted coproducts of the terminal object, so that is a promising starting point.
@@ -90,6 +161,11 @@ Especially
   * page 9, lemma 3.6 the end.	
 \item try to get rid of transfinite compositions.
 \end{itemize}
+
+I updated the definition of lifting property with respect to a family. This permits a concrete way to write down certain proofs, which I am also introducing.
+I do find that I remembered some forgotten aspects of earlier structures. As usual, my memory simplifies the proofs by erasing vital details, only hanging on to the general shape. Without these vital details some large scale restructuring becomes easy to imagine, but the chance that the new structure actually work becomes smaller.
+
+I mean, I rediscovered the idea of an object of lifting problems, a vital detail that I didn't manage to put down clearly enough before, and gradually removed as I rewrote the paper. The same happened with transfinite compositions. I had them in a way that obscured their role in the central proofs. Now I miss them.
 
 \section{26/5/17}
 
