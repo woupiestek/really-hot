@@ -89,13 +89,26 @@ Let $c\of \simplex_\nno\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $
 \begin{lemma} Contractible morphisms are acyclic fibrations.\label{Reedy}\end{lemma}
 
 \begin{proof}
-Suppose $c\of I\to J$ is a cofibration and $F$ is the family of faces outside the image of $c$.
-The cofibration $c$ is the transfinite composition of the inclusions between the following chain of subobjects of $J$ for $n\of\nno$.
+Suppose $c\of I\to J$ is a cofibration and $F$ is the decidable subobject of faces outside the image of $c$.
+Define the following $\nno$-indexed family of subobjects of $J$.
 \begin{align*} 
-J_n &= \set{c(i)|i\of I}\cup\set{ j\of J \middle| \exists f\of F_{<n}, \xi\of[\dim(f)]\to [\dim(j)].f\cdot \xi = j }\\
-\textrm{where } F_{<n} &= \set{f\of F|\dim(f)<n}
+K &= (\nno\disc\times \set{c(i)| i\of I})\cup\set{ \tuplet{n,j}\of \nno\disc\times J \middle| \exists f\of F_{<n}, \xi\of\Ar(\simCat).f\cdot \xi = j }\\
+&\textrm{where } F_{<n} = \set{f\of F|\dim(f) < n}
 \end{align*}
-By this definition every $j\of J$ is a member of $J_{\dim(j)+1}$ because %yeah, why exactly? 
+For every $n\of \nno$ and all $j\of J$ with $\dim(j) < n$, $\tuplet{n,j}\of K$ as shown by the following induction argument. The base case $n=0$ is trivial because $\set{j\of J|\dim(j)<0}$ is empty. Assume $n = m+1$, $j\of J$ and $\dim(j)=m$ and assume that all $\tuplet{m,j'}\of K$ for all $j'\of J$ with $\dim(j') \leq m$. By definition of cofibration, either $j\of F$, $j\of \set{c(i)|i\of I}$ or $j=j'\cdot\epsilon$, where $\epsilon$ is epic and different from $\id$. The first two directly imply $\tuplet{n,j}\of J$. In the third, $\dim(j') < m$ because of $\epsilon$. Therefore $\tuplet{m,j'}$ and hence $\tuplet{m,j}\of K$. Since $F_{<m}\subseteq F_{<n}$, $\tuplet{n,j}\of K$ as well.
+
+Let $f\of X\to Y$ is any morphism of $\ambient\s$. The successor function $s\of \nno\to\nno$ induces a endofunctor $s\ri$ of $\ambient\s/\nno\disc\to$ and a natural transformation $\sigma_X\of X \to s\ri(X)$. If $\nno\ri(f)$ has the right lifting property with respect to$\sigma_K$, then $f$ has the right lifting property with respect to $c\of I\to J$ for the following reasons. A filler operator for is an $\nno$-indexed morphism 
+$p_n \of \hom(K_n,X)\times_{\hom(K_n,Y)}\hom(K_{n+1},Y) \to \hom(K_{n+1},X)$ that satisfies
+$p_n\tuplet{a,b}\circ \sigma_{K,n} = a$ and $f\circ p_n\tuplet{a,b} = b$ for all $\tuplet{a,b}$ in its domain.
+Here $K_n$ stands for the fibre of the projection $\function{\tuplet{i,j}}i\of K\to\nno\disc$ over the point $n\of \nno$.
+Define $q_n\of\hom(K_0,X)\times_{\hom(K_0,Y)}\hom(J,Y)\to \hom(K_n,X)$ as follows:
+\begin{align*}
+q_0\tuplet{a,b} &= a\\
+q_{n+1}\tuplet{a,b} &= p_n(q_n\tuplet{a,b},b\circ (\function{\tuplet{i,j}}j))
+\end{align*}
+Since every $j\of J$ is in $K_n$ for some $n\of\nno$ and $q_{n+1}\tuplet{a,b}(j) = q_n\tuplet{a,b}(j)$ if $j\of K_n$, the join of the $q_n$ is a morphism $q_\omega\of\hom(K_0,X)\times_{\hom(K_0,Y)}\hom(J,Y)\to \hom(J,X)$. This morphism satisfies $f\circ q_\omega\tuplet{a,b} = b$.
+The morphism $c\of I \to K_0 = \set{c(i)|i\of I}$ is an isomorphism since cofibrations are monic. For all $a\of I\to X$ and $b\of J\to Y$ such that $f\circ a = b\circ c$, $q_\omega\tuplet{a\circ c^{-1},b}\circ c = a\circ c^{-1}\circ c = a$. Hence $\function{\tuplet{a,b}}q_\omega\tuplet{a\circ c^{-1},b}$ is a filler for $c$ against $f$.
+\hide{Notation may need some work, but the argument is now correct}
 
 The simplicial sets $\simplex_F$ and $\cycle_F$ satisfy:
 \begin{align*}
@@ -104,11 +117,17 @@ The simplicial sets $\simplex_F$ and $\cycle_F$ satisfy:
 \dim\tuplet{\phi,x} &= \dom(\phi) \\
 \tuplet{\phi,x}\cdot \xi &=\phi\circ\xi
 \end{align*}
-Now $c$ is a pushout of the inclusion $k_F\of\cycle_F\to\simplex_F$, $\function{\tuplet{\phi,x}}x\cdot \phi$ 
+The morphism $\sigma_K$ is a pushout of the inclusion $k_F\of\cycle_F\to\simplex_F$, along $\function{\tuplet{\phi,f}}\tuplet{\dim(f),f\cdot \phi}$, for the following reasons. Let $p\of K \to X$ and $q\of \simplex_F\to X$ satisfy $p\circ \function{\tuplet{\phi,f}}\tuplet{\dim(f),f\cdot \phi} = q\circ k_F$. 
+The factorization $\tuplet{p,q}\of s\ri(K)\to X$ of $p$ and $q$ through $s\ri(K)$ satisfies $\tuplet{p,q}\circ \sigma_K = p$ and $\tuplet{p,q}\circ \function{\tuplet{\phi,f}}\tuplet{\dim(f)+1,f\cdot \phi} = q$. 
+For each $\tuplet{n,j}\of s\ri(K)$, $j = c(i)$ for $i\of I$ or $j = f\cdot \phi$ for $f\of F$ with $\dim(f)\leq n$. If $j=c(i)$ then $\tuplet{p,q}(\tuplet{n,j}) = p(\tuplet{n-1,j})$. If $j = f\cdot \phi$ then $n=\dom(\phi)+1$ and $\tuplet{p,q}(\tuplet{n,j}) = q(\tuplet{\id,f})\cdot\phi$, which demonstrates existence. 
+If $c(i)=f\cdot\phi$, then $\phi$ cannot be an epimorphism, since epimorphisms have right inverses, and that would put $f$ in the image of $c$ where it is not by definition \ref{cofibration}. Hence $\tuplet{\phi,f}\of\cycle_F$ and $p(\tuplet{\dom(\phi),c(i)})=q(\tuplet{\phi,f}) = q(\tuplet{\id,f})\cdot\phi$. This proves uniqueness and existence of $\tuplet{p,q}$.
 
-\hide{something about transfinite compositions is missing here.}
+If $f\of X\to Y$ is any morphism of $\ambient$, then $\nno\ri(f)$ has the right lifting property with respect to $\sigma_K$ if it has the left lifting property with respect to $k_F$.
 
+The last step is the lifting property with respect to $k_F$. The morphism $k_F$ is the \keyword{tensor} of $k_\nno\of\cycle_\nno\to\simplex_\nno$ for the object $\dim\of F\to\nno$ of $\ambient/\nno$. This means $F\times \hom(X,Y) = \hom(F\otimes X,Y)$.
+The power construction preserves split epimorphisms and hence fillers. Therefore $\nno\ri(f)$ has a filler for $k_F$ it it has one for $k_\nno$.
 
+So if $f$ is contractible, $\nno\ri(f)$ has the right lifting property with respect to all tensors of $k_\nno$, their pushouts and all the induced transfinite compositions. These include all cofibrations.
 \end{proof}
 
 \end{document}

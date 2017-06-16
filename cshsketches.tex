@@ -67,6 +67,35 @@ Poland}
 
 \begin{document}
 
+\section{16/6/17}
+What is the task that I have been postponing?
+\begin{enumerate}
+\item update the definition of cofibration once more, to say that the set of complementary faces covers the complement of the image.
+\item ensure that every proof of cofibrancy also proves this extra condition.
+\item continue the other updates, namely the new family lifting property.
+\item prove anew that contractible morphisms are acyclic fibrations.
+\item restructure the descend proof to be less hand-wavy as well.
+\end{enumerate}
+
+I tend to focus on the link between cofibrations and the saturated class of morphism generated from the family of cycle inclusions.
+The recursive lifting constructions are a problem, however.
+
+I keep missing what I really need, but degeneracy should be definite.
+
+Suppose we definite degenerate as follows: $x=y\cdot\epsilon$ for a surjective $\epsilon$ such that $\epsilon\neq\id$.
+Can we prove the current positive definition of face?
+Suppose $x=x'\cdot\xi$ for some endomorphism $\xi$, but $x$ is nondegenerate. By em-factorization $x = x \cdot m(\xi)\cdot e(\xi)$, but now $\neg\neg(e(\xi)=\id)$, because of nondegeneracy, and $e(\xi) = \xi$ because equality between these morphisms is decidable.
+
+
+
+\section{11/6/17}
+Two approaches make sense. Add the condition that simplices are
+generated or define acyclic cofibrations the hard way.
+The latter doesn't make much sense.
+
+We can glue in new faces. Therefore the condition that the decided
+faces generate everything.
+
 \section{5/6/17}
 The lifting operator should be a family of morphism, otherwise
 the piece-wise application doesn't make much sense.
@@ -86,6 +115,8 @@ So that is a factor.
 Better yet $b\of K_\infty \to J$, etc.
 
 The last step is a pushout to get to the cofibrations.
+
+Rebuild the contractibles are acyclic proof. In need to reconsider the notation, but that can wait.
 
 \paragraph{confusion}
 I took for granted that the set of faces outside of the image of a cofibration is a set of generators, in the sense that each simplex is either part of the domain of the cofibration, or comes form one of the faces. Is it?
