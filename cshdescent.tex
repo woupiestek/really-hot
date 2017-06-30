@@ -105,9 +105,9 @@ It all works out because $\forall i\of[m]-\set k.p(x_i)\land q(x_i)$ is equivale
 For each $f\of X\to\horn_k[n]$ the functor $D\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ satisfies the following equations.
 \begin{align*}
 \base(\dom(D(f))) &= \sum_{\xi\of\base\simplex[n]}(\ambient\s/\horn_k[n])(K(\xi),f)\\
-\dim(\xi,x) &= \dom\xi\\
-(\xi,x)\cdot\phi &= (\xi\circ\phi,x\circ K(\phi))\\
-D(f)(\xi,x) &= \xi
+\dim\tuplet{\xi,x} &= \dom(\xi)\\
+\tuplet{\xi,x}\cdot\phi &= \tuplet{\xi\circ\phi,x\circ K(\phi)}\\
+D(f)\tuplet{\xi,x} &= \xi
 \end{align*}
 On morphisms in $\ambient\s/\horn_k[n]$, the functor $D$ acts by composition: $Dm(\xi,x) = (\xi,m\circ x)$. \label{descent functor}
 \end{definition}

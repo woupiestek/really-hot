@@ -37,7 +37,8 @@ The simplicial sets $\simplex_P$ and $\cycle_P$ satisfy:
 \tuplet{\phi,x}\cdot \xi &=\phi\circ\xi
 \end{align*}
 
-The inclusion $k_P\of\cycle_P\to\simplex_P$ is a cofibration for the following reasons. The simplex $\tuplet{\phi,x}\of\simplex_P$ is a face if $\phi$ is monic, outside of $\cycle_P$ if $\phi$ is epic, so $\phi = \id_[n]$ for some $n\of \nno$. This is a decidable property as required. 
+The inclusion $k_P\of\cycle_P\to\simplex_P$ is a cofibration for the following reasons. 
+A simplex $\tuplet{\phi,x}\of\simplex_P$ is outside the image of $k_P$ if $\phi$ is epic, and nondegenerate if $\phi = \id_{[n]}$ for some $n\of \nno$. This is a decidable property as required.
 
 For each $n\of\nno$ the members of the fibre $P[n]$ of $p$ over $n$ are pairs $\tuplet{a,b}$ where $a\of\cycle[n]\to X$ and $b\of \simplex[n]\to Y$ satisfy $f\circ a = b \circ k_n$. Here $\cycle[n]$ and $\simplex[n]$ are fibres over $n$ of the families. Define $a_P\of \cycle_P\to X$ and $b_P\of \cycle_P\to X$ as follows.
 \begin{align*}
@@ -71,17 +72,18 @@ Let $Z[n]\subseteq \product{i\of[n]}{(X[i]+LY[i])^{\simCat^+([i],[n])}}$ (where 
 \begin{enumerate}
 \item $(f,l_Y)(z(\alpha\circ\beta)) = (f,l_Y)(z(\alpha))\cdot\beta$;
 \item if $z(\alpha)\of X$ then $z(\alpha\circ\beta)\of X$;
-\item if $z(\alpha)=\tuplet{\epsilon,y}\of LY$ and $\epsilon\circ\beta$ is not monic, then $z(\alpha\circ\beta) = \tuplet{\epsilon',y'}\of LY$ and $\epsilon'$ factors through $\epsilon\circ\beta$.
+\item if $z(\alpha)=\tuplet{\epsilon,y}\of LY$ then $z(\alpha\circ\beta) = \tuplet{\epsilon,y}\cdot\beta$ unless $\epsilon\circ\beta$ is monic.
 \end{enumerate}
 For $\phi\of[m]\to [n]$ and $z\of Z[n]$, let $z\cdot\phi$ satisfy the following equation for all $\alpha$ of $\simCat^+$.
 \[ (z\cdot\phi)(\alpha) = z(m(\phi\circ\alpha))\cdot e(\phi\circ \alpha) \]
 By these definitions, $Z=(\coproduct{n\of\nno}{Z[n]},\function{\tuplet{n,z}}n,\cdot)$ is a simplicial object.
 
-Let $g\of X\to Z$ satisfy $g(x)(\alpha) = x\cdot\alpha$. It is a cofibration because a $z\of\base Z$ is nondegenerate and outside of the image of $g$ if and only if $z(\id_{[\dim(z)]}) = \tuplet{\id_{[\dim(z)]},y}$ for some $y\of Y[\dim(z)]$. The definition of $LY$ ensures that elements with this property are nondegenerate while condition 3 ensures that if $z(\id)$ is degenerate, then so is all of $z$.
+Let $g\of X\to Z$ satisfy $g(x)(\alpha) = x\cdot\alpha$. It is a cofibration because a $z\of\base Z$ is in the image of $X$ if $z(\id_{[n]})\of X$ by condition 2, degenerate if $z(\id_{[n]})=\tuplet{\epsilon,y}\of LY$ with $\epsilon\neq \id_{[n]}$ because of condition 3,
+and a face outside of the image of $g$ if $z(\id_{[n]})=\tuplet{\id_{[n]},y}\of LY$. Moreover, it is decidable which option holds.
 
 Let $h\of Z\to Y$ satisfy $h(z) = (f,l_Y)(z(\id_{[\dim(z)]}))$. This morphism is contractible thanks to the following filler construction.
-Let $k\of\cycle_\nno\to\simplex_\nno$ be the family of cycle inclusions and let $a\of \cycle_\nno\to Z$ and $b\of \simplex_\nno\to Y$ satisfy $h\circ a = b\circ k$. Since $k$ is essentially the the subobject of nonsurjective morphisms of $\simCat$ a filler $c$ can be defined as follows.
-Let $c\of \simplex_\nno\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $\phi$ is surjective and $c(\phi) = a(\phi)$ for $\phi$ in the image of $k$. By this definition $c\circ k = a$ and $h\circ c = b$.\end{proof}\hide{ Codomains of contractibles may have a distance function, that gives a lower bound to the number of compositions required to to reach it. I don't have time to work that out and check it right now.}
+Let $k\of\cycle_\nno\to\simplex_\nno$ be the family of cycle inclusions and let $a\of \cycle_\nno\to Z$ and $b\of \simplex_\nno\to Y$ satisfy $h\circ a = b\circ k$. Since $k$ is essentially the the subobject of nonepic morphisms of $\simCat$ a filler $c$ can be defined as follows.
+Let $c\of \simplex_\nno\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $\phi$ is epic and $c(\phi) = a(\phi)$ for $\phi$ in the image of $k$. By this definition $c\circ k = a$ and $h\circ c = b$.\end{proof}\hide{ Codomains of contractibles may have a distance function, that gives a lower bound to the number of compositions required to to reach it. I don't have time to work that out and check it right now.}
 
 \begin{remark} The construction is the proof of lemma \ref{factor1} are related to Reedy model structures \citep{Reedy74}. In the ambient category $\ambient$ morphisms factor as split epimorphism following decidable monomorphisms thanks to coproducts. Cofibrations are lifted versions of decidable monomorphisms and contractible fibrations are lifted versions of split epimorphisms and they form a factorization system on $\ambient\s$ by a similar construction. Unfortunately, external induction is not strong enough to proof things in the internal language of $\ambient$.
 \end{remark}

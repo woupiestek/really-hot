@@ -66,6 +66,72 @@ Poland}
 
 
 \begin{document}
+\section{30/6/17}
+Left to do:
+\begin{enumerate}
+\item ensure that every proof of cofibrancy satisfies the new definition.
+Done.
+
+\item continue the other updates, namely the new family lifting property.
+\item restructure the descend proof to be less hand-wavy as well.
+
+\item make the proof that contractible morphisms are acyclic fibrations more readable.
+\item surjective or epic in $\simCat$, make up your mind!
+Epic is it.
+\end{enumerate}
+
+
+Technically $D\of \ambient\s/\simplex_{\set\leq} \to \ambient\s/\horn_{\set\leq}$.
+The reason $D$ preserves cofibrations is that it is a 'partial' left adjoint $K$ that preserves acyclic cofibrations. It is in the wrong place to a 
+
+The functor $D$ is indeed a Kan extension, but of a right adjoint to $K$.
+That is how it preserves fibrations.
+
+The problem object combines a morphism $\phi\of\simplex[m]\to\simplex[n]$ with horns at both simplices. Worse still, to prove that it has the lifting property, we need to split things up even further.
+
+There is no Kan extension of $K$ along $\Delta$, but we can do every power and coequalizer.
+These would be the enriched projectives and the things they cover.
+
+Since we are working with enriched categories anyway, projective makes sense. The projectives of $\ambient\s$ in this sense and the objects that have a projective resolution permit the extension of $K$.
+
+Projective resolutions of horns: the set of faces of codimension $1$ and a power of those of codimension $2$. Do these help in any way?
+
+In any case, we can do the constructions with these objects,
+and since the problem object is in here, we have enough to proof properties of $D$.
+
+\paragraph{density}
+Acyclic cofibrations are dense up to homotopy. I now expect no deeper relation between the descend construction of the paper and density or codensity monads than that.
+
+The functor $(K_0,K_1)$ fails to be a monad because of the ordering we force on the supporting points. Without it, the reset of the construction doesn't work. But the ordering arbitrarily chosen to be the lexicographic one prevents a notion of bind.
+
+Moving on: what about $D$? Left Kan extension of $K$ along $D$ anyone?
+
+That makes it clearer why the projective thing would work out.
+In that case the elements are 'nice colimits' of simplices, 
+that can be replicated on the other side.
+
+\paragraph{new setting}
+Coproduct of categories over $\set\leq$. But then, we are considering simplicial object over other simplicial object, so there might be a more direct definition\dots
+
+$D\of \ambient\s/\simplex_{\set\leq} \to \ambient\s/\horn_{\set\leq}$
+
+
+\paragraph{projectives are cofibrants}
+The category of projectives should be equivalent to the category $\cat P$ where objects are pairs $\tuplet{P,p\of P\to\nno}$ of objects and morphisms of $\ambient$, and where a morphism $\tuplet{P,p}\to \tuplet{Q,q}$ is a morphism $f\of P\to \times Q\times \Ar(\simCat)$ such that $f_1(x)\of [p(x)]\to [q(f_0(y))]$, i.e. like a tracked morphism in a sense.
+Essentially, families of finite well orderings.
+
+We can cover the family of horn inclusions with these, which is all we need.
+
+Hey, notice something? Our cofibrations are projective morphisms in a suitably modified sense, just as intended. We have described cofibrant objects, which cover everything.
+
+What we need however is the covering by regular epimorphisms, which may differ from that by acyclic fibrations. The 'latching' construction in the factorization proof. I get the feeling that the equivalence relation is already cofibrant. A tuplet $\tuplet{\epsilon_0,y_0,\epsilon_1,y_1}$ where $y_0\cdot\epsilon_0 = y_1\cdot\epsilon_1$, is nondegenerate if $(\epsilon_0,\epsilon_1)\of [a]\to[b]\times[c]$ is monic. Now we have an equivalence relation whose quotient is the original simplex.
+
+I don't trust this. These structures aren't coproducts of simplices, like the projectives I look at before. So something is up.
+Coverings with tensors of the family of simplices are everywhere though, so it may not be a great problem.
+
+So $K$ does extends to all of $\ambient\s$. Every object is the quotient of a pseudoequivalence of cofibrant objects. The functor $K$ easily extends to cofibrants, and their quotients, hence all of $\ambient$. So $D$ has a proper left adjoint. This left adjoint has to send the family of horn inclusions to cofibrations.
+
+
 
 \section{16/6/17}
 What is the task that I have been postponing?
@@ -75,6 +141,7 @@ What is the task that I have been postponing?
 \item continue the other updates, namely the new family lifting property.
 \item prove anew that contractible morphisms are acyclic fibrations.
 \item restructure the descend proof to be less hand-wavy as well.
+\item epic vs surjective in $\simCat$--make up your mind.
 \end{enumerate}
 
 I tend to focus on the link between cofibrations and the saturated class of morphism generated from the family of cycle inclusions.
