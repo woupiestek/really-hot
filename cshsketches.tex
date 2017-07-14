@@ -66,6 +66,30 @@ Poland}
 
 
 \begin{document}
+\section{14/7/17}
+Since $\ambient\s$ is sort of like a topos, we can represent its objects as coequalizers between sums of simplices. This representation allows us to extends any functor $K\of \simCat \to \simCat$ to a functor $\ambient\s\to\ambient\s$: the right Kan extension of $Y$ along $YK$ if $Y$ is the Yoneda embedding.
+Technically we have a far larger class of lifting problems to address internally. We need a functor $\ambient\s/\simplex_{\set\leq}\to\ambient\s/\horn_{\set\leq}$, which has a right adjoint and which preserves cofibrations.
+
+We can subdivide a little, and use the family of horn inclusion to define a model structure first.
+
+\parargraph{recapitulate}
+We need a lifting operator for the universe of modest objects. We realize it by descending fibrations along the family of horn inclusions. The descent operator must produce a fibration whose pull back is the original fibration. We turn this into a functor, which has a left adjoint, and then prove the left adjoint preserves cofibrations.
+
+Ultimately we bring it down to a single family that is proven to be a family of cofibrations.
+
+The descend construction itself matters very much and must be applicable to all modest fibrations.
+Proving that the descended morphisms are fibrations is done by reducing the lifting problems of the descended morphisms to lifting problems of the original morphisms. This is what the left adjoint is useful for. Finally, 
+
+
+For each $\xi\of [m]\to[n]$, $k\of[m]$ and $l\of[n]$ there is a strengthened cofibration 
+
+\paragraph{strategy}
+We want to put the family of horn inclusions central, so let's just rewrite the section that way, and see where we get stuck.
+
+
+
+
+
 \section{30/6/17}
 Left to do:
 \begin{enumerate}
