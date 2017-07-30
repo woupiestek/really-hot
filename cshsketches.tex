@@ -66,6 +66,41 @@ Poland}
 
 
 \begin{document}
+
+\section{30/7/17}
+
+There is a family of special fibration that withstand pulling back. The really hard part is connecting the descend to this family.
+
+\paragraph{All problems}
+The object of all problems is 
+\begin{align*} 
+P &= \set{\tuplet{\xi,k,l}|\xi\of\Ar(\simCat),k\of\dom(\xi),l\of\cod(\xi)}\\
+p\tuplet{\xi,k,l} &= \tuplet{\dom(\xi),k}
+\end{align*}
+This is the one we want. The $p$ is the one we make the power over. The power is fine but the other object is much harder to do. The basis is still okay:
+\[ q\tuplet{\xi,k,l} = \dom(\xi)+\norm\xi_l \]
+
+The representables of $\ambient\s/\set\leq\disc$ are what I used as the key. That will work.
+
+\section{28/7/17}
+The global structure changes dramatically.
+
+If $V$ is the universe, the morphism $\ambient\s/\nno\disc(\simplex_{\set\geq},V)\to \ambient\s/\nno\disc(\horn_{\set\geq},V)$ is a split epimorphism. 
+The object $P=\ambient\s/\nno\disc(\horn_{\set\geq},V)$ is the object of lifting problems. By descending along $\horn_P\to \simplex_P$ we get where we want.
+After we pin down what the descendant looks like, we just need to demonstrate that it is a modest assembly.
+Here is where the real pain lies.
+
+Fatten the simplex and then pull back. That is all we need to make things work.
+
+Now the modesty is just in the way. All we really need is a grasp of the problem. 
+All combinations.
+Somehow just showing that horn inclusions are equivalences.
+
+We make descend adjoint to a construction which is not the same as simply pulling back,
+Although it comes close. Could we skip ahead and describe 
+
+Nothing really changes about the structure of the proof.
+
 \section{14/7/17}
 Since $\ambient\s$ is sort of like a topos, we can represent its objects as coequalizers between sums of simplices. This representation allows us to extends any functor $K\of \simCat \to \simCat$ to a functor $\ambient\s\to\ambient\s$: the right Kan extension of $Y$ along $YK$ if $Y$ is the Yoneda embedding.
 Technically we have a far larger class of lifting problems to address internally. We need a functor $\ambient\s/\simplex_{\set\leq}\to\ambient\s/\horn_{\set\leq}$, which has a right adjoint and which preserves cofibrations.

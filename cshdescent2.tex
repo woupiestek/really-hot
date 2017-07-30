@@ -1,0 +1,201 @@
+\documentclass[csh.tex]{subfiles}
+\begin{document}
+
+\section{Descent}
+A univalent universe that could serve as a model for homotopy type theory, has to live inside the category of complexes $\ambient\s\f$ itself because the model structure is limited to that part. This section shows that fibrancy is automatic for universal fibrations of certain classes of morphisms.
+
+Assume that there is a class $M$ of \emph{modest fibrations} in $\ambient\s$ with the following properties.
+\begin{itemize}
+\item $M$ is closed under pullbacks along arbitrary morphisms.
+\item $M$ is closed under composition.
+\item $M$ is closed under fibred exponentiation. This means that if $f:X\to Z$ belongs to $M$ and $g:Y\to Z$ is an arbitrary morphism, the fibred exponential $f^g_Z\of(\product{z\of Z}{X_z^{Y_z}})\to Z$ is in $M$ too. This requirement may give us more limits than we need, but the intended model of modest morphisms in the ex/lex completion of the category of assemblies satisfies it.
+%TODO: investigate which exponentials we actually need.
+
+\item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} if it is an equalizer. Since $\ambient$ may lack a subobject classifier, there can be irregular monomorphisms which $M$ can afford to miss.
+\end{itemize} 
+
+The interesting case is where $M$ has the following structure in addition to the properties above.
+
+\begin{definition} A \keyword{universal modest fibration} is a modest fibration $\uni\of U\to V$ such that every modest fibration $f\of X\to Y$ is the pullback of $\uni$ along a unique morphism $\chi(f)\of Y\to V$.
+\end{definition}
+
+The following fact makes the universal modest fibration a potential model of homotopy type theory.
+
+\begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant. \label{fibrant universe} \end{theorem}
+
+\begin{proof} The set of lifting problems $P$ to solve is isomorphic to $\hom_{\set\geq}(\horn_{\set\geq},V)$. There is an indexed coproduct of horn inclusions $k_P\of \horn_P\to\simplex_P$ and the fibrancy of $V$ is equivalent to factoring the canonical morphism $v\of\horn_P\to V$ through it.\hide{Explain how this is constructed?}
+The modest fibration $v\ri(\uni)\of \horn_P\times_V U \to \horn_P$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex_P$ by lemma \ref{descent}.
+Hence there is a $\chi(D(v\ri(\uni)))\of\simplex_P\to V$ and $\chi(D(v\ri(\uni)))\circ k_P$ equals $v$ by definition \ref{universal modest fibration}.
+\[\xymatrix{
+\horn_P\times_V U \ar@/^2ex/[rrr] \ar[r]\ar[d]_{v\ri(\uni)} & \bullet \ar[rr]\ar[d]_{D(v\ri(\uni))} && U\ar[d]^\uni\\
+\horn_P\ar@/_2ex/[rrr]_v\ar[r]^{k_P} & \simplex_P\ar[rr]^{\chi(D(v\ri(\uni)))} && V
+}\]
+\end{proof}
+
+\begin{lemma}
+For each fibration $f\of X\to \horn_P$ there is a fibration $Df\of Y\to\simplex_P$ such that $f$ is the pullback of $Df$ along $h$. Moreover, if $f$ is modest, so is $Df$. \hide{is this last bit proven anywhere?} \label{descent}
+\end{lemma}
+
+\begin{proof} 
+There is no horn inclusion for $n=0$. In the case $n=1$, there are two maps $1\to\simplex[1]$. In both cases $Df=\pi_0\of \simplex[1]\times X \to\simplex[1]$ suffices. For all the cases were $n>0$ we use the following construction.
+
+The functor $D$ is defined (see definition \ref{descent functor}) to have the following relation with a functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
+\[ \ambient\s/\simplex_P(\simplex(\xi), D(f))\simeq \ambient\s/\horn_P(K(\xi),f) \]
+
+
+This is possible because $\ambient\s/\simplex_P$ is equivalent to the category of presheaves over \dots and the Yoneda lemma applies to those presheaves. %lemma?
+The relation of $D$ and $K$ allows us to reduce the problem of lifting a horn against $Df$ to the problem of lifting some finite colimit of objects in the image of $K$ against $f$. These finite colimits have the required left lifting property by lemma \ref{left lifting property}.
+\end{proof}
+
+The rest of this section works out the definition and the properties of $K$.
+
+\begin{definition}
+Define the internal category $\cat P$ of $\ambient$ as follows. The objects of $\cat P$ are pairs $\tuplet{\xi,k}$ where $\xi\of\Ar(\simCat)$ and $k\of \cod(\xi)$. A morphism $\tuplet{\xi,k}\to \tuplet{\xi',k}$ is a morphism $\phi\of \dom(\xi)\to \dom(\xi')$ such that $\phi\circ \xi'= \xi$. There are only morphisms between pairs $\tuplet{\xi,k}$ and $\tuplet{\xi',k'}$ where $k=k'$ so $\cat P$ is a indexed coproduct of copies of categories of the family $\function{n\of\nno}\simCat/[n]$.
+
+Define the functor $K\of \cat P\to\cat P$ as follows:
+\begin{enumerate}
+\item A monotone function $\xi\of[m]\to[n]$ cuts $[m]$ into $n + 1$ posets $\xi_j = \set{i\of[m]|\xi(i)=j}$. 
+ Let $\norm{\xi,k}$ be the number of elements of the product $\product{i\of ([n]-\set k)}{\xi_i}$. 
+\item Define $K_0\tuplet{\xi,k}\of [m+\norm{\xi,k}]\to [n]$ as follows.
+\[ 
+	K_0\tuplet{\xi,k}(i) = \left\{
+		\begin{array}{cc}
+			\xi(i) & \xi(i)<k \\
+			k & \xi(i-\norm{\xi,k})\leq k \leq \xi(i)\\
+			\xi(i-\norm{\xi,k}) & k<\xi(i-\norm{\xi,k})
+		\end{array}
+	\right.
+\]
+
+\item In the \keyword{lexicographical product} $\product{i\of([n]-\set k)}{\xi_i}$ tuples get the \keyword{lexicographical ordering}. This ordering determines priority by comparing elements in sequence.
+\begin{align*} 
+(x_0,x_1,\dotsc) \leq_{\rm lex} (y_0,y_1,\dotsc) \iff& x_0\leq y_0 \land (x_0=y_0 \to (x_1,\dotsc)\leq_{\rm lex}(y_1,\dotsc))
+\end{align*}
+
+\item Let $\ka\tuplet{\xi,k}\of\product{i\of([n]-\set k)}{\xi_i} \to [m+\norm{\xi,k}]$ be the \emph{nondecreasing} injection $\ka$ which sends the lexicographical product $\product{i\of([n]-\set k)}{\xi_i}$ to the interval in $[m+\norm{\xi,k}]$ which starts at the least $i$ such that $K_0\tuplet{\xi,k}(i)=k$.
+
+\item Let $\la\tuplet{\xi,k}\of[m]\to[m+\norm{\xi,k}]$ be the unique nondecreasing injection which skips the image of $\ka$. This means $\la(i)=i$ if $\xi(i)<k$ and $\la(i)=i+\norm{\xi,k}$ if $\xi(i)\geq k$. Moreover $K_0\tuplet{\xi,k}\circ\la\tuplet{\xi,k} = \xi$.
+
+\item For each morphism $\phi\of\tuplet{\xi,k}\to\tuplet{\xi',k}$ in $\simCat/[n]$ let $\phi_i\of\xi_i\to\xi'_i$ be the fibrewise morphism and let $\product{i\of([n]-\set k)}{\phi_i}$ be the corresponding map of the (lexicographical) products $\product{i\of([n]-\set k)}{\xi_i}\to\product{i\of([n]-\set k)}{\xi'_i}$. Let $K_1(\phi)\of K_0\tuplet{\xi,k}\to K_0\tuplet{\xi',k}$ be the unique nondecreasing function which satisfies $K_1(\phi)\circ \ka\tuplet{\xi,k} = \ka\tuplet{\xi',k}\circ \product{i\of([n]-\set k)}{\phi_i}$ and $K_1(\phi)\circ \la\tuplet{\xi,k} = \la\tuplet{\xi',k}\circ \phi$.
+\end{enumerate}
+
+The maps $(K_0,K_1)$ define an endofunctor of $\simCat/[n]$. To get the functor, let $K(\xi) = h\ri(\simplex(K_0(\xi)))$ for objects $\xi$ of $\simCat/[n]$ and $K(\phi) = h\ri(\simplex(K_1(\phi)))$ for morphisms, where $h\ri$ is the reindexing functor $\ambient\s/\simplex[n]\to\ambient\s/\horn_k[n]$ along the horn inclusion $h\of \horn_k[n]\to\simplex[n]$. Concretely, $K$ satisfies the following equations for all objects $\xi$ of $\simCat/[n]$, all $x\of \base(\dom(K(\xi)))$ and all arrows $\phi$ of $\simCat/[n]$.
+\begin{align*}
+\base(\dom(K(\xi))) &= \set{ x\of\base\simplex[m+\norm\xi]| K_0(\xi)\circ x\of\base\horn_k[n]}\\
+K(\xi)(x) &= K_0(\xi)\circ x \\
+\dim(x) &= \dom(x) \\
+x\cdot\phi &= x\circ\phi \\
+K(\phi)(x) &= K_1(\phi)\circ x
+\end{align*}
+\end{definition}
+
+Thanks to the following property, the natural equivalence of homsets above extends to horn inclusions.
+
+\begin{lemma} In $\cat P$ an \keyword{intersection} is a pullback square of monomorphisms. The functor $K$ preserves all intersections. \end{lemma}
+
+%here
+
+\begin{proof} The easiest way to see that is to describe the monomorphisms in the intersection as decidable predicates on the domain of a map $\xi\of[m]\to[n]$. Maps $[m]\to\bool$ that equals $\true$ at least once characterize monomorphisms to $\xi$. The action of the endofunctor $(K_0,K_1)$ on the monomorphism has a parallel on predicates. For each $p\of[m]\to\bool$ the following equations define $p^K\of [m+\norm\xi]\to\bool$. 
+\begin{align*}
+p^K(\kappa(\vec x)) &= \forall i\of[m]-\set k.p(x_i) &
+p^K(\lambda(x)) &= p(x)
+\end{align*}
+It all works out because $\forall i\of[m]-\set k.p(x_i)\land q(x_i)$ is equivalent to $(\forall i\of[m]-\set k.p(x_i))\land(\forall i\of[m]-\set k.q(x_i))$.
+\end{proof}
+
+\begin{definition}
+For each $f\of X\to\horn_k[n]$ the functor $D\of \ambient\s/\horn_k[n]\to\ambient\s/\simplex[n]$ satisfies the following equations.
+\begin{align*}
+\base(\dom(D(f))) &= \sum_{\xi\of\base\simplex[n]}(\ambient\s/\horn_k[n])(K(\xi),f)\\
+\dim\tuplet{\xi,x} &= \dom(\xi)\\
+\tuplet{\xi,x}\cdot\phi &= \tuplet{\xi\circ\phi,x\circ K(\phi)}\\
+D(f)\tuplet{\xi,x} &= \xi
+\end{align*}
+On morphisms in $\ambient\s/\horn_k[n]$, the functor $D$ acts by composition: $Dm(\xi,x) = (\xi,m\circ x)$. \label{descent functor}
+\end{definition}
+
+If $\ambient$ has infinite colimits, the functor $D$ has a left adjoint $K'$ that satisfies $K'\simplex\simeq K$. We cannot rely on that property here. The functor $K$ does extend to finite colimits of simplices. Preservation of intersections implies that $K$ also applies to finite unions of simplices like $\horn_l[m]$. The reason $D$ preserves fibrations and their right lifting property, is that its partial left adjoint preserves the left lifting property. 
+
+\begin{definition} We introduce a notation for monomorphisms in $\simCat/[n]$ or more accurately for the result of applying the functor $\simplex\of \simCat/[n] \to \ambient\s/\simplex[n]$ to them. For $\xi\of[m]\to[n]$ and $\phi\of[m]\to\bool$ let $\face(\xi,p)\of \dom(\face(\xi,p))\to \simplex[m]$ satisfy
+\begin{align*}
+\base(\dom(\face(\xi,p))) &= \set{\alpha\of\base(\simplex[m])\middle|\forall i\of \dom(\alpha).p\circ\alpha(i)=\true}\\
+\dim(\alpha) &= \dom(\alpha)\\
+\alpha\cdot\chi &= \alpha\cdot\chi\\
+\face(\xi,p)(\alpha) &= \alpha
+\end{align*}
+\[\xymatrix{
+\bullet\ar[rr]^{\face(\xi,p)}\ar[dr] && \simplex[m]\ar[dl]^{\simplex(\xi)} \\
+& \simplex[n]
+}\]
+\end{definition}
+
+With the help of this notation, important commutative triangles of monomorphisms can be written as follows.
+\begin{align}
+&\horn_l[m]\stackrel{\hat h}\to \simplex[m]\stackrel{\simplex(\xi)}\to \simplex[n] = \bigvee_{i\of [m]-\set l} \face(\xi,\function x{x\neq i})\\
+&K(\horn_l[m])\stackrel{K(\hat h)}\to \simplex[m+\norm\xi]\stackrel{\simplex(K_0(\xi))}\to \simplex[n] = \bigvee_{j\of [m]-\set l} \face(K_0(\xi),v_j)\\
+&h\ri(K(\horn_l[m]))\stackrel{h\ri(K(\hat h))}\to h\ri(\simplex[m+\norm\xi])\stackrel{h\ri(\simplex(K_0(\xi)))}\to \horn_l[n] = \\
+&\quad\left(\bigvee_{i\of[n]-\set k} \face(K_0(\xi),u_i)\right)\wedge\left(\bigvee_{j\of [m]-\set l} \face(K_0(\xi),v_j)\right)=\\
+&\quad\left(\bigvee_{\substack{i\of[n]-\set k\\j\of [m]-\set l}}\face(K_0(\xi),u_i\land v_j)\right)\\
+&h\ri(\simplex[m+\norm\xi])\stackrel{h}\to \simplex[m+\norm\xi]\stackrel{K_0(\xi)}\to \simplex[n] =\left(\bigvee_{i\of[n]-\set k} \face(K_0(\xi),u_i)\right)
+\end{align}
+\begin{center}
+where
+\end{center}
+\begin{align*}
+u_i(x) &= (K_0\xi(x)\neq i) & 
+v_i(\kappa(\xi)(\vec x)) &= (\xi(i)= k\vee x_{\xi(i)}\neq i)\\
+v_i(\lambda(\xi)(x)) &= (x\neq i)&
+u_i\land v_i(x) &= u_i(x)\land v_i(x)
+\end{align*}
+
+
+\begin{lemma} The monomorphism $h\ri K(\hat h)\of$
+\[ \left(\bigvee_{\substack{i\of[n]-\set{k}\\j\of [m]-\set l}}\face(K_0(\xi),u_i\land v_j)\right)\to\left(\bigvee_{i\of[n]-\set{k}} \face(K_0(\xi),u_i)\right) \] 
+has the left lifting property with respect to all fibrations.\label{left lifting property}\end{lemma}
+
+\begin{proof}The class of morphisms with the left lifting property is closed under compositions and pushouts. The monomorphism $h\ri K(\hat h)$ belongs to this class because of this closure property.
+
+Decompose $h\ri K(\hat h)$ as the inclusions of the following three subobjects.
+\begin{align*}
+A &=\dom(h\ri K(\hat h))=\left(\bigvee_{\substack{i\of[n]-\set{k}\\j\of [m]-\set l}}\face(K_0(\xi),u_i\land v_j)\right)\\
+B &=\left(\bigvee_{j\of[m]-\set l}\face(K_0(\xi),u_{\xi(l)}\land v_j)\right)\vee \left(\bigvee_{i\of[n]-\set{k,\xi(l)}}\face(K_0(\xi),u_i)\right)\\
+C &=\cod(h\ri K(\hat h))=\left(\bigvee_{i\of[n]-\set{k}} \face(K_0(\xi),u_i)\right)
+\end{align*}
+
+Decompose $A\to B$ as a series of inclusions $A_j\to A_{j+1}$ that satisfy $A_0=A$ and $A_{n+1}=B$ by defining $A_j$ for $j\of[n+1]$ as follows.
+\[ A_j = A\vee \left(\bigvee_{i\of[j]-\set{k,j,\xi(l)}}\face(K_0(\xi),u_i)\right) \]
+Each inclusion $A_j\to A_{j+1}$ is a pushout of the inclusion of $A_j\cap \face(K_0(\xi),u_{j+1})$ into $\face(K_0(\xi),u_{j+1})$, where
+\begin{align*} A_j\cap \face(K_0(\xi),u_{j+1}) = &\left(\bigvee_{i\of[m]-\set l}\face(K_0(\xi),u_{j+1}\land v_{i})\right)\vee \\
+&\left(\bigvee_{i\of[j+1]-\set{k,\xi(l)}}\face(K_0(\xi),u_i\land u_{j+1})\right)\end{align*}
+The faces $\face(K_0(\xi),u_{j+1}\land v_{i})$ and $\face(K_0(\xi),u_i\land u_{j+1})$ all contain the point $\lambda(l)$ of $\simplex[m+\norm\xi]$ which means that lemma \ref{face completion} applies to the inclusion $A_j\land \face(K_0(\xi),u_{j+1}) \to \face(K_0(\xi),u_{j+1})$. Hence $A\to B$ has the left lifting property.
+
+If $\xi(l)=k$, then $B=C$ and the proof is complete. Suppose $\xi(l)=i\neq k$. First define the following maps $[m+\norm\xi]\to\bool$ for each $\vec p \of\product{i\of [n]-\set k}{\xi_i}$.
+\begin{align*}
+w_{\vec p}(\kappa(\vec q)) &= \true &
+w_{\vec p}(\lambda(q)) &= ((\xi(q)=k\vee q\leq p_{\xi(q)})\land\xi(q)\neq \xi(l))
+\end{align*}
+
+Decompose $B\to C$ as a series of inclusions $B_j\to B_j+1$ that satisfy $B_0=B$ and $B_{m+\norm\xi+1}=C$. For $j\of[m+\norm\xi+1]$ define $B_j$ as follows.
+\[ B_j = B \vee \left(\bigvee_{\kappa(\vec p)<j} \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})\right)\]
+
+When $j\neq\kappa(\vec p)$ for any $\vec p \of \product{i\of [n]-\set k}{\xi_i}$, the inclusion $B_j\to B_{j+1}$ is the identity arrow, which satsifies the left lifting property trivially. 
+
+Suppose $j\neq\kappa(\vec p)$. Each inclusion $B_j\to B_{j+1}$ is a pushout of the inclusion of $B_j\cap \face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})$ into $\face(K_0(\xi),u_{\xi(l)}\land w_{\vec p})$, where
+\begin{align*} B_j\cap \face(K_0(\xi),w_{\vec p}) = 
+&\bigvee_{i\of [n]-\set{\xi(l),k}}\face(K_0\xi,u_i\land w_{\vec p})\vee\\
+&\bigvee_{i\of [m]-\set l} \face(K_0\xi,v_i\land w_{\vec p})\vee\\
+&\bigvee_{\kappa(\vec q)<j} \face(K_0\xi,w_{\vec q}\land w_j)
+\end{align*}
+Let $\vec p[l]\of \product{i\of [n]-\set k}{\xi_i}$ satisfy $p[l]_j = l$ if $\xi(l)=j$ and $p[l]_i=p_i$ otherwise. The point $\kappa(p[l])$ is a member of $\face(K_0\xi,u_i\land w_{\vec p})$ for all $i\of [n]-\set{\xi(l),k}$. It is also a member of $\face(K_0\xi,w_{\vec q}\land w_{\vec p})$ for all $\vec q\of \product{i\of [n]-\set k}{\xi_i}$ such that $\kappa(\vec q)<\kappa(\vec p)$. When $\kappa(\vec p[l])$ is not a member of $\face(K_0\xi,v_i\land w_{\vec p})$ for some $i$, then $\face(K_0\xi,v_i\land w_{\vec p})$ is a subobject of a face of $B_j\cap \face(K_0(\xi),\land w_{\vec p})$ that does contain $\kappa(\vec p[l])$.
+
+Let $i\of[m]-\set l$. If not $v_i(\kappa(\vec p[l]))$ then by definition $\xi(i)\neq k$ and $(p[l]_\xi(i) = i)$. If $i$ is the least member of $\xi_{\xi(i)}$, then $\face(K_0\xi,v_i\land w_{\vec p})\subseteq \face(K_0\xi,u_{\xi(i)}\land w_{\vec p})$. If $\xi(i-1)=\xi(i)$, then $\kappa(\vec p[i-1])<\kappa(\vec p)$ and $\face(K_0\xi,v_i\land w_{\vec p})\subseteq \face(K_0\xi,W_{\vec p[i-1]}\land w_{\vec p})$.
+
+Since $B_j\cap \face(K_0(\xi),\land w_{\vec p})$ is a unions of faces that have the point $\vec p[l]$ in common, lemma \ref{face completion} applies to the inclusion $B_j\cap \face(K_0(\xi),\land w_{\vec p})\to \face(K_0(\xi),\land w_{\vec p})$. Therefore $B_j\to B_{j+1}$, $B\to C$ and $h\ri K(\hat h)\of A\to C$ all have the left lifting property.
+\end{proof}
+
+\begin{lemma} Let $F$ be an inhabited decidable set of faces of $\simplex[p]$ which all have a point $e$ of $\simplex[p]$ in common. The inclusion $\bigcup F\to \simplex[p]$ has the left lifting property with respect to all fibrations. \label{face completion} \end{lemma}
+
+\begin{proof} For all $j\of[p]$ let $F_j$ be the union of $F$ with the set of $j$-dimensional faces of $\simplex[p]$ which contain the edge $e$. Because $F$ is inhabited, $\bigcup F$ contains $e$ and therefore $F_0=F$. Because $\simplex[p]$ is a $p$-dimensional face of $\simplex[p]$ which contains $e$, $\bigcup F_p = \simplex[p]$. For $j>0$ let $S_j$ be the set of $j$-dimensional faces of $\bigcup F_j$ which are not already contained in $\bigcup F_{j-1}$. A $j$-dimensional face $\face(\Sigma)$ of $\bigcup F_j$ either contains $e$ or is part of a higher dimensional face which is a member of $F$. Therefore each face $\face(\Sigma)\of S_j$ contains $e$. For this reason $\face(\Sigma)\cap \bigcup F_{j-1}$ is the horn whose central edge is $e$. The inclusion $\bigcup F_{j-1}\to\bigcup F_j$ is therefore the pushout of a coproduct of horn inclusions indexed over $S_j$. Therefore the inclusion has the left lifting property. Because composition preserves the left lifting property, $\bigcup F = F_0\to F_p = \simplex[p]$ has it too. 
+\end{proof}
+
+\end{document}
