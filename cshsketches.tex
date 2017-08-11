@@ -67,6 +67,123 @@ Poland}
 
 \begin{document}
 
+\section{11/8/17}
+The biggest problem is the adjunction between $D$ and $K$ on $\ambient\s/\simplex_{\set\geq}$, methinks.
+Perhaps the problem set is technically bigger, but conceptually, all we need there is a good story about \emph{powers} or \emph{tensors} and \emph{cotensors}.
+
+We have a solid description of the representables of $\ambient\s/\simplex_{\set\geq}$, i.e. pairs $\tuplet{\xi\of\Ar(\simCat),k\of \cod(\xi)}$ with morphisms between the domains. It is a coproduct of categories, but vitally a indexed coproduct $\ambient$. Lets call this category $\cat P$ for now.
+
+Proving generic statements is the right way to go. What works in the practice of computer programming, will work in the practice of theorem proving.
+
+The have a functor $P\of \cat P\to\cat P$ with preserves intersections. This functor of representable induces an endo-adjunction of $\ambient\s/\simplex_{\set\leq}$, consisting for the covered functors $K\dashv D$. Of these $D$ is supposed to be the simplest, so let's start with $K$!
+
+For an object $f\of X \to \simplex_{\set\geq}$ we seek an object $Kf\of KX\to \set \simplex_{\set\geq}$. We know that there won't be a direct construction, but that we first make two other object maps $K_1f$ and $K_2f$ and a pair of natural transformations $K_2f\to K_1f$ for which $Kf$ will be the coequalizer.
+
+About $K_1f$: here $f$ produces $\tuplet{\xi,k}$, the underlying object. There is another bundle $b_1\of B_1\to \simplex_{\set\geq}$ where 
+\begin{align*}
+\base B_1 &= \set{\tuplet{\beta,\xi,k}| \cod(\beta) = \norm{\xi ,k} }\\
+\dim(\tuplet{\beta,\xi,k}) &= \dom(\xi) \\
+\tuplet{\beta,\xi,k}\cdot\phi &= \tuplet{K_1(\phi)\circ \beta \phi,\xi\circ \phi,k} \\
+b_1(\tuplet{\beta,\xi,k}) &= \tuplet{\xi,k}
+\end{align*}
+Pulling back along $f$ generates the $K_1f$ object, but the structure is all wrong.
+
+This would be amazing: an object $B$ such that $D = \cdot^B$ and $K =B \times \cdot$.
+It won't work out that way because the structures are wrong. We might get a span of morphisms $c,d\of B\to \simplex_{\set\geq}$\dots
+Surely it can't be proper morphisms though? What I have trouble with is the idea that we might be able to find a span of morphisms of simplices,
+such that $K$ and $D$ are the result of pullbacks and pushouts along those morphisms. The changes in dimension are the clearest problem.
+There must be two different simplicial structures on the same object to overcome that. 
+
+The $K_2f$ is a more complicated variant, supposed to capture pairs of equivalent elements. Pairs of commutative triangles sharing a domain. Both embellished with an element of $f$, that becomes equal after restriction. This is supposed to tell us which members of $f\ri(B_1)$ to equate.
+
+Forgetting structure is the goal. We know that $f$ can be represented as a coequalizer of coproducts of representables and its morphisms as well.
+For this we might introduce the 'co-yoneda lemma' or something. Simpler yet: presumably we are dealing with internal projectives and coverings by those.
+Now we get to a higher level of clarity, and completely loose track of the rest.
+
+\paragraph{looking at simplicial sets differently}
+The coequalizer of coproduct of representables suggests that all of our categories are exact completions of some sort, depending on how easily we can represent morphisms.
+
+I thought I worked this out before. We look at $\ambient/\nno$, and then a monad on this category to get the option of sending a simplex to a degenerate simplex. The simplicial sets are algebras for the monad, while we are now looking at the Kleisli category, and hence the 'free objects' in a sense among the simplicial objects. I think these free object a projective in an enriched sense, i.e. the enrichment in ambient is regular in the covariant variable, if the contravariant is free. Yet it is possible to represent all objects as pseudoequivalence relations of free objects, and all morphisms as morphisms of the pseudoequivalence relations, by finding a particularly full covering (perhaps we are dealing with a 'resolvent embedding').
+
+We can define the functor $K$ on the free objects, show that it preserves equivalence relations and use that to define the functor for all simplicial objects.
+We still have nothing on $D$.
+
+Precise generic statements.
+
+\paragraph{back to $D$}
+The construction of $D$ ought to be simpler, because a simplicial object is like a functor, and we just compose functors.
+The representation we use is a complication, but only slightly so, I think.
+
+Keep in mind that we combined to constructions to shorten the text. There is a perfectly ordinary adjunction giving by reindexing and its right adjoint, which unfortunately does not preserve model structures. We modify the model structure on one side and give adjoint endofunctors to connect the models structures.
+
+Our presheaves are algebras for a monad in a slice of $\ambient$. The monad is similar to the monad belonging to a monoid action, but since the action doesn't preserve dimension, the action is invisible.
+
+If we return to the presheaves over the full simplex, it look like we are just pulling back along a morphism of underlying objects, which is why $K$ must be like composing with the same morphism. In either case we need to do something about the lost monadic structure.
+
+That is a good way to look at it\dots
+
+Objects of $\ambient\s/\simplex_{\set\leq}$ are algebras for a monad on $\ambient/P$. There is a morphism $k\of P\to P$, and we define the functor $D$ be pulling back along this morphism. So what happens to the algebra structure then? There is a specific mapping:
+\[ K_1\of \set{ \tuplet{\xi,k,\phi} | \cod(\phi)=\dim\tuplet{\xi,k} } \to \set{ \tuplet{\xi,k,\phi} | \cod(\phi) = \dim(K_0\tuplet{\xi,k}) } \]
+With it help, we can show that the pullbacks have the same algebra structure.
+
+The other direction is harder, because composing with $k$ doesn't preserve the algebra structure. However, we should be able to work with a quotient of the free algebra. Start with $f\of X\to P$:
+\[ M(k\circ f) = \set{\tuplet{x,\phi}|\cod(\phi) = \norm{ f(x) }}\]
+Now $\tuplet{x\cdot\phi,\chi} \sim \tuplet{x,K_1(\phi)\circ \chi}$. The structure of ambient is sufficient to provide a quotient $M(k\circ f)/\sim$, and morphisms factors nicely through these quotients, providing the sought after functor $K$.
+
+Viewing slices of $\ambient$ as categories of algebras for various closely related looks smart. Maybe something to work into previous chapters of the paper.
+
+For the adjunction, this is even better. The unit $g \to DKg$ is $\function y \tuplet{y,\id}$. It is probably an isomorphism.
+The counit $KDf \to f$ is $\function{\tuplet{x,\phi}} x\cdot\phi$. Does that make sense?
+
+The construction relies on a kind of factorization of $k\circ g$ through a morphism $Kg\of KY \to P$, where $KY$ is a suitable quotient of the free algebra.
+$Df$ is simply a pullback. $Kg$ is the initial algebra through which $k\circ g$ factors. Clearly $g$ factors through $DKg$ due to the property of pullbacks, and $KDf$ through $f$ through initiality. Isomorphism $g\to DKg$ is equivalent to $K$ being fully faithful, which may help\dots Big factor is $k\of P\to P$ being monomorphic. Initiality is needed as well. For initiality $(Kg,Kh)\simeq (k\circ g,Kh)$, but $(k\circ g,Kh)\simeq (g,h)$ because $k$ is monic?
+
+Why do I want $DKg\simeq g$ anyway? I want $h\ri(D(h_*f))\simeq f$. The morphism $k$ being an endomorphism of $h$ takes care of this.
+
+\paragraph{Wider perspective}
+The right adjoint allows us to descend morphisms along the family of horn inclusions.
+It 'descends' in the sense that the right adjoint is right inverse to the reindexing functor.
+To show that it preserves fibrations, we show that the left adjoint preserves cofibrations.
+
+The further power/cotensor stuff is a way to proof this for all families of modest objects over all horns at once.
+The extra parameter does little other than witness that everything what we do is generic. Make that two extra parameters,
+because we also have to consider all possible lifting problems.
+
+On the other hand, we already have the parameter of the horn we descend along, giving a grand total of three parameters.
+
+So bring that down to one generic one $\norm:P\to \nno$, to start with.
+This is enough. We can define the simplicial set, the monad and the adjunction.
+No, don't go to general simplicial sets, stick to these 'projectives'.
+Also consider that $k\of P\to P$ is a functor, but absolutely no morphism of simplicial sets.
+
+This is good enough.
+\begin{enumerate}
+\item The first parameter is that of horns $H\to \nno$. This we need for defining our functor $k$.
+\item The second parameter is that of lifting problems $L\to H\to \nno$. Not more complex, but for each pair of horns and each morphism of the codomains, we need a point to show preservation.
+\item The third parameter is modest families $M\to H$. There is an object of modest families over horns. everything we have proved so far holds for this family. Importantly, closure under products suggest that modest sets survive descend.
+\end{enumerate}
+The third and second parameters have no direct relation. This is something to be wary of.
+
+I don't feel like I have the perspective I need yet.
+
+There is a nasty mismatch somewhere. The set $P$ may be our object of problems, but it isn't the underlying object of $\simplex_P$.
+This confuses. 
+
+Above, we are talking about simplicial objects. A simplicial object induces a category of elements. The morphisms are copied from $\simCat$. We define a functor $F$ and derive functors between the slice categories.
+We can do this with any simplicial set and any functor of the elements. The slice categories have the benefit of a subtle form of completeness.
+
+So what do we do exactly?
+\begin{enumerate}
+\item Show how functors between categories of elements induce adjoint pairs of functors between slice categories.
+\item Define for each $p:P\to H$ such a $\simplex_P \to \simplex_P$. Let $L\subseteq H$ stand for the elements of horns, 
+then we show that a composed left adjoint does preserve cofibrations.
+\item Finally argue that all right adjoints preserve modest sets.
+\end{enumerate}
+
+Going from top to bottom:
+Slice categories are categories of presheaves over internal categories of ambient and internal functor induce adjoints pairs of functor between slices.
+The descend functor is composed of the direct image along the family of horn inclusions and reindexing along a specific endomorphism $k$ of $\simCat_P$. 
+It therefore has left adjoint $K$. This left adjoint preserves discrete families of cofibrations, which makes $D$ preserve fibrations. direct images and reindexing both preserve modest families, hence $D$ does too.
 \section{30/7/17}
 
 There is a family of special fibration that withstand pulling back. The really hard part is connecting the descend to this family.
@@ -107,7 +224,7 @@ Technically we have a far larger class of lifting problems to address internally
 
 We can subdivide a little, and use the family of horn inclusion to define a model structure first.
 
-\parargraph{recapitulate}
+\paragraph{recapitulate}
 We need a lifting operator for the universe of modest objects. We realize it by descending fibrations along the family of horn inclusions. The descent operator must produce a fibration whose pull back is the original fibration. We turn this into a functor, which has a left adjoint, and then prove the left adjoint preserves cofibrations.
 
 Ultimately we bring it down to a single family that is proven to be a family of cofibrations.

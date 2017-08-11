@@ -4,13 +4,11 @@
 \section{Descent}
 A univalent universe that could serve as a model for homotopy type theory, has to live inside the category of complexes $\ambient\s\f$ itself because the model structure is limited to that part. This section shows that fibrancy is automatic for universal fibrations of certain classes of morphisms.
 
-Assume that there is a class $M$ of \emph{modest fibrations} in $\ambient\s$ with the following properties.
+Assume that there is a class $M$ of \emph{modest morphisms} in $\ambient\s$ with the following properties.
 \begin{itemize}
 \item $M$ is closed under pullbacks along arbitrary morphisms.
 \item $M$ is closed under composition.
 \item $M$ is closed under fibred exponentiation. This means that if $f:X\to Z$ belongs to $M$ and $g:Y\to Z$ is an arbitrary morphism, the fibred exponential $f^g_Z\of(\product{z\of Z}{X_z^{Y_z}})\to Z$ is in $M$ too. This requirement may give us more limits than we need, but the intended model of modest morphisms in the ex/lex completion of the category of assemblies satisfies it.
-%TODO: investigate which exponentials we actually need.
-
 \item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} if it is an equalizer. Since $\ambient$ may lack a subobject classifier, there can be irregular monomorphisms which $M$ can afford to miss.
 \end{itemize} 
 
@@ -23,7 +21,8 @@ The following fact makes the universal modest fibration a potential model of hom
 
 \begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant. \label{fibrant universe} \end{theorem}
 
-\begin{proof} The set of lifting problems $P$ to solve is isomorphic to $\hom_{\set\geq}(\horn_{\set\geq},V)$. There is an indexed coproduct of horn inclusions $k_P\of \horn_P\to\simplex_P$ and the fibrancy of $V$ is equivalent to factoring the canonical morphism $v\of\horn_P\to V$ through it.\hide{Explain how this is constructed?}
+\begin{proof} 
+The object of lifting problems $P$ is $\hom_{\set\geq}(\horn_{\set\geq},V)$. There is an indexed coproduct of horn inclusions $k_P\of \horn_P\to\simplex_P$ and the fibrancy of $V$ is equivalent to factoring the canonical morphism $v\of\horn_P\to V$ through it.\hide{Explain how this is constructed?}
 The modest fibration $v\ri(\uni)\of \horn_P\times_V U \to \horn_P$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex_P$ by lemma \ref{descent}.
 Hence there is a $\chi(D(v\ri(\uni)))\of\simplex_P\to V$ and $\chi(D(v\ri(\uni)))\circ k_P$ equals $v$ by definition \ref{universal modest fibration}.
 \[\xymatrix{
@@ -36,16 +35,53 @@ Hence there is a $\chi(D(v\ri(\uni)))\of\simplex_P\to V$ and $\chi(D(v\ri(\uni))
 For each fibration $f\of X\to \horn_P$ there is a fibration $Df\of Y\to\simplex_P$ such that $f$ is the pullback of $Df$ along $h$. Moreover, if $f$ is modest, so is $Df$. \hide{is this last bit proven anywhere?} \label{descent}
 \end{lemma}
 
-\begin{proof} 
-There is no horn inclusion for $n=0$. In the case $n=1$, there are two maps $1\to\simplex[1]$. In both cases $Df=\pi_0\of \simplex[1]\times X \to\simplex[1]$ suffices. For all the cases were $n>0$ we use the following construction.
-
-The functor $D$ is defined (see definition \ref{descent functor}) to have the following relation with a functor $K\of\simCat/[n]\to\ambient\s/\horn_k[n]$.
-\[ \ambient\s/\simplex_P(\simplex(\xi), D(f))\simeq \ambient\s/\horn_P(K(\xi),f) \]
-
-
-This is possible because $\ambient\s/\simplex_P$ is equivalent to the category of presheaves over \dots and the Yoneda lemma applies to those presheaves. %lemma?
-The relation of $D$ and $K$ allows us to reduce the problem of lifting a horn against $Df$ to the problem of lifting some finite colimit of objects in the image of $K$ against $f$. These finite colimits have the required left lifting property by lemma \ref{left lifting property}.
+\mathrmdef{elts}
+\mathrmdef{psh}
+\begin{proof}
+Each slice $\ambient\s/X$ of $\ambient\s$ is isomorphic to the category of internal presheaves over the internal \emph{category of elements} of $\elts X$ in $\ambient\s$--see definition \ref{category of elements} and lemma \ref{slices are presheaves}. %definition %lemma
+Internal functors induce reindexing functors, that have both a left and a right adjoint--see lemma \ref{both adjoints}. %lemma?
+The functor $D = K^*\circ (k_P)_*$ where $K$ is a specific internal endofunctor of $\elts(\simplex_P)$, and $(k_P)_*$ is the direct image along $k_P\of \horn_P\to\simplex_P$. Both reindexing and direct images preserve modest morphisms, so $Df$ is modest if $f$ is. %lemma?
+The functor $D$ has a left adjoint $h\ri\circ K^*$ which can be shown to preserve discrete families of cofibrations. %lemma
+For that reason, $D$ preserves all fibrations, including all modest fibrations.
 \end{proof}
+
+%Let's skip definitions that can be found in M&M
+
+\begin{definition} The \keyword{category of elements} $\elts(X)$ of a simplicial object $X$ is the internal category of $\ambient$ whose objects are the member of $\base X$ and where a morphism $x\to y$ is a morphism of $\simCat$ between $[\dim(x)]\to[\dim(y)]$. Identities and composition of these morphism is the same as in $\simCat$.
+\end{definition}
+
+\begin{lemma}
+The category $\ambient\s/X$ is isomorphic to the category of internal presheaves $\psh(\elts(X))$. \ref{slices are presheaves}
+\end{lemma}
+
+\begin{proof} The categories are the same modulo some choices of encoding. \end{proof}
+
+\begin{definition} Let $F\of \cat C\to\cat D$ be an internal functor. 
+The \emph{reindexing functor} $F\ri$ sends $\tuplet{X,p,\cdot}$ of $\psh(\cat D)$ to $\tuplet{X',p',\cdot}$ of $\psh(\cat C)$, where:
+\begin{align*}
+X' &= \set{\tuplet{x,c}|F_0(c) = p(x)}\\
+p' &= F_0\ri(p)\\
+\tuplet{x,c}\cdot f &= \tuplet{x\cdot F_1(f),F_0(\dom(f))}
+\end{align*}
+Here $F_0$ is the mapping of objects, and $F_1$ the mapping of morphisms.
+A morphism $f\of \tuplet{X,p,\cdot}\to \tuplet{Y,q,\cdot}$ is a morphism $f\of X\to Y$ and $F\ri(f) = F_0\ri(f)$. Preservation of composition and identities is automatic.
+\end{definition}
+
+\begin{lemma}
+For internal functors in $\ambient$ the reindexing functors have both adjoints.\label{both adjoints}
+\end{lemma}
+
+\begin{proof}
+That they have a right adjoint following form the fact that $\ambient$ is locally Cartesian closed.
+\hide{
+Keep thinking $F_*(P)(X) \simeq \nat(F\ri(\hom(_,X)),P)$, and that would fit the left adjoints story wouldn't it?
+}
+%here
+For the left adjoint, all part of the structure play a role. We use the fact that $\ambient$ 
+\end{proof}
+
+
+\section{Junk}
 
 The rest of this section works out the definition and the properties of $K$.
 
