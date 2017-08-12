@@ -37,6 +37,7 @@ For each fibration $f\of X\to \horn_P$ there is a fibration $Df\of Y\to\simplex_
 
 \mathrmdef{elts}
 \mathrmdef{psh}
+\mathrmdef{supp}
 \begin{proof}
 Each slice $\ambient\s/X$ of $\ambient\s$ is isomorphic to the category of internal presheaves over the internal \emph{category of elements} of $\elts X$ in $\ambient\s$--see definition \ref{category of elements} and lemma \ref{slices are presheaves}. %definition %lemma
 Internal functors induce reindexing functors, that have both a left and a right adjoint--see lemma \ref{both adjoints}. %lemma?
@@ -57,10 +58,10 @@ The category $\ambient\s/X$ is isomorphic to the category of internal presheaves
 \begin{proof} The categories are the same modulo some choices of encoding. \end{proof}
 
 \begin{definition} Let $F\of \cat C\to\cat D$ be an internal functor. 
-The \emph{reindexing functor} $F\ri$ sends $\tuplet{X,p,\cdot}$ of $\psh(\cat D)$ to $\tuplet{X',p',\cdot}$ of $\psh(\cat C)$, where:
+The \emph{reindexing functor} $F\ri$ sends $X=\tuplet{\base X,\supp,\cdot}$ of $\psh(\cat D)$ to $X'=\tuplet{\base(X'),\supp,\cdot}$ of $\psh(\cat C)$, where:
 \begin{align*}
 X' &= \set{\tuplet{x,c}|F_0(c) = p(x)}\\
-p' &= F_0\ri(p)\\
+\supp &= F_0\ri(\supp)\\
 \tuplet{x,c}\cdot f &= \tuplet{x\cdot F_1(f),F_0(\dom(f))}
 \end{align*}
 Here $F_0$ is the mapping of objects, and $F_1$ the mapping of morphisms.
@@ -71,14 +72,37 @@ A morphism $f\of \tuplet{X,p,\cdot}\to \tuplet{Y,q,\cdot}$ is a morphism $f\of X
 For internal functors in $\ambient$ the reindexing functors have both adjoints.\label{both adjoints}
 \end{lemma}
 
+
 \begin{proof}
+The basic intuition is that categories of presheaves have all limited and colimits that are indexed over the category $\ambient$. The ordinary constructions of the left and right adjoints of the reindexing functors there work here as well as anywhere else. This idea is worked out below for the skeptics.
+
 That they have a right adjoint following form the fact that $\ambient$ is locally Cartesian closed.
-\hide{
-Keep thinking $F_*(P)(X) \simeq \nat(F\ri(\hom(_,X)),P)$, and that would fit the left adjoints story wouldn't it?
-}
-%here
-For the left adjoint, all part of the structure play a role. We use the fact that $\ambient$ 
+
+Let $F\of\cat C\to\cat D$ be an internal functor and let $X=\tuplet{\base X,\supp,\cdot}$ be an object of $\psh(\cat C)$. Define $F_*(X)$ as follows.
+\begin{align*}
+\base(F_*(X)) &= \set{ \tuplet{d,\phi} | d\of D_1, \phi\of (F/d) \to \base(X), p\circ \phi = \pi_0, \phi(f\circ F_1(g)) = \phi(f)\cdot F_1(g) }\\
+\textrm{where }&(F/d) = \set{\tuplet{c,f}| c\of C_0, f\of F_1(c)\to d}\\
+\textrm{and }&\pi_0\tuplet{c,f} = c\\
+\supp\tuplet{c,d,\phi} &= d \\
+\tuplet{c,d,\phi}\cdot\chi &= \tuplet{d,\dom(\chi),\function f\phi(f)\cdot\chi}
+\end{align*}
+For morphisms $f\of X\to Y$ let $F_*(f)(\tuplet{d,\phi}) = \tuplet{d,f\circ \phi}$.
+
+For $f\of X\to F_*(Y)$, the transpose $f^t\of F^*(X) \to Y$ satisfies $f^t\tuplet{x,\xi} = f(x)\tuplet{\cod(\xi),\xi}$. Vice versa for $g\of F^*(X) \to Y$ the transpose $g^t\of X\to F_*(Y)$ satisfies $g^t(x)\tuplet{d,\xi} = g\tuplet{x,\xi}$, and these transpositions are clearly each other inverses, proving $F_*$ right adjoint to $F\ri$
+
+For the left adjoint, exactness and the $\nno$ provide all coequalizers.
+\begin{align*}
+\base(F_!(X)) &= \set{ \tuplet{x,\phi} | \dom(\phi) = F_0(p(x)) } / E \\
+\textrm{where }& E = \set{\tuplet{\tuplet{c\cdot\phi,\chi},\tuplet{c,F_1(\phi)\circ\chi}}| x\of\base X, \phi\of c\to p(x), \chi\of d\to F_0(c)}\\
+\supp\tuplet{x,\phi} &= \dom(\phi)\\
+\tuplet{x,\phi}\cdot\chi &= \tuplet{x,\phi\circ\chi}\\
+\end{align*}
+For a morphism $f\of X\to Y$ let $F_!(f)\tuplet{x,\phi} = \tuplet{f(x),\phi}$.
+
+To prove that this quotient is a left adjoint, consider that $\psh(\cat D)$ is a category of algebras for a monad on $\ambient/D_0$. Among the algebras that admit an embedding of $F_0\circ \supp$, and left the action of $\cat C$ to that of $\cat D$, the algebra given by $F_1(X)$ is merely the initial one. That already determines that we have an adjunction.
 \end{proof}
+
+\hide{It would be worth finding a source on internal categories and internal presheaves, that has this all worked out meticulously already}
 
 
 \section{Junk}
