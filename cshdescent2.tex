@@ -40,7 +40,7 @@ For each fibration $f\of X\to \horn_P$ there is a fibration $Df\of Y\to\simplex_
 \mathrmdef{supp}
 \begin{proof}
 Each slice $\ambient\s/X$ of $\ambient\s$ is isomorphic to the category of internal presheaves over the internal \emph{category of elements} of $\elts X$ in $\ambient\s$--see definition \ref{category of elements} and lemma \ref{slices are presheaves}. %definition %lemma
-Internal functors induce reindexing functors, that have both a left and a right adjoint--see lemma \ref{both adjoints}. %lemma?
+Internal functors induce reindexing functors, that have both a left and a right adjoint--see lemma \ref{both adjoints}. %lemma
 The functor $D = K^*\circ (k_P)_*$ where $K$ is a specific internal endofunctor of $\elts(\simplex_P)$, and $(k_P)_*$ is the direct image along $k_P\of \horn_P\to\simplex_P$. Both reindexing and direct images preserve modest morphisms, so $Df$ is modest if $f$ is. %lemma?
 The functor $D$ has a left adjoint $h\ri\circ K^*$ which can be shown to preserve discrete families of cofibrations. %lemma
 For that reason, $D$ preserves all fibrations, including all modest fibrations.
@@ -52,7 +52,7 @@ For that reason, $D$ preserves all fibrations, including all modest fibrations.
 \end{definition}
 
 \begin{lemma}
-The category $\ambient\s/X$ is isomorphic to the category of internal presheaves $\psh(\elts(X))$. \ref{slices are presheaves}
+The category $\ambient\s/X$ is isomorphic to the category of internal presheaves $\psh(\elts(X))$. \label{slices are presheaves}
 \end{lemma}
 
 \begin{proof} The categories are the same modulo some choices of encoding. \end{proof}
@@ -103,6 +103,50 @@ To prove that this quotient is a left adjoint, consider that $\psh(\cat D)$ is a
 \end{proof}
 
 \hide{It would be worth finding a source on internal categories and internal presheaves, that has this all worked out meticulously already}
+
+
+
+
+\begin{definition}
+Let $P$ be the following simplicial object:
+\begin{align*}
+\base P &= \set{\tuplet{\xi,k}|\xi\of\Ar(\simCat),k\of[\cod\xi]}\\
+\dim\tuplet{\xi,k} &= \dom(\xi) \\
+\tuplet{\xi,k}\cdot\phi &= \tuplet{\xi\circ\phi,k}
+\end{align*}
+
+Let $K\of\elts(P)\to\elts(P)$ be the following functor:
+\begin{align*}
+K_0\tuplet{\xi,k} &= \tuplet{\xi',k} \\
+\textrm{where } \dom(\xi') &= \cod(\xi) + \prod_{i\of [\cod(\xi)]-\set k}\#\xi_i\\
+\textrm{where } \prod_{i\of [\cod(\xi)]-\set k}\#\xi_i
+\textrm{where } \xi_i &= \set{j\of \dom(\xi)|\xi(j)=i}\\
+\textrm{and } \#\emptyset &= 0\\
+\textrm{and } \# x &= \max(x) - \min(x) + 1\\
+\\
+\xi'(i) &= \xi(i) \textrm{ if } \xi(i) < j\\
+\xi'(i) &= \xi(i-) \textrm{ if } \xi(i) > j
+\end{align*}
+%perhaps just describe the operators as functors of \simCat?
+
+
+
+\end{definition}
+
+
+\section{Arithmetic in $\simCat$}
+\begin{definition}
+
+The \emph{lexicographical product} is a functor $LP\of\simCat/\simCat\to \simCat$. It takes $\phi\of[n]\to [m]$ to 
+
+
+For $m$ and $n\of \nno$ the \emph{lexicographical product} of $[m]$ and $[n]$ is 
+
+
+
+\end{definition}
+
+
 
 
 \section{Junk}

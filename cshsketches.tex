@@ -65,7 +65,186 @@ Poland}
 \newcommand\keyword[1]{\emph{#1}\label{#1}}
 
 
+
 \begin{document}
+
+\section{25/8/17}
+What if the lexicographical product isn't a functor?
+$\tuplet{0,1} < \tuplet{1,0}$
+Suppose $\phi\of[1]\to[1]$ satisfies $\phi(x)=0$.
+Since $\tuplet{\phi,\id}\tuplet{0,1}=\tuplet{0,1}>\tuplet{0,0} = \tuplet{\phi,\id}\tuplet{1,0}$.
+
+Is this a problem for my construction?
+\begin{itemize}
+\item The functor $K$ of $\simCat$ would have to cover sufficiently many different cases to suffer from this problem.
+\item A big part of the argument is an adjunction of functors at the slice category level.
+\item The actual construction of the filler relies on the lexicographical
+order.
+\end{itemize}
+
+What can we do now?
+Take another route to $K_!$, and hopefully $K^*$, that doesn't go through $\simCat/[n]$.
+There may be advantages to that.
+Horns live in the categories of simplices, not in the slice category. That caused some awkwardness with having to prove that $K_!$ preserves intersections.
+The lexicographical product is involved in the construction of the fillers, but it may not be that important.
+
+\paragraph{back to the drawing board}
+We replace $\xi\of\simplex[m]\to\simplex[n]$ with a \emph{space} that makes the simplices robust for pulling back along the horn. This is done
+by adding supporting vertices for the simplices that would be cut out.
+
+What is this space like?
+
+The simplicial object $S\tuplet{\xi,k}\to\simplex[\cod(\xi)]$ confusingly must still consist of
+pairs ${\phi,x}$ where $\phi$ is a morphism $[n]\to[\cod(\xi)]$. The $k'$ add room for elements that are at the same height.
+
+We know that $S\tuplet{\delta^k,k} = \id$. No choice in that\dots
+Lets probe: if $\xi'$ hits $k$, its companion should be able to pick one of the new edges there. Like $\phi_k\to \prod_{i\neq k} \xi_i$.
+
+I know how many vertices I need. I know that the need to be above vertex $k$. I am unsure about the rest however.
+
+The functorial setup was too restrictive, so while the number of edges is correct, we have to permit more higher dimensional simplicial sets.
+I there are two obvious choices:
+\begin{itemize}
+\item allow every possible ordering of remaining egdes.
+\item take the partial ordering that arises naturally.
+\end{itemize}
+The latter is more restrictive to let's stick with that one for now.
+
+The ordering of $\xi_k + \product_{i\neq k}\xi_i$ is relevant as well.
+We now allow simplices to jump from one set to the other in a specific order, which mean we glue the new faces to existing simplices above $k$.
+Let's stick with adding the new faces in a specific place in the existing ordering.
+
+\mathbfdef{supp}
+We introduce a new partially ordered set $S\tuplet{\xi,k} = (s,\leq)$ where
+\begin{align*}
+s &= \dom(\xi) + \prod_{i\neq k} \xi_i\\
+\supp(\lambda(x)) &= \xi(x) \\
+\supp(\kappa(x)) &= k\\
+\lambda(x) \leq \lambda(y) &\iff x\leq y \\
+\kappa(x) \leq \kappa(y) &\iff x_i\leq y_i (\forall i\neq k)\\
+\lambda(x)\leq \kappa(y) &\iff \xi(x) \leq k \\
+\kappa(x) \leq \lambda(y) &\iff k < \xi(x)
+\end{align*}
+
+For $\phi:\xi\to \xi'$ the function $\phi\of S\tuplet{\xi,k} \to S\tuplet{\xi,k}$ we now let
+\begin{align*} S\phi(\lambda(x)) &= \lambda(\phi(x)) & S\phi(\kappa(x)) = \kappa(\vec\phi(x)) \end{align*}
+That way we indeed get a morphism of partially ordered sets.
+
+Now the simplicial set we aim at is the \emph{nerve} of this partially ordered set.
+
+
+\paragraph{back in the game?}
+
+The left adjoint would be another tensor product divided by an equivalence relation. Perhaps we can even construct it in one go.
+It kind of looks like using the nerves eliminates a lot of waste, meaning that we no long need the equivalence relations.
+
+The descend functor should then be simpler as well. For $f\of X\to\horn_k[n]$
+\[ \prod_\xi(\supp \backslash \xi \to X_\xi) \]
+With the usual naturality constraint.
+
+I got the feeling I am missing something.
+
+Each $S\tuplet{\xi,k}$ is one representable, so the left adjoint
+is forces to take every one of these in account.
+It looks more like: 
+\begin{align*}
+\base(D\ri(f)) &= \set{ \tuplet{x,s} | x\of\dom(f),s \of \nu(S(f(x)))}/{\mathord\sim}\\
+\textrm{where } & \tuplet{x\cdot\phi,s} \sim \tuplet{x,\nu(S(\phi))(s)}
+\end{align*}
+Here $\nu$ stands for the nerve, that adds many additional morphisms.
+
+The right adjoint consists of natural transformations form this nerve.
+
+This is nothing new. Ordinarily we'd take a functor $\simCat_{\set\geq}\to\ambient\s/\horn_{\set\geq}$ and spin of the adjunctions. Circumstances don't let this be a functor, however.
+
+Profunctor like structures do it, but they must be internalized in
+$\ambient$. That means we take $\horn_\leq$ and $\simplex_\leq$ and make
+a bundle of sorts over them.
+
+Suppose we re-imagine this as a morphism $K\to \base(\horn_{\set\geq}\times\simplex_{\set\geq})$ with lots of extra structure. This is where the nerve comes in.
+
+That profunctor would look like this:
+\begin{align*}
+D &= \set{\tuplet{\beta,b,\sigma}|
+\beta\of\Ar(\simCat),
+b\of \cod(\beta),
+s\tuplet{\beta,b}\circ \sigma\of \base(\horn_b)}\\
+d_0(\tuplet{\sigma,\beta,b})&=\tuplet{s\tuplet{\beta,b}\circ\sigma,b}\\
+d_1(\tuplet{\sigma,\beta,b})&=\tuplet{\beta,b}\\
+\delta\cdot\tuplet{\sigma,\beta,b}&=
+\tuplet{s(\delta)\circ\sigma,\beta\circ\delta,b}\\
+\tuplet{\sigma,\beta,b}\cdot\gamma&=
+\tuplet{\sigma\circ \gamma,\beta,b}
+\end{align*}
+In here, all the $s$'s are connected to the partially ordered sets above.
+I am having great trouble getting this one right.
+
+\newcommand\To{\mathbin\Rightarrow}
+The descend functor applied to $f\of X\to \horn_{\set\geq}$ is 
+$(D\To f)\of (D\To X) \to \simplex_{\set\geq}$.
+\begin{align*}
+\base(D\To X) &= \set{\tuplet{x,y}|
+x\of D_y \to \base(X),
+f\circ x = d_0,
+\forall y,\phi.x(y)\cdot\phi = x(y\cdot \phi)}\\
+& \textrm{where }D_y = \set{x\of D|d_1(x)=y}\\
+(D\To f)\tuplet{x,y} &= y\\
+\tuplet{x,y}\cdot\phi &= \tuplet{\lambda z.x(\phi\cdot z),y\circ\phi}
+\end{align*}
+The arrow mapping is relatively straight forward:
+\[ (D\to m)\tuplet{x,y} = \tuplet{m\circ x, y} \]
+
+
+Now that we have hidden the complexity of the nerve, this looks surprisingly simple.
+
+The left adjoint for $f\of X\to \simplex_{\set\geq}$ is $D\otimes f \of D\otimes X \to \horn_{\set\geq}$.
+\begin{align*}
+\base(D\otimes X) &= \set{\tuplet{x,d}\of \base(X\times D)|f(x)=d_1(d)}/\sim\\
+& \textrm{where }\tuplet{x\cdot\phi,d}\sim\tuplet{x,\phi\cdot d}\\
+(D\otimes f)\tuplet{x,d} &= f(x)=d_1(d)\\
+\tuplet{x,d}\cdot\phi &\sim \tuplet{x,d\cdot \phi}
+\end{align*}
+Now the arrow mapping satisfies:
+\[ (D\otimes m)\tuplet{x,d} \sim \tuplet{m\circ x,d} \]
+That $m$ is a morphism makes this work.
+
+
+If I have done this right, this should be an adjunction. Moreover, it should be evident that the construction preserves modest sets, at least if finite object are modest.
+
+\paragraph{The actual descent}
+We can not simply work with 'an' acyclic cofibration. We need to take the family of all cofibrations is account. This may get confusing
+We only find the family of horns in $\ambient\s/\set\geq\disc$. The functor $D\otimes$ lives on $\ambient\s/\simplex_{\set\geq}$. 
+The problem object $P$ satisfies \[P = \set{\tuplet{\xi,k,l}|\xi\of\Ar(\simCat),k\of[\dom(\xi)],l\of[\cod(\xi)] }\] 
+All we need to add to $P$ to get the family of all horn inclusions in the slice $\ambient\s/\simplex_{\set\geq}$ is $\simCat$ morphisms $\phi\to \dom\xi$.
+
+A clearer definition:
+\begin{align*}
+\base(\simplex_P) &= \set{\tuplet{\alpha,a,\beta,b}| 
+\alpha,\beta\of\Ar(\simCat),\cod(\alpha)=\dom(\beta),
+a\of\cod(\alpha),b\of\cod(\beta)}\\
+\base(\horn_P) &= \set{\tuplet{\alpha,a,\beta,b}\of \base(\simplex_P)|\alpha\of\base(\horn_a[\cod(\alpha)])}\\
+\supp\tuplet{\alpha,a,\beta,b} &= \tuplet{\beta\circ \alpha,b}\\
+\tuplet{\alpha,a,\beta,b}\cdot\phi &= \tuplet{\alpha\circ \phi,a,\beta,b}
+\end{align*}
+
+This provide two object and an inclusion in the slide category, to which we apply functor $D\otimes-$ above. And then we prove that the result is a discrete family of acyclic cofibrations.
+
+We wind up with tuplets of five elements in $D\otimes \simplex_P$.
+\begin{enumerate}
+\item a morphism $\alpha$ that implements a category action.
+\item a number $a\of\cod(\alpha)$, which tell us which horn we are trying to preserve.
+\item a morphism $\beta$ with $\dom(\beta) = \cod(\alpha)$, which tell us about the target simplex. This hold the most data.
+\item a number $b\of \cod(\beta)$ declaring which horn we want to pull back along.
+\item a morphism $\sigma$ into the partially ordered object $S\tuplet{\beta\circ \alpha,b}$, which similarly to $\alpha$ is a target for the category action.
+\end{enumerate}
+The equivalence relation tells us that:
+\begin{align*}
+\tuplet{\alpha\circ\phi,a,\beta,b,\sigma}&\sim
+\tuplet{\alpha,a,\beta,b,s(\phi)\circ\sigma}\\
+\end{align*}
+Note that $\alpha=\id$ is not (always) an option, though, because it isn't part of the horn.
+
+So that is what $D\otimes h$ looks like. Good luck showing that it is an acyclic cofibration.
 
 \section{11/8/17}
 The biggest problem is the adjunction between $D$ and $K$ on $\ambient\s/\simplex_{\set\geq}$, methinks.
