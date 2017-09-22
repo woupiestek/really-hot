@@ -68,6 +68,199 @@ Poland}
 
 \begin{document}
 
+\section{22/9/17}
+The inclusion that must be an acyclic cofibration is:
+\[ \bigcup_{i\neq a,j\neq b}(U_j\cap V_i) \to \bigcup_{j\neq b}U_j\]
+The problem face is $U_{\beta(a)}$ because it lack the point $a$. All the $V_j$ contain $a$. The other faces $U_i$ contain it. So in that case we go by dimension to add the faces. Any surprises here?
+
+This clears once thing up: the ordering of $S\tuplet{\beta,b}$. The posets are joined in a way that make it contractible--i.e. that its nerve is a contractible simplicial set. If we take the coproduct $\dom\beta$ and $B = \prod_{i\neq b}\set{j\of\dom\beta|\beta(j)=i}$ we wont get this property. We put $B$ above $b$ in $\cod\beta$ to make sure that pullbacks preserve it. So if we are going to connect $B$, it must be at the same level as $\beta_b = \set{j\of\dom\beta|\beta(j)=b}$. A by-pass would turn the poset in-contractible, so we need to pick place in $\beta_b$ to insert $B$. The canonical places are the top and the bottom.
+
+Now when we seek to fill out $U_j$ for $j\neq b$ and $j\neq \beta(a)$ we
+have $a\of V_i\cap U_j$ for $i\neq a$ from which we go up by dimension. 
+In these cases, the inclusion $\bigcup_{i\neq a} V_i\cap U_j \to U_j$ is
+mostly about $B$: $V_i$ miss points in $B$ that $U_j$ contains. Going up dimension by dimension may be overdoing it, but is far simpler than figuring out which points are missing. So we reduce the case of a monic monotone map $[n + 1]\to U_j$ to the cases where $[n]\to U_j$ all the way down to $a:[0]\to U_j$, all needing to have in common that $a$ is in there. I don't see how we can fail.
+
+
+Obviously, if $b=\beta(a)$ we are done. Only if $b\neq\beta(a)$ we are left with a troubled face $U_{\beta(a)}$ to glue in. Why troubled? The pieces $U_{\beta(a)}\cap V_j$ for $j\neq a$ are connected, but may not have a single point in common. That is why we introduced the helpers $W$.
+
+We are still considering faces $[n]\to U_{\beta(a)}$. We want to reduce the case $[n + 1]\to U_{\beta(a)}$ to cases where $[n]\to U_{\beta(a)}$, but we need to be more careful this time because of shifting
+base points.
+Just like we ignore faces that don't contain $a$ in the first example, we should probably ignore faces that don't contain all of $B$ this time.
+
+At this point we indeed keep arguing that some faces are present because
+greater faces have been added at an earlier stage, perhaps even as part of filling out $U_j$.
+
+I am working towards an alternative to dimension for $f:[n]\to U_{\beta(a)}$. Take the sum of $f(i)$ where $f(i)$ is not a member $B$ e.g.
+This is going put a lot of distance between $f$ while clustering others together. Removing a point generally reduces the sum (unless $f(i) = 0$ unfortunately). 
+
+You know what? Just focus on faces $f:[n]\to \dom(\beta)$ and do a similar trick, i.e. $|f| = n + \sum_{i\of [n]} f(i)$. We
+will be looking for a way to add all of $S\tuplet{\beta,b}(f)$ and the
+idea is that we can do induction over $|f|$. After all, $f\circ d_i$ all have lower norms. A, but we still need to pick a base point!
+
+Let's not be stingy and just say what we want.
+For each $j\of \cod(\beta)$ there is a least $i$ such that $i \geq f(k)$ whenever $\beta(f(k)) = j$. These least $i$ both determine the base point we will use, and the stage of
+construction at which $S\tuplet{\beta,b}(f)$ can be glued on. We would
+like to deal with the fact that we are not starting from $1$ in each fibre of $\beta$, but that might not be a big problem in the proof. We do have to be careful about dimension.
+
+\paragraph{Recap}
+Outline of the new descend chapter:
+\begin{enumerate}
+\item Introduce the descend functor and its left adjoint.
+We are dealing with slice categories here, and explaining the functor
+already involves nerves of posets, presumably. We have to deal with general theories that connect slice categories to categories of elements. Moreover, we lift functors using all structure of $\ambient$ at our convenience.
+\item Prove that descend is right inverse to reindexing and prove the preservation of modest fibrations.
+Both should follow easily form the definitions.
+\item Reduce the problem of preserving fibrations to the problem of showing that a single family of morphisms is acyclic.
+The definition of contractible morphism should help here, though we juggle many diagrams to get where we need.
+\item Proof that this family of morphism is indeed acyclic.
+This is what I am struggling with now.
+\end{enumerate}
+
+The basic tactic is to assign each face $[n]\to\bigcup_{j\neq b}U_j$ a turn to be included, in such a way that the turn of $f:[n + 1]\to\bigcup_{j\neq b}U_j$ comes after those of $f\circ d_i:[n + 1]\to\bigcup_{j\neq b}U_j$.
+
+Some general principles for computing terms: 
+If $f$ hits $\lambda(a)$, its dimension is its turn.
+If $f$ can be extended to a $g$ that contains $\lambda(a)$, its dimension plus 1 is its turn.
+The remainder either intersects $B$ or can be extended to extend it. They must be part of $U_{\beta(a)}$ and have a fair number of dimensions to avoid inclusion in $U_j$ for $j\neq \beta(a)$. In fact, $\cod(\beta) - 2$ is the least, considering that $s\tuplet{\beta,b}\circ f$ must hit every point in $\cod(\beta)$ except $\beta(a)$ and $b$.
+The rule is similar: hitting a number of points in $B$ qualifies $f$ for inclusion at a certain stage. Fewer points means $f$ will only be included indirectly. Since $V_j$ don't contain all of $B$ only working with simplices to contain all of $B$ may not work however.
+
+The old approach put all members of $B$ in order and demanded that a downset be included in the construction. We threw out this demand. What does that do to the stages?
+
+The least thing we can demand of $f$ is that it includes all its support points. For each monic $m\of[\cod(\beta) - 2]\to [\dom(f)]$ such that $s\tuplet{\beta,b}\circ m = d_{\beta(\alpha), b}$ there is a point $x\of B$ such that $x_m(i) = f(m(i))$, $x_m(\beta(a)) = a$. We demand the inclusion of these in the image of $f$. This determines the inclusion stage.
+This leaves us without a obvious pivot however.
+
+We could add a combination of two demands. Firstly, there is a point $x\of B$ such that $f$ contains all points $y\of B$ such that $y\leq x$.
+Secondly, $f(i) \leq x_{s(\beta,b)(f(i))}$. We still use dimensions to stage these, seeing as the number of point necessary bumps up the dimension of $f$ quite a lot. But can we glue this one in now?
+ 
+\paragraph{reviewing the old proof}
+Without the total ordering of $B$, there are a lot more morphisms to take in account there. If we follow the same tactics as before we simply demand that $f$ hits all points of $B$, however.
+Now the rule for this family of morphisms is that $f$ comes after $g$ if $f\geq g$. So that is something to bump the stage up for.
+
+Let's review: a face $f\of [n]\to U_{\beta(a)}$ cannot be extended to contain $a$. We therefore need to glue it, using its faces of codimension 1. The morphism $f$ has at least one pivot point to work with. Trading points with $a$ suggests a minimum of dimension plus 2-- --but would that work for points of $B$ that $f$ hits?
+For each point that $f$ hits in $B$, first remove that point. That becomes a new target. We get the same analysis: outside of $B$ we can switch points with $a$ to get them at a stage of minimally dimension plus 2, and adding the dimensional we already have, the stages becomes plus 3. Hence the general rule seems to add at least the number of points in $B$ that $f$ hits to the dimension, but they do this themselves don't they? Dimension plus 2 seems sufficient.
+
+I now get something like this. A face $f\of [n] \to \bigcup_{j\neq b}U_j$ belongs to stage $n$ if $f(i) = a$ for some $i\of [n]$. It belong to stage $n + 1$, if $(f \leftarrow a)$ is a function $[n + 1] \to \bigcup_{j\neq b}U_j$. Here:
+\begin{align*}
+(f \mathop\leftarrow a) (i) &= f(i) \textrm{ if } f(i) < a\\
+(f \mathop\leftarrow a) (i) &= a \textrm{ if } f(i) > a, f(i - 1) < a \\
+(f \mathop\leftarrow a) (i) &= f(i - 1) \textrm{ if } f(i - 1) > a
+\end{align*}
+Finally it belongs to stage $n + 2$ if $(f \leftarrow a)$ isn't a member of $\bigcup_{j\neq b}U_j$.
+
+The stages are subsets $A_i$ of $\bigcup_{j\neq b}U_j$ and supersets of $\bigcup_{i\neq a,j\neq b}(U_j\cap V_i)$ defined as unions of various stages according to the classification just made. We show that $A_0 = \bigcup_{i\neq a,j\neq b}(U_j\cap V_i)$, that $A_u = \bigcup_{j\neq b}U_j$ for some $u\geq\#S\tuplet{\beta,b}+2$. Finally the real issue: is $A_n \to A_{n+1}$ an acyclic cofibration?
+
+We have a good idea of what the new functions are. 
+\begin{itemize}
+\item For the faces $f$ where $f(i) = a$, all $f\circ d_j$ where $j\neq i$ are of stage $n - 1$.
+\item For the faces $f$, if $f \mathord\leftarrow a$ belong to the result, then $f\mathord\leftarrow a$ belongs to the same stage.
+\item For the faces that cannot be extended $f\circ d_j$ presumably have only two sorts: those that are extensible, and which therefore life at stage $n$ by the preceding argument, and those which aren't by the induction argument. It doesn't look like we need to be picky with the top edge, pivot etc. anymore.
+\end{itemize}
+
+I am missing something crucially important:
+It is possible to find too many restrictions at a lower stage!
+Precisely one \emph{must} be missing! The first two types of faces shouldn't be a problem because of the $V_j$.
+The third type is trouble, however. The reason we don't need to be picky
+is the reason why it won't work.
+
+First make another distinction, between those $f$ that already intersect $B$ and those that don't. Those that don't will only be added as part of a face that does at the same stage. For the $f$ that intersect $B$ we presumably pick one of the intersection points as pivot.
+We need to pick the top edge that puts $f$ in one way or another. The face of $f$ that lacks edge must have the same stage, and not appear at a low stage.
+
+The old solution was to restrict the points outside of $B$, while including all points inside of $B$. The lexicographical ordering does some strange things here.
+
+Be specific:
+\begin{itemize} 
+\item Only the intersection $f \cap \lambda\of [m]$ determines what the top edge will be.
+\item If $f$ does not contain this top edge, then it will only be added as part of the extension with that top edge, which should always be possible.
+\item For pivots other than $a$ we need an offset from the dimension. I have a pretty good idea what it should be, but I need to think about this.
+\end{itemize}
+Removing point of $f$ inside $B$ either results in removing the top edge, and we are safe from this now. Otherwise nothing important happens. So move on to removing points outside of $f$. This could change the proper top edge. That means that alternative top edges need to go first.
+
+The number of edges I would connect to $f$ is:
+$\prod_{j\neq b, j\neq \alpha(b)}\set{i|s\tuplet{\beta,b}(f(i)) = j}$
+This is big enough to be the proper dimensional offset.
+The canonical choice of pivot is also determined by this product as well: $a$ if the product is empty, the greatest element of the product with $a$ inserted at index $\beta(a)$ otherwise.
+
+I see a proof. I am unsure whether a simpler construction would not suffice, but I have something workable now.
+
+We have three factors that determine that stage:
+\begin{itemize}
+\item fundamentally dimension.
+\item the number of possible top edges in $B$
+\item whether the face already contains the chosen top edge, or need to be extended to include it.
+\end{itemize}
+The last bit is still a puzzler. I think we are safe because counting the number of possible edges in $B$ gives enough room to add all of them if needed. If we subtract the points that $f$ already hits, however, I get the feeling that we are getting the timing perfectly right.
+
+\paragraph{final thoughts}
+Perhaps it could be much simpler: glue in the faces according to dimension, just leave out the ones that could get in the way later. With a top edge selection strategy we can actually predict which faces might get in the way later (the ones missing the selected top edge). I have some doubts that this will actually do it for $B$ however.
+
+Suppose $f$ cannot be extended to $a$. We want to make sure removing the top edge result in something not already included in the structure. 
+Now we pick a point different from the top edge. How can we be sure that one is included? If the top edge of the less dimension thing is the same, no problem. If the top edge of the less dimensional thing is different, problem. The subface was not included at its stage unless its edge was is part of the current face.
+
+Perhaps we have been too selective: just demand that a face is connected to a shared subset of the leaves. That means $B\cup\set{a}$. In other words, any point of either $a$ or $B$ will do. For many faces the argument that it was glued on relies on extending the face with suitable points. In other cases the intersection proves enough. A, but here we run into the opposite problem: we remove a top edge and find that the sub face was already included. Hence, the inclusion no longer acyclic.
+
+Yet another idea: if $B$ is nonempty, just pick an point and use that one for all faces. At each stage, we just glue in the faces that have this point in it. How could that fail? The base cases might cause trouble now. I think I need Lumsdaine's counterexample to show why that won't work.
+
+\section{9/9/17}
+We use the posets $S\tuplet{\beta,b}$ and sub-posets to explain the construction. There are some bigger step we can take: a handful of 'faces' sharing a common vertex, included into a bigger face is an acyclic cofibration. The second stage generalizes form a single vertex to a collection of connected vertices. This way we can both prove descent, but also pushout products.
+
+I think we generally need a strategy to deal with the collection of connected vertices. That prevents useful generalizations.
+
+\section{8/9/17}
+
+\paragraph{Recap}
+We wind up with tuplets of five elements in $D\otimes \simplex_P$.
+\begin{enumerate}
+\item a morphism $\alpha$ that implements a category action.
+\item a number $a\of\cod(\alpha)$, which tell us which horn we are trying to preserve.
+\item a morphism $\beta$ with $\dom(\beta) = \cod(\alpha)$, which tell us about the target simplex. This hold the most data.
+\item a number $b\of \cod(\beta)$ declaring which horn we want to pull back along.
+\item a morphism $\sigma$ into the partially ordered object $S\tuplet{\beta\circ \alpha,b}$, which similarly to $\alpha$ is a target for the category action.
+\end{enumerate}
+The equivalence relation tells us that:
+\begin{align*}
+\tuplet{\alpha\circ\phi,a,\beta,b,\sigma}&\sim
+\tuplet{\alpha,a,\beta,b,s(\phi)\circ\sigma}\\
+\tuplet{\alpha\,a,\beta,b,\sigma}&\sim
+\tuplet{\id,a,\beta,b,s(\alpha)\circ\sigma}\\
+\end{align*}
+This reduces the number of elements to deal with to four.
+
+So what makes this a simplicial object again? 
+\begin{align*}
+\dim\tuplet{\alpha,a,\beta,b,\sigma} &= \dom(\sigma)\\
+\tuplet{\alpha,a,\beta,b,\sigma}\cdot\phi &= \tuplet{\alpha,a,\beta,b,\sigma\circ \phi}
+\end{align*}
+
+So that is what $D\otimes h$ looks like. Let's try to show that it is an acyclic cofibration.
+
+\paragraph{The problem}
+The codomain consists of those $\tuplet{a,\beta,b,\sigma}$ where $s\tuplet{\beta,b}\circ\sigma$ misses a point in $[\cod(\beta)]-\set b$.
+
+The domain consists of those $\tuplet{a,\beta,b,\sigma}$ in the domain where $\sigma$ misses a point in $[\dom(\alpha)] -\set a$. This means that that point neither appears directly or as part of a tuplet in $s(\alpha,b)$. Note $\cod(\alpha) = \dom(\beta)$.
+
+That is the analysis. Showing that this is a cofibration should be relatively straightforward. We already explained how to decide that an
+is part of the domain and faces only stand out for being injective.
+
+To show that the morphism is an acyclic cofibration, we divide the
+codomain in stages, each of which can be shown to be pushouts of sums
+of cofibrations. Here the pain starts.
+\begin{itemize}
+\item Stage zero is the domain. 
+\item The next few stages add all faces that contain $a$. Sometimes this requires several steps of adding faces, going up the dimensions one-by-one. In other words, $\beta$ determines how many stages are needed.
+\item The last few stages deal with cases where we are forced to work around $a$. Instead we use the tuplets in $S\tuplet{\beta,b}$ as points to work with.
+Think subsets of $S\tuplet{\beta,b}$. In fact, that is what we replace the old faces with: subsets of this poset.
+\end{itemize}
+
+Perhaps tracking with more general posets and using mostly dimension to glue in new faces, is better way to make the construction understood.
+
+\begin{align*}
+U_i &= \set{x\of S\tuplet{\beta,b} | s\tuplet{\beta,b}(x) \neq i } \\
+V_j &= \set{\lambda(x)\of S\tuplet{\beta,b} | x \neq j }\cup\set{\kappa(x)\of S\tuplet{\beta,b}| \forall k\of(\dom(\beta)-\set b). x_k\neq j } \\
+W_{\kappa(p)} &= \set{\lambda(x)\of S\tuplet{\beta,b} | \beta(x) = b \vee x \leq p_{\beta(x)} }\cup\set{\kappa(x)\of S\tuplet{\beta,b}} \\
+\end{align*}
+
+The change now is that these aren't totally ordered sets. The starting point is the $\bigcup(U_i\cap V_j)$. The goal is $\bigcup(U_i)$. We start with gluing in all faces that contain the point $a$. Then we switch to the $\kappa(p)$ points if necessary.
+
 \section{25/8/17}
 What if the lexicographical product isn't a functor?
 $\tuplet{0,1} < \tuplet{1,0}$
