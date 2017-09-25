@@ -68,6 +68,67 @@ Poland}
 
 \begin{document}
 
+\section{24/9/17}
+
+The cause of our problems is that the $V_i\cap U_{\beta(a)}$ don't have a single point in common. Pick a point $p$ in $B$ and is basically tells you it won't be present in any of the $V_{p_i}$.
+For $U_j$ where $j\neq \beta(a)$ and $j\neq b$, the point $a$ serves this purpose, but $a$ is not in $U_{\beta(a)}$.
+
+The is a problem with $f$ where $f\circ d_k$ is in $V_i$ while $f$ is not should probably be glued in from some top edge inside $V_i$. 
+
+If we start with a single $p\of B$ are top edge, we run into the problem where $f - p\of V_i$ for some $i$. The nerve $V_i$ unhelpfully supplies a face that we don't want to be there.
+These $f$ need to be glued in around a different top edge, which also is in $V_i$.
+
+We know that $f$ should contain $p = \bottom_B$, but we need to make an extra demand, like if $f-p\in V_i$. Note that there may be more $i$ where this happens.
+To make sure that we can add these faces, we need to make a new demand on $f$. I suppose it should have a specific alternative point which we will use to glue in this face.
+The best would revolve around the least $i$ that does not occur in $f$
+other than in $p$. 
+
+So the options are $f$ has $a$, $f$ has $p$ and all $p_k$, $f$ has $p$ and $p[k]+$ for the least $k$ such that $f$ doesn't hit $p_k$.
+
+Complicated but doable.
+
+Either $f$ can be extended with $a$ or for all $y\of \cod(\beta)-\set{\beta(a),b}$ there is an $x\of \dom(f)$ such that $s\tuplet{\beta,b}(f(x)) = y$--$f$ is surjective on this subject. We can then compute an alternative top edge $t(f)$ and demand that $f$ hits both $t(f)$ and the least point $p$ of $B$.
+
+Reducing the number of values that $t(f)$ can have is probably a good idea. Perhaps we can limit it to the top point of $B$.
+Sounds good.
+
+So two options: $f$ contains $a$, $f$ contains the extremes of $B$, and the rest cases.
+
+Generally, we would like a decidable property that neatly splits $f$ in two classes, closed under taking sub-faces, that determines which point we will need for gluing.
+
+No, it is either $\bottom_B$ and all of its members, or $\bottom_B$ and $\top_B$. If $f-\bottom_B\of V_i$, then we use $\top_B$, which therefore must be hit in the image of $f$.
+
+That is all.
+
+\paragraph{2-point-solution ?}
+Seeing this makes me wonder if we ever need more than 2 points in $B$. 
+
+So $S(\xi\of[m]\to[n])  = s(\xi)\of[m + 2]\to [n]$. This doesn't do descend properly, as is changes $\xi$ that must be preserved in pullbacks. I don't believe we can fix this in a way that leaves a functor, and that matters for how $V_i$ are mapped, implying potential disaster.
+
+\section{23/9/17}
+Let's put in some extra time. For each face $f\of U_{\beta(a)}-(\bigcup_{i\neq a}V_i)$ there is a set of points in $B$ there we might use as supporting points for gluing $f$ in. Technically we can use any point of $B$ to do the actual gluing, but there seems to be a problem.
+
+The difficult cases are quite restricted actually:
+\begin{align*}
+&\forall x. s\tuplet{\beta,b}(f(x))\neq \beta(a)\\
+&\forall j\of\cod(\beta) - \set{b,\beta(a)}.\exists x.s\tuplet{\beta,b}(f(x)) = j\\
+&\forall i\of\dom(\beta) - \set a.\exists x.f(x) = \lambda(i) \vee \exists y.f(x) = \kappa(y) \land y(\beta(i)) = i
+\end{align*}
+
+Exclusion based on missing certain points still feels like a good idea. We will be punching holes in $f$, and demand that all resulting subfaces are included at an earlier stage safe for one. So at the lower stages we need to exclude $f$ that point. Unfortunately, the top edge shifts around and we need to account for those shifted edges as well.
+
+At this point I am wondering how the old proof could even have worked. There we don't try to force ourselves to fit everything in dimensionally.
+Perhaps that will simply never work.
+
+Top selection should not be based on existing points, but on the possibility to add.
+So well order $B$--at least the subset where $x(\beta(a)) = a$--and pick the least $p\of B$ such that $f$ can be extended with it.
+Perhaps we never run into any restrictions here, and glue in faces with a single edge in $B$.
+Alternatively, we need to connect some faces to this edge before we can proceed.
+That is unlikely to work for all the base cases though.
+
+The conditions above tell us something about the distance between a faces here and the faces included at the start. Perhaps enough to determine the dimensional offset.
+
+
 \section{22/9/17}
 The inclusion that must be an acyclic cofibration is:
 \[ \bigcup_{i\neq a,j\neq b}(U_j\cap V_i) \to \bigcup_{j\neq b}U_j\]
