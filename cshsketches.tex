@@ -68,6 +68,59 @@ Poland}
 
 \begin{document}
 
+\section{26/9/17}
+
+\begin{proposition} The inclusion $(\bigcup_{j\neq b} U_j) \cap (\bigcup_{i\neq a} V_i)\to (\bigcup_{j\neq b} U_j) $ is an acyclic cofibration.
+\end{proposition}
+
+\begin{proof}
+Let $K$ be the image of $\kappa\of \prod_{j\neq b}\set{i\of\dom(\beta)|\beta(i)=j} \to S\tuplet{\beta,b}$. If $K$ is non empty, let $k$ be a $\dim(K)$-dimensional face of $k$. This means we cannot add an extra point to $k$ without leaving $K$.
+Let $\mathfrak K$ be the set of faces $f\of U_{\beta(a)}$ that have the following property. There is an $n$ and $p\of \dom(f)$ such that 
+$f(p+i) = k(i)$ for all $i\of[n]$ and
+$f\circ d_{p+i} = f - k_i \of (\bigcup_{i\neq a} V_i)$ but not $f_\circ f_{p+n} = f - k_n \of (\bigcup_{i\neq a} V_i)$.
+
+Let $A_0 = (\bigcup_{j\neq b} U_j) \cap (\bigcup_{i\neq a} V_i)$ and let $A_{i}$ be the union of $A_0$ with less than $i$ dimensional faces $f\of (\bigcup_{j\neq b} U_j)$ that satisfy one of these conditions:
+\begin{itemize}
+\item $f(p) = a$ for some $p$
+\item $f\of \mathfrak K$.
+\end{itemize}
+
+For all $f\of A_{i+1} - A_i$, $f\circ d_i$ are members of $A_i$ safe one. If $f$ contains $a$ then each of the $f\circ d_i$ where $i\neq p$ satisfy $f(q) = a$ for some $q$ and hence are included in $A_i$. The face $f\circ d_p$ is not in $A_i$ because the only $i$-dimensional faces without $a$ are in $A_0\cup\mathfrak K$, but $f\circ d_p \of A_0\cup\mathfrak K$ implies $f\of A_0\cup\mathfrak K$, and hence $f\not of A_{i+1} - A_i$ as assumed.
+If $f\of\mathfrak K$ then $f\circ d_i$ either intersect the same points of $k$ as $f$ and are therefore in $A_i$, or omit one of the points. Those will all be in $A_0$ except for the last by definition.
+
+Because of this relation, the inclusion $A_i\to A_{i+1}$ is a pushout of a coproduct of horn inclusions and hence an acyclic cofibration. Because acyclic cofibrations are closed under composition, so is $A_0\to A_i$ for all $i\of \nno$. All we need to show now is that $\bigcup_{j\neq b} U_j = A_{i+1}$ for dimension $i$ of $\bigcup_{j\neq b} U_j$. As you might have guessed, this is the hardest part.
+
+If $f\of A_0$, if $f(p) = a$ for some $p$ or $f\of \mathfrak K$, then this is trivial.
+If $f\of U_j$ for $j\neq \beta(a)$ and $j\neq b$, then the extension of $f$ with $a$ is a member of $U_j$ as well, so $f\of A_{\dim(f)+1}$.
+If $f\of U_\beta(a) - A_0 - \mathfrak K$, then we can add a point of $k$
+ to get a member of $\mathfrak K$, because \dots
+\end{proof}
+
+I cannot finish the proof yet, because I am unsure where we actually can add points of $k$ to any $f$. Alternatively, we replace $k$ with all faces of $K$ of maximal dimension though and retain all the properties I think are important:
+\begin{itemize}
+\item if $f$ contains all $k$ but removing a point always results in something from $A_0$, then $f$ must be of $U_j$ for some $j$ by some sort of pidgin hole principle.
+\item the number of elements of $\mathfrak K$ is limited, such that removing a point of the critical segment never lands in $\mathfrak K$. Hence the property: if $k(i)\leq l \leq k(i+1)$ then $k(i) = l$ or $k(i+1) = l$.
+\end{itemize}
+
+\section{25/9/17}
+I have no confidence in yesterdays solution anymore.
+
+Let stop calling it $B$, and instead call it $K$, the image of $\kappa\of \prod_{j\neq b}\set{i\of\dom(\beta)|\beta(i)=j} \to S\tuplet{\beta,b}$. I think we need a sequence of points $k_0,k_1,\dots \of K$ and only add a face $f\of U_{\beta(a)}$ if it contains an initial segment of this sequence. Furthermore, $f-{k_n}$--which is $f$ minus the point $k$--is a member of $\bigcup_{i\neq a} V_i$ for all $n$ except the greatest $n$ for which $k_n$ is in the image of $f$.
+
+If $f\of U_j$ for $j\neq b$ and $j\neq\beta(a)$ we should not include is. Somehow the sequence $k_n$ can help to determine this. 
+If know that if $f\of (U_{\beta(a)} - \bigcup_{i\neq a} V_i$)
+and $f - \kappa\tuplet{j_0,\dotsc,j_n}\of \bigcup_{i\neq a} V_i$,
+then $f - \kappa\tuplet{j_0,\dotsc,j_n}\of \bigcup_{n\neq a} V_{j_n}$.
+The reason is that $\kappa\tuplet{j_0,\dotsc,j_n}\of V_j$ for $j\not\of\set{j_n}$, and hence $f$ would be too, against the first assumption.
+
+I keep changing my mind about what will work here. I suppose the worst case scenario requires the maximum number of points in $K$ to work. Any face of $K$ that has the same dimension as the nerve.
+On the other hand, we seem to reduce the number of possibilities of $f$ quite significantly in the first step, which gives me the feeling that far fewer points can give us what we need.
+
+
+It seems like $f-K$ determines if $f$ is part of $U_j$. Since $\bigcap_{\beta(i) = j} V_i \subseteq U_j$ we want to use the $k$ to establish this. Take the smallest fibre of $\beta$, and pick $k_n$ such that each forces one of the $V_i$. Each $k\of K$ allows $f$ to escape, however.
+
+Each $k\of K$ limits $f-K$ to a disjunction of $\#\cod\beta - 2$ of $V_i$. Each step gives and intersection, that due to the distributive law only gets bigger. I see the number of members only growing along the way. But we strike out the intersections that contain all members of a fibre, because $f$ is not allowed to hide in those intersections. That is ultimately why a maximal solution does succeed. 
+
 \section{24/9/17}
 
 The cause of our problems is that the $V_i\cap U_{\beta(a)}$ don't have a single point in common. Pick a point $p$ in $B$ and is basically tells you it won't be present in any of the $V_{p_i}$.
@@ -78,7 +131,7 @@ The is a problem with $f$ where $f\circ d_k$ is in $V_i$ while $f$ is not should
 If we start with a single $p\of B$ are top edge, we run into the problem where $f - p\of V_i$ for some $i$. The nerve $V_i$ unhelpfully supplies a face that we don't want to be there.
 These $f$ need to be glued in around a different top edge, which also is in $V_i$.
 
-We know that $f$ should contain $p = \bottom_B$, but we need to make an extra demand, like if $f-p\in V_i$. Note that there may be more $i$ where this happens.
+We know that $f$ should contain $p = \bot_B$, but we need to make an extra demand, like if $f-p\in V_i$. Note that there may be more $i$ where this happens.
 To make sure that we can add these faces, we need to make a new demand on $f$. I suppose it should have a specific alternative point which we will use to glue in this face.
 The best would revolve around the least $i$ that does not occur in $f$
 other than in $p$. 
@@ -96,7 +149,7 @@ So two options: $f$ contains $a$, $f$ contains the extremes of $B$, and the rest
 
 Generally, we would like a decidable property that neatly splits $f$ in two classes, closed under taking sub-faces, that determines which point we will need for gluing.
 
-No, it is either $\bottom_B$ and all of its members, or $\bottom_B$ and $\top_B$. If $f-\bottom_B\of V_i$, then we use $\top_B$, which therefore must be hit in the image of $f$.
+No, it is either $\bot_B$ and all of its members, or $\bot_B$ and $\top_B$. If $f-\bot_B\of V_i$, then we use $\top_B$, which therefore must be hit in the image of $f$.
 
 That is all.
 
