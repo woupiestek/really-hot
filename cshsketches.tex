@@ -68,7 +68,39 @@ Poland}
 
 \begin{document}
 
-\section{26/9/17}
+\section{28/9/17}
+Let's try again.
+
+\begin{proposition} The inclusion $(\bigcup_{j\neq b} U_j) \cap (\bigcup_{i\neq a} V_i)\to (\bigcup_{j\neq b} U_j) $ is an acyclic cofibration.
+\end{proposition}
+
+\begin{proof}
+Let $K$ be the image of $\kappa\of \prod_{j\neq b}\set{i\of\dom(\beta)|\beta(i)=j} \to S\tuplet{\beta,b}$. 
+Let $\mathfrak K$ be the set of faces $k\of K$ such that $k(0)$ is the least element of $K$ and if $k(p+i) \leq k \leq k(p+i+1)$ then $k(p+i)=k$ or $k(p+i+1) = k$.
+Let $\mathfrak A$ contain $f\of U_{\beta(a)}$ such that $k\subseteq f$ for some $k\of \mathfrak K$, $f - k(i) \of \bigcup_{i\neq a} V_i$ for $i \leq \max(\dom(k))$, but not $f - k(\max(\dom(k)) \of \bigcup_{i\neq a} V_i$.
+
+Let $A_0 = (\bigcup_{j\neq b} U_j) \cap (\bigcup_{i\neq a} V_i)$ and let $A_{i}$ be the union of $A_0$ with less than $i$ dimensional faces $f\of (\bigcup_{j\neq b} U_j)$ that satisfy one of these conditions:
+\begin{itemize}
+\item $f(p) = a$ for some $p$
+\item $f\of \mathfrak A$.
+\end{itemize}
+
+For all $f\of A_{i+1} - A_i$, $f\circ d_i$ are members of $A_i$ safe one. If $f$ contains $a$ then each of the $f\circ d_i$ where $i\neq p$ satisfy $f(q) = a$ for some $q$ and hence are included in $A_i$. The face $f\circ d_p$ is not in $A_i$ because the only $i$-dimensional faces without $a$ are in $A_0\cup\mathfrak K$, but $f\circ d_p \of A_0\cup\mathfrak K$ implies $f\of A_0\cup\mathfrak K$, and hence $f\not of A_{i+1} - A_i$ as assumed.
+If $f\of\mathfrak A$ then $f\circ d_i$ either intersect the same points of $k$ as $f$ and are therefore in $A_i$, or omit one of the points. Those will all be in $A_0$ except for the last by definition.
+
+Because of this relation, the inclusion $A_i\to A_{i+1}$ is a pushout of a coproduct of horn inclusions and therefore an acyclic cofibration. Because acyclic cofibrations are closed under composition, so is $A_0\to A_i$ for all $i\of \nno$.
+The propositions holds because $\bigcup_{j\neq b} U_j = A_{i}$ for some $i$.
+
+If $f\of A_0$, if $f(p) = a$ for some $p$ or $f\of \mathfrak A$, then this is trivial.
+If $f\of U_j$ for $j\neq \beta(a)$ and $j\neq b$, then the extension of $f$ with $a$ is a member of $U_j$ as well, so $f\of A_{\dim(f)+1}$.
+Otherwise look for the greatest $k\of\mathfrak K\cup{\emptyset}$ such that $k\subseteq f$. If not $f - k(i)\of A_0$ for some $i\of \dom(f)$ then $f\of \mathfrak A$. If $f - k(i)\of A_0$ for all $i\of\dom(k)$, then there is a point of $K$ between $\max(k)$ and the next value of $f$ we can add, or $k$ would not be the greatest. The extended function $f + k\of\mathfrak A$ hence $f\of A_{\dim(f)+1}$.
+
+Since $U_j$ are finite dimensional, all faces of $\bigcup_{b\neq j} U_j$ are member of $A_i$ from some $i$ on, and this proves that the inclusion is an acyclic cofibration.
+\end{proof}
+
+After tying my head in a knot for so long, the result is almost insultingly simple. This does give confidence though.
+
+\section{27/9/17}
 
 \begin{proposition} The inclusion $(\bigcup_{j\neq b} U_j) \cap (\bigcup_{i\neq a} V_i)\to (\bigcup_{j\neq b} U_j) $ is an acyclic cofibration.
 \end{proposition}
