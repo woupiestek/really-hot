@@ -46,6 +46,7 @@ The functor $D$ has a left adjoint $h\ri\circ K^*$ which can be shown to preserv
 For that reason, $D$ preserves all fibrations, including all modest fibrations.
 \end{proof}
 
+
 %Let's skip definitions that can be found in M&M
 
 \begin{definition} The \keyword{category of elements} $\elts(X)$ of a simplicial object $X$ is the internal category of $\ambient$ whose objects are the member of $\base X$ and where a morphism $x\to y$ is a morphism of $\simCat$ between $[\dim(x)]\to[\dim(y)]$. Identities and composition of these morphism is the same as in $\simCat$.
@@ -74,9 +75,7 @@ For internal functors in $\ambient$ the reindexing functors have both adjoints.\
 
 
 \begin{proof}
-The basic intuition is that categories of presheaves have all limited and colimits that are indexed over the category $\ambient$. The ordinary constructions of the left and right adjoints of the reindexing functors there work here as well as anywhere else. This idea is worked out below for the skeptics.
-
-That they have a right adjoint following form the fact that $\ambient$ is locally Cartesian closed.
+The basic intuition is that categories of presheaves have all limits and colimits that are indexed over the category $\ambient$. As shown below the ordinary constructions of the left and right adjoints of the reindexing functors work here.
 
 Let $F\of\cat C\to\cat D$ be an internal functor and let $X=\tuplet{\base X,\supp,\cdot}$ be an object of $\psh(\cat C)$. Define $F_*(X)$ as follows.
 \begin{align*}
@@ -129,25 +128,11 @@ K_0\tuplet{\xi,k} &= \tuplet{\xi',k} \\
 \end{align*}
 %perhaps just describe the operators as functors of \simCat?
 
-
-
 \end{definition}
 
+\hide{
 
-\section{Arithmetic in $\simCat$}
-\begin{definition}
-
-The \emph{lexicographical product} is a functor $LP\of\simCat/\simCat\to \simCat$. It takes $\phi\of[n]\to [m]$ to 
-
-
-For $m$ and $n\of \nno$ the \emph{lexicographical product} of $[m]$ and $[n]$ is 
-
-
-
-\end{definition}
-
-
-
+}
 
 \section{Junk}
 

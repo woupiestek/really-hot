@@ -68,6 +68,51 @@ Poland}
 
 \begin{document}
 
+\section{3/11/17}
+The construction uses nerves of partially ordered objects of $\ambient$. The Yoneda lemma tells us that this is a fully faithful subcategory of the category of simplicial objects.
+
+Let's start making a new to do list:
+\begin{itemize}
+\item rewrite 'descent' with the new proof;
+\item find and rewrite proofs that may be easier to follow using nerves;
+\item write a section on nerves alone if useful.
+\end{itemize}
+
+Can I outline the new descent chapter?
+
+Start as usual by outlining the properties of the class of modest morphisms. Why would anyone care? Why did we want the universe to be fibrant?
+I explained that there is no model structure on general simplicial objects, and a minimal requirement is that the universe is part of the model category.
+We conclude however, that this is no issue here, because the descent construction gives the universal morphism a codomain.
+
+Describe descent. Here we got in trouble because we need to generalize. There is a family of descend constructions, one for each horn-inclusion. Ever worse: for each $\xi\of[m]\to[n]$ and each $k\of [n]$ there is a special object $s\of\tuplet{\xi,k} \of S\tuplet{\xi,k} \to \horn[n]_k$, and the descend $Df$ of $f\of X\to \horn[n]_k$ is defined in such a way that $\simplex(\xi) \to Df$ is isomorphic to $s\of\tuplet{\xi,k} \to f$.
+
+We can ignore how $s\of\tuplet{\xi,k}$ is defined for a while, because we don't need the details to show that $D$ is defined, preserves modest objects and that it has a left adjoint, all using the structure of $\ambient$. A small constraint makes $D$ right inverse to reindexing, meaning it is a descent functor. The final nail is the lifting property. The functor $D$ preserves fibrations, if its left adjoint preserves acyclic cofibrations, than it right adjoint preserves fibrations. We reduce the problem to the family of cofibrations, so that ultimately, we only need to show that a single object is an acyclic cofibration.
+
+So all that is left now is the descend proof that relies on all the nervy details. 
+
+\paragraph{structural integrity}
+I suppose a lot can be done without even knowing the specific morphism we will be descending along. We have a keep in mind that there is more than one though.
+
+There is a family of morphisms to descend along: $A\to B\to I$. Once again I am looking for an elegant abstract description of the construction I need.
+I don't have it yet.
+
+There is an (internal) category $\cat B$ of $\ambient$ that represents the representable objects of $\ambient\s/B$. What we want to describe is a functor $S:\cat B\to \ambient\s/A$. However, to point is to internalize everything. The object $\cat B$ must become an internal object of $\ambient\s/A$ and $S$ must become some structure over it. It becomes a profunctor $\cat B \to \cat A$, which can be represented as a bimodule. On both sides the action it derived form the category of simplicial sets however.
+
+That is where the 'sheaves are algebras' view comes in. Once we are in a slice category, restriction let's us define a monad, and sheaves are algebras for this monad. The $A$ and $B$ about are similarly algebras. The object $S$ provides two dimensions for each of its elements, and two actions. 
+
+What is $\cat B$ exactly? I keep feeling like we cannot just use the underlying object $\base(B)$ of $B$, but haven't got a fix on the alternative.
+
+There is $a\of S\to \base(A)$, $b\of S\to \base (B)$ with $a(x\cdot\xi) = a(x)\cdot\xi$ and $b(\xi\cdot x)\cdot \xi = b(x)$? The last equation is not quite natural. Leave it out.
+
+I keep getting stuck here. Does the higher level of abstraction buy me
+anything?
+
+\paragraph{Stick with it}
+In $\ambient\s/B$, the underlying object of $B$ represents the representable functors of $B$. The functor needs much more. For each $b\of\base(B)$ we have a whole simplicial object to describe, and we need the morphisms too. This underlines the fact that $S\to B$ is not a morphism of simplicial sets at all.
+
+I feel bad. I just want to get this over. It isn't getting any good though.
+
+
 \section{28/9/17}
 Let's try again.
 
