@@ -4,12 +4,14 @@
 \section{Descent}
 A univalent universe that could serve as a model for homotopy type theory, has to live inside the category of complexes $\ambient\s\f$ itself because the model structure is limited to that part. This section shows that fibrancy is automatic for universal fibrations of certain classes of morphisms.
 
+\newcommand\dprod[1]{\Pi_{#1}}
 Assume that there is a class $M$ of \emph{modest morphisms} in $\ambient\s$ with the following properties.
 \begin{itemize}
 \item $M$ is closed under pullbacks along arbitrary morphisms.
 \item $M$ is closed under composition.
-\item $M$ is closed under fibred exponentiation. This means that if $f:X\to Z$ belongs to $M$ and $g:Y\to Z$ is an arbitrary morphism, the fibred exponential $f^g_Z\of(\product{z\of Z}{X_z^{Y_z}})\to Z$ is in $M$ too. This requirement may give us more limits than we need, but the intended model of modest morphisms in the ex/lex completion of the category of assemblies satisfies it.
+\item $M$ is closed under dependent products. This means that if $f:X\to Y$ belongs to $M$ and $g:Y\to Z$ is an arbitrary morphism, then the product of $f$ along $g$--$\dprod g(f) \of \dprod g(X)\to Z$--is in $M$ too. This requirement may give us more limits than we need, but the intended model of modest morphisms in the ex/lex completion of the category of assemblies satisfies it.
 \item $M$ contains all \emph{regular} monomorphisms--a monomorphism is \emph{regular} if it is an equalizer. Since $\ambient$ may lack a subobject classifier, there can be irregular monomorphisms which $M$ can afford to miss.
+\item If $f\circ g\of M$ and $g$ is a regular epimorphism, then $f\of M$. %isn't true of modest sets is it?
 \end{itemize} 
 
 The interesting case is where $M$ has the following structure in addition to the properties above.
@@ -22,117 +24,60 @@ The following fact makes the universal modest fibration a potential model of hom
 \begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant. \label{fibrant universe} \end{theorem}
 
 \begin{proof} 
-The object of lifting problems $P$ is $\hom_{\set\geq}(\horn_{\set\geq},V)$. There is an indexed coproduct of horn inclusions $k_P\of \horn_P\to\simplex_P$ and the fibrancy of $V$ is equivalent to factoring the canonical morphism $v\of\horn_P\to V$ through it.\hide{Explain how this is constructed?}
-The modest fibration $v\ri(\uni)\of \horn_P\times_V U \to \horn_P$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex_P$ by lemma \ref{descent}.
-Hence there is a $\chi(D(v\ri(\uni)))\of\simplex_P\to V$ and $\chi(D(v\ri(\uni)))\circ k_P$ equals $v$ by definition \ref{universal modest fibration}.
+The object of lifting problems $P$ is $\hom_{\set\geq}(\horn_{\set\geq},V)$. There is an indexed coproduct of horn inclusions $k_P\of \horn_P\to\simplex_P$. The object $V$ is fibrant if and only if the canonical morphism $v\of\horn_P\to V$ factors through $k_P$, because such a factroisation solves all the lifting problems.\hide{Explain how this is constructed?}
+
+The modest fibration $v\ri(\uni)\of \horn_P\times_V U \to \horn_P$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex_P$ by lemma \ref{descent}. Descend means that $v\ri(\uni)$ is the pullback of $D(v\ri(\uni))$ along $k_P$.
+By the existence part of definition \ref{universal modest fibration} there is a $\chi\of\simplex_P\to V$ such that $D(v\ri(\uni))$ is the pullback of $\uni$ along $\chi$ making $v$ a pullback of $\uni$ along $\chi\circ k_P$. By the uniqueness part of definition \ref{universal modest fibration} $\chi\circ k_P=v$, which proves that $V$ is fibrant.
 \[\xymatrix{
 \horn_P\times_V U \ar@/^2ex/[rrr] \ar[r]\ar[d]_{v\ri(\uni)} & \bullet \ar[rr]\ar[d]_{D(v\ri(\uni))} && U\ar[d]^\uni\\
-\horn_P\ar@/_2ex/[rrr]_v\ar[r]^{k_P} & \simplex_P\ar[rr]^{\chi(D(v\ri(\uni)))} && V
+\horn_P\ar@/_2ex/[rrr]_v\ar[r]^{k_P} & \simplex_P\ar[rr]^{\chi} && V
 }\]
 \end{proof}
 
 \begin{lemma}
-For each fibration $f\of X\to \horn_P$ there is a fibration $Df\of Y\to\simplex_P$ such that $f$ is the pullback of $Df$ along $h$. Moreover, if $f$ is modest, so is $Df$. \hide{is this last bit proven anywhere?} \label{descent}
+For each fibration $f\of X\to \horn_P$ there is a fibration $Df\of Y\to\simplex_P$ such that $f$ is the pullback of $Df$ along $k_P$. Moreover, if $f$ is in $M$, so is $Df$. \hide{is this last bit proven anywhere?} \label{descent}
 \end{lemma}
 
-\mathrmdef{elts}
-\mathrmdef{psh}
-\mathrmdef{supp}
+\newcommand\dsum[1]{\Sigma_{#1}}
 \begin{proof}
-Each slice $\ambient\s/X$ of $\ambient\s$ is isomorphic to the category of internal presheaves over the internal \emph{category of elements} of $\elts X$ in $\ambient\s$--see definition \ref{category of elements} and lemma \ref{slices are presheaves}. %definition %lemma
-Internal functors induce reindexing functors, that have both a left and a right adjoint--see lemma \ref{both adjoints}. %lemma
-The functor $D = K^*\circ (k_P)_*$ where $K$ is a specific internal endofunctor of $\elts(\simplex_P)$, and $(k_P)_*$ is the direct image along $k_P\of \horn_P\to\simplex_P$. Both reindexing and direct images preserve modest morphisms, so $Df$ is modest if $f$ is. %lemma?
-The functor $D$ has a left adjoint $h\ri\circ K^*$ which can be shown to preserve discrete families of cofibrations. %lemma
-For that reason, $D$ preserves all fibrations, including all modest fibrations.
+There is in fact an adjoint pair of functors $(D\dashv K)\of\ambient\s/\simplex_P\to\ambient\s/\horn_P$ by definition \ref{descend functor}.
+The adjunction arises form a \emph{bisimplicial object} 
+The functor $D$ is constructed using only limits and dependent products and that is why $Df$ is in $M$ if $f$ is (see lemma \ref{preserved modesty}).
+The constraint that $Df$ is the pullback along $k_P$ is easily satisfied (see lemma \ref{...}).
+Right adjoints preserve fibrations if their left adjoint preserve acyclic cofibrations and lemma \ref{descend} shows that $K$ preserves acyclic cofibrations.
+
+\hide{I have not found the right balance between details that must be in here and that must be postponed yet}
 \end{proof}
 
 
-%Let's skip definitions that can be found in M&M
+\subsection{Cosimplicial objects}
+This subsection delves into cosimplicial objects in $\ambient$ to show how adjoint pairs of functors between slice categories of $\ambient\s$ can be constructed from them. The goal is to demonstrate constructiveness rather than to present something new. We are essentially deriving adjoint pairs of functors between presheaf toposes from functors between their categories of representables.
 
-\begin{definition} The \keyword{category of elements} $\elts(X)$ of a simplicial object $X$ is the internal category of $\ambient$ whose objects are the member of $\base X$ and where a morphism $x\to y$ is a morphism of $\simCat$ between $[\dim(x)]\to[\dim(y)]$. Identities and composition of these morphism is the same as in $\simCat$.
+\mathrmdef{codim}
+\begin{definition} A cosimplicial object $C$ of $\ambient$ is a tuple $\tuplet{\base(C),\codim,\cdot}$ where $\base(C)$ is an object of $\ambient$, $\dim\of\base(C)\to\nno$ is an arbitrary morphism and $\cdot\of \dom\times_{\nno}\codim \to \base (C)$ for $\dom\of \Ar(\simCat)\to\nno$
+ satisfies $\codim(\gamma\cdot c) = \cod(\gamma)$.
 \end{definition}
 
-\begin{lemma}
-The category $\ambient\s/X$ is isomorphic to the category of internal presheaves $\psh(\elts(X))$. \label{slices are presheaves}
-\end{lemma}
+Cosimplicial are like simplicial objects, but with the dual action of the category $\simCat$.
 
-\begin{proof} The categories are the same modulo some choices of encoding. \end{proof}
-
-\begin{definition} Let $F\of \cat C\to\cat D$ be an internal functor. 
-The \emph{reindexing functor} $F\ri$ sends $X=\tuplet{\base X,\supp,\cdot}$ of $\psh(\cat D)$ to $X'=\tuplet{\base(X'),\supp,\cdot}$ of $\psh(\cat C)$, where:
+\begin{definition} Let $A$ and $B$ be simplicial sets and let $C$ be a cosimplicial object of $\ambient\s/\cat B$ such that the underlying morphism of $\codim(C)$ factors through $\dim(A)$ in $\ambient$. This means that $C$ has both a simplicial and a cosimplicial structure, and that
+there are $a\of\base(C)\to A$ and $b\of\base(C)\to B$ such that 
 \begin{align*}
-X' &= \set{\tuplet{x,c}|F_0(c) = p(x)}\\
-\supp &= F_0\ri(\supp)\\
-\tuplet{x,c}\cdot f &= \tuplet{x\cdot F_1(f),F_0(\dom(f))}
+\dim(c) &= \dim(b(c)) & \codim(c) &= \dim(a(c))\\b(\phi\cdot c) &= b(c) & b(c\cdot\phi)&=b(c)\cdot\phi\\
 \end{align*}
-Here $F_0$ is the mapping of objects, and $F_1$ the mapping of morphisms.
-A morphism $f\of \tuplet{X,p,\cdot}\to \tuplet{Y,q,\cdot}$ is a morphism $f\of X\to Y$ and $F\ri(f) = F_0\ri(f)$. Preservation of composition and identities is automatic.
+
+Define the functor $C\ri\of\ambient\s/A\to \ambient\s/B$ as follows. For each object $f\of X\to A$ in $\ambient \s/A$ let $\base(C\ri(X))$ be the quotient of $\set{\tuplet{x,c}\of \base(X)\times \base(C)| f(x)=a(c) }$ by the least equivalence relation $\sim$ such that $\tuplet{x\cdot\phi,c}\sim\tuplet{x,\phi\cdot c}$. Let $M\ri(f)(\tuplet{x,c}) = b(c)$--this is well defined on the quotient. 
+The simplicial structure of $\base(C\ri(X))$ is defined by the equations $\dim(\tuplet{x,c}) = \dim(c)$ and $\tuplet{x,c}\cdot \phi = \tuplet{x,c\cdot\phi}$ because equivalent pairs are mapped to the same value as well. They also turn $M\ri(f)$ into a morphism of simplices as required. For each object $g\of Y\to A$ in $\ambient \s/A$ and each morphism $h\of f\to g$ let $C\ri(h)\tuplet{x,a} = \tuplet{h(x),a}$--once again this is well defined on the quotients. Because $C\ri$ preserves composition and identities, is indeed a functor.
+
+Define the functor $C_*\of\ambient\s/B\to \ambient\s/A$ as follows. For each object $f\of X\to B$ let 
+\[ \base(C_*(X)) = \set{g\of \dprod a(b\ri(X)) | \forall \tuplet{c,\phi}\of\codim(C)\times_\nno\dom(\Ar(\simCat)).g(\phi\cdot c)= g(c)\cdot \phi }\]
+Pointwise application gives $\base(C_*(X))$ the structure of a simplicial object over $a$. It is also how $C_*$ is defined for morphisms in a way that preserves composition and identities, making $C_*$ a functor.
+
+The functor $C_*$ is right adjoint to the functor $C\ri$. 
+A morphism $f\of X\to C_*Y$ is a morphism $f\to X \to \dprod a(b\ri(Y))$ that satisfies $f(x\cdot\phi)(c) = f(x)(c)\cdot\phi = f(x)(\phi\cdot c)$. Therefore the transpose $f^t\of \dsum b(a\ri(X)) \to Y$, which satisfies $f^t\tuplet{x,c} = f(x)(c)$, factors uniquely through $C\ri(X)$. In the other direction, a morphism $g\of C\ri\to Y$ can be composed with the quotient map $\dsum b(a\ri(X)) \to C\ri(X)$ and transposed to get a morphism $g\of X \to \dprod a(b\ri(Y))$ that factors through the inclusion $C_*Y\to \dprod a(b\ri(Y))$. \hide{Where do $\dprod a$ and $\dsum b$ live?}
 \end{definition}
 
-\begin{lemma}
-For internal functors in $\ambient$ the reindexing functors have both adjoints.\label{both adjoints}
-\end{lemma}
-
-
-\begin{proof}
-The basic intuition is that categories of presheaves have all limits and colimits that are indexed over the category $\ambient$. As shown below the ordinary constructions of the left and right adjoints of the reindexing functors work here.
-
-Let $F\of\cat C\to\cat D$ be an internal functor and let $X=\tuplet{\base X,\supp,\cdot}$ be an object of $\psh(\cat C)$. Define $F_*(X)$ as follows.
-\begin{align*}
-\base(F_*(X)) &= \set{ \tuplet{d,\phi} | d\of D_1, \phi\of (F/d) \to \base(X), p\circ \phi = \pi_0, \phi(f\circ F_1(g)) = \phi(f)\cdot F_1(g) }\\
-\textrm{where }&(F/d) = \set{\tuplet{c,f}| c\of C_0, f\of F_1(c)\to d}\\
-\textrm{and }&\pi_0\tuplet{c,f} = c\\
-\supp\tuplet{c,d,\phi} &= d \\
-\tuplet{c,d,\phi}\cdot\chi &= \tuplet{d,\dom(\chi),\function f\phi(f)\cdot\chi}
-\end{align*}
-For morphisms $f\of X\to Y$ let $F_*(f)(\tuplet{d,\phi}) = \tuplet{d,f\circ \phi}$.
-
-For $f\of X\to F_*(Y)$, the transpose $f^t\of F^*(X) \to Y$ satisfies $f^t\tuplet{x,\xi} = f(x)\tuplet{\cod(\xi),\xi}$. Vice versa for $g\of F^*(X) \to Y$ the transpose $g^t\of X\to F_*(Y)$ satisfies $g^t(x)\tuplet{d,\xi} = g\tuplet{x,\xi}$, and these transpositions are clearly each other inverses, proving $F_*$ right adjoint to $F\ri$
-
-For the left adjoint, exactness and the $\nno$ provide all coequalizers.
-\begin{align*}
-\base(F_!(X)) &= \set{ \tuplet{x,\phi} | \dom(\phi) = F_0(p(x)) } / E \\
-\textrm{where }& E = \set{\tuplet{\tuplet{c\cdot\phi,\chi},\tuplet{c,F_1(\phi)\circ\chi}}| x\of\base X, \phi\of c\to p(x), \chi\of d\to F_0(c)}\\
-\supp\tuplet{x,\phi} &= \dom(\phi)\\
-\tuplet{x,\phi}\cdot\chi &= \tuplet{x,\phi\circ\chi}\\
-\end{align*}
-For a morphism $f\of X\to Y$ let $F_!(f)\tuplet{x,\phi} = \tuplet{f(x),\phi}$.
-
-To prove that this quotient is a left adjoint, consider that $\psh(\cat D)$ is a category of algebras for a monad on $\ambient/D_0$. Among the algebras that admit an embedding of $F_0\circ \supp$, and left the action of $\cat C$ to that of $\cat D$, the algebra given by $F_1(X)$ is merely the initial one. That already determines that we have an adjunction.
-\end{proof}
-
-\hide{It would be worth finding a source on internal categories and internal presheaves, that has this all worked out meticulously already}
-
-
-
-
-\begin{definition}
-Let $P$ be the following simplicial object:
-\begin{align*}
-\base P &= \set{\tuplet{\xi,k}|\xi\of\Ar(\simCat),k\of[\cod\xi]}\\
-\dim\tuplet{\xi,k} &= \dom(\xi) \\
-\tuplet{\xi,k}\cdot\phi &= \tuplet{\xi\circ\phi,k}
-\end{align*}
-
-Let $K\of\elts(P)\to\elts(P)$ be the following functor:
-\begin{align*}
-K_0\tuplet{\xi,k} &= \tuplet{\xi',k} \\
-\textrm{where } \dom(\xi') &= \cod(\xi) + \prod_{i\of [\cod(\xi)]-\set k}\#\xi_i\\
-\textrm{where } \prod_{i\of [\cod(\xi)]-\set k}\#\xi_i
-\textrm{where } \xi_i &= \set{j\of \dom(\xi)|\xi(j)=i}\\
-\textrm{and } \#\emptyset &= 0\\
-\textrm{and } \# x &= \max(x) - \min(x) + 1\\
-\\
-\xi'(i) &= \xi(i) \textrm{ if } \xi(i) < j\\
-\xi'(i) &= \xi(i-) \textrm{ if } \xi(i) > j
-\end{align*}
-%perhaps just describe the operators as functors of \simCat?
-
-\end{definition}
-
-\hide{
-
-}
+\begin{remark} The class $M$ is closed under $C_*$ and $C^*$ since the class $M$ is assumed to be closed under all the necessary constructs. \end{remark}
 
 \section{Junk}
 

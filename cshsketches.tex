@@ -68,6 +68,33 @@ Poland}
 
 \begin{document}
 
+\section{17/11/17}
+The construction of the adjoint functors is easiest to understand when we consider that all of the categories are algebras of monads on slice categories of $\ambient$. Given two simplicial objects $A$ and $B$, a bimodule $A\nrightarrow B$ is a simplicial object over $B$, with a morphism $m\of\base(M)\to \base(A)$ and an left action $\cdot$ of $\simCat$, such that $\xi\cdot x$ is defined if $\dim(m(x)) = \dom(\xi)$ and $\dim(m(\xi\cdot x)) = \cod(\xi)$.
+
+Let's forget about $B$ for now, and focus in this weird $M$ part. One functor $M\ri\of \ambient\s/A\to\ambient\s/M$ is defined by first taking the pullback along $m$ and then taking the quotient by an equivalence relation: $\tuplet{x\circ \xi , y}\sim\tuplet{x,\xi\cdot y}$. The simplicial structure of $M$ now comfortably turns this into a new simplicial set. What about preserving morphisms? Because morphisms commute with the restriction action on $A$, the quotient is well defined, and the way that the new restriction is defined poses no difficulties. Hence, functor.
+
+Another functor $m_*\of\ambient\s/M\to \ambient\s/A$ is defined by first taking the fibred product $\prod_m(X)$ and then by taking the equalizer of the two restriction actions definable on this product: $f(\xi\cdot x) = f(x)\cdot \xi$ for all $x$ and $\xi$ where $\cdot$ is defined. Here the monad plays a clearer role. There are two algebras for the same monad on the product, and we pick the element where both actions agree.
+Once again, we have to ask whether this works well with morphisms, but the pointwise definitions hardly form a challenge.
+
+That $m_*$ preserves modesty follows from our assumptions about modesty. What about adjunction?
+
+For starts, we already have an adjunction between the pullback and the fibred product. The coequalizer and equalizers fit together to make the adjunction between $m\ri$ and $m_*$ work.
+
+Reintroducing $B$, we get a simpler adjunction $\ambient\s/B\to \ambient\s/M$ in the form of the reindexing functor and its left adjoint. When applied to the descend problem, $B$ is the family of horns, and $A$ is the family of simplices. This idea of fattening becomes a little but clearer, although some strange shit happens on the way back down to $A$. At that point the specifics of the construction are required to prove that the descend functor is right inverse to reindexing as it should, and that its left adjoint preserves coequalizers.
+
+Note: $\tuplet{x\circ \xi , y}\sim\tuplet{x,\xi\cdot y}$ means the projection to $y$ is not well defined! This means that the result is no simplicial set over $M$ nor a member of category $\ambient\s/M$.
+
+Note: $M$ should be closed under quotients. Is it though?
+
+
+\paragraph{rewriting ideas}
+\begin{itemize}
+\item Use object of lifting problems more often. This may be easier to follow than arguments about lifting problems in slice categories. Emphasize the importance of $\ambient$-indexed coproducts everywhere.
+\item Try to use intuitions about monad to do the pushout product and pullback exponential better.
+\end{itemize}
+
+
+
 \section{3/11/17}
 The construction uses nerves of partially ordered objects of $\ambient$. The Yoneda lemma tells us that this is a fully faithful subcategory of the category of simplicial objects.
 
