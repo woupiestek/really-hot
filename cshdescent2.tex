@@ -41,13 +41,16 @@ For each fibration $f\of X\to \horn_P$ there is a fibration $Df\of Y\to\simplex_
 \newcommand\dsum[1]{\Sigma_{#1}}
 \begin{proof}
 There is in fact an adjoint pair of functors $(D\dashv K)\of\ambient\s/\simplex_P\to\ambient\s/\horn_P$ by definition \ref{descend functor}.
-The adjunction arises form a \emph{bisimplicial object} 
+The adjunction arises form a \emph{bisimplicial object} %cosimplicial
+
 The functor $D$ is constructed using only limits and dependent products and that is why $Df$ is in $M$ if $f$ is (see lemma \ref{preserved modesty}).
 The constraint that $Df$ is the pullback along $k_P$ is easily satisfied (see lemma \ref{...}).
 Right adjoints preserve fibrations if their left adjoint preserve acyclic cofibrations and lemma \ref{descend} shows that $K$ preserves acyclic cofibrations.
 
 \hide{I have not found the right balance between details that must be in here and that must be postponed yet}
 \end{proof}
+
+
 
 
 \subsection{Cosimplicial objects}
@@ -61,7 +64,7 @@ This subsection delves into cosimplicial objects in $\ambient$ to show how adjoi
 Cosimplicial are like simplicial objects, but with the dual action of the category $\simCat$.
 
 \begin{definition} Let $A$ and $B$ be simplicial sets and let $C$ be a cosimplicial object of $\ambient\s/\cat B$ such that the underlying morphism of $\codim(C)$ factors through $\dim(A)$ in $\ambient$. This means that $C$ has both a simplicial and a cosimplicial structure, and that
-there are $a\of\base(C)\to A$ and $b\of\base(C)\to B$ such that 
+there are $a\of\base(C)\to\base(A)$ and $b\of\base(C)\to\base(B)$ such that 
 \begin{align*}
 \dim(c) &= \dim(b(c)) & \codim(c) &= \dim(a(c))\\b(\phi\cdot c) &= b(c) & b(c\cdot\phi)&=b(c)\cdot\phi\\
 \end{align*}
@@ -77,7 +80,9 @@ The functor $C_*$ is right adjoint to the functor $C\ri$.
 A morphism $f\of X\to C_*Y$ is a morphism $f\to X \to \dprod a(b\ri(Y))$ that satisfies $f(x\cdot\phi)(c) = f(x)(c)\cdot\phi = f(x)(\phi\cdot c)$. Therefore the transpose $f^t\of \dsum b(a\ri(X)) \to Y$, which satisfies $f^t\tuplet{x,c} = f(x)(c)$, factors uniquely through $C\ri(X)$. In the other direction, a morphism $g\of C\ri\to Y$ can be composed with the quotient map $\dsum b(a\ri(X)) \to C\ri(X)$ and transposed to get a morphism $g\of X \to \dprod a(b\ri(Y))$ that factors through the inclusion $C_*Y\to \dprod a(b\ri(Y))$. \hide{Where do $\dprod a$ and $\dsum b$ live?}
 \end{definition}
 
-\begin{remark} The class $M$ is closed under $C_*$ and $C^*$ since the class $M$ is assumed to be closed under all the necessary constructs. \end{remark}
+\begin{remark} 
+\hide{What is this all about? Add reference to $M$.}
+The class $M$ is closed under $C_*$ and $C^*$ since the class $M$ is assumed to be closed under all the necessary constructs. \end{remark}
 
 \section{Junk}
 

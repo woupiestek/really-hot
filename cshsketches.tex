@@ -68,6 +68,24 @@ Poland}
 
 \begin{document}
 
+\section{1/12/17}
+I have a first draft of a section on cosimplicials now. How much does it do for me?
+
+We need to work out the details on the cosimplicial object. That determines both why $D$ is actually a descend functor that preserves fibrations.
+
+There is a mismatch between the total set of problems, en the solution in the sense that the solutions aren't necessarily different. I.e. $P$ has many members that have the same solutions. There should be some map for this.
+
+\paragraph{nerves}
+Since nerves make things easier, find a poset to represent the set of problems.
+
+\[ P = \set{\tuplet{i,j,k}|i\of\nno,j\leq i, k\leq i}\]
+Where $\tuplet{i,j,k}\leq \tuplet{i',j',k'}$ if $i=i'$, $j=j'$ and $k=k'$. That is because the first to number serve as indices to the set of problems.
+
+The subset $Q = \set{\tuplet{i,j,k}\of P|j\neq k}$ allows us to define the functor $S$ in an easier way. Given $f:X\to P$ we extends the domain is an unfortunately complicated way. For each $i\of\nno$ and $j\of[i]$ we add the slices of $[i] - j$ to the fibre over $j$. The new ordering puts the slices above $x\of X$ such that $f(x)\leq j$ and below $x\of X$ where $f(x)>j$. That is it.
+
+Too much work perhaps. I feel we only need only one good monotone map and do the rest in the category of simplicial sets. The domain is still a coproduct of two different posets with extra inequalities added to the ordering.
+
+
 \section{17/11/17}
 The construction of the adjoint functors is easiest to understand when we consider that all of the categories are algebras of monads on slice categories of $\ambient$. Given two simplicial objects $A$ and $B$, a bimodule $A\nrightarrow B$ is a simplicial object over $B$, with a morphism $m\of\base(M)\to \base(A)$ and an left action $\cdot$ of $\simCat$, such that $\xi\cdot x$ is defined if $\dim(m(x)) = \dom(\xi)$ and $\dim(m(\xi\cdot x)) = \cod(\xi)$.
 
