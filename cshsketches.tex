@@ -1,72 +1,91 @@
-\documentclass{tac}
+\documentclass[csh.tex]{subfiles}
 \usepackage{amssymb, amsmath}
 \usepackage[backend=bibtex,citestyle=authoryear-icomp]{biblatex}
 \usepackage[all]{xy}
 \usepackage{url}
 
-\title{Constructive Simplicial Homotopy}
-\author{Wouter Pieter Stekelenburg}
-\copyrightyear{2015,2016,2017}
-\address{Faculty of Mathematics, Informatics and Mechanics\\
-University of Warsaw\\
-Banacha 2\\
-02-097 Warszawa\\
-Poland}
-\eaddress{w.p.stekelenburg@gmail.com}
-\keywords{realizability, simplicial homotopy, Kan complexes}
-\amsclass{03D80, 18G30, 18G55}
-
-\newcommand\hide[1]{}
-\newcommand\cat\mathcal
-\newcommand\set[1]{\left\{#1\right\}}
-\mathrmdef{id}
-\mathrmdef{dom}
-\mathrmdef{cod}
-\newcommand\ri{^*}
-\newcommand\N{\mathbb N}
-\mathbfdef[nno]{N}
-\newcommand\dual{^{\mathrm{op}}}
-\mathbfdef[simCat]\Delta
-\newcommand\s{^{\simCat\dual}}
-\newcommand\bang{!}
-\newcommand\of{:}
-\newcommand\simplex\Delta
-\newcommand\cycle{\partial\Delta}
-\newcommand\horn\Lambda
-\newcommand\f{_f}
-\newcommand\tuplet[1]{\left\langle #1 \right\rangle}
-\newcommand\true{\mathtt{true}}
-\newcommand\false{\mathtt{false}}
-\newcommand\bool{\mathtt{bool}}
-\mathrmdef{nat}
-\mathssbxdef{Ar}
-\mathssbxdef{Ob}
-\newcommand\pp{\mathbin\diamond}
-\newcommand\norm[1]{\Vert #1 \Vert}
-\newcommand\ka\kappa
-\newcommand\la\lambda
-\mathrmdef{face}
-\mathrmdef{colim}
-\newcommand\ex{_{\textrm{ex}}}
-\newcommand\citep[1]{[\cite{#1}]}
-\mathrmdef{dim}
-\newcommand\base{\mathbf{U}}
-\mathssbxdef[sub]{Sub}
-\newcommand\ambient{\mathfrak A}
-\mathrmdef{uni}
-\newcommand\disc{_{\rm disc}}
-\mathrmdef{filler}
-\newcommand\traco\omega
-
-\newcommand\product[2]{\Pi #1 \mapsto #2}
-\newcommand\coproduct[2]{\Sigma #1 \mapsto #2}
-\newcommand\function[2]{\lambda #1 \mapsto #2}
-
-\newcommand\keyword[1]{\emph{#1}\label{#1}}
-
-
-
 \begin{document}
+
+\section{15/12/17}
+What to do today?
+
+Some of the posets really look like dependent sums of exponentials. I keep struggling with that fact, because it keeps looking like a simpler exponential will do the trick.
+
+The object of problems is $\set{ \tuplet{\xi,k,l} | \xi\of\Ar(\simCat), k\of \dom(f), l\of\cod(f) }$.
+The descend functor and its left adjoint depend on $\cod(\xi)$ and $l$ only.
+The object of problems is actually $\hom_{\set\geq}(\horn_{\set\geq},V)$? Only if we forget that we have to solve a family of lifting problems!
+Once we take those, we see that the problem space is actually a pullback:
+\[ P\of \set{ \tuplet{\xi,k,l,v} | \xi\of\Ar(\simCat), k\of \dom(f), l\of\cod(f), v\of\horn_l[\cod(f)]\to V } \]
+
+Over this problem space we find the families of horn inclusions to descend along. It only depends on $\cod(f)$ and $l$, with the rest of the variables sitting there, doing nothing.
+The cosimplicial stuff works with the richer sets and depends on the same dimensions of course. It is easy to forget which side has the codirection.
+We should have a simplicial set over the horns, whose underlying object has an independent cosimplicial structure over the simplices the horns are included in.
+
+A slightly easier way to view this cosimplicial, is as a family of posets (po-objects?) over $P$, or once again, rather its projection onto the relevant indices. Here we get a unexpected dependence on $\xi$, however.
+
+We may have a real problem here. We need to proof that a 'codescend' construction along a specific horn preserves specific acyclic cofibration. Inspection now suggests that the codescend construction depends on the acyclic cofibration we are trying to lift. This is not permitted.
+There is no direct dependence: $\xi$ is the value of the cosimplicial structure. We have a family of posets $A$ and a map $b\of\base(A)\to\base(\simplex_\leq)$ and the $\xi$ that is worrying us, is simply this $b$. So no real problem.
+
+The construction is actually rather strange than. For each element of $\base(\horn_\leq)$, we get a collection of factorization through other posets over their codomains. Those other posets are really best indexed with their target pairs\dots.
+That is how it works: there is a cosimplex of posets over $\base(\simplex_\leq)$. The nerve preserves the cosimplicial structure, and adds a morphism to $\horn_\leq$. 
+
+\paragraph{down to earth?}
+The category $\ambient/\nno$ has two monads $-\otimes\simCat$ and $\simCat\times-$. Simplicial objects are algebras for $S$ and cosimplicial objects are algebras for $C$. Everything comes together in this category, including the discrete problem objects, families of posets over them etc. So can we just work here? The functor requires two dimensions on every object.
+
+We are dealing with endoprofunctors on $\simCat$.
+
+I have cleared all the obstacles, but the sheer complexity prohibits progress.
+
+\begin{itemize}
+\item the adjunction is our argument for preservation of fibrations.
+\item it is also to source of preserved $M$.
+\item the bimodule that generates the adjunction is fucking complicated itself.
+\item we haven't even started showing that is sends the generic family of acyclic cofibration to a family of cofibrations.
+\end{itemize}
+
+There seems to be no birds-eye view here. Everything is in the fucking details.
+
+\paragraph{details}
+The underlying object:
+\begin{align*} S = &\set{\tuplet{\xi,i,0,j}| j\of \dom(\xi)} \cup\\
+&\set{\tuplet{\xi,i,1,j}| j\of \cod(\xi) - \set i\to\dom(\xi),\xi\circ j = d_i}\\
+\end{align*}
+
+Where $d_i$ is the inclusion $\cod(\xi) - \set i \to \cod(\xi)$.
+Its ordering:
+\begin{align*}
+\tuplet{\xi,i,0,j} < \tuplet{\xi,i,0,j'}&\iff j< j'\\
+\tuplet{\xi,i,0,j} < \tuplet{\xi,i,1,j'}&\iff j\leq i\\
+\tuplet{\xi,i,1,j} < \tuplet{\xi,i,1,j'}&\iff \exists k\of \cod(\xi) - \set i. j(k) < j'(k) \\
+\tuplet{\xi,i,1,j} < \tuplet{\xi,i,0,j'}&\iff i < j'
+\end{align*}
+Note however, that we still have to take the nerve to see this monster in its full glory.
+
+The important non decreasing map:
+\begin{align*}
+s\of S &\to \set\leq\\
+s\tuplet{\xi,i,0,j} &= \tuplet{\xi(j),\cod(\xi)}\\
+s\tuplet{\xi,i,1,j} &= \tuplet{i,\cod(\xi)}\\
+\end{align*}
+
+
+This is the most simplified version, without the map to $V$ hanging around to cause confusion.
+The nerve defines its own dimensions. Important point though: the morphisms cannot cross over to different $\tuplet{\xi,i}$ because the ordering doesn't connect any of those. 
+
+The nerve takes non decreasing maps $\sigma\of[n]\to S$, and creates a simplicial object from them. We take a subset by the way: 
+\[ D = \set{ \sigma\of N(S)|s\circ \sigma \of \base(\horn_{\set\leq}) }\]
+This immediately shows how to map to the horn. 
+
+If $\xi = \xi' \circ \phi$, then $\phi\of\tuplet{\xi,i}\to\tuplet{\xi',i}$ and: 
+\begin{align*}
+S(\phi)\of S\tuplet{\xi,i}&\to S\tuplet{\xi',i}\\
+S(\phi)\tuplet{\xi,i,0,j} &= \tuplet{\xi',i,0,\phi(i)}\\
+S(\phi)\tuplet{\xi,i,1,j} &= \tuplet{\xi',i,0,\phi\circ j}
+\end{align*}
+So the `codimension' of $\tuplet{\xi,i,j,k}$ is $\dom(\xi)$, and $S(\phi)$ defines the cosimplicial structure. Note that:
+\[ s\tuplet{\xi',i}\circ S(\phi) = s\tuplet{\xi,i}\]
+
+Suppose $\sigma \of D$. The first two elements $\sigma(0)_{01}$ is all we need to get were we need to be in $\base(\simplex_{\set\leq})$. Done!
 
 \section{1/12/17}
 I have a first draft of a section on cosimplicials now. How much does it do for me?

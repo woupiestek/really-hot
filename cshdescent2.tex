@@ -24,13 +24,14 @@ The following fact makes the universal modest fibration a potential model of hom
 \begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant. \label{fibrant universe} \end{theorem}
 
 \begin{proof} 
-The object of lifting problems $P$ is $\hom_{\set\geq}(\horn_{\set\geq},V)$. There is an indexed coproduct of horn inclusions $k_P\of \horn_P\to\simplex_P$. The object $V$ is fibrant if and only if the canonical morphism $v\of\horn_P\to V$ factors through $k_P$, because such a factroisation solves all the lifting problems.\hide{Explain how this is constructed?}
+The object of lifting problems $P$ is $\hom_{\set\geq}(\horn_{\set\geq},V)$. There is an indexed coproduct of horn inclusions $k_P\of \horn_P\to\simplex_P$. The object $V$ is fibrant if and only if the canonical morphism $v\of\horn_P\to V$ factors through $k_P$, because such a factorization solves all the lifting problems.\hide{Explain how this is constructed?}
 
 The modest fibration $v\ri(\uni)\of \horn_P\times_V U \to \horn_P$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex_P$ by lemma \ref{descent}. Descend means that $v\ri(\uni)$ is the pullback of $D(v\ri(\uni))$ along $k_P$.
 By the existence part of definition \ref{universal modest fibration} there is a $\chi\of\simplex_P\to V$ such that $D(v\ri(\uni))$ is the pullback of $\uni$ along $\chi$ making $v$ a pullback of $\uni$ along $\chi\circ k_P$. By the uniqueness part of definition \ref{universal modest fibration} $\chi\circ k_P=v$, which proves that $V$ is fibrant.
 \[\xymatrix{
 \horn_P\times_V U \ar@/^2ex/[rrr] \ar[r]\ar[d]_{v\ri(\uni)} & \bullet \ar[rr]\ar[d]_{D(v\ri(\uni))} && U\ar[d]^\uni\\
-\horn_P\ar@/_2ex/[rrr]_v\ar[r]^{k_P} & \simplex_P\ar[rr]^{\chi} && V
+\horn_P\ar[d]\ar@/_2ex/[rrr]_(.6)v\ar[r]^{k_P} & \simplex_P\ar[d]\ar[rr]^{\chi} && V\\
+\horn_\leq\ar[r]^k & \simplex_\leq\\
 }\]
 \end{proof}
 
@@ -40,8 +41,30 @@ For each fibration $f\of X\to \horn_P$ there is a fibration $Df\of Y\to\simplex_
 
 \newcommand\dsum[1]{\Sigma_{#1}}
 \begin{proof}
-There is in fact an adjoint pair of functors $(D\dashv K)\of\ambient\s/\simplex_P\to\ambient\s/\horn_P$ by definition \ref{descend functor}.
-The adjunction arises form a \emph{bisimplicial object} %cosimplicial
+
+
+
+
+
+
+
+
+
+There is a specific adjoint pair of functors $(D\dashv C)\of\ambient\s/\horn_P\to\ambient\s/\simplex_P$.
+
+
+The functor $D$ is defined in terms of fibred exponentials and limits alone, and and therefore sends members of $M$ to members of $M$. 
+
+
+
+There is a generic family $g$ of acyclic cofibrations in $\ambient\s/\simplex_P$, and $C(g)$ is also a family of acyclic cofibrations. For that reason, $D$ preserves fibrations.
+
+
+
+
+
+
+The adjunction arises form a \emph{cosimplicial object} %cosimplicial
 
 The functor $D$ is constructed using only limits and dependent products and that is why $Df$ is in $M$ if $f$ is (see lemma \ref{preserved modesty}).
 The constraint that $Df$ is the pullback along $k_P$ is easily satisfied (see lemma \ref{...}).
