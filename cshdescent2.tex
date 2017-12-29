@@ -24,7 +24,9 @@ The following fact makes the universal modest fibration a potential model of hom
 \begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant. \label{fibrant universe} \end{theorem}
 
 \begin{proof} 
-The object of lifting problems $P$ is $\hom_{\set\geq}(\horn_{\set\geq},V)$. There is an indexed coproduct of horn inclusions $k_P\of \horn_P\to\simplex_P$. The object $V$ is fibrant if and only if the canonical morphism $v\of\horn_P\to V$ factors through $k_P$, because such a factorization solves all the lifting problems.\hide{Explain how this is constructed?}
+There is an object of lifting problems $P$ together with a map $p\of P\to\set{\leq}$ that indicates which horn inclusion $\horn[p(x)_1]_{p(x)_0}\to\simplex[p(x)_1]$ is involved.
+There is an indexed coproduct of horn inclusions $k_P\of\horn_P\to \simplex_P$ over the object $P$, namely the pullback of the family $\horn_{\set\leq}\to\simplex_{\set\leq}$ along $p\disc\of P\disc\to\set{\leq}$ in $\ambient\s$.
+The object $V$ is fibrant if and only if the canonical morphism $v\of\horn_P\to V$ factors through $k_P$, because such a factorization solves all the lifting problems.
 
 The modest fibration $v\ri(\uni)\of \horn_P\times_V U \to \horn_P$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex_P$ by lemma \ref{descent}. Descend means that $v\ri(\uni)$ is the pullback of $D(v\ri(\uni))$ along $k_P$.
 By the existence part of definition \ref{universal modest fibration} there is a $\chi\of\simplex_P\to V$ such that $D(v\ri(\uni))$ is the pullback of $\uni$ along $\chi$ making $v$ a pullback of $\uni$ along $\chi\circ k_P$. By the uniqueness part of definition \ref{universal modest fibration} $\chi\circ k_P=v$, which proves that $V$ is fibrant.
@@ -36,45 +38,72 @@ By the existence part of definition \ref{universal modest fibration} there is a 
 \end{proof}
 
 \begin{lemma}
-For each fibration $f\of X\to \horn_P$ there is a fibration $Df\of Y\to\simplex_P$ such that $f$ is the pullback of $Df$ along $k_P$. Moreover, if $f$ is in $M$, so is $Df$. \hide{is this last bit proven anywhere?} \label{descent}
+For each fibration $f\of X\to \horn_P$ there is a fibration $D(f)\of D(X)\to\simplex_P$ such that $f$ is the pullback of $Df$ along $k_P$. Moreover, if $f$ is in $M$, so is $Df$. \hide{is this last bit proven anywhere?} \label{descent}
 \end{lemma}
 
 \newcommand\dsum[1]{\Sigma_{#1}}
 \begin{proof}
+There is a dependent product $(k_P)_*(f)$ of $f$ along $k_P$. This product satisfies $k_P\ri((k_P)_*(f))\simeq f$. The product is modest whenever $f$ is modest. Moreover, the product has the right lifting property with respect to acyclic cofibrations that $k_P\ri$ sends to acyclic cofibrations. Since $k_P\ri$ doesn't preserve acyclic cofibrancy, the product is not a fibration. The fibration $D(f)$ regains the right lifting property by adding faces to $(k_P)_*(f)$.
 
-
-
-
-
-
-
-
-
-There is a specific adjoint pair of functors $(D\dashv C)\of\ambient\s/\horn_P\to\ambient\s/\simplex_P$.
-
-
-The functor $D$ is defined in terms of fibred exponentials and limits alone, and and therefore sends members of $M$ to members of $M$. 
-
-
-
-There is a generic family $g$ of acyclic cofibrations in $\ambient\s/\simplex_P$, and $C(g)$ is also a family of acyclic cofibrations. For that reason, $D$ preserves fibrations.
-
-
-
-
-
-
-The adjunction arises form a \emph{cosimplicial object} %cosimplicial
-
-The functor $D$ is constructed using only limits and dependent products and that is why $Df$ is in $M$ if $f$ is (see lemma \ref{preserved modesty}).
-The constraint that $Df$ is the pullback along $k_P$ is easily satisfied (see lemma \ref{...}).
-Right adjoints preserve fibrations if their left adjoint preserve acyclic cofibrations and lemma \ref{descend} shows that $K$ preserves acyclic cofibrations.
-
-\hide{I have not found the right balance between details that must be in here and that must be postponed yet}
+The construction of $Df$ works roughly as follows. 
+There is a family of simplicial objects and morphisms $\set{S_\xi\to \simplex_P|\xi\of\base(\simplex_P)}$ (see definition \ref{nerve})
+such that:
+%these aren't the conditions we actually need.
+\begin{itemize}
+\item The pullback $s_\xi\ri(k_P)\of \horn_P\times_{\simplex_P}S_\xi \to S_\xi$ is an acyclic cofibration. %lemma
+\item If $\xi\of\base(\horn_P)\subseteq \base(\simplex_P)$, then $s_\xi$ is isomorphic to the $\xi$ face of $\horn_P$. %lemma
+\end{itemize}
+The faces of the underlying object of $D(X)$ are maps $s_\xi\to(k_P)_*(f)$--or equivalently maps $k_P\ri(s_\xi)\to f$. %def
+These guarantee that $D(f)$ is a fibration and that $k_P\ri(Df) \simeq f$. %lemma
+Moreover, because the underlying map of $Df$ is a dependent product of a member of $M$, the underlying map of $Df$ belongs to $M$ as well. %lemma
+\[\xymatrix{
+\horn_P\times_{\simplex_P}S_\xi\ar[r]^(.7){s_\xi\ri(k_P)}\ar[d]_{k_P\ri(s_\xi)} & S_\xi\ar[d]^{s_\xi}\\
+\horn_P \ar[r]_{k_P} & \simplex_P
+}\]
+Details are worked out in definition and lemmas below which deal with internalization of this construction in $\ambient$.
 \end{proof}
 
 
+\begin{definition}
+Define the partially ordered object $(X,\leq)$ in $\ambient$ as follows.
+\[X = \set{\tuplet{\xi,i,0,j}|j\of\dom(\xi)}\cup
+\set{\tuplet{\xi,i,0,j}|j\of[\cod(\xi)-1]\to \dom(\xi),\xi\circ j = d_i}\]
+Where $d_i$ is the \keyword{face map} $[\cod(\xi)-1]\to[\cod(\xi)]$ that satisfies $d_i(j) = j$ if $j<i$ and $d_i(j) = j+1$ if $j\geq i$.
+\begin{align*}
+\tuplet{\xi,i,0,j}\leq\tuplet{\xi',i',0,j'} &\iff \xi=\xi',i=i',j\leq j'\\
+\tuplet{\xi,i,0,j}\leq\tuplet{\xi',i',1,j'} &\iff \xi=\xi',i=i',j \leq i'\\ 
+\tuplet{\xi,i,1,j}\leq\tuplet{\xi',i',0,j'} &\iff \xi=\xi',i=i',i < j'\\ 
+\tuplet{\xi,i,1,j}\leq\tuplet{\xi',i',1,j'} &\iff \xi=\xi',i=i',
+\forall k\of[\cod(\xi)-1].j(k)\leq j'(k)\\  
+\end{align*}
+Let:
+\begin{align*}
+a\tuplet{\xi,i,j,k} &= \tuplet{i,\cod(\xi)}\\
+b\tuplet{\xi,i,0,j} &= \xi(j)& 
+b\tuplet{\xi,i,1,j} &= i\\
+\end{align*}
 
+Partially ordered objects like $(X,\leq)$ have a \keyword{nerve} $N(X,\leq)$ which is a simplicial object. The object $\base(N(X,\leq))$ consist of \emph{non decreasing} maps $[n]\to X$ for arbitrary $n\of\nno$. 
+For $y\of \base(N(X,\leq))$:
+\begin{align*}
+[\dim(y)] &= \dom(y)\\
+y\cdot \phi &= y\circ \phi\\
+\end{align*}
+Note that because $[n]$ is connected, nondecreasing $y\of[n]\to X$ are constant in the first two variables, meaning therefore $a(y(i)) = a(y(0))$ Let $N(x)\of N(X,\leq)\to \simplex_\leq$ satisfy 
+\[ N(x)(y) = \tuplet{a(y(0)),b\circ y} \]
+
+The family $s\of S\to \simplex_P$ is the pullback of $N(x)$ along $p\disc\of P\disc\to\set\leq\disc$. 
+This means $\base(S)$ consist of pairs $\tuplet{f,g}$ of lifting problems $f\of \horn[i]_j\to V$ and non decreasing maps $g\of [k] \to (X,\leq)$ such that $N(x)(f)= \tuplet{j,i,\phi}$ for a $\phi$ with $\cod(\phi)=[i]$.
+
+\[\xymatrix{
+S\ar[d]\ar[r]^s& \simplex_P \ar[d]\ar[r] &P\disc\ar[d]^{p\disc}\\
+N(X,\leq)\ar[r]_{N(x)}&\simplex_{\set\leq}\ar[r] & \set\leq\disc
+}\]
+\end{definition}
+
+
+
+\section{Junk}
 
 \subsection{Cosimplicial objects}
 This subsection delves into cosimplicial objects in $\ambient$ to show how adjoint pairs of functors between slice categories of $\ambient\s$ can be constructed from them. The goal is to demonstrate constructiveness rather than to present something new. We are essentially deriving adjoint pairs of functors between presheaf toposes from functors between their categories of representables.
@@ -107,7 +136,6 @@ A morphism $f\of X\to C_*Y$ is a morphism $f\to X \to \dprod a(b\ri(Y))$ that sa
 \hide{What is this all about? Add reference to $M$.}
 The class $M$ is closed under $C_*$ and $C^*$ since the class $M$ is assumed to be closed under all the necessary constructs. \end{remark}
 
-\section{Junk}
 
 The rest of this section works out the definition and the properties of $K$.
 

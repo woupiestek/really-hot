@@ -6,6 +6,73 @@
 
 \begin{document}
 
+\section{29/12/17}
+How do we prove descend?
+
+
+\paragraph{properly defining the object of problems}
+
+In general, it may be smart to introduce default function names
+for every bit of structure often used. I.e. an object of a slice category is a pair $P = \tuplet{\base(B),\mathbf{supp}(B)}$ etc.
+
+Beyond that, I just need some consistency.
+
+
+\paragraph{ambition}
+Actually turning this into a programming language\dots
+So all the structure on $\ambient$ becomes definitions for types and functions. There is no real computation beyond the unification of paths, because type checking requires this.
+
+Much of what we define goes beyond $\ambient$, however. A simplicial object is a type and a couple of functions on top. The proper class of simplicial objects exists on a whole other level than the internal structure we can prove the properties of.
+We can add it to the language as a kind system, where kinds are closed under limits somehow, but little more.
+
+Perhaps the 'proper class as a kind' clarifies my world: take the exactness of $\ambient$. The pseudoequivalences in $\ambient$ are tuples of morphisms satisfying certain equations: a proper class. Our assumption is that there is a function that takes an element of this class to a coequalizer.
+Here things get interesting: to provide a unique factorization we need another function. The path unification algorithm has to enforce uniqueness, otherwise 
+
+I don't know about feasibility. I think what I need is more than just path unification, to prove equalities than cannot be derived.
+
+\paragraph{the right pullback?}
+I don't see yet how the fact that the pullback $s_\xi\ri(k_P)\of \horn_P\times_{\simplex_P}S_\xi \to S_\xi$ is an acyclic cofibration, will ultimately factor into the proof. Perhaps a factorization provides an easier way to establish that some morphisms are acyclic cofibrations.
+I think it is a red herring.
+
+Most monomorphisms between simplices over $\simplex_P$ get preserved in the pullback along $k_P$ because they factor through it. There is literally one family of exceptions, which is the focus of the proof.
+
+\section{17/12/17}
+No nerve? We take the nerve of $S$ and then use it in the construction of an adjoint pair of functors. Can we combine the constructions and skip the nerve altogether? I suspect the answer is no.
+
+There clearly is an adjunction, now that I think of it. The left adjoint takes a simplicial object $X$ to the ordered object:
+\[ \set{\tuplet{x,n}|x\of\base(X),n\leq \dim(x)} \]
+Where $\tuplet{x,n}<\tuplet{x',n'}$ if and only if $x=x'$ and $n<n'$. Morphisms pose no problem.
+In order to get transposes of simplicial morphisms, we need to demand that $f(\tuplet{x\cdot\phi,n}) = f(\tuplet{x,\phi(n)})$... so we take the quotient be the least equivalence $\sim$ that makes $\tuplet{x\cdot\phi,n}\sim \tuplet{x,\phi(n)}$. This has consequences for the ordering as well. A nondecreasing map now transposes to a map into the nerve.
+
+Does this help us somehow? It is kind of interesting that we don't need dimension anymore. We just deal with posets. Also, rather than a monad on the category of poset, we ought to get a comonad.
+A! The ordering is not always decidable because it extends equality. Decidability may be crucial in several crucial cases. That is an important point.
+
+\paragraph{Planning}
+The idea that power the latest rewrites is to let the structure of the proof determine the structure of the text. This seems impossible right now. So we need another structure.
+
+'distributions' or 'distributors' of simplicial sets. Descend is a 'distribution', a generalized function that takes values beyond simple simplices.
+
+We don't actually need the structure on $\horn$. The one on $\simplex$ is fine, but it is similar in nature.
+
+I walk away with a couple of questions:
+\begin{itemize}
+\item What is this adjunction with posets all about. Can it make our live simpler?
+\item How to structure the section on descend?
+\end{itemize}
+
+The left adjoint sends cycle and horn inclusions to isomorphisms. It destroys structure that is unavailable in the category of posets.
+Posets are a reflective subcategory, I guess. The truncation to the lowest dimension.
+
+Back planning.
+
+The basic story is that we start with the dependent product and note that it already preserves acyclic fibrations and then explain why other fibrations are not as lucky. I don't prove that there is no simpler alternative\dots
+
+\paragraph{I remember}
+After taking the fibred product, we end up with a fibration that cannot solve all lifting problems. So we glue them back in\dots
+The trick is to create a new simplicial object, that has a simplex were the product has a hole.
+
+The poset $S\to\set\leq$ guides this process, but its role is rather indirect. We can figure this out.
+
 \section{15/12/17}
 What to do today?
 
@@ -86,6 +153,9 @@ So the `codimension' of $\tuplet{\xi,i,j,k}$ is $\dom(\xi)$, and $S(\phi)$ defin
 \[ s\tuplet{\xi',i}\circ S(\phi) = s\tuplet{\xi,i}\]
 
 Suppose $\sigma \of D$. The first two elements $\sigma(0)_{01}$ is all we need to get were we need to be in $\base(\simplex_{\set\leq})$. Done!
+
+\paragraph{Conclusion}
+I propose that we just give the descend construction and then demonstrate its properties one by one.
 
 \section{1/12/17}
 I have a first draft of a section on cosimplicials now. How much does it do for me?
