@@ -23,83 +23,112 @@ The following fact makes the universal modest fibration a potential model of hom
 
 \begin{theorem} If $\uni\of U\to V$ is a universal modest fibration, then $V$ is fibrant. \label{fibrant universe} \end{theorem}
 
-\begin{proof} 
-There is an object of lifting problems $P$ together with a map $p\of P\to\set{\leq}$ that indicates which horn inclusion $\horn[p(x)_1]_{p(x)_0}\to\simplex[p(x)_1]$ is involved.
-There is an indexed coproduct of horn inclusions $k_P\of\horn_P\to \simplex_P$ over the object $P$, namely the pullback of the family $\horn_{\set\leq}\to\simplex_{\set\leq}$ along $p\disc\of P\disc\to\set{\leq}$ in $\ambient\s$.
-The object $V$ is fibrant if and only if the canonical morphism $v\of\horn_P\to V$ factors through $k_P$, because such a factorization solves all the lifting problems.
-
-The modest fibration $v\ri(\uni)\of \horn_P\times_V U \to \horn_P$ descends along $h$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex_P$ by lemma \ref{descent}. Descend means that $v\ri(\uni)$ is the pullback of $D(v\ri(\uni))$ along $k_P$.
-By the existence part of definition \ref{universal modest fibration} there is a $\chi\of\simplex_P\to V$ such that $D(v\ri(\uni))$ is the pullback of $\uni$ along $\chi$ making $v$ a pullback of $\uni$ along $\chi\circ k_P$. By the uniqueness part of definition \ref{universal modest fibration} $\chi\circ k_P=v$, which proves that $V$ is fibrant.
+Let's start with some notation that will be useful throughout the rest of this section.
+%%%formally introduce the object of problems
+\newcommand\LP{\mathbf{LP}}
+\newcommand\foh{\mathbf{h}}
+\begin{definition}
+There is an \keyword{object of lifting problems} $\LP$ in $\ambient$consisting of tuples $p = \tuplet{\top(p),\dim(p),\horn(p)\of\horn_{\top(p)}[\dim(p)]\to V}$. 
+There is an $\LP$-indexed coproduct of acyclic cofibrations $\foh_\LP\of\horn_\LP \to \simplex_\LP$ in $\ambient\s$: the pullback of the family of horn inclusions $\foh_{\set\leq}\of\horn_{\set\leq} \to \simplex_{\set\leq}$ along $(\function{p\of P}\tuplet{\top(p),\dim(p)})\disc$.
 \[\xymatrix{
-\horn_P\times_V U \ar@/^2ex/[rrr] \ar[r]\ar[d]_{v\ri(\uni)} & \bullet \ar[rr]\ar[d]_{D(v\ri(\uni))} && U\ar[d]^\uni\\
-\horn_P\ar[d]\ar@/_2ex/[rrr]_(.6)v\ar[r]^{k_P} & \simplex_P\ar[d]\ar[rr]^{\chi} && V\\
-\horn_\leq\ar[r]^k & \simplex_\leq\\
+\horn_\LP \ar[r]^{\foh_\LP}\ar[d] & \simplex_\LP\ar[d]\ar[r] & \LP\disc\ar[d]^{(\top\times\dim)\disc} \\
+\horn_{\set\leq} \ar[r]_{\foh_\LP} & \simplex_{\set\leq}\ar[r] &\set\leq\disc
+}\]
+There is a canonical morphism $\horn(\LP)\of \horn_\LP\to V$:
+\[ v\tuplet{\tuplet{\top(p),\dim(p),\xi\of \dom(\horn(p))},p} = \horn(p)(\xi)\]
+\end{definition}
+
+\begin{remark} The object $V$ is fibrant if and only if the canonical morphism $\horn(\LP)$ factors through $\foh_\LP$. On on hand such a factorization solves all the lifting problems. On the other, $\foh_\LP$ is a discrete family of acyclic cofibrations.
+\end{remark}
+
+\begin{proof}[of \ref{fibrant universe}]
+The modest fibration $\horn(\LP)\ri(\uni)\of \horn_P\times_V U \to \horn_P$ descends along $\foh_\LP$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex_\LP$ by lemma \ref{descent}. 
+Descend means that $\horn(\LP)\ri(\uni)$ is the pullback of $D(\horn(\LP)\ri(\uni))$ along $\foh_\LP$.
+By the existence part of definition \ref{universal modest fibration} there is a $\chi\of\simplex_\LP\to V$ such that $D(\horn(\LP)\ri(\uni))$ is the pullback of $\uni$ along $\chi$ making $\horn(\LP)$ a pullback of $\uni$ along $\chi\circ \foh_\LP$. By the uniqueness part of definition \ref{universal modest fibration} $\chi\circ \foh_\LP=\horn(\LP)$, which proves that $V$ is fibrant.
+\[\xymatrix{
+\horn_\LP\times_V U \ar@/^2ex/[rrr] \ar[r]\ar[d]_{v\ri(\uni)} & \bullet \ar[rr]\ar[d]|{D(v\ri(\uni))} && U\ar[d]^\uni\\
+\horn_\LP\ar@/_2ex/[rrr]_{\horn(\LP)}\ar[r]^{\foh_\LP} & \simplex_\LP\ar[rr]^{\chi} && V
 }\]
 \end{proof}
 
 \begin{lemma}
-For each fibration $f\of X\to \horn_P$ there is a fibration $D(f)\of D(X)\to\simplex_P$ such that $f$ is the pullback of $Df$ along $k_P$. Moreover, if $f$ is in $M$, so is $Df$. \hide{is this last bit proven anywhere?} \label{descent}
+For each fibration $f\of X\to \horn_\LP$ there is a fibration $D(f)\of D(X)\to\simplex_\LP$ such that $f$ is the pullback of $Df$ along $\foh_\LP$. Moreover, if $f$ is in $M$, so is $Df$.\label{descent}
 \end{lemma}
 
 \newcommand\dsum[1]{\Sigma_{#1}}
 \begin{proof}
-There is a dependent product $(k_P)_*(f)$ of $f$ along $k_P$. This product satisfies $k_P\ri((k_P)_*(f))\simeq f$. The product is modest whenever $f$ is modest. Moreover, the product has the right lifting property with respect to acyclic cofibrations that $k_P\ri$ sends to acyclic cofibrations. Since $k_P\ri$ doesn't preserve acyclic cofibrancy, the product is not a fibration. The fibration $D(f)$ regains the right lifting property by adding faces to $(k_P)_*(f)$.
+Reindexing along $\foh_\LP$ has a right adjoint $(\foh_\LP)_*$. As required for descend, $\foh_\LP\ri((\foh_\LP)_*(f))$ is isomorphic to $f$ because $\foh_\LP$ is a monomorphism. For $f\of X\to \horn_\LP$, the product is modest whenever $f$ is modest. Moreover, $(\foh_\LP)_*(f)$ has the right lifting property with respect to acyclic cofibrations that the reindexing functor $\foh_\LP\ri$ sends to acyclic cofibrations. Since $\foh_\LP\ri$ doesn't always preserve acyclic cofibrancy, the product is not a fibration. The fibration $D(f)$ regains the right lifting property by adding faces to $(\foh_\LP)_*(f)$, where needed.
 
-The construction of $Df$ works roughly as follows. 
-There is a family of simplicial objects and morphisms $\set{S_\xi\to \simplex_P|\xi\of\base(\simplex_P)}$ (see definition \ref{nerve})
-such that:
-%these aren't the conditions we actually need.
+The construction of $Df$ informally works as follows.
+$\ambient\s/\simplex_\LP$ is equivalent to $\ambient^{\cat P\dual}$ for an internal category $\cat P$ of $\ambient$, and $\ambient\s/\horn_\LP$ is equivalent to $\ambient^{\cat Q\dual}$ for a subcategory $\cat Q$ of $\cat P$. There is a functor $S\of\cat P\to \ambient^{\cat P\dual}$ such that: %def
 \begin{itemize}
-\item The pullback $s_\xi\ri(k_P)\of \horn_P\times_{\simplex_P}S_\xi \to S_\xi$ is an acyclic cofibration. %lemma
-\item If $\xi\of\base(\horn_P)\subseteq \base(\simplex_P)$, then $s_\xi$ is isomorphic to the $\xi$ face of $\horn_P$. %lemma
+\item for each object $Q$ of $\cat Q$, $S(Q)$ factors through $\foh_\LP$.
+\item for each monomorphism $m$ of $\cat P$, $\foh_\LP\ri(S(m))$ is an acyclic cofibration.
 \end{itemize}
-The faces of the underlying object of $D(X)$ are maps $s_\xi\to(k_P)_*(f)$--or equivalently maps $k_P\ri(s_\xi)\to f$. %def
-These guarantee that $D(f)$ is a fibration and that $k_P\ri(Df) \simeq f$. %lemma
-Moreover, because the underlying map of $Df$ is a dependent product of a member of $M$, the underlying map of $Df$ belongs to $M$ as well. %lemma
+The underlying object of $D(X)$ consists of maps $S(\xi)\to(\foh_\LP)_*(f)$--or equivalently maps $\foh_\LP\ri(S(\xi))\to f$. %def
+The conditions imply both that $D(f)$ is a fibration and that $\foh_\LP\ri(Df) \simeq f$. %lemma
+Moreover, because the underlying map of $Df$ is still a dependent product of a member of $M$, the underlying map of $Df$ belongs to $M$ as well. %lemma
 \[\xymatrix{
-\horn_P\times_{\simplex_P}S_\xi\ar[r]^(.7){s_\xi\ri(k_P)}\ar[d]_{k_P\ri(s_\xi)} & S_\xi\ar[d]^{s_\xi}\\
-\horn_P \ar[r]_{k_P} & \simplex_P
+\horn_\LP\times_{\simplex_\LP}\bullet\ar[r]^(.7){S(\xi)\ri(\foh_\LP)}\ar[d]_{\foh_\LP\ri(S(\xi))} & \bullet\ar[d]^{S(\xi)}\\
+\horn_\LP \ar[r]_{\foh_\LP} & \simplex_\LP
 }\]
 Details are worked out in definition and lemmas below which deal with internalization of this construction in $\ambient$.
 \end{proof}
 
-
 \begin{definition}
-Define the partially ordered object $(X,\leq)$ in $\ambient$ as follows.
-\[X = \set{\tuplet{\xi,i,0,j}|j\of\dom(\xi)}\cup
-\set{\tuplet{\xi,i,0,j}|j\of[\cod(\xi)-1]\to \dom(\xi),\xi\circ j = d_i}\]
-Where $d_i$ is the \keyword{face map} $[\cod(\xi)-1]\to[\cod(\xi)]$ that satisfies $d_i(j) = j$ if $j<i$ and $d_i(j) = j+1$ if $j\geq i$.
-\begin{align*}
-\tuplet{\xi,i,0,j}\leq\tuplet{\xi',i',0,j'} &\iff \xi=\xi',i=i',j\leq j'\\
-\tuplet{\xi,i,0,j}\leq\tuplet{\xi',i',1,j'} &\iff \xi=\xi',i=i',j \leq i'\\ 
-\tuplet{\xi,i,1,j}\leq\tuplet{\xi',i',0,j'} &\iff \xi=\xi',i=i',i < j'\\ 
-\tuplet{\xi,i,1,j}\leq\tuplet{\xi',i',1,j'} &\iff \xi=\xi',i=i',
-\forall k\of[\cod(\xi)-1].j(k)\leq j'(k)\\  
+Define partially ordered object $(S,\leq)$ in $\ambient$ as follows.
+\begin{align*} 
+S =& \set{\tuplet{p,\sigma,0,j}|\tuplet{p,\sigma}\of\base(\simplex_\LP),j\of[\dom(\sigma)]}\cup\\&
+\set{\tuplet{p,\sigma,1,j}|\tuplet{p,\sigma}\of\base(\simplex_\LP),
+j\of[\dim(p)-1]\to [\dom(\sigma)],\sigma\circ j = d_{\top(p)}}\\
 \end{align*}
-Let:
+Here $d_i$ is the \keyword{face map} $[\dim(p)-1]\to[\dim(p)]$ that satisfies $d_i(j) = j$ if $j<i$ and $d_i(j) = j+1$ if $j\geq i$.
 \begin{align*}
-a\tuplet{\xi,i,j,k} &= \tuplet{i,\cod(\xi)}\\
-b\tuplet{\xi,i,0,j} &= \xi(j)& 
-b\tuplet{\xi,i,1,j} &= i\\
+\tuplet{p,\sigma,0,j}\leq\tuplet{p',\sigma',0,j'} &
+\iff p=p',\sigma=\sigma',j\leq j'\\
+\tuplet{p,\sigma,0,j}\leq\tuplet{p',\sigma',1,j'} &
+\iff p=p',\sigma=\sigma',j \leq i'\\ 
+\tuplet{p,\sigma,1,j}\leq\tuplet{p',\sigma',0,j'} &
+\iff p=p',\sigma=\sigma',i < j'\\ 
+\tuplet{p,\sigma,1,j}\leq\tuplet{p',\sigma',1,j'} &
+\iff p=p',\sigma=\sigma',\forall k\of[\dim(p)-1].j(k)\leq j'(k)
 \end{align*}
 
-Partially ordered objects like $(X,\leq)$ have a \keyword{nerve} $N(X,\leq)$ which is a simplicial object. The object $\base(N(X,\leq))$ consist of \emph{non decreasing} maps $[n]\to X$ for arbitrary $n\of\nno$. 
-For $y\of \base(N(X,\leq))$:
+Partially ordered objects like $(S,\leq)$ have a \keyword{nerve} $N(S,\leq)$ which is a simplicial object. The object $\base(N(S,\leq))$ consist of \emph{non decreasing} maps $[n]\to S$ for arbitrary $n\of\nno$. For $y\of \base(N(S,\leq))$:
 \begin{align*}
-[\dim(y)] &= \dom(y)\\
-y\cdot \phi &= y\circ \phi\\
+[\dim(y)] &= \dom(y)&
+y\cdot \phi &= y\circ \phi
 \end{align*}
-Note that because $[n]$ is connected, nondecreasing $y\of[n]\to X$ are constant in the first two variables, meaning therefore $a(y(i)) = a(y(0))$ Let $N(x)\of N(X,\leq)\to \simplex_\leq$ satisfy 
-\[ N(x)(y) = \tuplet{a(y(0)),b\circ y} \]
-
-The family $s\of S\to \simplex_P$ is the pullback of $N(x)$ along $p\disc\of P\disc\to\set\leq\disc$. 
-This means $\base(S)$ consist of pairs $\tuplet{f,g}$ of lifting problems $f\of \horn[i]_j\to V$ and non decreasing maps $g\of [k] \to (X,\leq)$ such that $N(x)(f)= \tuplet{j,i,\phi}$ for a $\phi$ with $\cod(\phi)=[i]$.
+Note that because $[n]$ is connected, nondecreasing $y\of[n]\to S$ are constant in the first two variables, uniquely defining the functions $s\of \base(N(S,\leq))\to \simplex_\LP$ and $p\of \base(N(S,\leq))\to \LP$
+where $s(y)$ is the first two elements of $y(0)$ and $p(y)$ is the first element of $y(0)$. Let $t\of N(S,\leq)\to \simplex_\LP$ satisfy 
+$t(y) = \tuplet{p(y),\tau\circ y}$ where $\tau\tuplet{p,\sigma,0,j} = \sigma(j)$ and $\tau\tuplet{p,\sigma,1,j} = \top(p)$.
 
 \[\xymatrix{
-S\ar[d]\ar[r]^s& \simplex_P \ar[d]\ar[r] &P\disc\ar[d]^{p\disc}\\
-N(X,\leq)\ar[r]_{N(x)}&\simplex_{\set\leq}\ar[r] & \set\leq\disc
+N(S,\leq)\ar[d]_s\ar[r]^t\ar[dr]^p & \simplex_\LP \ar[d] \\
+\simplex_\LP\ar[r]&\LP
 }\]
 \end{definition}
+
+The functor from the proof of \ref{descent} $\cat P\to \ambient^{\cat P\dual}$ is encapsulated in the structure defined above, which has the structure of a fibred category over the pullback of $s$ and $t$, for a suitable notion of morphism.
+
+\begin{definition}
+\hide{There is an equivalence relation $\sim$ on $S$ generated by the pairs:
+\begin{align*} 
+\tuplet{p,\sigma\circ\phi,0,j} &\sim \tuplet{p,\sigma,0,\phi(j)}\\
+\tuplet{p,\sigma\circ\phi,1,j} &\sim \tuplet{p,\sigma,1,\phi\circ j}
+\end{align*}
+This extends to an equivalence relation $N(S,\leq)$ also denoted with $\sim$.}
+
+%here
+
+\[ \product{z}\set{x\of N(S,\leq)|t(x) = z}\to
+\set{\tuplet{x,y}\of X\times N(S,\leq)| f(x) = s(y),t(y)=z } \]
+
+
+\end{definition}
+
+
+
 
 
 
@@ -140,18 +169,18 @@ The class $M$ is closed under $C_*$ and $C^*$ since the class $M$ is assumed to 
 The rest of this section works out the definition and the properties of $K$.
 
 \begin{definition}
-Define the internal category $\cat P$ of $\ambient$ as follows. The objects of $\cat P$ are pairs $\tuplet{\xi,k}$ where $\xi\of\Ar(\simCat)$ and $k\of \cod(\xi)$. A morphism $\tuplet{\xi,k}\to \tuplet{\xi',k}$ is a morphism $\phi\of \dom(\xi)\to \dom(\xi')$ such that $\phi\circ \xi'= \xi$. There are only morphisms between pairs $\tuplet{\xi,k}$ and $\tuplet{\xi',k'}$ where $k=k'$ so $\cat P$ is a indexed coproduct of copies of categories of the family $\function{n\of\nno}\simCat/[n]$.
+Define the internal category $\cat P$ of $\ambient$ as follows. The objects of $\cat P$ are pairs $\tuplet{\sigma,k}$ where $\sigma\of\Ar(\simCat)$ and $k\of \cod(\sigma)$. A morphism $\tuplet{\sigma,k}\to \tuplet{\sigma',k}$ is a morphism $\phi\of \dom(\sigma)\to \dom(\sigma')$ such that $\phi\circ \sigma'= \sigma$. There are only morphisms between pairs $\tuplet{\sigma,k}$ and $\tuplet{\sigma',k'}$ where $k=k'$ so $\cat P$ is a indexed coproduct of copies of categories of the family $\function{n\of\nno}\simCat/[n]$.
 
 Define the functor $K\of \cat P\to\cat P$ as follows:
 \begin{enumerate}
-\item A monotone function $\xi\of[m]\to[n]$ cuts $[m]$ into $n + 1$ posets $\xi_j = \set{i\of[m]|\xi(i)=j}$. 
- Let $\norm{\xi,k}$ be the number of elements of the product $\product{i\of ([n]-\set k)}{\xi_i}$. 
-\item Define $K_0\tuplet{\xi,k}\of [m+\norm{\xi,k}]\to [n]$ as follows.
+\item A monotone function $\sigma\of[m]\to[n]$ cuts $[m]$ into $n + 1$ posets $\sigma_j = \set{i\of[m]|\sigma(i)=j}$. 
+ Let $\norm{\sigma,k}$ be the number of elements of the product $\product{i\of ([n]-\set k)}{\sigma_i}$. 
+\item Define $K_0\tuplet{\sigma,k}\of [m+\norm{\sigma,k}]\to [n]$ as follows.
 \[ 
-	K_0\tuplet{\xi,k}(i) = \left\{
+	K_0\tuplet{\sigma,k}(i) = \left\{
 		\begin{array}{cc}
-			\xi(i) & \xi(i)<k \\
-			k & \xi(i-\norm{\xi,k})\leq k \leq \xi(i)\\
+			\sigma(i) & \sigma(i)<k \\
+			k & \sigma(i-\norm{\sigma,k})\leq k \leq \sigma(i)\\
 			\xi(i-\norm{\xi,k}) & k<\xi(i-\norm{\xi,k})
 		\end{array}
 	\right.

@@ -5,6 +5,49 @@
 \usepackage{url}
 
 \begin{document}
+\section{12/1/18}
+Back in business.
+
+I am really confused again. The construction is just too complicated.
+The object $S$ should consist of tuples:
+\[ \tuplet{p,s,t,x} \]
+Here $p$ is the problem $\horn_i[j]\to V$,
+The $s$ is an element of the 'source' simplex and 
+the $t$ is an element of the 'target' simplex;
+both are elements of $\Ar(\simCat)$ with codomain $i$.
+Finally, $x$ is a suitable nerve of a suitable poset.
+
+This is frustrating.
+
+The category $\cat P$ consists of pairs $\tuplet{p,\pi}$ where $p$ is one of the problems $p\of\horn_i[j]\to V$ and $\pi$ is a morphism of $\simCat$ with codomain $i$. What are the arrows? There are only arrows in the fibres over each problem. There we only have $\phi\of\tuplet{p,\pi\circ \phi} \to \tuplet{p,\pi}$.
+
+Breathe.
+
+There is a functor $\cat P\times_P \cat P\dual \to \ambient$ we want to represent. It should work somewhat like this: 
+$\tuplet{p,s,t,\phi\cdot x} = \tuplet{p, s\circ \phi, t, x}$
+$\tuplet{p,s,t,x}\cdot \phi = \tuplet{p, s, t\circ \phi, x\circ \phi}$.
+depending on $p$ we factor $t$ though a non decreasing $w$.
+That is what the poset is for.
+
+
+\paragraph{Diversions}
+Equalizers (as domains) induce coequalizers on homsets. No that is not right. Only if the codomain is injective. Injective envelopes do help with that.
+
+Proving the equality of functions whose domain is defined as a equalizer is the problem here. Topos theory suggests the following solution. For $f,g\of X \to Y$, where $X = {z\of Z|p(z)=q(z)}$
+compare the following relations instead of the functions:
+\begin{align*} 
+F &= { (z,y)\of Z\times Y | p(z)=q(z),f(z) = y } \\
+G &= { (z,y)\of Z\times Y | p(z)=q(z),g(z) = y } \\
+\end{align*}
+This might be complicated because $Z$ could be a sum of other types types, and $f$ and $g$ may do a case analysis.
+
+Still, it seems like we can reduce the problem to finding the contradictions in $p(z)=q(z),f(z) \neq g(z)$. Fine, not the same thing as straightforward equation solving, but easily within reach of Prolog e.g.
+
+That should be the general strategy: model checking, where we search for examples where an expression violates the assumption connected to its type.
+
+\paragraph{Back to work}
+Figure out how this part has to work again.
+No I am giving up for today.
 
 \section{29/12/17}
 How do we prove descend?
