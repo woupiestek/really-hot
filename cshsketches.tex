@@ -5,6 +5,122 @@
 \usepackage{url}
 
 \begin{document}
+\section{9/2/18}
+I remember that I was naming things more explicitly in order to make the proof easier to read.
+
+What can I reasonable hope to achieve this day?
+
+
+
+
+\paragraph{All the monads}
+The category of simplicial objects $\ambient\s$ is a category of algebras for a monad on $\ambient/\nno$. That gives a slot of intuitions.
+
+Coyoneda--every object is a colimit of representables:
+\[
+\colim_{\simplex[n] \to X} \simplex[n] \simeq X
+\]
+Well, this is not the proper dual.
+
+In slices $\ambient/\s$ we get other objects of representables.
+We can still say that every object is an indexed colimit however.
+
+Enriched projectives maybe?
+The idea is that the sections functor down to $\ambient$ preserved regular epimorphisms. Every object is covered.
+
+What is the point? The 'projective resolution' has to make it simpler to define $D$.
+
+The distance between intuition and implementation is to great. I keep
+forgetting how it works.
+
+\paragraph{god help me}
+The monomorphisms are a good reduction. So the monomorphisms of $\simCat$ are acyclic cofibrations. Pulling back along the generic acyclic cofibrations fails to preserve this however.
+
+We have a general method for 
+
+
+\subsection{Descent, classically}
+I am starting backwards here. We do the following pullback, where:
+\[\xymatrix{
+\bullet\ar[r]^f\ar[d] &\bullet\ar[r]\ar[d] & \horn_l[m]\ar[d]^g\\
+\simplex[i]\ar[r]_{\simplex(h)} & \simplex[j]\ar[r]_k & \simplex[m]
+}\]
+Under the assumption that $i<j$, $\simplex(h)$ is an acyclic cofibration. In many cases $f$ is too. We need it to be true always. Solution:
+Introduce another functor $S(g,k)\of\simCat \to \ambient\s$ that gives better simplices.
+\[\xymatrix{
+\bullet\ar[r]^{f'}\ar[d] &\bullet\ar[r]\ar[d] & \horn_l[m]\ar[d]^g\\
+D(g,k)[i]\ar[r]_{D(g,k)(h)} & S(g,k)[j]\ar[r]_{s(g,k)} & \simplex[m]
+}\]
+The point is, that each monic is send to a preserved acyclic.
+
+How do we use this though?
+
+The constructions are generalized abstract nonsense, and I lack the ability to express them properly. 
+
+Ultimately, the descend functor is defined in such a way that $\hom(k, Df)$ must be $\hom(g\ri(s(g,k)),f)$. Moreover, all of this must be parametric in $g$ and $k$, otherwise it will not result in the needed lifting operator.
+
+\paragraph{Split}
+I want to rigorously separate the technical details of the lifting operator from the construction of the descend functor. That is the only way to keep my baring here.
+
+I think the notion of sending monics to acyclic cofibrations is spot on.
+
+That 'category' $\cat P$:
+The objects are pairs $\tuplet{\xi,i}$ where $\xi\of \Ar(\simCat)$ and $i\of\cod(\xi)$.
+A morphism $\tuplet{\xi,i}\to \tuplet{\xi',i'}$ requires that $i'=i$, and is a morphism $\phi\of \dom(\xi)\to\dom(\xi')$ such that $\xi = \xi'\circ \phi$.
+
+I keep struggling with all the abstract nonsense.
+
+Another approach: $D$ is the coequalizer of easier functors. 
+
+One way was the bimodule, the structure with both a left and a right action, not necessarily compatible.
+
+The elements are actually morphisms $S \to X$, but probably part of a fibred product, so 
+\[\Sigma c\mapsto {\set{a\of A|b(a) = c} \to \set{ x\of X | d(x) = c}}\]
+The equalizer annoyingly is $\function x {f(x\cdot \phi)} = \function x f(x)\cdot \phi$. The action $f\cdot \phi = \function x{f(\phi\cdot x)}$. 
+
+
+\paragraph{fine grain}
+Let's start with an adjoint pair of functors with certain properties,
+Like sending 
+
+Note that we just take for granted now that fibrations are closed under indexed coproducts. Eventually, we will introduce this fact at the start and use that where ever it is convenient.
+
+\paragraph{distributions}
+The notion of a distribution is difficult enough when slice categories are not involved, but can we derive the more general construction form the simpler one?
+
+One direction seems to come about by accident. The left adjoint already sends morphisms to a slice category. Does the right adjoint still do the right thing though?
+
+'There is a functor with these properties'
+What we started out with, was a target for the representable objects.
+So $\Phi \of X\nrightarrow Y$.
+The sum of all those representables is the 'projective' cover of $Y$.
+We can also view $\Phi$ as target for the terminal object.
+
+\paragraph{projectives}
+The ideas is that we define the functors from projective resolutions.
+What does that really help, though?
+
+The trick is to get the adjunction from a most amount of structure, in a fairly generic way. The definition I have looks clumsy and overly technical.
+
+Perhaps we can replace the right action with something easier.
+
+I was kind of hoping we could replace it with the equivalence it induces. 
+
+
+
+
+
+
+
+
+\section{4/2/18}
+What about free fibrations?
+We can freely add a lifting operator to a simplicial set. In fact, several structures are in the paper already. The problem in categories of algebras preserve liftings and we want to consider morphisms that do not. Can we recover those with an exact completion?
+I am afraid that the exact completion will not add anything useful because the parallel pair will be a pair of morphisms.
+
+This talk of monads suggest that we could construct an fibrations-acyclic-cofibration factorization system, in the form a lifting operator monad in a slice category. I think the problem is that the unit is not an acyclic cofibration. The fibred monad is hard to construct.
+
+
 \section{12/1/18}
 Back in business.
 

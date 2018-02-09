@@ -57,13 +57,13 @@ For each fibration $f\of X\to \horn_\LP$ there is a fibration $D(f)\of D(X)\to\s
 
 \newcommand\dsum[1]{\Sigma_{#1}}
 \begin{proof}
-Reindexing along $\foh_\LP$ has a right adjoint $(\foh_\LP)_*$. As required for descend, $\foh_\LP\ri((\foh_\LP)_*(f))$ is isomorphic to $f$ because $\foh_\LP$ is a monomorphism. For $f\of X\to \horn_\LP$, the product is modest whenever $f$ is modest. Moreover, $(\foh_\LP)_*(f)$ has the right lifting property with respect to acyclic cofibrations that the reindexing functor $\foh_\LP\ri$ sends to acyclic cofibrations. Since $\foh_\LP\ri$ doesn't always preserve acyclic cofibrancy, the product is not a fibration. The fibration $D(f)$ regains the right lifting property by adding faces to $(\foh_\LP)_*(f)$, where needed.
+Reindexing along $\foh_\LP$ has a right adjoint $(\foh_\LP)_*$. As required for descend, $\foh_\LP\ri((\foh_\LP)_*(f))$ is isomorphic to $f$ because $\foh_\LP$ is a monomorphism. For $f\of X\to \horn_\LP$, the product is modest whenever $f$ is modest. Moreover, $(\foh_\LP)_*(f)$ has the right lifting property with respect to acyclic cofibrations that the reindexing functor $\foh_\LP\ri$ sends to acyclic cofibrations. Since $\foh_\LP\ri$ doesn't always preserve acyclic cofibrancy, the product is not a fibration. The fibration $D(f)$ regains the right lifting property by adding faces to $(\foh_\LP)_*(f)$ where needed.
 
 The construction of $Df$ informally works as follows.
 $\ambient\s/\simplex_\LP$ is equivalent to $\ambient^{\cat P\dual}$ for an internal category $\cat P$ of $\ambient$, and $\ambient\s/\horn_\LP$ is equivalent to $\ambient^{\cat Q\dual}$ for a subcategory $\cat Q$ of $\cat P$. There is a functor $S\of\cat P\to \ambient^{\cat P\dual}$ such that: %def
 \begin{itemize}
 \item for each object $Q$ of $\cat Q$, $S(Q)$ factors through $\foh_\LP$.
-\item for each monomorphism $m$ of $\cat P$, $\foh_\LP\ri(S(m))$ is an acyclic cofibration.
+\item for each acyclic cofibration $m$ of $\cat P$, $\foh_\LP\ri(S(m))$ is an acyclic cofibration.
 \end{itemize}
 The underlying object of $D(X)$ consists of maps $S(\xi)\to(\foh_\LP)_*(f)$--or equivalently maps $\foh_\LP\ri(S(\xi))\to f$. %def
 The conditions imply both that $D(f)$ is a fibration and that $\foh_\LP\ri(Df) \simeq f$. %lemma
@@ -74,6 +74,70 @@ Moreover, because the underlying map of $Df$ is still a dependent product of a m
 }\]
 Details are worked out in definition and lemmas below which deal with internalization of this construction in $\ambient$.
 \end{proof}
+
+As far as candidates for descend go, functors with a left adjoints gives more ways to prove the desired properties.
+\begin{lemma}
+Let $m\of A\to B$ in $\ambient\s$ be any morphism of simplicial objects.
+Let $D\of \ambient\s/A \to \ambient\s/B$ have a left adjoint $S$.
+\begin{enumerate}
+\item The functor $D$ is left inverse to $m\ri$ if for each $a\of\simplex[i]\to\simplex[j]\to A$, if $S$ is right inverse to $m_!$.
+\item The functor $D$ preserves fibrations if $S$ preserves acyclic cofibrations. 
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Both follow directly from the definition of adjoint functors.
+\end{proof}
+
+Morphisms between simplicial object induce adjoint pairs of functors between slice categories, but we cannot rely on those. 
+Distributions are generalized functions. The distributions down here are supposed to do that for morphisms of simplicial objects.
+
+\mathrmdef{supp}
+\mathrmdef{cosupp}
+\mathrmdef{codim}
+\newcommand\ecof[1]{\llbracket #1 \rrbracket}
+\begin{definition} For each pair of simplicial object $X$,$Y$, a \keyword{distribution} $\Phi\of X\nrightarrow Y$ is a tuple 
+$\tuplet{\base(\Phi),\supp,\cosupp,\cdot}$ where 
+\begin{itemize}
+\item $\base(\Phi)$ is an object of $\ambient$.
+\item $\supp\of\base(\Phi)\to\base(X)$ and $\cosupp\of\base(Y)$.
+\item If $\dim(x) = \dim(\supp(x)) = \cod(\phi)$ for $x\of\base(\Phi)$ and $\phi\of\Ar(\simCat)$, then $x\cdot \phi$ is defined and $\supp(x\cdot \phi) = \supp(x)\cdot \phi$. This means $\Phi$ is a simplicial object and $\supp$ is a morphism $\Phi\to X$.
+\item if $\codim(x) = \dim(\cosupp(x)) = \dom(\phi)$ for $x\of\base(\Phi)$ and $\phi\of\Ar(\simCat)$, then $\phi\cdot x$ is defined, $\codim(\phi\cdot x) = \cod(\phi)$ and $\supp(\phi\cdot x) = \supp(x)$. This means that, $\Phi$ has a fibrewise left action of $\simCat$ defined on it.
+\end{itemize}
+
+The \emph{inverse image} functor $X\ri\of\ambient\s/Y\to\ambient\s/X$ of a distribution $\Phi$ is defined as follows. 
+For each $a\of A\to Y$,
+\begin{align*}
+\base(\Phi\ri(A)) &= \set{\tuplet{x\of\base(\Phi),y\of\base(A)} | \cosupp(x) = a(y) }/\mathord\sim\\
+\Phi\ri(a)\ecof{\tuplet{x,y}} &= \supp(x)\\
+\ecof{\tuplet{x,y}}\cdot\phi &= \ecof{\tuplet{x\cdot\phi,y}} \\
+\end{align*}
+Here $\sim$ is the least equivalence relation such that $\tuplet{\phi\cdot x,y}\sim\tuplet{x,y\cdot\phi}$ for all suitable $\phi$, $x$ and $y$; $\ecof{\cdot}$ is the coequalizer for $\sim$. The definition of distributor guarantees that the dimensions and action are well defined on the elements of $\Phi\ri(A)$.
+For each morphism $f\of A\to B \to Y$ of $X\ri\of\ambient\s/Y$, $\Phi\ri(f)\ecof{\tuplet{x,y}} = \ecof{\tuplet{x,f(y)}}$.
+
+The \emph{direct image} functor $\Phi_*\of\ambient\s/X\to\ambient\s/Y$ of a distributor $\Phi$ is defined as follows. For each $b:B\to X$,
+\begin{align*}
+\base(\Phi_*(B)) &= \set{ \tuplet{y\of\base(Y),f\of F(y)}  \middle| 
+\begin{array}{l}
+F(y) = \set{x\of \base(\Phi)|\cosupp(x) = y}\to \base(B)\\
+\dim_B\circ f = \dim_\Phi\\
+(\function{\tuplet{x,\phi}}{f(x\cdot\phi)}) = (\function{\tuplet{x,\phi}}{f(x)\cdot\phi}) 
+\end{array}
+}\\
+\Phi_*(b)\tuplet{y,f} &= y\\
+\tuplet{y,f}\cdot \phi &= \tuplet{y\cdot \phi,\function x f(\phi\cdot x)}
+\end{align*}
+For each morphism $g\of B\to A\to Y$, $\Phi_*(g)\tuplet{y,f} = \tuplet{y,g\circ f}$
+\end{definition}
+
+\begin{lemma}
+The inverse image functor $\Phi\ri$ is left adjoint to the direct image functor $\Phi_*$ for any distribution $\Phi$. Both send members of $M$ to $M$.
+\end{lemma}
+
+\begin{proof} This follows from the definition, though that may be hard to see.
+\end{proof}
+
+The descend functor is the direct image functor belonging to the distribution defined next.
 
 \begin{definition}
 Define partially ordered object $(S,\leq)$ in $\ambient$ as follows.
@@ -103,31 +167,8 @@ Note that because $[n]$ is connected, nondecreasing $y\of[n]\to S$ are constant 
 where $s(y)$ is the first two elements of $y(0)$ and $p(y)$ is the first element of $y(0)$. Let $t\of N(S,\leq)\to \simplex_\LP$ satisfy 
 $t(y) = \tuplet{p(y),\tau\circ y}$ where $\tau\tuplet{p,\sigma,0,j} = \sigma(j)$ and $\tau\tuplet{p,\sigma,1,j} = \top(p)$.
 
-\[\xymatrix{
-N(S,\leq)\ar[d]_s\ar[r]^t\ar[dr]^p & \simplex_\LP \ar[d] \\
-\simplex_\LP\ar[r]&\LP
-}\]
-\end{definition}
-
-The functor from the proof of \ref{descent} $\cat P\to \ambient^{\cat P\dual}$ is encapsulated in the structure defined above, which has the structure of a fibred category over the pullback of $s$ and $t$, for a suitable notion of morphism.
-
-\begin{definition}
-\hide{There is an equivalence relation $\sim$ on $S$ generated by the pairs:
-\begin{align*} 
-\tuplet{p,\sigma\circ\phi,0,j} &\sim \tuplet{p,\sigma,0,\phi(j)}\\
-\tuplet{p,\sigma\circ\phi,1,j} &\sim \tuplet{p,\sigma,1,\phi\circ j}
-\end{align*}
-This extends to an equivalence relation $N(S,\leq)$ also denoted with $\sim$.}
-
 %here
-
-\[ \product{z}\set{x\of N(S,\leq)|t(x) = z}\to
-\set{\tuplet{x,y}\of X\times N(S,\leq)| f(x) = s(y),t(y)=z } \]
-
-
 \end{definition}
-
-
 
 
 
