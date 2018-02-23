@@ -5,6 +5,50 @@
 \usepackage{url}
 
 \begin{document}
+\section{16/2/18}
+
+
+\paragraph{Can't help replanning}
+We separate two sides: the existence of the functors, and their specific handling of cofibrations.
+
+Acyclic cofibrations are closed under discrete morphisms. Is this a kind of discreteness that is orthogonal to a kind of connectedness?
+Right lifting property with respect to 'simply connected' morphisms I guess. Which generalizes to: indecomposables are codiscrete--although in this case we are talking about a different kind of indecomposable.
+
+In any case, we deal with model structures on many different categories here, and their interrelations. So while we have a generic discrete family of acyclic cofibrations in $\ambient/s$, these 
+
+
+Perhaps I am entangling two things that should not be entangled at all. One is a theory of model categories. The other is purely about constructive descent.
+Of course, the descent theorem is about a constructive variant of the simplicial model structure. 
+
+We always need a single object or morphism in $\ambient$ to realize various theorems. So it is not enough to\dots
+
+There is a connection with the left adjoint of an adjunctions preserves the left morphisms in a factorization system, of the right adjoint preserved the right morphisms. We need to amend for the extra property that left morphisms are closed under 'discrete pullbacks', i.e. all categories have discrete morphisms and all functors preserve them.
+
+What am I looking for now?
+The individual case where we look at whether the codescent of a horn inclusion along another is an acyclic cofirbation is complex. We need to make the case that this complex construction can be carried out parametrically, not just over all combinations of horn inclusions, but also when additional parameters (the object of all problems) are involved.
+There is a discrete object of problems $P$. Each problem translates to a simpler problem $P \to C$ involving just a single combination.
+
+Arguably, we are looking at the question of descent along acyclic cofibrations. Yes, ultimately we only need it for one. We have decent along a specific acyclic cofibration, and we need it elsewhere.
+
+I imagine descending a fibred product or coproduct, and then somehow getting back what we need. This is complicated yet again.
+I am starting to suspect that the orthogonality of discrete morphisms is very relevant here. First of all, discrete morphisms are fibrations, which is why we can apply descent to a composition involving a discrete morphism. How are monomorphisms fibrations? Well, none of the acyclic cofibrations have empty domains. Empty fibres are therefore allowed.
+
+Descent takes the fibred product and then adds some extra faces. These faces never cross discrete boundaries, crucially because all acyclic cofibrations are connected. None of that helps to reduce the larger problem.
+
+An approach that starts with the simplest solution and then generalizes it would have to be very sophisticated to take the interactions between discrete morphism an acyclic cofibration into account. I see little benefit in my case.
+
+\paragraph{Other options}
+Do much more inside the slice categories.
+Use partially ordered objects.
+
+\paragraph{different construction}
+We described the constructions with the partially ordered objects, but there are alternatives.
+
+For each $\xi\of\Ar(\simCat)$, $k\of \cod(\xi)$ and $p\of\nno$, we have a combination of morphisms. The first $a\of[p]\to[2]$ splits up the domain in three parts, $a_0$, $a_1$ and $a_2$. 
+We get three morphisms $b_0\of a_0 \to \xi_{\leq k}$, $b_1\of a_1\times[n-1]\to \xi_{\neq k}$ and $b_2\of a_2\to\xi_{>k}$. Now we need some boundaries on what $b_1$ can do. 
+ 
+Little progress today.
+
 \section{9/2/18}
 I remember that I was naming things more explicitly in order to make the proof easier to read.
 

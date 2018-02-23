@@ -100,12 +100,12 @@ Distributions are generalized functions. The distributions down here are suppose
 $\tuplet{\base(\Phi),\supp,\cosupp,\cdot}$ where 
 \begin{itemize}
 \item $\base(\Phi)$ is an object of $\ambient$.
-\item $\supp\of\base(\Phi)\to\base(X)$ and $\cosupp\of\base(Y)$.
+\item $\supp\of\base(\Phi)\to\base(X)$ and $\cosupp\of\base(\Phi)\to\base(Y)$.
 \item If $\dim(x) = \dim(\supp(x)) = \cod(\phi)$ for $x\of\base(\Phi)$ and $\phi\of\Ar(\simCat)$, then $x\cdot \phi$ is defined and $\supp(x\cdot \phi) = \supp(x)\cdot \phi$. This means $\Phi$ is a simplicial object and $\supp$ is a morphism $\Phi\to X$.
 \item if $\codim(x) = \dim(\cosupp(x)) = \dom(\phi)$ for $x\of\base(\Phi)$ and $\phi\of\Ar(\simCat)$, then $\phi\cdot x$ is defined, $\codim(\phi\cdot x) = \cod(\phi)$ and $\supp(\phi\cdot x) = \supp(x)$. This means that, $\Phi$ has a fibrewise left action of $\simCat$ defined on it.
 \end{itemize}
 
-The \emph{inverse image} functor $X\ri\of\ambient\s/Y\to\ambient\s/X$ of a distribution $\Phi$ is defined as follows. 
+The \emph{inverse image} functor $\Phi\ri\of\ambient\s/Y\to\ambient\s/X$ of a distribution $\Phi$ is defined as follows. 
 For each $a\of A\to Y$,
 \begin{align*}
 \base(\Phi\ri(A)) &= \set{\tuplet{x\of\base(\Phi),y\of\base(A)} | \cosupp(x) = a(y) }/\mathord\sim\\
