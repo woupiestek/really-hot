@@ -5,9 +5,76 @@
 \usepackage{url}
 
 \begin{document}
-\section{16/2/18}
 
+\section{9/3/18}
 
+Begin with the 'simple case' and generalize.
+
+The left adjoint modifies acyclic cofibration so 
+
+\paragraph{A minute}
+Starting with $\xi\of[m]\to[n]$ just let $S(\xi,k)$ be pairs of maps $\tuplet{f,g}$ where $f\of [i]\to[m]$ and $g\of [j] \to \prod_{l\neq k} \xi_l$. I.e. $g\of[j]\times[n-1] \to [m]$ such that $\xi \circ g\tuplet{x,y} = y$ if $y < k$ and $y+1$ if $y \geq k$.
+Same data, different representation. This will have impact on the simplicial structure, though.
+\begin{align*}
+\dim\tuplet{f,g}&=\dom(f) + \dom(g) + 1\\
+f_*(k) &= \min\set{i\of\dom(f) | f(i) > k}\\ %needs better symbol
+\tuplet{f,g}\cdot\phi &= \tuplet{f^\phi,g^\phi}\\
+\textrm{where } &f^\phi(i) = f(\phi(i)) \textrm{ if } \phi(i) < f_*(k) \\
+\textrm{and } &f^\phi(i) = f(\phi(i)-\dom(g)) \textrm{ if } \phi(i) \geq f_*(k) \\
+\textrm{and } &g^\phi(i) = g(\phi(i)-f_*(k)) \\
+s(\xi,k)\tuplet{f,g}(i) &= f(i) \textrm{ if } i < f_*(k)\\
+s(\xi,k)\tuplet{f,g}(i) &= k \textrm{ if } f_*(k) \leq i \leq f_*(k) + \dom(g)\\
+s(\xi,k)\tuplet{f,g}(i) &= f(i-\dom(g)) \textrm{ if } i > f_*(k) + \dom(g)
+\end{align*}
+The helpful $f_*(k)$ point to where $g$ is glued to $f$.
+This approach is clearer, despite the complexities. Demonstrating that this does define a simplicial object may be less straightforward.
+
+And then we do find a downside: there is no room for empty $f$ or $g$. Is should be possible for a simplex in $S(\xi,k)$ to completely belong to the fortification, or to the normal simplex. This way it cannot. This makes the calculations above more complex.
+
+So we have to take into account that either $f$ or $g$ may have an empty domain. This is a special case where the computation above do become simpler however. Also, what really matter here?
+
+The combination with the pullback introduces the limitation that $f$ must skip an element of $[m]$ different from $k$.
+
+So what about these structures matters now?
+Besides the simplicial structure, we also need a cosimplicial structure. Somethin like:
+\begin{align*}
+\phi \cdot  &\of S(\xi\circ \phi,k) \to S(\xi,k)\\
+\phi \cdot\tuplet{f,g} &= \tuplet{\phi\circ f,\phi\circ g}
+\end{align*} 
+That is fine.
+
+Another important point is the intersection lemma. The fortification part respects intersections of simplices.
+
+\paragraph{elusive descend then}
+Preservation of restriction action provides an opportunity to focus on a number of generators, and perhaps a set of relations. But we option not to work that way. 
+
+So the idea is that morphism $S(\xi,k)\to f$ replaces an actual simplex.
+
+Think about generators
+
+For $\xi\of [m]\to[n]$ and $k\of [n]$. There are monomorphisms $a\of\bullet \to [m]$ that are 'maximal' for the property that $\xi\circ a$ is part of the horn, $n - 1$ of them, to be exact. Then there are monomorphisms $b\of \xi_{\neq k} \to \prod_{l\neq k} \xi_l$, which also look like generators. We need to pair these up again and discuss how they may overlap.
+
+Every pair of generator can overlap where they differ in only one point. 
+Actually, $b$ is a bigger problem here, simply because there are so many of them.
+
+What does this have to do with the fibration $Df\of DX\to\horn_{?}$ we want to descend?
+Generators map to $\horn_{?}$ as well. For each generator, pick an element $x\tuplet{a,b}$ of the fibre of $f$ over $xi$.
+Generators $\tuplet{a,b}$ and $\tuplet{a',b'}$ can overlap, and that overlap implies a pair of morphisms of simplices $\tuplet{\phi,\phi'}$ such that $x\tuplet{a,b}\cdot \phi = x\tuplet{a',b'}\cdot \phi'$.
+
+Since we need to do this over all $\xi$ with the same codomain--and provide functors to link the generators together, we only gain complexity by not using full simplices for $S$.
+
+\paragraph{reversal}
+When arguing that acyclicity is preserved I used to make a big point out of the generating elements. Okay, I remember why I should: quotients of acyclics can be cyclic.
+
+Further subdivisions: $g$ as a sequence 
+
+\paragraph{Another mistake!}
+The right action is not actually from $\simCat$! The 'codimension' does not solely determine whether the action is defined. This is not a big problem, but awkward.
+
+\paragraph{Closing}
+I haven't regretted stopping to work on this paper for other activities in a long time. This was a rather good day of work.
+
+\section{23/2/18}
 \paragraph{Can't help replanning}
 We separate two sides: the existence of the functors, and their specific handling of cofibrations.
 

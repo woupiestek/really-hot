@@ -139,6 +139,59 @@ The inverse image functor $\Phi\ri$ is left adjoint to the direct image functor 
 
 The descend functor is the direct image functor belonging to the distribution defined next.
 
+\newcommand\dset{\mathord\downarrow}
+\mathbfdef{nds}
+\begin{definition}
+Define the underlying object and dimension of the simplicial object $S$ as follows.
+\begin{align*}
+\base(S) &= \set{\tuplet{\xi\of\Ar(\simCat),k\of\cod(\xi),f\of\nds(\dom
+\xi),g\of \nds(\product{l\neq k} \xi_l)}|
+\#(f)+\#(g)>0 }\\
+\textrm{where }\xi_l &= \set{i\of\dom(\xi)|\xi(i) = l}\\
+\dim\tuplet{\xi,k,f,g} &= \#(f) + \#(g) - 1
+\end{align*}
+Here $\nds$ maps partially ordered objects to the objects of non decreasing sequence, which is similar to the nerve, except that empty sequences are allowed too. The operator $\#$ is the number of elements in the sequence.
+
+The action $\cdot$ is a bit convoluted. Its splits a morphism $\phi\of[n]\to[\#(f)+\#(g)+1]$ into two parallel parts which it composes with $f$ and $g$. The part of $\phi$ that applies to $g$ is the part that maps to the interval $[a\tuplet{\xi,k,f,g}, b\tuplet{\xi,k,f,g}]$, where:
+\begin{align*}
+a\tuplet{\xi,k,f,g} &= \min(\set{ i\of[\#(f)+\#(g)+1] | i\geq\#(f) \vee \xi(f(i)) > k })\\
+b\tuplet{\xi,k,f,g} &= \max(\set{ i\of[\#(f)+\#(g)+1] | \phi(i)\leq\#(g) \vee \xi(f(i - \#(g))) \leq k })
+\end{align*}
+Two parts of $\phi$ can therefore apply to $f$, namely the restrictions to $\set{i\of\dom(\phi)|i<a(\phi)}$ and $\set{i\of\dom(\phi)|i>b(\phi)}$
+where: 
+\begin{align*}
+a(\phi) &= \min(\set{ i\of\dom(\phi) | \phi(i)\geq a\tuplet{\xi,k,f,g} }\cup\set{\dim(\phi)+1})\\
+b(\phi) &= \max(\set{ i\of\dom(\phi) | \phi(i)\leq b\tuplet{\xi,k,f,g} }\cup\set{-1})
+\end{align*}
+The action works as follows.
+\begin{align*}
+\tuplet{\xi,k,f,g}\cdot\phi &= \tuplet{\xi,k,f\phi,g\phi}\\
+\textrm{where }f\phi(i) &= f(\phi(i))&\textrm{ if }& i < a(\phi)\\
+\textrm{and }f\phi(i) &= f(\phi(i + b(\phi) - a(\phi) + 1) - \#(g))&\textrm{ if }& i \geq a(\phi)\\
+\textrm{and }g\phi(i) &= g(\phi(i + a(\phi)) - \phi(a(\phi)))
+\end{align*}
+%doubts: it is hard to tell whether the result is even still monotone.
+
+There is a left action of $\simCat$ on $S$ as well--fortunately simpler. 
+\begin{align*}
+\codim(\tuplet{\xi,k,f,g}) &= \dom(\xi)\\
+\phi\cdot\tuplet{\xi\circ \phi,k,f,g} &= \tuplet{\xi,k,\phi\circ f,
+\phi\circ g}
+\end{align*} %here, not actually an action from simcat!
+
+Define the morphism $s\of S\to \simplex_{\leq}$ as follows.
+\begin{align*}
+s\tuplet{\xi,k,f,g}(i) &= f(i)&&\textrm{ if } i < a\tuplet{\xi,k,f,g}\\
+s\tuplet{\xi,k,f,g}(i) &= f(i-\#(g))&&\textrm{ if } i > b\tuplet{\xi,k,f,g}\\
+s\tuplet{\xi,k,f,g}(i) &= k&&\textrm{ otherwise }
+\end{align*}
+
+
+
+\end{definition}
+
+
+\section{Junk}
 \begin{definition}
 Define partially ordered object $(S,\leq)$ in $\ambient$ as follows.
 \begin{align*} 
@@ -172,8 +225,6 @@ $t(y) = \tuplet{p(y),\tau\circ y}$ where $\tau\tuplet{p,\sigma,0,j} = \sigma(j)$
 
 
 
-
-\section{Junk}
 
 \subsection{Cosimplicial objects}
 This subsection delves into cosimplicial objects in $\ambient$ to show how adjoint pairs of functors between slice categories of $\ambient\s$ can be constructed from them. The goal is to demonstrate constructiveness rather than to present something new. We are essentially deriving adjoint pairs of functors between presheaf toposes from functors between their categories of representables.
