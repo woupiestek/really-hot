@@ -97,18 +97,18 @@ Distributions are generalized functions. The distributions down here are suppose
 \mathrmdef{codim}
 \newcommand\ecof[1]{\llbracket #1 \rrbracket}
 \begin{definition} For each pair of simplicial object $X$,$Y$, a \keyword{distribution} $\Phi\of X\nrightarrow Y$ is a tuple 
-$\tuplet{\base(\Phi),\supp,\cosupp,\cdot}$ where 
+$\tuplet{|\Phi|,\supp,\cosupp,\cdot}$ where 
 \begin{itemize}
-\item $\base(\Phi)$ is an object of $\ambient$.
-\item $\supp\of\base(\Phi)\to\base(X)$ and $\cosupp\of\base(\Phi)\to\base(Y)$.
-\item If $\dim(x) = \dim(\supp(x)) = \cod(\phi)$ for $x\of\base(\Phi)$ and $\phi\of\Ar(\simCat)$, then $x\cdot \phi$ is defined and $\supp(x\cdot \phi) = \supp(x)\cdot \phi$. This means $\Phi$ is a simplicial object and $\supp$ is a morphism $\Phi\to X$.
-\item if $\codim(x) = \dim(\cosupp(x)) = \dom(\phi)$ for $x\of\base(\Phi)$ and $\phi\of\Ar(\simCat)$, then $\phi\cdot x$ is defined, $\codim(\phi\cdot x) = \cod(\phi)$ and $\supp(\phi\cdot x) = \supp(x)$. This means that, $\Phi$ has a fibrewise left action of $\simCat$ defined on it.
+\item $|\Phi|$ is an object and $\supp \of |\Phi| \to X$ is a morphism of $\ambient\s$.
+\item $\cosupp\of\base|\Phi|\to\base(Y)$.
+\item For all $\phi\of\Ar(\simCat)$, $y\of\base Y$ and $x\of\base|\Phi|$ 
+if $\cosupp(x) = y\cdot \phi$, then $\phi\cdot x$ is defined, $\cosupp(\phi\cdot x) = y$ and $\dim(\phi\cdot x) = \dim(x)$.
 \end{itemize}
 
 The \emph{inverse image} functor $\Phi\ri\of\ambient\s/Y\to\ambient\s/X$ of a distribution $\Phi$ is defined as follows. 
 For each $a\of A\to Y$,
 \begin{align*}
-\base(\Phi\ri(A)) &= \set{\tuplet{x\of\base(\Phi),y\of\base(A)} | \cosupp(x) = a(y) }/\mathord\sim\\
+\base(\Phi\ri(A)) &= \set{\tuplet{x\of\base|\Phi|,y\of\base(A)} | \cosupp(x) = a(y) }/\mathord\sim\\
 \Phi\ri(a)\ecof{\tuplet{x,y}} &= \supp(x)\\
 \ecof{\tuplet{x,y}}\cdot\phi &= \ecof{\tuplet{x\cdot\phi,y}} \\
 \end{align*}
@@ -119,7 +119,7 @@ The \emph{direct image} functor $\Phi_*\of\ambient\s/X\to\ambient\s/Y$ of a dist
 \begin{align*}
 \base(\Phi_*(B)) &= \set{ \tuplet{y\of\base(Y),f\of F(y)}  \middle| 
 \begin{array}{l}
-F(y) = \set{x\of \base(\Phi)|\cosupp(x) = y}\to \base(B)\\
+F(y) = \set{x\of \base|\Phi||\cosupp(x) = y}\to \base(B)\\
 \dim_B\circ f = \dim_\Phi\\
 (\function{\tuplet{x,\phi}}{f(x\cdot\phi)}) = (\function{\tuplet{x,\phi}}{f(x)\cdot\phi}) 
 \end{array}
@@ -170,25 +170,24 @@ The action works as follows.
 \textrm{and }f\phi(i) &= f(\phi(i + b(\phi) - a(\phi) + 1) - \#(g))&\textrm{ if }& i \geq a(\phi)\\
 \textrm{and }g\phi(i) &= g(\phi(i + a(\phi)) - \phi(a(\phi)))
 \end{align*}
-%doubts: it is hard to tell whether the result is even still monotone.
 
-There is a left action of $\simCat$ on $S$ as well--fortunately simpler. 
-\begin{align*}
-\codim(\tuplet{\xi,k,f,g}) &= \dom(\xi)\\
-\phi\cdot\tuplet{\xi\circ \phi,k,f,g} &= \tuplet{\xi,k,\phi\circ f,
-\phi\circ g}
-\end{align*} %here, not actually an action from simcat!
-
-Define the morphism $s\of S\to \simplex_{\leq}$ as follows.
+Define the morphism $\supp \of S\to \simplex_{\leq}$ as follows.
 \begin{align*}
 s\tuplet{\xi,k,f,g}(i) &= f(i)&&\textrm{ if } i < a\tuplet{\xi,k,f,g}\\
 s\tuplet{\xi,k,f,g}(i) &= f(i-\#(g))&&\textrm{ if } i > b\tuplet{\xi,k,f,g}\\
 s\tuplet{\xi,k,f,g}(i) &= k&&\textrm{ otherwise }
 \end{align*}
 
-
-
+The remaining structure can be define as follows.
+\begin{align*}
+\cosupp\of\base(S)&\to\simplex_{\set\geq}\\
+\cosupp\tuplet{\xi,k,f,g} &= \xi\\
+\phi\cdot\tuplet{\xi\circ \phi,k,f,g} &= \tuplet{\xi,k,\phi\circ f, \phi\circ g}
+\end{align*}
 \end{definition}
+
+
+
 
 
 \section{Junk}
