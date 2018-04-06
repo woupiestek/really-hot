@@ -5,7 +5,146 @@
 \usepackage{url}
 
 \begin{document}
-\section{13/3/18}
+\section{6/4/18}
+
+Using the new description of the left adjoint to prove that acyclics get preserved.
+
+Let's once again return to the `simple' case of two horns.
+
+For $\xi\of [m]\to[n]$, $L(\xi,k)$
+
+$\simplex[m]\times F(\xi)$ where the latter consists of nondecreasing sequences of $\sum_{k\of[n]}\prod_{l\of [n]-\set k} \xi_l$.
+
+
+Strange tensor of simplicial sets:
+$X\otimes Y$ with \[(X\otimes Y)[n] = X[n]+Y[n]+\sum_{i+j+1=n} X[i]\times Y[j]\]
+The problem is the action of $\simCat$ on this tensor. The functions that splits up $\simCat$-morphisms according to dimension in order to 
+seems rater complex.
+
+The basic tensor above should simply split the action in two actions:
+the lower range applies to $X$ and the upper to $Y$.
+
+We need a fibred version of this in $\ambient\s/\simplex[n]$: for each $k\of [n]$ we split the action morphism in two parts.
+
+Actually, we can turn this around. First of all $X\otimes Y$ with the action just described has a morphism $X\otimes Y \to \simplex[1]$ which I used at one point.
+
+I am striving for 'orthogonality': the idea is to describe the fortification as a tensor product with a constant, because this hopefully simplifies the generalization to arbitrary fibred categories.
+It looks like it is going to be rather specific to the simplices though.
+
+Perhaps not totally useless\dots
+It is going to be like this:
+We will have $f(x)\of \base(\simplex[n])$
+and $g(y)\of \base(\simplex[n])$.
+These have a combination $f(x) \otimes g(y)$ of combined dimension, which explain how the action is split up.
+This looks like structure on $\simplex[n]$ itself. It seems to be burried much deeper though.
+
+\paragraph{Could more elements help?}
+A bigger tensor product allows for more way for the action to be cut up.
+
+
+$X\otimes Y$ would consist of triplets $\tuplet{\beta,x,y}$ where $\beta\of [n]\to\bool $ is a not necessarily monotone function, $x$ is a simplex of $X$ whose dimension is the numbers of zeros in $\beta$ minus one or some placeholder if there are no zeros. 
+Similarly, $y$ is a simplex of $Y$ whose dimension is the number of ones in $\beta$ minus one, or a placeholder if there are no ones. 
+There could be something with indiscrete simplicial sets.
+The action does not seem to come any more easily.
+
+\begin{align*}
+i_b(n) &= \min\set{i\of\dom(\phi) | \beta(\phi(i)) = b, \forall m < n. i_b(m) < i}\\
+\phi_b(n) &= \#\set{j\of\cod(\phi) | \phi(i_b(n))\geq j, \beta(j) = b}
+\end{align*}
+NB: off by one errors lurking everywhere\dots
+With the help of these, let:
+\[ \tuplet{\beta,x,y}\cdot\phi = \tuplet{\beta\circ \phi,x\cdot\phi_0,y\cdot\phi_1} \]
+
+We now definitely have too many elements. 
+
+\paragraph{fibrewise}
+We have a kind of product:
+$\base(\simplex[n])\times\base(\simplex[n]) \to \base(\simplex[n])\times\base(\simplex[n])$
+It combines non decreasing maps into nondecreasing maps on combined domains.
+
+I really want this tensor product to be a thing. Too much is hinging on the ordering of $[n]$ however.
+
+The indiscrete tensors basically create new simplicial objects by glueing every simplex of one to every element of another. Sounds like a recipe for contractible simplicial objects, which does not look good. Yet some glueing together is exactly what we do.
+
+\paragraph{deeper insight}
+I thought in terms of a functor $S\of \simCat/[n]\to \ambient\s/\simplex[n]$. To represent this functor more easily, I already introduce a kind of tensor product construction, showing (non trivial) the simplices of $S[n]$ are new simplices glued between a source and a target simplex. This potentially allows us to represent the co-descent functor more easily. Yes, we can surely combine two tensors into a simpler one.
+
+The new tensor product is like an indiscrete sum. I worry that it will be too indiscrete.
+
+There is a great number of ways a $\phi\of[m]\to[n]$ can be split up in two parallel morphisms, and have each act on a different part of the structure. Worse still, we need $n+2$ subdivisions to handle all composite simplices. The simplest solution of using the lower range for one and the upper range for another won't do.
+
+Introduce an indiscrete union of $\simCat$.
+Let $\alpha\of[p]\to[r]$ and $\beta\of[q]\to r$. Define
+$\alpha\sqcup\beta\of[p+q+1]\to [r]$ by:
+\begin{align*}
+\alpha\sqcup\beta(n) &= \min\set{ k | \exists i,j. i + j = n, (\alpha(i) = k \land \beta(j) < k ) \lor (\alpha(i) > k \land \beta(j) = k )}
+\end{align*}
+The struggle goes on.
+
+We need $\alpha \to \alpha\sqcup\beta$ and $\beta \to \alpha\sqcup\beta$, with all the commutativity implications. It should also be clear that for each $\gamma\of[n]\to [r]$ there are $n$ pairs $\tuplet{\alpha,\beta}$ such that $\alpha\sqcup\beta = \gamma$. Finally, $\sqcup$ should be a functor $\simCat/[r]\times\simCat/[r]$
+
+Let $\phi\of [m]\to [n]$. Invert it as follows: $C(\phi)\of [n]\to \nno$
+satisfies $C(\phi)(i) = \#\set{j\of [m]|\phi(j) = i}$. There is like a universal bundle for $[n]$, and this is the characteristic function.
+We can go the other way around: given $f:[n]\to\nno$, let $S(f)\of[(\sum_{i\of[n]} f(i)) - 1] \to [n]$ and let 
+\[S(f)(i) = \max\set{ k\of[n] \middle| i \geq \sum_{j < k} f(j) }\]
+
+With this translation, $\alpha\sqcup\beta$ is simply the conjugate of $+$ on $\nno$. Morphisms are harder to define in this setup. The simplest solution is just to stick to initial segments.
+
+\paragraph{where we are}
+The left adjoint combines elements from the pullback with these extra elements using this indiscrete sum construction. Intuitively, the Indiscrete sum commutes with the pullback, so the simplices like they add some decoration to simplices in the ordinary pullback.
+
+Such commutativity is worth noting! The descend construction could be described as taking the dependent product, after modifying the structure to give it stronger lifting properties. 
+
+There is a great advantage to doing this over the horn, however. Let's not forget that.
+
+A new wind\dots
+
+The discrete sum is a problem however. Combining simplicies of complementary dimension is simple and makes a lot of sense. Simplicial objects require something extra however, which involves a choice on about  interleaving the posets, that looks highly specific and crucial.
+
+
+A `path bundle`? Put a structure over $\horn[n]$ which is locally like the projection $\simplex[1]\to 1$, but manages to capture the complexity of the product.
+
+The path bundle $P\to \horn_k[n]$ has two disjoint sections. The of the elements are paths according to which two elements will be joined together. $P$ consists of pairs of simplices to be joined together 
+
+The bundle ought to be a fibration, and we will see about the local trivialness.
+
+How would that work out though? 
+\begin{align*}
+\base P &= \base \horn + \base \horn + \sum_{i < n} \horn[i]\times\horn
+[n-i-1]
+\end{align*}
+All the complication winds up in the definition of the action, which is what we have been struggling with all day. Does this help us define the bundle though?
+
+We need the action below to work for the bundle above, so we need to know which restriction maps to apply. That does not seems to be encoded here.
+$[i]+[j]\to [i+j-1]$ or something like $2^{\set\leq}$
+
+\paragraph{what about}
+Another explosion. No, what I am thinking is exactly what I rejected because we we forced to cram simplices together in a way that violate the ordering.
+
+So we have the indiscrete two element thing that almost tells us what we need.
+
+But we need something for each pair in the product.
+
+To cover all the bases, we need $\horn \sqcup \horn \to \horn \times 2_i$. The extra $2_i$ is needed to determine how the action of $\simCat$ is divided between the to parts of the simplex. 
+
+
+\paragraph{closing}
+There is a serious problem with modifying fibration first and then taking the dependent product: descended fibration have to pullback to themselves. If we don't lose the modifications in the pullback, descend fails for the original fibration, but if we lose the modifications in the pullback, descent fails for the modified fibration\dots I think. Better check this out. 
+Actually, pullback and fortification do not commute. Consider how fortification makes sure that $d_k\of[n-1]\to[n]$ becomes a preserved acyclic cofibration.
+
+I essentially have a more direct way of defining codescent. Let $f\of X\to \simplex$.
+$\base CX$ consists of pairs $\tuplet{x,y}$, where $x\of \base X$ and $y\of \mathbf{nds}(\prod_{l\neq k} f(x)_l)$--note that $\mathbf{nds}(\prod_{l\neq k} f(x)_l)$ has the empty sequence as element when the product is empty, and this has a huge impact on what pairs are valid--or $x\of
+\base\horn$ and $y$ is a non empty member of $\mathbf{nds}(\prod_{l\neq k} f(x)_l)$. We add a lot of simplices, and glue simplices of $X$ to them as well.
+The restriction map is very complicated--based on the idea that the connecting simplices are glued in over $k$--but I promise it exists.
+The trick is obviously that simplices get padded with extra points over the top edge of the horn, so they aren't destroyed in the pullback anymore.
+
+Even with we add variables for genericity, its should be clear that if we can take another horn inclusion, the pullback after the fortification leaves an acyclic cofibration. We show how missing faces can now be glued in dimension by dimension. Hopefully the problem with the restriction maps does not make the proof completely unreadable.
+
+After this is done, we introduce the actual descend functor, using a Yoneda-lemma like idea. The preservation of modest morphism should be trivial, and that descend inverts pullback should be clear as well.
+
+Done for today.
+
+\section{23/3/18}
 \paragraph{The codimension problem}
 We need our structure to be a functor from the category of elements of $\simplex$ to $\ambient\s$. While this means there is an action involving arrows of $\simCat$, it is not a total action on that category. So those parts will have to be reworked. That wasn't very hard to fix.
 
