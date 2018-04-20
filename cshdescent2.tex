@@ -42,8 +42,8 @@ There is a canonical morphism $\horn(\LP)\of \horn_\LP\to V$:
 \end{remark}
 
 \begin{proof}[of \ref{fibrant universe}]
-The modest fibration $\horn(\LP)\ri(\uni)\of \horn_P\times_V U \to \horn_P$ descends along $\foh_\LP$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex_\LP$ by lemma \ref{descent}. 
-Descend means that $\horn(\LP)\ri(\uni)$ is the pullback of $D(\horn(\LP)\ri(\uni))$ along $\foh_\LP$.
+The modest fibration $\horn(\LP)\ri(\uni)\of \horn_P\times_V U \to \horn_P$ descents along $\foh_\LP$ to form a modest fibration $D(v\ri(\uni))\of \bullet\to\simplex_\LP$ by lemma \ref{descent}. 
+Descent means that $\horn(\LP)\ri(\uni)$ is the pullback of $D(\horn(\LP)\ri(\uni))$ along $\foh_\LP$.
 By the existence part of definition \ref{universal modest fibration} there is a $\chi\of\simplex_\LP\to V$ such that $D(\horn(\LP)\ri(\uni))$ is the pullback of $\uni$ along $\chi$ making $\horn(\LP)$ a pullback of $\uni$ along $\chi\circ \foh_\LP$. By the uniqueness part of definition \ref{universal modest fibration} $\chi\circ \foh_\LP=\horn(\LP)$, which proves that $V$ is fibrant.
 \[\xymatrix{
 \horn_\LP\times_V U \ar@/^2ex/[rrr] \ar[r]\ar[d]_{v\ri(\uni)} & \bullet \ar[rr]\ar[d]|{D(v\ri(\uni))} && U\ar[d]^\uni\\
@@ -52,12 +52,26 @@ By the existence part of definition \ref{universal modest fibration} there is a 
 \end{proof}
 
 \begin{lemma}
-For each fibration $f\of X\to \horn_\LP$ there is a fibration $D(f)\of D(X)\to\simplex_\LP$ such that $f$ is the pullback of $Df$ along $\foh_\LP$. Moreover, if $f$ is in $M$, so is $Df$.\label{descent}
+There is an adjoint pair of functors $A\dashv D\of \ambient\s/\horn_\LP \to \ambient\s/\simplex_\LP$ such that
+\begin{enumerate}
+\item $A$ preserves acyclic cofibrations and hence $D$ preserves fibrations.
+\item $A\circ\foh_! = \id_{\ambient\s/\horn_\LP}$, hence $\foh^* \circ D = \id_{\ambient\s/\horn_\LP}$ too.
+\item $D$ preserves modest morphisms.
+\end{enumerate}
+\label{descent}
 \end{lemma}
 
 \newcommand\dsum[1]{\Sigma_{#1}}
 \begin{proof}
-Reindexing along $\foh_\LP$ has a right adjoint $(\foh_\LP)_*$. As required for descend, $\foh_\LP\ri((\foh_\LP)_*(f))$ is isomorphic to $f$ because $\foh_\LP$ is a monomorphism. For $f\of X\to \horn_\LP$, the product is modest whenever $f$ is modest. Moreover, $(\foh_\LP)_*(f)$ has the right lifting property with respect to acyclic cofibrations that the reindexing functor $\foh_\LP\ri$ sends to acyclic cofibrations. Since $\foh_\LP\ri$ doesn't always preserve acyclic cofibrancy, the product is not a fibration. The fibration $D(f)$ regains the right lifting property by adding faces to $(\foh_\LP)_*(f)$ where needed.
+
+
+
+\hide{
+- distributions and their $M$ preserving adjoint functors.
+- the special distribution, and the two resulting properties of ascent.
+}
+
+Reindexing along $\foh_\LP$ has a right adjoint $(\foh_\LP)_*$, which nearly satisfies the requirements. As required for descent, $\foh_\LP\ri((\foh_\LP)_*(f))$ is isomorphic to $f$ because $\foh_\LP$ is a monomorphism. For $f\of X\to \horn_\LP$, the product is modest whenever $f$ is modest. Moreover, $(\foh_\LP)_*(f)$ has the right lifting property with respect to acyclic cofibrations that the reindexing functor $\foh_\LP\ri$ sends to acyclic cofibrations. However, since $\foh_\LP\ri$ doesn't always preserve acyclic cofibrancy, the product is not a fibration.
 
 The construction of $Df$ informally works as follows.
 $\ambient\s/\simplex_\LP$ is equivalent to $\ambient^{\cat P\dual}$ for an internal category $\cat P$ of $\ambient$, and $\ambient\s/\horn_\LP$ is equivalent to $\ambient^{\cat Q\dual}$ for a subcategory $\cat Q$ of $\cat P$. There is a functor $S\of\cat P\to \ambient^{\cat P\dual}$ such that: %def

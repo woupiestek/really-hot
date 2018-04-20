@@ -5,8 +5,98 @@
 \usepackage{url}
 
 \begin{document}
-\section{6/4/18}
+\section{20/4/18}
+Over the weeks I have been thinking about the simplified construction,
+and along the way, lost confidence again.
 
+A morphism $f\of X\to \simplex$ \emph{ascents} along $\horn\to\simplex$ by gluing simplices from $x\of X$ over $\horn$ with supporting structures over the tip of $\horn$, which doesn't really depend on $f$. What to glue where?
+
+A first approach makes $\base(A(f))$ consist of pairs $\tuplet{x,y}$ where $x\of X$ and $y\of\mathrm{nds}(\prod_{l\neq k}\xi_l)$. But $f(x) = \xi$ is not enough, since the must be an action of $\simCat$.
+
+Perhaps $\tuplet{x,\phi,y}$ where $f(x) = \xi\cdot \phi$. This solves the action problem. Don't we get too many simplices that way?
+Revenge of the equivalence:
+\[ \tuplet{x,\phi,y}\sim \tuplet{x,\chi\circ\phi,\chi\circ y} \]
+Note that this only works if $\xi = \xi'\circ \chi$. Random $\chi$ can leave you with tuples where $\xi\circ \phi\neq f(x)$. We should name the function that maps $y$ to $\xi$. The limitation clearly is crucial.
+
+\paragraph{More bounds}
+Return to the idea that $f(x) = \mathrm{supp}(y)$. We have no proper action on the left hand side, but we can start with the free action. Use the equivalence relations to reduce the equivalence classes:
+$\tuplet{x,\chi \circ y,\chi\circ\phi}\simeq \tuplet{x\cdot \chi,y,\phi}$
+This is starting to look like something.
+
+It works like this now: $\tuplet{x,y,\zeta}\sim \tuplet{x\cdot\zeta,y',\id}$ if $y = \zeta\circ y'$.
+
+Confusing stuff, and it only gets worse. The action of $\simCat$ is supposed to be distributed among $x$ and $y$. $\dim\tuplet{x,y,\zeta} = \dom(\zeta) + \#(y)$ and so $\tuplet{x,y,\zeta}\circ\phi$ is going to be $\tuplet{x,y\circ \phi_0,\zeta\circ\phi_1}$, etc.
+
+The distribution is actually still here together with the tensor product. Reason to trust this was the right approach all along.
+
+\paragraph{the story now}
+For a long time, I saw no way to construct the left adjoint.
+I realize it is possible, and try to improve my prove of descend with it. I was stuck on distribution for a while, considered replacing them
+with a product with a more independent construction, but now I think a direct description of the ascend functor is better.
+
+`Ascend' is a good find.
+
+The mechanism of the distribution and the adjoint pair of functor it induces is still there. We have to watch out not to introduce a right actions of $\simCat$, because that does not exist.
+
+We now focus on the left adjoint first, however, and show how it preserves acyclic cofibrations. The right adjoint now naturally preserves fibrations. Secondly, because ascent after direct image is identity, inverse image after descent is identity as well, thanks to adjointness and Yoneda lemma's. Existence and preservation of modesty follows follows quite directly from assumptions.
+
+\paragraph{writers block} Besides the technical complexity, I also struggle just to structure all the information I need to present.
+
+
+We don't need general distributions, they are just a construction I use.
+
+\paragraph{another sketch}
+Let $S$ in $\ambient$ consist of tuples $\tuplet{\xi,k,y,\phi}$ where 
+$\xi\of\base(\horn_{\leq})$, 
+$k\of \cod(\xi)$, 
+$y$ is a nondecreasing sequence of elements in the poset $\prod_{l\neq \top(p)} \xi_l$ where $\xi_l = \set{i \of [\dim(p)] | \xi(i) = l }$, 
+$\phi\of\Ar(\simCat)$ such that $\dom(\xi) = \cod(\phi)$.
+
+We can not even define a right action, because $\xi$ is in the way.
+The $\xi$'s are standing in the way now.
+
+I am getting frustrated again. As soon s I try to sketch the proof, I lose track of the structure, and don't understand what I am doing anymore.
+
+\paragraph{more integral}
+So we have $g\of Y\to\simplex$. Ascent does two things. It adds simplices, and takes the pullback. Could the extra simplices come form $g$ itself? Specifically, $\simplex{x,y}$ where $g(y)\not\of\base_{\horn}$? Note that both sides would need to admit elements where the other remains empty, but otherwise the simplices in the ascended version connect included and excluded elements.
+
+This looks like a strange way of folding the structure.
+
+I have trouble believing the structures are even related\dots
+
+Okay, applying restrictions to $y$ can lead outside of the complement.
+
+$S$ could be pairs $\tuplet{\alpha,\beta}$ where $\alpha\of\base(\horn)$ and $\beta \of \base(\simplex)-\base(\horn)$. The idea being that the tensor product would essentially create the pairs above.
+It still doesn't work though, since the compliment is not a simplicial set.
+
+This is not as specific as before. There is a particular $\delta_k\of[n-1]\to[n]$, and $y$ is supposed to come from its fibre.
+
+That is a way of looking at it.
+The $\xi$ is confusing me now, so I try to get rid of it. This could be a way, but for now it only seems more troubling.
+
+Starting with $g\of Y\to \simplex$, and $y\of Y$, we know that $y$ are only preserved if $g(y)\of\base(\horn)$. To preserve the structure, we want to smear $y$ it out, like a convolution.
+
+I am completely lost right now. Trying to fashion the support out of $Y$ itself only confuses me more.
+
+\paragraph{Now what}
+The right action is something much more subtle now.
+If $f(x) = y\cdot \phi$ then $\phi\circ x$ exists and $f(x\circ \phi) = y$. Now the tensor makes sense to.
+
+So $S$ consists of tuples $\tuplet{\xi,k,y,\phi}$ as described. There are a number of projections. In one direction we go $\xi\circ \phi + \dim(y)$, in order to get to $\horn$, and this is supposed to work out as a morphism of simplices to $\horn$. The other is more straightforward: to $\xi$, where the rule $\xi = \xi'\circ \chi$ then $\tuplet{\xi,k,y,\phi}\simeq \tuplet{\xi',k,\chi\circ y,\chi\circ \phi}$ almost starts making sense, except that we cannot glue anymore. Instead
+$\chi\cdot\tuplet{\xi,k,y,\phi} = \tuplet{\xi',k,\chi\circ y,\chi\circ \phi}$
+Here I spot trouble: what if $\xi'\circ\alpha = \xi''\circ \alpha$?
+That makes $\alpha\cdot$ ambiguous.
+
+While there must be a functor in there, it is hiding itself really well.
+
+So what? $\tuplet{x,k,y,\phi}$ where $y$ is a nondecreasing sequence in $\prod_{l\neq k} g(x)_l$ is better? Now we let $\tuplet{x\cdot \chi,y,\phi}\sim\tuplet{x,\chi\circ y,\chi\circ \phi}$.
+
+No clean tensor then, because we lack a clean product. At least, the tensor representation is assume to cast more than it is worth. We just use the ascent functor.
+
+Peace.
+
+
+\section{6/4/18}
 Using the new description of the left adjoint to prove that acyclics get preserved.
 
 Let's once again return to the `simple' case of two horns.
