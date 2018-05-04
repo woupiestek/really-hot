@@ -5,6 +5,146 @@
 \usepackage{url}
 
 \begin{document}
+\section{4/5/18}
+
+The ascent functor $A\of \ambient\s/\simplex_P \to \ambient\s/\horn_P$ how does it work? For representables $r\of \simplex[n]\to \simplex_P$ it is sort of clear what $A(r)\of R(\simplex[n])\to\horn_P$ looks like. First fortify $r$, then take the pullback.
+
+For $g\of Y\to \simplex_P$, construct $A(g)$ in two steps. First, each $y\of\base(Y)$ corresponds to a representable $\simplex[\dim(y)]\to \simplex_P$. First sum over all $R(\simplex[\dim(y)])$, then take a quotient that glues simplices to their restrictions.
+
+
+Put simply, $g(y) = \tuplet{p,\xi}$, where $p\of P$ and $\xi\of[m]\to[n]$. 
+
+\paragraph{simplifications}
+The main trick in all of this, is replacing external coproducts with indexed coproducts over discrete families.
+
+Perhaps this allows us to represent the lifting operator in a simpler way. For each $f\of X\to Y$ in $\ambient\s$, there is a family of lifting problems $p\of P\to \set\geq$. The members of $P$ are commutative squares $h\to f$, where $h$ is a horn inclusion, and $p$ tells us which, by specifying dimension and top edge. This means there is a universal lifting problem, whose solutions are lifting operators.
+ 
+Note: we are dealing with a parallel lifting problem. The operator has to be a morphism in $\ambient\s/P\disc$, or in a transposed set up over $\ambient\s/\set\geq\disc$, or it doesn't work.
+
+The following diagram in $\ambient\s/\set\geq\disc$ would work:
+\[\xymatrix{
+\horn_{\set\geq}\ar[d]\ar[r] & X^P_{\set\geq}\ar[d]^{f^P_{\set\geq}}\\
+\simplex_{\set\geq}\ar[r]\ar@{.>}[ur] & Y^P_{\set\geq}
+}\]
+Each problem $p\of P$ contain a map $a\of\horn_j[i]\to X$ and a map $b\of\simplex[i]\to Y$ such that $b\circ h = f\circ a$, and these maps induce the commutative square above. This is the universal lifting problem for $f$. Its solutions are realizers of $f$'s fibrancy.
+
+This is great news. We only need descent along the family of horns, without worrying about larger set of problems.
+
+\paragraph{discrete pullback lemma}
+A discrete morphism in $\ambient\s$ in our case is a pullback of a morphism from $\ambient$. If cofibrations, and acyclic cofibration are closed under pullbacks form those, we don't even have to bother with slice categories over discrete objects. Just having a lifting operator for the 'family' is enough.
+
+This lemma must be equivalent to something in the definition of the factorization system--something that sets it apart from the normal factorization systems. A lemma about enriched factorization systems in other words.
+
+The category $\ambient\s$ is enriched over $\ambient$ and also has ambient embedded. Any enriched factorization system should therefore allow us to pull back its left morphisms along pullbacks of morphisms in $\ambient$, even if left morphism aren't generally closed under pullbacks. It this true though? It comes down to this: if we have a lifting operator for a coproduct of cofibrations, can we constructively split it up into lifting operators for individual cofibrations? No, because not every individual lifting problem extends to a lifting problem for the entire family. This won't fly.
+
+I have done this before, and concluded that it wouldn't work. The universal lifting problem has to exist in a slice over a discrete object, otherwise it just won't work. However, we can restrict our attention to $\ambient\s/\set\geq\disc$ thanks to adjunctions.
+
+
+\paragraph{mistake?}
+Perhaps the lifting property in the start of this paper is too weak. It might work out if we consider the enrichment over $\ambient/P$ rather than over $\ambient$. Very tiresome.
+
+The object of lifting problems is just rather different,
+being a sum over the possible horns rather than a product.
+
+Once we have that, does a version of the discrete pullback lemma become acceptable?
+
+In any case, my presentation is not clear enough, and too hard to remember.
+
+\paragraph{empty space}
+At this point is really seems like a mistake that an empty $[-1]$ simplex does not exists. Would initial object for $\simCat$ change that much?
+
+Every simplex would have an extra object $X[-1]\of\ambient$, and $!\of [-1] \to [n]$, would grant a new morphism $X[n]\to X[-1]$. The result could effectively be a family of simplicial sets, and might accidentally solve a lot of problems for us.
+
+There could be a model structure on families of simplicial sets.
+There would be an advantage if this somehow reduced the indexed coproducts we need to simpler constructions.
+
+The extension problem remains.
+
+
+\paragraph{Back to the functor}
+Not to knock the insights of this morning. We can now solve the problem of descent along the family of horn inclusions, and know that things work out\dots or can we?
+
+We got a lot of leverage out of the descended morphism simply being a modest fibration. The transposition throws a curve ball here. That is why we need to prove descent for all indexed sums of horns.
+
+%
+Let $g\of Y\to \simplex_P$. What is $A(g)\to A(Y)\to \horn_P$?
+$\simplex_P$ consists of a problem $p$ which has some parameters, like the dimension of the horn to be lifted, and a simplex $\xi\of[m]\to [n]$ that is part of its codomain, and $k$ the top edge of the horn. 
+First approximation $\sum_{y\of\base(Y)} \mathbf{nds}[\dim(g(y))]\times\mathbf{nds}(\prod_{l\neq k} \xi_l)$--barring the cases where both sequences are empty. Also, limit to cases $\tuplet{y,\alpha,\beta}$ where $g(y\cdot\alpha)\of\horn_P$.
+
+Generate an equivalence relation from:
+\[\tuplet{y\cdot\phi,\alpha,\beta}\sim \tuplet{y,\phi\circ \alpha,\phi\circ \beta}\]
+The quotient is $\base(A(Y))$.
+
+The rest is going to be more painful. 
+\begin{align*}
+\dim\tuplet{y,\alpha,\beta} &= \#\alpha+\#\beta-1\\
+A(g)\tuplet{y,\alpha,\beta} &= \tuplet{p,\xi'}\\
+\tuplet{y,\alpha,\beta}\cdot\phi &= \tuplet{y,\alpha\cdot\phi_0,\beta\cdot\phi_1}
+\end{align*}
+
+If $g(y) = \tuplet{p,\xi}$, then $A(g)\tuplet{y,\alpha,\beta} = \tuplet{p,\xi'}$ with $\xi'$ is $\xi\circ\alpha$ extended with $\#\beta$ copies of $k$. 
+Similarly, $\tuplet{y,\alpha,\beta}\cdot\phi = \tuplet{y,\alpha\cdot\phi_0,\beta\cdot\phi_1}$ relies on cutting a part $\phi_1$ form the middle of $\phi$.
+
+We can represent non-decreasing $\xi\of[m]\to [n]$ as morphisms $[n]\to \nno$ by counting the number of elements in their sections. The morphism in the slice category $\simCat/[n]$ similarly become families of morphisms.
+
+Idea: $\alpha\of[a]\to[n]$ and $\beta\of[b]\to[n]$ therefore have a `join' $\alpha\sqcup\beta\of[a + b + 1]\to[n]$. The lack of empty elements makes it harder to maintain.
+
+There are two morphisms $a\of [\#\alpha - 1]\to[\#\alpha + \#\beta - 1]$ and $b\of[\#\beta - 1]\to[\#\alpha + \#\beta - 1]$ fixed for each $\tuplet{y,\alpha,\beta}$, which are surjective together. For each $\phi\of [i] \to [\#\alpha + \#\beta - 1]$, $\phi_0$ is the pullback of $\phi$ along $a$ and $\phi_1$ is the pullback of $\phi$ along $b$. $A(g)\tuplet{y,\alpha,\beta} = \tuplet{p,\xi'}$, where $\xi'$ is completely define by $\xi'\circ a = \alpha$ and $\xi'\circ b = \function{x}k$. The division depends on the morphism part of $g(y)$, $\#\alpha$ and $\#\beta$.
+
+We need to keep track of these two morphisms, to help out the the future.
+
+The only thing left to define is what $A$ does to morphisms, but that should be obvious.
+\[ A(m)\tuplet{y,\alpha,\beta}\sim \tuplet{m(y),\alpha,\beta} \]
+
+A lot of particles are mentioned, but not properly named. Make sure that they are.
+
+\paragraph{Ascents}
+I take the descent of a single fibration as an example of gluing, but that actually solves the wrong problem.
+
+Actually, the modest fibration $f\of X \to \horn_?$ is a gluing problem, and for each gluing problem, we need a separate descend. We similarly need a separate ascend left adjoint, for each problem.
+
+We are dealing with a $P$ indexed set of fibrations, each of which needs its own descend.
+
+The construction I had in mind, might be off, due to a confusion between dependent products and coproducts. The construction works on a by-element basis, but one of the challenges is to prove that the infinite family of elements adds up to a single filler operator.
+
+So a problem consists of a single horn $\horn_j[i]\to V$ that needs a filler. Since there is a family of horns, the object of lifting problems exists $P = \sum_{j\leq i\of\nno}\ambient\s(\horn_j[i], V)$. 
+
+The category $\ambient\s/P\disc$ contains a horn inclusion $\horn_P\to\simplex_P$, by reindexing from $\ambient\s/\set\geq\disc$, and the universal modest morphism by reindexing from ambient.
+
+Think of $\ambient\s$ as a simplicial object up to isomorphism, its $n$-simplices given by fibrations $f\of X\to \simplex[n]$. The by element decent lemma tells us that the whole category is fibrant, in the external sense. We need this to be true in the internal sense as well, there should be a lifting operator.
+
+\paragraph{another route}
+Write a paper about this construction in the category of simplicial sets, perhaps without the axiom of choice, or other powerful assumptions.
+
+We could probably go further and show the same principle applies to many categories of simplicial object.
+
+The problem is and always was to get the actual operator.
+
+\paragraph{parametric}
+I really have a hard time telling the difference between a descend for a fibration and a family of descents for a family of fibrations.
+
+It also seems like giving a family of all objects is responsible f
+
+The `category is fibrant' has a better route: show that descend works along arbitrary acyclic cofibrations. That is the inevitable consequence.
+
+Weakly invertible cofibrations. It is not that simple, because $\horn$ is not fibrant. These crutches do not exist for all acyclic cofibrations. However, the weak inverse makes descent trivial.
+
+
+\paragraph{Big challenges seem smaller?}
+Collect all acyclic cofibrations with simplices as codomain.
+I guess that collecting the cofibrations is easy, but that filtering the ones with cycles out is hard, though not impossible. Perhaps simply checking all the cycles and checking that they are filled is enough.
+
+Let $F(X)$ consist of tuples $\tuplet{a,x,\xi}$ where $a\of A\to\simplex[n]$ is an acyclic cofibration, $x\of A\to X$ is an arbitrary morphism and $\xi\of [m]\to [n]$ is a monomorphism.
+Perhaps we need to work with quotients, or with families of such, but this is my candidate factorization.
+
+The inclusion of $X$ should be the trivial example. Showing that the result is an acyclic cofibration should rely on the whole thing being a pushout (hence the quotient) of cofibrations.
+
+Why is it a fibration though?
+I guess the gluing is almost just as obvious. Idea: the quotient means we have to deal with many possible representations of the component simplicial objects. Moreover, gluing together acyclic cofibrations may actually be quite hard, as simply uniting them could introduce unwanted cycles. Still, if a suitable combination can be found in each case, which respects the equivalence, there is a lifting operator as desired.
+
+\paragraph{conclusion}
+This was not a very productive day. Maybe I should just give up on this project. Or ask for help. I have to think about it.
+
 \section{20/4/18}
 Over the weeks I have been thinking about the simplified construction,
 and along the way, lost confidence again.
