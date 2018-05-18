@@ -5,6 +5,157 @@
 \usepackage{url}
 
 \begin{document}
+\section{18/5/18}
+
+\paragraph{Cofibrant generation}
+Everything I wrote is based on the internalized version of the notion of a small family of generic cofibrations. However, I got greedy, and tried to make the lifting property with regard to each member of the family a special case of the lifting property for a single morphism. I am unsure of this works anymore, and it certainly doesn't make the descent theorem harder to prove.
+
+General ideas:
+\begin{itemize}
+\item the whole paper is based on an internalized version of \emph{cofibrant generation}
+\item this notion of cofibrant generation hides a more \emph{natural characterization of (acyclic) cofibrations} in terms of decidability properties. For acyclic I haven't determined what this property is however.
+\item nor have I found a replacement for the \emph{small object argument}, that permits fibrant replacements.
+\item the definition of the lifting property for families isn't correct, and requires an update throughout the paper.
+\end{itemize}
+
+
+\paragraph{small object argument}
+
+For a morphism of simplices $f\of A \to B$, start with the monic
+$\function{a}\tuplet{0,a,f(a)}$ of $\base(A)\to \nno\times\base(A)\times \base(B)$ and the epic $\function{\tuplet{n,a,b}}b$. I want to modify $\nno\times\base(A)\times \base(B)$, first select elements and then take a quotient.
+
+Suppose $f = g\to h$ is the result of a small object like construction. The filler could work as follows. Every $x\of\base(\dom(g))$ is an equivalence class of tuples $\tuplet{n,b,a}$, where $n$ is the `birth date' of the, $b$ is the image of $g$ and $a$ is some bookkeeping we need to do. For each horn and each selection of tuplets, there is a least birth date that does not occur, and for this birth date $n$ there is a tuplet $\tuplet{n,b,a}$ whose equivalence class in $\dom(g)$ serves as the filler for the fragments.
+
+The extra bookkeeping is unavoidable however.
+
+Each horn filler introduces a simplex that intersects the horn in a cycle: the base of the horn. We need to keep track of this one.
+
+The generations could actually be about extra dimensions needed to get the acyclic inclusion back to $A$. I.e. $\tuplet{b,a}$ contains a bigger simplex $b$ of $B$, and a monic of $\simCat$ to indicate that the new face was introduced over that bigger face. This introduces new problems because $B$ does not have to be a fibrant object.
+
+We might need to keep a collection of elements of the codomain $B$ that together act as a kind of cover. The members represent simplices that need to be filled before the current one can, all the way back to simplices that directly derive from members of $A$.     
+
+Constructions are known, but we need to kip ahead of the line to the end result in order to get what we need. 
+
+The members of $C=\dom(g)$ combine $b\of \base(B)$ with $k\of[\dim(b)]$ to indicate how $b$ was filled in,
+but also $[\dim(b)]\to \base(C)$ to point to the other simplices, and we are still missing the restriction maps here.
+
+We are looking for a free filler algebra. We don't have a clear path to its construction, with may just go beyond what is available here.
+
+\paragraph{lisp}
+Take the horns and the restriction maps and turn them into operators in an operads like structure\dots There is some kind of multicategory in this somewhere. 
+
+The generic operators are $\xi\of\Ar(\simCat)$ and $\set{ h_j[i] | j\leq i\of\nno }$. The types that determine valid compositions are the dimension of the simplices involved\dots almost.
+
+The product in $h_j[i]\of [i-1]\times[i-1]\to [i]$ hides the overlap of the simplices the operator is supposed to combine.
+
+The product is a higher order operator that introduces new morphisms 
+
+So what about finite colimits as objects?
+
+We can indeed build a family of (acyclic) cofibration between finite colimits of simplicial objects--a set that is recursive, and probably decidable, if in a highly non trivial way. The lifting property with respect to this family implies the lifting property with respect to 
+
+The internal subcategory of small objects, and fillers given for all cofibrations in those categories. The advantage seems clear however.
+
+I am afraid things are still not that simple, because of the restriction maps. Actually the problem is that the product is still overly complicated.
+
+I think I found a way in:
+\newcommand\pushout{\ar@{}[dr]|(.9)\ulcorner}
+\[ \xymatrix{
+& X\ar[r]|f & Y\\
+%
+\sum_{i<n} \simplex[n-1] \ar[r]\ar[d]\pushout & 
+\horn_k[n] \ar[u]|a\ar[d]\ar[r] & 
+\simplex[n] \ar[dd]\ar[u]|b \\
+%
+\sum_{i<n} C_i \ar@/^{3ex}/[uur]|c \ar[r]\ar[d]\pushout & 
+\bullet \ar@/^{3ex}/[uu]|(.7){c'} \ar[d]|p\pushout \\
+%
+\sum_{i<n} D_i \ar@/_{3ex}/[uuurr]|(.6)d \ar[r] & 
+\bullet \ar[r]|q & \bullet \ar@/_{3ex}/[uuu]|{d'} \ar@/_{3ex}/[uuul]|{e} 
+}\]
+
+The idea is that the commuting $c\of \sum_{i<n} C_i\to X$ and $d\of \sum_{i<n} D_i\to Y$ are implied by $a$ and $b$. Pushouts then induce the maps $c'$ and $d'$, forming a new commutative square with $q\circ p$, which is a cofibration of finite colimits of simplicial sets. Hence the filler $e$ exists.
+
+Now this would be the complex product of types envisioned above.
+
+\paragraph{New way}
+By skipping ahead to the end result this way, we can actually perform the small object argument in order to produce a full factorization system. We might be getting close to Garner. No, distinctly no because we have a category of small objects closed under small colimits, which in our case means \emph{finite}.
+
+We are also stuck with a rather awkward notion of `generated'. 
+
+If this works as advertised, it could replace much of the paper.
+
+\paragraph{review of the small object argument}
+The category is assumed to have all small colimits and small homsets. The smallness and the domains of the generic cofibrations is small. 
+
+The assumptions look absurdly broad for actual horn inclusions and cycles. I want to do the opposite. Have an internal category of small objects for my construction. Then freely generate the filler algebra.
+
+Since all the objects are finite colimits, we don't even need to stick to the format of the proof above that badly. It becomes a matter of carefully putting together the various colimits. The covering by a small sum of representables gets us where we need to be.
+
+\paragraph{summary of the finite simplicial set approach}
+With the small object argument, we have to repeat the pushout until we get a transfinite composition up to a sufficiently high cardinal. I want to be done at once, so I get a larger family of cofibrations to take the pushout over.
+
+Basically, I assume that pulling back an acyclic cofibration along morphism with specific domains preserves acyclic cofibration.
+
+No that isn't it--I know the structure of the pushout. I know what each simplex there looks like, and use that information. Being covered by a small family of \emph{representables} is important, as well as accounting for all origins of representable objects.
+
+There is an important parallel though--the new family of cofibrations is not small, let alone the object of lifting problems, but the codomains of individual members are. This has an impact on the pushout, I struggle to pin down now. 
+
+\[\xymatrix{
+\bullet \ar[d]\ar[r]^{\sum h} & \bullet\ar[d]\\
+X\ar[dr]_f\ar[r]& Z \ar[d] & \bullet \ar[l]\ar[d]^{h'}\\
+& Y& \bullet \ar[l]
+}\]
+
+Its something like: take $\dom(\sum_{h\of P} h)\times_Z\dom(h')$. The functor $(\cdot)\times_Z\dom(h')$ preserves finitely filtered colimits, due to the finiteness of $\dom(h')$. This is what we get a finite family of colimits covering this specific one.
+
+I am unsure that I have the key now. 
+
+\paragraph{again}
+Here:
+\[\xymatrix{
+\bullet \ar[d]\ar[r]^{\sum h} & \bullet\ar[d]\\
+X\ar[dr]_f\ar[r]& Z \ar[d] & \bullet \ar[l]\ar[d]^{h'}\\
+& Y& \bullet \ar[l]
+}\]
+
+The argument is that there is a finite family $H$ of representables covering $\dom(h')$. For each of those representables, we can find a lifting problem that introduced it into the pushout. Said otherwise, a finite 
+
+I see what I did wrong. The representables don't grant maps into codomains. Now the covering gets in the way of combining the other lifting problems.
+
+I should just have started the update of the paper.
+
+\paragraph{Category of transfinite compositions}
+Still try to capture \emph{fibrancy} in an algebra.
+
+Finite simplicial object represent the types of the domains of the operators well. If we stick with full simplices for codomains, we get a simpler setup.
+ 
+Get rid of the pushout, it is to dangerous.
+
+The 'operators' are acyclic cofibrations $A \to \simplex[n]$ combined with maps $[m]\to [n]$, which cannot be members of $A$. 
+
+'operators'. So how do we apply them? The lifting problems are the answer. 
+
+Here I may be seeing something I missed before.
+Suppose $a\of I\to J$ is one of the small cofibrations. Each face $j\of\base(J)-\base(I)$ is an 'operator'.
+I suppose there is an equivalence, along the lines of $a'\of I'\to J'$ being a sub-acyclic cofibration, contain the same operator.
+
+We are back with describing the product in a sensible way. 
+
+That was the whole problem from the start. There may not be a simple join because any straightforward method introduces cycles.
+
+The `operators' are faces of codomains of acyclic cofibrations. The missing data is a way to select `operators` for each.
+
+
+\paragraph{alternative characterizations}
+Horn fillers introduce two new simplices, the whole filler and its base. So perhaps acyclics can be characterized by a decidable subdivision of the new faces. Seems like a stretch though.
+
+Not helpful.
+
+\paragraph{conclusion}
+I prefer puzzling over writing so much, that I rarely get to writing. Hmm\dots
+
+
 \section{4/5/18}
 
 The ascent functor $A\of \ambient\s/\simplex_P \to \ambient\s/\horn_P$ how does it work? For representables $r\of \simplex[n]\to \simplex_P$ it is sort of clear what $A(r)\of R(\simplex[n])\to\horn_P$ looks like. First fortify $r$, then take the pullback.
