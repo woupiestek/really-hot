@@ -4,7 +4,103 @@
 \usepackage[all]{xy}
 \usepackage{url}
 
+
+\newcommand\pushout{\ar@{}[dr]|(.9)\ulcorner}
+\newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
+\section{20/5/18}
+An important idea in the proof of yesterday is that $f_0$ should be a filtered colimit of compact (connected) acyclic cofibrations. We cannot make that happen with mere pushouts, but there is hope for transfinite compositions.
+
+Usually a good approximation of an object in terms of other objects is to take the a colimit, so we want to do this here too: $f_0 = \colim_{h\to f}h$.
+
+The idea is to use the extra compositions to add the joins required for the directed colimit.
+
+The simplest idea is to add copies of each cofibration for each $n\of \nno$, but to require that $i < j$ is a morphism is not a decidable monic. The difficult joins get lifted on a higher limit. That might not work because the result is not a directed category. 
+
+Even if the coequalizers were present, a coequalizer of a parallel pair of morphism between acyclic cofibrations, might not be an acyclic cofibration, precisely because the identification of equivalent point introduces cycles. I imagine the easy way out is to fill in this cycles, but how do we catch them, and what do we fill them with?
+
+I don't believe I actually have a solution for this anymore.
+
+\paragraph{Would this help?}
+We need cocones in the category of commutative squares $h\to f$ where $h$ is an acyclic cofibration. Coproducts are easy, but what about the cofibrations?
+
+\[\xymatrix{
+A\parr\ar[d]_h & A'\ar[r]\ar[d]_{h'} & X\ar[d]^f\\
+B\parr & B'\ar[r] & Y
+}\]
+
+If we first fill the rightmost square, a free filler won't factor through the coequalizer of the pair $B\rightrightarrows B'$. Fill the outer square first to get a commuting morphism $B\to X$ and derive a new diagram:
+
+\[\xymatrix{
+& A+A \ar[r]^{h+h}\ar[d]\pushout & B+B\ar[d] \\
+A\parr\ar[d]_h & A' \ar[r]\ar[d]_{h'}\pushout & \bullet \ar[r]\ar[d] & X\ar[d]^f\\
+B\parr & B' \ar[r] & \bullet \ar[r] & Y
+}\]
+
+If we now fill the rightmost diagram, I imagine a filler for the coequalizer could be fashioned from it. Maybe not: only the $A+A$ range of $B'$ is forced to adhere to a pre-specified lifting. Worse still, there may be not better way, because the morphism $B\rightrightarrows B'$ could overlap, conflicting in its prescriptions for $B$.
+
+It seems probable that this all has been tried before, and then forgotten because it just wouldn't work. 
+
+It look like the category of compact acyclic cofibrations of $f$ is not directed. While colimits exist among more general compact morphisms, a cocone with an acyclic cofibration is missing. 
+
+
+\section{19/5/18}
+
+\paragraph{the other small object argument}
+Instead of bothering with transfinite compositions, we start with a larger family of (acyclic) cofibrations. Let's work this out in the external case first.
+
+Instead of just considering horns, consider all acyclic cofibrations between simplicial which are finite colimits of representables. Let $\set{h_i\of A_i \to B_i |i\of I}$ be this family.
+
+Let $f\of X\to Y$ be any morphism of simplicial objects. We factorize as follows. First let $h_f\of A_f\to B_f = \sum_{ i\of I, h_i\to f } h_i$--this is a sum of morphisms between the appropriate sum of domains. There is a canonical morphism $h_f\to f$ (actually a commutative square) which we factorize using a pushout.
+\[\xymatrix{
+A_f\ar[r]^{h_f}\ar[d]_{a_f}\pushout & B_f\ar[d]\ar[dr]^{b_f} \\
+X \ar[r]^{f_0}\ar@/_/[rr]_f & Z \ar[r]^{f_1} & Y
+}\]
+Now $f_1$ is supposed to be a fibration.
+
+The core of the argument is that $f_0$ is a filtered colimit of acyclic cofibrations which are colimits of representables, and that $\ambient(A_i,-)$ preserve those. Given $(c\of A_i\to Z,d\of B_i\to Y)\of h_i\to f_1$, $c$ factors through some $B_j\to Z$, and the pushout of $h_i$ along this factorization gets us a new member $h_k$ of the family of `compact' acyclic cofibrations.
+\[ \xymatrix{
+ & A_j\ar@/_/[dd]_(.25){h_k}\ar[d]^{h_j} \ar[r] & X\ar[d]_{f_0} \ar@/^/[dd]^f\\
+A_i \ar[d]_{h_i} \ar[r]_{c'} \ar@/^/[rr]^(.25)c \pushout & B_j \ar[r]\ar[d] &Z\ar[d]_{f_1}\\
+B_i \ar[r]\ar@/_/[rr]_{d} & B_k\ar[r]\ar@{.>}[ur]^e & Y
+}\]
+The filler $e$ comes from the fact that $h_k\to f$ factors through $(a_f,b_f)\of h_f\to f$.
+
+To make this work constructively we either need all choices of $B_j$ to result in the same filler, or there must be a canonical choice\dots or both. I think it will be a bit of both: enumerate the family of $h_j$ and use partial sums, but all available choices of morphism $h_j\to f$ must work out.
+
+To complete the proof, we need to show that $f_0$ is a filtered colimit. The morphism $a_f\to A_f\to X$ is a regular epimorphism, because for each $x\of\base(X)$ the identity map $\simplex[\dim(x)]\to\simplex[\dim(x)]$ is a `compact' acyclic cofibration, hence a term of $h_f$.
+
+Pushouts preserve regular epimorphisms. I remember struggling with this, so let's work out the diagram:
+\[\xymatrix{
+\bullet \ar@/^/[r]\ar@/_/[r]\ar@{}[r]|\varnothing & \bullet \ar[r]\ar[d]\pushout & \bullet \ar[r]\ar[d] & \bullet \\
+& \bullet \ar[r]\ar@{.>}[urr] & \bullet \ar@{.>}[ur]
+}\]
+
+This makes $f_0$ the coequalizer of an exact fork, and the idea is to get a filtered diagram by taking pushouts of pullbacks for finite sets of $h_i$. In order to get the result to be a colimit, we need to coequalize stuff, but coequalizers of acyclic cofibration can be cyclic. This is what my problems have revolved around all the time.
+
+Okay, it turns out there are big problems left to solve here.
+The coequalizing members can add additional simplices to the original structure, thus filling in any accidental cycles.
+
+Generally taking the coequilizers for the codomains is fine. coequalizer of the domain may have cycles we need to fill in. While we have a filler for the joined cofibration, it is not going to commute\dots
+
+\paragraph{The point of a transfinite composition}
+A pushout does not allow us to build on the faces we already have, which is why it cannot. A better strategy is to use a transfinite composition that doubles as a filtered colimit somehow.
+
+I am unsure how exactly to reconcile the two.
+
+From the desire for directed limits is seems lie we should work with chains of morphisms between acyclic cofibrations:
+\[\xymatrix{
+A_0 \ar[r]^{a_0}\ar[d]_{h_0} & \cdots\ar[r]^{a_{n-1}} & A_n\ar[d]^{h_n} \\
+B_0 \ar[r]_{b_0} & \cdots \ar[r]_{b_{n-1}} & B_n 
+}\]
+Here all $b_i$ would be regular epimorphisms, and $B_n$ would be connected. Each stage add missing equalizers for the one before it, that is the point.
+
+For the construction in the core of the proof, simple chains of acyclic cofibrations make sense.
+
+In either case, the question is: what are the morphisms?
+
+
+
 \section{18/5/18}
 
 \paragraph{Cofibrant generation}
@@ -59,7 +155,7 @@ The internal subcategory of small objects, and fillers given for all cofibration
 I am afraid things are still not that simple, because of the restriction maps. Actually the problem is that the product is still overly complicated.
 
 I think I found a way in:
-\newcommand\pushout{\ar@{}[dr]|(.9)\ulcorner}
+
 \[ \xymatrix{
 & X\ar[r]|f & Y\\
 %
