@@ -8,6 +8,32 @@
 \newcommand\pushout{\ar@{}[dr]|(.9)\ulcorner}
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
+\section{23/5/18}
+To get a filtered category of commutative squares $h\to f$ where $h$ is a compact acyclic cofibration, only allow $(a,b)\of h\to h'$ where the factorization of $b$ through the pushout of $a$ is an acyclic cofibration.
+\[\xymatrix{
+\bullet \ar[r]^h\ar[d]_a\pushout & \bullet\ar[d]\ar[dr]^b \\
+\bullet \ar[r]\ar@/_/[rr]_{h'} & \bullet \ar[r]^(.4){b/a} & \bullet
+}\]
+
+Claim: the pushout of two such morphism exists within the category.
+\[\xymatrix{
+&& \bullet \ar[r]^a\ar[ddr]^(.4)f\ar[d]^(.7)e & \bullet\ar[r]^b & \bullet \ar[ddr]^h \ar[d]_g\\
+\bullet\ar[r]_i\ar[urr]^c\ar[ddr]_{c'} &\bullet\ar[urr]^(.4)d\ar[ddr]_(.3){d'} &
+\bullet\ar[rr]^j && \bullet\\
+&&&\bullet\ar[rr]_m\ar@{.>}[ul]^k &&\bullet\ar@{.>}[ul]^l \\
+& \bullet \ar[r]_{a'}\ar[urr]^(.6){f'}\ar[uur]_(.7){e'} & \bullet\ar[r]_{b'} & \bullet \ar[urr]_{h'}\ar[uur]^(.7){g'}
+}\]
+The big square $f\circ c = f'\circ c'$ is a pushout and $k$ is the factorization of the $e$-$e'$-cone through it. Since $m$ should simultaneously be a pushout of $b\circ a$ along $f$ and $b'\circ a'$ along $f'$, but perhaps those don't coinside. In that case let $h$, $h'$ and $w$ be the colimit of the $W$-shaped diagram involving $b\circ a$, $f$, $b'\circ a'$ and $f'$. The $j\circ k$-$g$-$g$-cone commutes and therefore factors as well, inducing $l$. 
+
+Difficulty remains in showing that $k$ and $l$ are a morphism, and $m$ is an acyclic cofibration. This might have been easier with coequalizer.
+
+\paragraph{Thoughts}
+It is hard to tell how important precisely these morphisms are, after all, would this not work for a greater class of morphism? The trouble is staying within acyclic cofibrations.
+
+On the other hand, we see to have a unique filler for all filling problems, which seems so much nicer than the transfinite compositions produce.
+
+At least it all looks possible now.
+
 \section{20/5/18}
 An important idea in the proof of yesterday is that $f_0$ should be a filtered colimit of compact (connected) acyclic cofibrations. We cannot make that happen with mere pushouts, but there is hope for transfinite compositions.
 
