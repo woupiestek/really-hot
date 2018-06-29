@@ -8,6 +8,185 @@
 \newcommand\pushout{\ar@{}[dr]|(.9)\ulcorner}
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
+
+\section{29/6/18}
+Let's start with an outline:
+
+\begin{itemize}
+\item motivation
+\item description of the construction
+\item literary review
+\item definitions
+\item theorem
+\item proof broke down in parts
+\item examples
+\end{itemize}
+
+
+\paragraph{Garner}
+Monad and comonad on the category of arrows.
+
+I think my construction is the \emph{density comonad} for some $F\of \cat C \to \ambient/\ambient$, except that $F$ is an internal subcategory.
+Two things should be difficult. Firstly, the density comonad exists.
+
+Not so fast! The category of compact acyclic cofibrations is already a free completion, designed to make the rest of the construction easier.
+
+
+
+
+
+
+
+Presumed differences:
+\begin{itemize}
+\item No completeness
+\item Internalized \emph{everything}: family of cofibrations, lifting properties, filtered colimit arguments etc.
+\item hence the difference should be in the way the monad is constructed, the rest is exactly the same.
+\end{itemize}
+
+
+\paragraph{Deeper understanding}
+The construction I came up with is not so weird, and is actually closely related to the constructions of Garner and Reihl. In fact Reihls enriched homopty theory is a great support. My biggest obstacle is completeness, and I don't think either Garner or Reihl have a solution here.
+
+So that is what my paper will be called:
+'A small object argument for incomplete categories'
+
+While the core of the argument is still the density comonad, the way it is constructed, and the reason it works are changed.
+
+Lets work this out:
+We take an internalized version of $I\of \cat J\to\ambient/\ambient$. The family of cofibrations is re-imagined as a commutative square. Same goes for the bundle of small morphisms.
+
+Eventually we have a saturated version $I'\of \cat J'\to\ambient/\ambient$ similarly internalized.
+
+\paragraph{algebraic small objects}
+
+Garner break things up in three steps:
+\begin{itemize}
+\item the codensity comonad
+\item the lefthand construction with the pullbacks
+\item the transfinite composition
+\end{itemize}
+
+The first two steps are already modified to work with internal constructions.
+The point of divergence is that last one, however. Here I need to skip ahead to the result.
+One we have the small saturation of the category of cofibrations, we only need 
+
+If we start from an category rather than a family of morphisms, the small saturation is going to have more morphisms as well.
+Here things stop making sense to me.
+
+The small maps ought to be filtered themselves. In $\ambient/I$ the subcategory of small morphisms should be filtered. It is not necessary for small morphisms to be closed under composition.
+
+Should the codomains be small as well? No, we need a family of potential codomains, but those could be 'small colimits' of whatever codomains the cofibrations actually have. I.e. let $I$ represent all generic cofibrations, then the domain of any small morphism to $I$ is fine.
+
+The codensity stuff we win back by working with internal categories, or even families.
+
+\paragraph{necessities}
+Image we pick the first category at random, then what makes transfinite compositions unnecessary?
+\begin{itemize}
+\item have small domains.
+\item being small-filtered.
+\item being closed under compositions and pushouts. The pushouts require clarification!
+\end{itemize}
+
+No smallness conditions here. Well, the 'filtered' may say something.
+Yes, because the colimit is not finite, we need the smallness here.
+
+The smallness of the codomains is not necessary--we just need an object of all possible codomains to exist.
+
+\paragraph{the generators}
+A functor $I\of\cat J \to\ambient/\ambient$ corresponds to one $[1]\times I \to \ambient$. We replace this with a fibred category like thing.
+Ultimately, we wind up with $C\to D \to I_0$ like we have been working with for a long time, together with an action of $I$ morphisms on both ends that the morphism then has to commute with.
+
+\paragraph{What is holding me back now?}
+I understand Garner's construction again and note that it both justifies what I did below, but also is more general by allowing categories of generic left morphisms instead of mere families. I don't know how to keep those around. I want to amend my construction 
+
+Okay, remember how we now need cofibrations to be closed under tensors? The small saturation requires that `small tensors' also factor through morphisms in the saturation, but I think they do so automatically.
+
+Small tensors may be the only extra requirement for filteredness.
+The crucial thing really is that the is a single generic small morphism. In that case, we only have to worry about finite limits.
+
+A second problem is the smallness of the codomains. It guarantees that the saturation exists as a small category, but technically 
+
+
+\paragraph{colimit preservation}
+This is an important idea: smallness is not random. The functor $\hom(S,\cdot)$ should preserve small-filtered colimits. The bigger the family of small objects, the smaller the number of preserved colimits. But this sounds like a requirement on small objects that we have not formulated properly yet.
+
+Does it come for free?
+
+
+First of, what is even a small filtered colimit?
+Well, a small internal category is an internal category categories whose object of morphisms is small. A small-filtered category is presumably an internal category which has cocones for all internal functors with small domains. A functor from such a category into the ambient category is replaces by a kind of module, and the colimit\dots probably is an obvious coequalizer.
+\begin{align*}
+&f\of X\to C_0\\
+&\cdot\of \set{(\gamma\of C_1,x\of X)| f(x) = \dom(\gamma)}\to C_0\\
+&C_0/(\gamma\cdot x \sim x)
+\end{align*}
+The point of smallness would be that $\hom(S,\cdot)$ preserves coequalizers of this shape internally.
+
+So maybe we can simplify further by talking about 'small filtered coequalizers'. I.e. any small family of connected elements has a representative. Precisely, suppose $h\of Y\to Z$ is the coequalizer of $f,g\of X\to Y$. Small filteredness means that if $k\of A\to B$ is small and $(a,b)\of k\to h$, then there are $a'\of A\to X$ and $b'\of B\to Y$ such that $f\circ a' = a$, $g\circ a' = b'\circ k$. Or course $f$ and $g$ can be swapped for symmetry and perhaps even weaker conditions apply.
+\[\xymatrix{
+& X \ar@<-.5ex>[d]_f \ar@<.5ex>[d]^g \\
+A \ar[r]^a \ar@{.>}[ur]^{a'}\ar[d]_k & Y\ar[d]^h \\
+B \ar[r]_b \ar@{.>}[ur]_{b'} & Z
+}\]
+This is related to the arguments about internal filtered colimits that are supposed to be in the Elephant. I only need to know how to guarantee that the category of small objects is small filtered itself, if any requirement beyond cocones for \emph{finite} diagrams is needed.
+
+I am thoroughly confused now. This whole filtered colimits thing made sense once, but now not so much. There must be something wrong with these filtered coequalizers, but I don't know what.
+
+The colimit of the functor may be a coequalizer of a straight forwardly derived parallel pair, but that coequalizer is not what is preserved.
+Yes! There is a single object where everything comes together, but in that object the elements are not necessarily the same.
+
+Perhaps we should stick to internal categories of cocones instead of bothering with these coequalizers.
+
+\paragraph{small filteredness of small objects}
+Once we assume that there is a generic small morphism, and that the small objects of all slice categories are filtered, can we assume that the full internal subcategory of small objects is small filtered?
+
+I suppose the answer is that any small family of objects already provides the upper bound.
+
+You know\dots maybe that does not matter.
+\paragraph{the danger}
+Given a morphism $f$ the category of small acyclics of $f$ has to be filtered. This is a different requirement than small object merely being small. In fact, we can probably argue now that because colimits exist, the small objects must be closed under them.
+
+The issue is that small morphisms over any morphism must be a filtered category. So now we know: we don't have the liberty to let small objects merely be filtered. We need finite colimits and compositions.
+
+Any cocone of small morphisms factors through the colimiting cone in a small morphism.
+
+\paragraph{The other issue}
+Yeah, the examples where one starts with a category rather than the small saturation.
+
+I suppose the big unanswered question is: where is the small saturation supposed to come from anyway?
+
+Close the generic morphisms under small tensors, pushouts, retracts and composition to get them all. At worst we need a natural number object to complete the set. Inside we only use finite compositions, is the idea.
+
+The small saturation should contain all left morphism with small domains. Well maybe not all\dots just the ones that have a small set of generators.
+
+Okay, but that was one approach: first generate the small fibrations, and then construct the small cofibrations from them. There is a difficulty with that approach if the codomains are not small.
+
+Still an approach where the saturation is the result of a finitary construction is more traditional and more flexible I guess.
+
+\paragraph{Plan?}
+I suppose I am ready to write an introduction which sketches the construction. While I write that, I can make a list of things that need to be worked out in the second half of the paper.
+
+\section{1/6/18}
+
+I think the horn inclusions are not the colimits of simpler acyclic cofibrations given the limited class of morphisms we allowed. No intersections.
+
+So we go ahead and try to benefit from the fact that the colimit is filtered. So how do we manage that?
+
+\paragraph{Filtered colimits and compactness}
+For representable $x$, the functor $r(x) = \function y y^x$ would preserves all colimits. If $x$ is a finite colimit of representables, there is a colimiting cone we should  use.
+
+The colimit for the whole object is a limit of colimits, and a limit of colimits is the colimit of the limits of the limit is cofiltered.
+
+Let $f$ be a functor $f\of \cat A\times \cat B\to\ambient$--actually, this should be an opfibration in out case. There is a canonical morphism:
+\[ \colim_x \lim_y f(x,y) \to \lim_y \colim_x f(x,y) \]
+Let $\phi\of\lim_y \colim_x f(x,y)$. For each $y$, $\phi(y)$ is an equivalence class that intersects $f(x_y,y)$ for certain $x_y$. For each choice of $y\mapsto x_y$, however, there is a cocone, which provides the unique member of $\colim_x \lim_y f(x,y)$ that the canonical morphisms sends to $\phi$.
+
+\paragraph{Idea}
+Let $s\of S_0\to S_1$ be the generic family of small objects. We only demand that it is closed under finite colimits. We can now define the internal category of small acyclic cofibrations $\cat H$, with the morphisms restricted to the kind of commutative squares show below. This category is not not just filtered, it is closed under finite colimits itself.
+
+Any morphism $f$ factors as $f_1\circ f_0$ where $f_0 = \colim_{h\to f} h$. Of course, every small acyclic cofibration factors through $f_0$. For each $h\to f_1$, the fact that $\cat H$ is filtered gives a construction from below, showing that $f$ indeed has a lifting property. This construction is so generic that we can use it for both horns and cycles, yielding the factorization systems we always dreamed of.
+
 \section{23/5/18}
 To get a filtered category of commutative squares $h\to f$ where $h$ is a compact acyclic cofibration, only allow $(a,b)\of h\to h'$ where the factorization of $b$ through the pushout of $a$ is an acyclic cofibration.
 \[\xymatrix{
