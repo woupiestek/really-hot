@@ -17,17 +17,124 @@
 \amsclass{03D80, 18G30, 18G55}
 \addbibresource{realizability}
 
+%structural helpers
+\newcommand\hide[1]{}
+\newcommand\keyword[1]{\emph{#1}\label{#1}}
+
+%symbols
+\newcommand\cat\mathcal
+\newcommand\ambient{\mathfrak A}
+\newcommand\of{\mathord:}
+\newcommand\set[1]{\left\{#1\right\}}
+
+\mathrmdef{id}
+\mathrmdef{dom}
+\mathrmdef{cod}
+\newcommand\colim{\mathop{\mathrm{colim}}}
+\mathrmdef{deco}
+\newcommand\tuplet[1]{\left\langle #1 \right\rangle}
+\newcommand\disc{_{\rm disc}}
+
+\newcommand\pushed{\ar@{}[ul]|(.2)\ulcorner}
+
 \begin{document}
 \begin{abstract}
-Garner's small object argument %cite
-is modified to work in incomplete $\Pi$-pretoposes like the effective topos%cite
-.
+The small object argument %cite
+is modified to work in categories like the effective topos %cite
+that lack infinite colimits.
 \end{abstract}
 
 \maketitle
 
+\section{Motivation}
 
+\section{Small object arguments for complete categories}
+As Garner explains %cite
+the small object argument can be split up in three steps: the \emph{density comonad}, the \emph{pushout} and the \emph{transfinite composition}.
 
+\paragraph{Density comonad}
+\begin{definition}
+For any functor $F\of \cat C\to \cat D$ the \keyword{codensity comonad} 
+is the left Kan extension of $F$ along itself.
+\end{definition}
 
+The density comonad gives a best approximation of an object of the domain $\cat D$ in terms of the objects in the image of the functor $F$.
+ 
+\begin{lemma} Let $\tuplet{D\of\cat D\to\cat D,\epsilon\of D\to \id_{
+\cat C},\delta\of D \to DD}$ be the density comonad of $F\of\cat C\to\cat D$. For each object $Y$ of $\cat D$, $DY$ is the colimit of $f\mapsto\dom(f)\of (F/\cat D)\to \cat D$. Hence if $\cat D$ is complete, the density comonad exists whenever the domain $\cat C$ of $F$ is small.
+\end{lemma}
+
+A family of generic left morphisms $\set{c\of A_i\to B_i|i\in I}$ in a category $\ambient$ is essentially a functor from the discrete category $I\disc$ to the arrow category $\ambient/\ambient$. Due to the lack of morphisms in $I\disc$, the density comonad yields the weighted coproduct $\sum_{i\of I} \hom(a_i,f)\times a_i$, which is a left morphism of course.
+
+\paragraph{Pushout}
+If $\ambient$ has all pushouts, comonads on the arrow category $\ambient/\ambient$ become functorial factorization systems.
+
+\[ \xymatrix{
+DX\ar[d]_{Df}\ar[r]^{\epsilon (X)} & X\ar[dr]^f\ar[d]_{l(f)} \\
+DY \ar[r]\ar@/_1ex/[rr]_{\epsilon (Y)}& \bullet\pushed \ar[r]^(.4){r(f)} & Y
+}\]
+
+Let $f\of X\to Y$, then there is a counit $\epsilon(f) = (\epsilon(X),\epsilon(Y))\of Df\to f$. The left factor $l(f)$ is the pushout of $Df$ along $\epsilon(X)$ and $r(f)$ is the factorization of the cone consisting of $f$ and $\epsilon(Y)$ through the colimiting cone.
+
+While the left morphisms here have the left lifting property there is no guarantee that the right ones do however.
+
+\paragraph{Transfinite composition}
+\begin{definition}
+An object $S$ of a category $\cat C$ is small, if for some regular cardinal $\kappa$, $\hom(S,\cdot)$ preserves $\kappa$-directed colimits.
+\end{definition}
+
+Effectively, this means $\hom(S,\cdot)$ preserves transfinite colimits of shape $\kappa$.
+
+Repeatedly factorize the rightmost morphism up to any ordinal, taking the limit over the chain to reach each limit ordinal.
+\begin{align*}
+l^0(f) &= \id_X\\
+r^0(f) &= f\\
+l^{n+1}(f) &= l(r^n(f))\circ l^n(f)\\
+r^{n+1}(f) &= r(r^n(f))\\
+l^\lambda(f) &= \colim_{n<\lambda} l^n(f) \\
+r^\lambda(f) &= \lim_{n<\lambda} r^n(f)
+\end{align*}
+This result in the factorization $f = r^\kappa(f)\circ l^\kappa(f)$. 
+
+\begin{lemma} The morphism $r^\kappa(f)$ has the right lifting property with respect to all generic left morphisms.
+\end{lemma}
+
+\begin{proof}
+For each generic left morphism $c\of A \to B$ and each $(a,b)\of c\to r^\kappa(f)$, the morphism $a$ factors through $\dom(r^n(f)) = \cod(l^n(f))$ for some $n<\kappa$ because $A$ is small and so $\hom(A,\cod(l^\kappa(f))) =\colim_{n<\lambda} \hom(A,\cod(l^n(f)))$.
+Hence for some $a'\of A\to \dom(r^n(f))$, $(a',b)\of c\to r^n(f)$.
+
+Since $l(r^n(f))$ is the pushout of the colimit of $c'\to r^n(f)$ for all generic left morphisms $c'$, $(a',b)$ factors through $l(r^n(f))$ as $(a',b')$ for some $b'\of B \to \cod(l^{n+1}(f))$. This induces a lift for $c$ against $r^{n+1}(f)$ and hence against $r^\kappa(f)$.
+
+\[\xymatrix{
+&& A\ar[r]^{c}\ar@/^2ex/[dr]^(.7)a\ar@{.>}@/_2ex/[dl]_(.7){a'} & B\ar@/^2ex/[dr]^(.7)b\ar@{.>}@/_2ex/[dl]_(.7){b'} \\
+X \ar[r]^{l^n(f)} \ar@/_1ex/[rrr]_{l^{\kappa}(f)} \ar@/_4ex/[rrrr]_{f} & \bullet \ar[r]^{l(r^n(f))}  & \bullet \ar[r]\ar@/_1ex/[rr]_(.3){r^{n+1}(f)} & \bullet \ar[r]^{r^\kappa(f)} & Y
+}\]
+\end{proof}
+
+\paragraph{Conclusion}
+The small object arguments shows that in a cocomplete category, an family of morphism with small domains induces a weak factorization system. Garner %cite 
+strengthens this into an algebraic factorization system.
+
+\section{Dealing with incompleteness}
+
+\hide{
+collect requirements:
+- lccc for the internalized density comonads
+- pushouts
+- internalized smallness
+}
+
+\section{Smallnesses}
+\hide{
+- nno's cycles & horns
+- W-types
+-	etc.
+}
+\section{The realizability example}
+\hide{
+- simplicial assemblies & modest sets.
+- exact completions for pushouts.
+- exact completions as examples of homotopy categories.
+}
 
 \end{document}
