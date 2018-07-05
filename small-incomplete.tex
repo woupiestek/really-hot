@@ -23,10 +23,12 @@
 
 %symbols
 \newcommand\cat\mathcal
-\newcommand\ambient{\mathfrak A}
 \newcommand\of{\mathord:}
 \newcommand\set[1]{\left\{#1\right\}}
 
+
+\mathrmdef{Ar}
+\mathrmdef{Ob}
 \mathrmdef{id}
 \mathrmdef{dom}
 \mathrmdef{cod}
@@ -64,10 +66,10 @@ The density comonad gives a best approximation of an object of the domain $\cat 
 \cat C},\delta\of D \to DD}$ be the density comonad of $F\of\cat C\to\cat D$. For each object $Y$ of $\cat D$, $DY$ is the colimit of $f\mapsto\dom(f)\of (F/\cat D)\to \cat D$. Hence if $\cat D$ is complete, the density comonad exists whenever the domain $\cat C$ of $F$ is small.
 \end{lemma}
 
-A family of generic left morphisms $\set{c\of A_i\to B_i|i\in I}$ in a category $\ambient$ is essentially a functor from the discrete category $I\disc$ to the arrow category $\ambient/\ambient$. Due to the lack of morphisms in $I\disc$, the density comonad yields the weighted coproduct $\sum_{i\of I} \hom(a_i,f)\times a_i$, which is a left morphism of course.
+A family of generic left morphisms $\set{c\of A_i\to B_i|i\in I}$ in a category $\cat A$ is essentially a functor from the discrete category $I\disc$ to the arrow category $\cat A/\cat A$. Due to the lack of morphisms in $I\disc$, the density comonad yields the weighted coproduct $\sum_{i\of I} \hom(a_i,f)\times a_i$, which is a left morphism of course.
 
 \paragraph{Pushout}
-If $\ambient$ has all pushouts, comonads on the arrow category $\ambient/\ambient$ become functorial factorization systems.
+If $\cat A$ has all pushouts, comonads on the arrow category $\cat A/\cat A$ become functorial factorization systems.
 
 \[ \xymatrix{
 DX\ar[d]_{Df}\ar[r]^{\epsilon (X)} & X\ar[dr]^f\ar[d]_{l(f)} \\
@@ -116,6 +118,20 @@ The small object arguments shows that in a cocomplete category, an family of mor
 strengthens this into an algebraic factorization system.
 
 \section{Dealing with incompleteness}
+Each step of the small object arguments assumes the presence of certain colimits, that realizability categories not always have. There are alternatives that will work than to other structure that these categories have.
+ \emph{Internal diagrams} have density comonads in locally cartesian closed categories. %is that all?
+ Missing pushouts can be added through \emph{exact completions} in many cases.
+The hardest part is the transfinite composition, however and our solution comes down to ensuring that the internal diagram is so complete, that its codensity monad does not require any further steps.
+
+\paragraph{Internal diagrams}
+\begin{definition} Let $\cat A$ be a locally cartesian closed category and let an internal category $C = \tuplet{C_0,C_1,\id\of C_0\to C_1,\dom\of C_1\to C_0,\cod\of C_1\to C_0,\circ\of C_1\times_{C_0}C_1\to C_1}$ be an internal category of $\cat A$. An \emph{internal diagram} $F$ is a tuple $\tuplet{f\of D\to C_0, \cdot\of C_1\times_{C_0} D\to D}$ where %here
+\end{definition}
+
+\begin{example}
+In a cocomplete categories $\cat A$ with finite limits, diagrams can be constructed from functors $F\of\cat C\to\cat A$ where $\cat C$ is a small category.
+\end{example}
+
+
 
 \hide{
 collect requirements:
