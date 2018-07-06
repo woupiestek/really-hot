@@ -23,6 +23,7 @@
 
 %symbols
 \newcommand\cat\mathcal
+\newcommand\icat\mathsf
 \newcommand\of{\mathord:}
 \newcommand\set[1]{\left\{#1\right\}}
 
@@ -119,18 +120,31 @@ strengthens this into an algebraic factorization system.
 
 \section{Dealing with incompleteness}
 Each step of the small object arguments assumes the presence of certain colimits, that realizability categories not always have. There are alternatives that will work than to other structure that these categories have.
- \emph{Internal diagrams} have density comonads in locally cartesian closed categories. %is that all?
+ \emph{Internal diagrams} have density comonads in locally Cartesian closed categories with coequalizers. %is that all?
  Missing pushouts can be added through \emph{exact completions} in many cases.
-The hardest part is the transfinite composition, however and our solution comes down to ensuring that the internal diagram is so complete, that its codensity monad does not require any further steps.
+The hardest part is the transfinite composition, however and our solution comes down to ensuring that the internal diagram is so complete, that its density comonad does not require any further steps.
 
 \paragraph{Internal diagrams}
-\begin{definition} Let $\cat A$ be a locally cartesian closed category and let an internal category $C = \tuplet{C_0,C_1,\id\of C_0\to C_1,\dom\of C_1\to C_0,\cod\of C_1\to C_0,\circ\of C_1\times_{C_0}C_1\to C_1}$ be an internal category of $\cat A$. An \emph{internal diagram} $F$ is a tuple $\tuplet{f\of D\to C_0, \cdot\of C_1\times_{C_0} D\to D}$ where %here
+\begin{definition} Let $\cat A$ be a category with finite limits category and let an internal category $\icat C = \tuplet{C_0,C_1,\id\of C_0\to C_1,\dom\of C_1\to C_0,\cod\of C_1\to C_0,\circ\of C_1\times_{C_0}C_1\to C_1}$ be an internal category of $\cat A$. 
+The category induces a monad $M$ on the slide category $\cat A/C_0$, where where:
+\begin{align*}
+M(f) &= \lambda\set{\tuplet{c,x}| \dom(c)=f(x)}\cod(c) \\
+\eta(x) &= \tuplet{\id(f(x)),x}\\
+\mu(\tuplet{a,\tuplet{b,x}}) &= \tuplet{a\circ b,x}
+\end{align*}
+\emph{Internal diagrams} are algebras for this monad.
 \end{definition}
 
 \begin{example}
-In a cocomplete categories $\cat A$ with finite limits, diagrams can be constructed from functors $F\of\cat C\to\cat A$ where $\cat C$ is a small category.
+In a cocomplete categories $\cat A$ with finite limits, diagrams can be constructed from functors $F\of\cat C\to\cat A$ if $\cat C$ is a small category. The external category $\cat C$ has an internal counterpart $\icat C$ whose objects of objects and arrows are the result of taking coproducts of the terminal object over the objects and arrows of $\cat C$. The internal diagrams for $\icat C$ and the functors $\cat C\to \cat A$ are equivalent categories.
 \end{example}
 
+%this needs work
+If the ambient category $\cat A$ is locally Cartesian closed and has stable coequalizers, then the density comonad can be internalized as well. Let $f\of X\to C_0$ be a diagram over $\icat C$ and let $A$ be an arbitrary object of $\cat A$. We need the end $\left(\int_{c\of \icat C}A^{f_c}\times f_c\right)$, but this is a coequalizer of a pullback now, instead of of an infinite coproduct.
+
+\paragraph{Exact completions and natural number objects}
+Exact completions add certain coequalizers and pushout to any category. 
+%here
 
 
 \hide{
