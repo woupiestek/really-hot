@@ -120,8 +120,7 @@ strengthens this into an algebraic factorization system.
 
 \section{Dealing with incompleteness}
 Each step of the small object arguments assumes the presence of certain colimits, that realizability categories not always have. There are alternatives that will work than to other structure that these categories have.
- \emph{Internal diagrams} have density comonads in locally Cartesian closed categories with coequalizers.
- Missing pushouts can be added through \emph{exact completions} in many cases.
+ \emph{Internal diagrams} have density comonads in locally Cartesian closed categories with coequalizers. Missing pushouts and equalizers can be added through \emph{exact completions} in many cases.
 The hardest part is the transfinite composition, however and our solution comes down to ensuring that the internal diagram is so complete, that its density comonad does not require any further steps.
 
 \paragraph{Internal diagrams}
@@ -136,18 +135,41 @@ M(f) &= \lambda\set{\tuplet{c,x}| \dom(c)=f(x)}\cod(c) \\
 \end{definition}
 
 \begin{example}
-In a cocomplete categories $\cat A$ with finite limits, diagrams can be constructed from functors $F\of\cat C\to\cat A$ if $\cat C$ is a small category. The external category $\cat C$ has an internal counterpart $\icat C$ whose objects of objects and arrows are the result of taking coproducts of the terminal object over the objects and arrows of $\cat C$. The internal diagrams for $\icat C$ and the functors $\cat C\to \cat A$ are equivalent categories.
+In cocomplete categories $\cat A$ with finite limits, diagrams can be constructed from functors $F\of\cat C\to\cat A$ if $\cat C$ is a small category. The external category $\cat C$ has an internal counterpart $\icat C$ whose objects of objects and arrows are the result of taking coproducts of the terminal object over the objects and arrows of $\cat C$. The internal diagrams for $\icat C$ and the functors $\cat C\to \cat A$ are equivalent categories.
 \end{example}
 
 %this needs work
-If the ambient category $\cat A$ is locally Cartesian closed and has stable coequalizers, then the density comonad can be internalized as well. Let $f\of X\to C_0$ be a diagram over $\icat C$ and let $A$ be an arbitrary object of $\cat A$. We need the end $\left(\int_{c\of \icat C}A^{f_c}\times f_c\right)$, but this is a coequalizer of a pullback now, instead of of an infinite coproduct.
+If the ambient category $\cat A$ is locally Cartesian closed and has stable coequalizers, then the density comonad can be internalized as well, at the expense of the universal property.
 
-\paragraph{Internal smallness}
+\begin{definition}
+The \emph{density comonad} for a diagram $\tuplet{f,\cdot}$ sends $A$ of $\cat A$ to the the coend $\left(\int^{c\of \icat C}A^{f_c}\times f_c\right)$--where $f_c = \set{x\of X|f(x)=c}$. This is a coequalizer of the parallel pair $p,q\of A\to B$ between pullbacks show below, instead of an infinite coproduct.
+\begin{align*}
+p&=\lambda\tuplet{x,y,z}.\tuplet{y(x \cdot -),z}\\
+q&=\lambda\tuplet{x,y,z}.\tuplet{y,x\cdot z}\\
+\textrm{where }A&= 
+\set{ \tuplet{x\of C_1, y\of A^{f}, z\of X }| \cod(x)=\dom(y), \dom(x) = f(z)}\\
+\textrm{and }B&=
+\set{ \tuplet{x\of A^f, y\of X} | \dom(x) = f(y) }
+\end{align*}
+\end{definition}
+\hide{
+Notation for locally Cartesian closed categories: 
+\[ A^f &= \sum_{x\of\cod(f)}A^{\set{y\of \dom(f)|f(y)=x}}\]
+}
+
+\paragraph{Avoiding transfinite compositions}
+
+
+
+
 %properties of the categories
 % dense
-% closed under finite limits
+% closed under finite colimits
 % closed under composition... presumably
 % generic
+
+%idea: keep it down to necessities,
+%introdce the constructions later
 
 \hide{
 collect requirements:

@@ -9,6 +9,27 @@
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
 
+\section{8/7/18}
+The ascent construction is a left Kan extension, modified to work with internal diagrams in stead of functors.
+
+The classical case is simply this:
+\[\xymatrix{
+\simCat/[n] \ar[r]^\simplex\ar[dr]_{S} & \ambient/\simplex[n]\ar@{.>}[d] \\
+& \ambient/\horn_k[n]
+}\]
+Does that mean the right adjoint is the right Kan extension?
+
+We already know how to factorize.
+\[\xymatrix{
+\simCat/[n] \ar[r]^\simplex\ar[dr]_{K} & \ambient/\simplex[n]\ar@{.>}[d] \\
+& \ambient/\simplex[n] \ar@<-1ex>[d]_{h\ri}\ar@{}[d]|\dashv\\
+& \ambient/\horn_k[n] \ar@<-1ex>[u]_{h_*}
+}\]
+So now it becomes a matter of internalizing this\dots
+
+\paragraph{extensional type theory}
+I now have the means the introduce my own extensional type theory based on this 'polynomial type' idea. Given $f\of X\to Y$ there is a functor $Z\mapsto Z^f\of \ambient\to \ambient/Y$ right adjoint to the `forgetful pullback' $g \mapsto\set{\tuplet{x,y}|f(x)=g(y)} \of\ambient/Y\to \ambient$. Like the powerset, these types generate all of the right adjoints we associate with locally Cartesian closed categories.
+
 \section{2/7/18}
 We don't need independent notions of smallness, but we do need a natural number object.
 
