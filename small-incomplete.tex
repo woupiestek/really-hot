@@ -26,6 +26,7 @@
 \newcommand\icat\mathsf
 \newcommand\of{\mathord:}
 \newcommand\set[1]{\left\{#1\right\}}
+\newcommand\dual{^\circ}
 
 
 \mathrmdef{Ar}
@@ -121,11 +122,11 @@ strengthens this into an algebraic factorization system.
 \section{Dealing with incompleteness}
 Each step of the small object arguments assumes the presence of certain colimits, that realizability categories not always have. There are alternatives that will work than to other structure that these categories have.
  \emph{Internal diagrams} have density comonads in locally Cartesian closed categories with coequalizers. Missing pushouts and equalizers can be added through \emph{exact completions} in many cases.
-The hardest part is the transfinite composition, however and our solution comes down to ensuring that the internal diagram is so complete, that its density comonad does not require any further steps.
+The hardest part is the transfinite composition, however and the solution comes down to ensuring that the internal diagram is so complete, that its density comonad does not require any further steps.
 
 \paragraph{Internal diagrams}
 \begin{definition} Let $\cat A$ be a category with finite limits category and let an internal category $\icat C = \tuplet{C_0,C_1,\id\of C_0\to C_1,\dom\of C_1\to C_0,\cod\of C_1\to C_0,\circ\of C_1\times_{C_0}C_1\to C_1}$ be an internal category of $\cat A$. 
-The category induces a monad $M$ on the slide category $\cat A/C_0$, where where:
+The category induces a monad $M$ on the slice category $\cat A/C_0$, where where:
 \begin{align*}
 M(f) &= \lambda\set{\tuplet{c,x}| \dom(c)=f(x)}\cod(c) \\
 \eta(x) &= \tuplet{\id(f(x)),x}\\
@@ -138,38 +139,95 @@ M(f) &= \lambda\set{\tuplet{c,x}| \dom(c)=f(x)}\cod(c) \\
 In cocomplete categories $\cat A$ with finite limits, diagrams can be constructed from functors $F\of\cat C\to\cat A$ if $\cat C$ is a small category. The external category $\cat C$ has an internal counterpart $\icat C$ whose objects of objects and arrows are the result of taking coproducts of the terminal object over the objects and arrows of $\cat C$. The internal diagrams for $\icat C$ and the functors $\cat C\to \cat A$ are equivalent categories.
 \end{example}
 
-%this needs work
-If the ambient category $\cat A$ is locally Cartesian closed and has stable coequalizers, then the density comonad can be internalized as well, at the expense of the universal property.
+If the ambient category is locally Cartesian closed and has stable coequalizers, then the density comonad can be internalized as well.
+
+\mathsfdef{diagrams}
+\mathsfdef{sheaves}
+\begin{definition}
+For any internal category $\icat C$ of $\cat A$ 
+let $\diagrams(\icat C)$ be the category of diagrams and diagram-homomorphisms over $\icat C$ and let $\sheaves(\icat C) = \diagrams(\icat C\dual)$ where $\icat C\dual$ is the dual category of $\icat C$. In the category of functors $\sheaves(\icat C)\times\diagrams(\icat C) \to\cat A$ let $\otimes$ be the codomain of the coequalizer of 
+$p,q\of A\to B \of $ where:
+\begin{align*}
+A\tuplet{f,g} &= \set{\tuplet{x\of \dom(f),y\of C_1,z\of\dom(g)}|f(x) = \cod(y), \dom(y) = g(z)}\\
+B\tuplet{f,g} &= \set{\tuplet{x\of \dom(f),y\of\dom(g)}|f(x) = g(z)}\\
+p\tuplet{x,y,z}&=\tuplet{x\cdot y,z}\\
+q\tuplet{x,y,z}&=\tuplet{x,y\cdot z}
+\end{align*}
+I.e. $f\otimes g$ the the quotient of of pairs $\tuplet{x\of\dom(f),y\of\dom(g)}$ by the least equivalence relation that equates $\tuplet{x\cdot y,z}$ and $\tuplet{x, y\cdot z}$ for each morphism $y$ of $\icat C$.
+
+Thanks to local Cartesian closure each diagram $g$ induces a functor $g\Rightarrow  \of \cat A\to \sheaves(\icat C)$.
+\begin{align*}
+\dom(g\Rightarrow A) &= \set{\tuplet{y\of C_0,m\of\set{x | g(x) = y}\to A}}\\
+(g\Rightarrow A)\tuplet{c,m} &= c\\
+ \tuplet{\cod(h),m}\cdot h &= \tuplet{\dom(h),\lambda x.m(h\cdot x)}
+\end{align*}
+
+For each diagram $g$ the functor $g\Rightarrow$ is right adjoint to $\otimes g$. 
+The \emph{density comonad} for $g$ is the comonad induced by this functor.
+\end{definition}
+
+Intuitively, $\sheaves(\icat C)$ is an internal colimit completion of $\icat C$ and a category of generalized objects of the internal category $\cat C$. The functor $\otimes g\of \sheaves(\icat C) \to \cat A$ is a externalize the diagram. The density monad is the left Kan extension of $\otimes g$ along itself, which links this construction to the density comonad for a functor.
+
+\hide{
+we will need to revisit the concepts and notions throughout this document
+
+some guidelines:
+- the greater the scope, the more descriptive the identifier
+- keep refactoring
+- define small generic components and compose them 
+}
+
+\paragraph{Domain density}
+After modifying the first step to no longer rely on infinite colimits the pushouts of the second step still produce factorization systems on the ambient category. The third step still requires infinite colimits in the shape of the transfinite compositions, however. The density comonad will ultimately provide these colimits as well, but only after the family of generic left morphisms becomes a `suitable' diagram of left morphisms, which we suggestively call \emph{the diagram of small left morphisms}. The first suitability requirement makes the pushout of the second step superfluous.
 
 \begin{definition}
-The \emph{density comonad} for a diagram $\tuplet{f,\cdot}$ sends $A$ of $\cat A$ to the the coend $\left(\int^{c\of \icat C}A^{f_c}\times f_c\right)$--where $f_c = \set{x\of X|f(x)=c}$. This is a coequalizer of the parallel pair $p,q\of A\to B$ between pullbacks show below, instead of an infinite coproduct.
-\begin{align*}
-p&=\lambda\tuplet{x,y,z}.\tuplet{y(x \cdot -),z}\\
-q&=\lambda\tuplet{x,y,z}.\tuplet{y,x\cdot z}\\
-\textrm{where }A&= 
-\set{ \tuplet{x\of C_1, y\of A^{f}, z\of X }| \cod(x)=\dom(y), \dom(x) = f(z)}\\
-\textrm{and }B&=
-\set{ \tuplet{x\of A^f, y\of X} | \dom(x) = f(y) }
-\end{align*}
+A diagram is \emph{dense} if the density comonad is isomorphism to the identity comonad.
 \end{definition}
+
+The domain and codomain functors $\cat A^{[1]}\to\cat A$ preserve internal diagrams and commute with their density comonads. If the diagram $D$ of left morphisms has a dense diagram of domains, then the density monad produces a morphism whose domain is isomorphic 
+
+The first requirement on the internal category of generic left morphisms will therefore be that \emph{the diagram of domains is dense}. %refer
+
 \hide{
-Notation for locally Cartesian closed categories: 
-\[ A^f &= \sum_{x\of\cod(f)}A^{\set{y\of \dom(f)|f(y)=x}}\]
+We are looking for a feature like `locally presentable', but this is formulated in terms of colimits and small sets. So we need to start from the assumption that a dense diagram exists in $\cat A$ and work with that.
 }
 
 \paragraph{Avoiding transfinite compositions}
+Further requirements make the transfinite composition superfluous. 
+The notion of being $\kappa$-filtered for a cardinal $\kappa$ can be internalized. An internal category $\icat C$ can have cocones for $K$-indexed families of objects. The result is that for each diagram over $\icat C$, 
+$(\colim_{c\of\icat C} D_c)^K\simeq\colim_{c\of\icat C} (D_c^K)$.
+%cite/proof/...
+Similarly, the density comonad for the diagram of left morphisms can commute with exponentiation by the domains of the left morphisms. Hence, the second requirement is the internal category under the diagram of left morphisms is $K$-filtered for all members $K$ of the diagram of domains.
+
+%is it even clear what the diagram looks like?
+The third requirement finally actually deals with composition and pushouts. For each $c\of A\to B$ and $c'\of A'\to B'$ in the diagram and each $d\of A'\to B$ in $\cat A$ the composition of the pushout of $c'$ along $d$ with $c$ should also be a member of the diagram.
+\[\xymatrix{
+& A'\ar[r]^{c'}\ar[d]_d & B'\ar[d] \\
+A\ar[r]^c\ar@/_2ex/[rr]_{d_*(c)\circ c} & B \ar[r] & \bullet\pushed
+}\]
+And to so should the commutative triangle $c\to d_*(c)\circ c$!
+
+If the density comonad factor $f\of X\to Y$ as $r(f)\circ l(f)$ and $c\of A\to C$ is a member of the diagram, then $c\to r(f)$ 
+
+\paragraph{Conclusion}
+
+\begin{definition}
+An internal diagram $A\to B \to \icat I$ of $\cat A^{[1]}$ is \emph{suitable}, if 
+\begin{enumerate}
+\item $A\to\icat I$ is dense in $\cat A$, 
+\item $\icat I$ has cocones for $A_i$ indexed colimits for all $i\of I_0$
+\item $A\to B \to \icat I$ is closed under the pushout composition construction above.
+\end{enumerate}
+\end{definition}
 
 
+\begin{lemma} The density comonad for $A\to B \to \icat I$ factors each morphism $f\of X\to Y$ of $\cat A$ as a right morphism followed by a left morphism. %what does that even mean?
+\end{lemma}
 
+\begin{proof} %todo
+% don't we need a four requirement?
+\end{proof}
 
-%properties of the categories
-% dense
-% closed under finite colimits
-% closed under composition... presumably
-% generic
-
-%idea: keep it down to necessities,
-%introdce the constructions later
 
 \hide{
 collect requirements:
@@ -178,12 +236,19 @@ collect requirements:
 - internalized smallness
 }
 
-\section{Smallnesses}
+\section{Generating suitable diagrams}
+% 1. replace locally presentable with 'dense family', 'small morphisms' etc.
+% 2. generate the morphisma and objects
+% 3. proof filteredness
+
+\section{Getting the ambient category in shape}
+%exact completions etc.
 \hide{
 - nno's cycles & horns
 - W-types
 -	etc.
 }
+
 \section{The realizability example}
 \hide{
 - simplicial assemblies & modest sets.
