@@ -9,6 +9,63 @@
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
 
+\section{27/7/18}
+Sidetracked by the idea of creating an extensional type theory based programming language.
+
+
+The requirements thing is nice, but why not risk asking for too much?
+
+First we set up a nice diagram to build a factorization system for. Second we show how diagram can be made nice. More niceness makes the prove easier, but makes it harder to get nice diagrams. However, we can take gradual steps to generalize.
+
+I think I want to replace suitable with \emph{presaturated}
+
+
+\paragraph{density still needed?}
+Being closed under pushouts and composition seems enough. Perhaps we need small colimits, but even that is questionable.
+
+I guess the argument used to be that closure under pushout grants density of codomains. I missed something important however, that makes closure under pushouts much stronger.
+
+Being closed under pushouts indirectly induces density of codomains.
+Being closed under composition indirectly induces 
+
+I feel a bit silly now. We have a class of morphisms in $\cat A$ that are isomorphic to $f\otimes c$ for some sheaf $f$. 
+
+The properties for $c$ we propose is that any pushout $\alpha\of f\otimes c\to g$ is isomorphic to $\beta\otimes c\of f\otimes c \to h\otimes c$ for some $\beta\of f\to h$. Similarly, if $\cod(f\otimes c) \simeq \dom(g\otimes c)$, then there is a morphism $\alpha\of f\to h$ such that $\alpha\times A$ is an isomorphism and $\alpha\otimes B\simeq g\otimes c$ (note the $B$).
+
+I imagine these are pretty straightforward thing to ask of the internal category\dots
+
+We still need to make a diagram commute, and filteredness may still be vital here.
+
+\paragraph{confusion}
+We had like three requirements, related to the stages of the completing:
+density of $A$ to ensure the factorization system, 
+filteredness of $I$ to ensure the colimit preservation,
+closure under pushout and composition with the desired morphisms.
+
+These come from peeking inside the internal category and proposing properties there.
+I take the last property, try to formulate it as a property of the externalisation, and the first two don't seem the matter anymore.
+How is that possible!?
+
+
+Perhaps the externalisation is a far stronger versions of the property than I realize.
+
+That must be it.
+
+\paragraph{baby steps}
+Perhaps this is the lesson. Give every lemma a single responsibility. That may seem like a way to annoy, but is makes the work easier to digest.
+
+\paragraph{presaturation diagrams}
+We have arrived at a pleasant point.
+The pushout property is the most powerful and probably requires some density and directedness.
+
+But let's review.
+Getting the composition property is probably an afterthought, once we have the pushouts. 
+
+One thing that is not a afterthought: we need an index of domains and codomains in order to test which generic left morphisms fit together. We won't get one for free.
+
+\paragraph{Good work}
+I was in bad shape and the weather is hot. Let's be grateful for what we achieved today.
+
 \section{13/7/18}
 Where was I?
 

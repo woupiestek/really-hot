@@ -68,7 +68,7 @@ The density comonad gives a best approximation of an object of the domain $\cat 
 \cat C},\delta\of D \to DD}$ be the density comonad of $F\of\cat C\to\cat D$. For each object $Y$ of $\cat D$, $DY$ is the colimit of $f\mapsto\dom(f)\of (F/\cat D)\to \cat D$. Hence if $\cat D$ is complete, the density comonad exists whenever the domain $\cat C$ of $F$ is small.
 \end{lemma}
 
-A family of generic left morphisms $\set{c\of A_i\to B_i|i\in I}$ in a category $\cat A$ is essentially a functor from the discrete category $I\disc$ to the arrow category $\cat A/\cat A$. Due to the lack of morphisms in $I\disc$, the density comonad yields the weighted coproduct $\sum_{i\of I} \hom(a_i,f)\times a_i$, which is a left morphism of course.
+A family of generic left morphisms $\set{c_i\of A_i\to B_i|i\in I}$ in a category $\cat A$ is essentially a functor from the discrete category $I\disc$ to the arrow category $\cat A/\cat A$. Due to the lack of morphisms in $I\disc$, the density comonad yields the weighted coproduct $\sum_{i\of I} \hom(a_i,f)\times a_i$, which is a left morphism of course.
 
 \paragraph{Pushout}
 If $\cat A$ has all pushouts, comonads on the arrow category $\cat A/\cat A$ become functorial factorization systems.
@@ -120,9 +120,14 @@ The small object arguments shows that in a cocomplete category, an family of mor
 strengthens this into an algebraic factorization system.
 
 \section{Dealing with incompleteness}
-Each step of the small object arguments assumes the presence of certain colimits, that realizability categories not always have. There are alternatives that will work than to other structure that these categories have.
- \emph{Internal diagrams} have density comonads in locally Cartesian closed categories with coequalizers. Missing pushouts and equalizers can be added through \emph{exact completions} in many cases.
-The hardest part is the transfinite composition, however and the solution comes down to ensuring that the internal diagram is so complete, that its density comonad does not require any further steps.
+Each step of the small object argument assumes the presence of certain colimits, that realizability categories not always have.
+
+The alternative presented here presumes that the ambient category $\cat A$ has other structure to replace the missing colimits. In particular, if $\cat A$ is locally Cartesian closed, then there is a notion of a colimit over an \emph{internal diagram} \ref{Internal diagram}, and $\cat A$ trivially has coproducts over internal families of objects.
+
+Internal diagrams have density comonads if $\cat A$ also has equalizers, just like `external' functors with small domains do in cocomplete categories. So an internal diagram in the category $\cat A/\cat A$ of arrows of $\cat A$ can replace the family of generic left morphisms.
+
+There is a kind of internal diagram from which it is relatively easy to get an internal factorization system, the \emph{presaturated} \ref{presaturated} ones. %ref
+Presaturated diagrams can be constructed from others in many interesting cases. %ref
 
 \paragraph{Internal diagrams}
 \begin{definition} Let $\cat A$ be a category with finite limits category and let an internal category $\icat C = \tuplet{C_0,C_1,\id\of C_0\to C_1,\dom\of C_1\to C_0,\cod\of C_1\to C_0,\circ\of C_1\times_{C_0}C_1\to C_1}$ be an internal category of $\cat A$. 
@@ -132,7 +137,7 @@ M(f) &= \lambda\set{\tuplet{c,x}| \dom(c)=f(x)}\cod(c) \\
 \eta(x) &= \tuplet{\id(f(x)),x}\\
 \mu(\tuplet{a,\tuplet{b,x}}) &= \tuplet{a\circ b,x}
 \end{align*}
-\emph{Internal diagrams} are algebras for this monad.
+\keyword{Internal diagrams} are algebras for this monad.
 \end{definition}
 
 \begin{example}
@@ -163,10 +168,10 @@ Thanks to local Cartesian closure each diagram $g$ induces a functor $g\Rightarr
 \end{align*}
 
 For each diagram $g$ the functor $g\Rightarrow$ is right adjoint to $\otimes g$. 
-The \emph{density comonad} for $g$ is the comonad induced by this functor.
+The \emph{density comonad} for $g$ is the comonad induced by the adjunction $\otimes g\dashv g\Rightarrow$.
 \end{definition}
 
-Intuitively, $\sheaves(\icat C)$ is an internal colimit completion of $\icat C$ and a category of generalized objects of the internal category $\cat C$. The functor $\otimes g\of \sheaves(\icat C) \to \cat A$ is a externalize the diagram. The density monad is the left Kan extension of $\otimes g$ along itself, which links this construction to the density comonad for a functor.
+Intuitively, $\sheaves(\icat C)$ is both an internal colimit completion and a category of generalized objects of the internal category of $\icat C$ . The functor $\otimes g\of \sheaves(\icat C) \to \cat A$ externalizes the diagram. The density monad is the left Kan extension of $\otimes g$ along itself, which links this construction to the density comonad for a functor.
 
 \hide{
 we will need to revisit the concepts and notions throughout this document
@@ -177,66 +182,62 @@ some guidelines:
 - define small generic components and compose them 
 }
 
-\paragraph{Domain density}
-After modifying the first step to no longer rely on infinite colimits the pushouts of the second step still produce factorization systems on the ambient category. The third step still requires infinite colimits in the shape of the transfinite compositions, however. The density comonad will ultimately provide these colimits as well, but only after the family of generic left morphisms becomes a `suitable' diagram of left morphisms, which we suggestively call \emph{the diagram of small left morphisms}. The first suitability requirement makes the pushout of the second step superfluous.
+An internal diagram in $\cat A/\cat A$ is essentially a morphism $c\of A\to B$ of internal diagrams for some internal category $\icat I$ in $\cat A$. The functor $\otimes c\of \sheaves(\icat I)\to \cat A/\cat A$ generates morphisms from the diagram, as an alternative to infinite coproducts.
+
+\paragraph{Presaturation}
+The strategy to getting a factorization system from an internal diagram is to first only consider diagrams that almost directly generate all the left morphisms.
 
 \begin{definition}
-A diagram is \emph{dense} if the density comonad is isomorphism to the identity comonad.
-\end{definition}
-
-The domain and codomain functors $\cat A^{[1]}\to\cat A$ preserve internal diagrams and commute with their density comonads. If the diagram $D$ of left morphisms has a dense diagram of domains, then the density monad produces a morphism whose domain is isomorphic 
-
-The first requirement on the internal category of generic left morphisms will therefore be that \emph{the diagram of domains is dense}. %refer
-
-\hide{
-We are looking for a feature like `locally presentable', but this is formulated in terms of colimits and small sets. So we need to start from the assumption that a dense diagram exists in $\cat A$ and work with that.
-}
-
-\paragraph{Avoiding transfinite compositions}
-Further requirements make the transfinite composition superfluous. 
-The notion of being $\kappa$-filtered for a cardinal $\kappa$ can be internalized. An internal category $\icat C$ can have cocones for $K$-indexed families of objects. The result is that for each diagram over $\icat C$, 
-$(\colim_{c\of\icat C} D_c)^K\simeq\colim_{c\of\icat C} (D_c^K)$.
-%cite/proof/...
-Similarly, the density comonad for the diagram of left morphisms can commute with exponentiation by the domains of the left morphisms. Hence, the second requirement is the internal category under the diagram of left morphisms is $K$-filtered for all members $K$ of the diagram of domains.
-
-%is it even clear what the diagram looks like?
-The third requirement finally actually deals with composition and pushouts. For each $c\of A\to B$ and $c'\of A'\to B'$ in the diagram and each $d\of A'\to B$ in $\cat A$ the composition of the pushout of $c'$ along $d$ with $c$ should also be a member of the diagram.
-\[\xymatrix{
-& A'\ar[r]^{c'}\ar[d]_d & B'\ar[d] \\
-A\ar[r]^c\ar@/_2ex/[rr]_{d_*(c)\circ c} & B \ar[r] & \bullet\pushed
-}\]
-And to so should the commutative triangle $c\to d_*(c)\circ c$!
-
-If the density comonad factor $f\of X\to Y$ as $r(f)\circ l(f)$ and $c\of A\to C$ is a member of the diagram, then $c\to r(f)$ 
-
-\paragraph{Conclusion}
-
-\begin{definition}
-An internal diagram $A\to B \to \icat I$ of $\cat A^{[1]}$ is \emph{suitable}, if 
+A diagram $c\of A\to B$ over $\icat I$ in the arrow category $\cat A/\cat A$ is \keyword{presaturated} if it has the following two properties.
 \begin{enumerate}
-\item $A\to\icat I$ is dense in $\cat A$, 
-\item $\icat I$ has cocones for $A_i$ indexed colimits for all $i\of I_0$
-\item $A\to B \to \icat I$ is closed under the pushout composition construction above.
+\item for each $f$ of $\sheaves(\icat I)$ and pushout $\tuplet{a,b}\of f\otimes c\to g$ there is a $\tuplet{a',b'}\of f\to g'$ in $\sheaves(\icat I)$ and an isomorphism $\tuplet{d,e}\of g'\otimes c\to g$ such that $\tuplet{d,e}\circ \tuplet{a',b'}\otimes c = \tuplet{a,b}$.
+\[\xymatrix{
+\bullet \ar[r]_{a'\otimes c}\ar[d]_{f\otimes c}\ar@/^1ex/[rr]^a &
+\bullet \ar[r]_\sim \ar[d]^{h\otimes c} & \bullet\ar[d]^g \\
+\bullet \ar[r]^{b'\otimes c} \ar@/_1ex/[rr]_b &
+\bullet\pushed \ar[r]^\sim & \bullet
+}\]
+\item for each pair $f$ and $g$ of $\sheaves(\icat I)$ such that there is an isomorphism $h\of\cod(f\otimes c)\to \dom(g\otimes c)$, there there is an $\tuplet{a',b'}\of f\to k$ of $\sheaves(\icat I)$ such that $a'\otimes c$ is an isomorphism and $(k\otimes c)\circ (a'\otimes c)$ is isomorphic to $(g\otimes c)\circ h \circ (f\otimes c)$.
+\[\xymatrix{
+\bullet\ar[d]_{a'\otimes c}\ar[r]^{f\otimes c} & \bullet\ar[r]^h\ar[drr]_{b'\otimes c} & \bullet\ar[r]^{g\otimes c} & \bullet\ar[d]^\sim\\
+\bullet\ar[rrr]_{k\otimes c} &&& \bullet 
+}\]
 \end{enumerate}
 \end{definition}
 
-
-\begin{lemma} The density comonad for $A\to B \to \icat I$ factors each morphism $f\of X\to Y$ of $\cat A$ as a right morphism followed by a left morphism. %what does that even mean?
+\begin{lemma} The density comonad for a presaturated diagram is an algebraic factorization system. \hide{define this somewhere, or refer to literature}
 \end{lemma}
 
-\begin{proof} %todo
-% don't we need a four requirement?
+\begin{proof}
+Let $c\of A\to B$ be a presaturated diagram over $\icat I$ in the arrow category $\cat A/\cat A$. 
+For each morphism $f\of X\to Y$ the counit $\epsilon_f\of(c\Rightarrow f)\times c\to f$ of the codensity monad factors as a composition following a pushout, which is of the form $h\otimes c$ by presaturation.
+\[\xymatrix{
+\bullet\ar[d]_{(c\Rightarrow f)\otimes c} \ar[r]^{\eta_{f,0}} & \bullet \ar[d]^{h\otimes c} \ar[r]^\sim & \bullet\ar[d]^f\\
+\bullet \ar[r]\ar@/_1ex/[rr]_{\eta_{f,1}} & \bullet\pushed\ar[r] & \bullet
+}\]
+The counit is terminal in $(\otimes c)/f$, however, forcing $h \simeq (c\Rightarrow f)$ in a way that commutes with the counit.
+
+Hence $f = l(f)\circ r(f)$ where $l(f)$ is isomorphic to $(c\Rightarrow f)\times c$ and $r(f)$ is isomorphic to $\eta_{f,1}$
+The general lifting problem $\tuplet{a,b}\of g\otimes c\to r(f)$ first reduces to the case where $a$ is an isomorphism thanks to the pushout property of presaturated diagrams. Then, the composition property gets us a $k$ such that the composition of $l(f)$ with the pushout of $g\otimes c$ essentially is $k\circ c$.
+\[\xymatrix{
+&& \bullet\ar[r]^{g\otimes c}\ar[d]\ar[dl] & 
+\bullet\ar[d]\\ 
+\bullet\ar@/_1ex/[dd]_\id\ar[d]^{a'\otimes c}\ar[r]^{l(f)} & 
+\bullet\ar[r]^\sim\ar[drr]^(.7){b'\otimes c}\ar[ddrr]_(.7){r(f)} & 
+\bullet\ar[r]_{g'\otimes c} & 
+\bullet\pushed\ar[d]^\sim\\
+\bullet\ar[d]^\sim\ar[rrr]_{k\otimes c} &&& \bullet\ar[d]^\sim \\
+\bullet\ar[rrr]_f &&& \bullet 
+}\]
+The finality of $c\Rightarrow f$ makes it a retract of $k$ and the unique morphism $k\to (c\Rightarrow f)$ is the solution to the lifting problem we needed.
+\hide{This feels way too easy.}
 \end{proof}
 
 
-\hide{
-collect requirements:
-- lccc for the internalized density comonads
-- pushouts
-- internalized smallness
-}
+\section{Presaturating diagrams}
 
-\section{Generating suitable diagrams}
+
+
 % 1. replace locally presentable with 'dense family', 'small morphisms' etc.
 % 2. generate the morphisma and objects
 % 3. proof filteredness
