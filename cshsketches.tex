@@ -9,6 +9,77 @@
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
 
+\section{10/8/18}
+
+Ingredients:
+\begin{enumerate}
+\item the diagram of generic left morphisms $L$ in $\cat A/\cat A$
+\item the dense diagram $s$, with extra demands\dots
+\item the natural number object
+\end{enumerate}
+The extra demand also has to do with composition, but is more subtle. For each internal presheaf $a$ over the same internal category as $s$, there is a morphism $a\otimes s\to a\otimes \top$, where the $\top$ is the terminal presheaf. When morphisms of this form compose up to isomorphism, their compositions ought to be members of $s$ as well. One way to explain this is to lift $s$ to the category of arrows with the help of $\top$, and demand the same closure under composition we saw before.
+
+Small coproducts is the first goal. 
+
+The internal categories become more active now, so let's name them. $\cat L$ is the category of generic left morphisms and $\cat S$ that of small objects. The small coporducts are indexed by functors $\cat L\to\cat S$.
+
+The presaturations object are finite chains:
+\[\xymatrix{
+&\bullet \ar[dr]\ar[dl]&&\bullet\ar[dr]\ar[dl] &&\bullet\ar[dr]\ar[dl] &&\bullet\ar[dr]\ar[dl] &\\
+\bullet &&\bullet &&\bullet &&\bullet &&\bullet
+}\]
+The morphism pointing left are small coproducts of generic left morphisms. The morphisms pointing right are arbitrary, except that the last one has a small codomain. This chain ought to represent the composition of its pushouts. The natural number object together with locally Cartesian closure implies that this is representable.
+
+I don't think the chains help with defining morphisms. Instead look at the left morphism they represent, and then use the condition that each morphism of morphisms is a pushout followed by a composition.
+
+To prove that the result is presaturated\dots
+
+Closure under pushouts: density is part of it, as well as closure under certain coproducts. May this is the place where the preservation of colimits comes in more than in proving composition. Or maybe there is a more general property to consider, that takes care of both.
+
+\paragraph{internalized smallness}
+We consider a diagram $d$, even though that may be more general than we need. We want to say that the objects preserve internal coproducts indexed over themselves. Rather self referential\dots how do we go about it?
+
+One idea is that we can single out a class of $d$-small morphisms, morphism isomorphic to $f\otimes d\to f\times \top$ for some presheaf $f$ over the same internal category $\cat D$ as $d$. If this is closed under composition, that means $d$ indexed coproducts of `elements of $d$' are themselves `elements of $d$'. This is a tough concept.
+
+We want something like internal functor $\Sigma\of \cat D^d \to \cat D^\top$ left adjoint to the diagonal to drive how the point. Of course, a $\Sigma\of \top\otimes(\cat D^d) \to \cat D$ works just as well. 
+So the idea is that left exact functors preserve internal categories, and hence it makes sense to talk about the left adjoint between two internal categories in the category of presheaves over $\cat D$. This should be equivalent to the composition thing.
+
+These first two can be connect through a universal composition. 
+
+I am taking for granted that $d$-small morphisms are closed under pullback. Suppose $b\of B\to A$ is the pullback of $d(f)\of f\otimes d\to f\otimes \top$ along $a\of A \to f\otimes \top$. The morphisms of presheaves $a^\top$ and $b^\top$ have pullbacks $a'$and $b'$ along the unit $f\to(f\otimes \top)^\top$. Now $a'\otimes \top$ is isomorphic to $a$ and $b'\otimes \top$ is isomorphic to $b$ because\dots $^\top$ is faithful?
+
+Perhaps closure under pullback is a property of diagrams over discrete categories, that does not hold more generally. I don't see the general case holding.
+
+This complicates some matters, but it might not be important for the end result.
+
+Ultimately I need prove of presaturation. What do we need here?
+
+I cannot really see it now. I am trying to imagine a stage in the proof where some functor needs to preserve small coproducts, but cannot.
+
+\paragraph{Which functors?}
+If an object is small $S$, it is $\hom(S,\cdot)$. What is this for a diagram of small objects? Sound like presheaf builder $d\Rightarrow$ should do something. At the same time that seems limited, because we are not considering morphisms to arbitrary objects, but cocones. Yes, intuitively, $d\Rightarrow -$ is the presheaf of cocones with given codomain.
+
+Consider $\hom(f\ri(s)\otimes d,-)$ where $f\of \cat D\dual\to\cat S$ is an internal functor. We could introduce the notion of `small presheaf' over $\cat D$ which means that it is the result of taking pointwise colimits of a presheaf over $\cat S\times \cat D$. This feels comforting\dots
+
+\paragraph{Continue\dots}
+It should be a matter of unexpected commutativity:
+\[ \hom(a\otimes d,b\otimes d) \simeq \hom(a\otimes d, b)\otimes d \]
+This does not make sense yet: even the types don't match up properly.
+
+Maybe something like the 'canonical map has an inverse':
+\[ (d\Rightarrow a)\otimes d \to d\Rightarrow(a\otimes d) \]
+But the types don't match up\dots
+
+It looks more like a strengthening for presaturation or an equivalent property.
+
+On the other hand though, the interesting filtered colimit is $d\Rightarrow f$. Hence $\hom(A,(d\Rightarrow f)\otimes d) \simeq (d\Rightarrow f)\otimes \hom(A,d)$ for small $A$. 
+
+I am missing something here, and therefore getting stuck.
+
+Things seemed to be going so well.
+
+
+
 \section{27/7/18}
 Sidetracked by the idea of creating an extensional type theory based programming language.
 

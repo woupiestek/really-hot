@@ -27,6 +27,7 @@
 \newcommand\of{\mathord:}
 \newcommand\set[1]{\left\{#1\right\}}
 \newcommand\dual{^\circ}
+\newcommand\nno{\mathbb N}
 
 
 \mathrmdef{Ar}
@@ -40,6 +41,8 @@
 \newcommand\disc{_{\rm disc}}
 
 \newcommand\pushed{\ar@{}[ul]|(.2)\ulcorner}
+
+\newcommand\asif[1]{`#1'}
 
 \begin{document}
 \begin{abstract}
@@ -229,12 +232,31 @@ The general lifting problem $\tuplet{a,b}\of g\otimes c\to r(f)$ first reduces t
 \bullet\ar[d]^\sim\ar[rrr]_{k\otimes c} &&& \bullet\ar[d]^\sim \\
 \bullet\ar[rrr]_f &&& \bullet 
 }\]
-The finality of $c\Rightarrow f$ makes it a retract of $k$ and the unique morphism $k\to (c\Rightarrow f)$ is the solution to the lifting problem we needed.
-\hide{This feels way too easy.}
+The finality of $c\Rightarrow f$ makes it a retract of $k$ and the unique morphism $k\to (c\Rightarrow f)$ is the solution to the lifting problem.
 \end{proof}
 
+\paragraph{Conclusion}
+The problem of generating a factorization system from a family of generic left morphisms can be reformulated as the problem extending a given diagram to a presaturated one. We will show that new problem has solutions that don't require infinite colimits from the ambient category.
 
 \section{Presaturating diagrams}
+%here
+
+
+% dense is enough? dense families don't have to be closed under composition?
+At this point, assume that the ambient category $\cat A$ has a natural number object $\nno$ and a dense diagram $S$. In a locally Cartesian closed Category, a natural number objects permit the construction of many other inductive objects, like free monoids, which can help to substitute transfinite compositions. The existence of a dense diagram replaces another useful property: \emph{local presentability}. Rather than having each object represented as a small colimit of small objects, we let them be 
+
+
+
+
+
+%domain of left morphism are memebrs of S!?
+
+
+
+
+
+\hide{the difficulty is going to be showing that the construction delivers a presaturated diagram, and that may show presaturated diagram to be useless abstractions.}
+
 
 
 
