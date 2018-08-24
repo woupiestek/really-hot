@@ -9,6 +9,78 @@
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
 
+\section{24/8/18}
+Time to bang my head against thee problems again.
+
+The small object argument relies on the smallness of the domains of the generic cofibrations. I don't know what to ask from generic diagrams to replace this property. So let's try something else this week.
+
+Starting with a diagram, describe possible constructions of its. presaturation. Then try to prove that the result is indeed presaturated.
+
+\paragraph{small sums}
+Isn't this obvious?
+
+Coproduct completions for internal categories, combined with the 'obvious' operation on the diagram.
+
+Let's take this slow. Simply add finite coproducts at first. So lists of objects will be the new objects. The new morphisms already present a challenge, since in order to be proper coproducts, we need to add coproduct injections and codiagonal maps.
+
+Rather than lists, consider functions from and between finite sets. Here we run into an important difference between product and coproduct completions. Each member of the source must go to some member of the target in the coproduct completion. Each member of the target must come to some member of the source in the product completion. But neither case has to satisfy both, thank to structural morphisms.
+
+In other words, the free coproduct completion of an internal category $\cat C$ takes functions from finite sets to the object of objects $C_0$ as objects. A morphism $\tuplet{x,f\of x\to C_0}\to\tuplet{y,g\of y\to C_0}$ is a pair of functions $\tuplet{h\of x\to y,k\of x\to C_1}$ such that $\dom\circ k = f$, $\cod\circ k = g\circ h$. Nice.
+
+This is a construction involving the full diagram of finite objects, and this specific diagram could be replaced with an alternative full diagram of small objects.
+
+Consider a diagram over $\cat C$. This is mainly a morphism $d\of D\to C_0$ with an action from morphisms. 
+The completed version should preserve the new coproducts, so $D'$ should be something like this:
+\[ \set{\tuplet{x,f\of x\to C_0, a\of x, b\of D}| f(a) = d(b) }\]
+The morphism $d'\of D'\to C_0'$ should be obvious. Now the action of the morphisms. For $\tuplet{h,k}\of\tuplet{x,f}\to\tuplet{y,g}$:
+\[ \tuplet{h,k}\cdot\tuplet{x,f,a,b} = \tuplet{y,g,h(a),k\cdot b}\]
+This is pretty straightforward actually.
+
+In what sense has the diagram gained coproducts now?
+
+Since the terminal object is finite, there is an embedding $\cat C\to \cat C'$ and we can say something about coproducts being isomorphism to members of the diagrams.
+
+\paragraph{alternative}
+Presheaf toposes are famously free colimit completions, so could we use that here? I think that relies on $\hom$, which suggest that the only way is to have an enrichment in a more complete internal category.
+
+Rather than using this for coproduct only, start with a category that already has pushouts and transfinite colimits and probably also products.
+
+This suggest that there could be a generic category $\cat G$ of objects and morphisms, which already has the desired properties and can be used to complete the 
+
+I doubt that this really works. It won't be the free completion, but instead add a bunch of extra colimits, that get in the way of what we need. The presheaf categories are only a free completion by actually being the terminal solution to an impredicative problem.
+
+\paragraph{pushouts}
+The point is to get a directed colimit for the density comonad. Pushout are a mean to that end. But rather than having a collection of small object to push arrows out to, we should consider pushouts that are coequalizers.
+
+Note that this does not come for free. In fact, the diagram we complete this way cannot have too difficult morphisms in it.
+
+Maybe we shouldn't stick use a coproduct completion, but the family of small colimits.
+
+\paragraph{composition}
+Maybe the coproducts are the easy parts.
+
+Consider a diagram in the category of arrows, and represent compositions of the morphisms it contains.
+
+Start with list of the objects in the internal category $\cat C$. The diagram turns this into a list of morphisms. The domains and codomains won't ever be equal, however. Moreover, we only have one empty list of morphisms.
+
+I guess I am missing something about identities and isomorphisms. A property of presaturated diagrams perhaps: every identity is represented by the diagram. Let's not dwell on that now.
+
+Equalities of domains and codomains is a problem, isomorphisms is not. So the objects of $\cat C'$ are not just (nonempty) lists of objects of object of $\cat C$, but also of isomorphisms between the codomain of each function to the next.
+
+The diagram is not longer a problem, the iso's are clear enough. But what are the morphisms of $\cat C'$? 
+
+I know I need the initial segments. But we cannot just throw the rest out.
+
+It looks like we will destroy every bit of structure that the internal diagram used to have, and replace it with very particular diagrams.
+
+\paragraph{pushouts}
+Here the only recourse seems to have a diagram of small objects and then to build a new diagram of morphism by pushing out morphism in all possible ways.
+
+The idea is to take pair of objects and then involve the diagram through a morphism. The target diagram uses a pushout along that morphism.
+
+\paragraph{Conclusion}
+I don't really see where smallness comes in yet. Maybe I need to actually sketch the presaturation proof and step through it. Let's try that next time.
+
 \section{10/8/18}
 
 Ingredients:
