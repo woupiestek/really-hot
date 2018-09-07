@@ -9,12 +9,98 @@
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
 
+\section{7/9/18}
+
+A little recap. I found that for a diagram over of the category of arrows with particular qualities the density comonad is a functorial factorisation system. The following properties seem necessary:
+\begin{itemize}
+\item density and direction of the domains
+\item closure under pushout and composition
+\end{itemize}
+These make the diagram \emph{presaturated}.
+
+There is a construction of a presaturated diagram from a general diagram, relying on spans of morphisms, freely adding pushout and compositions, and ensuring a dense and directed set of domains.
+
+I think the external version is pretty straightforward, but I want something that works inside realizability categories. The trouble is, I don't really know how to go about this presaturation step internally.
+
+In an effort to understand the requirements and the construction better, today I should start with sketching the proof and working backward\dots
+
+\paragraph{left morphisms}
+Back off a bit.
+
+I think a diagram $D$ over $\ambient/\ambient$ 'generates' morphisms by taking tensors with presheaves in $\ambient$.  
+Interesting point: tensors with presheaves in $\ambient/\ambient$ doesn't work. That brings in too many morphisms.
+Though the class of left morphisms that occur as tensors with diagrams is large, is generally won't be the entire class of left morphisms. 
+
+This construction tries to select a suitable class of left morphisms and morphisms between them.
+It may in fact have little in common with the original diagram.
+
+This only complicates a sketch of the proof: what do we have to go on?
+
+\paragraph{new thought}
+Density inside a subcategory of $\ambient/\ambient$: only the morphisms we identified earlier.
+
+It would simplify presaturation, or perhaps make it more exact. It would not be correct though: only left morphisms should be generated. I mean: with only pushouts and commutative triangles, we have too few morphisms to cover morphisms that aren't left morphisms already.
+
+I suppose the density comonad should be full.
+
+This is confusing.
+
+The idea is that we look at the subcategory of the category of arrows whose morphism are compositions of:
+\begin{itemize}
+\item pushouts
+\item `commutative triangles', actually $\tuplet{a,b}\of c\to d$ where $a$ is an isomorphism.
+\item retracts
+\end{itemize}
+
+In this category the density comonad of the diagram that generates the left morphisms cannot be isomorphic to identity comonad, because not all morphisms are left morphisms. It cannot be full because we admitted too many commutative diagrams.
+
+This isn't going well.
+
+\paragraph{sketching the proof}
+The diagram $D$ is modified to have left morphisms with small codomains as objects and commuting square of a special type as morphism. This category is closed under finite colimits, pushouts and small coproducts for arguments given below\dots
+
+This is the point: getting the left factorization as a directed colimit of generic left morphisms. This, however, requires that we work of a much more saturated basis. Why do I want it to be directed though?
+The idea is that the closed under pushout somehow follows: the pushout of each finite approximation is itself a finite approximation, and the colimit of the pushouts is the pushout of the colimit.
+
+Pushout along what?
+
+This is the point. Let $l\of A\to B$ be a left morphism and $f\of A\to C$ be random. The pushout $p$ of $l$ along $f$ is supposed to be isomorphic to something in the image of the density comonad. Why? I don't think I really get the problem here. What is it that we have to prove?
+All small approximation of $f$ are already in the pocket. 
+
+It is as if we want operations of the presheaf categories that witness closure under the desired operations.
+
+Each small approximation $L'$ of the domain of $l$ factors through a small approximation $P'$ of the domain of $p$. So what?
+What do the pushouts help us here? Something about the colimit and the pushout commuting. I.e. pushouts of all small approximation together are a pushout of $l$ along a morphism that factors through $f$\dots but how does that help us?
+
+The density of the domains ensures all of the codomain of $f$ is covered, while the approximation argument takes care of the codomain of $f$. Careful though: we combine small identity morphisms from the codomain of $f$ with small approximations of $l$.
+
+We can turn identity morphism into sheaves\dots and somehow get $(\id(\dom(a\otimes d)))^d\to a$\dots I think. At least that gives us a pushout in the category of sheaves, that could be the one we need.
+
+A condition comes forth: enough identities must be in there. Density on identities. 
+
+\paragraph{pushouts}
+We derive closure under pushout form two conditions on $\otimes d$: it must be dense on identities, as well as be full on commutative squares of two particular (degenerate?) types. If so, there is a pushout in the category of presheaves of which the original pushout is the image (up to isomorphism). 
+
+I have to record the diagram, but I need a break now.
+
+The commutative squares are still reasons for caution.
+
+\[\xymatrix{
+& C \ar[r]^\id \ar[dr]^(.75)\id & C \ar[dr]\\
+A\otimes D \ar[ur]^f\ar[dr]_\id\ar[r]^\id & A\otimes D\ar[ur]^(.25)f\ar[dr]_(.25)l & C\ar[r] & \bullet \\
+& A\otimes D \ar[r]_l\ar[ur]_(.75)f & B\otimes D\ar[ur]
+}\]
+
+So, this looks like an alternative to the pushout condition, that connects to density more directly. 
+Next time, let's see if we can find something like this for composition.
+
+
 \section{24/8/18}
 Time to bang my head against thee problems again.
 
 The small object argument relies on the smallness of the domains of the generic cofibrations. I don't know what to ask from generic diagrams to replace this property. So let's try something else this week.
 
-Starting with a diagram, describe possible constructions of its. presaturation. Then try to prove that the result is indeed presaturated.
+Starting with a diagram, describe possible constructions of its. Then try to prove that the result is indeed presaturated.
 
 \paragraph{small sums}
 Isn't this obvious?
