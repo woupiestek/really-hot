@@ -9,9 +9,117 @@
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
 
+\section{21/9/18}
+Given a diagram of the arrow category, there should be a construction for a larger diagram, whose density comonad serves as a factorization system. This exists because the ambient category is a $\Pi$-pretopos with a natural number object. At least, that is what I am trying to prove.
+The construction of the larger diagram is still a mystery, however.
+Transfinite composition is the mystery. Last time we dealt with pushouts and translated them into conditions that relate to density and available morphisms.
+I have looked into the composition part. 
+This is the situation we have to deal with:
+\[\xymatrix{
+A_0\otimes D\ar[d]_{a\otimes d} \ar[r] & B_0\otimes D \ar[d]^{b\otimes d} \\
+A_1\otimes D\ar[ur]|{\sim} \ar[r] & B_1\otimes D
+}\]
+
+The composite should also be represented by a sheaf.
+
+\paragraph{targets}
+We are looking for something that looks like $A\to B\to I_0$, a morphism is diagrams actually, because there are morphisms and actions involved. We start with such a structure and modify it it ensure that the domains are directed and dense, while the whole structure is closed under compositions in a suitable sense.
+
+\paragraph{pushout out factorization}
+Given pushouts in $\ambient$, $\ambient/\ambient$ has a factorization system where each morphism is a commutative triangle following a pushout square. We simply restricted the commutative triangles to specific kinds.
+
+\paragraph{up-to-iso problems}
+Anodyne extensions are closed under composition. When we use a diagram, however, we are not dealing with a property that any morphism can have, but specific instances that are singled out. We probably cannot ask for a structure that is closed under all isomorphic object. So we are stuck with mitigation isomorphisms all over our constructions. This sucks.
+
+Suppose the first first step is just closure of a diagram under finite sums, and some of their morphisms. Just the get rid of that part of the problem. 
+
+The compositions have the lifting property because of the inverse of the
+isomorphism actually:
+\[\xymatrix{
+A_0\otimes D\ar[d]_{a\otimes d} \ar[r] & B_0\otimes D \ar[d]^{b\otimes d}\ar[dl] \\
+A_1\otimes D \ar[r] & B_1\otimes D
+}\]
+So forget about compositions isomorphisms and worry about these instead.
+We are not limited to specific commutative squares here.
+
+The weakening to more general morphisms only makes things a little bit easier, though. Diagrams still require rather odd structure.
+
+\paragraph{Back off}
+This was the idea: the density comonad is actually a factorization system, with $l(f) \simeq f^d\otimes d$. Given a `morphism from the original diagram'--whatever that means--we ask for the left lifting property with respect to $r(f)$.
+
+So instead of a `morphism from the original diagram' we need something to stand in, like $a\otimes d$ with an arbitrary sheaf. I end up with $r(f)^d$ being split epic (at least) and perhaps even an isomorphism\dots but too much seems to follows form just the density comonad.
+
+I am missing something about the density comonad, because it should not be so straight forward that the diagram is essentially closed under composition. 
+
+A lot comes from $r(f)$ being part of the counit of the comonad. This is part of the point of using the density comonad. But now it look like we don't have to proof anything about compositions or density anymore.
+It is not that simple. The adjunction makes $r(f)^d$ is a split epimorphism, but the assumed lifting properties tell us it should be an isomorphism.
+
+Counit is isomorphism is equivalent to a fully faithful left adjoint $-\otimes d$. A, but that is not the property we are looking at here. Only the $^d$ applied to the counit of the density comonad gives the isomorphism.
+
+\paragraph{algebraic selection}
+I suppose we could start with the sheaves, and then get a diagram be selecting particular ones, the algebras for the codensity monad for example. What does that actually do? 
+The unit $f \to (f\otimes d)^d$ would have an inverse of some sort, that
+sends a family of equivalence classes to some pre-image. This touches on
+something deep: $f$ is a way to build acyclic cofibrations, and
+the algebra makes that construction recursive.
+
+Yeah, this should be a problem because we would miss out on the compositions.
+
+The Garner way is more like: the right factor in the construction eventually becomes an isomorphism. But the proof relies on locally presentable ambient categories, which is what we try to work around here, and I am unsure how to proceed.
+
+Getting a new diagram this way is probably just a silly dream.
+
+\paragraph{Another sketch}
+First consider finite colimits generated from the diagram. At this stage we don't look at morphism too closely. We do want to include identities among the building blocks.
+
+No, try another way. Sheaves act as blue prints for morphisms. Isn't a sequence of sheaves what we are looking for then?
+Not in isolation, because we need to push the constructed object out to the correct place.
+
+So a sequence of pairs, where each pair is a sheaf $f_i$ and a morphism $g_i\of \dom(f_i\otimes d)\to X$ to push $f_i$ out along.
+Instead of a morphism $g$ could be a cocone, as a way to get it smaller.
+Better yet: make is a sequence of pushout squares that match up correctly.
+
+The problem is representing this complex structure as some object of the ambient category as ever.
+
+Extending the diagrams with finite coproducts and their pushouts and the special morphism between them are one step in the direction of making things simpler. We no longer need the pushout, because we can represent them directly\dots
+Perhaps we can even stick with certain coequalizers.
+
+\paragraph{Isn't this nuts?}
+The cycle and horn inclusions from generic sets, but why want such a set at all?
+
+Smallness of the codomains means we need to take such colimits in account in composition. 
+
+I am using sleepiness, loneliness, sadness, etc. to hide the fact that I am unsure how to solve these problems.
+
+\paragraph{back}
+Step one takes pushout of small colimits of the elements of the first diagram and identity morphisms in order to gain a diagram that
+\begin{enumerate}
+\item is dense on identities (and domains)
+\item is small directed
+\end{enumerate}
+The small directed part should mean something like $\hom(\kappa, f\otimes d)\simeq \kappa\to\hom(1,f\otimes d)$ for small $\kappa$. I don't know if we really need this now. Perhaps just adding certain pushouts is sufficient.
+
+The density just gets rid of the sums and pushout steps of the construction.
+
+For the transfinite composition step, add finite composition to the diagram.
+
+\paragraph{left morphism building kit}
+I like this idea of creating a category of left morphism recipes, explaining how to glue together the components until the full morphism comes out. Such a construction could confirm that we have all the left rules in place.
+
+\paragraph{Moving on\dots}
+Don't I have a pretty good idea what to do now? I am afraid that I don't because I keep making the same mistakes, and there are just too many details I fail to keep track off, no matter what I try.
+
+
+\paragraph{trying to redistribute}
+Keep the first step simpler: assume a diagram of small objects, and create a new diagram of pushouts of generic fibrations to small objects.
+The second step uses the zigzag squares to get composition functioning.
+This unlikely couple, together with the special morphisms should ultimately do it.
+
+Maybe better next time.
+
 \section{7/9/18}
 
-A little recap. I found that for a diagram over of the category of arrows with particular qualities the density comonad is a functorial factorisation system. The following properties seem necessary:
+A little recap. I found that for a diagram over of the category of arrows with particular qualities the density comonad is a functorial factorization system. The following properties seem necessary:
 \begin{itemize}
 \item density and direction of the domains
 \item closure under pushout and composition
