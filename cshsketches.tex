@@ -9,6 +9,83 @@
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
 
+
+\section{2/11/18}
+I am unsure if I will be working on this for much longer. It has taken too much time and I feel like I am getting further of target. 
+
+\paragraph{Factorization system}
+It now makes sense to me to break up the construction along the way Garner outlined. First turn it into a factorization system, using a dense diagram. At this point the question of what counts as a morphism is relatively easy.
+
+A diagram in the category of arrows looks like this: $ A\stackrel{a}{\to} B\to I_0$, where $I_0$ is the object of objects of an internal category and the arrows in $I_1$ act on both $A$ and $B$. A dense diagram will look like this: $S \to J_0$. So, what we are looking for is tuples:
+\[K_0 = \set{\tuplet{i\of I_0,j\of J_0,f\of A_i\to S_j}}\]
+Which exists in locally Cartesian closed categories. This is just the object of objects of the category. The morphisms are like:
+\[K_1 = \set{\tuplet{i\of I_1,j\of J_1,
+c\of A_{\cod(i)} \to S_{\cod(j)},
+d\of A_{\dom(i)} \to S_{\dom(j)}
+}\middle| c \circ a_i = S_j\circ d }\] 
+To get a new diagram in the category of arrow we need a little more.
+\begin{align*}
+C &= \set{\tuplet{i\of I_0,j\of J_0,f\of A_i\to S_j, s\of S_j}}\\
+D &= \set{\tuplet{i\of I_0,j\of J_0,f\of A_i\to S_j, s\of B_i +_{A_i} S_j}}\\
+c\tuplet{i,j,f,s} &= \tuplet{i,j,f,i_1(s)}
+\end{align*}
+where $i_1\of S_j\to B_i+_{A_i}S_j$ is the pushout of $a_i$ along $f$.
+The dependent pushout is a challenge met by any extensive and exact ambient category.
+
+So there it is. The density monad $c\of C\to D$ produces pushouts of $a\of A\to B$ and hence a factorization system. That is my claim at least.
+
+Basic proof strategy: sheaf reduction? The density comonad of $a$ looks like $(f^a)\otimes a$ and similarly that of $c$. So morphisms between $a$ and $c$, or $f^a$ and $f^c$ and show that these objects have to be similar. The simplest strategy is to looks at the relation between $a$ and $c$ and $\cat I$ and $\cat K$ in particular.
+
+Obviously, there is a forgetful internal functor $F\of \cat K\to \cat I$. Smallness of the bundle $A\to I$ induces an inverse functor $\cat I\to \cat K$. Here we have a connection to the original small object argument. The functor $F$ already induces several functors between the categories of sheaves.
+
+The idea is now that $(f^c)\otimes c$ has isomorphic domains to $f$ and is a pushout of $(f^a)\otimes a$ and this together makes the density monad of $c$ the factorization system got by pushing out out the density monad of $a$.
+
+Let think both parts through. 
+\paragraph{sharing domains}
+The diagram $S$ being directed may be important now too, and even a condition not met yet by the construction. My feeling is that if we have two pushouts $p_*(a_i)$ and $q_*(a_j)$ we need to factor those through some sort of union of their domains. Even if this is already possible in $S$, the new diagram $c$ breaks up those unions.
+
+I think the best solution is to close the diagram $a$ under finite coproducts first and only then get to the dense and directed domains. It should be finite coproducts, and we do destroy pre-existing finite product in the process if we are not careful.
+
+I took the finite coproduct out for simplicity, believing that the second step would add them back in. What is going on then?
+
+This could be a mistake. There are many object of $\cat K$ map to each elements of $\cat I$ through $F$. If the fibres of the functor are directed, however, we may be able to reduce the density monad of one to the other.
+
+If we have $\tuple{i,j,f}$ and $\tuplet{i,k,g}$, then we need a pushout $\tuplet{i,l,h}$. With those pushouts, the density comonad of $c$ reduces to $a$. Because $h$ is the diagonal in the pushout of $f$
+and $g$, there is no room for breaking approximations up.
+
+So, the fibres have to be closed under these pushouts. $S$ should have finite colimits, so the fibres of $F$ can have them too. The result is
+exactly what we need.
+
+Conditions on smallness:
+\begin{enumerate}
+\item density, so each object of $\ambient$ is reached by the density comonad,
+\item finite colimits of small object are small,
+\item the map $A\to I_0$ is small.
+\end{enumerate}
+
+\paragraph{Transfinite composition}
+The second part of the construction is still a bit vague. The objects are chains of zigzag squares between morphisms. Beyond that, I have no grip on the morphisms yet. Yes, pushout factorization, what does that mean?
+
+
+
+
+
+
+\section{5/10/18}
+What I have right now, is a combination of properties, that imply each other that together tells us a diagram is presaturated.
+
+\section{30/9/18}
+Maybe just start with more assumptions on the diagrams, keep on factorizing the proof all the way back to the family of generic morphisms.
+
+So let a diagram have:
+\begin{enumerate}
+\item dense domains;
+\item directed or even having small colimits;
+\item the pushouts;
+\item the compositions.
+\end{enumerate}
+I have to figure out what that means exactly, because I have tried, and apparently not gotten far enough.
+
 \section{21/9/18}
 Given a diagram of the arrow category, there should be a construction for a larger diagram, whose density comonad serves as a factorization system. This exists because the ambient category is a $\Pi$-pretopos with a natural number object. At least, that is what I am trying to prove.
 The construction of the larger diagram is still a mystery, however.
