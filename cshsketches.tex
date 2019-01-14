@@ -9,6 +9,129 @@
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
 
+\section{14/1/19}
+It is difficult to solve the problems for arbitrary categories of generic cofirbations, but for mere families, things are more or less clear now. I mean, I was struggling to understand the morphisms given an arbitrary base category, but I never solved that problem, and I don't need to.
+
+\begin{enumerate}
+	\item Start with a family of \emph{generic cofirbations} and a family of small objects, and create a new category of pushouts of generic morphisms with small domains.
+	\item Create a new diagram whose objects are witnessed by zigzag chains, while its morphisms are limited to specific forms.
+	\item The density comonad for the latter category is the factorisation system.
+\end{enumerate}
+
+Now I think the zig zag chains don't actually help as witnesses. The codomains don't have to be small. So we need something like small joined with a finite number of codomains.
+
+Here is the problem: I have a construction I don't know how to internalize, and an internalized structure that doesn't fit into my proof. 
+
+\paragraph{What works?}
+There is a finite composition $X_0\to\dotsm\to X_n$ starting with a small $X_0$ and a sequence of generic cofibrations $a_0,\dotsc,a_n$ and morphism $f_i\of \dom(a_i)\to X_0$ such that the morphism $X_i\to X_{i+1}$ is the pushout of $a_i$.
+
+This recursive type may not exist in the general sort of category we are looking in. That is the problem. So I am looking for a work around with the family of small objects.
+
+In the motivating example this is not even a problem. The codomains are representable--as in 'could hardly be more finite.' This is the simplest case: there is a dense full subcategory (full diagram?) which contains the domains and codomains of the generic cofibrations.
+
+Witnessing of cofibrance consist of breaing up a morphism into components, and showing each of them is a pushout. I believe we don't need retracts or transfinite compositions at this stage.
+
+So, we end up with a diagram of cofibrations and certain simple morphism between them, which has a dense diagram of domains, and is directed. Now the density comond provides morphisms which factor as cofirbations followed by fibrations.
+
+Interesting note: the 'full' diagrams and the 'families' are the final and initial object in the category of diagrams with the same objects, which is why we need no distinction.
+
+To finish the paper, we focus on the case where there is a family of generic cofibrations, whose domain and codomains belong to a given dense diagram. Everything else should then kick in to get the desired results.
+
+\section{17/12/18}
+What are the morphisms in the category of transfinite zig-zag chains?
+\[\xymatrix{
+	C \ar[r]^a \ar[d]_c & D \ar[r]^b\ar[d]_d & \nno\ar[d]^s\\
+	C \ar[r]_a \ar[ur] & D \ar[r]_b & \nno
+}\]
+For starts we could simply consider the straightforward morphisms that preserve all the structure.
+
+The problem with transfinite composistion of cofibrations is that the codomains of the generic cofibrations don't ordinarily have to be small. We run out of small object too soon, which is a problem, because it means we cannot keep the catgeory of generic cofibrations small by keeping the domains small.
+
+The inifitrary chains should be easier to work with than a collection of finite chains of all length, inclusing giving a simpler definition of morphism. On the other hand, we now need more morphisms to keep the factorization clean. Still, I'd say the simplest proposal is good enough. Ignore the zigzags, and allow reindexing. Given $\tuplet{a,b,c,d}$ as above, and a similar tuplet $\tuplet{a',b',c',d'}$, then a morphism $\tuplet{a,b,c,d}\to\tuplet{a',b',c',d'}$ is a morphism $f\of a \to a'$ with a zero preserving increasing morphism $g\of N\to N$ that commutes with $b$:
+\[
+\xymatrix{
+C\ar[r]^a\ar@{.>}[d]_{f_0} & D \ar[r]^b\ar@{.>}[d]^{f_1} & \nno\ar@{.>}[d]^g\\
+C'\ar[r]_{a'} & D'\ar[r]_{b'} & \nno 
+}\]
+So, the zero presevring increasing morphism emphasizes that we care about the result of the infinite composition, but the individual steps aren't important. The zigzag is evidence for the left lifting property, and it is unique when cofibrations are monic, but this evidence is ignored by the morphism, as it doesn't matter for the result.
+
+The reason tranfinite compositions can be composed is that we are working inside an exact ambient category $\ambient$. I.e. $D_\infty$ is a quotient of $D$, by an inductively defined equivalence relation based on the chain of morphisms $D_i\to D_{i+1}$. This defines a new diagram if transfinite compositions in the ambient category.
+
+\paragraph{Finite zigzags}
+At this point is may be interesting to consider 'terminating compositions'. So from some $i$ on, $a_{i+1} = a_i$. Bringing back the finiteness this way, the smallness starts to pay off more clearly. 
+
+Now that we know how to do it in the infinite case, we can start considering zigzags over initial segments of $[n]$ and introduce the same kinds of morphism. This time, everything is nice and finite, however.
+
+Doubt is creeping in again. 
+It looks like my notion of morphism picks a member of the target to embed into. 
+Yeah, we are actually ignoring the tranfinite composition itself. We need to treat the transfinite compositions as diagrams on their own.
+
+Take the finite zigzag and reverse the order. The result is a diagram of simplicial objects coming from another diagram of cofibrations. Once we pay attention to the actual compositions, however, the zigzag can be safely ignored. They are just evidence that the whole composition taken together is a cofibration.
+
+\paragraph{Recap}
+Given a diagram of generic cofibrations and a dense diagram, we first combine this into a diagram of generic extensions of small objects, and then we take tranfinite compositions as above. We (may) then still need to add identities of small objects as cofibrations. The result is a diagram whose density comonad is supposed to be a factorisation system. How would that work?
+
+The problem is that after factoring $f$ as $r(f)\circ l(f)$, $r(f)$ should have the right lifting property. Because any generic cofibration $c$ has a small codomain, any morphism $c\to r(f)$ should factor through some finite--or at least small--approximation of the factorisation. The pushout is simply another such finite approximation.
+
+The zigzags are now in the way aren't they? It is actually harder to work with these structures now.
+
+\paragraph{Relevance}
+In the saturated diagram a morphism tells us something about the lifting property. The morphisms point out potential relations between fillers for the cofibrations. At the same time, some morphisms are needed to get a directed category of cofibation te work with. This is the trouble now. If we don't start with a family, but with a diagram of generic cofibrations, we may break connections that this initial digram has. Adding morphism too carelessly can result in a loss of directedness, however.
+
+Everything is still at stake.
+
+\paragraph{Insight}
+We allowed pushouts and compositions as morphisms. Then added morphisms from the base diagram to intervene. With the compositions intervening, it is still okay to let gaps fall between the composites, because it follows the same principles.
+
+The challenge is directedness. This is automatic for sums, but parallel pairs must have coequalizers too. That is the hard part. Morphism have to be limited to eliminate parallel pairs that have no coequalizer. However, the generic diagram may contain morphisms that complicate matters.
+
+I should write what I know, and perhaps what I need. If I cannot tell if my construction can handle arbitrary diagrams, just do the discrete version. If I cannot extend fibrations constructively, just do it classically. Leave it to other to work out the full idea.
+
+\paragraph{Generic parallels}
+I don't really know what to do with these anyway. Meanwhile, the idea of a finite composition of pushouts of generic cofibrations still works well.
+
+\section{16/11/18}
+I have no better idea than the zigzag chains for completing the diagram.
+
+Recap: any diagram in the category of arrows can be combined with a diagram of small objects, so the density comonad becomes a factorization of morphisms.
+
+The zigzags solve the problem that all domains are small, but codomains don't have to be. Meanwhile, they don't solve the problem of missing identities and introduce the problem of to define morphisms between them.
+
+\paragraph{Compositions first}
+I have been considering this, but it looks like it cannot work out. Suppose we have a sequence of generic cofibrations $a_i$ whose pushouts compose to form a new cofibration. Vital data about this composition is part of the pushouts, especially about what parts of the domain of $a_i$ are covered by the domains of $a_j$ for $j<i$, and which are part of the domain of the full composition.
+
+
+Perhaps this can be mitigated with the transfinite composition diagrams.
+I.e. we have the morphism:
+\[\sum_{i<\omega} a_i \of \sum_{i<\omega} dom(a_i)\to \sum_{i<\omega} dom(a_i)\]
+
+This just seems silly. Freely add transfinite composition by using these obvious `algebras' on the category $\ambient^\omega$. Why wouldn't that work?
+
+The obvious problem is that domains and codomains of generic cofibrations can fail to match up. The solution seems obvious now. Use transfinite zigzags instead:
+\[\xymatrix{
+C \ar[r]^a \ar[d] & D \ar[r]\ar[d] & \nno\ar[d]^s\\
+C \ar[r]_a \ar[ur] & D \ar[r] & \nno
+}\]
+The composition is still the initial constant zigzag this embeds into.
+Why do I like this? Because I expect that these definition simply the definition of morphism between transfinite compositions.
+
+\paragraph{Finite colimit options}
+The transfinite composition is a kind of diagram. What if we use a diagram over small categories instead?
+We get a kind of closure under small colimits, that could kill two bord with one stone.
+
+The idea is that the diagrams we are interested in are exists in the category of cofibrations and zigzag morphisms. 
+
+This isn't going anywhere, because zigzags don't compose.
+
+
+
+\section{3/11/18}
+Instead of transfinite compositions, use zigzag chains:
+\[\xymatrix{
+A_0 \ar[r]\ar[d] & \cdots \ar[r]\ar[d]\ar[dl] & A_n \ar[d]\ar[dl] \\
+B_0 \ar[r]& \cdots \ar[r]& B_n
+}\]
+The vertical morphisms are from the diagrams to be completed with compositions. The composition from top left to bottom right is what matters.
 
 \section{2/11/18}
 I am unsure if I will be working on this for much longer. It has taken too much time and I feel like I am getting further of target. 
@@ -50,7 +173,7 @@ I took the finite coproduct out for simplicity, believing that the second step w
 
 This could be a mistake. There are many object of $\cat K$ map to each elements of $\cat I$ through $F$. If the fibres of the functor are directed, however, we may be able to reduce the density monad of one to the other.
 
-If we have $\tuple{i,j,f}$ and $\tuplet{i,k,g}$, then we need a pushout $\tuplet{i,l,h}$. With those pushouts, the density comonad of $c$ reduces to $a$. Because $h$ is the diagonal in the pushout of $f$
+If we have $\tuplet{i,j,f}$ and $\tuplet{i,k,g}$, then we need a pushout $\tuplet{i,l,h}$. With those pushouts, the density comonad of $c$ reduces to $a$. Because $h$ is the diagonal in the pushout of $f$
 and $g$, there is no room for breaking approximations up.
 
 So, the fibres have to be closed under these pushouts. $S$ should have finite colimits, so the fibres of $F$ can have them too. The result is
@@ -1449,7 +1572,7 @@ We always need a single object or morphism in $\ambient$ to realize various theo
 There is a connection with the left adjoint of an adjunctions preserves the left morphisms in a factorization system, of the right adjoint preserved the right morphisms. We need to amend for the extra property that left morphisms are closed under 'discrete pullbacks', i.e. all categories have discrete morphisms and all functors preserve them.
 
 What am I looking for now?
-The individual case where we look at whether the codescent of a horn inclusion along another is an acyclic cofirbation is complex. We need to make the case that this complex construction can be carried out parametrically, not just over all combinations of horn inclusions, but also when additional parameters (the object of all problems) are involved.
+The individual case where we look at whether the codescent of a horn inclusion along another is an acyclic cofibration is complex. We need to make the case that this complex construction can be carried out parametrically, not just over all combinations of horn inclusions, but also when additional parameters (the object of all problems) are involved.
 There is a discrete object of problems $P$. Each problem translates to a simpler problem $P \to C$ involving just a single combination.
 
 Arguably, we are looking at the question of descent along acyclic cofibrations. Yes, ultimately we only need it for one. We have decent along a specific acyclic cofibration, and we need it elsewhere.
