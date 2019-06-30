@@ -9,6 +9,583 @@
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
 
+\section{30/6/19}
+\paragraph{move to toposes}
+Conjecture: 
+Suppose that a $\Pi$-pretopos $\ambient$ with natural number object has a dense
+(directed) diagram $D$. Then $\ambient$ is a topos. The coequalizer of domains 
+and codomains of epics in $D$ is a subobject classifier $\Omega$. The object of
+epics $E$ is crucial here--and directedness and important reason it exists.
+
+So, this would be a reason to rewrite on the assumption that the ambient
+category is an elementary topos. All the examples are in fact toposes.
+
+Let $m\of X\to Y$ be any monic. Needed are $Y_D$ and $Y_E$ plus morphisms
+$p,q\of Y_D\to Y_E$, $r\of Y_D\to D$ and $s\to Y_E \to E$ that commute with
+the domain and codomain maps, and that somehow classify the monic.
+Part of the formula is letting $Y_D$ just be a cover of $Y$ with tuplets
+$\tuplet{x\of D_0,y\of D[x],z\of D[x]\to Y}$ and $Y_E$ be commutative diagrams
+$e\to m$ where $e$ is a $D$-epic, possibly together with $y\of D[\dom(e)]$, so 
+for a map $Y_E\to X$. Yes, $Y_E$ needs to cover $X$ and all equivalent pairs of
+$Y_D$. Feel rather complicated, but something like 
+$\tuplet{x\of E,y\of D[\dom(x)], z\of D[\cod(x)]\to X}$, with 
+$p\tuplet{x,y,z} = \tuplet{\dom(x), y, m\circ z\circ (x\cdot)}$ and
+$q\tuplet{x,y,z} = \tuplet{\cod(x), x\cdot y, m\circ z}$.
+This ought to do the job and induce the desired
+
+
+\paragraph{smarter?}
+A better way may be: if the object of $D$-epics $E$ exists, then surely the 
+object of $D$-monics $M$ exists as well. This should acts as a weakly generic 
+monomorphism however, which is all we need.
+
+Thinking backwards: we can cover each object with 'sums' of $D$-objects. Pulling
+back the monics might force us to cover the domain again, but then we still get
+a cover for each monomorphism by the generic $D$ morphism. 
+
+We need fullness of $D$, but that isn't new is it?
+
+Ultimately, take the epi-mono factorization of the universal $D$ morphism, 
+then the fibered product of isomoprhism of the fibers of the monic factor, 
+then the quotient of that equivalence relation. What exactly could we be missing
+then?
+
+\paragraph{counter}
+I suspect that somehow a subterminal could be so great, that no $D$ object 
+properly covers it, dispite density of $d$. Take $\mathrm{Set}/\omega$. Finite colimits 
+of representables are candidate for $D$, they surely fit every bill. The whole
+density thing is easy to arrange. There is no way to cover the terminal object
+without using `large' objects are indexes. This is a topos, but maybe we can fix 
+that using cardinalities as well. E.g. take functions with finite fibres only.
+Only worry is that $D$ would not be internal anymore. Okay, so move to teh next 
+limit cardinal: subcategory of $\mathrm{Set}/\lambda$ with fibres smaller than $\lambda$.
+Not a topos because the subobject classifier is huge. Many more representables,
+that sucks. So the exponentials get in the way of a convincing counter here.
+
+\paragraph{Use those exponentials then}
+First cover the terminal object with objects of $D$, to sabotage what happened
+above. Note that since each object has a unique map to the terminal object, this
+simply is the sum of $D$ objects. Call that $C$ and consider $D^C$, or ever 
+$D_0^{D_0}$, just to get something that should be big enough to cover
+a potential subobject classifier.
+
+We arrive at $D_0$ modulo equi-inhabitation as before, as the smallest possible
+solution. Full idea: for each monic $m\of X\to Y$, $m$ is covered by a family of
+$D$-morphisms $\set{ m_i\of X_i\to Y_i| i\of I}$. 
+
+Actually, first cover $Y$, than cover the domain of the pullback of $m$ and use 
+fullness to argue that this must be a $D$-morphism. Does that work?
+
+The unique lifting properties of epics versus monics are crucial here.
+With their help, the pullback of $m$ is already classified, and $m$ soon follows
+by diagram chasing. There is a map to the monic factor of the universal 
+$D$-morphism. 
+
+\paragraph{pressing questions}
+Could all $D$-objects be inhabited? Would it matter if they were?
+This is another challenge. 
+
+No, we have a universal $D$ morphism, whose codomain is a rather large 
+combination of $D$ objects. The way in which we get a subobjectclassifier is
+not that sensitive to these problems.
+
+\paragraph{Conclusion}
+We might as well assume we are working in a topos, because if there is a
+suitable dense internal full subcategory, then there probably is a subobject
+classifier. All examples I have in mind are toposes. All we have to do is
+explain this choice.
+
+\section{23/6/19}
+\paragraph{The construction\dots}
+Given a dense directed diagram $D$ and family of \emph{generic left morphisms}
+$L$ that live in $D$, there is an object $P$ of pushouts of members of $L$. 
+The following dependent limit tracks finite compositions of these pushouts.
+\[\prod_{n\of\nno}\set{f\of[n]\to P|\dom\circ f\circ\delta_0 = \cod\circ f \circ \delta_n}\]
+There is a morphism that takes these sequences to their composites and the
+image of this morphism $A$ will be the object of objects is a new diagram.
+
+Morphisms between the composed pushouts are themselves combinations of pushouts
+and morphisms:
+\[\xymatrix{
+  S_0 \ar[r]^s\ar[d]_{m_0}\pushout & S_1\ar[d]\ar[dr]^{m_1}\\
+  T_0 \ar@/_/[rr]_t\ar[r] & \bullet \ar[r]^{\of P} & T_1
+}\]
+Any commutative square $m\of s\to t$ can be factorized as a commutative 
+triangle following a pushout square. Here the commutative triangle consists of
+morphisms of $P$, however.
+
+The new diagram $L'$ of left morphisms gives a factorisation system which 
+factors morphisms into left and right ones, because this selection of morphisms 
+doesn't interfere with the lifting property.
+
+\paragraph{target diagram of generators}
+So, small objects. The smallness of the domains of the generic left morphisms
+means that $\hom(d,\cdot)$ preserves directed colimits, which is the most
+mysterious part. Since we can represent the left factor $l(f)$ of a morphism 
+$f$ as a directed colimit, there are now a number of steps we can take to lift 
+a generic left morphism $g$ again the right factor  $r(f)$.
+
+Firstly consider that the morphism
+$\dom(g)\to \dom(r(f)) = \cod(l(f)) = \colim_{l'\to f} (l')$ 
+is a member of $\colim_{l'\to f} \hom(\dom(a),\cod(l'))$.
+Secondly, there is an operation that takes this data and generates a new member 
+of the diagram: take the pushout $g$ and compose with $l'$.
+Finally, the finality of $l(f)$ forces $g$ to factor through $r(f)$
+
+A number of properties is desired fo the target diagram of generators, and
+obtained only through combining different structure, but what we need is:
+\begin{itemize}
+  \item closure under composition of the left morphisms
+  \item a dense diagram of codomains, with left morphisms pushed out out to all 
+  of them
+  \item enough morphisms to get a direct diagram
+  \item not so many morphism that the left lifting property is lost in the 
+  colimit
+\end{itemize}
+
+\paragraph{algebraic lifting properties}
+When you equip a right morphism with an lifting operator, no guarantees are 
+given that lifts of compositions of left morphisms will commute. The 
+factorizations constructed above do give such guarantees. This is just an aside.
+
+\paragraph{paper}
+Perhaps I now finally have what I need to write the paper I have been working 
+on for the past 5 years\dots 
+
+\begin{itemize}
+  \item a plausible story for algebraic factorisation systems in simplicial 
+  assemblies
+  \item a plausible story for extending fibrations along horns
+  \item the language of internal diagrams and sheaves
+\end{itemize}
+
+Add the motivating example of modests simplicial sets.
+
+\section{22/6/19}
+\paragraph{shortly on factorisation systems}
+To replace the small object argument, turn the left side of the factorisation
+into a filtered colimit. A saturated set of small morphisms is not needed,
+but closure under pushouts and compositions is. Care about the morphisms of
+the category or the filteredness is going to fail.
+
+\paragraph{what about the algebras?}
+Fibrations are algebras already, just not of a monad. The procedure above is
+a way to get a free monad, which is the algebraic factorization system. It
+doesn't need to consist such structures itself.
+
+I don't think the algebra idea is that helpful.
+
+\paragraph{better approaches}
+A finite composition of functions can be encoded as $X \to Y \to [n]$ with
+extra structure to get $X_{i+1}\simeq Y_i$ for all $i<n$. The actual composition
+still has to be derived. If we moreover know that $X\to Y$ is a pushout of a
+coproduct of generic left morphisms, then we are ready. All structure we need 
+is present.
+
+\section{21/6/19}
+I'd like to look into the factorization systems again. Ultimately, it should
+combine two ideas: approximating object with dense categories and using
+initial algebras or terminal coalgebras, to create factorization systems.
+
+The following concepts are sort of clear:
+\begin{itemize}
+  \item the category of small objects
+  \item the functors to consider the algebras or coalgebras of
+  \item what the morphisms between the algebras should look like
+\end{itemize}
+
+The rest is a mess.
+
+Proving that a morphism is an acyclic cofibration, requires knowing the
+complementary faces plus a strategy for glueing them in. This strategy 
+could be a coalgebra of sorts, breaking down each 
+
+May it would look as follows.
+\[\xymatrix{
+  A\ar[r]^i\ar[d]_a & B\ar@/^/[r]^{c}\ar@/_/[r]|(.4){l(b)}\ar[dr]_{b} & LB\ar[d]^{r(b)}\\
+  X\ar[rr]_f && Y
+}\]
+Here $c$ is the coalgebra, but $a$ is also the equalizer of $c$ and $l(b)$, to 
+ensure that the complement of $A$ won't be send to itself. This only works 
+because cofibrations are regular monomorphisms. The risk here is that the 
+coalgebra is not well-founded.
+
+\section{19/6/19}
+
+\paragraph{Two more days of thought}
+Let $W = \bigcup_{i\of [n]-\set{x,\xi(y)}} U_i$ and let
+$V=\bigcup_{j\of[m]}V$.
+For faces $f\of W-U_{\xi(y)}-V$, $y$ is a
+fine support point. If $f\of W-U_{\xi(y)}-V$, then it subface
+$f-y$ doesn't belong to any $V_j$ with $j\neq y$.
+For $f\of U_{\xi(y)}-W-V$, $\beta(f)_i\neq \emptyset$ for any 
+$i\of [n]-\set{x,\xi(y)}$, hence there is are points like $\max\beta$ and
+$\min\beta$ to use as supporting points.
+\begin{align*}
+  \max\beta(\xi(y)) &=y\\
+  \max\beta(i) &= \beta(i,\max(\alpha_{\delta(i)})) \textrm{ if } i\neq \xi(y)\\
+  \min\beta(\xi(y)) &=y\\
+  \min\beta(i) &= \beta(i,\min(\alpha_{\delta(i)})) \textrm{ if } i\neq \xi(y)
+\end{align*}
+The remaining faces of $U_{\xi(y)}\cap W-V^y$ can all be extended with extra 
+points to become member of these difference sets. I didn't want to use $y$ in 
+these cases, because we don't want the support point to be removeable, and
+$y$ is too specific.
+
+I think we have all faces we need now, but there is still a problem.
+If $f\of U_{\xi(y)}-W-V$ there is typically no reason why $f-p(f)(i)$ 
+should belong to $U_{\xi(y)}-W-V$ for $i\of [n]-\set{x,\xi(y)}$. The argument
+would probably be that we can get $f-p(f)(i)$ from other supporting points,
+but only if those faces have been added before\dots
+
+Obviously, $W-U_{\xi(y)}-V$ don't need to use this measure. Also, we have to see
+whether dimension actually can be left out completely.
+What if we just use $\sum(\beta)$?
+
+\paragraph{strategy}
+Suppose we always take $\max\beta$. 
+The supporting points we get $f-p(f)(i)$ from are always strictly lower. So we 
+use $\max\beta$ to determine when a face can be added.
+in fact $\sum_{i\of [n]-\set{x,\xi(y)}} \beta(i,\max(\alpha_{\delta(i)})$ could
+be a replacement for dimension here.
+
+\paragraph{go through proof}
+Let $\sigma\tuplet{\alpha,\beta,\gamma} = \sum_{i\of [n]-\set{x,\xi(y)}} \beta(i,\max(\alpha_{\delta(i)})$.
+Let $A_d$ be the union of 
+$(\bigcup_{i<n} U_{\delta^n_x(i)}) \cap (\bigcup_{j<m} V_{\delta^m_y(j)})$ with 
+all faces for which satisfy:
+\begin{enumerate}
+  \item $\tuplet{\alpha,\beta,\gamma}\of (U_{\xi(y)}-W)\cup(W-U_{\xi(i)}) - V$
+  Also $f$ contains its supporting point.
+  This should be part of the first condition.
+  \item $d > 2\dim(\beta)+\dim\gamma$
+\end{enumerate}
+Inaccurate language obviously, the simplex $\tuplet{\alpha,\beta,\gamma}$ 
+generates a simplicial set which is a subset of $A_i$.
+
+We need to show a couple of things, one is that the inclusions $A_d\to A_{d+1}$
+are acyclic cofibrations, the other that there is a $D$ such that 
+$A_D = \bigcup_{i<n} U_{\delta^n_x(i)} $.
+
+So for $(W-U_{\xi(i)}-V)$ we simply take $f\circ \delta_y$, which reduces the
+dimensions (when we remove the maximal element of a
+segment), may even lands us directly in $A_0$. Hence all of these faces are 
+present except the one that fails to reach $y$.
+
+For $(U_{\xi(i)}-W-V)$ it gets a bit more complicated. Most $f\circ \delta_y$
+are included because of reasons outlined above. The problem cases are 
+$f-\max(\beta(f))$, which remains excluded, and $f-\max(\beta(f))(i)$.
+These never fall into $V_j$ because $\max(\beta(f))(i)$ itself is still there.
+If they don't fall into $W$, then we add the new $\max(\beta(f-y))$ to get a
+face with the same dimension but a lower score because points in $\Gamma$ are
+cheaper. If they fall into $W$, then maybe we just should add $y$ and be done 
+with it--that would require making $y$ cheaper as well! 
+That adds 1 to the dimension, but $\sigma$ will have lost more 
+($0\of[m]$ is a problem, so perhaps we need to adjust our measure of $\sigma$).
+
+\paragraph{cost model}
+Define the cost of $\tuplet{\alpha,\beta,\gamma}$ as twice the number of points
+$\beta$ reaches in $[m]-y-\xi_x$ once the number of points in 
+ plus once the number of points in $\xi_x\cup\set{y}$ plus the number of points
+ $\gamma$ reaches. Now we can say that leaving out or replacing point reduces 
+ cost and that there is a maximum cost.
+
+We need to sharpen our definitions.
+All $j\of [m]-y$ occur somewhere either way. $f$ reaches $y$ or
+more complicatedly, $f$ reaches all $\xi_i$ except $\xi_{\xi(i)}$ plus an extra
+point $p$ which is a combination of maxima.
+
+Finally, after all this time!
+
+\paragraph{consequences}
+There are ascend functors $A^n_x:\cat S/\horn_x[n]\to \cat S/\simplex[n]$ and
+these preserve acyclic fibrations. They have right adjoints $D^n_x$ which 
+preserve fibrations, so this is a Quillen adjunction. The unit
+$\eta\of\id\to D^n_xA^n_x$ and the counit $\epsilon\of A^n_xD^n_x\to\id$ ought
+to be equivalences. This may be another hard to prove fact though. In any case
+we are interested in the property that $h\ri D^n_x \simeq \id$, because form
+there we get the fibrancy of the universe of modest fibrations\dots
+
+We never got around to the fibrant replacements\dots.
+
+The point of this construction was to avoid minimal fibrations,
+which are non constructive. Do I remember why?
+
+Extension instead of `descend', so look for a antonym to replace `ascend':
+condensation, reduction, contraction, subtraction, diminution? 
+
+\section{17/6/19}
+Let's do this again. The set 
+$\gamma_y = \set{ a\of \alpha_i | \gamma(a,\xi(y))=y }$ 
+can contain mutliple elements, and we have to be careful that they don't get in
+each others way. Just consider the set of injections into
+ $\product{i\of[n]-\set{x,\xi(y)}}\xi_i$.
+There must be some reason we cannot pick the least element here and just use
+that?
+
+Our starting point is:
+$(\bigcup_{i<n} U_{\delta^n_x(i)}) \cap (\bigcup_{j<m} V_{\delta^m_y(j)})$
+And I think the problem is that these just may have no single point in common.
+The intersection of $\bigcap_{i<n} U_{\delta^n_x(i)}$ has everything empty
+except $\alpha_k$ and $\alpha_{k+1}$. The $V_j$ do the rest, but that seems to
+leave us with a set of points to work with. 
+The question is, is there any point in $U_i$ that cannot be extended by the
+least point of $\product{i\of[n]-\set{x,\xi(y)}}\xi_i$?
+
+The jumping around makes sense if we stick to $y$ as strating point, because
+there is an opposing face that causes trouble. Also, faces can get in each
+others way, which is a reason to be careful.
+
+The problem is that $U_i\cap V_j$ really do not have any single point in common 
+with each other, not even the members of to following set:
+$\Gamma_y = \set{\gamma\of\product{i<n}\xi_{\delta^n_x(i)}| \gamma(\xi(y)) = y}$
+
+I think $y$ may be a distraction, i.e. we may have to use it to glue a point of 
+$\Gamma_y$ to a member of $V_j$, but using it to glue in everything just makes
+things more complex. I am unsure.
+
+The basic strategy is the glue in faces by dimension. This requires an $p(f)$ 
+for each face $f$ such that subface $f\circ \delta_p$ is not glued in during the
+ previous stage with all the others. Gluing in every face that contains
+a specific point works because that point becomes $p$. That won't work with our
+starting point though.
+
+The `downsets' start to make sense: they describe a path to a point we want to 
+get in first. We have to be specific though. $\gamma$ 
+has to reach every element of $[m]$, otherwise it belongs to some $V_j$.
+
+\paragraph{pushout product}
+What we are dealing with is a kind of repeated pushout product:
+$\horn_y(\xi_{\xi(y)})\Box\cycle(\xi_i)$
+
+See, $\xi\of \simplex[m]\to\simplex[n]$ breaks up the horn 
+$\horn_y[m]\to \simplex[m]$ into a list of cycles
+$\cycle[\xi_i]\to\simplex[\xi_i]$ and a horn 
+$\horn_y[\xi_{\xi(y)}]\to \simplex[\xi_{\xi(y)}]$
+The inflation takes the product of most of these and glues them to the
+original simplex. This should result in a simplex that is stable under
+pullback.
+
+\paragraph{can we not ignore?}
+I wanted to focus on $\Gamma_y$, but it seems that we run into trouble then.
+A $\tuplet{\alpha,\beta,\gamma}$ belongs to the complement when 
+$\beta$ and $\gamma$ bother reach all points of $[m]$ (except perhaps $y$, but 
+then we should be able to add $y$ somehwere). $\gamma$ can reach a lot of points
+easily, but $\beta$ can compensate for everything that $\gamma$ misses.
+
+So, let's try is this way. We only glue in faces where $\gamma$ has the 
+following properties:
+\begin{enumerate}
+  \item $\exists a\of\alpha_k.\gamma(a,\xi(y)) = y$
+  \item $\forall i\of[n]-\set{x,\xi(y)}. \gamma(\min(\alpha_k),i) = \min(\xi(i))$
+  \item $\forall a\of\alpha_k-\set{\min(\alpha_k)}. b\of\Gamma_y. 
+  \gamma(a-1)\leq b \leq \gamma(a) \to (\gamma(a-1) = b \vee \gamma(a) = b)$
+\end{enumerate}
+And of course, $\beta_m\neq \emptyset \vee \gamma_m\neq \emptyset$, otherwise
+inclusion is not needed.
+
+What I think we need is:
+\begin{itemize}
+  \item a point $p$ in $\Gamma_y$
+  \item a `dense' $\gamma$ that intersects that point.
+\end{itemize}
+What does this do? The point $p$ cannot be removed and if we remove any other 
+point, fuck! 
+
+For most faces, the strategy is to add points to $\gamma$ until the conditions 
+are satsified. 
+
+Pick a point $p\of\Gamma_y$. We know it does not belong to $V_p(i)$, and we need
+to be careful about this fact.
+
+I think there should be two conditions to ensure $\gamma$ gets full before 
+$\beta$ does. For the second condition, $\beta$ and $\gamma$ both ought to be
+maximal. If we remove an element from $\beta$, the faces should be included
+because of the rule for filling out $\gamma$. Removing an element from $\gamma$
+leads to immediate problems, however.
+
+Funny thing is, $\beta$ has to miss an entire range $\xi_i$ of $[n]$, otherwise
+none of this will work.
+
+\paragraph{the difficulties}
+We need a condition, such that if $\gamma$ satisfies it, then 
+all $\gamma\circ \delta_j$ satisfy it, except for one.
+To add to the trouble, whatever the condition is,
+all $\gamma$ that do not reach all of $[m]-y$ have to satisfy it.
+The latter seems to make this impossible.
+Okay, part of the condition can be that $\gamma$ reaches $y$, but that is not
+enough. $\gamma$ can reach $y$ multiple times and more than once means more 
+than one $\gamma\circ \delta_j$ that reaches $\gamma$.
+We have to discount specific $\gamma$ that hit $y$ multiple times.
+A specific point $p$ with $p(\xi(y))=y$ works better, except that removing any 
+such specific point could land us in $V_p(i)$ for $i\neq x$ and $i\neq \xi(y)$.
+
+Can it be made that simple: just ask that $p(i)$ are reached from some other
+point as well? Adjacent in $y$ perhaps? i.e. $\gamma(a) = p$ and 
+$\gamma(a',\xi(y))\neq y$, while $\gamma(a',j) = p(j)$ otherwise for some $a'$?
+
+Looking at the examples, we more or less need the opposite.
+I mean, we start with the faces that have full $\Gamma_y$ and gradually but
+strategically remove elements to get dense $\beta$ in.
+
+\paragraph{suddenly noticed}
+We are asking that $f\circ \delta_k\of \bigcup_j V_j$ for all except one point.
+This is a very severe condition actually\dots what the hell does it mean?
+The removal of each point results in some $j\of [m]-y$ not being reached 
+anymore, except for the end of this chain. In other words, every point reached
+from the end of this chain is reached elsewhere.
+
+More of a clear out operation then.
+Could it be like this: there is a $j\of [m]$ such that $\beta \geq j$ and 
+$\gamma \leq j$? Nope! $\gamma$ cannot be limited that way.
+What about $\max_a(\gamma(a,i))<\min_a(\beta(i,a))$?
+On one hand, overlap is not optional.
+
+This has been the problem forever. I cannot get a solid grip on this part of the
+problem, no matter what I try.
+
+\paragraph{big picture}
+Why is this true intuitively?
+It is indeed a matter of using the pushout product multiple times.
+It is also this idea of having supplied a support point for these
+specific purposes.
+
+If we could show that:
+$U_{i\neq x}\cap V_{j\neq y} \to U_i$
+Was an acyclic cofibration, would that not be enough?
+A pushout of a coproduct of acyclic cofibrations,
+Isn't that what we get?
+
+Distribution for $U_i$ would work, but there could be disagreement precisely
+on tha simplices we need to glue in, as they aren't covered.
+
+But then, if we could show that for $i\neq x$
+$\bigcup_{j\neq y} U_i\cap V_j \to U_i$
+was an acyclic cofibration, we would be home right?
+
+We went down this road, and as long as $i\neq \xi(x)$
+we can use $y$ as support to glue everything in.
+
+The problem is $\bigcup_{j\neq y} U_\xi(y)\cap V_j \to U_{\xi(y)}$.
+Still, not having the other around might be a blessing here.
+I am unsure.
+
+There is no single edge that belongs to all of $U_\xi(y)\cap V_j$,
+but there is a system of interconnected edges.
+Could we come up with a different cover then, based on $\Gamma_y$?
+That would be nice wouldn't it?
+
+But I thought differently.
+Let $V'_j = \set{\tuplet{\alpha,\beta,\gamma}| \beta_j= \emptyset}$.
+Now see if $V_j \cap U_{\xi(y)} \to V'_j \cap U_{\xi(j)}$ are acyclic 
+cofibrations. Because $U_{\xi(y)} \subset V_j$ when $\xi(j)=\xi(y)$\dots
+we need some help if $\xi(j) = \xi(y)$ means $j=y$.
+Also $V_j \cap U_{\xi(y)} \to V'_j \cap U_{\xi(j)}$ aren't necessarily easier at
+all.
+
+We know that each $p\of \Gamma_y$ is missing from $V_p(i)$.
+What about $w_p\of \bigcup_{j\neq p(\xi(j)) } V_j\cap U_\xi(y)\to U_{\xi(y)}$ as 
+covering family?
+Well, those would be reason to worry about singletons in $\xi$, since we seem to 
+miss cover there.
+I think we may just run into the same trouble we got into with splitting $V_j$
+before: no reason to believe that we get a pushout of acyclic cofibrations,
+because the pushout won't uniquely specify how to extend each face. I guess
+this is why I use graded constructions in the first place.
+
+\paragraph{pushout product}
+This is a relevant insight. The morphism $\xi\of \simplex[m]\to\simplex[n]$ cuts
+the inclusion $h\of\horn_y[m]\to\simplex[m]$ into a sequence of cofribations,
+$h_i\of\cycle(\xi_i)\to \simplex(\xi_i)$ with one acyclic cofibration 
+$h_{\xi(y)}\of \horn_y(\xi_{\xi(y)})\to\simplex(\xi_{\xi(y)})$. All except $h_x$
+ are multiplied together, and glued back to $h$. Then the whole structure is 
+pulled back along $\horn_x[n]\to\simplex[n]$.
+
+The product $\prod_{i\neq x} h_x$ is glued at a point that is stable under 
+the pullback and because it is an acyclic cofibration, the result is one as
+well. The rest is more delcate however, because the glueing is non-trivial and
+because the pullback definately damages the other side.
+
+Maybe that is the trick: to index the operation by the points left out.
+It is the same set however\dots
+
+Ok, there is no pushout to make this product work.
+
+What if we cover $U_{\xi(y)}$ with maximal chains?
+It probabaly does not get finer than that.
+
+\section{16/6/19}
+A general way to show that an inclusion of simplicial sets $f\of A \to B$ is to 
+have a subset $C\of B$ of faces, such that for each $c\of C$ and each 
+$i<\dim(c)$ except one $c\circ \delta^{\dim(c)}_i\of C$. That way, we can glue
+in faces dimension by dimension and use that to proof it is an acyclic 
+cofibration.
+
+We are looking at this inclusion:
+\[(\bigcup_{i<n} U_{\delta^n_x(i)}) \cap (\bigcup_{j<m} V_{\delta^m_y(j)}) \to \bigcup_{i<n} U_{\delta^n_x(i)}\]
+The property that we want to use is reaching $y$ of $m$, but the faces of 
+$U_{\xi(y)}$ cannot do that. That is why we need the extra $\gamma$'s.
+
+So we trace out the difference, faces of $U_{\xi(i)}$ that aren't members of
+anything else. Firstly, all $z\of [m]-\set y$ have to be represented somewhere,
+but because $\xi_{\xi(y)}$ is excluded, all $z \of [m]$ such that 
+$\xi(z) = \xi(y)$ but $z\neq y$. 
+
+I think it is best to snake my way up in here:
+$\product{i\of[n-1]}\xi_{\delta^n_x(i)}$. Then at the end, add $y$ to finish
+everything off.
+
+$\gamma_y$ can contain multiple components, and that is the issue. The potential
+ maximum is $\prod_{i\neq x,i\neq \xi(y)} \xi_i$ and this we solve using
+ initial segments.
+
+\section{12/6/19}
+
+\paragraph{A better representation of the inflated simplices}
+Let $\xi\of [m]\to[n]$ and let $x\of[n]$. The inflated simplex $S\tuplet{\xi,x}$
+ for this pair consist of tuples of the following form. 
+\[\tuplet{
+  \alpha\of[a]\to[n+1], 
+  \beta\of\product{i\of[n]}(\alpha_{\delta^{n+1}_x(i)} \to \xi_{i}),
+  \gamma\of\alpha_x \to \product{i\of[n-1]}\xi_{\delta^n_x(i)}
+}\]
+The simplicial action is now obvious, because the partial functions can simply 
+be composed. The faces are injective maps, i.e. in 
+$\tuplet{\alpha,\beta,\gamma}$, $\beta$ and $\gamma$ are injective.
+
+The only missing data is that to be limited to $\horn_x[n]$--there must be an 
+$i\of[n-1]$ such that $\alpha_{\delta^{n+1}_x(\delta^n_x(i))}=\emptyset$. I keep
+ calling this family $U_i$:
+\[U_i = \set{\tuplet{\alpha,\beta,\gamma}\of S\tuplet{\xi,x}|\alpha_i = \emptyset}\]
+
+For the inflated $\horn_y[m]\to\simplex[m]$ we only get tuples that avoid the 
+value $y$. There are inclusions 
+$S\tuplet{\xi\circ \delta^m_j,x}\to S\tuplet{\xi,x}$ and we want to describe the
+ images, which are $V_j$:
+\[V_j = \set{\tuplet{\alpha,\beta,\gamma}\of S\tuplet{\xi,x}|\beta_j=\emptyset,\gamma_j=\emptyset }\]
+This ominous fibres over $j$ take advantage of the fact that we ultimately end 
+up in $[m]$.
+
+There is a third family: $p\of\product{i\of[n-1]}\xi_{\delta^n_x(i)}$. One 
+demand actually:
+\[W_p = \set{\tuplet{\alpha,\beta,\gamma}\of S\tuplet{\xi,x}|
+	\forall a\of\alpha_x.\beta(x,a)=x,\forall i\of[n-1], a\of\alpha_{\delta^n_x(i)}.\beta(\delta^n_x(i),a)\geq p(i)
+}\]
+
+See (28/9/17). We have a different representation, that may be easier to work 
+with, but the proof went like this. To prove the following map is an acyclic 
+cofibration:
+\[(\bigcup_{i<n} U_{\delta^n_x(i)}) \cap (\bigcup_{j<m} V_{\delta^m_y(j)}) \to \bigcup_{i<n} U_{\delta^n_x(i)}\]
+Let $A_k$ consist of all less than $k$ dimensional simplices 
+$s=\tuplet{\alpha,\beta,\gamma}\of\bigcup_{i<n} U_{\delta^n_x(i)}$ that satisfy 
+one of:
+\begin{itemize}
+\item $s\of \bigcup_{j<m} V_{\delta^m_y(i)}$--i.e. it is in from the start
+\item $\beta$ reaches $y$.
+\item $\gamma$ satisfies a special initial or final segment condition.
+This condition requires more explanation.
+\end{itemize}
+
 \section{14/1/19}
 It is difficult to solve the problems for arbitrary categories of generic cofirbations, but for mere families, things are more or less clear now. I mean, I was struggling to understand the morphisms given an arbitrary base category, but I never solved that problem, and I don't need to.
 
