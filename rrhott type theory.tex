@@ -83,12 +83,12 @@ Univalence is a desirable property for the universe of modest sets, because it i
 
 \newcommand\gen\gamma
 \subsection{Heyting bialgebras}
-\begin{defin} A category $\cat C$ is \emph{locally Cartesian closed} if for each object $X$ the slice $\cat C/X$ is Cartesian closed. A category is \emph{extensive} if is has finite coproducts and if $\cat C/(X+Y)$ is equivalent to $(\cat C/X)\times(\cat C/Y)$ for each pair of objects $X$ and $Y$. A \emph{Heyting bialgebra} is an extensive locally Cartesian closed category. \label{Heyting bialgebra}
+\begin{defin} A category $\cat C$ is \emph{locally cartesian closed} if for each object $X$ the slice $\cat C/X$ is cartesian closed. A category is \emph{extensive} if is has finite coproducts and if $\cat C/(X+Y)$ is equivalent to $(\cat C/X)\times(\cat C/Y)$ for each pair of objects $X$ and $Y$. A \emph{Heyting bialgebra} is an extensive locally cartesian closed category. \label{Heyting bialgebra}
 \end{defin}
 
 Heyting bialgebras which are posets are simply Heyting algebras. While Heyting algebras are models for constructive provability, the morphisms of the bialgebras directly model constructive proofs. As suggested by the Curry-Howard correspondence, the internal languages of these categories are a typed $\lambda$-calculus, know as \emph{extensional type theory}.
 
-\begin{remark} Heyting bialgebras are ordinarily simply called `extensive locally Cartesian closed categories' or `ELCCCs'. \end{remark}
+\begin{remark} Heyting bialgebras are ordinarily simply called `extensive locally cartesian closed categories' or `ELCCCs'. \end{remark}
 
 Extensional type theory hides a part of the necessary diagram chasing in the proofs of this paper. The following subsections provides a quick introduction to the type theory and the conventions of this paper.
 
@@ -124,7 +124,7 @@ The unit and counit induces a families of morphisms between the following famili
 Here $u[t/x]$ is the result of replacing every free occurrence of $x$ in $u$ with $t$; the type $V$ cannot contain $x$ as a free variable. Unit and co-units satisfy equations that ensure that $\pi_0\tuple{t,u}=t$ and $\pi_1\tuple{t,u}=u$ are valid for all terms $t$ and $u$.
 
 \newcommand\dprod{\Pi_}
-Let $\cat C$ be finitely complete and Cartesian closed. The functor $\dprod X\of\cat C/X\to \cat C$ sends each morphism $f\of Y\to X$ is the object $\set{g\of X\to Y| f\circ g = \id_X }$ of sections of $f$. It is the right adjoint of $X\ri$.
+Let $\cat C$ be finitely complete and cartesian closed. The functor $\dprod X\of\cat C/X\to \cat C$ sends each morphism $f\of Y\to X$ is the object $\set{g\of X\to Y| f\circ g = \id_X }$ of sections of $f$. It is the right adjoint of $X\ri$.
 
 Product types look like $\Pi x\of T.U$. The elements are $\lambda$-terms $\lambda x\of T.u$, such that $u[t/x]\of U[t/x]$ whenever $t\of T$. A $\lambda$-term $\lambda x\of T.u$ and a term $t\of T$ have an \emph{application} $(\lambda x\of T.u)(t)$. The context dependent interpretation satisfies:
 \[ \db{\Gamma\vdash\Pi x\of T.U} = \dprod {\db T}(\db{\Gamma,x\of T\vdash U}) \]
@@ -139,7 +139,7 @@ Here $V$ cannot depend on $x$. Unit and co-units satisfy equations that ensure t
 \newcommand\false{\mathtt{false}}
 \newcommand\bool{\mathtt{bool}}
 \newcommand\ttif{\mathtt{if}}
-Extensiveness means that $\cat C$ has coproducts, that $\cat C/0$ is equivalent to the terminal category and that $\cat C/(X+Y)\cong (\cat C/X)\times(\cat C/Y)$. In order to add coproduct to the language, only need the type $\bool$ that stands for the object $1+1$ and a way to introduce types and terms dependent on $\bool$.
+Extensiveness means that $\cat C$ has coproducts that $\cat C/0$ is equivalent to the terminal category and that $\cat C/(X+Y)\cong (\cat C/X)\times(\cat C/Y)$. In order to add coproduct to the language, only need the type $\bool$ that stands for the object $1+1$ and a way to introduce types and terms dependent on $\bool$.
 \[ \db{\Gamma\vdash t\of T}\times\db{\Gamma\vdash u\of U}\to\db{\Gamma,b\of\bool\vdash \ttif(b,t,u)\of\ttif(b,T,U)} \]
 The constants $\true$ and $\false$ denote the two global section of $1+1$. The function $\ttif$ is interpreted to satisfy the following equations.
 \[ \ttif(\true,t,u)=t\qquad\ttif(\false,t,u) = u\]
@@ -810,7 +810,7 @@ X[n]\ar[d]_f\ar[r]\pb & \dom\gen(M\s)[n] \ar[r]\ar[d]_{\gen(M\s)[n]}\pb & \dom(\
 Y[n] \ar[r]^(.4){\chi'[n]} \ar@/_2ex/[rr]_{\chi[n]} & \cof(\gen(M))^{\simCat/[n]\dual} \ar[r]^(.6){F\mapsto F(\id)} & \cod(\gen(M))
 }\]
 The diagram hold for every $f$ and shows that $\gen(M\s)$ belongs to $M\s$ at the same time. Hence $\gen(M\s)$ is a generic morphism of $M\s$.
-\end{proof}\hide{ Even if we cannot build $\cof(\gen(M))\s$ in $\cat S$, that does mean the pullback is not a modest morphism. }
+\end{proof}\hide{ Even if we cannot build $\cof(\gen(M))\s$ in $\cat S$ that does mean the pullback is not a modest morphism. }
 
 \subsection{Generic fibration}
 
@@ -1019,7 +1019,7 @@ The following \emph{category of assemblies} is the intended ambient category $\c
 \end{defin}
 
 
-\begin{lemma} The category of assemblies has all finite limits and colimits, is locally Cartesian closed, regular and has a natural number object. It is a Heyting category that also possesses a generic monomorphism.
+\begin{lemma} The category of assemblies has all finite limits and colimits, is locally cartesian closed, regular and has a natural number object. It is a Heyting category that also possesses a generic monomorphism.
 \end{lemma}
 
 \begin{proof} See \cite{MR2479466,MSC:8896618,RealCats}. \end{proof}
@@ -1126,7 +1126,7 @@ The injective objects, i.e.\ the complexes, for these 5 horn inclusions are prec
 There is a generic modest fibration in $\Asm^{\simCat_0\dual}\f$ for the same reason that there is a generic modest fibration in $\Asm\s\f$ (theorem \ref{univalent universe}). Pullbacks of fibrations are preserved by the quotient functor $Q\of \Asm^{\simCat_0\dual}\f \to\Asm\ex$ because they are examples of homotopy pullbacks \cite{GJSHT}. Therefore $\gen(M\s\f)$ is a generic family of modest sets in $\Asm\ex$.
 \end{proof}
 
-\begin{remark} The effective topos is the exact completion of the category of partitioned assemblies, which are the projective object of the category of assemblies. The category of partitioned assemblies is not Cartesian closed and for that reason partitioned modest sets are not a complete internal category of the effective topos. The effective topos has no generic modest morphism \cite{MR1023803}.
+\begin{remark} The effective topos is the exact completion of the category of partitioned assemblies, which are the projective object of the category of assemblies. The category of partitioned assemblies is not cartesian closed and for that reason partitioned modest sets are not a complete internal category of the effective topos. The effective topos has no generic modest morphism \cite{MR1023803}.
 \end{remark}
 
 

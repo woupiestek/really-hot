@@ -82,7 +82,7 @@ The category of assemblies has a number of useful properties which we will menti
 \begin{lemma} The category of assemblies\dots
 \begin{itemize}
 \item is finitely complete and cocomplete;
-\item is locally Cartesian closed, regular and extensive;
+\item is locally cartesian closed, regular and extensive;
 \item has a natural number object $\nno$;
 \end{itemize}\label{essential_properties}%hier: werk de bad boxes weg
 \end{lemma}
@@ -95,7 +95,7 @@ This section sketches a type theory which can be soundly interpreted in $\Asm$ t
 \newcommand\of{\mathord{\ :\ }}
 The internal language of $\Asm$ is a dependent type theory. Types are interpreted as assemblies and terms are interpreted as morphism of assemblies. The statement $x\of\tau$ declares that $x$ is of type $\tau$. If $f:S\to T$ is a morphism of assemblies and $S$ and $T$ are interpretations of types $\sigma$ and $\tau$, then $f(x)$ is a term and $x\of \sigma$ implies $f(x)\of \tau$.  
 
-The internal language allows for various type constructions, in particular products like the \emph{terminal type} $1$, the \emph{binary product} $\tau\times\sigma$ and the \emph{arrow types} $\tau\to\sigma$ all with the usual semantics. Because $\Asm$ is locally Cartesian closed, types can also come in families indexed over other types: $\set{\tau_i|i\of \sigma}$ and these families have indexed products $\prod_{i\of \sigma} \tau_i$ and coproducts $\coprod_{i\of \sigma} \tau_i$. Finally, systems of equations define subtypes of any type. \[\set{x\of\tau| f(x)=g(x)\land h(x)=k(x)} \] Subtypes correspond to subobjects.
+The internal language allows for various type constructions, in particular products like the \emph{terminal type} $1$, the \emph{binary product} $\tau\times\sigma$ and the \emph{arrow types} $\tau\to\sigma$ all with the usual semantics. Because $\Asm$ is locally cartesian closed, types can also come in families indexed over other types: $\set{\tau_i|i\of \sigma}$ and these families have indexed products $\prod_{i\of \sigma} \tau_i$ and coproducts $\coprod_{i\of \sigma} \tau_i$. Finally, systems of equations define subtypes of any type. \[\set{x\of\tau| f(x)=g(x)\land h(x)=k(x)} \] Subtypes correspond to subobjects.
 %citeer iets?
 
 Because $\Asm$ is extensive, types also have various coproducts, like the \emph{initial type} 0, the \emph{binary coproduct} $\tau+\sigma$. Regularity gives existential quantification over subtypes: if $\alpha$ is a subtype of $\sigma\times\tau$, then $\exists x\of\sigma.\alpha$ is a subtype of $\tau$. By combining existential quantification with the other type constructors, we get \emph{finitary disjunctions} $\bot$, $\alpha\vee \beta$, \emph{implications} $\alpha\to \beta$ and \emph{universal quantification} $\forall x\of\sigma.\alpha$ of subtypes. In fact, $\Asm$ is a Heyting category, i.e.\ it provides a sound interpretation of first order constructive logic if each subtype declarations $x\of \alpha$ is treated as a sentence $\alpha(x)$.
@@ -167,9 +167,9 @@ We now enter the internal language of $\Asm$ (see subsection \ref{internal}) to 
 \begin{proof} Let $G:\cat D\to\cat E$ be an opfibration and let $D:\cat C\to \cat \cat D$ and $E:F/\cat D \to \cat E$ satisfy $GD=EI$. Define $H:F/\cat D\to \cat C$ by $H(f:Fc\to d) = E(f,\id_{d})\cdot D(c)$ for objects of $\cat B^\sier$. For $(g,g'):(f:Fc\to d) \to (f':Fc'\to d')$ let $H(g,g') = E(g,g')_{H(f)}$. The functor $H$ satisfies $HI(b) = G(b)$ and $GH(f) = G(E(f,\id_{Fc})\cdot D(c))$.
 \end{proof}
 
-\begin{lemma} The category $\Asm^{\cat B}$ has all finite limits and colimits and is locally Cartesian closed and regular. \end{lemma}
+\begin{lemma} The category $\Asm^{\cat B}$ has all finite limits and colimits and is locally cartesian closed and regular. \end{lemma}
 
-\begin{proof} Finite limits is trivial with lemma \ref{disc1}. The functor $\cat C \mapsto \cat C^\sier$ preserves all coproducts because the category $\set\to$ is connected. If a discrete opfibration $F:\cat C\to\cat D$ is a regular epimorphism of objects, then so is $F^\sier$, which explains coequalizers and regularity. Since every slice category of $\Asm^{\cat B}$ is another category of the form $\Asm^{\cat C}$ it suffices to show Cartesian closure. 
+\begin{proof} Finite limits is trivial with lemma \ref{disc1}. The functor $\cat C \mapsto \cat C^\sier$ preserves all coproducts because the category $\set\to$ is connected. If a discrete opfibration $F:\cat C\to\cat D$ is a regular epimorphism of objects, then so is $F^\sier$, which explains coequalizers and regularity. Since every slice category of $\Asm^{\cat B}$ is another category of the form $\Asm^{\cat C}$ it suffices to show cartesian closure. 
 
 Let $F:\cat C\to\cat B$ and $G:\cat D\to\cat B$ be opfibrations. The opfibration $G^F:\cat D^{\cat C}_{\cat B}$ is defined as follows. The objects of $\cat D^{\cat C}_{\cat B}$ are pairs $(b,H)$ where $b$ is an object of $\cat B$ and $H:b/\cat B \times_{\cat B} \cat C\to \cat D$ is a functor that commutes with $\cod\times F:b/\cat B \times_{\cat B} \cat C \to \cat B$ and $G:\cat D \to \cat B$. A morphism $(b,H) \to (b', H')$ is a morphism $f:b\to b'$ such that $H(x\circ f,Y) = H'(x,Y)$. This is an opfibration because for each object $(b,H)$ and each $f:b\to b'$, $(b,H\circ f\ri)$, where $f\ri$ is composition with $f$ to the right, is the unique lifting.
 
@@ -303,7 +303,7 @@ By definition $f$ is $a$-injective if the canonical morphism $(a^*,f_!):\nat(E,I
 
 \begin{theorem} Every family of morphisms $a$ has a generic modest $a$-injective. \label{geninjmod} \end{theorem}
 
-\begin{proof} The functor $S$ is defined by a combination of limits and colimits. Pullbacks preserve all of them because $\Asm^{\cat B}$ is locally Cartesian closed. The factorization with $S$ above is therefore stable under pullback, i.e.\ if $f: A\to B$ is the pullback of $g:C\to D$ along some $h:B\to D$, then $S(f):S(A)\to B$ is the pullback of $S(g):S(C) \to D$.
+\begin{proof} The functor $S$ is defined by a combination of limits and colimits. Pullbacks preserve all of them because $\Asm^{\cat B}$ is locally cartesian closed. The factorization with $S$ above is therefore stable under pullback, i.e.\ if $f: A\to B$ is the pullback of $g:C\to D$ along some $h:B\to D$, then $S(f):S(A)\to B$ is the pullback of $S(g):S(C) \to D$.
 \[\xymatrix{
 A\ar[r]_{\sigma(f)} \ar@/^2ex/[rr]^{f}\ar[d]\pb & S(A) \ar[r]_{S(f)}\ar[d]\pb & B\ar[d]^h\\
 C\ar[r]^{\sigma(g)} \ar@/_2ex/[rr]_{g} & S(C) \ar[r]^{S(g)} & D
@@ -330,7 +330,7 @@ Let $f:X\to Y$ be the pullback of $\rat U$ along $\chi:Y\to \rat \pers$. Let $g:
 The following is a diagram chasing way to find that morphism.
 Work inside $\Asm^{\cat B}/Y$, where we have actual isomorphisms $\alpha':f\to \chi\ri(\rat U)$ and $\beta':S(f)\to\chi\ri(S(\rat U))$. 
 The morphism $\alpha'\circ g\circ (\beta')^{-1}:\chi\ri(S(\rat U)) \to \chi\ri(\rat U)$ has a transpose $\gamma:1\to \chi\ri(\rat U)^{\chi\ri(S(\rat U))}$. 
-Local Cartesian closure implies that the canonical morphism $\kappa:\chi\ri(\rat U^{S(\rat U)})\to \chi\ri(\rat U)^{\chi\ri(S(\rat U))}$ is an isomorphism.
+Local cartesian closure implies that the canonical morphism $\kappa:\chi\ri(\rat U^{S(\rat U)})\to \chi\ri(\rat U)^{\chi\ri(S(\rat U))}$ is an isomorphism.
 The transpose $(\kappa^{-1}\circ\gamma)^t:\chi\to \rat U^{S(\rat U)}$ in $\Asm^{\cat B}/\rat\pers$ is what we are looking for.
 
 Note that $h\circ \sigma(f) = \id_X$. For this reason $(\kappa^{-1}\circ\gamma)^t$ actually goes to $\rat\pers^S$, which only contains the right inverses of sections of $\sigma(\rat U)$.
@@ -429,7 +429,7 @@ The factorization in the proof above turns the implication in lemma \ref{Reedy} 
 
 \begin{prop} A monomorphism $f:X\to Y$ is a cofibration if and only if it is decidable whether simplices of $Y$ are in $X$ and whether simplices outside of $X$are degenerate. \label{charcof} \end{prop}
 
-\begin{proof} Lemma \ref{Reedy} shows the `if' direction. For `only if' factor $f:X\to Y$ as in the proof of lemma \ref{factor1} to get (another) cofibration $g:X\to Z$ and an acyclic fibration $h:Z\to Y$. Because $\id_Y\circ f = h\circ g$ there is a $k:Y\to Z$ such that $h\circ k = \id_Y$ and $k\circ f = g$ by the global lifting property. Reasoning internally, for each simplex $y$ of $Y$, $k(y)=(a,b,c,d)$. The simplex $y$ is in the image of $x$ if and only if $b=\top$ and this is decidable. A simplex $y$ for which $b\neq \top$ is nondegenerate if and only if $a=\id$ for the following reasons. Since $k$ is a section of $h$ it is a monomorphism, and monomorphisms preserve nondegeneracy. The morphism $k$ commutes with the actions of morphisms in $\simcat$ and degenerates of $Z$ outside of the image of $g$ have $a\neq\id$.
+\begin{proof} Lemma \ref{Reedy} shows the `if' direction. For `only if' factor $f:X\to Y$ as in the proof of lemma \ref{factor1} to get (another) cofibration $g:X\to Z$ and an acyclic fibration $h:Z\to Y$. Because $\id_Y\circ f = h\circ g$ there is a $k:Y\to Z$ such that $h\circ k = \id_Y$ and $k\circ f = g$ by the global lifting property. Reasoning internally, for each simplex $y$ of $Y$, $k(y)=(a,b,c,d)$. The simplex $y$ is in the image of $x$ if and only if $b=\top$ and this is decidable. A simplex $y$ for which $b\neq \top$ is nondegenerate if and only if $a=\id$ for the following reasons. Since $k$ is a section of $h$ it is a monomorphism and monomorphisms preserve nondegeneracy. The morphism $k$ commutes with the actions of morphisms in $\simcat$ and degenerates of $Z$ outside of the image of $g$ have $a\neq\id$.
 \end{proof}
 
 \section{Kan complexes}
@@ -445,7 +445,7 @@ W\times Z \ar[r] \ar@/_2ex/[rr]_{f\times\id} & \bullet \ar[r]^(.4){f\otimes g} &
 }\]
 \end{defin}
 
-Because $\sAsm$ is Cartesian closed, the pushout product with a fixed morphism has a right adjoint.
+Because $\sAsm$ is cartesian closed, the pushout product with a fixed morphism has a right adjoint.
 
 \begin{defin} For each pair of morphisms $f:W\to X$ and $g:Y\to Z$ the \emph{pullback exponential} $g^f: $ is the unique factorization of the span of the span $(Y^f, g^X): $ though the pullback of $Z^f$ and $g^W$. 
 \[\xymatrix{
@@ -501,7 +501,7 @@ While acyclic fibrations and cofibrations are trivially weak equivalences, lemma
 
 \begin{proof} By lemma \ref{factor1} $f$ factors as an acyclic fibration $a:Z\to Y$ and cofibration $b:X\to Z$. The morphism $b' = g\circ a$ is a left inverse of $b'$ and $a\circ b\circ b' = f\circ g\circ a$ is homotopic to $a$ thanks to $h\circ(\id_{\Delta[1]}\times a)$. The morphism $a$ reflects this homotopy because it is an acyclic fibration.
 
-Let $c_1$ be the cycle $1+1\to \Delta[1]$. The pushout product $c_1\otimes b$ is a cofibration by lemma \ref{pushprod}. The domain of $c_1\otimes b$ is $W=\Delta[1]\times X +_{X+X} (Z+Z)$, and there is a morphism $d=(b\circ\pi_1,(\id_Z,b\circ b')):W\to Z$ such that $a\circ d = h\circ (\id_{\Delta[1]}\times a)\circ c_1\otimes b$.
+Let $c_1$ be the cycle $1+1\to \Delta[1]$. The pushout product $c_1\otimes b$ is a cofibration by lemma \ref{pushprod}. The domain of $c_1\otimes b$ is $W=\Delta[1]\times X +_{X+X} (Z+Z)$ and there is a morphism $d=(b\circ\pi_1,(\id_Z,b\circ b')):W\to Z$ such that $a\circ d = h\circ (\id_{\Delta[1]}\times a)\circ c_1\otimes b$.
 \[\xymatrix{
 X+X\ar[r]^{a+a} \ar[d]_{c_1\times \id} \po & Z+Z\ar[d] \ar@/^3ex/[drr]^{(\id,b\circ b')} \\
 \Delta[1]\times X \ar[r]\ar[dr]_{\id\times g}\ar@/^4ex/[rrr]^{b\circ\pi_1} & W \ar[rr]_d \ar[d]^{c_1\otimes b} && Z\ar[d]^a \\
@@ -598,7 +598,7 @@ Lemma \ref{drisac} tells us that $k$ is acyclic because it is a deformation retr
 
 The second case we tackle is where $g$ and $g\circ f$ are weak equivalences. 
 
-First assume that $g$ and $g\circ f$ are acyclic fibrations. By proposition \ref{factor1}, $f$ factors as an acyclic fibration $h:W\to Y$ following a cofibration $k:X\to W$. Because $(g\circ f)\circ \id = (g\circ h)\circ k$ and $g\circ h$ is an acyclic fibration, $k$ has a left inverse $k':X\to W$ which satisfies $g\circ f\circ k' = g\circ h$. The pushout product of the cycle $c_1:1+1\to \Delta[1]$ with $k$ is a cofibration by corollary \ref{pushprod}. The domain of $c_1\otimes k$ is the pushout $V=\Delta[1]\times X+_{X+X}(W+w)$, and there is a morphism $a=(k\circ \pi_1,\id_W,k\circ k'):V\to W$ such that $h\circ a = h\circ \pi_1\circ (c_1\otimes k)$. The filler $\Delta[1]\times W\to W$ is a homotopy between $\id_W$ and $k\circ k'$. By lemma \ref{drisac} $k$ is an acyclic cofibration and $f$ is a weak equivalence.
+First assume that $g$ and $g\circ f$ are acyclic fibrations. By proposition \ref{factor1}, $f$ factors as an acyclic fibration $h:W\to Y$ following a cofibration $k:X\to W$. Because $(g\circ f)\circ \id = (g\circ h)\circ k$ and $g\circ h$ is an acyclic fibration, $k$ has a left inverse $k':X\to W$ which satisfies $g\circ f\circ k' = g\circ h$. The pushout product of the cycle $c_1:1+1\to \Delta[1]$ with $k$ is a cofibration by corollary \ref{pushprod}. The domain of $c_1\otimes k$ is the pushout $V=\Delta[1]\times X+_{X+X}(W+w)$ and there is a morphism $a=(k\circ \pi_1,\id_W,k\circ k'):V\to W$ such that $h\circ a = h\circ \pi_1\circ (c_1\otimes k)$. The filler $\Delta[1]\times W\to W$ is a homotopy between $\id_W$ and $k\circ k'$. By lemma \ref{drisac} $k$ is an acyclic cofibration and $f$ is a weak equivalence.
 
 Next assume that $g$ and $g\circ f$ are acyclic cofibrations. The monomorphism $g$ reduces decisions on membership and degeneracy of a simplex $y$ in $Y$ to the same questions about $g(y)$ in $Z$. Therefore $f$ is a cofibration. Because $X$, $Y$ and $Z$ are fibrant, $g$ and $g\circ f$ are deformation retracts. Construction of left inverses and homotopies of $f$ from those of $g$ and $g\circ f$ is easy. They prove that $f$ is a deformation retract and acyclic by lemma \ref{drisac}.
 

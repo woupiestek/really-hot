@@ -22,7 +22,7 @@ category is an elementary topos. All the examples are in fact toposes.
 
 Let $m\of X\to Y$ be any monic. Needed are $Y_D$ and $Y_E$ plus morphisms
 $p,q\of Y_D\to Y_E$, $r\of Y_D\to D$ and $s\to Y_E \to E$ that commute with
-the domain and codomain maps, and that somehow classify the monic.
+the domain and codomain maps and that somehow classify the monic.
 Part of the formula is letting $Y_D$ just be a cover of $Y$ with tuplets
 $\tuplet{x\of D_0,y\of D[x],z\of D[x]\to Y}$ and $Y_E$ be commutative diagrams
 $e\to m$ where $e$ is a $D$-epic, possibly together with $y\of D[\dom(e)]$, so 
@@ -51,7 +51,7 @@ then the quotient of that equivalence relation. What exactly could we be missing
 then?
 
 \paragraph{counter}
-I suspect that somehow a subterminal could be so great, that no $D$ object 
+I suspect that somehow a subterminal could be so great that no $D$ object 
 properly covers it, dispite density of $d$. Take $\mathrm{Set}/\omega$. Finite colimits 
 of representables are candidate for $D$, they surely fit every bill. The whole
 density thing is easy to arrange. There is no way to cover the terminal object
@@ -77,7 +77,7 @@ Actually, first cover $Y$, than cover the domain of the pullback of $m$ and use
 fullness to argue that this must be a $D$-morphism. Does that work?
 
 The unique lifting properties of epics versus monics are crucial here.
-With their help, the pullback of $m$ is already classified, and $m$ soon follows
+With their help, the pullback of $m$ is already classified and $m$ soon follows
 by diagram chasing. There is a map to the monic factor of the universal 
 $D$-morphism. 
 
@@ -132,7 +132,7 @@ Secondly, there is an operation that takes this data and generates a new member
 of the diagram: take the pushout $g$ and compose with $l'$.
 Finally, the finality of $l(f)$ forces $g$ to factor through $r(f)$
 
-A number of properties is desired fo the target diagram of generators, and
+A number of properties is desired fo the target diagram of generators and
 obtained only through combining different structure, but what we need is:
 \begin{itemize}
   \item closure under composition of the left morphisms
@@ -229,7 +229,7 @@ $\min\beta$ to use as supporting points.
 \end{align*}
 The remaining faces of $U_{\xi(y)}\cap W-V^y$ can all be extended with extra 
 points to become member of these difference sets. I didn't want to use $y$ in 
-these cases, because we don't want the support point to be removeable, and
+these cases, because we don't want the support point to be removeable and
 $y$ is too specific.
 
 I think we have all faces we need now, but there is still a problem.
@@ -274,7 +274,7 @@ present except the one that fails to reach $y$.
 
 For $(U_{\xi(i)}-W-V)$ it gets a bit more complicated. Most $f\circ \delta_y$
 are included because of reasons outlined above. The problem cases are 
-$f-\max(\beta(f))$, which remains excluded, and $f-\max(\beta(f))(i)$.
+$f-\max(\beta(f))$, which remains excluded and $f-\max(\beta(f))(i)$.
 These never fall into $V_j$ because $\max(\beta(f))(i)$ itself is still there.
 If they don't fall into $W$, then we add the new $\max(\beta(f-y))$ to get a
 face with the same dimension but a lower score because points in $\Gamma$ are
@@ -317,7 +317,7 @@ condensation, reduction, contraction, subtraction, diminution?
 \section{17/6/19}
 Let's do this again. The set 
 $\gamma_y = \set{ a\of \alpha_i | \gamma(a,\xi(y))=y }$ 
-can contain mutliple elements, and we have to be careful that they don't get in
+can contain mutliple elements and we have to be careful that they don't get in
 each others way. Just consider the set of injections into
  $\product{i\of[n]-\set{x,\xi(y)}}\xi_i$.
 There must be some reason we cannot pick the least element here and just use
@@ -395,7 +395,7 @@ point, fuck!
 For most faces, the strategy is to add points to $\gamma$ until the conditions 
 are satsified. 
 
-Pick a point $p\of\Gamma_y$. We know it does not belong to $V_p(i)$, and we need
+Pick a point $p\of\Gamma_y$. We know it does not belong to $V_p(i)$ and we need
 to be careful about this fact.
 
 I think there should be two conditions to ensure $\gamma$ gets full before 
@@ -463,7 +463,7 @@ But then, if we could show that for $i\neq x$
 $\bigcup_{j\neq y} U_i\cap V_j \to U_i$
 was an acyclic cofibration, we would be home right?
 
-We went down this road, and as long as $i\neq \xi(x)$
+We went down this road and as long as $i\neq \xi(x)$
 we can use $y$ as support to glue everything in.
 
 The problem is $\bigcup_{j\neq y} U_\xi(y)\cap V_j \to U_{\xi(y)}$.
@@ -498,7 +498,7 @@ This is a relevant insight. The morphism $\xi\of \simplex[m]\to\simplex[n]$ cuts
 the inclusion $h\of\horn_y[m]\to\simplex[m]$ into a sequence of cofribations,
 $h_i\of\cycle(\xi_i)\to \simplex(\xi_i)$ with one acyclic cofibration 
 $h_{\xi(y)}\of \horn_y(\xi_{\xi(y)})\to\simplex(\xi_{\xi(y)})$. All except $h_x$
- are multiplied together, and glued back to $h$. Then the whole structure is 
+ are multiplied together and glued back to $h$. Then the whole structure is 
 pulled back along $\horn_x[n]\to\simplex[n]$.
 
 The product $\prod_{i\neq x} h_x$ is glued at a point that is stable under 
@@ -535,7 +535,7 @@ I think it is best to snake my way up in here:
 $\product{i\of[n-1]}\xi_{\delta^n_x(i)}$. Then at the end, add $y$ to finish
 everything off.
 
-$\gamma_y$ can contain multiple components, and that is the issue. The potential
+$\gamma_y$ can contain multiple components and that is the issue. The potential
  maximum is $\prod_{i\neq x,i\neq \xi(y)} \xi_i$ and this we solve using
  initial segments.
 
@@ -572,7 +572,7 @@ demand actually:
 	\forall a\of\alpha_x.\beta(x,a)=x,\forall i\of[n-1], a\of\alpha_{\delta^n_x(i)}.\beta(\delta^n_x(i),a)\geq p(i)
 }\]
 
-See (28/9/17). We have a different representation, that may be easier to work 
+See (28/9/17). We have a different representation that may be easier to work 
 with, but the proof went like this. To prove the following map is an acyclic 
 cofibration:
 \[(\bigcup_{i<n} U_{\delta^n_x(i)}) \cap (\bigcup_{j<m} V_{\delta^m_y(j)}) \to \bigcup_{i<n} U_{\delta^n_x(i)}\]
@@ -587,17 +587,17 @@ This condition requires more explanation.
 \end{itemize}
 
 \section{14/1/19}
-It is difficult to solve the problems for arbitrary categories of generic cofirbations, but for mere families, things are more or less clear now. I mean, I was struggling to understand the morphisms given an arbitrary base category, but I never solved that problem, and I don't need to.
+It is difficult to solve the problems for arbitrary categories of generic cofirbations, but for mere families, things are more or less clear now. I mean, I was struggling to understand the morphisms given an arbitrary base category, but I never solved that problem and I don't need to.
 
 \begin{enumerate}
-	\item Start with a family of \emph{generic cofirbations} and a family of small objects, and create a new category of pushouts of generic morphisms with small domains.
+	\item Start with a family of \emph{generic cofirbations} and a family of small objects and create a new category of pushouts of generic morphisms with small domains.
 	\item Create a new diagram whose objects are witnessed by zigzag chains, while its morphisms are limited to specific forms.
 	\item The density comonad for the latter category is the factorisation system.
 \end{enumerate}
 
 Now I think the zig zag chains don't actually help as witnesses. The codomains don't have to be small. So we need something like small joined with a finite number of codomains.
 
-Here is the problem: I have a construction I don't know how to internalize, and an internalized structure that doesn't fit into my proof. 
+Here is the problem: I have a construction I don't know how to internalize and an internalized structure that doesn't fit into my proof. 
 
 \paragraph{What works?}
 There is a finite composition $X_0\to\dotsm\to X_n$ starting with a small $X_0$ and a sequence of generic cofibrations $a_0,\dotsc,a_n$ and morphism $f_i\of \dom(a_i)\to X_0$ such that the morphism $X_i\to X_{i+1}$ is the pushout of $a_i$.
@@ -606,9 +606,9 @@ This recursive type may not exist in the general sort of category we are looking
 
 In the motivating example this is not even a problem. The codomains are representable--as in 'could hardly be more finite.' This is the simplest case: there is a dense full subcategory (full diagram?) which contains the domains and codomains of the generic cofibrations.
 
-Witnessing of cofibrance consist of breaing up a morphism into components, and showing each of them is a pushout. I believe we don't need retracts or transfinite compositions at this stage.
+Witnessing of cofibrance consist of breaing up a morphism into components and showing each of them is a pushout. I believe we don't need retracts or transfinite compositions at this stage.
 
-So, we end up with a diagram of cofibrations and certain simple morphism between them, which has a dense diagram of domains, and is directed. Now the density comond provides morphisms which factor as cofirbations followed by fibrations.
+So, we end up with a diagram of cofibrations and certain simple morphism between them, which has a dense diagram of domains and is directed. Now the density comond provides morphisms which factor as cofirbations followed by fibrations.
 
 Interesting note: the 'full' diagrams and the 'families' are the final and initial object in the category of diagrams with the same objects, which is why we need no distinction.
 
@@ -624,13 +624,13 @@ For starts we could simply consider the straightforward morphisms that preserve 
 
 The problem with transfinite composistion of cofibrations is that the codomains of the generic cofibrations don't ordinarily have to be small. We run out of small object too soon, which is a problem, because it means we cannot keep the catgeory of generic cofibrations small by keeping the domains small.
 
-The inifitrary chains should be easier to work with than a collection of finite chains of all length, inclusing giving a simpler definition of morphism. On the other hand, we now need more morphisms to keep the factorization clean. Still, I'd say the simplest proposal is good enough. Ignore the zigzags, and allow reindexing. Given $\tuplet{a,b,c,d}$ as above, and a similar tuplet $\tuplet{a',b',c',d'}$, then a morphism $\tuplet{a,b,c,d}\to\tuplet{a',b',c',d'}$ is a morphism $f\of a \to a'$ with a zero preserving increasing morphism $g\of N\to N$ that commutes with $b$:
+The inifitrary chains should be easier to work with than a collection of finite chains of all length, inclusing giving a simpler definition of morphism. On the other hand, we now need more morphisms to keep the factorization clean. Still, I'd say the simplest proposal is good enough. Ignore the zigzags and allow reindexing. Given $\tuplet{a,b,c,d}$ as above and a similar tuplet $\tuplet{a',b',c',d'}$, then a morphism $\tuplet{a,b,c,d}\to\tuplet{a',b',c',d'}$ is a morphism $f\of a \to a'$ with a zero preserving increasing morphism $g\of N\to N$ that commutes with $b$:
 \[
 \xymatrix{
 C\ar[r]^a\ar@{.>}[d]_{f_0} & D \ar[r]^b\ar@{.>}[d]^{f_1} & \nno\ar@{.>}[d]^g\\
 C'\ar[r]_{a'} & D'\ar[r]_{b'} & \nno 
 }\]
-So, the zero presevring increasing morphism emphasizes that we care about the result of the infinite composition, but the individual steps aren't important. The zigzag is evidence for the left lifting property, and it is unique when cofibrations are monic, but this evidence is ignored by the morphism, as it doesn't matter for the result.
+So, the zero presevring increasing morphism emphasizes that we care about the result of the infinite composition, but the individual steps aren't important. The zigzag is evidence for the left lifting property and it is unique when cofibrations are monic, but this evidence is ignored by the morphism, as it doesn't matter for the result.
 
 The reason tranfinite compositions can be composed is that we are working inside an exact ambient category $\ambient$. I.e. $D_\infty$ is a quotient of $D$, by an inductively defined equivalence relation based on the chain of morphisms $D_i\to D_{i+1}$. This defines a new diagram if transfinite compositions in the ambient category.
 
@@ -646,7 +646,7 @@ Yeah, we are actually ignoring the tranfinite composition itself. We need to tre
 Take the finite zigzag and reverse the order. The result is a diagram of simplicial objects coming from another diagram of cofibrations. Once we pay attention to the actual compositions, however, the zigzag can be safely ignored. They are just evidence that the whole composition taken together is a cofibration.
 
 \paragraph{Recap}
-Given a diagram of generic cofibrations and a dense diagram, we first combine this into a diagram of generic extensions of small objects, and then we take tranfinite compositions as above. We (may) then still need to add identities of small objects as cofibrations. The result is a diagram whose density comonad is supposed to be a factorisation system. How would that work?
+Given a diagram of generic cofibrations and a dense diagram, we first combine this into a diagram of generic extensions of small objects and then we take tranfinite compositions as above. We (may) then still need to add identities of small objects as cofibrations. The result is a diagram whose density comonad is supposed to be a factorisation system. How would that work?
 
 The problem is that after factoring $f$ as $r(f)\circ l(f)$, $r(f)$ should have the right lifting property. Because any generic cofibration $c$ has a small codomain, any morphism $c\to r(f)$ should factor through some finite--or at least small--approximation of the factorisation. The pushout is simply another such finite approximation.
 
@@ -662,7 +662,7 @@ We allowed pushouts and compositions as morphisms. Then added morphisms from the
 
 The challenge is directedness. This is automatic for sums, but parallel pairs must have coequalizers too. That is the hard part. Morphism have to be limited to eliminate parallel pairs that have no coequalizer. However, the generic diagram may contain morphisms that complicate matters.
 
-I should write what I know, and perhaps what I need. If I cannot tell if my construction can handle arbitrary diagrams, just do the discrete version. If I cannot extend fibrations constructively, just do it classically. Leave it to other to work out the full idea.
+I should write what I know and perhaps what I need. If I cannot tell if my construction can handle arbitrary diagrams, just do the discrete version. If I cannot extend fibrations constructively, just do it classically. Leave it to other to work out the full idea.
 
 \paragraph{Generic parallels}
 I don't really know what to do with these anyway. Meanwhile, the idea of a finite composition of pushouts of generic cofibrations still works well.
@@ -675,7 +675,7 @@ Recap: any diagram in the category of arrows can be combined with a diagram of s
 The zigzags solve the problem that all domains are small, but codomains don't have to be. Meanwhile, they don't solve the problem of missing identities and introduce the problem of to define morphisms between them.
 
 \paragraph{Compositions first}
-I have been considering this, but it looks like it cannot work out. Suppose we have a sequence of generic cofibrations $a_i$ whose pushouts compose to form a new cofibration. Vital data about this composition is part of the pushouts, especially about what parts of the domain of $a_i$ are covered by the domains of $a_j$ for $j<i$, and which are part of the domain of the full composition.
+I have been considering this, but it looks like it cannot work out. Suppose we have a sequence of generic cofibrations $a_i$ whose pushouts compose to form a new cofibration. Vital data about this composition is part of the pushouts, especially about what parts of the domain of $a_i$ are covered by the domains of $a_j$ for $j<i$ and which are part of the domain of the full composition.
 
 
 Perhaps this can be mitigated with the transfinite composition diagrams.
@@ -694,7 +694,7 @@ Why do I like this? Because I expect that these definition simply the definition
 
 \paragraph{Finite colimit options}
 The transfinite composition is a kind of diagram. What if we use a diagram over small categories instead?
-We get a kind of closure under small colimits, that could kill two bord with one stone.
+We get a kind of closure under small colimits that could kill two bord with one stone.
 
 The idea is that the diagrams we are interested in are exists in the category of cofibrations and zigzag morphisms. 
 
@@ -718,7 +718,7 @@ It now makes sense to me to break up the construction along the way Garner outli
 
 A diagram in the category of arrows looks like this: $ A\stackrel{a}{\to} B\to I_0$, where $I_0$ is the object of objects of an internal category and the arrows in $I_1$ act on both $A$ and $B$. A dense diagram will look like this: $S \to J_0$. So, what we are looking for is tuples:
 \[K_0 = \set{\tuplet{i\of I_0,j\of J_0,f\of A_i\to S_j}}\]
-Which exists in locally Cartesian closed categories. This is just the object of objects of the category. The morphisms are like:
+Which exists in locally cartesian closed categories. This is just the object of objects of the category. The morphisms are like:
 \[K_1 = \set{\tuplet{i\of I_1,j\of J_1,
 c\of A_{\cod(i)} \to S_{\cod(j)},
 d\of A_{\dom(i)} \to S_{\dom(j)}
@@ -742,9 +742,9 @@ The idea is now that $(f^c)\otimes c$ has isomorphic domains to $f$ and is a pus
 
 Let think both parts through. 
 \paragraph{sharing domains}
-The diagram $S$ being directed may be important now too, and even a condition not met yet by the construction. My feeling is that if we have two pushouts $p_*(a_i)$ and $q_*(a_j)$ we need to factor those through some sort of union of their domains. Even if this is already possible in $S$, the new diagram $c$ breaks up those unions.
+The diagram $S$ being directed may be important now too and even a condition not met yet by the construction. My feeling is that if we have two pushouts $p_*(a_i)$ and $q_*(a_j)$ we need to factor those through some sort of union of their domains. Even if this is already possible in $S$, the new diagram $c$ breaks up those unions.
 
-I think the best solution is to close the diagram $a$ under finite coproducts first and only then get to the dense and directed domains. It should be finite coproducts, and we do destroy pre-existing finite product in the process if we are not careful.
+I think the best solution is to close the diagram $a$ under finite coproducts first and only then get to the dense and directed domains. It should be finite coproducts and we do destroy pre-existing finite product in the process if we are not careful.
 
 I took the finite coproduct out for simplicity, believing that the second step would add them back in. What is going on then?
 
@@ -772,7 +772,7 @@ The second part of the construction is still a bit vague. The objects are chains
 
 
 \section{5/10/18}
-What I have right now, is a combination of properties, that imply each other that together tells us a diagram is presaturated.
+What I have right now, is a combination of properties that imply each other that together tells us a diagram is presaturated.
 
 \section{30/9/18}
 Maybe just start with more assumptions on the diagrams, keep on factorizing the proof all the way back to the family of generic morphisms.
@@ -784,10 +784,10 @@ So let a diagram have:
 \item the pushouts;
 \item the compositions.
 \end{enumerate}
-I have to figure out what that means exactly, because I have tried, and apparently not gotten far enough.
+I have to figure out what that means exactly, because I have tried and apparently not gotten far enough.
 
 \section{21/9/18}
-Given a diagram of the arrow category, there should be a construction for a larger diagram, whose density comonad serves as a factorization system. This exists because the ambient category is a $\Pi$-pretopos with a natural number object. At least, that is what I am trying to prove.
+Given a diagram of the arrow category, there should be a construction for a larger diagram, whose density comonad serves as a factorization system. This exists because the ambient category is a $\Pi$-pretopos with a natural number object. At least that is what I am trying to prove.
 The construction of the larger diagram is still a mystery, however.
 Transfinite composition is the mystery. Last time we dealt with pushouts and translated them into conditions that relate to density and available morphisms.
 I have looked into the composition part. 
@@ -808,7 +808,7 @@ Given pushouts in $\ambient$, $\ambient/\ambient$ has a factorization system whe
 \paragraph{up-to-iso problems}
 Anodyne extensions are closed under composition. When we use a diagram, however, we are not dealing with a property that any morphism can have, but specific instances that are singled out. We probably cannot ask for a structure that is closed under all isomorphic object. So we are stuck with mitigation isomorphisms all over our constructions. This sucks.
 
-Suppose the first first step is just closure of a diagram under finite sums, and some of their morphisms. Just the get rid of that part of the problem. 
+Suppose the first first step is just closure of a diagram under finite sums and some of their morphisms. Just the get rid of that part of the problem. 
 
 The compositions have the lifting property because of the inverse of the
 isomorphism actually:
@@ -834,15 +834,15 @@ It is not that simple. The adjunction makes $r(f)^d$ is a split epimorphism, but
 Counit is isomorphism is equivalent to a fully faithful left adjoint $-\otimes d$. A, but that is not the property we are looking at here. Only the $^d$ applied to the counit of the density comonad gives the isomorphism.
 
 \paragraph{algebraic selection}
-I suppose we could start with the sheaves, and then get a diagram be selecting particular ones, the algebras for the codensity monad for example. What does that actually do? 
-The unit $f \to (f\otimes d)^d$ would have an inverse of some sort, that
+I suppose we could start with the sheaves and then get a diagram be selecting particular ones, the algebras for the codensity monad for example. What does that actually do? 
+The unit $f \to (f\otimes d)^d$ would have an inverse of some sort that
 sends a family of equivalence classes to some pre-image. This touches on
-something deep: $f$ is a way to build acyclic cofibrations, and
+something deep: $f$ is a way to build acyclic cofibrations and
 the algebra makes that construction recursive.
 
 Yeah, this should be a problem because we would miss out on the compositions.
 
-The Garner way is more like: the right factor in the construction eventually becomes an isomorphism. But the proof relies on locally presentable ambient categories, which is what we try to work around here, and I am unsure how to proceed.
+The Garner way is more like: the right factor in the construction eventually becomes an isomorphism. But the proof relies on locally presentable ambient categories, which is what we try to work around here and I am unsure how to proceed.
 
 Getting a new diagram this way is probably just a silly dream.
 
@@ -884,11 +884,11 @@ For the transfinite composition step, add finite composition to the diagram.
 I like this idea of creating a category of left morphism recipes, explaining how to glue together the components until the full morphism comes out. Such a construction could confirm that we have all the left rules in place.
 
 \paragraph{Moving on\dots}
-Don't I have a pretty good idea what to do now? I am afraid that I don't because I keep making the same mistakes, and there are just too many details I fail to keep track off, no matter what I try.
+Don't I have a pretty good idea what to do now? I am afraid that I don't because I keep making the same mistakes and there are just too many details I fail to keep track off, no matter what I try.
 
 
 \paragraph{trying to redistribute}
-Keep the first step simpler: assume a diagram of small objects, and create a new diagram of pushouts of generic fibrations to small objects.
+Keep the first step simpler: assume a diagram of small objects and create a new diagram of pushouts of generic fibrations to small objects.
 The second step uses the zigzag squares to get composition functioning.
 This unlikely couple, together with the special morphisms should ultimately do it.
 
@@ -903,7 +903,7 @@ A little recap. I found that for a diagram over of the category of arrows with p
 \end{itemize}
 These make the diagram \emph{presaturated}.
 
-There is a construction of a presaturated diagram from a general diagram, relying on spans of morphisms, freely adding pushout and compositions, and ensuring a dense and directed set of domains.
+There is a construction of a presaturated diagram from a general diagram, relying on spans of morphisms, freely adding pushout and compositions and ensuring a dense and directed set of domains.
 
 I think the external version is pretty straightforward, but I want something that works inside realizability categories. The trouble is, I don't really know how to go about this presaturation step internally.
 
@@ -945,7 +945,7 @@ This isn't going well.
 The diagram $D$ is modified to have left morphisms with small codomains as objects and commuting square of a special type as morphism. This category is closed under finite colimits, pushouts and small coproducts for arguments given below\dots
 
 This is the point: getting the left factorization as a directed colimit of generic left morphisms. This, however, requires that we work of a much more saturated basis. Why do I want it to be directed though?
-The idea is that the closed under pushout somehow follows: the pushout of each finite approximation is itself a finite approximation, and the colimit of the pushouts is the pushout of the colimit.
+The idea is that the closed under pushout somehow follows: the pushout of each finite approximation is itself a finite approximation and the colimit of the pushouts is the pushout of the colimit.
 
 Pushout along what?
 
@@ -959,7 +959,7 @@ What do the pushouts help us here? Something about the colimit and the pushout c
 
 The density of the domains ensures all of the codomain of $f$ is covered, while the approximation argument takes care of the codomain of $f$. Careful though: we combine small identity morphisms from the codomain of $f$ with small approximations of $l$.
 
-We can turn identity morphism into sheaves\dots and somehow get $(\id(\dom(a\otimes d)))^d\to a$\dots I think. At least that gives us a pushout in the category of sheaves, that could be the one we need.
+We can turn identity morphism into sheaves\dots and somehow get $(\id(\dom(a\otimes d)))^d\to a$\dots I think. At least that gives us a pushout in the category of sheaves that could be the one we need.
 
 A condition comes forth: enough identities must be in there. Density on identities. 
 
@@ -976,7 +976,7 @@ A\otimes D \ar[ur]^f\ar[dr]_\id\ar[r]^\id & A\otimes D\ar[ur]^(.25)f\ar[dr]_(.25
 & A\otimes D \ar[r]_l\ar[ur]_(.75)f & B\otimes D\ar[ur]
 }\]
 
-So, this looks like an alternative to the pushout condition, that connects to density more directly. 
+So, this looks like an alternative to the pushout condition that connects to density more directly. 
 Next time, let's see if we can find something like this for composition.
 
 
@@ -998,7 +998,7 @@ Rather than lists, consider functions from and between finite sets. Here we run 
 
 In other words, the free coproduct completion of an internal category $\cat C$ takes functions from finite sets to the object of objects $C_0$ as objects. A morphism $\tuplet{x,f\of x\to C_0}\to\tuplet{y,g\of y\to C_0}$ is a pair of functions $\tuplet{h\of x\to y,k\of x\to C_1}$ such that $\dom\circ k = f$, $\cod\circ k = g\circ h$. Nice.
 
-This is a construction involving the full diagram of finite objects, and this specific diagram could be replaced with an alternative full diagram of small objects.
+This is a construction involving the full diagram of finite objects and this specific diagram could be replaced with an alternative full diagram of small objects.
 
 Consider a diagram over $\cat C$. This is mainly a morphism $d\of D\to C_0$ with an action from morphisms. 
 The completed version should preserve the new coproducts, so $D'$ should be something like this:
@@ -1018,7 +1018,7 @@ Rather than using this for coproduct only, start with a category that already ha
 
 This suggest that there could be a generic category $\cat G$ of objects and morphisms, which already has the desired properties and can be used to complete the 
 
-I doubt that this really works. It won't be the free completion, but instead add a bunch of extra colimits, that get in the way of what we need. The presheaf categories are only a free completion by actually being the terminal solution to an impredicative problem.
+I doubt that this really works. It won't be the free completion, but instead add a bunch of extra colimits that get in the way of what we need. The presheaf categories are only a free completion by actually being the terminal solution to an impredicative problem.
 
 \paragraph{pushouts}
 The point is to get a directed colimit for the density comonad. Pushout are a mean to that end. But rather than having a collection of small object to push arrows out to, we should consider pushouts that are coequalizers.
@@ -1030,7 +1030,7 @@ Maybe we shouldn't stick use a coproduct completion, but the family of small col
 \paragraph{composition}
 Maybe the coproducts are the easy parts.
 
-Consider a diagram in the category of arrows, and represent compositions of the morphisms it contains.
+Consider a diagram in the category of arrows and represent compositions of the morphisms it contains.
 
 Start with list of the objects in the internal category $\cat C$. The diagram turns this into a list of morphisms. The domains and codomains won't ever be equal, however. Moreover, we only have one empty list of morphisms.
 
@@ -1042,7 +1042,7 @@ The diagram is not longer a problem, the iso's are clear enough. But what are th
 
 I know I need the initial segments. But we cannot just throw the rest out.
 
-It looks like we will destroy every bit of structure that the internal diagram used to have, and replace it with very particular diagrams.
+It looks like we will destroy every bit of structure that the internal diagram used to have and replace it with very particular diagrams.
 
 \paragraph{pushouts}
 Here the only recourse seems to have a diagram of small objects and then to build a new diagram of morphism by pushing out morphism in all possible ways.
@@ -1060,7 +1060,7 @@ Ingredients:
 \item the dense diagram $s$, with extra demands\dots
 \item the natural number object
 \end{enumerate}
-The extra demand also has to do with composition, but is more subtle. For each internal presheaf $a$ over the same internal category as $s$, there is a morphism $a\otimes s\to a\otimes \top$, where the $\top$ is the terminal presheaf. When morphisms of this form compose up to isomorphism, their compositions ought to be members of $s$ as well. One way to explain this is to lift $s$ to the category of arrows with the help of $\top$, and demand the same closure under composition we saw before.
+The extra demand also has to do with composition, but is more subtle. For each internal presheaf $a$ over the same internal category as $s$, there is a morphism $a\otimes s\to a\otimes \top$, where the $\top$ is the terminal presheaf. When morphisms of this form compose up to isomorphism, their compositions ought to be members of $s$ as well. One way to explain this is to lift $s$ to the category of arrows with the help of $\top$ and demand the same closure under composition we saw before.
 
 Small coproducts is the first goal. 
 
@@ -1071,27 +1071,27 @@ The presaturations object are finite chains:
 &\bullet \ar[dr]\ar[dl]&&\bullet\ar[dr]\ar[dl] &&\bullet\ar[dr]\ar[dl] &&\bullet\ar[dr]\ar[dl] &\\
 \bullet &&\bullet &&\bullet &&\bullet &&\bullet
 }\]
-The morphism pointing left are small coproducts of generic left morphisms. The morphisms pointing right are arbitrary, except that the last one has a small codomain. This chain ought to represent the composition of its pushouts. The natural number object together with locally Cartesian closure implies that this is representable.
+The morphism pointing left are small coproducts of generic left morphisms. The morphisms pointing right are arbitrary, except that the last one has a small codomain. This chain ought to represent the composition of its pushouts. The natural number object together with locally cartesian closure implies that this is representable.
 
-I don't think the chains help with defining morphisms. Instead look at the left morphism they represent, and then use the condition that each morphism of morphisms is a pushout followed by a composition.
+I don't think the chains help with defining morphisms. Instead look at the left morphism they represent and then use the condition that each morphism of morphisms is a pushout followed by a composition.
 
 To prove that the result is presaturated\dots
 
-Closure under pushouts: density is part of it, as well as closure under certain coproducts. May this is the place where the preservation of colimits comes in more than in proving composition. Or maybe there is a more general property to consider, that takes care of both.
+Closure under pushouts: density is part of it, as well as closure under certain coproducts. May this is the place where the preservation of colimits comes in more than in proving composition. Or maybe there is a more general property to consider that takes care of both.
 
 \paragraph{internalized smallness}
 We consider a diagram $d$, even though that may be more general than we need. We want to say that the objects preserve internal coproducts indexed over themselves. Rather self referential\dots how do we go about it?
 
-One idea is that we can single out a class of $d$-small morphisms, morphism isomorphic to $f\otimes d\to f\times \top$ for some presheaf $f$ over the same internal category $\cat D$ as $d$. If this is closed under composition, that means $d$ indexed coproducts of `elements of $d$' are themselves `elements of $d$'. This is a tough concept.
+One idea is that we can single out a class of $d$-small morphisms, morphism isomorphic to $f\otimes d\to f\times \top$ for some presheaf $f$ over the same internal category $\cat D$ as $d$. If this is closed under composition that means $d$ indexed coproducts of `elements of $d$' are themselves `elements of $d$'. This is a tough concept.
 
 We want something like internal functor $\Sigma\of \cat D^d \to \cat D^\top$ left adjoint to the diagonal to drive how the point. Of course, a $\Sigma\of \top\otimes(\cat D^d) \to \cat D$ works just as well. 
-So the idea is that left exact functors preserve internal categories, and hence it makes sense to talk about the left adjoint between two internal categories in the category of presheaves over $\cat D$. This should be equivalent to the composition thing.
+So the idea is that left exact functors preserve internal categories and hence it makes sense to talk about the left adjoint between two internal categories in the category of presheaves over $\cat D$. This should be equivalent to the composition thing.
 
 These first two can be connect through a universal composition. 
 
 I am taking for granted that $d$-small morphisms are closed under pullback. Suppose $b\of B\to A$ is the pullback of $d(f)\of f\otimes d\to f\otimes \top$ along $a\of A \to f\otimes \top$. The morphisms of presheaves $a^\top$ and $b^\top$ have pullbacks $a'$and $b'$ along the unit $f\to(f\otimes \top)^\top$. Now $a'\otimes \top$ is isomorphic to $a$ and $b'\otimes \top$ is isomorphic to $b$ because\dots $^\top$ is faithful?
 
-Perhaps closure under pullback is a property of diagrams over discrete categories, that does not hold more generally. I don't see the general case holding.
+Perhaps closure under pullback is a property of diagrams over discrete categories that does not hold more generally. I don't see the general case holding.
 
 This complicates some matters, but it might not be important for the end result.
 
@@ -1117,7 +1117,7 @@ It looks more like a strengthening for presaturation or an equivalent property.
 
 On the other hand though, the interesting filtered colimit is $d\Rightarrow f$. Hence $\hom(A,(d\Rightarrow f)\otimes d) \simeq (d\Rightarrow f)\otimes \hom(A,d)$ for small $A$. 
 
-I am missing something here, and therefore getting stuck.
+I am missing something here and therefore getting stuck.
 
 Things seemed to be going so well.
 
@@ -1137,7 +1137,7 @@ I think I want to replace suitable with \emph{presaturated}
 \paragraph{density still needed?}
 Being closed under pushouts and composition seems enough. Perhaps we need small colimits, but even that is questionable.
 
-I guess the argument used to be that closure under pushout grants density of codomains. I missed something important however, that makes closure under pushouts much stronger.
+I guess the argument used to be that closure under pushout grants density of codomains. I missed something important however that makes closure under pushouts much stronger.
 
 Being closed under pushouts indirectly induces density of codomains.
 Being closed under composition indirectly induces 
@@ -1148,7 +1148,7 @@ The properties for $c$ we propose is that any pushout $\alpha\of f\otimes c\to g
 
 I imagine these are pretty straightforward thing to ask of the internal category\dots
 
-We still need to make a diagram commute, and filteredness may still be vital here.
+We still need to make a diagram commute and filteredness may still be vital here.
 
 \paragraph{confusion}
 We had like three requirements, related to the stages of the completing:
@@ -1157,7 +1157,7 @@ filteredness of $I$ to ensure the colimit preservation,
 closure under pushout and composition with the desired morphisms.
 
 These come from peeking inside the internal category and proposing properties there.
-I take the last property, try to formulate it as a property of the externalisation, and the first two don't seem the matter anymore.
+I take the last property, try to formulate it as a property of the externalisation and the first two don't seem the matter anymore.
 How is that possible!?
 
 
@@ -1224,7 +1224,7 @@ We already know how to factorize.
 So now it becomes a matter of internalizing this\dots
 
 \paragraph{extensional type theory}
-I now have the means the introduce my own extensional type theory based on this 'polynomial type' idea. Given $f\of X\to Y$ there is a functor $Z\mapsto Z^f\of \ambient\to \ambient/Y$ right adjoint to the `forgetful pullback' $g \mapsto\set{\tuplet{x,y}|f(x)=g(y)} \of\ambient/Y\to \ambient$. Like the powerset, these types generate all of the right adjoints we associate with locally Cartesian closed categories.
+I now have the means the introduce my own extensional type theory based on this 'polynomial type' idea. Given $f\of X\to Y$ there is a functor $Z\mapsto Z^f\of \ambient\to \ambient/Y$ right adjoint to the `forgetful pullback' $g \mapsto\set{\tuplet{x,y}|f(x)=g(y)} \of\ambient/Y\to \ambient$. Like the powerset, these types generate all of the right adjoints we associate with locally cartesian closed categories.
 
 \section{2/7/18}
 We don't need independent notions of smallness, but we do need a natural number object.
@@ -1270,12 +1270,12 @@ Presumed differences:
 
 
 \paragraph{Deeper understanding}
-The construction I came up with is not so weird, and is actually closely related to the constructions of Garner and Reihl. In fact Reihls enriched homopty theory is a great support. My biggest obstacle is completeness, and I don't think either Garner or Reihl have a solution here.
+The construction I came up with is not so weird and is actually closely related to the constructions of Garner and Reihl. In fact Reihls enriched homopty theory is a great support. My biggest obstacle is completeness and I don't think either Garner or Reihl have a solution here.
 
 So that is what my paper will be called:
 'A small object argument for incomplete categories'
 
-While the core of the argument is still the density comonad, the way it is constructed, and the reason it works are changed.
+While the core of the argument is still the density comonad, the way it is constructed and the reason it works are changed.
 
 Lets work this out:
 We take an internalized version of $I\of \cat J\to\ambient/\ambient$. The family of cofibrations is re-imagined as a commutative square. Same goes for the bundle of small morphisms.
@@ -1339,7 +1339,7 @@ Does it come for free?
 
 
 First of, what is even a small filtered colimit?
-Well, a small internal category is an internal category categories whose object of morphisms is small. A small-filtered category is presumably an internal category which has cocones for all internal functors with small domains. A functor from such a category into the ambient category is replaces by a kind of module, and the colimit\dots probably is an obvious coequalizer.
+Well, a small internal category is an internal category categories whose object of morphisms is small. A small-filtered category is presumably an internal category which has cocones for all internal functors with small domains. A functor from such a category into the ambient category is replaces by a kind of module and the colimit\dots probably is an obvious coequalizer.
 \begin{align*}
 &f\of X\to C_0\\
 &\cdot\of \set{(\gamma\of C_1,x\of X)| f(x) = \dom(\gamma)}\to C_0\\
@@ -1363,7 +1363,7 @@ Yes! There is a single object where everything comes together, but in that objec
 Perhaps we should stick to internal categories of cocones instead of bothering with these coequalizers.
 
 \paragraph{small filteredness of small objects}
-Once we assume that there is a generic small morphism, and that the small objects of all slice categories are filtered, can we assume that the full internal subcategory of small objects is small filtered?
+Once we assume that there is a generic small morphism and that the small objects of all slice categories are filtered, can we assume that the full internal subcategory of small objects is small filtered?
 
 I suppose the answer is that any small family of objects already provides the upper bound.
 
@@ -1384,7 +1384,7 @@ Close the generic morphisms under small tensors, pushouts, retracts and composit
 
 The small saturation should contain all left morphism with small domains. Well maybe not all\dots just the ones that have a small set of generators.
 
-Okay, but that was one approach: first generate the small fibrations, and then construct the small cofibrations from them. There is a difficulty with that approach if the codomains are not small.
+Okay, but that was one approach: first generate the small fibrations and then construct the small cofibrations from them. There is a difficulty with that approach if the codomains are not small.
 
 Still an approach where the saturation is the result of a finitary construction is more traditional and more flexible I guess.
 
@@ -1400,7 +1400,7 @@ So we go ahead and try to benefit from the fact that the colimit is filtered. So
 \paragraph{Filtered colimits and compactness}
 For representable $x$, the functor $r(x) = \function y y^x$ would preserves all colimits. If $x$ is a finite colimit of representables, there is a colimiting cone we should  use.
 
-The colimit for the whole object is a limit of colimits, and a limit of colimits is the colimit of the limits of the limit is cofiltered.
+The colimit for the whole object is a limit of colimits and a limit of colimits is the colimit of the limits of the limit is cofiltered.
 
 Let $f$ be a functor $f\of \cat A\times \cat B\to\ambient$--actually, this should be an opfibration in out case. There is a canonical morphism:
 \[ \colim_x \lim_y f(x,y) \to \lim_y \colim_x f(x,y) \]
@@ -1428,7 +1428,7 @@ Claim: the pushout of two such morphism exists within the category.
 }\]
 The big square $f\circ c = f'\circ c'$ is a pushout and $k$ is the factorization of the $e$-$e'$-cone through it. Since $m$ should simultaneously be a pushout of $b\circ a$ along $f$ and $b'\circ a'$ along $f'$, but perhaps those don't coinside. In that case let $h$, $h'$ and $w$ be the colimit of the $W$-shaped diagram involving $b\circ a$, $f$, $b'\circ a'$ and $f'$. The $j\circ k$-$g$-$g$-cone commutes and therefore factors as well, inducing $l$. 
 
-Difficulty remains in showing that $k$ and $l$ are a morphism, and $m$ is an acyclic cofibration. This might have been easier with coequalizer.
+Difficulty remains in showing that $k$ and $l$ are a morphism and $m$ is an acyclic cofibration. This might have been easier with coequalizer.
 
 \paragraph{Thoughts}
 It is hard to tell how important precisely these morphisms are, after all, would this not work for a greater class of morphism? The trouble is staying within acyclic cofibrations.
@@ -1446,7 +1446,7 @@ The idea is to use the extra compositions to add the joins required for the dire
 
 The simplest idea is to add copies of each cofibration for each $n\of \nno$, but to require that $i < j$ is a morphism is not a decidable monic. The difficult joins get lifted on a higher limit. That might not work because the result is not a directed category. 
 
-Even if the coequalizers were present, a coequalizer of a parallel pair of morphism between acyclic cofibrations, might not be an acyclic cofibration, precisely because the identification of equivalent point introduces cycles. I imagine the easy way out is to fill in this cycles, but how do we catch them, and what do we fill them with?
+Even if the coequalizers were present, a coequalizer of a parallel pair of morphism between acyclic cofibrations, might not be an acyclic cofibration, precisely because the identification of equivalent point introduces cycles. I imagine the easy way out is to fill in this cycles, but how do we catch them and what do we fill them with?
 
 I don't believe I actually have a solution for this anymore.
 
@@ -1468,7 +1468,7 @@ B\parr & B' \ar[r] & \bullet \ar[r] & Y
 
 If we now fill the rightmost diagram, I imagine a filler for the coequalizer could be fashioned from it. Maybe not: only the $A+A$ range of $B'$ is forced to adhere to a pre-specified lifting. Worse still, there may be not better way, because the morphism $B\rightrightarrows B'$ could overlap, conflicting in its prescriptions for $B$.
 
-It seems probable that this all has been tried before, and then forgotten because it just wouldn't work. 
+It seems probable that this all has been tried before and then forgotten because it just wouldn't work. 
 
 It look like the category of compact acyclic cofibrations of $f$ is not directed. While colimits exist among more general compact morphisms, a cocone with an acyclic cofibration is missing. 
 
@@ -1487,7 +1487,7 @@ X \ar[r]^{f_0}\ar@/_/[rr]_f & Z \ar[r]^{f_1} & Y
 }\]
 Now $f_1$ is supposed to be a fibration.
 
-The core of the argument is that $f_0$ is a filtered colimit of acyclic cofibrations which are colimits of representables, and that $\ambient(A_i,-)$ preserve those. Given $(c\of A_i\to Z,d\of B_i\to Y)\of h_i\to f_1$, $c$ factors through some $B_j\to Z$, and the pushout of $h_i$ along this factorization gets us a new member $h_k$ of the family of `compact' acyclic cofibrations.
+The core of the argument is that $f_0$ is a filtered colimit of acyclic cofibrations which are colimits of representables and that $\ambient(A_i,-)$ preserve those. Given $(c\of A_i\to Z,d\of B_i\to Y)\of h_i\to f_1$, $c$ factors through some $B_j\to Z$ and the pushout of $h_i$ along this factorization gets us a new member $h_k$ of the family of `compact' acyclic cofibrations.
 \[ \xymatrix{
  & A_j\ar@/_/[dd]_(.25){h_k}\ar[d]^{h_j} \ar[r] & X\ar[d]_{f_0} \ar@/^/[dd]^f\\
 A_i \ar[d]_{h_i} \ar[r]_{c'} \ar@/^/[rr]^(.25)c \pushout & B_j \ar[r]\ar[d] &Z\ar[d]_{f_1}\\
@@ -1505,7 +1505,7 @@ Pushouts preserve regular epimorphisms. I remember struggling with this, so let'
 & \bullet \ar[r]\ar@{.>}[urr] & \bullet \ar@{.>}[ur]
 }\]
 
-This makes $f_0$ the coequalizer of an exact fork, and the idea is to get a filtered diagram by taking pushouts of pullbacks for finite sets of $h_i$. In order to get the result to be a colimit, we need to coequalize stuff, but coequalizers of acyclic cofibration can be cyclic. This is what my problems have revolved around all the time.
+This makes $f_0$ the coequalizer of an exact fork and the idea is to get a filtered diagram by taking pushouts of pullbacks for finite sets of $h_i$. In order to get the result to be a colimit, we need to coequalize stuff, but coequalizers of acyclic cofibration can be cyclic. This is what my problems have revolved around all the time.
 
 Okay, it turns out there are big problems left to solve here.
 The coequalizing members can add additional simplices to the original structure, thus filling in any accidental cycles.
@@ -1522,7 +1522,7 @@ From the desire for directed limits is seems lie we should work with chains of m
 A_0 \ar[r]^{a_0}\ar[d]_{h_0} & \cdots\ar[r]^{a_{n-1}} & A_n\ar[d]^{h_n} \\
 B_0 \ar[r]_{b_0} & \cdots \ar[r]_{b_{n-1}} & B_n 
 }\]
-Here all $b_i$ would be regular epimorphisms, and $B_n$ would be connected. Each stage add missing equalizers for the one before it, that is the point.
+Here all $b_i$ would be regular epimorphisms and $B_n$ would be connected. Each stage add missing equalizers for the one before it that is the point.
 
 For the construction in the core of the proof, simple chains of acyclic cofibrations make sense.
 
@@ -1533,14 +1533,14 @@ In either case, the question is: what are the morphisms?
 \section{18/5/18}
 
 \paragraph{Cofibrant generation}
-Everything I wrote is based on the internalized version of the notion of a small family of generic cofibrations. However, I got greedy, and tried to make the lifting property with regard to each member of the family a special case of the lifting property for a single morphism. I am unsure of this works anymore, and it certainly doesn't make the descent theorem harder to prove.
+Everything I wrote is based on the internalized version of the notion of a small family of generic cofibrations. However, I got greedy and tried to make the lifting property with regard to each member of the family a special case of the lifting property for a single morphism. I am unsure of this works anymore and it certainly doesn't make the descent theorem harder to prove.
 
 General ideas:
 \begin{itemize}
 \item the whole paper is based on an internalized version of \emph{cofibrant generation}
 \item this notion of cofibrant generation hides a more \emph{natural characterization of (acyclic) cofibrations} in terms of decidability properties. For acyclic I haven't determined what this property is however.
-\item nor have I found a replacement for the \emph{small object argument}, that permits fibrant replacements.
-\item the definition of the lifting property for families isn't correct, and requires an update throughout the paper.
+\item nor have I found a replacement for the \emph{small object argument} that permits fibrant replacements.
+\item the definition of the lifting property for families isn't correct and requires an update throughout the paper.
 \end{itemize}
 
 
@@ -1549,20 +1549,20 @@ General ideas:
 For a morphism of simplices $f\of A \to B$, start with the monic
 $\function{a}\tuplet{0,a,f(a)}$ of $\base(A)\to \nno\times\base(A)\times \base(B)$ and the epic $\function{\tuplet{n,a,b}}b$. I want to modify $\nno\times\base(A)\times \base(B)$, first select elements and then take a quotient.
 
-Suppose $f = g\to h$ is the result of a small object like construction. The filler could work as follows. Every $x\of\base(\dom(g))$ is an equivalence class of tuples $\tuplet{n,b,a}$, where $n$ is the `birth date' of the, $b$ is the image of $g$ and $a$ is some bookkeeping we need to do. For each horn and each selection of tuplets, there is a least birth date that does not occur, and for this birth date $n$ there is a tuplet $\tuplet{n,b,a}$ whose equivalence class in $\dom(g)$ serves as the filler for the fragments.
+Suppose $f = g\to h$ is the result of a small object like construction. The filler could work as follows. Every $x\of\base(\dom(g))$ is an equivalence class of tuples $\tuplet{n,b,a}$, where $n$ is the `birth date' of the, $b$ is the image of $g$ and $a$ is some bookkeeping we need to do. For each horn and each selection of tuplets, there is a least birth date that does not occur and for this birth date $n$ there is a tuplet $\tuplet{n,b,a}$ whose equivalence class in $\dom(g)$ serves as the filler for the fragments.
 
 The extra bookkeeping is unavoidable however.
 
 Each horn filler introduces a simplex that intersects the horn in a cycle: the base of the horn. We need to keep track of this one.
 
-The generations could actually be about extra dimensions needed to get the acyclic inclusion back to $A$. I.e. $\tuplet{b,a}$ contains a bigger simplex $b$ of $B$, and a monic of $\simCat$ to indicate that the new face was introduced over that bigger face. This introduces new problems because $B$ does not have to be a fibrant object.
+The generations could actually be about extra dimensions needed to get the acyclic inclusion back to $A$. I.e. $\tuplet{b,a}$ contains a bigger simplex $b$ of $B$ and a monic of $\simCat$ to indicate that the new face was introduced over that bigger face. This introduces new problems because $B$ does not have to be a fibrant object.
 
 We might need to keep a collection of elements of the codomain $B$ that together act as a kind of cover. The members represent simplices that need to be filled before the current one can, all the way back to simplices that directly derive from members of $A$.     
 
 Constructions are known, but we need to kip ahead of the line to the end result in order to get what we need. 
 
 The members of $C=\dom(g)$ combine $b\of \base(B)$ with $k\of[\dim(b)]$ to indicate how $b$ was filled in,
-but also $[\dim(b)]\to \base(C)$ to point to the other simplices, and we are still missing the restriction maps here.
+but also $[\dim(b)]\to \base(C)$ to point to the other simplices and we are still missing the restriction maps here.
 
 We are looking for a free filler algebra. We don't have a clear path to its construction, with may just go beyond what is available here.
 
@@ -1577,9 +1577,9 @@ The product is a higher order operator that introduces new morphisms
 
 So what about finite colimits as objects?
 
-We can indeed build a family of (acyclic) cofibration between finite colimits of simplicial objects--a set that is recursive, and probably decidable, if in a highly non trivial way. The lifting property with respect to this family implies the lifting property with respect to 
+We can indeed build a family of (acyclic) cofibration between finite colimits of simplicial objects--a set that is recursive and probably decidable, if in a highly non trivial way. The lifting property with respect to this family implies the lifting property with respect to 
 
-The internal subcategory of small objects, and fillers given for all cofibrations in those categories. The advantage seems clear however.
+The internal subcategory of small objects and fillers given for all cofibrations in those categories. The advantage seems clear however.
 
 I am afraid things are still not that simple, because of the restriction maps. Actually the problem is that the product is still overly complicated.
 
@@ -1622,7 +1622,7 @@ With the small object argument, we have to repeat the pushout until we get a tra
 
 Basically, I assume that pulling back an acyclic cofibration along morphism with specific domains preserves acyclic cofibration.
 
-No that isn't it--I know the structure of the pushout. I know what each simplex there looks like, and use that information. Being covered by a small family of \emph{representables} is important, as well as accounting for all origins of representable objects.
+No that isn't it--I know the structure of the pushout. I know what each simplex there looks like and use that information. Being covered by a small family of \emph{representables} is important, as well as accounting for all origins of representable objects.
 
 There is an important parallel though--the new family of cofibrations is not small, let alone the object of lifting problems, but the codomains of individual members are. This has an impact on the pushout, I struggle to pin down now. 
 
@@ -1678,7 +1678,7 @@ Horn fillers introduce two new simplices, the whole filler and its base. So perh
 Not helpful.
 
 \paragraph{conclusion}
-I prefer puzzling over writing so much, that I rarely get to writing. Hmm\dots
+I prefer puzzling over writing so much that I rarely get to writing. Hmm\dots
 
 
 \section{4/5/18}
@@ -1693,7 +1693,7 @@ Put simply, $g(y) = \tuplet{p,\xi}$, where $p\of P$ and $\xi\of[m]\to[n]$.
 \paragraph{simplifications}
 The main trick in all of this, is replacing external coproducts with indexed coproducts over discrete families.
 
-Perhaps this allows us to represent the lifting operator in a simpler way. For each $f\of X\to Y$ in $\ambient\s$, there is a family of lifting problems $p\of P\to \set\geq$. The members of $P$ are commutative squares $h\to f$, where $h$ is a horn inclusion, and $p$ tells us which, by specifying dimension and top edge. This means there is a universal lifting problem, whose solutions are lifting operators.
+Perhaps this allows us to represent the lifting operator in a simpler way. For each $f\of X\to Y$ in $\ambient\s$, there is a family of lifting problems $p\of P\to \set\geq$. The members of $P$ are commutative squares $h\to f$, where $h$ is a horn inclusion and $p$ tells us which, by specifying dimension and top edge. This means there is a universal lifting problem, whose solutions are lifting operators.
  
 Note: we are dealing with a parallel lifting problem. The operator has to be a morphism in $\ambient\s/P\disc$, or in a transposed set up over $\ambient\s/\set\geq\disc$, or it doesn't work.
 
@@ -1702,18 +1702,18 @@ The following diagram in $\ambient\s/\set\geq\disc$ would work:
 \horn_{\set\geq}\ar[d]\ar[r] & X^P_{\set\geq}\ar[d]^{f^P_{\set\geq}}\\
 \simplex_{\set\geq}\ar[r]\ar@{.>}[ur] & Y^P_{\set\geq}
 }\]
-Each problem $p\of P$ contain a map $a\of\horn_j[i]\to X$ and a map $b\of\simplex[i]\to Y$ such that $b\circ h = f\circ a$, and these maps induce the commutative square above. This is the universal lifting problem for $f$. Its solutions are realizers of $f$'s fibrancy.
+Each problem $p\of P$ contain a map $a\of\horn_j[i]\to X$ and a map $b\of\simplex[i]\to Y$ such that $b\circ h = f\circ a$ and these maps induce the commutative square above. This is the universal lifting problem for $f$. Its solutions are realizers of $f$'s fibrancy.
 
 This is great news. We only need descent along the family of horns, without worrying about larger set of problems.
 
 \paragraph{discrete pullback lemma}
-A discrete morphism in $\ambient\s$ in our case is a pullback of a morphism from $\ambient$. If cofibrations, and acyclic cofibration are closed under pullbacks form those, we don't even have to bother with slice categories over discrete objects. Just having a lifting operator for the 'family' is enough.
+A discrete morphism in $\ambient\s$ in our case is a pullback of a morphism from $\ambient$. If cofibrations and acyclic cofibration are closed under pullbacks form those, we don't even have to bother with slice categories over discrete objects. Just having a lifting operator for the 'family' is enough.
 
 This lemma must be equivalent to something in the definition of the factorization system--something that sets it apart from the normal factorization systems. A lemma about enriched factorization systems in other words.
 
 The category $\ambient\s$ is enriched over $\ambient$ and also has ambient embedded. Any enriched factorization system should therefore allow us to pull back its left morphisms along pullbacks of morphisms in $\ambient$, even if left morphism aren't generally closed under pullbacks. It this true though? It comes down to this: if we have a lifting operator for a coproduct of cofibrations, can we constructively split it up into lifting operators for individual cofibrations? No, because not every individual lifting problem extends to a lifting problem for the entire family. This won't fly.
 
-I have done this before, and concluded that it wouldn't work. The universal lifting problem has to exist in a slice over a discrete object, otherwise it just won't work. However, we can restrict our attention to $\ambient\s/\set\geq\disc$ thanks to adjunctions.
+I have done this before and concluded that it wouldn't work. The universal lifting problem has to exist in a slice over a discrete object, otherwise it just won't work. However, we can restrict our attention to $\ambient\s/\set\geq\disc$ thanks to adjunctions.
 
 
 \paragraph{mistake?}
@@ -1724,12 +1724,12 @@ being a sum over the possible horns rather than a product.
 
 Once we have that, does a version of the discrete pullback lemma become acceptable?
 
-In any case, my presentation is not clear enough, and too hard to remember.
+In any case, my presentation is not clear enough and too hard to remember.
 
 \paragraph{empty space}
 At this point is really seems like a mistake that an empty $[-1]$ simplex does not exists. Would initial object for $\simCat$ change that much?
 
-Every simplex would have an extra object $X[-1]\of\ambient$, and $!\of [-1] \to [n]$, would grant a new morphism $X[n]\to X[-1]$. The result could effectively be a family of simplicial sets, and might accidentally solve a lot of problems for us.
+Every simplex would have an extra object $X[-1]\of\ambient$ and $!\of [-1] \to [n]$, would grant a new morphism $X[n]\to X[-1]$. The result could effectively be a family of simplicial sets and might accidentally solve a lot of problems for us.
 
 There could be a model structure on families of simplicial sets.
 There would be an advantage if this somehow reduced the indexed coproducts we need to simpler constructions.
@@ -1738,13 +1738,13 @@ The extension problem remains.
 
 
 \paragraph{Back to the functor}
-Not to knock the insights of this morning. We can now solve the problem of descent along the family of horn inclusions, and know that things work out\dots or can we?
+Not to knock the insights of this morning. We can now solve the problem of descent along the family of horn inclusions and know that things work out\dots or can we?
 
 We got a lot of leverage out of the descended morphism simply being a modest fibration. The transposition throws a curve ball here. That is why we need to prove descent for all indexed sums of horns.
 
 %
 Let $g\of Y\to \simplex_P$. What is $A(g)\to A(Y)\to \horn_P$?
-$\simplex_P$ consists of a problem $p$ which has some parameters, like the dimension of the horn to be lifted, and a simplex $\xi\of[m]\to [n]$ that is part of its codomain, and $k$ the top edge of the horn. 
+$\simplex_P$ consists of a problem $p$ which has some parameters, like the dimension of the horn to be lifted and a simplex $\xi\of[m]\to [n]$ that is part of its codomain and $k$ the top edge of the horn. 
 First approximation $\sum_{y\of\base(Y)} \mathbf{nds}[\dim(g(y))]\times\mathbf{nds}(\prod_{l\neq k} \xi_l)$--barring the cases where both sequences are empty. Also, limit to cases $\tuplet{y,\alpha,\beta}$ where $g(y\cdot\alpha)\of\horn_P$.
 
 Generate an equivalence relation from:
@@ -1777,7 +1777,7 @@ A lot of particles are mentioned, but not properly named. Make sure that they ar
 \paragraph{Ascents}
 I take the descent of a single fibration as an example of gluing, but that actually solves the wrong problem.
 
-Actually, the modest fibration $f\of X \to \horn_?$ is a gluing problem, and for each gluing problem, we need a separate descend. We similarly need a separate ascend left adjoint, for each problem.
+Actually, the modest fibration $f\of X \to \horn_?$ is a gluing problem and for each gluing problem, we need a separate descend. We similarly need a separate ascend left adjoint, for each problem.
 
 We are dealing with a $P$ indexed set of fibrations, each of which needs its own descend.
 
@@ -1785,7 +1785,7 @@ The construction I had in mind, might be off, due to a confusion between depende
 
 So a problem consists of a single horn $\horn_j[i]\to V$ that needs a filler. Since there is a family of horns, the object of lifting problems exists $P = \sum_{j\leq i\of\nno}\ambient\s(\horn_j[i], V)$. 
 
-The category $\ambient\s/P\disc$ contains a horn inclusion $\horn_P\to\simplex_P$, by reindexing from $\ambient\s/\set\geq\disc$, and the universal modest morphism by reindexing from ambient.
+The category $\ambient\s/P\disc$ contains a horn inclusion $\horn_P\to\simplex_P$, by reindexing from $\ambient\s/\set\geq\disc$ and the universal modest morphism by reindexing from ambient.
 
 Think of $\ambient\s$ as a simplicial object up to isomorphism, its $n$-simplices given by fibrations $f\of X\to \simplex[n]$. The by element decent lemma tells us that the whole category is fibrant, in the external sense. We need this to be true in the internal sense as well, there should be a lifting operator.
 
@@ -1841,20 +1841,20 @@ This is starting to look like something.
 
 It works like this now: $\tuplet{x,y,\zeta}\sim \tuplet{x\cdot\zeta,y',\id}$ if $y = \zeta\circ y'$.
 
-Confusing stuff, and it only gets worse. The action of $\simCat$ is supposed to be distributed among $x$ and $y$. $\dim\tuplet{x,y,\zeta} = \dom(\zeta) + \#(y)$ and so $\tuplet{x,y,\zeta}\circ\phi$ is going to be $\tuplet{x,y\circ \phi_0,\zeta\circ\phi_1}$, etc.
+Confusing stuff and it only gets worse. The action of $\simCat$ is supposed to be distributed among $x$ and $y$. $\dim\tuplet{x,y,\zeta} = \dom(\zeta) + \#(y)$ and so $\tuplet{x,y,\zeta}\circ\phi$ is going to be $\tuplet{x,y\circ \phi_0,\zeta\circ\phi_1}$, etc.
 
 The distribution is actually still here together with the tensor product. Reason to trust this was the right approach all along.
 
 \paragraph{the story now}
 For a long time, I saw no way to construct the left adjoint.
-I realize it is possible, and try to improve my prove of descend with it. I was stuck on distribution for a while, considered replacing them
+I realize it is possible and try to improve my prove of descend with it. I was stuck on distribution for a while, considered replacing them
 with a product with a more independent construction, but now I think a direct description of the ascend functor is better.
 
 `Ascend' is a good find.
 
 The mechanism of the distribution and the adjoint pair of functor it induces is still there. We have to watch out not to introduce a right actions of $\simCat$, because that does not exist.
 
-We now focus on the left adjoint first, however, and show how it preserves acyclic cofibrations. The right adjoint now naturally preserves fibrations. Secondly, because ascent after direct image is identity, inverse image after descent is identity as well, thanks to adjointness and Yoneda lemma's. Existence and preservation of modesty follows follows quite directly from assumptions.
+We now focus on the left adjoint first, however and show how it preserves acyclic cofibrations. The right adjoint now naturally preserves fibrations. Secondly, because ascent after direct image is identity, inverse image after descent is identity as well, thanks to adjointness and Yoneda lemma's. Existence and preservation of modesty follows follows quite directly from assumptions.
 
 \paragraph{writers block} Besides the technical complexity, I also struggle just to structure all the information I need to present.
 
@@ -1871,10 +1871,10 @@ $\phi\of\Ar(\simCat)$ such that $\dom(\xi) = \cod(\phi)$.
 We can not even define a right action, because $\xi$ is in the way.
 The $\xi$'s are standing in the way now.
 
-I am getting frustrated again. As soon s I try to sketch the proof, I lose track of the structure, and don't understand what I am doing anymore.
+I am getting frustrated again. As soon s I try to sketch the proof, I lose track of the structure and don't understand what I am doing anymore.
 
 \paragraph{more integral}
-So we have $g\of Y\to\simplex$. Ascent does two things. It adds simplices, and takes the pullback. Could the extra simplices come form $g$ itself? Specifically, $\simplex{x,y}$ where $g(y)\not\of\base_{\horn}$? Note that both sides would need to admit elements where the other remains empty, but otherwise the simplices in the ascended version connect included and excluded elements.
+So we have $g\of Y\to\simplex$. Ascent does two things. It adds simplices and takes the pullback. Could the extra simplices come form $g$ itself? Specifically, $\simplex{x,y}$ where $g(y)\not\of\base_{\horn}$? Note that both sides would need to admit elements where the other remains empty, but otherwise the simplices in the ascended version connect included and excluded elements.
 
 This looks like a strange way of folding the structure.
 
@@ -1885,12 +1885,12 @@ Okay, applying restrictions to $y$ can lead outside of the complement.
 $S$ could be pairs $\tuplet{\alpha,\beta}$ where $\alpha\of\base(\horn)$ and $\beta \of \base(\simplex)-\base(\horn)$. The idea being that the tensor product would essentially create the pairs above.
 It still doesn't work though, since the compliment is not a simplicial set.
 
-This is not as specific as before. There is a particular $\delta_k\of[n-1]\to[n]$, and $y$ is supposed to come from its fibre.
+This is not as specific as before. There is a particular $\delta_k\of[n-1]\to[n]$ and $y$ is supposed to come from its fibre.
 
 That is a way of looking at it.
 The $\xi$ is confusing me now, so I try to get rid of it. This could be a way, but for now it only seems more troubling.
 
-Starting with $g\of Y\to \simplex$, and $y\of Y$, we know that $y$ are only preserved if $g(y)\of\base(\horn)$. To preserve the structure, we want to smear $y$ it out, like a convolution.
+Starting with $g\of Y\to \simplex$ and $y\of Y$, we know that $y$ are only preserved if $g(y)\of\base(\horn)$. To preserve the structure, we want to smear $y$ it out, like a convolution.
 
 I am completely lost right now. Trying to fashion the support out of $Y$ itself only confuses me more.
 
@@ -1898,7 +1898,7 @@ I am completely lost right now. Trying to fashion the support out of $Y$ itself 
 The right action is something much more subtle now.
 If $f(x) = y\cdot \phi$ then $\phi\circ x$ exists and $f(x\circ \phi) = y$. Now the tensor makes sense to.
 
-So $S$ consists of tuples $\tuplet{\xi,k,y,\phi}$ as described. There are a number of projections. In one direction we go $\xi\circ \phi + \dim(y)$, in order to get to $\horn$, and this is supposed to work out as a morphism of simplices to $\horn$. The other is more straightforward: to $\xi$, where the rule $\xi = \xi'\circ \chi$ then $\tuplet{\xi,k,y,\phi}\simeq \tuplet{\xi',k,\chi\circ y,\chi\circ \phi}$ almost starts making sense, except that we cannot glue anymore. Instead
+So $S$ consists of tuples $\tuplet{\xi,k,y,\phi}$ as described. There are a number of projections. In one direction we go $\xi\circ \phi + \dim(y)$, in order to get to $\horn$ and this is supposed to work out as a morphism of simplices to $\horn$. The other is more straightforward: to $\xi$, where the rule $\xi = \xi'\circ \chi$ then $\tuplet{\xi,k,y,\phi}\simeq \tuplet{\xi',k,\chi\circ y,\chi\circ \phi}$ almost starts making sense, except that we cannot glue anymore. Instead
 $\chi\cdot\tuplet{\xi,k,y,\phi} = \tuplet{\xi',k,\chi\circ y,\chi\circ \phi}$
 Here I spot trouble: what if $\xi'\circ\alpha = \xi''\circ \alpha$?
 That makes $\alpha\cdot$ ambiguous.
@@ -1977,7 +1977,7 @@ I thought in terms of a functor $S\of \simCat/[n]\to \ambient\s/\simplex[n]$. To
 
 The new tensor product is like an indiscrete sum. I worry that it will be too indiscrete.
 
-There is a great number of ways a $\phi\of[m]\to[n]$ can be split up in two parallel morphisms, and have each act on a different part of the structure. Worse still, we need $n+2$ subdivisions to handle all composite simplices. The simplest solution of using the lower range for one and the upper range for another won't do.
+There is a great number of ways a $\phi\of[m]\to[n]$ can be split up in two parallel morphisms and have each act on a different part of the structure. Worse still, we need $n+2$ subdivisions to handle all composite simplices. The simplest solution of using the lower range for one and the upper range for another won't do.
 
 Introduce an indiscrete union of $\simCat$.
 Let $\alpha\of[p]\to[r]$ and $\beta\of[q]\to r$. Define
@@ -1990,7 +1990,7 @@ The struggle goes on.
 We need $\alpha \to \alpha\sqcup\beta$ and $\beta \to \alpha\sqcup\beta$, with all the commutativity implications. It should also be clear that for each $\gamma\of[n]\to [r]$ there are $n$ pairs $\tuplet{\alpha,\beta}$ such that $\alpha\sqcup\beta = \gamma$. Finally, $\sqcup$ should be a functor $\simCat/[r]\times\simCat/[r]$
 
 Let $\phi\of [m]\to [n]$. Invert it as follows: $C(\phi)\of [n]\to \nno$
-satisfies $C(\phi)(i) = \#\set{j\of [m]|\phi(j) = i}$. There is like a universal bundle for $[n]$, and this is the characteristic function.
+satisfies $C(\phi)(i) = \#\set{j\of [m]|\phi(j) = i}$. There is like a universal bundle for $[n]$ and this is the characteristic function.
 We can go the other way around: given $f:[n]\to\nno$, let $S(f)\of[(\sum_{i\of[n]} f(i)) - 1] \to [n]$ and let 
 \[S(f)(i) = \max\set{ k\of[n] \middle| i \geq \sum_{j < k} f(j) }\]
 
@@ -2005,14 +2005,14 @@ There is a great advantage to doing this over the horn, however. Let's not forge
 
 A new wind\dots
 
-The discrete sum is a problem however. Combining simplicies of complementary dimension is simple and makes a lot of sense. Simplicial objects require something extra however, which involves a choice on about  interleaving the posets, that looks highly specific and crucial.
+The discrete sum is a problem however. Combining simplicies of complementary dimension is simple and makes a lot of sense. Simplicial objects require something extra however, which involves a choice on about  interleaving the posets that looks highly specific and crucial.
 
 
 A `path bundle`? Put a structure over $\horn[n]$ which is locally like the projection $\simplex[1]\to 1$, but manages to capture the complexity of the product.
 
 The path bundle $P\to \horn_k[n]$ has two disjoint sections. The of the elements are paths according to which two elements will be joined together. $P$ consists of pairs of simplices to be joined together 
 
-The bundle ought to be a fibration, and we will see about the local trivialness.
+The bundle ought to be a fibration and we will see about the local trivialness.
 
 How would that work out though? 
 \begin{align*}
@@ -2039,14 +2039,14 @@ There is a serious problem with modifying fibration first and then taking the de
 Actually, pullback and fortification do not commute. Consider how fortification makes sure that $d_k\of[n-1]\to[n]$ becomes a preserved acyclic cofibration.
 
 I essentially have a more direct way of defining codescent. Let $f\of X\to \simplex$.
-$\base CX$ consists of pairs $\tuplet{x,y}$, where $x\of \base X$ and $y\of \mathbf{nds}(\prod_{l\neq k} f(x)_l)$--note that $\mathbf{nds}(\prod_{l\neq k} f(x)_l)$ has the empty sequence as element when the product is empty, and this has a huge impact on what pairs are valid--or $x\of
-\base\horn$ and $y$ is a non empty member of $\mathbf{nds}(\prod_{l\neq k} f(x)_l)$. We add a lot of simplices, and glue simplices of $X$ to them as well.
+$\base CX$ consists of pairs $\tuplet{x,y}$, where $x\of \base X$ and $y\of \mathbf{nds}(\prod_{l\neq k} f(x)_l)$--note that $\mathbf{nds}(\prod_{l\neq k} f(x)_l)$ has the empty sequence as element when the product is empty and this has a huge impact on what pairs are valid--or $x\of
+\base\horn$ and $y$ is a non empty member of $\mathbf{nds}(\prod_{l\neq k} f(x)_l)$. We add a lot of simplices and glue simplices of $X$ to them as well.
 The restriction map is very complicated--based on the idea that the connecting simplices are glued in over $k$--but I promise it exists.
 The trick is obviously that simplices get padded with extra points over the top edge of the horn, so they aren't destroyed in the pullback anymore.
 
 Even with we add variables for genericity, its should be clear that if we can take another horn inclusion, the pullback after the fortification leaves an acyclic cofibration. We show how missing faces can now be glued in dimension by dimension. Hopefully the problem with the restriction maps does not make the proof completely unreadable.
 
-After this is done, we introduce the actual descend functor, using a Yoneda-lemma like idea. The preservation of modest morphism should be trivial, and that descend inverts pullback should be clear as well.
+After this is done, we introduce the actual descend functor, using a Yoneda-lemma like idea. The preservation of modest morphism should be trivial and that descend inverts pullback should be clear as well.
 
 Done for today.
 
@@ -2103,7 +2103,7 @@ That is fine.
 Another important point is the intersection lemma. The fortification part respects intersections of simplices.
 
 \paragraph{elusive descend then}
-Preservation of restriction action provides an opportunity to focus on a number of generators, and perhaps a set of relations. But we option not to work that way. 
+Preservation of restriction action provides an opportunity to focus on a number of generators and perhaps a set of relations. But we option not to work that way. 
 
 So the idea is that morphism $S(\xi,k)\to f$ replaces an actual simplex.
 
@@ -2116,7 +2116,7 @@ Actually, $b$ is a bigger problem here, simply because there are so many of them
 
 What does this have to do with the fibration $Df\of DX\to\horn_{?}$ we want to descend?
 Generators map to $\horn_{?}$ as well. For each generator, pick an element $x\tuplet{a,b}$ of the fibre of $f$ over $xi$.
-Generators $\tuplet{a,b}$ and $\tuplet{a',b'}$ can overlap, and that overlap implies a pair of morphisms of simplices $\tuplet{\phi,\phi'}$ such that $x\tuplet{a,b}\cdot \phi = x\tuplet{a',b'}\cdot \phi'$.
+Generators $\tuplet{a,b}$ and $\tuplet{a',b'}$ can overlap and that overlap implies a pair of morphisms of simplices $\tuplet{\phi,\phi'}$ such that $x\tuplet{a,b}\cdot \phi = x\tuplet{a',b'}\cdot \phi'$.
 
 Since we need to do this over all $\xi$ with the same codomain--and provide functors to link the generators together, we only gain complexity by not using full simplices for $S$.
 
@@ -2133,12 +2133,12 @@ I haven't regretted stopping to work on this paper for other activities in a lon
 
 \section{23/2/18}
 \paragraph{Can't help replanning}
-We separate two sides: the existence of the functors, and their specific handling of cofibrations.
+We separate two sides: the existence of the functors and their specific handling of cofibrations.
 
 Acyclic cofibrations are closed under discrete morphisms. Is this a kind of discreteness that is orthogonal to a kind of connectedness?
 Right lifting property with respect to 'simply connected' morphisms I guess. Which generalizes to: indecomposables are codiscrete--although in this case we are talking about a different kind of indecomposable.
 
-In any case, we deal with model structures on many different categories here, and their interrelations. So while we have a generic discrete family of acyclic cofibrations in $\ambient/s$, these 
+In any case, we deal with model structures on many different categories here and their interrelations. So while we have a generic discrete family of acyclic cofibrations in $\ambient/s$, these 
 
 
 Perhaps I am entangling two things that should not be entangled at all. One is a theory of model categories. The other is purely about constructive descent.
@@ -2152,9 +2152,9 @@ What am I looking for now?
 The individual case where we look at whether the codescent of a horn inclusion along another is an acyclic cofibration is complex. We need to make the case that this complex construction can be carried out parametrically, not just over all combinations of horn inclusions, but also when additional parameters (the object of all problems) are involved.
 There is a discrete object of problems $P$. Each problem translates to a simpler problem $P \to C$ involving just a single combination.
 
-Arguably, we are looking at the question of descent along acyclic cofibrations. Yes, ultimately we only need it for one. We have decent along a specific acyclic cofibration, and we need it elsewhere.
+Arguably, we are looking at the question of descent along acyclic cofibrations. Yes, ultimately we only need it for one. We have decent along a specific acyclic cofibration and we need it elsewhere.
 
-I imagine descending a fibred product or coproduct, and then somehow getting back what we need. This is complicated yet again.
+I imagine descending a fibred product or coproduct and then somehow getting back what we need. This is complicated yet again.
 I am starting to suspect that the orthogonality of discrete morphisms is very relevant here. First of all, discrete morphisms are fibrations, which is why we can apply descent to a composition involving a discrete morphism. How are monomorphisms fibrations? Well, none of the acyclic cofibrations have empty domains. Empty fibres are therefore allowed.
 
 Descent takes the fibred product and then adds some extra faces. These faces never cross discrete boundaries, crucially because all acyclic cofibrations are connected. None of that helps to reduce the larger problem.
@@ -2219,11 +2219,11 @@ Introduce another functor $S(g,k)\of\simCat \to \ambient\s$ that gives better si
 \bullet\ar[r]^{f'}\ar[d] &\bullet\ar[r]\ar[d] & \horn_l[m]\ar[d]^g\\
 D(g,k)[i]\ar[r]_{D(g,k)(h)} & S(g,k)[j]\ar[r]_{s(g,k)} & \simplex[m]
 }\]
-The point is, that each monic is send to a preserved acyclic.
+The point is that each monic is send to a preserved acyclic.
 
 How do we use this though?
 
-The constructions are generalized abstract nonsense, and I lack the ability to express them properly. 
+The constructions are generalized abstract nonsense and I lack the ability to express them properly. 
 
 Ultimately, the descend functor is defined in such a way that $\hom(k, Df)$ must be $\hom(g\ri(s(g,k)),f)$. Moreover, all of this must be parametric in $g$ and $k$, otherwise it will not result in the needed lifting operator.
 
@@ -2234,7 +2234,7 @@ I think the notion of sending monics to acyclic cofibrations is spot on.
 
 That 'category' $\cat P$:
 The objects are pairs $\tuplet{\xi,i}$ where $\xi\of \Ar(\simCat)$ and $i\of\cod(\xi)$.
-A morphism $\tuplet{\xi,i}\to \tuplet{\xi',i'}$ requires that $i'=i$, and is a morphism $\phi\of \dom(\xi)\to\dom(\xi')$ such that $\xi = \xi'\circ \phi$.
+A morphism $\tuplet{\xi,i}\to \tuplet{\xi',i'}$ requires that $i'=i$ and is a morphism $\phi\of \dom(\xi)\to\dom(\xi')$ such that $\xi = \xi'\circ \phi$.
 
 I keep struggling with all the abstract nonsense.
 
@@ -2323,7 +2323,7 @@ compare the following relations instead of the functions:
 F &= { (z,y)\of Z\times Y | p(z)=q(z),f(z) = y } \\
 G &= { (z,y)\of Z\times Y | p(z)=q(z),g(z) = y } \\
 \end{align*}
-This might be complicated because $Z$ could be a sum of other types types, and $f$ and $g$ may do a case analysis.
+This might be complicated because $Z$ could be a sum of other types types and $f$ and $g$ may do a case analysis.
 
 Still, it seems like we can reduce the problem to finding the contradictions in $p(z)=q(z),f(z) \neq g(z)$. Fine, not the same thing as straightforward equation solving, but easily within reach of Prolog e.g.
 
@@ -2396,7 +2396,7 @@ The basic story is that we start with the dependent product and note that it alr
 
 \paragraph{I remember}
 After taking the fibred product, we end up with a fibration that cannot solve all lifting problems. So we glue them back in\dots
-The trick is to create a new simplicial object, that has a simplex were the product has a hole.
+The trick is to create a new simplicial object that has a simplex were the product has a hole.
 
 The poset $S\to\set\leq$ guides this process, but its role is rather indirect. We can figure this out.
 
@@ -2421,7 +2421,7 @@ We may have a real problem here. We need to proof that a 'codescend' constructio
 There is no direct dependence: $\xi$ is the value of the cosimplicial structure. We have a family of posets $A$ and a map $b\of\base(A)\to\base(\simplex_\leq)$ and the $\xi$ that is worrying us, is simply this $b$. So no real problem.
 
 The construction is actually rather strange than. For each element of $\base(\horn_\leq)$, we get a collection of factorization through other posets over their codomains. Those other posets are really best indexed with their target pairs\dots.
-That is how it works: there is a cosimplex of posets over $\base(\simplex_\leq)$. The nerve preserves the cosimplicial structure, and adds a morphism to $\horn_\leq$. 
+That is how it works: there is a cosimplex of posets over $\base(\simplex_\leq)$. The nerve preserves the cosimplicial structure and adds a morphism to $\horn_\leq$. 
 
 \paragraph{down to earth?}
 The category $\ambient/\nno$ has two monads $-\otimes\simCat$ and $\simCat\times-$. Simplicial objects are algebras for $S$ and cosimplicial objects are algebras for $C$. Everything comes together in this category, including the discrete problem objects, families of posets over them etc. So can we just work here? The functor requires two dimensions on every object.
@@ -2453,7 +2453,7 @@ Its ordering:
 \tuplet{\xi,i,1,j} < \tuplet{\xi,i,1,j'}&\iff \exists k\of \cod(\xi) - \set i. j(k) < j'(k) \\
 \tuplet{\xi,i,1,j} < \tuplet{\xi,i,0,j'}&\iff i < j'
 \end{align*}
-Note however, that we still have to take the nerve to see this monster in its full glory.
+Note however that we still have to take the nerve to see this monster in its full glory.
 
 The important non decreasing map:
 \begin{align*}
@@ -2466,7 +2466,7 @@ s\tuplet{\xi,i,1,j} &= \tuplet{i,\cod(\xi)}\\
 This is the most simplified version, without the map to $V$ hanging around to cause confusion.
 The nerve defines its own dimensions. Important point though: the morphisms cannot cross over to different $\tuplet{\xi,i}$ because the ordering doesn't connect any of those. 
 
-The nerve takes non decreasing maps $\sigma\of[n]\to S$, and creates a simplicial object from them. We take a subset by the way: 
+The nerve takes non decreasing maps $\sigma\of[n]\to S$ and creates a simplicial object from them. We take a subset by the way: 
 \[ D = \set{ \sigma\of N(S)|s\circ \sigma \of \base(\horn_{\set\leq}) }\]
 This immediately shows how to map to the horn. 
 
@@ -2476,7 +2476,7 @@ S(\phi)\of S\tuplet{\xi,i}&\to S\tuplet{\xi',i}\\
 S(\phi)\tuplet{\xi,i,0,j} &= \tuplet{\xi',i,0,\phi(i)}\\
 S(\phi)\tuplet{\xi,i,1,j} &= \tuplet{\xi',i,0,\phi\circ j}
 \end{align*}
-So the `codimension' of $\tuplet{\xi,i,j,k}$ is $\dom(\xi)$, and $S(\phi)$ defines the cosimplicial structure. Note that:
+So the `codimension' of $\tuplet{\xi,i,j,k}$ is $\dom(\xi)$ and $S(\phi)$ defines the cosimplicial structure. Note that:
 \[ s\tuplet{\xi',i}\circ S(\phi) = s\tuplet{\xi,i}\]
 
 Suppose $\sigma \of D$. The first two elements $\sigma(0)_{01}$ is all we need to get were we need to be in $\base(\simplex_{\set\leq})$. Done!
@@ -2505,16 +2505,16 @@ Too much work perhaps. I feel we only need only one good monotone map and do the
 \section{17/11/17}
 The construction of the adjoint functors is easiest to understand when we consider that all of the categories are algebras of monads on slice categories of $\ambient$. Given two simplicial objects $A$ and $B$, a bimodule $A\nrightarrow B$ is a simplicial object over $B$, with a morphism $m\of\base(M)\to \base(A)$ and an left action $\cdot$ of $\simCat$, such that $\xi\cdot x$ is defined if $\dim(m(x)) = \dom(\xi)$ and $\dim(m(\xi\cdot x)) = \cod(\xi)$.
 
-Let's forget about $B$ for now, and focus in this weird $M$ part. One functor $M\ri\of \ambient\s/A\to\ambient\s/M$ is defined by first taking the pullback along $m$ and then taking the quotient by an equivalence relation: $\tuplet{x\circ \xi , y}\sim\tuplet{x,\xi\cdot y}$. The simplicial structure of $M$ now comfortably turns this into a new simplicial set. What about preserving morphisms? Because morphisms commute with the restriction action on $A$, the quotient is well defined, and the way that the new restriction is defined poses no difficulties. Hence, functor.
+Let's forget about $B$ for now and focus in this weird $M$ part. One functor $M\ri\of \ambient\s/A\to\ambient\s/M$ is defined by first taking the pullback along $m$ and then taking the quotient by an equivalence relation: $\tuplet{x\circ \xi , y}\sim\tuplet{x,\xi\cdot y}$. The simplicial structure of $M$ now comfortably turns this into a new simplicial set. What about preserving morphisms? Because morphisms commute with the restriction action on $A$, the quotient is well defined and the way that the new restriction is defined poses no difficulties. Hence, functor.
 
-Another functor $m_*\of\ambient\s/M\to \ambient\s/A$ is defined by first taking the fibred product $\prod_m(X)$ and then by taking the equalizer of the two restriction actions definable on this product: $f(\xi\cdot x) = f(x)\cdot \xi$ for all $x$ and $\xi$ where $\cdot$ is defined. Here the monad plays a clearer role. There are two algebras for the same monad on the product, and we pick the element where both actions agree.
+Another functor $m_*\of\ambient\s/M\to \ambient\s/A$ is defined by first taking the fibred product $\prod_m(X)$ and then by taking the equalizer of the two restriction actions definable on this product: $f(\xi\cdot x) = f(x)\cdot \xi$ for all $x$ and $\xi$ where $\cdot$ is defined. Here the monad plays a clearer role. There are two algebras for the same monad on the product and we pick the element where both actions agree.
 Once again, we have to ask whether this works well with morphisms, but the pointwise definitions hardly form a challenge.
 
 That $m_*$ preserves modesty follows from our assumptions about modesty. What about adjunction?
 
 For starts, we already have an adjunction between the pullback and the fibred product. The coequalizer and equalizers fit together to make the adjunction between $m\ri$ and $m_*$ work.
 
-Reintroducing $B$, we get a simpler adjunction $\ambient\s/B\to \ambient\s/M$ in the form of the reindexing functor and its left adjoint. When applied to the descend problem, $B$ is the family of horns, and $A$ is the family of simplices. This idea of fattening becomes a little but clearer, although some strange shit happens on the way back down to $A$. At that point the specifics of the construction are required to prove that the descend functor is right inverse to reindexing as it should, and that its left adjoint preserves coequalizers.
+Reintroducing $B$, we get a simpler adjunction $\ambient\s/B\to \ambient\s/M$ in the form of the reindexing functor and its left adjoint. When applied to the descend problem, $B$ is the family of horns and $A$ is the family of simplices. This idea of fattening becomes a little but clearer, although some strange shit happens on the way back down to $A$. At that point the specifics of the construction are required to prove that the descend functor is right inverse to reindexing as it should and that its left adjoint preserves coequalizers.
 
 Note: $\tuplet{x\circ \xi , y}\sim\tuplet{x,\xi\cdot y}$ means the projection to $y$ is not well defined! This means that the result is no simplicial set over $M$ nor a member of category $\ambient\s/M$.
 
@@ -2542,10 +2542,10 @@ Let's start making a new to do list:
 Can I outline the new descent chapter?
 
 Start as usual by outlining the properties of the class of modest morphisms. Why would anyone care? Why did we want the universe to be fibrant?
-I explained that there is no model structure on general simplicial objects, and a minimal requirement is that the universe is part of the model category.
-We conclude however, that this is no issue here, because the descent construction gives the universal morphism a codomain.
+I explained that there is no model structure on general simplicial objects and a minimal requirement is that the universe is part of the model category.
+We conclude however that this is no issue here, because the descent construction gives the universal morphism a codomain.
 
-Describe descent. Here we got in trouble because we need to generalize. There is a family of descend constructions, one for each horn-inclusion. Ever worse: for each $\xi\of[m]\to[n]$ and each $k\of [n]$ there is a special object $s\of\tuplet{\xi,k} \of S\tuplet{\xi,k} \to \horn[n]_k$, and the descend $Df$ of $f\of X\to \horn[n]_k$ is defined in such a way that $\simplex(\xi) \to Df$ is isomorphic to $s\of\tuplet{\xi,k} \to f$.
+Describe descent. Here we got in trouble because we need to generalize. There is a family of descend constructions, one for each horn-inclusion. Ever worse: for each $\xi\of[m]\to[n]$ and each $k\of [n]$ there is a special object $s\of\tuplet{\xi,k} \of S\tuplet{\xi,k} \to \horn[n]_k$ and the descend $Df$ of $f\of X\to \horn[n]_k$ is defined in such a way that $\simplex(\xi) \to Df$ is isomorphic to $s\of\tuplet{\xi,k} \to f$.
 
 We can ignore how $s\of\tuplet{\xi,k}$ is defined for a while, because we don't need the details to show that $D$ is defined, preserves modest objects and that it has a left adjoint, all using the structure of $\ambient$. A small constraint makes $D$ right inverse to reindexing, meaning it is a descent functor. The final nail is the lifting property. The functor $D$ preserves fibrations, if its left adjoint preserves acyclic cofibrations, than it right adjoint preserves fibrations. We reduce the problem to the family of cofibrations, so that ultimately, we only need to show that a single object is an acyclic cofibration.
 
@@ -2559,7 +2559,7 @@ I don't have it yet.
 
 There is an (internal) category $\cat B$ of $\ambient$ that represents the representable objects of $\ambient\s/B$. What we want to describe is a functor $S:\cat B\to \ambient\s/A$. However, to point is to internalize everything. The object $\cat B$ must become an internal object of $\ambient\s/A$ and $S$ must become some structure over it. It becomes a profunctor $\cat B \to \cat A$, which can be represented as a bimodule. On both sides the action it derived form the category of simplicial sets however.
 
-That is where the 'sheaves are algebras' view comes in. Once we are in a slice category, restriction let's us define a monad, and sheaves are algebras for this monad. The $A$ and $B$ about are similarly algebras. The object $S$ provides two dimensions for each of its elements, and two actions. 
+That is where the 'sheaves are algebras' view comes in. Once we are in a slice category, restriction let's us define a monad and sheaves are algebras for this monad. The $A$ and $B$ about are similarly algebras. The object $S$ provides two dimensions for each of its elements and two actions. 
 
 What is $\cat B$ exactly? I keep feeling like we cannot just use the underlying object $\base(B)$ of $B$, but haven't got a fix on the alternative.
 
@@ -2569,7 +2569,7 @@ I keep getting stuck here. Does the higher level of abstraction buy me
 anything?
 
 \paragraph{Stick with it}
-In $\ambient\s/B$, the underlying object of $B$ represents the representable functors of $B$. The functor needs much more. For each $b\of\base(B)$ we have a whole simplicial object to describe, and we need the morphisms too. This underlines the fact that $S\to B$ is not a morphism of simplicial sets at all.
+In $\ambient\s/B$, the underlying object of $B$ represents the representable functors of $B$. The functor needs much more. For each $b\of\base(B)$ we have a whole simplicial object to describe and we need the morphisms too. This underlines the fact that $S\to B$ is not a morphism of simplicial sets at all.
 
 I feel bad. I just want to get this over. It isn't getting any good though.
 
@@ -2591,7 +2591,7 @@ Let $A_0 = (\bigcup_{j\neq b} U_j) \cap (\bigcup_{i\neq a} V_i)$ and let $A_{i}$
 \item $f\of \mathfrak A$.
 \end{itemize}
 
-For all $f\of A_{i+1} - A_i$, $f\circ d_i$ are members of $A_i$ safe one. If $f$ contains $a$ then each of the $f\circ d_i$ where $i\neq p$ satisfy $f(q) = a$ for some $q$ and hence are included in $A_i$. The face $f\circ d_p$ is not in $A_i$ because the only $i$-dimensional faces without $a$ are in $A_0\cup\mathfrak K$, but $f\circ d_p \of A_0\cup\mathfrak K$ implies $f\of A_0\cup\mathfrak K$, and hence $f\not of A_{i+1} - A_i$ as assumed.
+For all $f\of A_{i+1} - A_i$, $f\circ d_i$ are members of $A_i$ safe one. If $f$ contains $a$ then each of the $f\circ d_i$ where $i\neq p$ satisfy $f(q) = a$ for some $q$ and hence are included in $A_i$. The face $f\circ d_p$ is not in $A_i$ because the only $i$-dimensional faces without $a$ are in $A_0\cup\mathfrak K$, but $f\circ d_p \of A_0\cup\mathfrak K$ implies $f\of A_0\cup\mathfrak K$ and hence $f\not of A_{i+1} - A_i$ as assumed.
 If $f\of\mathfrak A$ then $f\circ d_i$ either intersect the same points of $k$ as $f$ and are therefore in $A_i$, or omit one of the points. Those will all be in $A_0$ except for the last by definition.
 
 Because of this relation, the inclusion $A_i\to A_{i+1}$ is a pushout of a coproduct of horn inclusions and therefore an acyclic cofibration. Because acyclic cofibrations are closed under composition, so is $A_0\to A_i$ for all $i\of \nno$.
@@ -2601,7 +2601,7 @@ If $f\of A_0$, if $f(p) = a$ for some $p$ or $f\of \mathfrak A$, then this is tr
 If $f\of U_j$ for $j\neq \beta(a)$ and $j\neq b$, then the extension of $f$ with $a$ is a member of $U_j$ as well, so $f\of A_{\dim(f)+1}$.
 Otherwise look for the greatest $k\of\mathfrak K\cup{\emptyset}$ such that $k\subseteq f$. If not $f - k(i)\of A_0$ for some $i\of \dom(f)$ then $f\of \mathfrak A$. If $f - k(i)\of A_0$ for all $i\of\dom(k)$, then there is a point of $K$ between $\max(k)$ and the next value of $f$ we can add, or $k$ would not be the greatest. The extended function $f + k\of\mathfrak A$ hence $f\of A_{\dim(f)+1}$.
 
-Since $U_j$ are finite dimensional, all faces of $\bigcup_{b\neq j} U_j$ are member of $A_i$ from some $i$ on, and this proves that the inclusion is an acyclic cofibration.
+Since $U_j$ are finite dimensional, all faces of $\bigcup_{b\neq j} U_j$ are member of $A_i$ from some $i$ on and this proves that the inclusion is an acyclic cofibration.
 \end{proof}
 
 After tying my head in a knot for so long, the result is almost insultingly simple. This does give confidence though.
@@ -2623,7 +2623,7 @@ Let $A_0 = (\bigcup_{j\neq b} U_j) \cap (\bigcup_{i\neq a} V_i)$ and let $A_{i}$
 \item $f\of \mathfrak K$.
 \end{itemize}
 
-For all $f\of A_{i+1} - A_i$, $f\circ d_i$ are members of $A_i$ safe one. If $f$ contains $a$ then each of the $f\circ d_i$ where $i\neq p$ satisfy $f(q) = a$ for some $q$ and hence are included in $A_i$. The face $f\circ d_p$ is not in $A_i$ because the only $i$-dimensional faces without $a$ are in $A_0\cup\mathfrak K$, but $f\circ d_p \of A_0\cup\mathfrak K$ implies $f\of A_0\cup\mathfrak K$, and hence $f\not of A_{i+1} - A_i$ as assumed.
+For all $f\of A_{i+1} - A_i$, $f\circ d_i$ are members of $A_i$ safe one. If $f$ contains $a$ then each of the $f\circ d_i$ where $i\neq p$ satisfy $f(q) = a$ for some $q$ and hence are included in $A_i$. The face $f\circ d_p$ is not in $A_i$ because the only $i$-dimensional faces without $a$ are in $A_0\cup\mathfrak K$, but $f\circ d_p \of A_0\cup\mathfrak K$ implies $f\of A_0\cup\mathfrak K$ and hence $f\not of A_{i+1} - A_i$ as assumed.
 If $f\of\mathfrak K$ then $f\circ d_i$ either intersect the same points of $k$ as $f$ and are therefore in $A_i$, or omit one of the points. Those will all be in $A_0$ except for the last by definition.
 
 Because of this relation, the inclusion $A_i\to A_{i+1}$ is a pushout of a coproduct of horn inclusions and hence an acyclic cofibration. Because acyclic cofibrations are closed under composition, so is $A_0\to A_i$ for all $i\of \nno$. All we need to show now is that $\bigcup_{j\neq b} U_j = A_{i+1}$ for dimension $i$ of $\bigcup_{j\neq b} U_j$. As you might have guessed, this is the hardest part.
@@ -2643,21 +2643,21 @@ I cannot finish the proof yet, because I am unsure where we actually can add poi
 \section{25/9/17}
 I have no confidence in yesterdays solution anymore.
 
-Let stop calling it $B$, and instead call it $K$, the image of $\kappa\of \prod_{j\neq b}\set{i\of\dom(\beta)|\beta(i)=j} \to S\tuplet{\beta,b}$. I think we need a sequence of points $k_0,k_1,\dots \of K$ and only add a face $f\of U_{\beta(a)}$ if it contains an initial segment of this sequence. Furthermore, $f-{k_n}$--which is $f$ minus the point $k$--is a member of $\bigcup_{i\neq a} V_i$ for all $n$ except the greatest $n$ for which $k_n$ is in the image of $f$.
+Let stop calling it $B$ and instead call it $K$, the image of $\kappa\of \prod_{j\neq b}\set{i\of\dom(\beta)|\beta(i)=j} \to S\tuplet{\beta,b}$. I think we need a sequence of points $k_0,k_1,\dots \of K$ and only add a face $f\of U_{\beta(a)}$ if it contains an initial segment of this sequence. Furthermore, $f-{k_n}$--which is $f$ minus the point $k$--is a member of $\bigcup_{i\neq a} V_i$ for all $n$ except the greatest $n$ for which $k_n$ is in the image of $f$.
 
 If $f\of U_j$ for $j\neq b$ and $j\neq\beta(a)$ we should not include is. Somehow the sequence $k_n$ can help to determine this. 
 If know that if $f\of (U_{\beta(a)} - \bigcup_{i\neq a} V_i$)
 and $f - \kappa\tuplet{j_0,\dotsc,j_n}\of \bigcup_{i\neq a} V_i$,
 then $f - \kappa\tuplet{j_0,\dotsc,j_n}\of \bigcup_{n\neq a} V_{j_n}$.
-The reason is that $\kappa\tuplet{j_0,\dotsc,j_n}\of V_j$ for $j\not\of\set{j_n}$, and hence $f$ would be too, against the first assumption.
+The reason is that $\kappa\tuplet{j_0,\dotsc,j_n}\of V_j$ for $j\not\of\set{j_n}$ and hence $f$ would be too, against the first assumption.
 
 I keep changing my mind about what will work here. I suppose the worst case scenario requires the maximum number of points in $K$ to work. Any face of $K$ that has the same dimension as the nerve.
 On the other hand, we seem to reduce the number of possibilities of $f$ quite significantly in the first step, which gives me the feeling that far fewer points can give us what we need.
 
 
-It seems like $f-K$ determines if $f$ is part of $U_j$. Since $\bigcap_{\beta(i) = j} V_i \subseteq U_j$ we want to use the $k$ to establish this. Take the smallest fibre of $\beta$, and pick $k_n$ such that each forces one of the $V_i$. Each $k\of K$ allows $f$ to escape, however.
+It seems like $f-K$ determines if $f$ is part of $U_j$. Since $\bigcap_{\beta(i) = j} V_i \subseteq U_j$ we want to use the $k$ to establish this. Take the smallest fibre of $\beta$ and pick $k_n$ such that each forces one of the $V_i$. Each $k\of K$ allows $f$ to escape, however.
 
-Each $k\of K$ limits $f-K$ to a disjunction of $\#\cod\beta - 2$ of $V_i$. Each step gives and intersection, that due to the distributive law only gets bigger. I see the number of members only growing along the way. But we strike out the intersections that contain all members of a fibre, because $f$ is not allowed to hide in those intersections. That is ultimately why a maximal solution does succeed. 
+Each $k\of K$ limits $f-K$ to a disjunction of $\#\cod\beta - 2$ of $V_i$. Each step gives and intersection that due to the distributive law only gets bigger. I see the number of members only growing along the way. But we strike out the intersections that contain all members of a fibre, because $f$ is not allowed to hide in those intersections. That is ultimately why a maximal solution does succeed. 
 
 \section{24/9/17}
 
@@ -2683,9 +2683,9 @@ Either $f$ can be extended with $a$ or for all $y\of \cod(\beta)-\set{\beta(a),b
 Reducing the number of values that $t(f)$ can have is probably a good idea. Perhaps we can limit it to the top point of $B$.
 Sounds good.
 
-So two options: $f$ contains $a$, $f$ contains the extremes of $B$, and the rest cases.
+So two options: $f$ contains $a$, $f$ contains the extremes of $B$ and the rest cases.
 
-Generally, we would like a decidable property that neatly splits $f$ in two classes, closed under taking sub-faces, that determines which point we will need for gluing.
+Generally, we would like a decidable property that neatly splits $f$ in two classes, closed under taking sub-faces that determines which point we will need for gluing.
 
 No, it is either $\bot_B$ and all of its members, or $\bot_B$ and $\top_B$. If $f-\bot_B\of V_i$, then we use $\top_B$, which therefore must be hit in the image of $f$.
 
@@ -2694,7 +2694,7 @@ That is all.
 \paragraph{2-point-solution ?}
 Seeing this makes me wonder if we ever need more than 2 points in $B$. 
 
-So $S(\xi\of[m]\to[n])  = s(\xi)\of[m + 2]\to [n]$. This doesn't do descend properly, as is changes $\xi$ that must be preserved in pullbacks. I don't believe we can fix this in a way that leaves a functor, and that matters for how $V_i$ are mapped, implying potential disaster.
+So $S(\xi\of[m]\to[n])  = s(\xi)\of[m + 2]\to [n]$. This doesn't do descend properly, as is changes $\xi$ that must be preserved in pullbacks. I don't believe we can fix this in a way that leaves a functor and that matters for how $V_i$ are mapped, implying potential disaster.
 
 \section{23/9/17}
 Let's put in some extra time. For each face $f\of U_{\beta(a)}-(\bigcup_{i\neq a}V_i)$ there is a set of points in $B$ there we might use as supporting points for gluing $f$ in. Technically we can use any point of $B$ to do the actual gluing, but there seems to be a problem.
@@ -2706,14 +2706,14 @@ The difficult cases are quite restricted actually:
 &\forall i\of\dom(\beta) - \set a.\exists x.f(x) = \lambda(i) \vee \exists y.f(x) = \kappa(y) \land y(\beta(i)) = i
 \end{align*}
 
-Exclusion based on missing certain points still feels like a good idea. We will be punching holes in $f$, and demand that all resulting subfaces are included at an earlier stage safe for one. So at the lower stages we need to exclude $f$ that point. Unfortunately, the top edge shifts around and we need to account for those shifted edges as well.
+Exclusion based on missing certain points still feels like a good idea. We will be punching holes in $f$ and demand that all resulting subfaces are included at an earlier stage safe for one. So at the lower stages we need to exclude $f$ that point. Unfortunately, the top edge shifts around and we need to account for those shifted edges as well.
 
 At this point I am wondering how the old proof could even have worked. There we don't try to force ourselves to fit everything in dimensionally.
 Perhaps that will simply never work.
 
 Top selection should not be based on existing points, but on the possibility to add.
 So well order $B$--at least the subset where $x(\beta(a)) = a$--and pick the least $p\of B$ such that $f$ can be extended with it.
-Perhaps we never run into any restrictions here, and glue in faces with a single edge in $B$.
+Perhaps we never run into any restrictions here and glue in faces with a single edge in $B$.
 Alternatively, we need to connect some faces to this edge before we can proceed.
 That is unlikely to work for all the base cases though.
 
@@ -2750,7 +2750,7 @@ will be looking for a way to add all of $S\tuplet{\beta,b}(f)$ and the
 idea is that we can do induction over $|f|$. After all, $f\circ d_i$ all have lower norms. A, but we still need to pick a base point!
 
 Let's not be stingy and just say what we want.
-For each $j\of \cod(\beta)$ there is a least $i$ such that $i \geq f(k)$ whenever $\beta(f(k)) = j$. These least $i$ both determine the base point we will use, and the stage of
+For each $j\of \cod(\beta)$ there is a least $i$ such that $i \geq f(k)$ whenever $\beta(f(k)) = j$. These least $i$ both determine the base point we will use and the stage of
 construction at which $S\tuplet{\beta,b}(f)$ can be glued on. We would
 like to deal with the fact that we are not starting from $1$ in each fibre of $\beta$, but that might not be a big problem in the proof. We do have to be careful about dimension.
 
@@ -2758,7 +2758,7 @@ like to deal with the fact that we are not starting from $1$ in each fibre of $\
 Outline of the new descend chapter:
 \begin{enumerate}
 \item Introduce the descend functor and its left adjoint.
-We are dealing with slice categories here, and explaining the functor
+We are dealing with slice categories here and explaining the functor
 already involves nerves of posets, presumably. We have to deal with general theories that connect slice categories to categories of elements. Moreover, we lift functors using all structure of $\ambient$ at our convenience.
 \item Prove that descend is right inverse to reindexing and prove the preservation of modest fibrations.
 Both should follow easily form the definitions.
@@ -2789,7 +2789,7 @@ Without the total ordering of $B$, there are a lot more morphisms to take in acc
 Now the rule for this family of morphisms is that $f$ comes after $g$ if $f\geq g$. So that is something to bump the stage up for.
 
 Let's review: a face $f\of [n]\to U_{\beta(a)}$ cannot be extended to contain $a$. We therefore need to glue it, using its faces of codimension 1. The morphism $f$ has at least one pivot point to work with. Trading points with $a$ suggests a minimum of dimension plus 2-- --but would that work for points of $B$ that $f$ hits?
-For each point that $f$ hits in $B$, first remove that point. That becomes a new target. We get the same analysis: outside of $B$ we can switch points with $a$ to get them at a stage of minimally dimension plus 2, and adding the dimensional we already have, the stages becomes plus 3. Hence the general rule seems to add at least the number of points in $B$ that $f$ hits to the dimension, but they do this themselves don't they? Dimension plus 2 seems sufficient.
+For each point that $f$ hits in $B$, first remove that point. That becomes a new target. We get the same analysis: outside of $B$ we can switch points with $a$ to get them at a stage of minimally dimension plus 2 and adding the dimensional we already have, the stages becomes plus 3. Hence the general rule seems to add at least the number of points in $B$ that $f$ hits to the dimension, but they do this themselves don't they? Dimension plus 2 seems sufficient.
 
 I now get something like this. A face $f\of [n] \to \bigcup_{j\neq b}U_j$ belongs to stage $n$ if $f(i) = a$ for some $i\of [n]$. It belong to stage $n + 1$, if $(f \leftarrow a)$ is a function $[n + 1] \to \bigcup_{j\neq b}U_j$. Here:
 \begin{align*}
@@ -2799,13 +2799,13 @@ I now get something like this. A face $f\of [n] \to \bigcup_{j\neq b}U_j$ belong
 \end{align*}
 Finally it belongs to stage $n + 2$ if $(f \leftarrow a)$ isn't a member of $\bigcup_{j\neq b}U_j$.
 
-The stages are subsets $A_i$ of $\bigcup_{j\neq b}U_j$ and supersets of $\bigcup_{i\neq a,j\neq b}(U_j\cap V_i)$ defined as unions of various stages according to the classification just made. We show that $A_0 = \bigcup_{i\neq a,j\neq b}(U_j\cap V_i)$, that $A_u = \bigcup_{j\neq b}U_j$ for some $u\geq\#S\tuplet{\beta,b}+2$. Finally the real issue: is $A_n \to A_{n+1}$ an acyclic cofibration?
+The stages are subsets $A_i$ of $\bigcup_{j\neq b}U_j$ and supersets of $\bigcup_{i\neq a,j\neq b}(U_j\cap V_i)$ defined as unions of various stages according to the classification just made. We show that $A_0 = \bigcup_{i\neq a,j\neq b}(U_j\cap V_i)$ that $A_u = \bigcup_{j\neq b}U_j$ for some $u\geq\#S\tuplet{\beta,b}+2$. Finally the real issue: is $A_n \to A_{n+1}$ an acyclic cofibration?
 
 We have a good idea of what the new functions are. 
 \begin{itemize}
 \item For the faces $f$ where $f(i) = a$, all $f\circ d_j$ where $j\neq i$ are of stage $n - 1$.
 \item For the faces $f$, if $f \mathord\leftarrow a$ belong to the result, then $f\mathord\leftarrow a$ belongs to the same stage.
-\item For the faces that cannot be extended $f\circ d_j$ presumably have only two sorts: those that are extensible, and which therefore life at stage $n$ by the preceding argument, and those which aren't by the induction argument. It doesn't look like we need to be picky with the top edge, pivot etc. anymore.
+\item For the faces that cannot be extended $f\circ d_j$ presumably have only two sorts: those that are extensible and which therefore life at stage $n$ by the preceding argument and those which aren't by the induction argument. It doesn't look like we need to be picky with the top edge, pivot etc. anymore.
 \end{itemize}
 
 I am missing something crucially important:
@@ -2815,7 +2815,7 @@ The third type is trouble, however. The reason we don't need to be picky
 is the reason why it won't work.
 
 First make another distinction, between those $f$ that already intersect $B$ and those that don't. Those that don't will only be added as part of a face that does at the same stage. For the $f$ that intersect $B$ we presumably pick one of the intersection points as pivot.
-We need to pick the top edge that puts $f$ in one way or another. The face of $f$ that lacks edge must have the same stage, and not appear at a low stage.
+We need to pick the top edge that puts $f$ in one way or another. The face of $f$ that lacks edge must have the same stage and not appear at a low stage.
 
 The old solution was to restrict the points outside of $B$, while including all points inside of $B$. The lexicographical ordering does some strange things here.
 
@@ -2825,7 +2825,7 @@ Be specific:
 \item If $f$ does not contain this top edge, then it will only be added as part of the extension with that top edge, which should always be possible.
 \item For pivots other than $a$ we need an offset from the dimension. I have a pretty good idea what it should be, but I need to think about this.
 \end{itemize}
-Removing point of $f$ inside $B$ either results in removing the top edge, and we are safe from this now. Otherwise nothing important happens. So move on to removing points outside of $f$. This could change the proper top edge. That means that alternative top edges need to go first.
+Removing point of $f$ inside $B$ either results in removing the top edge and we are safe from this now. Otherwise nothing important happens. So move on to removing points outside of $f$. This could change the proper top edge. That means that alternative top edges need to go first.
 
 The number of edges I would connect to $f$ is:
 $\prod_{j\neq b, j\neq \alpha(b)}\set{i|s\tuplet{\beta,b}(f(i)) = j}$
@@ -2900,7 +2900,7 @@ of cofibrations. Here the pain starts.
 \item Stage zero is the domain. 
 \item The next few stages add all faces that contain $a$. Sometimes this requires several steps of adding faces, going up the dimensions one-by-one. In other words, $\beta$ determines how many stages are needed.
 \item The last few stages deal with cases where we are forced to work around $a$. Instead we use the tuplets in $S\tuplet{\beta,b}$ as points to work with.
-Think subsets of $S\tuplet{\beta,b}$. In fact, that is what we replace the old faces with: subsets of this poset.
+Think subsets of $S\tuplet{\beta,b}$. In fact that is what we replace the old faces with: subsets of this poset.
 \end{itemize}
 
 Perhaps tracking with more general posets and using mostly dimension to glue in new faces, is better way to make the construction understood.
@@ -2928,7 +2928,7 @@ order.
 \end{itemize}
 
 What can we do now?
-Take another route to $K_!$, and hopefully $K^*$, that doesn't go through $\simCat/[n]$.
+Take another route to $K_!$ and hopefully $K^*$ that doesn't go through $\simCat/[n]$.
 There may be advantages to that.
 Horns live in the categories of simplices, not in the slice category. That caused some awkwardness with having to prove that $K_!$ preserves intersections.
 The lexicographical product is involved in the construction of the fillers, but it may not be that important.
@@ -2996,7 +2996,7 @@ It looks more like:
 \base(D\ri(f)) &= \set{ \tuplet{x,s} | x\of\dom(f),s \of \nu(S(f(x)))}/{\mathord\sim}\\
 \textrm{where } & \tuplet{x\cdot\phi,s} \sim \tuplet{x,\nu(S(\phi))(s)}
 \end{align*}
-Here $\nu$ stands for the nerve, that adds many additional morphisms.
+Here $\nu$ stands for the nerve that adds many additional morphisms.
 
 The right adjoint consists of natural transformations form this nerve.
 
@@ -3118,16 +3118,16 @@ Surely it can't be proper morphisms though? What I have trouble with is the idea
 such that $K$ and $D$ are the result of pullbacks and pushouts along those morphisms. The changes in dimension are the clearest problem.
 There must be two different simplicial structures on the same object to overcome that. 
 
-The $K_2f$ is a more complicated variant, supposed to capture pairs of equivalent elements. Pairs of commutative triangles sharing a domain. Both embellished with an element of $f$, that becomes equal after restriction. This is supposed to tell us which members of $f\ri(B_1)$ to equate.
+The $K_2f$ is a more complicated variant, supposed to capture pairs of equivalent elements. Pairs of commutative triangles sharing a domain. Both embellished with an element of $f$ that becomes equal after restriction. This is supposed to tell us which members of $f\ri(B_1)$ to equate.
 
 Forgetting structure is the goal. We know that $f$ can be represented as a coequalizer of coproducts of representables and its morphisms as well.
 For this we might introduce the 'co-yoneda lemma' or something. Simpler yet: presumably we are dealing with internal projectives and coverings by those.
-Now we get to a higher level of clarity, and completely loose track of the rest.
+Now we get to a higher level of clarity and completely loose track of the rest.
 
 \paragraph{looking at simplicial sets differently}
 The coequalizer of coproduct of representables suggests that all of our categories are exact completions of some sort, depending on how easily we can represent morphisms.
 
-I thought I worked this out before. We look at $\ambient/\nno$, and then a monad on this category to get the option of sending a simplex to a degenerate simplex. The simplicial sets are algebras for the monad, while we are now looking at the Kleisli category, and hence the 'free objects' in a sense among the simplicial objects. I think these free object a projective in an enriched sense, i.e. the enrichment in ambient is regular in the covariant variable, if the contravariant is free. Yet it is possible to represent all objects as pseudoequivalence relations of free objects, and all morphisms as morphisms of the pseudoequivalence relations, by finding a particularly full covering (perhaps we are dealing with a 'resolvent embedding').
+I thought I worked this out before. We look at $\ambient/\nno$ and then a monad on this category to get the option of sending a simplex to a degenerate simplex. The simplicial sets are algebras for the monad, while we are now looking at the Kleisli category and hence the 'free objects' in a sense among the simplicial objects. I think these free object a projective in an enriched sense, i.e. the enrichment in ambient is regular in the covariant variable, if the contravariant is free. Yet it is possible to represent all objects as pseudoequivalence relations of free objects and all morphisms as morphisms of the pseudoequivalence relations, by finding a particularly full covering (perhaps we are dealing with a 'resolvent embedding').
 
 We can define the functor $K$ on the free objects, show that it preserves equivalence relations and use that to define the functor for all simplicial objects.
 We still have nothing on $D$.
@@ -3135,7 +3135,7 @@ We still have nothing on $D$.
 Precise generic statements.
 
 \paragraph{back to $D$}
-The construction of $D$ ought to be simpler, because a simplicial object is like a functor, and we just compose functors.
+The construction of $D$ ought to be simpler, because a simplicial object is like a functor and we just compose functors.
 The representation we use is a complication, but only slightly so, I think.
 
 Keep in mind that we combined to constructions to shorten the text. There is a perfectly ordinary adjunction giving by reindexing and its right adjoint, which unfortunately does not preserve model structures. We modify the model structure on one side and give adjoint endofunctors to connect the models structures.
@@ -3146,13 +3146,13 @@ If we return to the presheaves over the full simplex, it look like we are just p
 
 That is a good way to look at it\dots
 
-Objects of $\ambient\s/\simplex_{\set\leq}$ are algebras for a monad on $\ambient/P$. There is a morphism $k\of P\to P$, and we define the functor $D$ be pulling back along this morphism. So what happens to the algebra structure then? There is a specific mapping:
+Objects of $\ambient\s/\simplex_{\set\leq}$ are algebras for a monad on $\ambient/P$. There is a morphism $k\of P\to P$ and we define the functor $D$ be pulling back along this morphism. So what happens to the algebra structure then? There is a specific mapping:
 \[ K_1\of \set{ \tuplet{\xi,k,\phi} | \cod(\phi)=\dim\tuplet{\xi,k} } \to \set{ \tuplet{\xi,k,\phi} | \cod(\phi) = \dim(K_0\tuplet{\xi,k}) } \]
 With it help, we can show that the pullbacks have the same algebra structure.
 
 The other direction is harder, because composing with $k$ doesn't preserve the algebra structure. However, we should be able to work with a quotient of the free algebra. Start with $f\of X\to P$:
 \[ M(k\circ f) = \set{\tuplet{x,\phi}|\cod(\phi) = \norm{ f(x) }}\]
-Now $\tuplet{x\cdot\phi,\chi} \sim \tuplet{x,K_1(\phi)\circ \chi}$. The structure of ambient is sufficient to provide a quotient $M(k\circ f)/\sim$, and morphisms factors nicely through these quotients, providing the sought after functor $K$.
+Now $\tuplet{x\cdot\phi,\chi} \sim \tuplet{x,K_1(\phi)\circ \chi}$. The structure of ambient is sufficient to provide a quotient $M(k\circ f)/\sim$ and morphisms factors nicely through these quotients, providing the sought after functor $K$.
 
 Viewing slices of $\ambient$ as categories of algebras for various closely related looks smart. Maybe something to work into previous chapters of the paper.
 
@@ -3160,7 +3160,7 @@ For the adjunction, this is even better. The unit $g \to DKg$ is $\function y \t
 The counit $KDf \to f$ is $\function{\tuplet{x,\phi}} x\cdot\phi$. Does that make sense?
 
 The construction relies on a kind of factorization of $k\circ g$ through a morphism $Kg\of KY \to P$, where $KY$ is a suitable quotient of the free algebra.
-$Df$ is simply a pullback. $Kg$ is the initial algebra through which $k\circ g$ factors. Clearly $g$ factors through $DKg$ due to the property of pullbacks, and $KDf$ through $f$ through initiality. Isomorphism $g\to DKg$ is equivalent to $K$ being fully faithful, which may help\dots Big factor is $k\of P\to P$ being monomorphic. Initiality is needed as well. For initiality $(Kg,Kh)\simeq (k\circ g,Kh)$, but $(k\circ g,Kh)\simeq (g,h)$ because $k$ is monic?
+$Df$ is simply a pullback. $Kg$ is the initial algebra through which $k\circ g$ factors. Clearly $g$ factors through $DKg$ due to the property of pullbacks and $KDf$ through $f$ through initiality. Isomorphism $g\to DKg$ is equivalent to $K$ being fully faithful, which may help\dots Big factor is $k\of P\to P$ being monomorphic. Initiality is needed as well. For initiality $(Kg,Kh)\simeq (k\circ g,Kh)$, but $(k\circ g,Kh)\simeq (g,h)$ because $k$ is monic?
 
 Why do I want $DKg\simeq g$ anyway? I want $h\ri(D(h_*f))\simeq f$. The morphism $k$ being an endomorphism of $h$ takes care of this.
 
@@ -3246,10 +3246,10 @@ Nothing really changes about the structure of the proof.
 Since $\ambient\s$ is sort of like a topos, we can represent its objects as coequalizers between sums of simplices. This representation allows us to extends any functor $K\of \simCat \to \simCat$ to a functor $\ambient\s\to\ambient\s$: the right Kan extension of $Y$ along $YK$ if $Y$ is the Yoneda embedding.
 Technically we have a far larger class of lifting problems to address internally. We need a functor $\ambient\s/\simplex_{\set\leq}\to\ambient\s/\horn_{\set\leq}$, which has a right adjoint and which preserves cofibrations.
 
-We can subdivide a little, and use the family of horn inclusion to define a model structure first.
+We can subdivide a little and use the family of horn inclusion to define a model structure first.
 
 \paragraph{recapitulate}
-We need a lifting operator for the universe of modest objects. We realize it by descending fibrations along the family of horn inclusions. The descent operator must produce a fibration whose pull back is the original fibration. We turn this into a functor, which has a left adjoint, and then prove the left adjoint preserves cofibrations.
+We need a lifting operator for the universe of modest objects. We realize it by descending fibrations along the family of horn inclusions. The descent operator must produce a fibration whose pull back is the original fibration. We turn this into a functor, which has a left adjoint and then prove the left adjoint preserves cofibrations.
 
 Ultimately we bring it down to a single family that is proven to be a family of cofibrations.
 
@@ -3260,7 +3260,7 @@ Proving that the descended morphisms are fibrations is done by reducing the lift
 For each $\xi\of [m]\to[n]$, $k\of[m]$ and $l\of[n]$ there is a strengthened cofibration 
 
 \paragraph{strategy}
-We want to put the family of horn inclusions central, so let's just rewrite the section that way, and see where we get stuck.
+We want to put the family of horn inclusions central, so let's just rewrite the section that way and see where we get stuck.
 
 
 
@@ -3317,7 +3317,7 @@ $D\of \ambient\s/\simplex_{\set\leq} \to \ambient\s/\horn_{\set\leq}$
 
 
 \paragraph{projectives are cofibrants}
-The category of projectives should be equivalent to the category $\cat P$ where objects are pairs $\tuplet{P,p\of P\to\nno}$ of objects and morphisms of $\ambient$, and where a morphism $\tuplet{P,p}\to \tuplet{Q,q}$ is a morphism $f\of P\to \times Q\times \Ar(\simCat)$ such that $f_1(x)\of [p(x)]\to [q(f_0(y))]$, i.e. like a tracked morphism in a sense.
+The category of projectives should be equivalent to the category $\cat P$ where objects are pairs $\tuplet{P,p\of P\to\nno}$ of objects and morphisms of $\ambient$ and where a morphism $\tuplet{P,p}\to \tuplet{Q,q}$ is a morphism $f\of P\to \times Q\times \Ar(\simCat)$ such that $f_1(x)\of [p(x)]\to [q(f_0(y))]$, i.e. like a tracked morphism in a sense.
 Essentially, families of finite well orderings.
 
 We can cover the family of horn inclusions with these, which is all we need.
@@ -3329,7 +3329,7 @@ What we need however is the covering by regular epimorphisms, which may differ f
 I don't trust this. These structures aren't coproducts of simplices, like the projectives I look at before. So something is up.
 Coverings with tensors of the family of simplices are everywhere though, so it may not be a great problem.
 
-So $K$ does extends to all of $\ambient\s$. Every object is the quotient of a pseudoequivalence of cofibrant objects. The functor $K$ easily extends to cofibrants, and their quotients, hence all of $\ambient$. So $D$ has a proper left adjoint. This left adjoint has to send the family of horn inclusions to cofibrations.
+So $K$ does extends to all of $\ambient\s$. Every object is the quotient of a pseudoequivalence of cofibrant objects. The functor $K$ easily extends to cofibrants and their quotients, hence all of $\ambient$. So $D$ has a proper left adjoint. This left adjoint has to send the family of horn inclusions to cofibrations.
 
 
 
@@ -3351,7 +3351,7 @@ I keep missing what I really need, but degeneracy should be definite.
 
 Suppose we definite degenerate as follows: $x=y\cdot\epsilon$ for a surjective $\epsilon$ such that $\epsilon\neq\id$.
 Can we prove the current positive definition of face?
-Suppose $x=x'\cdot\xi$ for some endomorphism $\xi$, but $x$ is nondegenerate. By em-factorization $x = x \cdot m(\xi)\cdot e(\xi)$, but now $\neg\neg(e(\xi)=\id)$, because of nondegeneracy, and $e(\xi) = \xi$ because equality between these morphisms is decidable.
+Suppose $x=x'\cdot\xi$ for some endomorphism $\xi$, but $x$ is nondegenerate. By em-factorization $x = x \cdot m(\xi)\cdot e(\xi)$, but now $\neg\neg(e(\xi)=\id)$, because of nondegeneracy and $e(\xi) = \xi$ because equality between these morphisms is decidable.
 
 
 
@@ -3463,11 +3463,11 @@ Especially
 I updated the definition of lifting property with respect to a family. This permits a concrete way to write down certain proofs, which I am also introducing.
 I do find that I remembered some forgotten aspects of earlier structures. As usual, my memory simplifies the proofs by erasing vital details, only hanging on to the general shape. Without these vital details some large scale restructuring becomes easy to imagine, but the chance that the new structure actually work becomes smaller.
 
-I mean, I rediscovered the idea of an object of lifting problems, a vital detail that I didn't manage to put down clearly enough before, and gradually removed as I rewrote the paper. The same happened with transfinite compositions. I had them in a way that obscured their role in the central proofs. Now I miss them.
+I mean, I rediscovered the idea of an object of lifting problems, a vital detail that I didn't manage to put down clearly enough before and gradually removed as I rewrote the paper. The same happened with transfinite compositions. I had them in a way that obscured their role in the central proofs. Now I miss them.
 
 \section{26/5/17}
 
-Transfinite compositions are not used explicitly anywhere, and don't seem like much of an addition.
+Transfinite compositions are not used explicitly anywhere and don't seem like much of an addition.
 
 Okay, suppose $f\of X\to X$ is a chain. Feels like the inclusion $X_0 \to X - f(X)$ should be the transfinite composition. Of course, $X - f(X)$ is not a simplicial set, unless we can adjust the restriction operator, but the existence of a transfinite composition suggest than we can.
 
@@ -3495,7 +3495,7 @@ Perhaps we need a lemma for this or something, but let's just see how far we get
 
 As it stands, the text suggest that a lot of power comes from defining the lifting property in the slice category. It does not. 
 There is an option to pull back morphism with left lifting property along \emph{discrete morphisms}, because of the enrichment. 
-That is the power I wanted, and should be using explicitly throughout my proofs.
+That is the power I wanted and should be using explicitly throughout my proofs.
 
 Another insight: the coproducts I seek are \emph{weighted coproducts}.
 
@@ -3546,7 +3546,7 @@ k\leq \cod(\phi),\\
 The simplicial object $\horn_{\set\geq}$ is subobject of $\simplex_{\set\geq}$ by definition. 
 The inclusion $\horn_{\set\geq}\to\simplex_{\set\geq}$ is the family of all horn inclusions.
 
-The formula $\tuplet{\phi,k}\mapsto \tuplet{\dom(\phi),\cod(\phi),k}$ defines morphisms of simplices $\horn_{\set\geq}\to\set\geq\disc$ and $\simplex_{\set\geq}\to\set\geq\disc$ that commute with the inclusion, and make it a morphism in $\ambient\s/\set\geq\disc$. This category $\ambient\s/\set\geq\disc$ has an enrichment in $\ambient/\set\geq$, where $\nat(X,Y)$. If $\set\geq\ri(f)$ has the right lifting property with respect to the inclusion $\horn_{\set\geq}\to\set\geq\disc$ relative to the enrichment on $\ambient/\set\geq$.
+The formula $\tuplet{\phi,k}\mapsto \tuplet{\dom(\phi),\cod(\phi),k}$ defines morphisms of simplices $\horn_{\set\geq}\to\set\geq\disc$ and $\simplex_{\set\geq}\to\set\geq\disc$ that commute with the inclusion and make it a morphism in $\ambient\s/\set\geq\disc$. This category $\ambient\s/\set\geq\disc$ has an enrichment in $\ambient/\set\geq$, where $\nat(X,Y)$. If $\set\geq\ri(f)$ has the right lifting property with respect to the inclusion $\horn_{\set\geq}\to\set\geq\disc$ relative to the enrichment on $\ambient/\set\geq$.
 \end{definition}
 
 Perhaps this requires a new section, even if we use the notion only twice.
@@ -3561,7 +3561,7 @@ Lifting discrete families as a core concept, to be introduced right after the en
 I know what I need, but as usual, it is a struggle to write down.
 
 \section{28/4/17}
-Dwelling on the contractible-cofibration factorization. The latching an matching elements evidently are part of fibrant and cofibrant replacements, and perhaps the proof becomes clearer if we somehow use the replacements first. I don't see it working however.
+Dwelling on the contractible-cofibration factorization. The latching an matching elements evidently are part of fibrant and cofibrant replacements and perhaps the proof becomes clearer if we somehow use the replacements first. I don't see it working however.
 
 Plan: print out and check for mistakes; try to publish once again? At the same time, look for computer verification.
 
@@ -3575,7 +3575,7 @@ Two parts stay difficult to understand, because they generalize in the internal 
 
 The trouble with the factorization must be that we need to show a filler operator for the family of cycles. Other than a rewording of the current text, I don't see much to improve here.
 
-This whole part is based on Reedy's work, and it would be better to reflect that somehow.
+This whole part is based on Reedy's work and it would be better to reflect that somehow.
 I don't know how to do that yet.
 
 \paragraph{Some observations on the relation with Reedy's work}
@@ -3583,7 +3583,7 @@ Reedy shows how a model structure on a small complete category can be lifted to 
 My construction combines the latching and the matching factorizations of the Reedy categories to yield only one of the factorizations of the model structure.
 The latching part seem to ensure cofibrations, while the matching part ensures fillers.
 The external induction hurts. Everything should be related to the internal natural number object.
-Note that Reedy factorization is quite complicated, and the paper tries to skip to the result.
+Note that Reedy factorization is quite complicated and the paper tries to skip to the result.
 
 There is a factorization of morphisms in the ambient category based on decidable monomorphism following split epimorphisms.
 Reedy's construction lifts this to the category of simplicial objects.
@@ -3597,7 +3597,7 @@ It is good to look up the definitions again, if only for the confirmation that t
 We are working out exactly what a \emph{horn or cycle filler} operator is, just like we worked out what a simplicial set is, in hopes of making the proof clearer and more convincing.
 
 The lifting property is more demanding because it has to take all cases into account.
-I work in all kinds of slice categories to hide to gory details, and keep track of additional requirement:
+I work in all kinds of slice categories to hide to gory details and keep track of additional requirement:
 For a particular $f\of X\to Y$ and the family of horns $h\of D\to C$.
 \begin{align*}
 P &= \set{ \tuplet{a,b}\of(D\to X)\times(C\to Y)| f\circ a = b \circ h }\\
@@ -3611,7 +3611,7 @@ b(\tuplet{\phi,k})\cdot\chi &= b(\tuplet{\phi\circ \chi,k}) \\
 \item The filler satisfies the same restrictions on dimensionality and restrictions, plus $c\circ h = a$ and $f\circ c = b$.
 \end{itemize}
 
-We now get a simplified notion of what a filler operator for both families are, and can try to rewrite the proofs in order to build exactly such an operator.
+We now get a simplified notion of what a filler operator for both families are and can try to rewrite the proofs in order to build exactly such an operator.
 
 Suppose we work out an official definition of horn and cycle fillers. What might happen?
 The step from the filler to lifting cofibrations may be less obvious, requiring some updates of the proofs and definition.
@@ -3665,14 +3665,14 @@ Where do we have problems with generalizations?
 \end{itemize}
 
 \section{Triple lifting property}
-We derive this from the equality of contractible and the acyclic fibrations. The core argument is that $\tuplet{f\to g}$ is a fibration if $f\of A\to B$ is a cofibration and $g\of X\to Y$ is a fibration, and contractible if $g$ is contractible or $f$ is acyclic. So how to define the horn and cycle fillers?
+We derive this from the equality of contractible and the acyclic fibrations. The core argument is that $\tuplet{f\to g}$ is a fibration if $f\of A\to B$ is a cofibration and $g\of X\to Y$ is a fibration and contractible if $g$ is contractible or $f$ is acyclic. So how to define the horn and cycle fillers?
 
 \[ \tuplet{f\to g} = \function{x\of X^B}\tuplet{g\circ x,x\circ f}\of X^B \to Y^B\times_{Y^A} X^A \]
 
 Another approach is to take the pushout product of the families and construct the desired fillers there.
 
 Take push out product of the family of horns with the family of cycles, then find a filler.
-If $f$ is contractible, take the pushout product of the family of cycles with itself, and find a filler for that too.
+If $f$ is contractible, take the pushout product of the family of cycles with itself and find a filler for that too.
 Then use adjoints etc. to prove the lemma.
 We may be able to pull it of without products, however. The triple lift for the families is a special case form which we derive all the special cases.
 
@@ -3738,16 +3738,16 @@ We look for the first point where $f(k+j+n)_1 > j$ and swap all those points!?
 Nope, we need to subdivide one step further.
 
 Better approach: the 'distance' of two monotone monics is the number of places they don't coincide.
-There is a specific monic that we start with, and then we progressively add in monics at greater distances.
+There is a specific monic that we start with and then we progressively add in monics at greater distances.
 Note the law $f(k)_0+f(k)_1=k$, which may be even better than out surjectivity claims.
 
-So let's try again: $f_0(l) = \tuplet{l,0}$ if $l\leq k$, $f_0(l) = \tuplet{k,l-k}$ if $l$ is between $k$ and $k+n$, and 
+So let's try again: $f_0(l) = \tuplet{l,0}$ if $l\leq k$, $f_0(l) = \tuplet{k,l-k}$ if $l$ is between $k$ and $k+n$ and 
 $f_0(l) = \tuplet{l-n,n}$ if $l\geq n+k$. We gluing the faces in order of their distance (a number of steps from the basis figure)
 to this monic. That way, we can rely on the overlap to prove required faces are present.
 
 The only problem is choosing the base point is such a way that the opposing face is absent. Can we always do this?
 
-Let $f$ be glued in, and $g$ be different from in in point $p\of[m+n]$. For $g\circ \partial_q$ if $q\neq p$ we know those faces are available.
+Let $f$ be glued in and $g$ be different from in in point $p\of[m+n]$. For $g\circ \partial_q$ if $q\neq p$ we know those faces are available.
 We also need a base point, however. Some place where $f_0$ and $g_0$ are both $k$.
 Then we note that all opposites to where $f_0=k$ have been added however\dots
 What am I saying? All subfaces of $g$ are different from $f$ except $g\circ \partial_p$!
@@ -3755,10 +3755,10 @@ What am I saying? All subfaces of $g$ are different from $f$ except $g\circ \par
 In general, the surjectivity ensures we can use the $k$-spine to glue in any face. What we need is the opposite:
 a proof that the face opposing the chosen base point has not already been glued in!
 
-So for $f$ let the least $p$ such that $f(p)_0=k$ be the base point. We would hate for $f\circ\partial_p$ to be present, and there is exactly one face that could case this tragedy: $f + (p \mapsto \tuplet{k-1,f_1(p)+1})$. Its least point is $p+1$, so that gives us a criterion for ordering faces: the least points that hit $k$ 
+So for $f$ let the least $p$ such that $f(p)_0=k$ be the base point. We would hate for $f\circ\partial_p$ to be present and there is exactly one face that could case this tragedy: $f + (p \mapsto \tuplet{k-1,f_1(p)+1})$. Its least point is $p+1$, so that gives us a criterion for ordering faces: the least points that hit $k$ 
 
 The existing subfaces seem like causes for $f\circ\partial_p$ existence, but that requires either coordinate of $f(p) = \tuplet{k,x}$ not to occur anymore.
-In the first case, that forces $f(p-1)_0=k-1$ and $f(p+1)_0=k+1$, which is in the missing $([m]-\set k)\times [n]$ area. In the second, $f(p-1) = \tuplet{k,x-1}$, which means that $p$ is not the least point, contradicting an assumption. We in fact hardly notice the preexisting faces.
+In the first case that forces $f(p-1)_0=k-1$ and $f(p+1)_0=k+1$, which is in the missing $([m]-\set k)\times [n]$ area. In the second, $f(p-1) = \tuplet{k,x-1}$, which means that $p$ is not the least point, contradicting an assumption. We in fact hardly notice the preexisting faces.
 
 The main part is then 'face completion': we have a base point and dimension by dimension glue in the necessary faces, noting that we already have all the $[m+n-2]$ ones already.
 
@@ -3785,11 +3785,11 @@ Then the ordering depends on how many points a monic has in common with this one
 
 All monics are going to have two points in common: $(0,0)$ and $(m,n)$.
 If a monic $g$ has only three point in common with $f$, could the third point be outside of the $k$-spine? 
-Nope: $g(p)=\tuplet{k,p-k}$ somewhere, and $f(p)=\tuplet{k,p-k}$.
+Nope: $g(p)=\tuplet{k,p-k}$ somewhere and $f(p)=\tuplet{k,p-k}$.
 
 How do we glue in $f$?
 There are at most two faces not already present: $f\circ d_k$ and $f\circ d_{k+n}$. If $k=0$ or $k=m$ this reduces to 1, which is ideal.
-Otherwise we can first glue in $f\circ d_{k+n}$, and then proceed. I am unsure if this step is unavoidable.
+Otherwise we can first glue in $f\circ d_{k+n}$ and then proceed. I am unsure if this step is unavoidable.
 
 We order the set of monics in such a way that a monic appears earlier in the ordering, if it has more points in common with $f$.
 It is more difficult than that though
@@ -3860,9 +3860,9 @@ In both cases there is a subobject of $B\times D$ that is the pushout of $f\time
 \[ \set{\tuplet{x,y}\of B\times D\middle| (x\of f(A)) \vee (y\of g(C)) }\]
 Since pushouts preserve left lifting properties, a filler operator for the pushout product is sufficient.
 
-For $m > 0$ and $n > 0$ none of the faces of $\simplex[m]\times \simplex[n]$ belong to either $\simplex[m]\times \cycle[n]$ or $\horn_k[m]\times\simplex[n]$ for any $k\of[m]$, because the faces are $m+n$-dimensional, and the faces of either $\simplex[m]$ or $\simplex[n]$ are not. The cases where $m=0$ or $n=0$ are trivial because $\simplex[0] \simeq 1$, $\cycle[0]\simeq 0$ and $\horn_0[0]$ does not exist. Since the pushout product is a countable sum of these inclusions, it is a cofibration. This settles the case where both $f$ and $g$ are the family cycle inclusions, because $h$ is an acyclic fibration.
+For $m > 0$ and $n > 0$ none of the faces of $\simplex[m]\times \simplex[n]$ belong to either $\simplex[m]\times \cycle[n]$ or $\horn_k[m]\times\simplex[n]$ for any $k\of[m]$, because the faces are $m+n$-dimensional and the faces of either $\simplex[m]$ or $\simplex[n]$ are not. The cases where $m=0$ or $n=0$ are trivial because $\simplex[0] \simeq 1$, $\cycle[0]\simeq 0$ and $\horn_0[0]$ does not exist. Since the pushout product is a countable sum of these inclusions, it is a cofibration. This settles the case where both $f$ and $g$ are the family cycle inclusions, because $h$ is an acyclic fibration.
 
-The case where $f$ is the family of horn inclusions is more complicated. Fortunately, this case is worked out in the proof of lemma A.1 in \citep{DD&DIS11}, where \emph{inner anodyne} is what this paper calls acyclic, and \emph{box product} is pushout product. Note that all necessary properties of simplices are decidable. Since the pushout product of $f$ and $g$ is an acyclic cofibration.
+The case where $f$ is the family of horn inclusions is more complicated. Fortunately, this case is worked out in the proof of lemma A.1 in \citep{DD&DIS11}, where \emph{inner anodyne} is what this paper calls acyclic and \emph{box product} is pushout product. Note that all necessary properties of simplices are decidable. Since the pushout product of $f$ and $g$ is an acyclic cofibration.
 \end{proof}
 \hide{perhaps we should adopt the same terms as that paper.}
 
@@ -3870,7 +3870,7 @@ The case where $f$ is the family of horn inclusions is more complicated. Fortuna
 \hide{ 
 The case for $f$ acyclic seems simpler, but perhaps pushout products are not as ubiquitous as I thought. I don't see how we can decide if a degenerate simplex belongs to the image of a cofibration. The problem is determining that $x\cdot \phi = x$ for some $\phi\of[\dim x]\to[\dim x]$, since $=$ is not always decidable. This in turn that pushout products may not be available for all cofibrations.
 
-The trick involves regularity: the family of faces exists internally, and therefore so does its union.
+The trick involves regularity: the family of faces exists internally and therefore so does its union.
 
 Not good enough! We would need a union of faces inside. We can create a 'least pseudo-complement'. 
 }

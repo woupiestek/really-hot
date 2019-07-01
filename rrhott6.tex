@@ -82,11 +82,11 @@ The category of assemblies has a number of useful properties which we will menti
 \begin{lemma} The category of assemblies\dots
 \begin{itemize}
 \item is finitely complete and cocomplete;
-\item is locally Cartesian closed, regular and extensive;
+\item is locally cartesian closed, regular and extensive;
 \item has a natural number object $\nno$.
 \end{itemize}
 
-\label{biCartesian closed + nno}
+\label{bicartesian closed + nno}
 \end{lemma}
 
 \begin{proof} See \cite{MR2479466,MSC:8896618,RealCats}. \end{proof}
@@ -158,9 +158,9 @@ For each internal category $\cat B$ of $\Asm$, $\Asm^{\cat B}$ is the category w
 
 Another way in which that $\Asm^{\cat B}$ is like a presheaf category, is that in inherits a lot of the structure of $\Asm$.
 
-\begin{lemma} The category $\Asm^{\cat B}$ has all finite limits and colimits and is locally Cartesian closed and regular. \end{lemma}
+\begin{lemma} The category $\Asm^{\cat B}$ has all finite limits and colimits and is locally cartesian closed and regular. \end{lemma}
 
-\begin{proof} Finite limits is trivial with lemma \ref{disc1}. The functor $\cat C \mapsto \cat C^\sier$ preserves all coproducts because the category $\set\to$ is connected. If a discrete opfibration $F:\cat C\to\cat D$ is a regular epimorphism of objects, then so is $F^\sier$, which explains coequalizers and regularity. Since every slice category of $\Asm^{\cat B}$ is another category of the form $\Asm^{\cat C}$ it suffices to show Cartesian closure. 
+\begin{proof} Finite limits is trivial with lemma \ref{disc1}. The functor $\cat C \mapsto \cat C^\sier$ preserves all coproducts because the category $\set\to$ is connected. If a discrete opfibration $F:\cat C\to\cat D$ is a regular epimorphism of objects, then so is $F^\sier$, which explains coequalizers and regularity. Since every slice category of $\Asm^{\cat B}$ is another category of the form $\Asm^{\cat C}$ it suffices to show cartesian closure. 
 
 Let $F:\cat C\to\cat B$ and $G:\cat D\to\cat B$ be opfibrations. The opfibration $G^F:\cat D^{\cat C}_{\cat B}$ is defined as follows. The objects of $\cat D^{\cat C}_{\cat B}$ are pairs $(b,H)$ where $b$ is an object of $\cat B$ and $H:b/\cat B \times_{\cat B} \cat C\to \cat D$ is a functor that commutes with $\cod\times F:b/\cat B \times_{\cat B} \cat C \to \cat B$ and $G:\cat D \to \cat B$. A morphism $(b,H) \to (b', H')$ is a morphism $f:b\to b'$ such that $H(x\circ f,Y) = H'(x,Y)$. This is an opfibration because for each object $(b,H)$ and each $f:b\to b'$, $(b,H\circ f\ri)$, where $f\ri$ is composition with $f$ to the right, is the unique lifting.
 
@@ -310,11 +310,11 @@ The ordinary right lifting property only says that composition with $(f^J,X^g)$ 
 
 \begin{example} Discrete opfibrations have the global right lifting property with respect to $0:1\to \set\to$, though they are not the only functors that have it. \end{example}
 
-\begin{defin}[Injective and anodyne] Let $\cat S$ be a locally Cartesian closed category. A tuple $(a,e)$ where $a:D\to E$ and $e:E\to I$ are two morphisms represents a family of morphisms $\set{a_i:D_i\to E_i|i\in I}$ of $\cat S$. Let $I\ri:\cat S \to\cat S/I$ be the constant family functor. A morphism $f:X\to Y$ is \emph{$(a,e)$-injective} if $I\ri(f)$ has the global right lifting property relative to $a$. A family of morphisms $(b:D'\to E',e:E'\to J)$ is \emph{anodyne} if $b$ has the global left lifting with respect to $J\ri f$ for each $(a,e)$-injective morphism $f$. An \emph{anodyne morphism} is a anodyne family with one element. \end{defin}
+\begin{defin}[Injective and anodyne] Let $\cat S$ be a locally cartesian closed category. A tuple $(a,e)$ where $a:D\to E$ and $e:E\to I$ are two morphisms represents a family of morphisms $\set{a_i:D_i\to E_i|i\in I}$ of $\cat S$. Let $I\ri:\cat S \to\cat S/I$ be the constant family functor. A morphism $f:X\to Y$ is \emph{$(a,e)$-injective} if $I\ri(f)$ has the global right lifting property relative to $a$. A family of morphisms $(b:D'\to E',e:E'\to J)$ is \emph{anodyne} if $b$ has the global left lifting with respect to $J\ri f$ for each $(a,e)$-injective morphism $f$. An \emph{anodyne morphism} is a anodyne family with one element. \end{defin}
 }
 
 \hide{
-\begin{lemma} For each family of morphism $(a,e)$ in each locally Cartesian closed category $\cat S$ the class of $(a,e)$-injectives\dots
+\begin{lemma} For each family of morphism $(a,e)$ in each locally cartesian closed category $\cat S$ the class of $(a,e)$-injectives\dots
 \begin{enumerate}
 \item includes all isomorphisms;
 \item is closed under composition and pullbacks;
@@ -326,7 +326,7 @@ The ordinary right lifting property only says that composition with $(f^J,X^g)$ 
 
 \begin{proof} 1., 2. and 3. are trivial.
 
-For 4. Let $f:X\to Y$ be a $(a,e)$-injective and let $g:W\to Y$ be any other morphism. Because $\cat S$ is locally Cartesian closed, so the exponential $f^g$ exists. The fibred exponential functor $x\mapsto x^g$ preserves split monomorphisms because every functor does. It is right adjoint to the fibred product functor $x\mapsto g\times x$ and therefore preserves pullbacks. We have $I\ri(f^g) \simeq I\ri f^{I\ri g}$ and $I\ri Y^{I\ri g} \simeq I\ri Y$ and $x\mapsto x^{I\ri g}$ commutes with other exponentials. For all of these reasons $f^g:X^W_Y \to Y$ is $(a,e)$-injective.
+For 4. Let $f:X\to Y$ be a $(a,e)$-injective and let $g:W\to Y$ be any other morphism. Because $\cat S$ is locally cartesian closed, so the exponential $f^g$ exists. The fibred exponential functor $x\mapsto x^g$ preserves split monomorphisms because every functor does. It is right adjoint to the fibred product functor $x\mapsto g\times x$ and therefore preserves pullbacks. We have $I\ri(f^g) \simeq I\ri f^{I\ri g}$ and $I\ri Y^{I\ri g} \simeq I\ri Y$ and $x\mapsto x^{I\ri g}$ commutes with other exponentials. For all of these reasons $f^g:X^W_Y \to Y$ is $(a,e)$-injective.
 %Frobenius is een beetje twijfelachtig of niet? Nee, met schoven gaat dat altijd goed.
 
 Dependent products are pullbacks of fibred exponentials. Suppose $f:X\to Y$ and $g:W\to X$ are $(a,e)$-injective. In the slice over $Y$ we have:
@@ -430,7 +430,7 @@ Let $f:X\to Y$ be the pullback of $\rat U$ along $\chi:Y\to \rat \pers$. Let $g:
 The following is a diagram chasing way to find that morphism.
 Work inside $\Asm^{\cat B}/Y$, where we have actual isomorphisms $\alpha':f\to \chi\ri(\rat U)$ and $\beta':S(f)\to\chi\ri(S(\rat U))$. 
 The morphism $\alpha'\circ g\circ (\beta')^{-1}:\chi\ri(S(\rat U)) \to \chi\ri(\rat U)$ has a transpose $\gamma:1\to \chi\ri(\rat U)^{\chi\ri(S(\rat U))}$. 
-Local Cartesian closure implies that the canonical morphism $\kappa:\chi\ri(\rat U^{S(\rat U)})\to \chi\ri(\rat U)^{\chi\ri(S(\rat U))}$ is an isomorphism.
+Local cartesian closure implies that the canonical morphism $\kappa:\chi\ri(\rat U^{S(\rat U)})\to \chi\ri(\rat U)^{\chi\ri(S(\rat U))}$ is an isomorphism.
 The transpose $(\kappa^{-1}\circ\gamma)^t:\chi\to \rat U^{S(\rat U)}$ in $\Asm^{\cat B}/\rat\pers$ is what we are looking for.
 
 Note that $h\circ \sigma(f) = \id_X$. For this reason $(\kappa^{-1}\circ\gamma)^t$ actually goes to $\rat\pers^S$, which only contains the right inverses of sections of $\sigma(\rat U)$.
@@ -943,7 +943,7 @@ We have a generic modest injective in $\Asm^{\simcat_0}_f$ by theorem \ref{genin
 \subsection{Conjectures of independence}
 None of the proofs crucially rely on recursive realizability. For every non trivial \emph{partial combinatory algebra} $A$ the realizability topos $\mathsf{RT}(A)$ has a nice subcategory of assemblies $\Asm(A)$ \cite{MR2479466}. The category of modest sets can be defined in exactly the same way and includes the natural number object which $\mathsf{RT}(A)$ always has. Further generalization to relative realizability seem unproblematic and I am not sure if \emph{order partial combinatory algebras} cause any trouble.
 
-I see no reason why the category of assemblies has to be constructed over the topos of sets. The base category should be locally Cartesian closed and regular, but other properties may be superfluous.
+I see no reason why the category of assemblies has to be constructed over the topos of sets. The base category should be locally cartesian closed and regular, but other properties may be superfluous.
 
 \subsection{Building factorization systems}
 A nice way to get an anodyne-injective factorization system is to generate a free monoid from the functor $S$ in subsection \ref{IAA} in the monoidal category of functors $\sAsm \to\sAsm$.  Garner shows that this is possible in the category of simplicial sets in \cite{MR2899720}, which is a reflective subcategory of $\sAsm$. The algebraic completeness of $\rat \pers$ makes it easy to find the free monoid of $S$ there, in fact the lemma before \ref{modfac} shows how to do it. I could not figure out how to combine these two constructions into one.

@@ -40,7 +40,7 @@ The effective topos is a form of recursive realizability, because it assigns a s
 \end{itemize}
 
 \subsection{projectives}
-The effective topos has enough projectives. A projective object has the lifting property with regard to epimorphisms, and enough projectives means that for each object $X$ there is a projective $P$ and an epimorphisms $e:P\to X$.
+The effective topos has enough projectives. A projective object has the lifting property with regard to epimorphisms and enough projectives means that for each object $X$ there is a projective $P$ and an epimorphisms $e:P\to X$.
 
 Because the effective topos has finite coproducts, there is a (weak) factorisation system where the left class of morphisms contains all inclusions in coproducts with projectives $X\to X+P$.
 
@@ -63,11 +63,11 @@ As in any topos, double negation is a local operator or Lawvere-Tierney topology
 \newcommand\Asm{\mathsf{Asm}}
 The \emph{$\neg\neg$-separated objects} are objects for which the diagonal is closed. These form a subcategory of the effective topos that contain the topos of sets.
 
-The natural number object of the effective topos is separated, and hence in this subcategory.
+The natural number object of the effective topos is separated and hence in this subcategory.
 
-The category of separated objects is regular, and its inclusion to the effective topos is regular too.
+The category of separated objects is regular and its inclusion to the effective topos is regular too.
 
-Finaly separated objects also cover all objects of the effective topos, and this causes projective objects to be separated.
+Finaly separated objects also cover all objects of the effective topos and this causes projective objects to be separated.
 
 \begin{blackboard}
 Separated objects.
@@ -89,8 +89,8 @@ Separated cover $e:S \to P$ has section $s:P\to A$, but subobjects of separated 
 \end{blackboard}
 
 \subsection{discrete arrows and modest sets}
-A \emph{prone epimorphism} is an epimorphism which is prone (or Cartesian) relative to the global sections functor -- which is a fibration.
-A morphism is \emph{discrete} if it is right orthogonal to a prone epimorphism. All monomorphisms are discrete because the left class consist of epimorphisms. Since they are also a saturated class, discrete morphisms form a complete fibration, and in fact a complete stack on the effective topos.
+A \emph{prone epimorphism} is an epimorphism which is prone (or cartesian) relative to the global sections functor -- which is a fibration.
+A morphism is \emph{discrete} if it is right orthogonal to a prone epimorphism. All monomorphisms are discrete because the left class consist of epimorphisms. Since they are also a saturated class, discrete morphisms form a complete fibration and in fact a complete stack on the effective topos.
 
 \begin{blackboard}
 \[\xymatrix{
@@ -103,7 +103,7 @@ C\ar[r]\ar@{.>}[ur] & D
 }
 \]
 
-Mono's are discrete, and discretes are saturated. As consequence, discretes have all finite limits and indexed products.
+Mono's are discrete and discretes are saturated. As consequence, discretes have all finite limits and indexed products.
 \end{blackboard}
 
 Discrete objects coinside with quotients of the natural number object. Because we are in a topos, there is a bundle and even an internal category of such subquotients. 
@@ -179,7 +179,7 @@ Thus we get a model structure where
 
 \section{the univalent fibration}
 There are some problems with the definition of equivalences. I will treat those later because I want to explain what the univalent firbation is supposed to be first. The univalent fibration comes form the bundle of modest sets is pretty straighforward. We turn the modest sets into discrete groupoids, so that equivalent modest sets are trivially isomorphic.
-Let $P$ be the groupoid of PERs and their isomorphisms, and $P^*$ the groupoid of pointed pers and their isomorphisms. There is a forgetful functor $P^*\to P$ and this is a univalnet fibration for trivial reasons.
+Let $P$ be the groupoid of PERs and their isomorphisms and $P^*$ the groupoid of pointed pers and their isomorphisms. There is a forgetful functor $P^*\to P$ and this is a univalnet fibration for trivial reasons.
 
 \[ P^* \to P \]
 
@@ -190,7 +190,7 @@ The existence of a weak equivalence $X\to Y$ is not an equivalence relation, bec
 \[\xymatrix{ & Z\ar[dl]^f\ar[dr]^g \\ X&& Y }\] 
 \end{blackboard}
 
-Now we take advantage of the factorisation of each morphism into modest morphism following a prone epimorphism in the category of separated objects. The prone epimorphism all have a section, and therefore a weak inverse. Hence every span of equivalences factors through a span where at least one of the equivalences is discrete on objects. The objects of spans of equivalences where one of the equivalences is modest on objects, is represented in the the catgeory of assemblies thanks to the universal bundle of modest sets.
+Now we take advantage of the factorisation of each morphism into modest morphism following a prone epimorphism in the category of separated objects. The prone epimorphism all have a section and therefore a weak inverse. Hence every span of equivalences factors through a span where at least one of the equivalences is discrete on objects. The objects of spans of equivalences where one of the equivalences is modest on objects, is represented in the the catgeory of assemblies thanks to the universal bundle of modest sets.
 
 \begin{blackboard}
 \[\xymatrix{ W\ar[d]_{\textrm{disc.}}\ar@/^/[r] & Z\ar[l]^{\textrm{pe}}\ar[dl]^f\ar[dr]^g \\ X&& Y }\] 
@@ -199,7 +199,7 @@ Now we take advantage of the factorisation of each morphism into modest morphism
 There are some extra considerations which make life even easier:
 \begin{itemize}
 \item all groupoids are fibrant in the projective model structure, so we can retrict to trivial fibrations for the equivalences.
-\item we only have to consider projective discrete objects, and these are with $\neg\neg$-stable sets of numbers.
+\item we only have to consider projective discrete objects and these are with $\neg\neg$-stable sets of numbers.
 \end{itemize}
 
 

@@ -1,67 +1,171 @@
 \documentclass[csh.tex]{subfiles}
 \begin{document}
 \section{Internal simplicial objects}
-The \emph{ambient category} that provides the object and morphisms everything in this paper is constructed of, is a $\Pi$-pretopos (see definition \ref{pretopos}) $\ambient$ with natural number object $\nno$. The simplicial homotopy here concerns a kind of internal simplicial object of $\ambient$ instead of $\ambient$-valued presheaves.
-
-\begin{definition} A \keyword{simplicial object} $X$ of $\ambient$ is a triple $\tuplet{\base X, \dim, \cdot}$ where $\base X$ is an object of $\ambient$ and $\dim$ is a morphism $\base X\to \nno$. Here $\nno$ is the \keyword{natural number object} of $\ambient$. The operator $\cdot$ is has the following properties. Let $\Ar(\simCat)$ be the object of nondecreasing functions between decidable, finite and inhabited initial segments of the natural numbers. The domain $\dom(\cdot)$ of $\cdot$ is the following object. 
-\[ \set{\tuplet{x,\xi}\of \base X\times \Ar(\simCat)\middle| \dim(x) = \max(\cod(\xi))}\]
-The codomain $\cod(\cdot)$ of $\cdot$ is $\base X$. The operator $\cdot$ satisfies the following equations.
-\begin{align*}
-\dim(x\cdot\xi) &= \max(\dom(\xi))\\
-x\cdot \id &= x \\
-x\cdot(\alpha\circ\beta)&=(x\cdot\alpha)\cdot\beta 
-\end{align*}
-
-A \emph{morphism of simplicial objects} $X\to Y$ is a morphism $f\of\base X\to\base Y$ which commutes with $\dim$ and $\cdot$. Together with simplicial objects, they form the \emph{category of simplicial objects and morphisms} $\ambient\s$.
-
-The category $\ambient\s$ is enriched over $\ambient$. The object of morphisms $X\to Y$ of $\ambient\s$ in $\ambient$ is $\nat(X,Y)$. It represents families of morphisms $X\to Y$, i.e. for each object $I$ of $\ambient$ there is a natural bijection between morphisms $I\to \nat(X,Y)$ and morphisms $I\times X\to Y$ which commute with $\dim$, $\cdot$ and their $I$-fold multiples.
-\end{definition}
-
-\begin{example} A simple kind of simplicial object is the \keyword{discrete} simplicial object. There is one for each object $I$ of $\ambient$: 
-\[ I\disc = \tuplet{\nno\times I,\function{\tuplet{n,i}}n,\function{\tuplet{\tuplet{n,i},\phi}}i} \]
-Note the $\function{x}{f(x)}$ notation for morphisms of $\ambient$ the paper uses.
-\end{example}
-
-This definition is consistent with the definition of initial presheaves in \citep{MR1300636}. The definition is valid because $\ambient$ is a $\Pi$-pretopos with a natural number object $\nno$. Decidable, finite and inhabited initial segments of the natural numbers have a classifier.
-\[  \function{\tuplet{i,j}}j\of\set{\tuplet{i,j}\of\nno\times\nno\middle|i\leq j}\to \nno \]
-The relation $\leq$ is decidable. Comprehension on decidable predicates defines subobjects in $\ambient$, because there are classifiers of decidable subobjects $1\to \bool = 1+1$. Here $1$ is a terminal object and $+$ a binary coproduct. Let $\true$ and $\false$ stand for the distinct morphisms $1\to\bool$.
-
-Local Cartesian closure means that there is an object $A$ of morphisms between the initial segments. Local Cartesian closure also implies that there is a subobject of nondecreasing morphisms $\Ar(\simCat)$.
-\[ \Ar(\simCat)=\product{f\of A,i,j\of\nno,x\of\set{y\of 1|i\leq j}}{\set{y\of 1|f(i)\leq f(j)}}\]
-Note that $\product{x\of y} z(x)$ is the notation for the dependent product. 
-Because $\ambient$ is also exact and extensive, it is a Heyting category, so the same subobject has a more familiar definition.
-\[ \Ar(\simCat)=\set{f\of A|\forall i,j\of\nno.i\leq j \to f(i)\leq f(j)} \]
-
-\begin{definition} The object $\Ar(\simCat)$ is the object of arrows of the internal \keyword{category of simplices} $\simCat$, whose object of objects $\Ob(\simCat)$ is $\nno$. Composition is defined as ordinary function composition.
-\end{definition}
-
-For completeness we recall the definition of $\Pi$-pretoposes below.
+The \emph{ambient category} that provides the object and morphisms everything 
+in this paper is constructed of, is an elementary topos $\ambient$ with natural 
+number object $\nno$. 
 
 \begin{definition} 
-That $\ambient$ is a $\Pi$-\keyword{pretopos} means all of the following.
-
-\begin{enumerate}
-\item The category $\ambient$ is \emph{locally Cartesian closed}. This means that for each object $X$ of $\ambient$ each slice $\ambient/X$ is Cartesian closed.
-\item The category $\ambient$ is \emph{extensive}, which means that is has finite coproducts and that $\ambient/(X+Y)$ is equivalent to $(\ambient/X)\times(\ambient/Y)$ for each pair of objects $X$ and $Y$ of $\ambient$.
-\item The category $\ambient$ is \emph{exact} in the sense of Barr. This means that all pseudo-equivalence relations (see below) have coequalizers and that those coequalizers are stable under pullback.
-\end{enumerate}
-
-A \keyword{pseudo-equivalence relation} consists of a pair of objects $X_0$, $X_1$ and morphisms $r\of X_0\to X_1$ and $s,t\of X_1\to X_0$ such that $s\circ r= t\circ r = \id_{X_0}$ and such that for each $x,y,z\of X_0$ if two of $\tuplet{x,y}$, $\tuplet{x,z}$ and $\tuplet{y,z}$ are in the image of $\function{x\of X_1}{\tuplet{s(x),t(x)}}\of X_1\to X_0\times X_0$, the third is too. A \emph{coequalizer} for a pseudo-equivalence relation is a coequalizer of $s$ and $t$.
+  That $\ambient$ is an elementary \keyword{topos} means all of the following.
+  
+  \begin{enumerate}
+  \item The category $\ambient$ is \emph{locally cartesian closed}. This means 
+  that for each object $X$ of $\ambient$ each slice $\ambient/X$ is cartesian 
+  closed.
+  \item The category $\ambient$ is \emph{extensive}, which means that is has 
+  finite coproducts and that $\ambient/(X+Y)$ is equivalent to 
+  $(\ambient/X)\times(\ambient/Y)$ for each pair of objects $X$ and $Y$ of 
+  $\ambient$.
+  \item The category $\ambient$ is \emph{exact} in the sense of Barr. This 
+  means that all pseudo-equivalence relations (see below) have coequalizers and 
+  that those coequalizers are stable under pullback.
+  \item The category has a \emph{subobject classifier}, which is a monomorphism
+  $t\of 1\to \Omega$ such that every monomorphism $m\of X\to Y$ is a pullback of
+  $t$ along a unique morphism $\xi(m)\of Y\to \Omega$.
+  \end{enumerate}
+  
+  A \keyword{pseudo-equivalence relation} consists of a pair of objects $X_0$, 
+  $X_1$ and morphisms $r\of X_0\to X_1$ and $s,t\of X_1\to X_0$ such that 
+  $s\circ r= t\circ r = \id_{X_0}$ and such that for each $x,y,z\of X_0$ if two 
+  of $\tuplet{x,y}$, $\tuplet{x,z}$ and $\tuplet{y,z}$ are in the image of 
+  $\function{x\of X_1}{\tuplet{s(x),t(x)}}\of X_1\to X_0\times X_0$, the third 
+  is too. A \emph{coequalizer} for a pseudo-equivalence relation is a 
+  coequalizer of $s$ and $t$.
 \end{definition}
 
-\begin{example} Every topos is a $\Pi$-pretopos so any topos with a natural number object, like the topos of sets, is candidate for $\ambient$. \end{example}
+\begin{remark} A pseudo-equivalence relation is essentially a 1-dimensional 
+  simplicial object. For that reason, the simplicial homotopy category doesn't
+  change if some pseudo-equivalence relation has no coequalizer. Together with
+  the subobject claissfier, exactness should play a minor role in the rest of
+  this paper.
+\end{remark}
 
-This combination of properties implies the following.
-\begin{enumerate}
-\item The category $\ambient$ has all colimits and reindexing functors preserve them. 
-\item The category $\ambient$ is a \emph{Heyting category}. 
+Inside $\ambient$ the most relevant structure are \emph{internal diagrams} and
+their duals \emph{internal presheaves}. These structures replace functors 
+$\cat C\to \ambient$ and $\cat C\dual\to \ambient$ where $\cat C$ is a small 
+category in classical treatments.
 
-Technically being a Heyting category means that for each object $X$ the poset of subobjects $\sub(X)$ is a Heyting algebra and that for each $f\of X\to Y$ the preimage map $f\ri\of\sub(Y)\to\sub(X)$ is a morphism of Heyting algebras. Moreover, for each morphism $f$, $f\ri$ has both adjoints--right adjoint $\forall_f$ and left adjoint $\exists_f$--and those adjoints satisfy the \emph{Beck-Chevalley condition} which says that quantification and substitution commute over pullback squares. If $f\circ g = h\circ k$ is a pullback square, then $f\ri\circ\exists_h=\exists_g\circ k\ri$.
+\begin{definition}
+  For any category $\cat E$ with finite limits, an \keyword{internal category} 
+  is a tuple
+  $\icat C = \tuplet{\Ob(\icat C),\Ar(\icat C),\dom_{\icat C},\cod_{\icat C},\id_{\icat C},\circ_{\icat C}}$
+  where $\Ob(\icat C)$ and $\Ar(\icat C)$ are objects of $\cat E$ and given that
+  $C_2 = \set{\tuplet{f\of \Ar(\icat C),g\of \Ar(\icat C)}| \dom(f) = \cod(g) }$:
+  \begin{align*}
+  \dom_{\icat C} \of \Ar(\icat C)&\to \Ob(\icat C) &
+  \cod_{\icat C} \of \Ar(\icat C) &\to \Ob(\icat C)\\
+  \id_{\icat C} \of \Ob(\icat C)&\to \Ar(\icat C)&
+  \circ_{\icat C} \of C_2&\to \Ar(\icat C)\\
+  \dom_{\icat C}\circ\id_{\icat C} &= \id_{\Ob(\icat C)}&
+  \cod_{\icat C}\circ\id_{\icat C} &= \id_{\Ob(\icat C)}\\
+  \dom_{\icat C}(f\circ_{\icat C} g) &= \dom_{\icat C}(g)&
+  \cod_{\icat C}(f\circ_{\icat C} g) &= \cod_{\icat C}(f)\\
+  \id_{\icat C}(\cod_{\icat C}(g))\circ_{\icat C} g &= g &
+  f\circ_{\icat C} \id_{\icat C}(\dom_{\icat C}(g)) &= f
+  \end{align*}
 
-Practically being a Heyting category means being a model for a constructive first order logic. Hence first order predicates define subobjects and constructive theorems are valid in the internal language.
-\end{enumerate}
+  For $f\of X \to \Ob(\icat C)$, a \keyword{left action} of $\icat C$ is an 
+  operator $\cdot\of Y \to X$ where \[Y = \set{\tuplet{g\of\Ar(\icat C),x\of X}|
+  \dom(g) = f(x)}\] such that:
+  \begin{align*}
+    \id_{\cat C}(f(x))\cdot x &= x & 
+    g \cdot (h\cdot x) &= (g\circ h)\circ x
+  \end{align*}
+  Dually, a \keyword{right action} of $\icat C$ on $f$ is an 
+  operator $\cdot\of Z \to X$ where \[Z = \set{\tuplet{x\of X,g\of\Ar(\icat C)}|
+  f(x) = \cod(g)}\] such that:
+  \begin{align*}
+    x\cdot\id_{\cat C}(f(x)) &= x & 
+    (x\cdot g)\cdot h &= x\cdot(g\circ h)
+  \end{align*}
+  
+  An \keyword{internal diagram} over $\icat C$ is the combination of an 
+  $f\of X\to \Ob(\icat C)$ with a left action, while an \emph{internal presheaf}
+  over $\icat C$ is the combination of an $f\of X\to \Ob(\icat C)$ with a right 
+  action. Finally, a \emph{morphism} of diagrams or presheaves is a morphism that 
+  commutes with the actions on the appropriate sides.
+\end{definition}
 
-\begin{remark} Assume throughout this paper that all of the structure on $\ambient$ comes from functors. Limits and exponentials come from right adjoints to functors between categories related to $\ambient$ and colimits come from left adjoints. This assumption ensures that many functors only specified up to isomorphism can be constructed.
+The simplicial objects of thsi paper in are internal presheaves over the 
+internal simplex category that can be fashioned from the natural number object.
+
+\begin{definition} The internal category $\simCat$ satisfies 
+  $\Ob(\simCat)=\nno$, $\Ar(\simCat)$ consist of non decreasing maps between
+inhabited initial segments of $\nno$, domains, codomains, identities and 
+compositions all canonical.
+
+The \emph{category of internal presheaves} over $\simCat$ is denoted by
+ $\ambient\s$.
+\end{definition}
+
+\begin{example} A simple kind of simplicial object is the \keyword{discrete} 
+  simplicial object. There is one for each object $I$ of $\ambient$: 
+\[ I\disc = \tuplet{\nno\times I,\function{\tuplet{n,i}}n,\function{\tuplet{\tuplet{n,i},\phi}}i} \]
+Note the $\function{x}{f(x)}$ notation for morphisms of $\ambient$ the paper 
+uses.
+\end{example}
+
+\begin{remark} Assume throughout this paper that all of the structure on 
+  $\ambient$ comes from functors. Limits and exponentials come from right
+   adjoints to functors between categories related to $\ambient$ and colimits 
+   come from left adjoints. This assumption ensures that many functors only 
+   specified up to isomorphism can be constructed.
+\end{remark}
+
+\hide{We need to talk about density comonads here, because it is a condition on
+$\ambient$.}
+
+Besides simplicial object we will be interested in a internal diagram
+with specific properties assumed to be part of $\ambient$.
+
+\begin{definition}
+  %fully faithful
+  Let $\cdot$ be a left action on $f\of X\to \Ob(\icat C)$ for some internal
+  category $\icat C$. The left action $\cdot$ induces a map that shows how a
+  diagram is a kind of functor:
+  \[ \function g g\cdot\of\Ar(\icat C)\to\set{\tuplet{c,d,e}| c,d\of\Ob(\icat C), e\of X_c\to X_d} \]
+  A diagram is therefore \emph{full} if this map is an epimorphism, 
+  \emph{faithful} if this map is a monomorphism and \emph{fully faithful} if it
+  is an isomorphism.
+
+  %dense
+  The \keyword{codensity monad} $M$ for a diagram $d\of D\to\Ob(\icat C)$ is the 
+  left Kan extension of a diagram along itself. 
+  \[M(X) = \colim_{D_c\to X} D_c\]
+  It gives a best approximation of an object of $\ambient$ in terms of the 
+  fibres of the diagram. If $M$ is isomorphic to the identity functor, the
+  diagram $d$ is dense. %lot of handwaving, but how could this be misunderstood?
+
+  %filtered
+  A \emph{filtered category} is a category is a category in which every 
+  finite diagram has a cocone. A \emph{filtered diagram} is a diagram over a
+  filtered category. Both notions have internal counterparts which I won't spell
+  out here.
+\end{definition}
+
+\begin{example} In any Grothendieck topos, there is a a fully faithful and dense
+  diagram that indexes the representable functors. Some conditions on the 
+  underlying site that are always satisfied by the ones that come form 
+  topological spaces ensure that this diagram is filtered.
+\end{example}
+
+\begin{remark} %make this something to point back to.
+An important assumption we make about $\ambient$ is that it has a 
+dense filtered fully faithful internal diagram that contains all the objects 
+of non decreasing morphisms between inhabited initial sections of the natural 
+number objects. The diagram provides an initial alternative to smallness and 
+this extra condition will eventually ensure that the generic cofibrations have 
+`small' codomains.
+\end{remark}
+
+\begin{remark} The category of modest objects, or its ex/lex completion is not
+  assumed to take on the role of dense fully faithful filtered diagram in the
+  intended model, even though that would work. The modest sets are
+  interesting because of their completeness, which is an unrelated rarer
+  quality.
+  As the example shows, the diagram makes an elementary topos more like a
+  Grothendieck topos, but realizability toposes have other ways of meeting the
+  same condition.
 \end{remark}
 
 \end{document}

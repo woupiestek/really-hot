@@ -39,7 +39,7 @@ Poland}
 \begin{document}
 \maketitle
 
-Modest sets are a model of homotopy type theory. The internal groupoids in the effective topos have a model structure whose weak equivalences are internal equivalences of groupoids. Modest sets are a class of discrete internal groupoids, which are closed under internal limits. Arrow groupoids provide an interpretation of identity types, and there is a universe of modest sets which satisfies the univalence principle. This paper presents the resulting recursive realizability of homotopy type theory.
+Modest sets are a model of homotopy type theory. The internal groupoids in the effective topos have a model structure whose weak equivalences are internal equivalences of groupoids. Modest sets are a class of discrete internal groupoids, which are closed under internal limits. Arrow groupoids provide an interpretation of identity types and there is a universe of modest sets which satisfies the univalence principle. This paper presents the resulting recursive realizability of homotopy type theory.
 
 \section{The effective topos}
 
@@ -151,7 +151,7 @@ Any weak factorisation system $(L,R)$ on a topos $\cat E$ induces a weak factori
 
 \begin{lemma} The classes of $L$-functors and $R$-equivalences form a weak factorisation system on internal groupoids. \end{lemma}
 
-\begin{proof} Functors factor as $R$-equivalences following $L$-functors in the following manner. Let $F:X\to Y$ be an arbitrary functor. The object map $F_0:X_0\to Y_0$ factors as an $R$-morphism $G_0:Z_0 \to Y_0$ following an $L$-morphism $H_0:X_0 \to Z_0$. Let $d_Z:Z_1 \to Z_0\times Z_0$ be the pullback of $d_Y:Y_1\to Y_0\times Y_0$ along $G_0\times G_0$. Now $Z$ is a groupoid, and the pullback square defines an $R$-equivalence $G:Z\to Y$. There is a unique $H_1:X_1 \to Z_1$ such that $G_1\circ H_1 = F_1$ and $H_0\times H_0\circ d_X = d_Z\circ H_1$, and this defines an $L$-functor $H:Y\to Z$.
+\begin{proof} Functors factor as $R$-equivalences following $L$-functors in the following manner. Let $F:X\to Y$ be an arbitrary functor. The object map $F_0:X_0\to Y_0$ factors as an $R$-morphism $G_0:Z_0 \to Y_0$ following an $L$-morphism $H_0:X_0 \to Z_0$. Let $d_Z:Z_1 \to Z_0\times Z_0$ be the pullback of $d_Y:Y_1\to Y_0\times Y_0$ along $G_0\times G_0$. Now $Z$ is a groupoid and the pullback square defines an $R$-equivalence $G:Z\to Y$. There is a unique $H_1:X_1 \to Z_1$ such that $G_1\circ H_1 = F_1$ and $H_0\times H_0\circ d_X = d_Z\circ H_1$ and this defines an $L$-functor $H:Y\to Z$.
 \[ \xymatrix{
 X_1\ar[d]_{d_X}\ar[r]_{H_1}\ar@/^/[rr]^{F_1} & Z_1 \ar[r]_{G_1} \ar[d]|{d_Z}\ar@{}[dr]|<\lrcorner & Y_1\ar[d]^{d_Y}\\
 X_0\times X_0 \ar[r]^{H_0\times H_0}\ar@/_/[rr]_{F_0\times F_0} & Z_0\times Z_0 \ar[r]^{G_0\times G_0} & Y_0\times Y_0 
@@ -199,7 +199,7 @@ The rest of this subsection will show that these morphism satsify the axioms of 
 
 \begin{lemma}[2 of 3] If two of $F:X\to Y$, $G:Y\to Z$ and $GF:X\to Z$ are weak equivalences, then all three are. \label{2of3}\end{lemma}
 
-\begin{proof} \emph{From $F$ and $G$ to $GF$:} the functor $\Pi_0(GF)$ is a retract of the pullback $H:W\to Z\comma G$ of $\Pi_0(F)$ along $\Pi_1(G)$, and $R$-equivalences are closed under pullbacks and retracts because they are the right class of a weak factorisation system. The object of $W$ are pairs $(g:z\to Gy,f:y\to Fx)$ and the morphisms consist of two commuting squares who have a side in common up to an application of $G$ as shown below.
+\begin{proof} \emph{From $F$ and $G$ to $GF$:} the functor $\Pi_0(GF)$ is a retract of the pullback $H:W\to Z\comma G$ of $\Pi_0(F)$ along $\Pi_1(G)$ and $R$-equivalences are closed under pullbacks and retracts because they are the right class of a weak factorisation system. The object of $W$ are pairs $(g:z\to Gy,f:y\to Fx)$ and the morphisms consist of two commuting squares who have a side in common up to an application of $G$ as shown below.
 \[ \xymatrix{
 z\ar[d]_c\ar[r]^g & Gy\ar[d]^{Gb} & y\ar[d]_b\ar[r]^f & Fx\ar[d]^{Fa} \\
 z'\ar[r]_{g'} & Gy' & y'\ar[r]_{f'} & Fx'
@@ -273,7 +273,7 @@ Therefore $F$ factors as the fibration $\Pi_0(F)G$ following a trivial cofibrati
 
 \begin{proof} Lemmas \ref{retracts}, \ref{2of3}, \ref{lift} and \ref{factor} show that the functors in definition \ref{modstruc} satisfy all the axioms of model structures. 
 
-Fibrations and cofibrations are right and left classes in weak factorisation systems by the current definition, and hence closed under retracts. Lemma \ref{retracts} show that weak equivalences are also closed under retracts. Lemma \ref{2of3} shows that weak equivalence satisfy 2 of 3. Lemma \ref{lift} establishes that cofibrations have the left lifting property with respect to trivial fibrations, while fibrations have this lifting property relative to trivial cofobrations by definition. Lemma \ref{lift} also show that every functor factors as a trivial fibrations following a cofibration, while lemma \ref{factor} shows that every functor factors as a fibration following a trivial cofibration. \end{proof}
+Fibrations and cofibrations are right and left classes in weak factorisation systems by the current definition and hence closed under retracts. Lemma \ref{retracts} show that weak equivalences are also closed under retracts. Lemma \ref{2of3} shows that weak equivalence satisfy 2 of 3. Lemma \ref{lift} establishes that cofibrations have the left lifting property with respect to trivial fibrations, while fibrations have this lifting property relative to trivial cofobrations by definition. Lemma \ref{lift} also show that every functor factors as a trivial fibrations following a cofibration, while lemma \ref{factor} shows that every functor factors as a fibration following a trivial cofibration. \end{proof}
 
 \subsection{weak factorization systems on the effective topos}
 We apply the definitions above to two weak factorisation systems which are available in the effective topos. The first one the the factorisation system of split epimorphism and coproduct inclusion, which is fairly general.
@@ -377,7 +377,7 @@ To get a model structure on the internal groupoids of the effective topos I mimi
 
 
 
-The effective topos has enough projectives, and hence admits a model structure in which internal equivalences of categories are weak equivalences.
+The effective topos has enough projectives and hence admits a model structure in which internal equivalences of categories are weak equivalences.
 
 For the rest of this section, let $\cat E$ be a topos and let $(L,R)$ be a weak factorization system on this topos.
 
@@ -387,9 +387,9 @@ This weak factorisation system is going to be the cofibration-trivial fibration 
 
 \begin{lemma} Trivial cofibrations and fibrations form a weak factorisation system. \end{lemma}
 
-\begin{proof} Any functor $F$ already factors as a cloven fibration $P$ following a homotopy equivalence $I$. The homotopy equivalence $I$ factors as a trivial fibration $G$ following a cofibration $H$. If every cloven fibration is a fibration, and the cofibration factor of a homotopy equivalence is a weak equivalence, then $PG$ is a fibration and $H$ is a trivial cofibration, as required.
+\begin{proof} Any functor $F$ already factors as a cloven fibration $P$ following a homotopy equivalence $I$. The homotopy equivalence $I$ factors as a trivial fibration $G$ following a cofibration $H$. If every cloven fibration is a fibration and the cofibration factor of a homotopy equivalence is a weak equivalence, then $PG$ is a fibration and $H$ is a trivial cofibration, as required.
 
-I first show that cloven fibrations are fibrations. Let $F:W\to X$ be a trivial cofibration, and let $G:Y\to Z$, $A:W\to Y\comma G$ and $B:X\to Z$ satisfy $\Pi_0 A = BF$. There is a functor $H:X\to X\comma F$ such that $HF = I:W\to X\comma F$ and $\Pi_0H = F$ because $F$ is a cofibration and $\Pi_0:X\comma F \to X$ is a trivial fibration. Each $x\in X$ has $Hx:x\to F\Pi_1 H x$, and each $w\in W$ has $Aw:BFw \to G\Pi_1Aw$. So define
+I first show that cloven fibrations are fibrations. Let $F:W\to X$ be a trivial cofibration and let $G:Y\to Z$, $A:W\to Y\comma G$ and $B:X\to Z$ satisfy $\Pi_0 A = BF$. There is a functor $H:X\to X\comma F$ such that $HF = I:W\to X\comma F$ and $\Pi_0H = F$ because $F$ is a cofibration and $\Pi_0:X\comma F \to X$ is a trivial fibration. Each $x\in X$ has $Hx:x\to F\Pi_1 H x$ and each $w\in W$ has $Aw:BFw \to G\Pi_1Aw$. So define
 $K$ using the pointwise composition $(A\Pi_1\circ B)H$. Then $\Pi_0 K = B$ and $KF = (A\Pi_1\circ B)I = A$,%HF=I!
 so cloven fibrations have the lifting property relative to trivial cofibrations adn are therefore fibrations.
 

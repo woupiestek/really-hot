@@ -2,30 +2,49 @@
 \begin{document}
 
 \section{Model Category}
-This section defines a model structure on a subcategory of $\ambient\s$.
+This section defines a kind of model structure on a subcategory of $\ambient\s$. 
+It is important that this model structure is visisble in the internal language 
+of $\ambient$. Moreover, since coproducts indexed over objects of $\ambient$ 
+replace small coproducts, the model structure should be closed under indexed
+coproducts of cofibrations and indexed products of fibrations. For these
+pusposes, I use an enriched variant of the classical model structure.
 
-\hide{ Finding  model structure on $\ambient$ is more difficult. Only the decidable-split system works, but is hard to extend to a system where weak equivalences satisfy 2-out-of-3. }
-
-\begin{definition} A \keyword{model structure} on an $\cat A$-enriched category $\cat C$ consist of three sets of morphism--the \emph{fibrations} $F$, the \emph{cofibrations} $C$ and the \emph{weak equivalences} $W$--which have the following properties. 
+\begin{definition} A \keyword{model structure} on an $\cat A$-enriched 
+  category $\cat C$ consist of three sets of morphism--the \emph{fibrations} 
+  $F$, the \emph{cofibrations} $C$ and the \emph{weak equivalences} $W$--which 
+  have the following properties. 
 \begin{itemize}
-\item The set $W$ satisfies \emph{2-out-of-3} which means that for every pair of morphisms $f\of X\to Y$ and $g\of Y\to Z$ of $\cat C$, if two out of $f$, $g$ and $g\circ f$ are in $W$ then all three are. 
-\item The pairs of sets $(C,F\cap W)$ and $(C\cap W,F)$ are \emph{enriched factorization systems} (see definition \ref{enriched factorization system}). 
+\item The set $W$ satisfies \emph{2-out-of-3} which means that for every pair 
+of morphisms $f\of X\to Y$ and $g\of Y\to Z$ of $\cat C$, if two out of $f$, 
+$g$ and $g\circ f$ are in $W$ then all three are. 
+\item The pairs of sets $(C,F\cap W)$ and $(C\cap W,F)$ are \emph{enriched 
+factorization systems} (see definition \ref{enriched factorization system}). 
 \end{itemize}
 
 Categories with such a structure are \emph{model categories}.
 \end{definition}
 
-This notion of model structure is the ordinary one, except for the kind of factorization systems the morphisms in it form.
+This notion of model structure is the ordinary one, except for the kind of
+ factorization systems the morphisms in it form.
 
 \begin{definition}
-An \keyword{enriched factorization system} is a pair of sets of morphisms $(L,R)$ of an enriched category with the following properties.
+An \keyword{enriched factorization system} is a pair of sets of morphisms 
+$(L,R)$ of an enriched category with the following properties.
 \begin{itemize}
-\item A morphism belong to $L$ if and only if it has the \emph{left lifting property} with respect all to members of $R$.
-\item A morphism belong to $R$ if and only if it has the \emph{right lifting property} with respect all to members of $L$.
+\item A morphism belong to $L$ if and only if it has the 
+\emph{left lifting property} with respect all to members of $R$.
+\item A morphism belong to $R$ if and only if it has the 
+\emph{right lifting property} with respect all to members of $L$.
 \item Every morphism factors as a member of $R$ following a member of $L$.
 \end{itemize}
 
-A morphism $f\of X\to Y$ of an $\cat A$-enriched category $\cat C$ has the \emph{($\cat A$ enriched) right lifting property} with respect to a morphism $g\of I\to J$--and $g$ has the \emph{left lifting property} with respect to $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\cat C(\id_J,f),\cat C(g,\id_X))}$ which is the factorization of the span $\cat C(\id_J,f)$, $\cat C(g,\id_X)$ through the pullback cone of $\cat C(\id_I,f)$ and $\cat C(g,\id_Y)$ is a \emph{split} epimorphism.
+A morphism $f\of X\to Y$ of an $\cat A$-enriched category $\cat C$ has the 
+\emph{($\cat A$-enriched) right lifting property} with respect to a morphism
+ $g\of I\to J$--and $g$ has the \emph{left lifting property} with respect to 
+ $f$--if the morphism $\tuplet{f_!,g\ri} = \tuplet{\cat C(\id_J,f),\cat C(g,\id_X))}$ 
+ which is the factorization of the span $\cat C(\id_J,f)$, $\cat C(g,\id_X)$ 
+ through the pullback cone of $\cat C(\id_I,f)$ and $\cat C(g,\id_Y)$ is a 
+ \emph{split} epimorphism.
 \[\xy
 (34,20)*+{\cat C(I,X)}="top",(0,10)*+{\cat C(J,X)}="left",(24,10)*+{\bullet}="middle",(44,10)*+{\cat C(I,Y)}="right",(34,0)*+{\cat C(J,Y)}="bottom"
 \ar^{\cat C(g,\id_X)} "left";"top" \ar@{.>}|(.6){\tuplet{f_!,g\ri}} "left";"middle" \ar_{\cat C(\id_J,f)} "left";"bottom" \ar "middle";"bottom"
@@ -37,8 +56,13 @@ A section of $\tuplet{f_\bang,g\ri}$ is a \keyword{filler}.
 In $\ambient\s$ we make the following selections. 
 
 \begin{definition}
-Let $\set\geq = \set{\tuplet{n,k}\of \nno\times\nno |n\geq k}$ in $\ambient$ and let $\set\geq\disc\ri$ be the \keyword{constant family functor} $\ambient\to\ambient/\set\geq\disc$.
-A morphism $f\of X\to Y$ of $\ambient\s$ is a \keyword{fibration} if $\set\geq\disc\ri(f)$ has the $\ambient/\set\geq$-enriched right lifting property relative to the family of \emph{horn inclusions}, which is defined as follows.
+Let $\set\geq = \set{\tuplet{n,k}\of \nno\times\nno |n\geq k}$ in
+ $\ambient$ and let $\set\geq\disc\ri$ be the \keyword{constant family functor}
+  $\ambient\to\ambient/\set\geq\disc$.
+A morphism $f\of X\to Y$ of $\ambient\s$ is a \keyword{fibration} if 
+$\set\geq\disc\ri(f)$ has the $\ambient/\set\geq$-enriched right lifting 
+property relative to the family of \emph{horn inclusions}, which is defined as 
+follows.
 
 The simplicial sets $\simplex_{\set\geq}$ and $\horn_{\set\geq}$ satisfy:
 \begin{align*}
@@ -48,34 +72,75 @@ The simplicial sets $\simplex_{\set\geq}$ and $\horn_{\set\geq}$ satisfy:
 \dim\tuplet{\phi,k} &= \dom(\phi) \\
 \tuplet{\phi,k}\cdot \xi &= \tuplet{\phi\circ\xi,k}
 \end{align*}
-The simplicial object $\horn_{\set\geq}$ is subobject of $\simplex_{\set\geq}$ by definition. 
-The formula $\function{\tuplet{\phi,k}}\tuplet{\dom(\phi),\cod(\phi),k}$ defines morphisms of simplices $\horn_{\set\geq}\to {\set\geq}\disc$ and $\simplex_{\set\geq}\to {\set\geq}\disc$, which are objects of $\ambient\s/{\set\geq}\disc$. The inclusion $\horn_{\set\geq}\to\simplex_{\set\geq}$ commutes with the morphisms to ${\set\geq}\disc$ and is therefore a morphism of $\ambient\s/{\set\geq}\disc$. This is the family of horn inclusions.
-
+The simplicial object $\horn_{\set\geq}$ is subobject of $\simplex_{\set\geq}$ 
+by definition. The formula $\function{\tuplet{\phi,k}}\tuplet{\dom(\phi),\cod(\phi),k}$ 
+defines morphisms of simplices $\horn_{\set\geq}\to {\set\geq}\disc$ and 
+$\simplex_{\set\geq}\to {\set\geq}\disc$, which are objects of 
+$\ambient\s/{\set\geq}\disc$. The inclusion $\horn_{\set\geq}\to\simplex_{\set\geq}$ 
+commutes with the morphisms to ${\set\geq}\disc$ and is therefore a morphism of 
+$\ambient\s/{\set\geq}\disc$. This is the family of horn inclusions.
 \end{definition}
 
 \begin{remark}\label{fibred enrichment}
-For any object $I$ of $\ambient$, $\ambient\s/I\disc$ is enriched over $\ambient/I$. The hom-functor $\hom_I\of(\ambient\s/I\disc)\dual\times(\ambient\s/I\disc)\to\ambient/I$ sends $I\disc$ indexed families of simplicial objects to the $I$ indexed family of fibre wise hom-objects. The category $\ambient\s/I\disc$ is also enriched over $\ambient$ and over the category of sets, but those bifunctors may result in different classes of fibration. 
+For any object $I$ of $\ambient$, $\ambient\s/I\disc$ is enriched over
+ $\ambient/I$. The hom-functor 
+ $\hom_I\of(\ambient\s/I\disc)\dual\times(\ambient\s/I\disc)\to\ambient/I$ 
+ sends $I\disc$ indexed families of simplicial objects to the $I$ indexed 
+ family of fibre wise hom-objects. The category $\ambient\s/I\disc$ is also 
+ enriched over $\ambient$ and over the category of sets, but those bifunctors 
+ may result in different classes of fibration. 
 \end{remark}
 
-\hide{For each natural number $n$, the $n$-\keyword{simplex} $\simplex[n]$ is the internal simplicial set where $\base{\simplex[n]}$ is the object of all morphisms $\phi$ in $\simCat$ such that $\cod(\phi) = n$, $\dim(\phi) = \dom(\phi)$ and $\phi\cdot \xi = \phi\circ \xi$. Here $\N$ is the \keyword{set of natural numbers} that exists outside of $\ambient$. For each $k\of[n]$ the \keyword{horn} $\horn_k[n]$ is the subobject of the nondecreasing maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$.
+\hide{For each natural number $n$, the $n$-\keyword{simplex} $\simplex[n]$ is 
+the internal simplicial set where $\base{\simplex[n]}$ is the object of all 
+morphisms $\phi$ in $\simCat$ such that $\cod(\phi) = n$, 
+$\dim(\phi) = \dom(\phi)$ and $\phi\cdot \xi = \phi\circ \xi$. Here $\N$ is the 
+\keyword{set of natural numbers} that exists outside of $\ambient$. For each 
+$k\of[n]$ the \keyword{horn} $\horn_k[n]$ is the subobject of the nondecreasing 
+maps $[m]\to [n]$ that are not onto the set $[n]-\set{k}$.
 \[ \base{\horn_k[n]} = \set{\phi\of\base{\simplex[n]}| \exists i\of[n]-\set k.\forall j\of \dom(\phi).\phi(i)\neq j } \]
-The \keyword{horn inclusion} is the monomorphism $\horn_k[n]\to\simplex[n]$. The \emph{family of horn inclusions} is the sum of all horn inclusions $\coproduct{k\leq n\of\nno}{\horn_k[n]}\to \coproduct{k\leq n\of\nno}{\simplex[n]}$ that exists as a morphism of $\ambient\s$. Note that $\coproduct{x\of y}{f(x)}$ is the notation for dependent coproducts in this paper.
+The \keyword{horn inclusion} is the monomorphism $\horn_k[n]\to\simplex[n]$. 
+The \emph{family of horn inclusions} is the sum of all horn inclusions 
+$\coproduct{k\leq n\of\nno}{\horn_k[n]}\to \coproduct{k\leq n\of\nno}{\simplex[n]}$ 
+that exists as a morphism of $\ambient\s$. Note that $\coproduct{x\of y}{f(x)}$ 
+is the notation for dependent coproducts in this paper.
 
-The morphism $f$ is a fibration if $\set\geq\disc\ri(f)$ has the right lifting property with respect to $\horn_{\set\geq}\to \simplex_{\set\geq}$. Here $\set\geq\disc\ri\of \ambient\s\to\ambient\s/\set\geq\disc$ is the constant family functor.}
+The morphism $f$ is a fibration if $\set\geq\disc\ri(f)$ has the right lifting 
+property with respect to $\horn_{\set\geq}\to \simplex_{\set\geq}$. Here 
+$\set\geq\disc\ri\of \ambient\s\to\ambient\s/\set\geq\disc$ is the constant 
+family functor.}
 
-\begin{example} If $\ambient$ is the topos of sets, then the morphisms that satisfy definition \ref{fibration} are precisely the \emph{Kan fibrations}. In that case the axiom of choice implies a filler exists. \end{example}
+\begin{example} If $\ambient$ is the topos of sets, then the morphisms that 
+satisfy definition \ref{fibration} are precisely the \emph{Kan fibrations}. In 
+that case the axiom of choice implies a filler exists. \end{example}
 
-\begin{definition} A monomorphism $f\of X\to Y$ of category $\ambient\s$ is a \keyword{cofibration} if
-the subobject of \emph{faces} $F$ of $Y$ which are not in the image of $X$ is decidable.
+\begin{definition} A monomorphism $m\of X\to Y$ of category $\ambient\s$ is a 
+  \keyword{cofibration} if the subobject of \emph{faces} $F$ of $Y$ which are 
+  not in the image of--\emph{complementary to}--$m$ is decidable.
 
-A $y\of\base Y$ is \keyword{degenerate} if $y=y'\cdot\epsilon$ for an arbitrary $y'\of\base Y$ and an epic $\epsilon\of\Ar(\simCat)$ that is not an identity morphism. A \keyword{face} of $Y$ is a $y\of\base Y$ which is \keyword{nondegenerate}. Hence $f$ is a cofibration if there is a morphism $\psi\of\base Y\to\bool$ such that $\psi(y)=\false$ if an only if $y$ is either degenerate or in the image of $f$.\end{definition}
+A $y\of\base Y$ is \keyword{degenerate} if $y=y'\cdot\epsilon$ for an arbitrary 
+$y'\of\base Y$ and an epic $\epsilon\of\Ar(\simCat)$ that is not an identity 
+morphism. A \keyword{face} of $Y$ is a $y\of\base Y$ which is 
+\keyword{nondegenerate}. Hence $f$ is a cofibration if there is a morphism 
+$\psi\of\base Y\to\bool$ such that $\psi(y)=\false$ if an only if $y$ is either 
+degenerate or in the image of $f$.\end{definition}
 
-\begin{example} In the category of simplicial sets all monomorphisms are cofibrations. Decidability comes for free there.\end{example}
+\begin{example} In the category of simplicial sets all monomorphisms are 
+cofibrations. Decidability comes for free there.\end{example}
 
-\begin{definition} A \keyword{weak equivalence} is a composition of an acyclic fibration following an acyclic cofibration. Here, an \emph{acyclic fibration} is a morphism that has the right lifting property with respect to all cofibrations; an \emph{acyclic cofibration} is a morphism has the left lifting property with respect to all fibrations.
+\begin{definition} A \keyword{weak equivalence} is a composition of an acyclic 
+  fibration following an acyclic cofibration. Here, an \emph{acyclic fibration} 
+  is a morphism that has the right lifting property with respect to all 
+  cofibrations; an \emph{acyclic cofibration} is a morphism has the left 
+  lifting property with respect to all fibrations.
 \end{definition}
 
-The \emph{small object argument} is a factorization method often applied in simplicial homotopy. Unfortunately, it relies on infinite colimits which $\ambient$ may lack. To get a model structure without the help of the small object argument we retreat to a subcategory of $\ambient\s$.
+% here: we take a radically different approach from here on.
+
+The \emph{small object argument} is a factorization method often applied in 
+simplicial homotopy. Unfortunately, it relies on infinite colimits which 
+$\ambient$ may lack. To get a model structure without the help of the small 
+object argument we retreat to a subcategory of $\ambient\s$.
 
 \begin{definition} A simplicial object is \emph{fibrant} if the unique morphism $\bang\of X\to 1$ is a fibration.
 A \keyword{complex} is a tuple $\tuplet{\base X,\dim,\cdot,\filler}$ where $\tuplet{\base X,\dim,\cdot}$ is a simplicial object and $\filler$ is a filler (see definition \ref{enriched factorization system}) that makes the unique morphism $\bang\of \tuplet{\base X,\dim,\cdot}\to 1\disc$ a fibration. A morphism of complexes is a morphism of the simplicial objects that remain after forgetting the fillers. The \emph{category of complexes} and morphisms of complexes is $\ambient\s\f$.

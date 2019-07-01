@@ -73,7 +73,7 @@ This section supplies the effectively computable morphisms required for building
 
 \begin{remark} I will let $\XN$ stand for the \emph{set} of natural numbers which is external to $\cat S$. \end{remark}
 
-Primitive recursion is basically a parametric version of this, which is available because $\cat S$ is Cartesian closed.
+Primitive recursion is basically a parametric version of this, which is available because $\cat S$ is cartesian closed.
 
 \begin{lemma}[Primitive recursion] For each $f:X\to X$ there is a unique $\rho f:\N\times X\to X$ such that $\rho f\circ(z,\id_X) = \id_X$ and $\rho f\circ(s,\id_X) = f\circ \rho f$.
 \[\xymatrix{
@@ -82,7 +82,7 @@ X\ar[r]_{\id} & X & X \ar[l]^f
 }\]
 \end{lemma}
 
-\begin{proof} There is a map $x:1\to X^X$ which points at $\id_X$, and a map $f^X:X^X \to X^X$ defined by composition. Because $\N$ is a natural number object, there is a unique $g:\N \to X^X$ such that $g\circ z = x$ and $g\circ s = f^X\circ g$. The wanted morphism $\rho f$ is the transpose of $g$ under the adjunction $-\times X \dashv -^X$.
+\begin{proof} There is a map $x:1\to X^X$ which points at $\id_X$ and a map $f^X:X^X \to X^X$ defined by composition. Because $\N$ is a natural number object, there is a unique $g:\N \to X^X$ such that $g\circ z = x$ and $g\circ s = f^X\circ g$. The wanted morphism $\rho f$ is the transpose of $g$ under the adjunction $-\times X \dashv -^X$.
 \end{proof}
 
 The natural numbers object is the initial algebra of the functor $X\mapsto 1+X$. Because $\cat S$ is a topos, this functor also has a terminal coalgebra, which coincides with the partial map classifier of $\N$.
@@ -152,7 +152,7 @@ Het probleem is dan dat bewoonde deelverzamelingen van $\N$ niet altijd een glob
 Ik zie niet minder dan drie mogelijkheden:
 1 alle bewoonde deelverzamelingen
 2 alle deelverzamelingen met globale snede
-3 alle deelverzamelingen die een numeral bevatten, i.e. waar één van de punten $s^n(0):1\to N$ doorheen gaat.
+3 alle deelverzamelingen die een numeral bevatten, i.e. waar ï¿½ï¿½n van de punten $s^n(0):1\to N$ doorheen gaat.
 
 Ik vermoed dat ze allemaal verschillend kunnen zijn\dots
 
@@ -174,7 +174,7 @@ The \emph{exact completion} of $\cat C$ is a universal flat functor $I:\cat C\to
 \end{defin}
 
 \newcommand\pro{\mathsf{Pro}}
-The reason that $\cat S$ is an exact completion, is that is has enough projectives. This means that projective object cover all objects of the category. The full subcategory $\pro(\cat S)$ of projective objects has weak limits, and the inclusion $\pro(\cat S) \to \cat S$ is an exact completion.
+The reason that $\cat S$ is an exact completion, is that is has enough projectives. This means that projective object cover all objects of the category. The full subcategory $\pro(\cat S)$ of projective objects has weak limits and the inclusion $\pro(\cat S) \to \cat S$ is an exact completion.
 
 The effective topos $\Eff(\cat S)$ over $\cat S$ is an exact completion too. The reason are outlined in my thesis. I will take advantage of this fact to present the effective topos as the exact completion of another category in this paper.
 
@@ -191,9 +191,9 @@ The effective topos $\Eff(\cat S)$ over $\cat S$ is an exact completion too. The
 
 The partitioned assembly $(1,z)$ is terminal.
 
-Let $(X,f)$ and $(X,g)$ be two partitoned assemblies with the same underlying object $X$. They combine into the assembly $(X,\pair fg)$, where $\pair fg$ is the composition of $(f,g):X\to \N\times \N$ with a recursive paring function $\N\times \N \to \N$. The new assembly $(X,\pair fg)$ is the intersection of $(X,f)$ and $(X,g)$ in the sense that if $(X,h)$ is a third assembly with the same underlying object, and $\id:(X,h) \to (X,f)$ and $\id:(X,h) \to (X,g)$ are morphisms of partitioned assemblies, then so is $\id:(X,h) \to (X,\pair fg)$.
+Let $(X,f)$ and $(X,g)$ be two partitoned assemblies with the same underlying object $X$. They combine into the assembly $(X,\pair fg)$, where $\pair fg$ is the composition of $(f,g):X\to \N\times \N$ with a recursive paring function $\N\times \N \to \N$. The new assembly $(X,\pair fg)$ is the intersection of $(X,f)$ and $(X,g)$ in the sense that if $(X,h)$ is a third assembly with the same underlying object and $\id:(X,h) \to (X,f)$ and $\id:(X,h) \to (X,g)$ are morphisms of partitioned assemblies, then so is $\id:(X,h) \to (X,\pair fg)$.
 
-Let $k:(X,f) \to (Z,h)$ and $l:(Y,f) \to (Z,h)$ be an arbitrary pair of morphisms with the same codomain. There is a weak pullback $l':W\to X$ and $k':W\to Y$ of $k$ and $l$ in $\pro(\cat S)$. Now $l':(W,\pair{f\circ l',g\circ k'}) \to (X,f)$ and $k':(W,\pair{f\circ l',g\circ k'}) \to (Y,g)$ are morphism of assemblies, and together they form a weak pullback of $k$ and $l$ in $\pasm(\cat S)$.
+Let $k:(X,f) \to (Z,h)$ and $l:(Y,f) \to (Z,h)$ be an arbitrary pair of morphisms with the same codomain. There is a weak pullback $l':W\to X$ and $k':W\to Y$ of $k$ and $l$ in $\pro(\cat S)$. Now $l':(W,\pair{f\circ l',g\circ k'}) \to (X,f)$ and $k':(W,\pair{f\circ l',g\circ k'}) \to (Y,g)$ are morphism of assemblies and together they form a weak pullback of $k$ and $l$ in $\pasm(\cat S)$.
 
 Since $\pasm(\cat S)$ has a terminal object and weak pullbacks and hence all weak finite limits.
 \end{proof}
@@ -297,7 +297,7 @@ r_{H/F}(x,y) &= (x,r_H(d_0(x)),x,r_G(y))\\
 t_{H/F}((w,x,y,z),(y,x',y',z')) &= (w,t_H(x',x),y',t_G(y',y))\\
 \end{align*}
 
-There are two obvious projection functors $D_0(F): H/F \to H$ and $D_1(G):H/F\to G$, and identity arrows in the groupoids provide a third functor $R(F):G\to H/F$ that sends objects to identities. Formally:
+There are two obvious projection functors $D_0(F): H/F \to H$ and $D_1(G):H/F\to G$ and identity arrows in the groupoids provide a third functor $R(F):G\to H/F$ that sends objects to identities. Formally:
 \begin{align*}
 (D_0(F))_0(x,y) &= d_0(x) \\
 (D_0(F))_1(w,x,y,z) &= x \\
@@ -364,7 +364,7 @@ These lemmas justify the following conclusion.
 \subsection{Modeling type theory}
 This section shows how groupoids form a model of type theory.
 
-For each groupoid $I$ there is a category of fibrations $\fib(I)$. If $\Phi:X\to I$ and $\Psi:Y\to I$ are cloven fibrations, then $\fib(I)(\Phi,\Psi)$ contains all functors $H:X\to Y$ which satisfy $\Psi H=\Phi$. In the case of Grothendieck fibrations, there is an extra requirement that the functors preserve \emph{Cartesian} or \emph{prone} morphisms, but this is automatic with groupoids.
+For each groupoid $I$ there is a category of fibrations $\fib(I)$. If $\Phi:X\to I$ and $\Psi:Y\to I$ are cloven fibrations, then $\fib(I)(\Phi,\Psi)$ contains all functors $H:X\to Y$ which satisfy $\Psi H=\Phi$. In the case of Grothendieck fibrations, there is an extra requirement that the functors preserve \emph{cartesian} or \emph{prone} morphisms, but this is automatic with groupoids.
 
 Because fibrations are stable under pullback because they are the right class of a factroisation system. This way a functor $F:I\to J$ induces a 2-functor $F^*:\fib(J) \to \fib (I)$.
 
@@ -378,11 +378,11 @@ While Hofmann and Streicher's paper describes a lot of structure form type theor
 
 The construction of depedent produucts depedents on exponentials from the base catgeory $\cat C$ and the following lemma.
 
-\begin{lemma} If $\cat C$ is Cartesian closed, then so is $\grpd(\cat C)$. \end{lemma}
+\begin{lemma} If $\cat C$ is cartesian closed, then so is $\grpd(\cat C)$. \end{lemma}
 
 \begin{proof} If $G$ and $H$ are groupoids, then the exponential groupoid $H^G$ consists of functors and natural transformations. These are collections of morphisms in $\cat C$ whcih satisfy certain equations, so the construction of $H^G$ requires only exponentials in $\cat C$ and finite limits, but both are given. \end{proof}
 
-The category $\cat C$ induces dependent products of fibrations along functors, if every slice of $\cat C$ is Cartesian closed, i.e. if $\cat C$ is \emph{locally Cartesian closed}. This is a property that any topos satisfies. We will assume that $\cat C$ for the rest of this section.
+The category $\cat C$ induces dependent products of fibrations along functors, if every slice of $\cat C$ is cartesian closed, i.e. if $\cat C$ is \emph{locally cartesian closed}. This is a property that any topos satisfies. We will assume that $\cat C$ for the rest of this section.
 
 The following insight makes the construction of dependent products easier to understand.
 
@@ -398,15 +398,15 @@ Because $(I\disc)_0 = (I\disc)_1 = I$, a functor $F:G\to I\disc$ consists of an 
 
 \appendix
 \section{Dependent products of fibrations}
-The category of groupoids is Cartesian closed, but not locally Cartesian closed. The fact that fibrations admit an interpretation of depedent products is therefore not trivial. This section explains how they are constructed.
+The category of groupoids is cartesian closed, but not locally cartesian closed. The fact that fibrations admit an interpretation of depedent products is therefore not trivial. This section explains how they are constructed.
 
-The category $\cat E$ whose internal groupoids are the subject of the section has to be locally Cartesian closed itself to make everything work. But this is property every topos has.
+The category $\cat E$ whose internal groupoids are the subject of the section has to be locally cartesian closed itself to make everything work. But this is property every topos has.
 
 \subsection{Sketch} Since every functor factors as a cloven fibration following a deformation retract, the construction of depedent product can be split in two constructions, one for either type of functors. This simplifies the description of depedent products considerably.
 
 The category of fibrations over a fixed groupoid has exponentials. If $F:I\to J$ is a fibration, fibrewise exponential provide a right adjoint of $F^*:\fib(J)\to\fib(I)$ using fibrewise exponentials.
 
-If $F:I\to J$ is a deformation retract, then the deformation $D:J\to J/F$ provides a functor $G = D_1(F)\circ D:J\to I$ such that $GF = \id_I$, and a natural isomorphism $D:\id_J \to FG$. The functor $G$ is both left and right adjoint to $F$ and therefore $G\pb$ is both a left and a right adjoint to $F\pb:\fib(J) \to \fib(I)$. %mijn god ik hoop dat dit werkt.
+If $F:I\to J$ is a deformation retract, then the deformation $D:J\to J/F$ provides a functor $G = D_1(F)\circ D:J\to I$ such that $GF = \id_I$ and a natural isomorphism $D:\id_J \to FG$. The functor $G$ is both left and right adjoint to $F$ and therefore $G\pb$ is both a left and a right adjoint to $F\pb:\fib(J) \to \fib(I)$. %mijn god ik hoop dat dit werkt.
 
 \subsection{Along fibrations}
 The category of groupoids has exponential objects and this property extends to $\fib(I)$ for a fixed groupoid $I$. The following is a fibrewise definition of the exponential objects.
@@ -519,7 +519,7 @@ Informally a morphism $(j,\xi) \to (j', \xi')$ is a pair $(\phi,\psi)$ where $\p
 
 
 \hide{
-concretely, what are we looking for, and what do we have to prove? What is the goal of this section?
+concretely, what are we looking for and what do we have to prove? What is the goal of this section?
 
 How are groupoids a model of type theory?
 In particular, do identity types do what they are supposed to do?

@@ -38,14 +38,14 @@ The simplicial sets $\simplex_P$ and $\cycle_P$ satisfy:
 \end{align*}
 
 The inclusion $k_P\of\cycle_P\to\simplex_P$ is a cofibration for the following reasons. 
-A simplex $\tuplet{\phi,x}\of\simplex_P$ is outside the image of $k_P$ if $\phi$ is epic, and nondegenerate if $\phi = \id_{[n]}$ for some $n\of \nno$. This is a decidable property as required.
+A simplex $\tuplet{\phi,x}\of\simplex_P$ is outside the image of $k_P$ if $\phi$ is epic and nondegenerate if $\phi = \id_{[n]}$ for some $n\of \nno$. This is a decidable property as required.
 
 For each $n\of\nno$ the members of the fibre $P[n]$ of $p$ over $n$ are pairs $\tuplet{a,b}$ where $a\of\cycle[n]\to X$ and $b\of \simplex[n]\to Y$ satisfy $f\circ a = b \circ k_n$. Here $\cycle[n]$ and $\simplex[n]$ are fibres over $n$ of the families. Define $a_P\of \cycle_P\to X$ and $b_P\of \cycle_P\to X$ as follows.
 \begin{align*}
 a_P\tuplet{\phi,\tuplet{a,b}} &= a(\phi)\\
 b_P\tuplet{\phi,\tuplet{a,b}} &= b(\phi)
 \end{align*}
-This way $f\circ a_P = b_P\circ k_P$, and since $f$ is an acyclic fibration, there is a $c_P\of \simplex_P\to X$ such that $f\circ c_P = b_P$ and $c_P\circ k_P = a_P$. This is the key.
+This way $f\circ a_P = b_P\circ k_P$ and since $f$ is an acyclic fibration, there is a $c_P\of \simplex_P\to X$ such that $f\circ c_P = b_P$ and $c_P\circ k_P = a_P$. This is the key.
 
 Back in $\ambient/\nno$, $c_P$ induces a morphism $p\to\hom_\nno(\simplex_\nno,\nno\ri(X))$, which is a section to the canonical morphism $\function c\tuplet{\nno\ri(f)\circ c,c\circ k}$ and hence a filler for $k$ against $\nno\ri(f)$. Therefore $f$ is contractible.
 \end{proof}
@@ -83,7 +83,7 @@ and a face outside of the image of $g$ if $z(\id_{[n]})=\tuplet{\id_{[n]},y}\of 
 
 Let $h\of Z\to Y$ satisfy $h(z) = (f,l_Y)(z(\id_{[\dim(z)]}))$. This morphism is contractible thanks to the following filler construction.
 Let $k\of\cycle_\nno\to\simplex_\nno$ be the family of cycle inclusions and let $a\of \cycle_\nno\to Z$ and $b\of \simplex_\nno\to Y$ satisfy $h\circ a = b\circ k$. Since $k$ is essentially the the subobject of nonepic morphisms of $\simCat$ a filler $c$ can be defined as follows.
-Let $c\of \simplex_\nno\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $\phi$ is epic and $c(\phi) = a(\phi)$ for $\phi$ in the image of $k$. By this definition $c\circ k = a$ and $h\circ c = b$.\end{proof}\hide{ Codomains of contractibles may have a distance function, that gives a lower bound to the number of compositions required to to reach it. I don't have time to work that out and check it right now.}
+Let $c\of \simplex_\nno\to Z$ satisfy $c(\phi)(\mu) = \tuplet{\phi,b(\mu)}$ if $\phi$ is epic and $c(\phi) = a(\phi)$ for $\phi$ in the image of $k$. By this definition $c\circ k = a$ and $h\circ c = b$.\end{proof}\hide{ Codomains of contractibles may have a distance function that gives a lower bound to the number of compositions required to to reach it. I don't have time to work that out and check it right now.}
 
 \begin{remark} The construction is the proof of lemma \ref{factor1} are related to Reedy model structures \citep{Reedy74}. In the ambient category $\ambient$ morphisms factor as split epimorphism following decidable monomorphisms thanks to coproducts. Cofibrations are lifted versions of decidable monomorphisms and contractible fibrations are lifted versions of split epimorphisms and they form a factorization system on $\ambient\s$ by a similar construction. Unfortunately, external induction is not strong enough to proof things in the internal language of $\ambient$.
 \end{remark}
@@ -122,7 +122,7 @@ The simplicial sets $\simplex_F$ and $\cycle_F$ satisfy:
 The morphism $\sigma_K$ is a pushout of the inclusion $k_F\of\cycle_F\to\simplex_F$, along $\function{\tuplet{\phi,f}}\tuplet{\dim(f),f\cdot \phi}$, for the following reasons. Let $p\of K \to X$ and $q\of \simplex_F\to X$ satisfy $p\circ \function{\tuplet{\phi,f}}\tuplet{\dim(f),f\cdot \phi} = q\circ k_F$. 
 The factorization $\tuplet{p,q}\of s\ri(K)\to X$ of $p$ and $q$ through $s\ri(K)$ satisfies $\tuplet{p,q}\circ \sigma_K = p$ and $\tuplet{p,q}\circ \function{\tuplet{\phi,f}}\tuplet{\dim(f)+1,f\cdot \phi} = q$. 
 For each $\tuplet{n,j}\of s\ri(K)$, $j = c(i)$ for $i\of I$ or $j = f\cdot \phi$ for $f\of F$ with $\dim(f)\leq n$. If $j=c(i)$ then $\tuplet{p,q}(\tuplet{n,j}) = p(\tuplet{n-1,j})$. If $j = f\cdot \phi$ then $n=\dom(\phi)+1$ and $\tuplet{p,q}(\tuplet{n,j}) = q(\tuplet{\id,f})\cdot\phi$, which demonstrates existence. 
-If $c(i)=f\cdot\phi$, then $\phi$ cannot be an epimorphism, since epimorphisms have right inverses, and that would put $f$ in the image of $c$ where it is not by definition \ref{cofibration}. Hence $\tuplet{\phi,f}\of\cycle_F$ and $p(\tuplet{\dom(\phi),c(i)})=q(\tuplet{\phi,f}) = q(\tuplet{\id,f})\cdot\phi$. This proves uniqueness and existence of $\tuplet{p,q}$.
+If $c(i)=f\cdot\phi$, then $\phi$ cannot be an epimorphism, since epimorphisms have right inverses and that would put $f$ in the image of $c$ where it is not by definition \ref{cofibration}. Hence $\tuplet{\phi,f}\of\cycle_F$ and $p(\tuplet{\dom(\phi),c(i)})=q(\tuplet{\phi,f}) = q(\tuplet{\id,f})\cdot\phi$. This proves uniqueness and existence of $\tuplet{p,q}$.
 
 If $f\of X\to Y$ is any morphism of $\ambient$, then $\nno\ri(f)$ has the right lifting property with respect to $\sigma_K$ if it has the left lifting property with respect to $k_F$.
 

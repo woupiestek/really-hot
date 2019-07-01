@@ -68,13 +68,13 @@ There is an adjoint pair of functors $A\dashv D\of \ambient\s/\horn_\LP \to \amb
 
 \hide{
 - distributions and their $M$ preserving adjoint functors.
-- the special distribution, and the two resulting properties of ascent.
+- the special distribution and the two resulting properties of ascent.
 }
 
 Reindexing along $\foh_\LP$ has a right adjoint $(\foh_\LP)_*$, which nearly satisfies the requirements. As required for descent, $\foh_\LP\ri((\foh_\LP)_*(f))$ is isomorphic to $f$ because $\foh_\LP$ is a monomorphism. For $f\of X\to \horn_\LP$, the product is modest whenever $f$ is modest. Moreover, $(\foh_\LP)_*(f)$ has the right lifting property with respect to acyclic cofibrations that the reindexing functor $\foh_\LP\ri$ sends to acyclic cofibrations. However, since $\foh_\LP\ri$ doesn't always preserve acyclic cofibrancy, the product is not a fibration.
 
 The construction of $Df$ informally works as follows.
-$\ambient\s/\simplex_\LP$ is equivalent to $\ambient^{\cat P\dual}$ for an internal category $\cat P$ of $\ambient$, and $\ambient\s/\horn_\LP$ is equivalent to $\ambient^{\cat Q\dual}$ for a subcategory $\cat Q$ of $\cat P$. There is a functor $S\of\cat P\to \ambient^{\cat P\dual}$ such that: %def
+$\ambient\s/\simplex_\LP$ is equivalent to $\ambient^{\cat P\dual}$ for an internal category $\cat P$ of $\ambient$ and $\ambient\s/\horn_\LP$ is equivalent to $\ambient^{\cat Q\dual}$ for a subcategory $\cat Q$ of $\cat P$. There is a functor $S\of\cat P\to \ambient^{\cat P\dual}$ such that: %def
 \begin{itemize}
 \item for each object $Q$ of $\cat Q$, $S(Q)$ factors through $\foh_\LP$.
 \item for each acyclic cofibration $m$ of $\cat P$, $\foh_\LP\ri(S(m))$ is an acyclic cofibration.
@@ -249,7 +249,7 @@ This subsection delves into cosimplicial objects in $\ambient$ to show how adjoi
 
 Cosimplicial are like simplicial objects, but with the dual action of the category $\simCat$.
 
-\begin{definition} Let $A$ and $B$ be simplicial sets and let $C$ be a cosimplicial object of $\ambient\s/\cat B$ such that the underlying morphism of $\codim(C)$ factors through $\dim(A)$ in $\ambient$. This means that $C$ has both a simplicial and a cosimplicial structure, and that
+\begin{definition} Let $A$ and $B$ be simplicial sets and let $C$ be a cosimplicial object of $\ambient\s/\cat B$ such that the underlying morphism of $\codim(C)$ factors through $\dim(A)$ in $\ambient$. This means that $C$ has both a simplicial and a cosimplicial structure and that
 there are $a\of\base(C)\to\base(A)$ and $b\of\base(C)\to\base(B)$ such that 
 \begin{align*}
 \dim(c) &= \dim(b(c)) & \codim(c) &= \dim(a(c))\\b(\phi\cdot c) &= b(c) & b(c\cdot\phi)&=b(c)\cdot\phi\\

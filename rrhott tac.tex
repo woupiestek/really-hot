@@ -106,7 +106,7 @@ Misschien moet ik het beperken tot een belangrijk lemma: constructive descent. D
 
 A fibration $f:X\to Y$ has certain interesting properties that imply that its fibres are closed under finite limits. We just need something for the diagonal and for subobjects. 
 
-It follows that $Y$ is a Kan complex. We prove this constructively, and in fact with less than the usual amount of logic.
+It follows that $Y$ is a Kan complex. We prove this constructively and in fact with less than the usual amount of logic.
 
 The statement should hold for fibrations in internal categories inside lcccs with (stable) nno's. By externalizing and using generalized elements, we can lift this to just a normal category with a certain model structure on it. I.e. use $f:I\to \Ob(\Func(\simCat,\cat S))$ to denote some generic fibration. I have to show that this works though. Stack semantics might help somewhere.
 
@@ -138,14 +138,14 @@ There is an ambient category and several internal categories. Some of the notati
 
 Every object $I$ of the ambient category has an internal discrete category $I\disc$. For this category $\Ob(I\disc)=\Ar(I\disc)=I$ and $\cod=\dom=\id=\id(I)$.
 
-The \emph{set} of natural numbers is $\N$, and since it is a set, $i\in \N$ indicates membership. Other natural number objects are $\nno$, and $i\of\nno$ means that $i$ is a morphism whose codomain is $\nno$.
+The \emph{set} of natural numbers is $\N$ and since it is a set, $i\in \N$ indicates membership. Other natural number objects are $\nno$ and $i\of\nno$ means that $i$ is a morphism whose codomain is $\nno$.
 
 Let $\cat C$ be an internal category. Its object of objects is $\Ob(\cat C)$ and its object of arrows is $\Ar(\cat C)$, so in this case $\cod$ and $\dom$ are morphisms $\Ar(\cat C)\to\Ob(\cat C)$ and $\id\of\Ob(\cat C)\to\Ar(\cat C)$. Let $\cat D$ be another internal category. The internal category of functors $\cat C\to\cat D$ is $\Func(\cat C,\cat D)$ or $\cat D^{\cat C}$.
 
 \subsection{Heyting bialgebras}
-This paper deals with several categories which have a higher dimensional version of the structure of Heyting algebras. Although the term \emph{extensive locally Cartesian closed category} covers what they are, I prefer a shorter term that highlights this connection.
+This paper deals with several categories which have a higher dimensional version of the structure of Heyting algebras. Although the term \emph{extensive locally cartesian closed category} covers what they are, I prefer a shorter term that highlights this connection.
 
-\begin{definition} A category $\cat C$ is \emph{locally Cartesian closed} if for each object $X$ the slice $\cat C/X$ is Cartesian closed. A category is \emph{extensive} if is has finite coproducts and if $\cat C/(X+Y)$ is equivalent to $(\cat C/X)\times(\cat C/Y)$ for each pair of objects $X$ and $Y$. A \emph{Heyting bialgebra} is an extensive locally Cartesian closed category. \label{Heyting bialgebra}
+\begin{definition} A category $\cat C$ is \emph{locally cartesian closed} if for each object $X$ the slice $\cat C/X$ is cartesian closed. A category is \emph{extensive} if is has finite coproducts and if $\cat C/(X+Y)$ is equivalent to $(\cat C/X)\times(\cat C/Y)$ for each pair of objects $X$ and $Y$. A \emph{Heyting bialgebra} is an extensive locally cartesian closed category. \label{Heyting bialgebra}
 \end{definition}
 
 Heyting bialgebras which are posets are simply Heyting algebras. While Heyting algebras are models for constructive provability, the morphisms of the bialgebras directly model constructive proofs. As suggested by the Curry-Howard correspondence, the internal languages of these categories are a typed $\lambda$-calculus, know as \emph{extensional type theory}.
@@ -189,7 +189,7 @@ The unit and counit induces a families of morphisms between the following famili
 Here $u[t/x]$ is the result of replacing every free occurrence of $x$ in $u$ with $t$; the type $V$ cannot contain $x$ as a free variable. Unit and co-units satisfy equations that ensure that $\pi_0\tuplet{t,u}=t$ and $\pi_1\tuplet{t,u}=u$ are valid for all terms $t$ and $u$.
 
 
-Let $\cat C$ be finitely complete and Cartesian closed. The functor $\dprod X\of\cat C/X\to \cat C$ sends each morphism $f\of Y\to X$ is the object $\set{g\of X\to Y| f\circ g = \id_X }$ of sections of $f$. It is the right adjoint of $X\ri$.
+Let $\cat C$ be finitely complete and cartesian closed. The functor $\dprod X\of\cat C/X\to \cat C$ sends each morphism $f\of Y\to X$ is the object $\set{g\of X\to Y| f\circ g = \id_X }$ of sections of $f$. It is the right adjoint of $X\ri$.
 
 Product types look like $\Pi x\of T.U$. The elements are $\lambda$-terms $\lambda x\of T.u$, such that $u[t/x]\of U[t/x]$ whenever $t\of T$. A $\lambda$-term $\lambda x\of T.u$ and a term $t\of T$ have an \emph{application} $(\lambda x\of T.u)(t)$. The context dependent interpretation satisfies:
 \[ \db{\Gamma\vdash\Pi x\of T.U} = \dprod {\db T}(\db{\Gamma,x\of T\vdash U}) \]
@@ -200,7 +200,7 @@ The unit and the counit induce the following families of morphism:
 \end{align*}
 Here $V$ cannot depend on $x$. Unit and co-units satisfy equations that ensure that $(\lambda x\of T.u)(t) = u[t/x]$ and $(\lambda x\of T.u(x))=u$.
 
-Extensiveness means that $\cat C$ has coproducts, that $\cat C/0$ is equivalent to the terminal category and that $\cat C/(X+Y)\cong (\cat C/X)\times(\cat C/Y)$. In the presence of dependent coproducts, a type $\bool$ that stands for the object $1+1$ and a way to introduce types and terms that dependent on $\bool$ suffice to add all binary coproducts.
+Extensiveness means that $\cat C$ has coproducts that $\cat C/0$ is equivalent to the terminal category and that $\cat C/(X+Y)\cong (\cat C/X)\times(\cat C/Y)$. In the presence of dependent coproducts, a type $\bool$ that stands for the object $1+1$ and a way to introduce types and terms that dependent on $\bool$ suffice to add all binary coproducts.
 \[ \db{\Gamma\vdash t\of T}\times\db{\Gamma\vdash u\of U}\to\db{\Gamma,b\of\bool\vdash \ttif(b,t,u)\of\ttif(b,T,U)} \]
 The constants $\true$ and $\false$ denote the two global section of $1+1$. The function $\ttif$ is interpreted to satisfy the following equations.
 \[ \ttif(\true,t,u)=t\qquad\ttif(\false,t,u) = u\]
@@ -225,7 +225,7 @@ A \emph{full internal subcategory} is the category of fibres of a generic morphi
 
 If $\cat C$ is an internal groupoid and $\cat H$ is an internal Heyting bialgebra an internal functor $F\of\cat C\to\cat H$ represents the class of objects $\set F\subseteq \Ob(\cat C)$ where $X\of U$ if there is a morphism $1\to\Ar(\cat H)$ in the ambient category which maps to a global section $1\to FX$ inside $\cat H$. However, besides this class of global elements, $F$ has classes of local elements for each object $I$ of the ambient category and each functor $G\of I\disc \to \cat H$--where $I\disc$ is the discrete groupoid based on $I$--determined by morphisms $1\to\Ar(\Func(I\disc,\cat C))$ in the ambient category.
 
-If $f\of X\to Y$ is a morphism of $\cat C$, and if $FX$ has a global section, then so does $FY$. This limits the properties that are represented by functors. In most cases, we consider functors $\Core(\cat C)\to \cat S$ instead, where $\Core(\cat C)$ is the internal groupoid that has the same objects as $\cat C$ but only its isomorphisms for morphisms. That way the represented classes are closed under isomorphism objects, but nothing else.
+If $f\of X\to Y$ is a morphism of $\cat C$ and if $FX$ has a global section, then so does $FY$. This limits the properties that are represented by functors. In most cases, we consider functors $\Core(\cat C)\to \cat S$ instead, where $\Core(\cat C)$ is the internal groupoid that has the same objects as $\cat C$ but only its isomorphisms for morphisms. That way the represented classes are closed under isomorphism objects, but nothing else.
 
 \section{Internal simplicial homotopy}
 This section develops the homotopy theory of Kan complexes internally in Heyting bialgebras. 
@@ -971,7 +971,7 @@ X[n]\ar[d]_f\ar[r] & \dom(\igen(M\s))[n] \ar[r]\ar[d]_{\igen(M\s)[n]} & \dom(\ig
 Y[n] \ar[r]^(.4){\chi'[n]} \ar@/_2ex/[rr]_{\chi[n]} & \cof(\igen(M))^{\simCat/[n]\dual} \ar[r]^(.6){F\mapsto F(\id)} & \cod(\igen(M))
 }\]
 The diagram hold for every $f$ and shows that $\igen(M\s)$ belongs to $M\s$ at the same time. Hence $\igen(M\s)$ is a generic morphism of $M\s$.
-\end{proof}\hide{ Even if we cannot build $\cof(\igen(M))\s$ in $\cat S$, that does mean the pullback is not a modest morphism. }
+\end{proof}\hide{ Even if we cannot build $\cof(\igen(M))\s$ in $\cat S$ that does mean the pullback is not a modest morphism. }
 
 \subsection{Generic fibration}
 This subsection shows that the class $M\s\f$ of fibrations in $M\s$ has its own generic morphism $\igen(M\s\f)$.
@@ -1205,7 +1205,7 @@ The following \emph{category of assemblies} is the intended ambient category $\c
 \end{definition}
 
 
-\begin{lemma} The category of assemblies has all finite limits and colimits, is locally Cartesian closed, regular and has a natural number object. It is a Heyting category that also possesses a generic monomorphism.
+\begin{lemma} The category of assemblies has all finite limits and colimits, is locally cartesian closed, regular and has a natural number object. It is a Heyting category that also possesses a generic monomorphism.
 \end{lemma}
 
 \begin{proof} See \cite{MR2479466,MSC:8896618,RealCats}. \end{proof}
@@ -1311,7 +1311,7 @@ The injective objects, i.e.\ the complexes, for these 5 horn inclusions are prec
 There is a generic modest fibration in $\Asm^{\simCat_0\dual}\f$ for the same reason that there is a generic modest fibration in $\Asm\s\f$ (theorem \ref{univalent universe}). Pullbacks of fibrations are preserved by the quotient functor $Q\of \Asm^{\simCat_0\dual}\f \to\Asm\ex$ because they are examples of homotopy pullbacks \citep{GJSHT}. Therefore $\igen(M\s\f)$ is a generic family of modest sets in $\Asm\ex$.
 \end{proof}
 
-\begin{remark} The effective topos is the exact completion of the category of partitioned assemblies, which are the projective object of the category of assemblies. The category of partitioned assemblies is not Cartesian closed and for that reason partitioned modest sets are not a complete internal category of the effective topos. The effective topos has no generic modest morphism \citep{MR1023803}.
+\begin{remark} The effective topos is the exact completion of the category of partitioned assemblies, which are the projective object of the category of assemblies. The category of partitioned assemblies is not cartesian closed and for that reason partitioned modest sets are not a complete internal category of the effective topos. The effective topos has no generic modest morphism \citep{MR1023803}.
 \end{remark}
 
 \begin{remark}[Colimits] Modest sets are closed under colimits, because a morphism $I\to X+Y$ always factors through either $X$ or $Y$. Many other colimits can be defined as limits over larger diagrams. In particular the limit of a category of \emph{Lambek algebras} of an endofunctor $F$ is an initial Lambek algebra, which is how modest sets interpret $W$-types \citep{Freyd91}.

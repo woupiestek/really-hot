@@ -123,9 +123,9 @@ The small object arguments shows that in a cocomplete category, an family of mor
 strengthens this into an algebraic factorization system.
 
 \section{Dealing with incompleteness}
-Each step of the small object argument assumes the presence of certain colimits, that realizability categories not always have.
+Each step of the small object argument assumes the presence of certain colimits that realizability categories not always have.
 
-The alternative presented here presumes that the ambient category $\cat A$ has other structure to replace the missing colimits. In particular, if $\cat A$ is locally Cartesian closed, then there is a notion of a colimit over an \emph{internal diagram} \ref{Internal diagram}, and $\cat A$ trivially has coproducts over internal families of objects.
+The alternative presented here presumes that the ambient category $\cat A$ has other structure to replace the missing colimits. In particular, if $\cat A$ is locally cartesian closed, then there is a notion of a colimit over an \emph{internal diagram} \ref{Internal diagram} and $\cat A$ trivially has coproducts over internal families of objects.
 
 Internal diagrams have density comonads if $\cat A$ also has equalizers, just like `external' functors with small domains do in cocomplete categories. So an internal diagram in the category $\cat A/\cat A$ of arrows of $\cat A$ can replace the family of generic left morphisms.
 
@@ -147,7 +147,7 @@ M(f) &= \lambda\set{\tuplet{c,x}| \dom(c)=f(x)}\cod(c) \\
 In cocomplete categories $\cat A$ with finite limits, diagrams can be constructed from functors $F\of\cat C\to\cat A$ if $\cat C$ is a small category. The external category $\cat C$ has an internal counterpart $\icat C$ whose objects of objects and arrows are the result of taking coproducts of the terminal object over the objects and arrows of $\cat C$. The internal diagrams for $\icat C$ and the functors $\cat C\to \cat A$ are equivalent categories.
 \end{example}
 
-If the ambient category is locally Cartesian closed and has stable coequalizers, then the density comonad can be internalized as well.
+If the ambient category is locally cartesian closed and has stable coequalizers, then the density comonad can be internalized as well.
 
 \mathsfdef{diagrams}
 \mathsfdef{sheaves}
@@ -163,7 +163,7 @@ q\tuplet{x,y,z}&=\tuplet{x,y\cdot z}
 \end{align*}
 I.e. $f\otimes g$ the the quotient of of pairs $\tuplet{x\of\dom(f),y\of\dom(g)}$ by the least equivalence relation that equates $\tuplet{x\cdot y,z}$ and $\tuplet{x, y\cdot z}$ for each morphism $y$ of $\icat C$.
 
-Thanks to local Cartesian closure each diagram $g$ induces a functor $g\Rightarrow  \of \cat A\to \sheaves(\icat C)$.
+Thanks to local cartesian closure each diagram $g$ induces a functor $g\Rightarrow  \of \cat A\to \sheaves(\icat C)$.
 \begin{align*}
 \dom(g\Rightarrow A) &= \set{\tuplet{y\of C_0,m\of\set{x | g(x) = y}\to A}}\\
 (g\Rightarrow A)\tuplet{c,m} &= c\\
@@ -243,7 +243,7 @@ The problem of generating a factorization system from a family of generic left m
 
 
 % dense is enough? dense families don't have to be closed under composition?
-At this point, assume that the ambient category $\cat A$ has a natural number object $\nno$ and a dense diagram $S$. In a locally Cartesian closed Category, a natural number objects permit the construction of many other inductive objects, like free monoids, which can help to substitute transfinite compositions. The existence of a dense diagram replaces another useful property: \emph{local presentability}. Rather than having each object represented as a small colimit of small objects, we let them be 
+At this point, assume that the ambient category $\cat A$ has a natural number object $\nno$ and a dense diagram $S$. In a locally cartesian closed Category, a natural number objects permit the construction of many other inductive objects, like free monoids, which can help to substitute transfinite compositions. The existence of a dense diagram replaces another useful property: \emph{local presentability}. Rather than having each object represented as a small colimit of small objects, we let them be 
 
 
 
@@ -255,7 +255,7 @@ At this point, assume that the ambient category $\cat A$ has a natural number ob
 
 
 
-\hide{the difficulty is going to be showing that the construction delivers a presaturated diagram, and that may show presaturated diagram to be useless abstractions.}
+\hide{the difficulty is going to be showing that the construction delivers a presaturated diagram and that may show presaturated diagram to be useless abstractions.}
 
 
 

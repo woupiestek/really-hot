@@ -101,9 +101,9 @@ The category $\pers$ of \emph{PERs} is the category whose object are symmetric a
 The category $\pers$ is a complete internal full subcategory of the category $\sep(\eff,\neg\neg)$ of \emph{$\neg\neg$-separated} objects in the \emph{effective topos}. Any internal subcategory has an externalization, which is a fibred category. For $\pers$ in $\sep(\eff,\neg\neg)$ this externalization is a complete fibred category. At the same time $\pers$ is \emph{the} subcategory of subquotients (quoteints of subobjects) of the natural number object of $\sep(\eff,\neg\neg)$. 
 Unfortunately, neither the full subcategory of subquotients nor the full subcategory of $\neg\neg$-separated subquotients of $\N$ in $\eff$ is a complete internal subcategory. The categories are only \emph{weakly complete}, which means that the stack completion of the externalization is complete. 
 
-The effective topos is the ex/reg completion -- N.B.: /reg, not /lex -- of $\sep(\eff,\neg\neg)$, and is therefore pseudoequivalent to a category of groupoids and pseudofunctors in $\sep(\eff,\neg\neg)$: the groupoids are equivalence relations, and the pseudofunctors are functional relations. Higher dimensional category theory may provide more suitable completions: Rosolini suggested looking at more general groupoids in $\sep(\eff,\neg\neg)$ in order to preserve the completeness of $\pers$; recent developments in homotopy type theory suggest by extension that $\omega$-groupoids in $\sep(\eff,\neg\neg)$ are a more suitable completion.
+The effective topos is the ex/reg completion -- N.B.: /reg, not /lex -- of $\sep(\eff,\neg\neg)$ and is therefore pseudoequivalent to a category of groupoids and pseudofunctors in $\sep(\eff,\neg\neg)$: the groupoids are equivalence relations and the pseudofunctors are functional relations. Higher dimensional category theory may provide more suitable completions: Rosolini suggested looking at more general groupoids in $\sep(\eff,\neg\neg)$ in order to preserve the completeness of $\pers$; recent developments in homotopy type theory suggest by extension that $\omega$-groupoids in $\sep(\eff,\neg\neg)$ are a more suitable completion.
 
-%We believe that the faculty of mathematics, informatics and mechanics of the university of Warshaw has a lot of interest in research on the edge of higher dimensional category theory and theoretical computer science. Therefore we propose to research these two problems in collaboration with members of the mathematical logic and category theory group, and with Marek Zawadowski in particular.
+%We believe that the faculty of mathematics, informatics and mechanics of the university of Warshaw has a lot of interest in research on the edge of higher dimensional category theory and theoretical computer science. Therefore we propose to research these two problems in collaboration with members of the mathematical logic and category theory group and with Marek Zawadowski in particular.
 
 
 \hide{\section{internal ex/lex completions}
@@ -124,9 +124,9 @@ An internally projective object satisfies the properties of a projective object 
 J\times P\ar@{.>}[d]_{-\times P}\ar@{.>}[r] & X\ar[d]^e\\
 I\times P\ar[r]_f & Y
 }\]
-This means that there are \emph{inhabited families} of Kan fibrations between the simplicial internally projective objects, which may not have any global elements. Hence we are looking for a variant of the ex/lex completion construction, that somehow replaces individual Kan fibrations by \emph{inhabited internal equivalence classes} of Kan fibrations. The greatest problem here is the property definition of `inhabited' in a category that may not be regular.
+This means that there are \emph{inhabited families} of Kan fibrations between the simplicial internally projective objects, which may not have any global elements. Hence we are looking for a variant of the ex/lex completion construction that somehow replaces individual Kan fibrations by \emph{inhabited internal equivalence classes} of Kan fibrations. The greatest problem here is the property definition of `inhabited' in a category that may not be regular.
 
-The case we are interested in is the case of a realizability topos $\cat R$ constructed over another topos $\cat T$ than the topos of sets. The topos $\cat R$ is a locally small fibred topos over $\cat T$, and so is its subcategory of internally projective objects. A possibly suitable notion of inhabitation for enriched categories with a terminal object $1$ is the following: object $X$ of $\cat R$ is habited if $\cat R(Y,X)$ is, for all objects $Y$ of $\cat R$. 
+The case we are interested in is the case of a realizability topos $\cat R$ constructed over another topos $\cat T$ than the topos of sets. The topos $\cat R$ is a locally small fibred topos over $\cat T$ and so is its subcategory of internally projective objects. A possibly suitable notion of inhabitation for enriched categories with a terminal object $1$ is the following: object $X$ of $\cat R$ is habited if $\cat R(Y,X)$ is, for all objects $Y$ of $\cat R$. 
 Other approaches look at Grothendieck topologies to provide a suitable notion of inhabitation, see \cite{ECnSS}.
 
 We want to figure out which approach is most suitable for representing exact categories as completions of their subcategories of internally projective objects in general.
@@ -144,7 +144,7 @@ The forgetful functor $U:\Asm\to \Set$ is a fibration. The identity function $\i
 
 The category $\pers$ is closely related to the following factorisation system on $\Asm$:
 
-\begin{defin} An arrow $m:X\to Y$ is \emph{modest}, if it is right orthogonal to all Cartesian regular epimorphisms of $\Asm$, i.e. given a regular epimorphism $e:X'\to Y'$ which is Cartesian relative to the forgetful functor $U$, and arbitrary morphisms $x:X'\to X$ and $y:Y'\to Y$, then there is a unique morphism $z: Y'\to X$ such that $m\circ z = x$ and $z\circ e = y$.
+\begin{defin} An arrow $m:X\to Y$ is \emph{modest}, if it is right orthogonal to all cartesian regular epimorphisms of $\Asm$, i.e. given a regular epimorphism $e:X'\to Y'$ which is cartesian relative to the forgetful functor $U$ and arbitrary morphisms $x:X'\to X$ and $y:Y'\to Y$, then there is a unique morphism $z: Y'\to X$ such that $m\circ z = x$ and $z\circ e = y$.
 \[ \xymatrix{
 X'\ar[d]_e\ar[r]^x & X\ar[d]^m \\
 Y'\ar[r]_y\ar@{.>}[ur]^z & Y
@@ -161,7 +161,7 @@ On one hand, the full fibred subcategory of subquotients of $\N$ in $\Asm$ is co
 
 
 \section{Problems and univalence}
-Modest morphisms and Cartesian epimorphism are a stable factorisation system in $\Asm$ and this is the reason for the nice properties of the category of subquotients of $\N$ there. This does not hold in $\eff$, because it implies that the subquotients of $\N$ from a topos, which quickly leads to contradictions with Cantors theorem.
+Modest morphisms and cartesian epimorphism are a stable factorisation system in $\Asm$ and this is the reason for the nice properties of the category of subquotients of $\N$ there. This does not hold in $\eff$, because it implies that the subquotients of $\N$ from a topos, which quickly leads to contradictions with Cantors theorem.
 
 The exact status of the completeness is rather subtle:
 

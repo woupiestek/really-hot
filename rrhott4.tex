@@ -42,10 +42,10 @@ Realizability toposes have complete internal subcategories, which provide models
 
 
 \section{Internal groupoids}
-Hofmann and Streicher's \emph{groupoid interpretation of type theory} works with the internal groupoids of an arbitary elementary topos if we make a few adjustments to the limitations of the internal language. This section is about the category of internal groupoids of a topos, and the structure that makes the interpretation of type theory possible.
+Hofmann and Streicher's \emph{groupoid interpretation of type theory} works with the internal groupoids of an arbitary elementary topos if we make a few adjustments to the limitations of the internal language. This section is about the category of internal groupoids of a topos and the structure that makes the interpretation of type theory possible.
 
 \newcommand\ri{^*}
-This section is about internal groupoids in an extensive locally Cartesian closed category $\cat E$. Locally Cartesian closed implies that $\cat E$ has finite limits and that for each morphism $f:X\to Y$ the reindexing functor $f\ri:\cat E/Y\to\cat E/X$ has both adjoints.%Beck Chevalley?
+This section is about internal groupoids in an extensive locally cartesian closed category $\cat E$. Locally cartesian closed implies that $\cat E$ has finite limits and that for each morphism $f:X\to Y$ the reindexing functor $f\ri:\cat E/Y\to\cat E/X$ has both adjoints.%Beck Chevalley?
 Extensive means that the category has finite coproducts which are disjoint and stable under pullback. Disjoint means that the following square with the coporduct inclusions is a pullback:
 \[\xymatrix{
 0\ar[r]\ar[d] & X\ar[d]^(.4){\iota_0}\\
@@ -55,7 +55,7 @@ Y\ar[r]_(.4){\iota_1} & X+Y
 \hide{
 Toposes have these properties, but are also 
 
-classifier. Elementary toposes automatically are exact, extensive and locally Cartesian closed. In fact, for each object $I$ of $\cat E$, the slice $\cat E/I$ is a topos. Each $f:I\to J$ induces a reindexing functor $f\ri:\cat E/J \to \cat E/I$ and this functor has both al left adjoint $\coprod_f$ and a right adjoint $\prod_f$, which means it preserves all limits.
+classifier. Elementary toposes automatically are exact, extensive and locally cartesian closed. In fact, for each object $I$ of $\cat E$, the slice $\cat E/I$ is a topos. Each $f:I\to J$ induces a reindexing functor $f\ri:\cat E/J \to \cat E/I$ and this functor has both al left adjoint $\coprod_f$ and a right adjoint $\prod_f$, which means it preserves all limits.
 \hide{misschien meteen over assemblies praten?}
 
 Toposes are also Heyting categories, which means that set builder expressions like $\set{x\in X| \phi(x)}$ corresponds to subobjects of $X$. We assume that every topos is equipped with a map which chooses a specific monomorphism $Y\to X$ to represent each set builder expression. When we refer to $\set{x\in X| \phi(x)}$ as an object of $\cat E$ we implicitely apply this map.
@@ -96,7 +96,7 @@ d^Y_0\circ \eta &= f_0 \\
 d^Y_1\circ \eta &= g_0 \\
 t^Y\circ(\eta\circ d^X_0,f_1) &= t^Y\circ(g_1,\eta\circ d^X_1)
 \end{align*}
-The composition morphism $t^Y$ provides a composition of internal natural tranformations of functors $X\to Y$, and $r^Y\circ f_0 = f_1\circ r^X$ is an identity morphism of the functor $F$. Because every morphism has in inverse intenrally, every natrual transformation $\eta:F\to G$ has an inverse $\eta\inv:G\to F$ which exists externally.
+The composition morphism $t^Y$ provides a composition of internal natural tranformations of functors $X\to Y$ and $r^Y\circ f_0 = f_1\circ r^X$ is an identity morphism of the functor $F$. Because every morphism has in inverse intenrally, every natrual transformation $\eta:F\to G$ has an inverse $\eta\inv:G\to F$ which exists externally.
 
 Internal natural transformation between internal functors are natural isomorphisms and we take this for granted throughout this paper.
 
@@ -120,7 +120,7 @@ r^{Y/F}(x,y) &= (x,r^Y(d_0^Y(x)),x,r^Y(y))\\
 t^{Y/F}((w,x,y,z),(y,x',y',z')) &= (w,t^Y(x',x),y',t^X(y',y))\\
 \end{align*}
 
-There are two obvious projection functors $D_0(F): Y/F \to Y$ and $D_1(X):Y/F\to X$, and identity arrows in the groupoids provide a third functor $R(F):X\to Y/F$ that sends objects to identities. Formally:
+There are two obvious projection functors $D_0(F): Y/F \to Y$ and $D_1(X):Y/F\to X$ and identity arrows in the groupoids provide a third functor $R(F):X\to Y/F$ that sends objects to identities. Formally:
 \begin{align*}
 (D_0(F))_0(x,y) &= d^Y_0(x) \\
 (D_0(F))_1(w,x,y,z) &= x \\
@@ -150,7 +150,7 @@ Y \ar[r]_\id\ar[ur]^D & Y
 
 \begin{theorem} Deformation retracts and cloven fibrations form a weak factorisation system. \end{theorem}
 
-\begin{proof} I will show this by first showing that deformation retracts have the left lifting property with respect to cloven fibration, and then showing that for any functor $F:X\to Y$, $R(F)$ is a deformation retract and $D_0(F)$ is a cloven fibration.
+\begin{proof} I will show this by first showing that deformation retracts have the left lifting property with respect to cloven fibration and then showing that for any functor $F:X\to Y$, $R(F)$ is a deformation retract and $D_0(F)$ is a cloven fibration.
 
 Let $F:X\to Y$ have a deformation $D:Y\to Y/F$, let $F':X'\to Y'$ have cleavage $K:Y'/F'\to X'$, let $A:X\to X'$ and $B:Y\to Y'$ satisfy $BF = F'A$.
 \[\xymatrix{
@@ -202,7 +202,7 @@ For each internal groupoid $I$ let $\fib(I)$ be the category whose object are cl
 
 \begin{lemma} Let $F,G:I\to J$ be an internal functor. A natural transformation $\eta: F\to G$ induces a natural homotopy equivalence $G\ri \to F\ri$. \label{isotohe}\end{lemma}
 
-\begin{proof} Let $\Phi:X\to J$ be a fibration with cleavage $K^\Phi:J/\Phi\to X$. The pullback can now be described as follows. The groupoid $F\ri X$ is just the fibred product $I\times_J X$, and $F\ri(\Phi)$ is its projection to $I$. A similar description holds for $G\ri X$ and $F\ri X$. The cleavage $K^\Phi$ induces a functor $A:G\ri X\to F\ri X$ which commutes with $F\ri\Phi$ and $G\ri\Phi$. 
+\begin{proof} Let $\Phi:X\to J$ be a fibration with cleavage $K^\Phi:J/\Phi\to X$. The pullback can now be described as follows. The groupoid $F\ri X$ is just the fibred product $I\times_J X$ and $F\ri(\Phi)$ is its projection to $I$. A similar description holds for $G\ri X$ and $F\ri X$. The cleavage $K^\Phi$ induces a functor $A:G\ri X\to F\ri X$ which commutes with $F\ri\Phi$ and $G\ri\Phi$. 
 \[ A(i,x) = (i, K^\Phi(\eta(i),x)) \]
 The inverse $\eta\inv$ induces a similar functor $B:G\ri X\to F\ri X$ in the oppositie direction. Its also give us these commutative squares.
 \[ \xymatrix{
@@ -226,12 +226,12 @@ This notion of natural homotopy equivalence induces a weak form of equivalence b
 \subsection{Products along fibrations}
 This subsection show that if $F:I\to J$ is a fibration, then $F\ri$ has a right adjoint. Using the resulting depedent products, we can then build an interpretation of intensional type theory.
 
-\begin{lemma} For each groupoid, the category $\fib(I)$ is Cartesian closed. \end{lemma}
+\begin{lemma} For each groupoid, the category $\fib(I)$ is cartesian closed. \end{lemma}
 
 \begin{proof}
 The category $\grpd(\cat E)$ has finite limits and fibrations are closed under pullback because they are the right class of a factorization system. Equalizers are just equalizers and products in $\fib (I)$ are pullbacks.
 
-The exponentials are defined fibrewise. The underlying category $\cat E$ is a topos, and has fibrewise exponentials. Hence if $\Phi:X\to I$ and $\Psi:Y\to I$ are objects of $\fib(I)$, there are fibred exponentials $(Y_0)^{X_0}_I$, $(Y_1)^{X_1}_I$, $(Y_1)^{X_0}_I$. Using finite limits, we can construct any equationally define subset of a product of these. This is enough to internalize the definitions of internal groupoids and natural transformations of subsection \ref{internal}. In this way we can construct a fibred exponential $(\Phi\Rightarrow \Psi)$. 
+The exponentials are defined fibrewise. The underlying category $\cat E$ is a topos and has fibrewise exponentials. Hence if $\Phi:X\to I$ and $\Psi:Y\to I$ are objects of $\fib(I)$, there are fibred exponentials $(Y_0)^{X_0}_I$, $(Y_1)^{X_1}_I$, $(Y_1)^{X_0}_I$. Using finite limits, we can construct any equationally define subset of a product of these. This is enough to internalize the definitions of internal groupoids and natural transformations of subsection \ref{internal}. In this way we can construct a fibred exponential $(\Phi\Rightarrow \Psi)$. 
 
 The objects of $(\Phi\Rightarrow \Psi)$ objects are pairs $(i,H)$ where $i\in I_0$ and $H$ is a functor $X_i \to Y_i$. Its morphisms are pairs $(m,H^0,H^1,\eta)$ where $m\in I_1$, $H^i$ are functors in $X_{d_i(m)} \to Y_{d_i(m)}$ and $\eta$ is a natural transformation between functors which can be described as $x\mapsto K^\Psi(m,H^1(x))$ and $x\mapsto H^0(K^\Phi(m,x))$.
 \[\xymatrix{ 
@@ -253,7 +253,7 @@ A cleavage of $(\Phi\Rightarrow \Psi)$ is constructed as follows. Let $m:i_0\to 
 \id_J \ar[r] & F^F
 }\]
 
-The category $\fib(I)$ is isomorphic to the subcategory of $\fib(J)/F$ whose members are fibrations, and a similar remark holds for $\fib(J)$ versus $\fib(J)/\id_J$. This makes it is easy to see that $\prod_F$ is a right adjoint of $F\ri$.
+The category $\fib(I)$ is isomorphic to the subcategory of $\fib(J)/F$ whose members are fibrations and a similar remark holds for $\fib(J)$ versus $\fib(J)/\id_J$. This makes it is easy to see that $\prod_F$ is a right adjoint of $F\ri$.
 \[\xymatrix{
 F\times \Psi \ar[r] \ar[d]_{F\ri\Psi} & F\circ \Phi\ar[d]^\Phi \\
 F\ar[r]_\id & F
@@ -283,12 +283,12 @@ In order to establish that groupoids and fibrations admit an interpretation of t
 \item For each $F:\Gamma \to \Delta$ the substitution $T[F]$ is defined as the pullback $F\ri T$.
 \end{itemize}
 
-For the interpretation of the rest of type theory, we take advantage of the rich structure $\fib$ already has. The category $\fib(\Gamma)$ is Cartesian closed and has finite coproducts. This structure allows us to easily interpret finite product and discrete sum types, as well as functor types.
+For the interpretation of the rest of type theory, we take advantage of the rich structure $\fib$ already has. The category $\fib(\Gamma)$ is cartesian closed and has finite coproducts. This structure allows us to easily interpret finite product and discrete sum types, as well as functor types.
 
 The identity types are interpreted through the factorisation of the diagonal functors. For $T:X\to \Gamma$ there is a fibred product $T\times_\Gamma T:X\times_\Gamma X \to \Gamma$ and a diagonal functor $\delta: X\to X\times_\Gamma X$. The identity type 
 \[ \id(T) = D_0(\delta):(X\times_\Gamma X)/\delta\to \Gamma;T;T[T] = (X\times_\Gamma X) \]
 
-For the dependent products and coproducts, we use the following trick. Each functor $F:I \to J$ splits as a cloven fibration $D_0(F):J/F\to J$ following a deformation retract $R(F):I\to J/F$. The deformation retract is a homotopy equivalence, and induces a biequivalence between $\fib(I)$ and $\fib(J/F)$. For the cloven fibration $D_0(F)\ri:\fib(I) \to \fib(J/F)$ has left and right adjoints. The dependent products and coproducts of a type $T$ in $\fib(I)_0$ along an arbitrary functor $F$ are intrepreted as the depedent products and coproducts of the pullbakc of $T$ along $D_1(F):J/F\to J$. This means that they satisfy their universal properties only up to homotopy equivalence. This doesn't matter as in equivalence of terms is interpretated as the existsence of a natural transformation between the interpretations of those terms.
+For the dependent products and coproducts, we use the following trick. Each functor $F:I \to J$ splits as a cloven fibration $D_0(F):J/F\to J$ following a deformation retract $R(F):I\to J/F$. The deformation retract is a homotopy equivalence and induces a biequivalence between $\fib(I)$ and $\fib(J/F)$. For the cloven fibration $D_0(F)\ri:\fib(I) \to \fib(J/F)$ has left and right adjoints. The dependent products and coproducts of a type $T$ in $\fib(I)_0$ along an arbitrary functor $F$ are intrepreted as the depedent products and coproducts of the pullbakc of $T$ along $D_1(F):J/F\to J$. This means that they satisfy their universal properties only up to homotopy equivalence. This doesn't matter as in equivalence of terms is interpretated as the existsence of a natural transformation between the interpretations of those terms.
 
 \section{Modest sets}%werken aan de titel
 Every realizability topos $\cat R$ has a class of discrete arrows, which form a complete fibred subcategory of the codomain fibration $\cat R/\cat R \to\cat R$. The subcategory of \emph{separated objects} in $\cat R$ has a generic discrete arrow. This section goes through the theory of realizability toposes and their discrete objects. We will turn the generic discrete arrow into a universe in the next section.
@@ -297,15 +297,15 @@ Every realizability topos $\cat R$ has a class of discrete arrows, which form a 
 Let $\cat S$ be an arbitrary elementary topos. In order to build a realizability topos, we will need an object of realizers $A$, together with a suitable notion of computable partial morphism. The realizability topos implicitely assigns subobjects of $A$ to the propositions of its internal language. The following structure allows valid propositions to correspond to inhabited (or globally supported) subobjects of $A$.
 
 \newcommand\partar\rightharpoonup
-\begin{defin}[Partial combinatory algebras] A partial combinatory algebra is a tuple $(A,\cdot,K,S)$ where $\cdot: A\times A \partar A$ is a partial map, and $K, S\subseteq A$ satsify:
+\begin{defin}[Partial combinatory algebras] A partial combinatory algebra is a tuple $(A,\cdot,K,S)$ where $\cdot: A\times A \partar A$ is a partial map and $K, S\subseteq A$ satsify:
 \begin{itemize}
 \item $K$ and $S$ are inhabited.
 \item For all $k\in K$, $x,y\in A$, $k\cdot x$ is defined and $(k\cdot x)\cdot y = x$.
-\item For all $s\in S$, $x,y,z\in A$, $s\cdot x$ is defined, $(s\cdot x)\cdot y$ is defined, and if $(x\cdot z)\cdot (y\cdot z)$ is defined, then $((s\cdot x)\cdot y)\cdot z = (x\cdot z)\cdot (y\cdot z)$
+\item For all $s\in S$, $x,y,z\in A$, $s\cdot x$ is defined, $(s\cdot x)\cdot y$ is defined and if $(x\cdot z)\cdot (y\cdot z)$ is defined, then $((s\cdot x)\cdot y)\cdot z = (x\cdot z)\cdot (y\cdot z)$
 \end{itemize}
 \end{defin}
 
-The operator $\cdot:A\times A\partar A$ \emph{is} the family of all partial computable arrows, with the first variable acting as an index. In order to get arbtrary-ary functiones, we use the operator $\cdot$ repeatedly. So $\phi_0 = \id_A:A\to A$ is the familie of all $0$-ary functions, and the family of all $n+1$-ary functions $\phi_{n+1}: A^n\times A \partar A$ is defined by $\phi_{n+1}(\vec x,y) = \phi_n(\vec x)\cdot y$ for all $n$ in $\mathbb N$.
+The operator $\cdot:A\times A\partar A$ \emph{is} the family of all partial computable arrows, with the first variable acting as an index. In order to get arbtrary-ary functiones, we use the operator $\cdot$ repeatedly. So $\phi_0 = \id_A:A\to A$ is the familie of all $0$-ary functions and the family of all $n+1$-ary functions $\phi_{n+1}: A^n\times A \partar A$ is defined by $\phi_{n+1}(\vec x,y) = \phi_n(\vec x)\cdot y$ for all $n$ in $\mathbb N$.
 
 Since $A$ may not have any global section, we generally work with inhabited families of partial arrows $U\times A\partar A$ rather than with global partials arrows $A\partar A$.
 
@@ -404,7 +404,7 @@ X^I_Y\times I \ar[d]_{\pi_0}\ar[r]^{\epsilon} & X\ar[d]_{C(f)}\ar[r]^\id &X \ar[
 X^I_Y\ar@/_/[rr]_{f^I_Y}\ar[r] & \bullet\ar[r]^{D(f)} \ar@{}[ul]|<\ulcorner & Y
 }\]
 
-\begin{lemma} For each $f:X\to Y$, $C(f)$ is connected, and $D(f)$ is discrete. \end{lemma}
+\begin{lemma} For each $f:X\to Y$, $C(f)$ is connected and $D(f)$ is discrete. \end{lemma}
 
 \begin{proof} Let $Z$ be the codomain of $C(f)$ and the domain of $D(f)$. The morphism $C(f)$ is connected if the following diagram is pullback:
 \[\xymatrix{
@@ -415,7 +415,7 @@ Here, $X^I_Z = \set{(h,z):X^I\times Y| \forall i\in I. C(f)(h(i)) = y }$.
 
 If $C(f)(h(i)) = C(f)(h(0))$ then clearly $f(h(i))=f(h(0))$ so $X^I_Z \subseteq X^I_Y$. If $f(h(i))=f(h(0))$ then $C(f)(h(i)) = C(f)(h(0))$ because $h(i)$ and $h(0)$ are path connected elements of a fibre of $f$. Therefore $X^I_Z = X^I_Y$, making the diagram above equivalent to the pushout that defines $C(f)$. Hence $C(f)$ is connected.
 
-%o nee hè
+%o nee hï¿½
 The morphism $D(f):Z\to Y$ is discrete if $(Z^!,D(f)):Z\to Z^I_Y$ is an isomorphism. It is easy to see that it is a split monomorphisms because there is a left inverse: $(h,y)\mapsto h(0)$. To see that this an epimorphism we use the fact that the functor $X\mapsto X^I$ preserves regular epimorphisms. \hide{gewoon uitwerken ergens.} 
 So $C(f)^I_Y$ is a regular epimorphism $X^I_Y\to Z^I_Y$. The map $(h,y)\mapsto C(f)(h(0)): X^I_Y \to Z$ is a regular epimorphism for trivial reasons. Now $C(f)^I_Y(h) = C(f)\circ h$ is a constant function because all point in $I$ are connected. That means $C(f)\circ h = (Z^!,D(f))((C(f)(h(0))))$. This proves $(Z^!,D(f))$ is a regular epimorphism and hence an isomorphism.
 \end{proof}
@@ -444,7 +444,7 @@ The projections $A\times |X|\to A$ and $A\times|X|\to|X|$ induce the required mo
 
 \begin{corol} Discrete objects are quotient of prone subobjects of $\genpa$. \end{corol}
 
-\begin{proof} Suppose $X$ is a discrete object, $e:Y\to X$ is a regular epimorphism and $p:Y\to \genpa$ is a prone morphism. The prone morphism $p$ factors as a prone monomorphism $M(p):Z\to \genpa$ following a prone epimorphism $E(p):Y\to Z$, which is connected and hence orthogonal to $!:X\to 1$. Hence there is a $g:Z\to X$ such that $g\circ E(p) = e$. This means $g$ is an epimorphism too, and that the prone `subobject' $Z$ of $\genpa$ covers $X$.
+\begin{proof} Suppose $X$ is a discrete object, $e:Y\to X$ is a regular epimorphism and $p:Y\to \genpa$ is a prone morphism. The prone morphism $p$ factors as a prone monomorphism $M(p):Z\to \genpa$ following a prone epimorphism $E(p):Y\to Z$, which is connected and hence orthogonal to $!:X\to 1$. Hence there is a $g:Z\to X$ such that $g\circ E(p) = e$. This means $g$ is an epimorphism too and that the prone `subobject' $Z$ of $\genpa$ covers $X$.
 \[ \xymatrix{
 Y\ar[d]_{E(p)} \ar[rr]^e && X\ar[d] \\
 Z \ar[r]_{M(p)}\ar[urr]^g & \genpa\ar[r] & 1
@@ -454,7 +454,7 @@ We now know that discrete objects are quotients of certain subobjects of $\genpa
 \begin{enumerate}
 \item The object $\genpa$ is discrete. This requires wroking out the definition of $\genpa^I$ etc.
 \item Monomorphisms are discrete, hence subobjects of discrete objects are discrete.
-\item If $X$ is discrete and $e:X\to Y$ is a regular epimorphism, then so is $e^I:X^I\to Y^I$ because $I$ is internally projective. The split monic $X^!:X\to X^I$ is an isomorphism, and $Y^!\circ e = e^I\circ X^!$, forcing the split monic $Y^!$ to be an epimorphism and hence an isomorphism too.
+\item If $X$ is discrete and $e:X\to Y$ is a regular epimorphism, then so is $e^I:X^I\to Y^I$ because $I$ is internally projective. The split monic $X^!:X\to X^I$ is an isomorphism and $Y^!\circ e = e^I\circ X^!$, forcing the split monic $Y^!$ to be an epimorphism and hence an isomorphism too.
 \end{enumerate}
 
 \end{proof}
@@ -468,7 +468,7 @@ For each discrete object $D$ there is a global section $\chi:1\to Q$ such that $
 
 \begin{proof} The object $Y$ has an object $Z$ together with morphism $e:Z\to Y$ and $p:Z\to \genpa$ such that $e$ is a regular epimorphism and $p$ is prone. We just need to show that $(f\circ e,p):Z\to \nabla X\times \genpa$ is prone.
 
-The projection $\pi_1:\nabla X\times\genpa\to \genpa$ is prone, and so is $p = \pi_1\circ(f\circ e,p)$. 
+The projection $\pi_1:\nabla X\times\genpa\to \genpa$ is prone and so is $p = \pi_1\circ(f\circ e,p)$. 
 Suppose $h:W\to \nabla X\times \genpa$ has the property that $\Gamma h = \Gamma (f\circ e,p) \circ k$ for some $k:\Gamma W\to \Gamma Z$. Because $p$ is prone, there is a unique $k':W\to Z$ such that $\Gamma k'=k$ and $p\circ k' = \pi_1\circ h$. Now $\pi_1\circ (f\circ e,p)\circ k' = \pi_1\circ h$ and $\Gamma((f\circ e,p)\circ k') = \Gamma(f\circ e,p)\circ k = \Gamma h$, so $(f\circ e,p)\circ k' = h$ because $\pi_1$ is prone. But this means that $h$ has a unique factorisation through $(f\circ e,p)$ which means that $h$ is prone.%def prone moet ergens.
 
 \[\xymatrix{
@@ -483,7 +483,7 @@ An object $X$ is \emph{separated} if the unit $\eta_X:X\to\nabla\Gamma X$ is mon
 
 \begin{theorem}[Generic discrete] For each separated $Y$ and each discrete $f:X\to Y$ there is a morphism $\chi:Y\to Q$ such that $f$ the the pullback of $\gendisc$ along $\chi$. \end{theorem}
 
-\begin{proof} Monomorphisms are discrete. The discrete $\eta_Y\circ f$ has a $\chi:\nabla \Gamma X\to Q$ such that $\eta_Y\circ f$ is the pullback of $\gendisc$ along $\chi$. But $f$ is the pullback of $\eta_Y\circ f$ along $\eta Y$, and hence the pullbakc of $\gendisc$ along $\chi\circ \eta_Y$
+\begin{proof} Monomorphisms are discrete. The discrete $\eta_Y\circ f$ has a $\chi:\nabla \Gamma X\to Q$ such that $\eta_Y\circ f$ is the pullback of $\gendisc$ along $\chi$. But $f$ is the pullback of $\eta_Y\circ f$ along $\eta Y$ and hence the pullbakc of $\gendisc$ along $\chi\circ \eta_Y$
 \newcommand\pbc{\ar@{}[dr]|<\lrcorner}%pullbackcorner
 \[ \xymatrix{
 X\ar[d]_f \ar[r]^\id\pbc & X \ar[d]^f \ar[r]\pbc & Q'\ar[dd]^\gendisc\\
@@ -507,7 +507,7 @@ In the next section, we put these things together to extend our model of type th
 We turn to the category of internal groupoids in the subcategory of separated objects. The trivial groupoid structure turns modest sets into a collection of small types, which has a univalent universe.
 
 \subsection{Orthogonality}
-A family of sets indexed over a groupoid is the same thing as a faithful functor over the groupoid. Let $G$ be a groupoid, and let $F:G^{op}\to\mathsf{Set}$ be the indexed family of sets. The Grothendieck construction gives a groupoid $G'$ which has pairs $(i\in G,x\in G_i)$ as object; a morphism $(i,x)\to (j,y)$ is a morphism $h:i\to j$ such that $x=Fh(y)$.
+A family of sets indexed over a groupoid is the same thing as a faithful functor over the groupoid. Let $G$ be a groupoid and let $F:G^{op}\to\mathsf{Set}$ be the indexed family of sets. The Grothendieck construction gives a groupoid $G'$ which has pairs $(i\in G,x\in G_i)$ as object; a morphism $(i,x)\to (j,y)$ is a morphism $h:i\to j$ such that $x=Fh(y)$.
 
 A \emph{modest functor} is faithful and discrete on objects. Such functors are right orthogonal to full functors which are prone epimorphic on objects. This causes modest functors to be closed under finite limits. Because full and prone epimorphism functors are stable under pullback, modest fibrations are closed under depedent products along fibrations.
 
@@ -562,12 +562,12 @@ This section is about the following lemma, which explains why there is a generic
 Let $X=(|X|,e_X)$ and consider the following object.
 \[ X_p =  \]
 
-The projections $A\times |X|\to A$ and $A\times |X|\to |X|$ induce morphisms $p:X_p \to \genpa$ and $q:X_p \to X$. The morphism $p$ is prone, and the morphism $q$ is a regular epimorphism. Moreover, the epimorphic part $E(f\circ q,p)$ of $(f\circ q,p):X \to \genpa\times\nabla Y$ is also prone and therefore connected.
+The projections $A\times |X|\to A$ and $A\times |X|\to |X|$ induce morphisms $p:X_p \to \genpa$ and $q:X_p \to X$. The morphism $p$ is prone and the morphism $q$ is a regular epimorphism. Moreover, the epimorphic part $E(f\circ q,p)$ of $(f\circ q,p):X \to \genpa\times\nabla Y$ is also prone and therefore connected.
 \[ \xymatrix{
 X_p\ar[d]_{E(f\circ q,p)} \ar[rr]^{q} && X \ar[d]^f \\
 \bullet \ar[r]_{M(f\circ q,p)}\ar@{.>}[urr]^g &\nabla Y\times\genpa\ar[r]_{\pi_0} & \nabla Y
 }\]
-The vertical arrow $g$ exists because $E(f\circ q,p)$ and $f$ are orthogonal, and is an epimorphim because $g\circ E(f\circ p, q)$ is. The morphism $M(f\circ p,q)$ is the monic part of $(f\circ p,q)$. Together these arrows show that $f$ is a quotient of a subobject of $\pi_0$.
+The vertical arrow $g$ exists because $E(f\circ q,p)$ and $f$ are orthogonal and is an epimorphim because $g\circ E(f\circ p, q)$ is. The morphism $M(f\circ p,q)$ is the monic part of $(f\circ p,q)$. Together these arrows show that $f$ is a quotient of a subobject of $\pi_0$.
 \end{proof}
 
 Since $\rt(\cat S,A)/\nabla Y$ is a topos we now get of lot of constructiction for free. There is an object $Q$ of partial equivalence relations of $\genpa$, together with a discrete arrow $\gendisc$ such that de fibre over the relation $R$ is the discrete object $\A/R$.%quotienten???
@@ -646,13 +646,13 @@ The classes of families of types and of contexts are formed by mutual recursion.
 A context is generated from groupoids and fibrations by the following rules.
 \begin{enumerate}
 \item for each groupoid $I$ and each variable $x$, $x\of I$ is a context. Interpretation simply erases the variable: $\db{x\of I}=I$
-\item for each type $T$ over $\Gamma$ and $\Gamma$, and each variable $y$ which does not already occur in $\Gamma$, $\Gamma;y\of T$ is a context. The interpertation $\db{\Gamma, y\of T} = \dom\db T_\Gamma$.
+\item for each type $T$ over $\Gamma$ and $\Gamma$ and each variable $y$ which does not already occur in $\Gamma$, $\Gamma;y\of T$ is a context. The interpertation $\db{\Gamma, y\of T} = \dom\db T_\Gamma$.
 \end{enumerate}
 
 There are more constructions of types available. The following are for a fixed context $\Gamma$.
 \begin{enumerate}
 \item Each fibration $F:X\to \db \Gamma$ is a type dependent on $\Gamma$.
-\item There is a terminal type $1$, and $\db 1_\Gamma = \id_{\db\Gamma}:\db\Gamma \to \db \Gamma$. 
+\item There is a terminal type $1$ and $\db 1_\Gamma = \id_{\db\Gamma}:\db\Gamma \to \db \Gamma$. 
 \item There is an initial type $0$ and $\db 0_\Gamma$ is the unique map $!:0\to \db \Gamma$, where $0$ is the initial groupoid.
 \item For each pair of types $T,U$ dependent on $\Gamma$, $T\times U$ is a type and $\db{T\times U}_\Gamma$ is the fibred product of $\db T_\Gamma$ and $\db U_\Gamma$.
 \item For each pair of types $T,U$ dependent on $\Gamma$, $T+U$ is a type and $\db{T+U}$ is the factorisation of $\db{T}$ and $\db{U}$ through the coproduct of their domains: $(\db{T},\db{U}): \dom\db T+\dom\db U \to \db\Gamma$.
@@ -663,8 +663,8 @@ There are more constructions of types available. The following are for a fixed c
 The next set works with a fibration $F:X\to \db\Gamma$.
 \begin{enumerate}
 \item For each fibration $F:X\to \db\Gamma$ and each type $T$ over $\db \Gamma$, $\Delta_F(T)$ is a a type over $\Gamma, y\of F$ and $\db{\Delta_F(T)}_{\Gamma; y\of F} = F\ri\db T_F$.%is dit wel genoeg?
-\item For each fibration $F:X\to \db\Gamma$ and each type $T$ over $\db{\Gamma;y\of F}$, $\Sigma_{y\of F} T$ is a type over $\Gamma$, and $\db{\Sigma_{y\of F} T}_\Gamma = F\circ \db T_{\Gamma;y\of F}$.
-\item For each fibration $F:X\to \db\Gamma$ and each type $T$ over $\db{\Gamma;y\of F}$, $\Pi_{y\of F} T$ is a type over $\Gamma$, and $\db{\Pi_{y\of F} T}_\Gamma = \prod_F(\db{T}_{\Gamma,y\of F})$.
+\item For each fibration $F:X\to \db\Gamma$ and each type $T$ over $\db{\Gamma;y\of F}$, $\Sigma_{y\of F} T$ is a type over $\Gamma$ and $\db{\Sigma_{y\of F} T}_\Gamma = F\circ \db T_{\Gamma;y\of F}$.
+\item For each fibration $F:X\to \db\Gamma$ and each type $T$ over $\db{\Gamma;y\of F}$, $\Pi_{y\of F} T$ is a type over $\Gamma$ and $\db{\Pi_{y\of F} T}_\Gamma = \prod_F(\db{T}_{\Gamma,y\of F})$.
 \end{enumerate}%tot nu toe geen duidelijk gebruik gemaakt van de variabelen. Waarom hoeven de cofibraties niet?
 
 \newcommand\pair[2]{\langle #1,#2\rangle}

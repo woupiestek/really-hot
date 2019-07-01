@@ -47,9 +47,9 @@ A $\Pi$-pretopos has a lot of the structure a topos has, but it misses the subob
 This section explains $\Pi$-pretoposes and $W$-types.
 
 \newcommand\bieq{\cong}
-\begin{definition}[$\Pi$-pretopos] A \emph{$\Pi$-pretopos} is an exact and extensive locally Cartesian closed category. 
+\begin{definition}[$\Pi$-pretopos] A \emph{$\Pi$-pretopos} is an exact and extensive locally cartesian closed category. 
 
-A \emph{locally Cartesian closed category} is a category $\cat C$ where for each object $X$ the slice $\cat C/X$ is Cartesian closed.
+A \emph{locally cartesian closed category} is a category $\cat C$ where for each object $X$ the slice $\cat C/X$ is cartesian closed.
 A category $\cat C$ is \emph{extensive} if it has finite coproducts and if for each pair of objects $X$ and $Y$ pulling back along coproduct inclusions induce an equivalence of categories $\cat C/(X+Y)\bieq\cat C/X\times \cat C/Y$. 
 
 A category is \emph{exact} if each pseudoequivalence relation $p,q\of X\to Z$ has a coequalizer $r\of Y\to Z$ and if the pullback of $r$along any $f\of W\to Z$ is the coequalizer of the pullbacks of $p$ and $q$. 
@@ -70,7 +70,7 @@ The idea is to have a category similar to the topos of sets, but without the sub
 
 An \emph{algebra} for an endofunctor $F\of \cat C\to\cat C$ is a pair $(X,f)$ where $X$ is an object of $\cat C$ and $f\of FX\to X$ is a morphism. A morphism of algebras $(X,f)\to(Y,g)$ is a morphism $h\of X\to Y$ such that $h\circ f=g\circ Fh$. An \emph{initial algebra} for $F$ is an initial object of the category of algebras and algebra morphisms of $F$.
 
-A \emph{polynomial endofunctor} is defined as follows. A morphism $f\of A\to B$ of a locally Cartesian closed category $\cat C$ induces an endofunctor $P_f(X) = A_!(A\ri(X)^f)$, where $A_!\of \cat C/A\to \cat C$ sends each `object' $g\of Y\to A$ of $\cat C/A$ to its codomain, $A\ri(X)^f$ is the exponential of $A\ri(X)$ and $f$ in $\cat C/A$ and $A\ri\of \cat C\to\cat C/A$ send each object $X$ to the projection $\pi_0\of A\times X\to A$. Any endofunctor is polynomial if it is naturally isomorphic to $P_f$ for some $f$.
+A \emph{polynomial endofunctor} is defined as follows. A morphism $f\of A\to B$ of a locally cartesian closed category $\cat C$ induces an endofunctor $P_f(X) = A_!(A\ri(X)^f)$, where $A_!\of \cat C/A\to \cat C$ sends each `object' $g\of Y\to A$ of $\cat C/A$ to its codomain, $A\ri(X)^f$ is the exponential of $A\ri(X)$ and $f$ in $\cat C/A$ and $A\ri\of \cat C\to\cat C/A$ send each object $X$ to the projection $\pi_0\of A\times X\to A$. Any endofunctor is polynomial if it is naturally isomorphic to $P_f$ for some $f$.
 \end{definition}
 
 The definition is imprecise because a type is an isomorphism class of objects.
