@@ -9,6 +9,185 @@
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
 
+\section{15/7/19}
+Nicola Gambino, Christian Sattler, Karol Szumiło and Simon Henry are working on
+constructive simplicial homotopy. I assume their constructuction are correct,
+because they are exactly the ones I was considering. See: 
+https://arxiv.org/abs/1905.06281,
+https://arxiv.org/abs/1907.05394.
+
+So what is left?
+\begin{itemize}
+\item There seems to be no consideration of realizability categories.
+\item None of the external view I was considering is present, which could mean 
+my approach is a different way of looking at the same results, or simply
+completely different.
+\item Completeness of modest sets in the ex/lex completion of assemblies.
+\end{itemize}
+
+I have no answer for the coherence properties, but I can do more of the rest.
+The main issue are:
+\begin{itemize}
+ \item Do ex/lex completions indeed preserve completeness?
+ \item Are homotopy categories indeed equivalent and do they preserve 
+ completeness?
+\end{itemize}
+These are questions about presheaves modulo weak equivalences.
+
+I am unsure about whether the coherence issues pose a problem for the modest 
+case.
+
+\paragraph{Complete universes}
+Rather than looking at maps with a lot of sepcific properties, we are interested
+in morphisms $u\of U \to V$ of locally cartesian closed categories
+where every exponential $u^I\of U^I\to V^I$ is a pullback of $u$.
+Issues:
+\begin{itemize}
+\item Beck-Chevalley: what does it mean here? Does it hold up?
+I think that asking that $u^I$ is a pullback sufficient, and that discretes of 
+the effective topos simply won't do that.
+\item Is it true that discretes aren't a complete universe then?
+\item What does moving to a category of internal presheaves do?
+\item What does localization on a cofibrantly generated model structure do?
+\end{itemize}
+
+\paragraph{Beck Chevalley}
+The Beck Chevalley condition seems to require a little more just to formulate,
+since we need $\Pi_f \of u^X \to u^Y$ for all $f\of X\to Y$.
+Okay, so I know about the fibred product: 
+$A^f = \set{\tuplet{y\of Y,X_y \to A}}$
+This is sufficient. If $u^f$ is a pulback of $u$, then a map 
+$\Pi_f\of u^X \to u^Y$ is transposed to that one. This also cements completeness
+some more. What about Beck-Chevalley?
+
+It would be hard to guarantee that the right adjoints commute on the nose,
+but no more than isomorphism is required. It look like:
+if $a$ is a pullback of $b$ with $c\of a\to b$, then $\chi_a\of u^a \to u$ is 
+isomorphic to $\chi_b\circ u^c \of u^b\to u$. Yeah, the morphisms don't have to
+commute on the nose, but they should have isomorphic fibres.
+This sound pretty automatic, however. I.e. in an lccc, if fibred products are
+pullbacks, then Beck-Chevalley holds.
+
+I just realize what is nice about the exact completion: it creates a classifier
+of discrete objects. The map is unique, so we no longer have to mess with things
+holding only to isomorphism.
+
+There are transpose Beck Chevalley condition. The notions of a large coporduct
+of small object is confusing, but in case of modest sets, it makes sense due to
+the modest reflection. Yeah, and we see it in the subobject poset as well.
+
+It doesn't simplify anything to work this way.
+
+\paragraph{Discretes}
+So what is the problem with discrete objects in the effective topos? 
+There is something about quotients along equivalence relations that aren't
+$\neg\neg$-closed.
+
+Actually, let's work things out. For modest sets in assemblies out complete
+universe is given by the bundle of equivalence classes over the set of partial
+equivalence relations over the natural numbers. Since each equivalence class is
+a set of numbers, we have a set of realizers for each equivalence class.
+This is the universe of modest sets.
+
+It is complete in the above sense? The fibred products along arbitrary functors
+are products again. 
+
+\paragraph{differences between ex/lex and ex/reg: the epic factor}
+The ex/lex completion is the homotopy category for the canonical cofibrantly 
+generated model structure on locally contractible simplices. So what changes for
+the ex/reg completion? Probabaly that products over inhabited families of
+cofibrant generator suddenly count as well.
+
+The ex/reg completion has extra equivalences between the locally contractible
+spaces, with mere existence of paths replacing a specific choice. This weakening
+is fatal for completeness in the recursive realizability context, which is good
+at throwing a wrench into axiom of choice based arguments.
+
+locally contratible--for lack of better words. $\geq 1$-connected perhaps.
+
+\paragraph{Internal prescheaves}
+The ex/lex completion and the simplicial homotopy catgeory combine two steps:
+presheaves and cofibrantly generated model structures. So\dots don't presheaves
+simply preserve complete universes?
+
+The idea is simple enough: use fibrewise smallness. That should work.
+
+Okay, there is an obvious quirk not to overlook: the homotopy
+category allows large set of paths, but those aren't small objects anymore.
+The modest reflection sort of solves this riddle: the classical epic part
+is split, the rest is recorded in the small structure.
+
+\paragraph{Combinations}
+Ex/lex is simply connected simplicial sets with the standard model structure.
+If we repeat the simplicial homotopy category construction up here, what do
+we wind up with? Convariantly `bisimplicial' assemblies, with a cofibrantly
+generated model structure. The result should be the same if we just look
+at simplicial assemblies.
+
+\paragraph{coming back up}
+The intuition that modest simplicial sets could be a good model for univalence
+is supported by the new papers.
+
+\subsection{Simplicial Assemblies}
+\begin{itemize}
+\item We will be working with internal presheaves in the category of assemblies.
+\item Cofibrations are monics with decidable sets of complementary faces--
+  `Reedy decidable`.
+\item Fibrations are `Reedy split`--have the lifting operators.
+\end{itemize}
+
+Nice, but how does this help? What would we prove here?
+
+I guess I want simplicial pers to be a model. What are they?
+
+I do need a new plan.
+
+To show that simplicial modest sets are a modest for univalence,
+We should not have to do much, since the modest sets are already models for a
+powerful type theory. The generic modest fibration is a neat trick, but should
+not be too hard. I am stuck with vague complaints of coherences.
+
+
+\paragraph{CZF} So Gambino et al. work within CZF. A model exists in 
+the effective topos and should be close to modest sets.
+
+So the value of the paper is that instead of guessing, I now have a roadmap
+toward a model structure on assemblies. I also don't need the separate paper on
+constructive simplicial homotopy anymore.
+
+\paragraph{new ideas on density}
+Not knowing for sure how useful the papers are yet, just let write these 
+considerations down.
+
+Use small morphisms instead of just morphisms with small domains. The problem
+of finding factorizations becomes the problem of finding fibrant replacements
+in slice categories.
+
+I was only in the process of demonstrating a factorization system. Gambino et
+al. do much more than that, but the applicability of their ideas on the
+category of assemblies is not immediately clean, ironacally because of the
+reliance on the internal language, precisely what I was trying to get away from.
+
+This it what the papers can do: either give me something to point to as
+evidence for my own claims, or a pointer on how to prove useful result myself.
+I am mostly just worried about having nothing left to prove.
+
+I suppose the modest simplicial sets are still interesting, but
+we need to bring the arguments into to context of the category of assemblies
+and show that the coherence issues don't play such a big role there.
+
+\section{1/7/19}
+Important but forgot to mention: the notion of small morphism is important,
+and small morphisms are closed under composition. Closure under composition
+means being small-filtered, giving all small diagrams a cone. Should also help
+with composing small left morphisms.
+
+Each morphism has a fully faithful diagram connected to it--its diagram of 
+fibres--that may sometimes offer a simpler view of other diagrams, 
+namely as internal functor to such diagrams of fibres. This not only is a good 
+family of examples, but it could also give an easier statement of the conditions
+we need.
+
 \section{30/6/19}
 \paragraph{move to toposes}
 Conjecture: 
@@ -3841,7 +4020,7 @@ Cut down the variety of lifting problems with the following strategies.
 \begin{itemize}
 \item Using symmetry, derive the cases where $g$ is acyclic from those where $f$ is.
 \item By definition, there is an equivalence between lifting acyclic cofibrations and having a filler operator for the family of horns. Use this to reduce the cases where $f$ is acyclic to the case where $f$ is the family of horns.
-\item By lemma \ref{Reedy}, there is an equivalence between lifting cofibrations and having a filler operator for the family of cycles. Use this to reduce the cases where $g$ is an arbitrary cofibration to the case where $g$ is the family of cycles and do the same for $f$.
+\item By lemma Reedy, there is an equivalence between lifting cofibrations and having a filler operator for the family of cycles. Use this to reduce the cases where $g$ is an arbitrary cofibration to the case where $g$ is the family of cycles and do the same for $f$.
 \end{itemize}
 These reductions can be proved with the \emph{pullback power} construction and some diagram chasing.
 \[\xy
