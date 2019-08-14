@@ -9,6 +9,125 @@
 \newcommand\parr{\ar@<.5ex>[r]\ar@<-.5ex>[r]}
 \begin{document}
 
+\section{14/8/19}
+
+The time has come for the puzzle of defining the ascend functor.
+
+For $f\of X\to \Delta^n$ the $n$-dimensional simplices of $Af$ are freely glued 
+in simplices between p-dimensional simplicies of $f$ and $q$-dimensional
+simplicies of $f^{\delta^n_k}$, such that $p+q=n-1$. The whole $f^\delta$ part is
+supposed to be located over $k$, at the start of the fibre. So how to break a
+morphism in two parts for defining the action?
+
+The morphism $f$ assigns some element $\xi$ of $|Delta^n|$ to each
+$x\of \dom f$ and the other part has a dimension $d$. So we have this couple
+$\tuplet{\xi,d}$. All that needed is a consist way to break up 
+$\phi\of[a]\to [\dim(\xi)+y+1]$ into two morphisms $\phi_0\of[a_0]\to\dom[\xi]$
+and $\phi_1\of[a_1]\to [y]$, to apply to the two constituent parts.
+
+\begin{align*}
+m_0 &= \max(\set{a\of[a]| \phi(a) \of \dom(\xi),\xi(\phi(a)) < k }\cup\set{-1})\\
+m_1 &= \max(\set{a\of[a]| y < \phi(a), \xi(\phi(a) - y - 1) < k }\cup\set{-1})\\
+a_0 &= a - m_1 + m_0\\% $m_1+1$ maps to $m_0+1$!
+a_1 &= m_1 - m_0 - 1\\
+\phi_0(i) \textrm{ for } i \leq m_0 &= \phi(i)\\
+\phi_0(i) \textrm{ for } i > m_0 &= \phi(i + m_1 - m_0) - y - 1\\
+\phi_1(i) &= \phi(i + m_0 + 1) - \phi(m_0 + 1)
+\end{align*}
+I don't believe I made any off by one errors here, but it is always hard to be
+sure.
+
+\paragraph{Conclusion}
+I got the proof down. The rest, I believe is context.
+
+\section{29/7/19}
+
+I was working toward an argument that works for internal families of morphism
+as long as their domains are small in an internalized sense. GHSS seems to be 
+using decidable properties of cofibration to make the small object argument 
+work. I doubt that this is necessary.
+
+"A small object argument for incomplete toposes"
+
+How about this: given $f\of X \to Y$, consider small morphisms $g\of W \to Y$
+that factor through $f$. I.e. the category of small objects over $f$.
+
+The one step factorization is these small morphisms is not sufficient,
+the colimit must be taken over $n$-fold factorizations for all $n$. Now,
+a morphism between small morphisms induces a morphism between these 
+factorisations as long as the number of factorizations is greater for the target 
+object. It is a bit underwhelming, but the result is the product category of 
+the poset $(\nno, \leq)$ and the category of small morphisms over $f$.
+
+That is almost too simple\dots. 
+
+Take the colimit here. The hard part is the domain. There is an object of small 
+morphisms over $f$.
+
+Perhaps it is somehow easier the other way around. For small morphisms, the
+transfinite factorisations supposedly just exists. 
+
+No! 
+
+I want to avoid making the codomain of the generic left morphisms small as well,
+but without such an assumption, it is not clear that a colimit exists.
+
+This could be a case of mixed concerns. On one hand, the construction is a
+recursive colimit, which may not exist, on the other, 
+
+\paragraph{Jump ahead}
+Consider $f\of X\to Y$ again. There is a diagram of small fibrations over
+$Y$ and that could be useful. Maybe there simply is a limit. There are structure
+morphisms to work with. And morphism of small morphisms over $f$ can be judged
+to be left morphisms due to the lifting properties.
+
+\paragraph{Inspiration}
+I feel up to nothing today. I have no faith I am doing any good, and I am not
+having any fun working on this either. Instead, I am once again trying to
+remember what my plan was, because despite all these notes, I don't know how to 
+write this paper. 
+
+I came up with a combinatorial proof for the descent of fibrations along 
+cofibrations. That puzzle motivated me for the last 50 days. Do I do any good to
+solve it?
+
+The proof is supposed to show that the universe of types is fibrant. Five years
+ago nobody seemed to be aware of a combinatorial approach that actually worked.
+That is a reason to think that these facts aren't widely known.
+
+"Fibrant universes--a combinatorial proof"
+
+This was the manageable part. 
+
+The good days were: 12/6-19/6. After those, I got distracted. Keep wiritng about
+this.
+
+\paragraph{Ascent functor}
+After mucking about with encodings, I am not eager to start again, though the
+difference should not matter all that much.
+
+A small part of the pain come from the pervasive off by one error.
+The real pain, however, is in defining the restriction maps.
+
+Let's just start with $\alpha\of[a]\to[n]$. We want to use an initial segment
+of $\alpha_k$ for glueing, so we can just indicate how many elements we want to
+use, leading to $(\alpha,i)$ with 
+$f(\alpha,i):[a - i] \to [a]$ and $g(\alpha,i):[i - 1]\to [a]$ as components.
+I have no good names yet. We need a way to split morphisms up, however.
+$f(\phi,\alpha, i)$ and $g(\phi,\alpha,i)$.
+
+It is a convolution of sorts.
+
+The sad thing is that the sets of simplices is simple, but the action is
+incredibly hard to define.
+
+Idea: $\alpha +_k b$ for adding $b$ elements to the start of the $k$-th fibre
+This lets us do:
+\[ \sum_{\alpha +k b \of |\Lambda^n_k|} X[\alpha]\times X^{\delta^n_k}[b]\]
+So how is the action defined? 
+
+Let's solve this puzzle later. At least I have an idea what to do now.
+
 \section{15/7/19}
 Nicola Gambino, Christian Sattler, Karol Szumiło and Simon Henry are working on
 constructive simplicial homotopy. I assume their constructuction are correct,
@@ -398,7 +517,7 @@ For faces $f\of W-U_{\xi(y)}-V$, $y$ is a
 fine support point. If $f\of W-U_{\xi(y)}-V$, then it subface
 $f-y$ doesn't belong to any $V_j$ with $j\neq y$.
 For $f\of U_{\xi(y)}-W-V$, $\beta(f)_i\neq \emptyset$ for any 
-$i\of [n]-\set{x,\xi(y)}$, hence there is are points like $\max\beta$ and
+$i\of [n]-\set{x,\xi(y)}$, hence there are points like $\max\beta$ and
 $\min\beta$ to use as supporting points.
 \begin{align*}
   \max\beta(\xi(y)) &=y\\

@@ -1,0 +1,290 @@
+\documentclass{tac}
+\usepackage{amssymb, amsmath, stmaryrd}
+\usepackage[backend=bibtex,citestyle=authoryear-icomp]{biblatex}
+\usepackage[all]{xy}
+\usepackage{url}
+
+\title{Fibrant universes--a combinatorial proof}
+\author{Wouter Pieter Stekelenburg}
+\copyrightyear{2019}
+\eaddress{w.p.stekelenburg@gmail.com}
+\keywords{simplicial homotopy, fibrant objects}
+\amsclass{03D80, 18G30, 18G55}
+\addbibresource{realizability}
+
+%structural helpers
+\newcommand\hide[1]{}
+
+%symbols
+\newcommand\cat\mathcal
+\newcommand\icat\mathsf
+\newcommand\of{\mathord:}
+\newcommand\set[1]{\left\{#1\right\}}
+\newcommand\dual{^\circ}
+\newcommand\nno{\mathbb N}
+\newcommand\ri{^*}
+
+\mathrmdef{Ar}
+\mathrmdef{Ob}
+\mathrmdef{id}
+\mathrmdef{dom}
+\mathrmdef{cod}
+\newcommand\colim{\mathop{\mathrm{colim}}}
+\newcommand\tuplet[1]{\left\langle{} #1 \right\rangle}
+\newcommand\pulled{\ar@{}[dr]|(.2)\lrcorner}
+
+\begin{document}
+\begin{abstract} This paper presents a combinatorial proof that Kan fibrations
+  descend along acyclic cofibration. This indirectly shows that certains
+  universes of fibrations have a fibrant codomains.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+This paper grew out of attempts to advertise realizability toposes by
+developing simplicial homotopy inside them and demonstrating interesting
+models of homotopy type theory, in particular the 
+category of \emph{modest Kan complexes} in the category of \emph{simplicial 
+assemblies}.\hide{todo: point to a point in the paper where these are explained}
+Unfortunately, classical simplicial homotopy theory doesn't work in 
+realizability toposes, because the classical theory is rife with arguments that 
+rely on classical logic and the completeness of various large categories.
+\hide{this could also do with explanation or citations} There are a growing 
+number of approaches that could help,\hide{cite! Garner, Swan, Gambino, Herny, 
+Stattler, Szumilo...} but demonstrating that these work in realizability 
+toposes is more work than I am willing and able to do (having left academia). 
+Instead I aim to make a modest contribution to constructive simplicial homotopy 
+by showing a constructive solution to a specific problem that apparently doesn't
+have one yet.
+
+\mathrmdef{sSet}
+\section{The problem}
+Let \( h\of \Lambda^n_k \to \Delta^n \) be a horn inclusion in the category of
+simplicial sets and let \( f\of X\to \Lambda^n_k \) be a Kan complex. There is a
+Kan complex \( Df\of X \to \Delta^n \) such that \( f \) is the pullback of \( Df \) along 
+\( h \). Moreover, there is a functor \( D\of \sSet/\Lambda^n_k\to \sSet/\Delta^n \)
+that preserves Kan complexes, with a left adjoint \( A \) that preserves acyclic
+cofibrations, such that \( h\ri \circ D\simeq \id \).
+\[\xymatrix{
+X\ar[d]_f\ar@{.>}[r]\pulled & DX \ar@{.>}[d]^{Df}\\
+\Lambda^n_k \ar[r]_h & \Delta^n
+}\]
+\hide{ 
+  lots of undefined terms here\dots 
+
+  Jaap would interupt me before the first sentence ended, but we could go over
+  the context and the definitions down here, using the informal decription
+  above as a guide.
+
+  Maybe I could add a `bear with me' on top.
+}
+\hide{
+  Functors \( D^n_k \) and \( A^n_k \)? 
+}
+
+\section{The ascend functor}
+The solution starts with the left adjoint 
+\( A\of \sSet/\Delta^n \to \sSet/\Lambda^n_k \). This functor is similar 
+enough to reindexing along \( h\ri \) to allow its right adjoint to satisfy 
+\( h\ri\circ D = \id \), but it should also preserve acyclic cofibrations. 
+
+It is instructive to first understand why \( h\ri \) doesn't preserve all 
+acyclic cofibrations. The problem boils down to the simplex
+\( \delta^n_k\of \Delta^{n-1}\to\Delta^n \) \hide{\( \delta^n_k \)?},
+whose pullback along \( h \) is a cycle 
+\( h\ri(\delta^n_k)\of \partial\Delta^{n-1}\to\Lambda^n_k \).
+\[\xymatrix{
+\partial\Delta^{n-1}\ar[d]\ar[r]\pulled & \Delta^{n-1} \ar[d]^{\delta^n_k}\\
+\Lambda^n_k \ar[r]_h & \Delta^n
+}\]
+All the other simplices \( \Delta^{n-1}\to\Delta^n \) are preserved in the pullback
+and therefore acyclic cofibrations over these simplices are preserved as well,
+but those over \( \delta^n_k \) get cycles cut into them.
+
+The functor \( A \) solves this by applying \( h\ri \) after inflating simplices over 
+\( \delta^n_k \) in a way that makes their pullbacks acyclic, while keeping other
+simplices untouched. For any \( f\of X\to \Delta_n \) the inflation involves glueing
+a copy of the exponential \( f^{\delta^n_k} \) to the fibre of \( f \) over the edge 
+\( k \), together with a lot of bridging simplices.
+
+The construction requires some bookkeeping, to deal with the structure of the
+simplex category. \hide{simplex category?}
+
+Firstly, things get a lot easier with an \emph{`empty simplex'} \( [-1] \), an 
+initial object for the simplex category. This new simplex category is known as 
+the \emph{augmented simplex category}. For each simplical set \( X \) we let 
+\( X[-1] \) be a terminal object---i.e.\ a singleton or one element set---so the 
+required restrictions maps to \( X[-1] \) are all uniquely determined.
+
+Secondly, the members of the inflated simplicials sets are simplices that
+serve as paths between a `source' simplex of \( f \) and a `target' simplex of 
+\( f^{\delta^n_k} \). The action of the simplex category on these paths
+is defined in term of the action on sources and targets, but this requires
+spliting morphisms \( \phi \) of the simplex category into two parallel parts
+\( \phi_0 \) and \( \phi_1 \).
+
+\newcommand\source{\mathbf{s}}
+\newcommand\target{\mathbf{t}}
+Let \( m\of\nno \), \( \xi\of[m]\to[n] \), \( y\of \nno \). For each 
+\( \phi\of[a]\to[m + y + 1] \) let:
+\begin{align*}
+  m_0 &= \max(\set{-1}\cup\set{i\of[a]\middle|i<m,\xi(\phi(i))<k})\\
+  m_1 &= \max(\set{-1}\cup\set{i\of[a]\middle|\phi(i)>y,\xi(\phi(i)-y-1)\leq k})\\
+  a_0 &= a - m_1 + m_0\\% $m_1+1$ maps to $m_0+1$!
+  a_1 &= m_1 - m_0 - 1\\
+  \source(\xi, y, \phi)(i)&= \phi(i) \quad\textrm{if } i \leq m_0 \\
+  \source(\xi, y, \phi)(i)&= \phi(i + m_1 - m_0) - y - 1 \quad\textrm{if } i > m_0 \\
+  \target(\xi, y, \phi)(i) &= \phi(i + m_0 + 1) - \phi(m_0 + 1)
+\end{align*}
+
+With these helpers, the \emph{ascend functor} can be defined.
+\begin{definition}
+  For each \( f\of X\to \Delta^n \), \( AX \) is the presheaf over the augmented
+  simplex category that satisfies the following equations.
+  \begin{align*} 
+    AX[n] &= \set{\tuplet{x,y}\of\sum_{k+l=n-1} X[k]\times X^{\delta^n_k}[l]\middle|f(x)\of \Lambda^n_k}\\
+    \tuplet{x,y}\cdot\phi &= \tuplet{x\cdot\source(f(x),\dim(y),\phi), y\cdot\target(f(x),\dim(y),\phi)}
+  \end{align*}
+
+  Let \( Af\of AX\to \Lambda^n_k \) satisfy the following.
+  \begin{align*}
+    Af\tuplet{x,y}(i) &= f(x)(i) &&\textrm{if } i\leq\dim(x), f(x)(i)<k \\
+    Af\tuplet{x,y}(i) &= f(x)(i-y-1)&&\textrm{if } i > y, f(x)(i-y-1)\geq k\\
+    Af\tuplet{x,y}(i) &= k&&\textrm{otherwise}
+  \end{align*}
+
+  For each \( g\of Y\to X \), let \( Ag\of AY \to AX \) satisfy the following.
+  \[  Ag\tuplet{y_0,y_1} = \tuplet{g(y_0),g\circ y_1}\]
+
+  This defines the \emph{ascend functor} \(
+    A\of \sSet/\Delta^n \to \sSet/\Lambda^n_k
+  \)
+\end{definition}
+
+\hide{
+  presheaf valued functor
+  preserves acyclic cofibrations
+  has right adjoint (which hence preserves fibrations)
+  which is right inverse of reindexing
+}
+\section{Preservation of acyclic cofibrations}
+Let's leave the technical problem of proving that \( A \) is indeed a presheaf valued
+functor for later and show why it preserves acyclic cofibrations. 
+Essentially, \( f^{\delta^n_k} \) is vulnerable to the pullback, so \( A \) creates a 
+backup for this part over the top edge of the horn \( \Lambda^n_k \). 
+
+\begin{lemma}
+  Let \(\xi\of[m]\to[n]\) in the simplex category and let \(
+    Y(\xi)\of \Delta^m \to \Delta^n \) be its Yoneda embedding.
+  Let \(h^m_l \of \Lambda^m_l\to\Delta^m\) be the
+  horn inclusion. Then \( A(Y(\xi)\circ(h^m_l))\to A(Y(\xi)) \) is an acyclic
+  cofibration.
+\end{lemma}
+
+\begin{proof}
+  The strategy here is to show that \( A(Y(\xi)\circ(h^m_k))\to A(Y(\xi)) \) 
+  is the composition of a series of pushouts of sums of horn inclusions \(
+    A_i\to A_{i+1} \), where \( A_0 = A(Y(\xi)\circ(h^m_k)) \).
+  This clearly produces an acyclic cofibration.
+  Each \(A_{i+1}\) is generated by picking faces \(a\) of \(A(Y(\xi))\) for 
+  which \(a\cap A_i\to A_a\) is a horn inclusion. Because all faces of 
+  \(A(Y(\xi))\) get glued in along the way, \(A_j=A(Y(\xi))\) from some 
+  \(A_j\) on, proving that  \( A(Y(\xi)\circ(h^m_k))\to A(Y(\xi)) \) is the
+  constructed acyclic cofibration, and hence proving the lemma.
+  This leaves the question of which faces of  \(A(Y(\xi))\) to include at every 
+  step.
+  
+  Let's peek inside. Simplices of \( A(Y(\xi)) \) are pairs \(\tuplet{x,y}\)
+  where \(x\of[a]\to [m]\) is a nondecreasing map and \(
+    y\of [b]\to{[m]}^{[n-1]}\) subject to the restrictions that both are 
+  nondecreasing map (both variables in case of \(y\)), \(
+    \xi\circ x\of \Lambda^n_k\)---i.e. \(x\) misses some edge different from 
+  \(k\)---and \(\xi\circ y(i) = \delta^n_k \) for all \( i\of [b] \). Among 
+  these, faces are the simplices for which both \(x\) and \(y\) are injective 
+  functions.
+
+  The set \( A(Y(\xi)\circ(h^m_l)) \) can be considered to be the subset of 
+  \( A(Y(\xi)) \) of those pairs \(\tuplet{x,y}\) that miss at least one element
+  \(p\) from \([m]\) different from the top \(l\) both with \(x\) and \(y\). 
+  For \(y\) this means \(y(i)(j)\neq p\) for all \(i\of[b]\) and \(j\of[n-1]\).
+
+  When selecting faces to include into \(A_i\) we have to be careful not to
+  accidentally create cycles, because they form boundaries of faces that
+  still need to be glued in. For this purpose, consider the following two
+  collection of faces with suggested top edges.
+  \begin{enumerate}
+    \item The collection \(P\) of faces \( \tuplet{x,y} \) such that \( x \) 
+    reaches \(l\) but \(\xi\circ x\) misses some element in 
+    \([n]-\set{k,\xi(l)}\).
+    \item For \( \tuplet{x,y} \) such that 
+    \( \xi\circ x \) is surjective on \([n]-\set{k,\xi(l)}\), 
+    let \(l'(x)\of {[m]}^{[n-1]}\) be the unique edge that reaches 
+    the maximal value of \(x\) in each fibre of \(\xi \) except the one over
+    \(\xi(l)\) where its value is \(l\).
+    The collection \(Q\) consist of faces \( \tuplet{x,y} \) such that 
+    \( \xi\circ x \) is surjective on \([n]-\set{k,\xi(l)}\)
+    and where \(y\) reaches \(l'(x)\).
+  \end{enumerate}
+
+  
+  Let's first check that the faces of \(P\cup Q\) cover all the faces in 
+  the complement \( A(Y(\xi)) - A(Y(\xi)\circ(h^m_k)) \). 
+  First, note that \(\xi\circ x\) can never be onto \([n]-\set{k}\) because 
+  \(A(Y(\xi))\) is a simplicial set over \(\Lambda^n_k\).
+  For a face \(\tuplet{x,y}\) of the complement \(xi\circ x\) either is or isn't 
+  onto \([n]-\set{k,\xi(l)}\). %the classical argument!
+  If it is onto, then extend \(y\) with the edge \(l'(x)\), to get an 
+  element in \(Q\).
+  If it isn't, then extending \(x\) with \(l\) won't make it so, and this gives 
+  an element in \(P\). For this reason, it is sufficient to show the presence of 
+  faces in \(P\cup Q\) to prove the lemma.
+
+  Simply adding faces based on dimension still doesn't work out, but a similar
+  metric does. Put a \emph{price} on each edge in \([m]\) and \({[m]}^{[n-1]}\):
+  \begin{enumerate}
+    \item In \([m]\) the top edges, i.e. \(l\) and all \(i\of [m]\) such 
+    that \(\xi(i) = k\) are worth 1;
+    \item In \([m]\) all the other edges are worth 2;
+    \item In \({[m]}^{[n-1]}\) all edges are worth 1.
+  \end{enumerate}
+  The price of a face is simply the sum of the prices of the edges it contains. 
+  Faces from both \(P\cup Q\) are included in \(A_i\) if they cost at 
+  most \(i\).
+
+  For each face \(\tuplet{x,y}\of P\) %that cost \(i+1\), all boundary 
+  %faces are part of \(A_i\) safe for one. If \(\tuplet{x,y}\of P\), then 
+  all the boundary faces \(\tuplet{x,y}\cdot\delta_i\) except the 
+  one that misses \(l\) is in \(P\) and they cost either \(i\) or \(i-1\)
+  depending on the price of the removed point. Hence those faces are part of
+  \(A_i\) and \(\tuplet{x,y}\cap A_i \to \tuplet{x,y}\)---where the element is
+  reinterpreted as the subobject it generates---is a horn inclusion.
+  
+  If \(\tuplet{x,y}\of Q\), then the boundary faces 
+  \(\tuplet{x_i,y_i} = \tuplet{x,y}\cdot\delta_i\) fall in several different
+  categories that demonstrate why some edges cost more than others. 
+  \begin{itemize}
+  \item Those that remove an edge of \(y\)--except \(l'(x)\)--are members of 
+  \(Q\) 
+  that cost one less. 
+  \item Those that remove an edge of \(x\) in the fibre of \(\xi \) over \(k\) 
+  are also 
+  members of \(Q\) that cost one less. Those that remove an edge of \(x\) in 
+  the fibre of \(\xi \) over some other member come in three kinds.
+  \item Those that remove an element that differs from the maximal element of 
+  their 
+  fibre have \(l'(x_i) = l'(x)\), which means they are members of \(Q\) that 
+  simply cost two less. 
+  Those that remove the maximal element of their fibre either empty the fibre
+  or not. 
+  \item In the empty case \(\xi\circ x_i\) is not onto, and adding \(l\) results
+  in a member of \(P\) that still costs one less.
+  \item In the non empty case, adding \(l'(x_i)\) results in a member of \(Q\)
+  that still costs one less.
+  \end{itemize}
+  So if \(\tuplet{x,y}\) is a member of \(Q\) that costs \(i+1\), then
+  \(\tuplet{x,y}\cap A_i \to \tuplet{x,y}\) is a horn inclusion as well.
+\end{proof}
+
+
+\end{document}
