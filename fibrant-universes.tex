@@ -4,7 +4,7 @@
 \usepackage[all]{xy}
 \usepackage{url}
 
-\title{Fibrant universes--a combinatorial proof}
+\title{Fibrant universes---a combinatorial proof}
 \author{Wouter Pieter Stekelenburg}
 \copyrightyear{2019}
 \eaddress{w.p.stekelenburg@gmail.com}
@@ -16,12 +16,12 @@
 \newcommand\hide[1]{}
 
 %symbols
-\newcommand\cat\mathcal
-\newcommand\icat\mathsf
+\newcommand\cat{\mathcal}
+\newcommand\icat{\mathsf}
 \newcommand\of{\mathord:}
 \newcommand\set[1]{\left\{#1\right\}}
 \newcommand\dual{^\circ}
-\newcommand\nno{\mathbb N}
+\newcommand\nno{\mathbb{N}}
 \newcommand\ri{^*}
 
 \mathrmdef{Ar}
@@ -33,6 +33,12 @@
 \newcommand\tuplet[1]{\left\langle{} #1 \right\rangle}
 \newcommand\pulled{\ar@{}[dr]|(.2)\lrcorner}
 
+\newcommand\simplex[1]{\Delta^{#1}}
+\newcommand\horn[2]{\Lambda^{#1}_{#2}}
+\newcommand\cycle[1]{\partial\Delta^{#1}}
+%yoneda embedding of the simplex category. needs work.
+\newcommand\Y{\Delta}
+
 \begin{document}
 \begin{abstract} This paper presents a combinatorial proof that Kan fibrations
   descend along acyclic cofibration. This indirectly shows that certains
@@ -42,17 +48,17 @@
 \maketitle
 
 \section{Introduction}
-This paper grew out of attempts to advertise realizability toposes by
-developing simplicial homotopy inside them and demonstrating interesting
-models of homotopy type theory, in particular the 
-category of \emph{modest Kan complexes} in the category of \emph{simplicial 
-assemblies}.\hide{todo: point to a point in the paper where these are explained}
+This paper grew out of attempts to develop simplicial homotopy inside
+realizability toposes to find interesting models of homotopy type theory, in
+particular the category of \emph{modest Kan complexes} in the category of 
+\emph{simplicial assemblies}.\hide{todo: refer to a point in the paper where 
+these are explained}
 Unfortunately, classical simplicial homotopy theory doesn't work in 
 realizability toposes, because the classical theory is rife with arguments that 
 rely on classical logic and the completeness of various large categories.
 \hide{this could also do with explanation or citations} There are a growing 
-number of approaches that could help,\hide{cite! Garner, Swan, Gambino, Herny, 
-Stattler, Szumilo...} but demonstrating that these work in realizability 
+number of approaches that could help,\hide{cite! Garner, Swan, Gambino, Henry, 
+Stattler, Szumilo\dots} but demonstrating that these work in realizability 
 toposes is more work than I am willing and able to do (having left academia). 
 Instead I aim to make a modest contribution to constructive simplicial homotopy 
 by showing a constructive solution to a specific problem that apparently doesn't
@@ -60,16 +66,20 @@ have one yet.
 
 \mathrmdef{sSet}
 \section{The problem}
-Let \( h\of \Lambda^n_k \to \Delta^n \) be a horn inclusion in the category of
-simplicial sets and let \( f\of X\to \Lambda^n_k \) be a Kan complex. There is a
-Kan complex \( Df\of X \to \Delta^n \) such that \( f \) is the pullback of \( Df \) along 
-\( h \). Moreover, there is a functor \( D\of \sSet/\Lambda^n_k\to \sSet/\Delta^n \)
-that preserves Kan complexes, with a left adjoint \( A \) that preserves acyclic
-cofibrations, such that \( h\ri \circ D\simeq \id \).
+
+\begin{proposition}
+Let \( h^n_k\of \horn{n}{k} \to \simplex{n} \) be a horn inclusion in the category of
+simplicial sets and let \( f\of X\to \horn{n}{k} \) be a Kan complex. There is a
+Kan complex \( Df\of X \to \simplex{n} \) such that \( f \) is the pullback of 
+\( Df \) along \( h^n_k \). Moreover, there is a functor 
+\( D\of \sSet/\horn{n}{k}\to \sSet/\simplex{n} \) that preserves Kan complexes, 
+with a left adjoint \( A \) that preserves acyclic cofibrations, such that 
+\( (h^n_k)\ri \circ D\simeq \id \).
 \[\xymatrix{
 X\ar[d]_f\ar@{.>}[r]\pulled & DX \ar@{.>}[d]^{Df}\\
-\Lambda^n_k \ar[r]_h & \Delta^n
+\horn{n}{k} \ar[r]_{h^n_k} & \simplex{n}
 }\]
+\end{proposition}
 \hide{ 
   lots of undefined terms here\dots 
 
@@ -82,23 +92,28 @@ X\ar[d]_f\ar@{.>}[r]\pulled & DX \ar@{.>}[d]^{Df}\\
 \hide{
   Functors \( D^n_k \) and \( A^n_k \)? 
 }
+\begin{proof}
+Definition~\ref{descend functor} describes the functor, the 
+adjunction is demonstrated at Lemma~\ref{adjunction} and 
+Lemma~\ref{inverse} shows that the functor is inverse.
+\end{proof}
 
 \section{The ascend functor}
 The solution starts with the left adjoint 
-\( A\of \sSet/\Delta^n \to \sSet/\Lambda^n_k \). This functor is similar 
+\( A\of \sSet/\simplex{n} \to \sSet/\horn{n}{k} \). This functor is similar 
 enough to reindexing along \( h\ri \) to allow its right adjoint to satisfy 
 \( h\ri\circ D = \id \), but it should also preserve acyclic cofibrations. 
 
 It is instructive to first understand why \( h\ri \) doesn't preserve all 
 acyclic cofibrations. The problem boils down to the simplex
-\( \delta^n_k\of \Delta^{n-1}\to\Delta^n \) \hide{\( \delta^n_k \)?},
+\( \delta^n_k\of \simplex {n-1}\to\simplex{n} \) \hide{\( \delta^n_k \)?},
 whose pullback along \( h \) is a cycle 
-\( h\ri(\delta^n_k)\of \partial\Delta^{n-1}\to\Lambda^n_k \).
+\( h\ri(\delta^n_k)\of \cycle {n-1}\to\horn{n}{k} \).
 \[\xymatrix{
-\partial\Delta^{n-1}\ar[d]\ar[r]\pulled & \Delta^{n-1} \ar[d]^{\delta^n_k}\\
-\Lambda^n_k \ar[r]_h & \Delta^n
+\cycle {n-1}\ar[d]\ar[r]\pulled & \simplex {n-1} \ar[d]^{\delta^n_k}\\
+\horn{n}{k} \ar[r]_h & \simplex{n}
 }\]
-All the other simplices \( \Delta^{n-1}\to\Delta^n \) are preserved in the pullback
+All the other simplices \( \simplex {n-1}\to\simplex{n} \) are preserved in the pullback
 and therefore acyclic cofibrations over these simplices are preserved as well,
 but those over \( \delta^n_k \) get cycles cut into them.
 
@@ -126,90 +141,146 @@ spliting morphisms \( \phi \) of the simplex category into two parallel parts
 
 \newcommand\source{\mathbf{s}}
 \newcommand\target{\mathbf{t}}
-Let \( m\of\nno \), \( \xi\of[m]\to[n] \), \( y\of \nno \). For each 
-\( \phi\of[a]\to[m + y + 1] \) let:
-\begin{align*}
-  m_0 &= \max(\set{-1}\cup\set{i\of[a]\middle|i<m,\xi(\phi(i))<k})\\
-  m_1 &= \max(\set{-1}\cup\set{i\of[a]\middle|\phi(i)>y,\xi(\phi(i)-y-1)\leq k})\\
-  a_0 &= a - m_1 + m_0\\% $m_1+1$ maps to $m_0+1$!
-  a_1 &= m_1 - m_0 - 1\\
-  \source(\xi, y, \phi)(i)&= \phi(i) \quad\textrm{if } i \leq m_0 \\
-  \source(\xi, y, \phi)(i)&= \phi(i + m_1 - m_0) - y - 1 \quad\textrm{if } i > m_0 \\
-  \target(\xi, y, \phi)(i) &= \phi(i + m_0 + 1) - \phi(m_0 + 1)
-\end{align*}
+Let \( m\of\nno \), \( \xi\of[m]\to[n] \), \( y\of \nno \). For 
+each \( \phi\of[a]\to[m + y + 1] \) let:
+\begin{align}
+  \label{max0} m_0 &= \max(\set{-1}\cup\set{i\of[a]\middle|
+    \phi(i)\leq m, \xi(\phi(i)) < k
+  })\\
+  \label{max1} m_1 &= \max(\set{-1}\cup\set{i\of[a]\middle|
+    \phi(i) > y, \xi(\phi(i)-y-1)\leq k
+  })\\
+  \label{source0} \source(\xi, y, \phi)&\of
+    [a - m_1 + m_0]\to[n]\\
+  \label{source1} \source(\xi, y, \phi)(i)&= 
+    \left\{
+      \begin{array}{rl}
+        \phi(i) &\textrm{if } i \leq m_0 \\
+        \phi(i + m_1 - m_0) - y - 1 &\textrm{if } i > m_0
+      \end{array}
+    \right. \\
+  \target(\xi, y, \phi)&\of\label{target0} 
+    [m_1 - m_0 - 1]\to[n]\\
+  \target(\xi, y, \phi)(i) &=\label{target1} 
+    \phi(i + m_0 + 1) - \phi(m_0 + 1)
+\end{align}
 
 With these helpers, the \emph{ascend functor} can be defined.
 \begin{definition}
-  For each \( f\of X\to \Delta^n \), \( AX \) is the presheaf over the augmented
-  simplex category that satisfies the following equations.
-  \begin{align*} 
-    AX[n] &= \set{\tuplet{x,y}\of\sum_{k+l=n-1} X[k]\times X^{\delta^n_k}[l]\middle|f(x)\of \Lambda^n_k}\\
-    \tuplet{x,y}\cdot\phi &= \tuplet{x\cdot\source(f(x),\dim(y),\phi), y\cdot\target(f(x),\dim(y),\phi)}
-  \end{align*}
+  For each \( f\of X\to \simplex{n} \), \( AX \) is the 
+  presheaf over the augmented simplex category that
+  satisfies the following equations.
+  \begin{align} 
+    \label{AX1} AX[n] &= \set{
+      \tuplet{x,y}\of\sum_{k+l=n-1} X[k]\times X^{\delta^n_k}[l]
+    \middle|
+      f(x)\of \horn{n}{k}
+    }\\
+    \label{AX2} \tuplet{x,y}\cdot\phi &= \tuplet{
+      x\cdot\source(f(x),\dim(y),\phi),
+      y\cdot\target(f(x),\dim(y),\phi)
+    }
+  \end{align}
 
-  Let \( Af\of AX\to \Lambda^n_k \) satisfy the following.
-  \begin{align*}
-    Af\tuplet{x,y}(i) &= f(x)(i) &&\textrm{if } i\leq\dim(x), f(x)(i)<k \\
-    Af\tuplet{x,y}(i) &= f(x)(i-y-1)&&\textrm{if } i > y, f(x)(i-y-1)\geq k\\
-    Af\tuplet{x,y}(i) &= k&&\textrm{otherwise}
-  \end{align*}
-
-  For each \( g\of Y\to X \), let \( Ag\of AY \to AX \) satisfy the following.
-  \[  Ag\tuplet{y_0,y_1} = \tuplet{g(y_0),g\circ y_1}\]
+  Let \( Af\of AX\to \horn{n}{k} \) satisfy the following.
+  \[Af\tuplet{x,y}\of[\dim(x)+\dim(y)+1]\to[n]\]
+  \begin{multline}
+    \label{Af} Af\tuplet{x,y}(i) = \\
+    \begin{array}{rl}
+      f(x)(i) &
+      \textrm{ if } i\leq\dim(x), f(x)(i)<k \\
+      f(x)(i-\dim(y)-1) &
+      \textrm{ if } i > \dim(y), f(x)(i-\dim(y)-1)\geq k\\
+      k &
+      \textrm{ otherwise}
+    \end{array}
+  \end{multline}
+  
+  For each \( m\of Y\to X \), let \( Am\of AY \to AX \) satisfy: 
+  \begin{equation} \label{Am}
+    Am\tuplet{y_0,y_1} = \tuplet{m(y_0),m\circ y_1}
+  \end{equation}
 
   This defines the \emph{ascend functor} \(
-    A\of \sSet/\Delta^n \to \sSet/\Lambda^n_k
+    A\of \sSet/\simplex{n} \to \sSet/\horn{n}{k}
   \)
 \end{definition}
 
+Let's check the correctness of this definition.
+
+\begin{lemma} The ascend functor \(A\) is a functor 
+\(\sSet/\simplex{n} \to \sSet/\horn{n}{k}\). \end{lemma}
+
+\begin{proof} 
+  Let \(f\of X\to \simplex{n} \). The condition
+  \(f(x)\of\horn{n}{k}\) in (\ref{AX1}) ensures that 
+  \(f(x)\) is not onto \([n]-\set{k}\). By 
+  (\ref{Af}) \(Af(x)\) isn't onto either. Hence
+  \(Af\of AX\to \horn{n}{k} \) as far as the underlying sets are
+  concerned.
+
+  That \(AX\) is valued in simplical sets follow from (\ref{AX2}),
+  (\ref{source1}) and (\ref{target1}). The latter two explain how
+  morphisms are split up to act on the members of the tuplet,
+  and this is done in a way that commutes with composition and
+  identity so \(\cdot \) is a proper action of the (augmented)
+  simplex category on \(AX\).
+
+  Let \(m\of Y \to X\), so it forms a morphism 
+  \(f\circ m \to m\) in \(\sSet/\simplex{n}\). Equation
+  (\ref{Am}) makes it straighforward that \(A\) preserves
+  identitiies and compositions, and crosschecking with 
+  (\ref{AX2}) shows that \(A\) commutes with \(\cdot \).
+\end{proof}
+
 \hide{
-  presheaf valued functor
-  preserves acyclic cofibrations
   has right adjoint (which hence preserves fibrations)
   which is right inverse of reindexing
 }
 \section{Preservation of acyclic cofibrations}
-Let's leave the technical problem of proving that \( A \) is indeed a presheaf valued
-functor for later and show why it preserves acyclic cofibrations. 
-Essentially, \( f^{\delta^n_k} \) is vulnerable to the pullback, so \( A \) creates a 
-backup for this part over the top edge of the horn \( \Lambda^n_k \). 
+This section covers the most complicated part.
+Essentially, \( f^{\delta^n_k} \) is vulnerable to the pullback, 
+so \( A \) creates a backup for this part over the top edge of 
+the horn \( \horn{n}{k} \). The pullback does not
+cut a cycle into the inflated \( f^{\delta^n_k} \), which
+therefore remains acyclic, as demonstrated below.
 
 \begin{lemma}
   Let \(\xi\of[m]\to[n]\) in the simplex category and let \(
-    Y(\xi)\of \Delta^m \to \Delta^n \) be its Yoneda embedding.
-  Let \(h^m_l \of \Lambda^m_l\to\Delta^m\) be the
-  horn inclusion. Then \( A(Y(\xi)\circ(h^m_l))\to A(Y(\xi)) \) is an acyclic
+    \Y(\xi)\of \simplex{m} \to \simplex{n} \) be its Yoneda embedding.
+  Let \(h^m_l \of \horn{m}{l}\to\simplex{m}\) be the
+  horn inclusion. Then \( A(\Y(\xi)\circ(h^m_l))\to A(\Y(\xi)) \) is an acyclic
   cofibration.
 \end{lemma}
 
 \begin{proof}
-  The strategy here is to show that \( A(Y(\xi)\circ(h^m_k))\to A(Y(\xi)) \) 
+  The strategy here is to show that \( A(\Y(\xi)\circ(h^m_k))\to A(\Y(\xi)) \) 
   is the composition of a series of pushouts of sums of horn inclusions \(
-    A_i\to A_{i+1} \), where \( A_0 = A(Y(\xi)\circ(h^m_k)) \).
+    H_i\to H_{i+1} \), where \( H_0 = A(\Y(\xi)\circ(h^m_k)) \).
   This clearly produces an acyclic cofibration.
-  Each \(A_{i+1}\) is generated by picking faces \(a\) of \(A(Y(\xi))\) for 
-  which \(a\cap A_i\to A_a\) is a horn inclusion. Because all faces of 
-  \(A(Y(\xi))\) get glued in along the way, \(A_j=A(Y(\xi))\) from some 
-  \(A_j\) on, proving that  \( A(Y(\xi)\circ(h^m_k))\to A(Y(\xi)) \) is the
+  Each \(H_{i+1}\) is generated by picking faces \(a\) of \(A(\Y(\xi))\) for 
+  which \(a\cap H_i\to H_a\) is a horn inclusion. Because all faces of 
+  \(A(\Y(\xi))\) get glued in along the way, \(H_j=A(\Y(\xi))\) from some 
+  \(H_j\) on, proving that  \( A(\Y(\xi)\circ(h^m_k))\to A(\Y(\xi)) \) is the
   constructed acyclic cofibration, and hence proving the lemma.
-  This leaves the question of which faces of  \(A(Y(\xi))\) to include at every 
+  This leaves the question of which faces of  \(A(\Y(\xi))\) to include at every 
   step.
   
-  Let's peek inside. Simplices of \( A(Y(\xi)) \) are pairs \(\tuplet{x,y}\)
+  Let's peek inside. Simplices of \( A(\Y(\xi)) \) are pairs \(\tuplet{x,y}\)
   where \(x\of[a]\to [m]\) is a nondecreasing map and \(
     y\of [b]\to{[m]}^{[n-1]}\) subject to the restrictions that both are 
   nondecreasing map (both variables in case of \(y\)), \(
-    \xi\circ x\of \Lambda^n_k\)---i.e. \(x\) misses some edge different from 
+    \xi\circ x\of \horn{n}{k}\)---i.e. \(x\) misses some edge different from 
   \(k\)---and \(\xi\circ y(i) = \delta^n_k \) for all \( i\of [b] \). Among 
   these, faces are the simplices for which both \(x\) and \(y\) are injective 
   functions.
 
-  The set \( A(Y(\xi)\circ(h^m_l)) \) can be considered to be the subset of 
-  \( A(Y(\xi)) \) of those pairs \(\tuplet{x,y}\) that miss at least one element
+  The set \( A(\Y(\xi)\circ(h^m_l)) \) can be considered to be the subset of 
+  \( A(\Y(\xi)) \) of those pairs \(\tuplet{x,y}\) that miss at least one element
   \(p\) from \([m]\) different from the top \(l\) both with \(x\) and \(y\). 
   For \(y\) this means \(y(i)(j)\neq p\) for all \(i\of[b]\) and \(j\of[n-1]\).
 
-  When selecting faces to include into \(A_i\) we have to be careful not to
+  When selecting faces to include into \(H_i\) we have to be careful not to
   accidentally create cycles, because they form boundaries of faces that
   still need to be glued in. For this purpose, consider the following two
   collection of faces with suggested top edges.
@@ -227,11 +298,10 @@ backup for this part over the top edge of the horn \( \Lambda^n_k \).
     and where \(y\) reaches \(l'(x)\).
   \end{enumerate}
 
-  
   Let's first check that the faces of \(P\cup Q\) cover all the faces in 
-  the complement \( A(Y(\xi)) - A(Y(\xi)\circ(h^m_k)) \). 
+  the complement \( A(\Y(\xi)) - A(\Y(\xi)\circ(h^m_k)) \). 
   First, note that \(\xi\circ x\) can never be onto \([n]-\set{k}\) because 
-  \(A(Y(\xi))\) is a simplicial set over \(\Lambda^n_k\).
+  \(A(\Y(\xi))\) is a simplicial set over \(\horn{n}{k}\).
   For a face \(\tuplet{x,y}\) of the complement \(xi\circ x\) either is or isn't 
   onto \([n]-\set{k,\xi(l)}\). %the classical argument!
   If it is onto, then extend \(y\) with the edge \(l'(x)\), to get an 
@@ -249,15 +319,14 @@ backup for this part over the top edge of the horn \( \Lambda^n_k \).
     \item In \({[m]}^{[n-1]}\) all edges are worth 1.
   \end{enumerate}
   The price of a face is simply the sum of the prices of the edges it contains. 
-  Faces from both \(P\cup Q\) are included in \(A_i\) if they cost at 
+  Faces from both \(P\cup Q\) are included in \(H_i\) if they cost at 
   most \(i\).
 
-  For each face \(\tuplet{x,y}\of P\) %that cost \(i+1\), all boundary 
-  %faces are part of \(A_i\) safe for one. If \(\tuplet{x,y}\of P\), then 
+  For each face \(\tuplet{x,y}\of P\)
   all the boundary faces \(\tuplet{x,y}\cdot\delta_i\) except the 
   one that misses \(l\) is in \(P\) and they cost either \(i\) or \(i-1\)
   depending on the price of the removed point. Hence those faces are part of
-  \(A_i\) and \(\tuplet{x,y}\cap A_i \to \tuplet{x,y}\)---where the element is
+  \(H_i\) and \(\tuplet{x,y}\cap H_i \to \tuplet{x,y}\)---where the element is
   reinterpreted as the subobject it generates---is a horn inclusion.
   
   If \(\tuplet{x,y}\of Q\), then the boundary faces 
@@ -283,8 +352,106 @@ backup for this part over the top edge of the horn \( \Lambda^n_k \).
   that still costs one less.
   \end{itemize}
   So if \(\tuplet{x,y}\) is a member of \(Q\) that costs \(i+1\), then
-  \(\tuplet{x,y}\cap A_i \to \tuplet{x,y}\) is a horn inclusion as well.
+  \(\tuplet{x,y}\cap H_i \to \tuplet{x,y}\) is a horn inclusion as well.
+  That completes the proof that \(A\) peserves acyclic cofibrations.
 \end{proof}
+
+\section{The adjunction}
+A lot of nice properties of \(A\) follow come from the fact 
+that it has a right adjoint, so let's look at that adjoint
+now.
+
+\begin{definition}\label{descend functor}
+Let \(f\of X\to \horn{n}{k} \) and define 
+\(Df\of DX\to \simplex{n}\) as follows.
+\begin{align}
+  \label{DX1} DX &= \set{\tuplet{
+    \xi\of [m]\to [n],
+    y \of \sSet/\horn{n}{k}(A(\Y(\xi)), f) 
+  }\middle|m\of\nno}\\
+  \label{DX2} \tuplet{\xi,y}\cdot\phi &= \tuplet{
+    \xi\circ \phi,
+    y\circ A(\Y(\phi))
+  }\\
+  \label{Df} Df \tuplet{\xi,y} &= \xi
+\end{align}
+Here we take advantage of the fact that \(\sSet \) is locally 
+small.
+
+For \(m\of Y\to X\), let \(Dm\of D(f\circ m)\to D(f)\) satisfy:
+\begin{equation}
+  \label{Dm} Dm \tuplet{\xi,y} = \tuplet{\xi,m\circ y}
+\end{equation}
+
+This defines the \emph{descend functor}
+\(D\of \sSet/\horn{n}{k} \to \sSet/\simplex{n}\).
+\end{definition}
+
+Let's first check whether the \(D\) is a functor.
+
+\begin{lemma} The \emph{descend functor}
+  \(D\) is a functor \(\sSet/\horn{n}{k} \to \sSet/\simplex{n}\).
+\end{lemma}
+
+\begin{proof}
+  Let \(f\of X\to \horn{n}{k}\). Equation (\ref{DX1}) clearly
+  shows a dependent product indexed over the underlying set of
+  \(\simplex{n}\) and (\ref{Df}) clearly commutes with the
+  action of the simplex category, as defined in (\ref{DX2}) for
+  \(DX\). Hence the object map is good.
+
+  Let \(m\of Y\to X\) be a morphism of simplicial sets, so
+  \(m\) is also a morphism \(f\circ m\to f\). Equation 
+  (\ref{Dm}) implies that \(D\) commutes with identities
+  and composition, just as a functor should.
+\end{proof}
+
+\begin{lemma} The descend functor \(D\) is right adjoint to the
+  ascend functor \(A\). \label{adjunction}
+\end{lemma}
+
+\begin{proof} Adjoints are unique up to isomorphism and any 
+  right adjoint \(R\) to \(A\) must satisfy:
+  \[ \sSet(\Y(\xi), Rf)/\simplex{n}\simeq
+     \sSet(A\Y(\xi),f)/\horn{n}{k} \]
+  For \(R=D\) this natrual equivalence follows straight from 
+  (\ref{DX1}) and (\ref{Df}). Hence \(D\) is right adjoint to 
+  \(A\).
+\end{proof}
+
+This adjunctions has far reaching consequences.
+\begin{lemma} The descend functor preserves fibrations,
+  the ascend functor all acyclic cofibrations.
+\end{lemma}
+
+\begin{proof} This is a matter of transposing lifting
+  problems between the categories.
+\end{proof}
+
+This ultimately amounts to a proof that the homotopy categories
+over the weakly equivalent spaces \(\simplex{n}\) and 
+\(\horn{n}{k}\) are equivalent, as they should be.
+We explore a different path here. %here
+%this doesn't really belong in the adjunction section.
+
+\begin{lemma} The descend functor is right inverse to reindexing
+  along the horn inclusion 
+  \(h^n_k\of\horn{n}{k}\to\simplex{n}\).
+  \[(h^n_k)\ri\circ D \simeq \id \] \label{inverse}
+\end{lemma}
+
+\begin{proof} 
+  For \(\xi\of\horn{n}{k}\), \({\Y(\xi)}^{\delta^n_k}\) is
+  empty because \(\xi \) cannot be onto \([n]-\set{k}\).
+  Therefore, by (\ref{AX1}), 
+  \(A\Y(\xi) \simeq (h^n_k)\ri(\Y(\xi))\). In turn this means
+  that for \(f\of X\to \simplex{n}\), the fibre of \(Df\) over
+  \(\xi \)---which is isomorphic to 
+  \(\sSet((h^n_k)\ri(\Y(\xi)),f)\) by (\ref{DX1})---is
+  isomorphic to the fibre of \(f\) over \(\xi \) by the Yoneda
+  lemma.
+\end{proof}
+
 
 
 \end{document}
